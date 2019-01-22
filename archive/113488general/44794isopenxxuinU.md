@@ -1,0 +1,66 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/44794isopenxxuinU.html
+---
+
+## [general](index.html)
+### [is_open {x | x + u \in U}](44794isopenxxuinU.html)
+
+#### [Johan Commelin (Sep 10 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133679397):
+Given a topological additive monoid, I expected theorems that say that you can translate opens along addition by a given element. But I could not find those... is this in mathlib, or do I need to roll my own?
+
+#### [Kenny Lau (Sep 10 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133679963):
+continuous_add or something
+
+#### [Kevin Buzzard (Sep 10 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680126):
+Are you sure Kenny? That seems to prove only that the pre-image of an open under the map lam x, x+c (c constant) is open. But you can't cancel in a monoid and Johan seems to want to show that the image, not the pre-image, of an open is open. @**Johan Commelin** are you sure that what you want to prove is true? What exactly do you want to prove?
+
+#### [Kevin Buzzard (Sep 10 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680147):
+and what exactly are you thinking about topological monoids for??
+
+#### [Johan Commelin (Sep 10 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680161):
+Hmmm, I probably over-generalised.
+
+#### [Johan Commelin (Sep 10 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680168):
+Let's assume it's a group.
+
+#### [Kevin Buzzard (Sep 10 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680174):
+then what Kenny said
+
+#### [Johannes Hölzl (Sep 10 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680177):
+Huh, the title looks like a preimage
+
+#### [Johan Commelin (Sep 10 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680182):
+That's good enough for applications, since I'm a mathematician.
+
+#### [Kevin Buzzard (Sep 10 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680237):
+oh yes, Kenny's comment answers the question in the title but not in the body.
+
+#### [Johan Commelin (Sep 10 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680244):
+Ok, somehow `continuous_add` didn't work straightaway. I'll try harder.
+
+#### [Kevin Buzzard (Sep 10 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680273):
+I'm assuming continuous_add is continuity of addition, so now you need to compose with the map from G to G x G sending g to g,c
+
+#### [Kevin Buzzard (Sep 10 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680277):
+which is continuous for any topological space
+
+#### [Kenny Lau (Sep 10 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133680978):
+```quote
+Given a topological additive monoid, I expected theorems that say that you can translate opens along addition by a given element. But I could not find those... is this in mathlib, or do I need to roll my own?
+```
+I think this is not true. Consider the topological multiplicative monoid $$\Bbb R$$ and translation by 0
+
+#### [Kevin Buzzard (Sep 10 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133681061):
+bingo
+
+#### [Reid Barton (Sep 10 2018 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133681162):
+Hmn, I could PR the `continuity` tactic now that tidy is in mathlib
+
+#### [Patrick Massot (Sep 10 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133681868):
+Related: https://github.com/leanprover-community/mathlib/blob/completions/analysis/topology/topological_structures.lean#L289
+
+#### [Patrick Massot (Sep 10 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open {x | x + u \in U}/near/133681885):
+Reid: yes, please!
+

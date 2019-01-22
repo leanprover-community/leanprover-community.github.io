@@ -1,0 +1,62 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/71650tidyholecommand.html
+---
+
+## [general](index.html)
+### [tidy hole command](71650tidyholecommand.html)
+
+#### [Johan Commelin (Sep 03 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133272160):
+@**Scott Morrison** The tidy hole command is really marvellous. Here are some trivialities that might give epsilon improvement:
+(1) If `tidy` generates the proof `begin refl end`, generate `rfl` instead.
+(2) If `tidy` generates the proof `begin exact foo end`, generate `foo` instead.
+
+#### [Scott Morrison (Sep 03 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276810):
+@**Johan Commelin**, the first is impossible, or rather useless: Lean actually decides _in the parser_ whether you not you proved by `rfl`, rather than inspecting the proof term!
+
+#### [Scott Morrison (Sep 03 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276820):
+But (2) will go on my todo list. (i.e. I'll leave your message starred :-)
+
+#### [Johan Commelin (Sep 03 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276825):
+No, I mean that you inspect the string you are about to return.
+
+#### [Johan Commelin (Sep 03 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276866):
+The hole command returns some string, and VScode substitutes that for the hole. Is that right?
+
+#### [Scott Morrison (Sep 03 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276869):
+Ah, okay. Absolutely, I can do that.
+
+#### [Johan Commelin (Sep 03 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276870):
+If that string is exactly `begin refl end`, then you might as well output `rfl` instead.
+
+#### [Kenny Lau (Sep 03 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276875):
+by induction convert tactic proofs to term proofs
+
+#### [Scott Morrison (Sep 03 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276879):
+I can also have "begin just_one_tactic end" into "by just_one_tactic".
+
+#### [Patrick Massot (Sep 03 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276880):
+I think `refl` tries slightly harder than `rfl`
+
+#### [Johan Commelin (Sep 03 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276882):
+That's somewhere on the VScode extension wishlist
+
+#### [Johan Commelin (Sep 03 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276940):
+```quote
+I think `refl` tries slightly harder than `rfl`
+```
+Hmmm... that might be true. So maybe we need to slightly patch tidy, to first try `exact rfl`. Then (1) will be a special case of (2).
+
+#### [Johan Commelin (Sep 03 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133276948):
+Anyway, this is not high priority stuff.
+
+#### [Chris Hughes (Sep 03 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133277149):
+`refl` works for any reflexive relation I think. `rfl` is just equality.
+
+#### [Patrick Massot (Sep 03 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133277163):
+I think it also does more definitional reduction
+
+#### [Chris Hughes (Sep 03 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy hole command/near/133277646):
+Can you give an example? If I prove something with `by refl`, the proof term is just `eq.refl _` which is `rfl`
+

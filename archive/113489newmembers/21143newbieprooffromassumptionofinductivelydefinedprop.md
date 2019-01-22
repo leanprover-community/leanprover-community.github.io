@@ -1,0 +1,22 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/21143newbieprooffromassumptionofinductivelydefinedprop.html
+---
+
+## [new members](index.html)
+### [newbie: proof from assumption of inductively defined prop](21143newbieprooffromassumptionofinductivelydefinedprop.html)
+
+#### [Kevin Buzzard (Oct 17 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new members/topic/newbie: proof from assumption of inductively defined prop/near/135989819):
+[moving to `new members` stream]. You could prove that `ev n` was decidable, and then use `dec_trivial` to decide it.
+
+#### [Rob Lewis (Oct 17 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new members/topic/newbie: proof from assumption of inductively defined prop/near/135991991):
+Proving decidability is the right way to do it in general, but for this example:
+```lean
+example : ¬ ev 7 :=
+begin
+  intro h,
+  repeat {cases h with _ h}
+end
+```
+
