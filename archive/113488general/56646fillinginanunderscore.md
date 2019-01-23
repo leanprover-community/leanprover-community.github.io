@@ -9,6 +9,8 @@ permalink: archive/113488general/56646fillinginanunderscore.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 29 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filling%20in%20an%20underscore/near/124374909):
 ```
 import data.fintype
@@ -113,3 +115,5 @@ which is canonically isomorphic though
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 31 2018 at 00:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filling%20in%20an%20underscore/near/124433208):
 so I heard
 
+
+{% endraw %}

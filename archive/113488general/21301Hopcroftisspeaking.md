@@ -9,6 +9,8 @@ permalink: archive/113488general/21301Hopcroftisspeaking.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 24 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hopcroft%20is%20speaking%21/near/134509660):
 Hopcroft is speaking!
 
@@ -72,3 +74,5 @@ https://drive.google.com/file/d/17NBICP6OcUSucrXKNWvzLmrQpfUrEKuY/view
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 24 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hopcroft%20is%20speaking%21/near/134516096):
 It's a huge shame that HLF organizers arranged that. I guess they would use any big name
 
+
+{% endraw %}

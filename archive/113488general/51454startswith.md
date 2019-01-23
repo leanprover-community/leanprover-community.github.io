@@ -9,6 +9,8 @@ permalink: archive/113488general/51454startswith.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 04 2019 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/startswith/near/154412396):
 Do we have something like `string.startswith : string -> string -> bool` somewhere?
 
@@ -63,3 +65,5 @@ I'm working on #464, making good progress
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 04 2019 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/startswith/near/154431693):
 yeah, I noticed and have already incorporated your changes
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/09652fixLEANPATH.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) garySebastian (Apr 01 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fix%20LEAN_PATH/near/124468992):
 I've tried to get lean to work on Xubuntu, macOS, and nixos; all three are having the same issue where importing anything (including standard), yields an error: "file standard not found in the LEAN_PATH". I've done a lot of looking around and can't find any relevant information on LEAN_PATH. I have lean in my system PATH. I'm not sure what it wants from me.
 
@@ -63,3 +65,5 @@ If you just follow the step by step instructions for making a new project and ad
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 01 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fix%20LEAN_PATH/near/124493486):
 and everything should magically work because `leanpkg` will get your `leanpkg.path` right and you won't need to set `LEAN_PATH` at all by the looks of things
 
+
+{% endraw %}

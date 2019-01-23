@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/39139Constructinganiteexpressionwithout.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 24 2018 at 03:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Constructing%20an%20ite%20expression%20without%20%25%25/near/130183355):
 I entered the following code to construct an ite expression in a meta def:
 ```lean
@@ -46,3 +48,5 @@ The error is because the universe parameter of `ite` could not be inferred. If y
 ```
 it should work
 
+
+{% endraw %}

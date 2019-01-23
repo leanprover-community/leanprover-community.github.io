@@ -9,6 +9,8 @@ permalink: archive/116395maths/44395sheavesandsites.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 08 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sheaves%20and%20sites/near/147299236):
 Lol, I'm quite sure that the definition of `coverage` is wrong. I should demand that the collection of covers contains the singletons `{id : U ⟶ U}` for every `U : X`.
 
@@ -2094,3 +2096,5 @@ And I guess my sheaf condition is hard to work with right now because I'm trying
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 20 2019 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sheaves%20and%20sites/near/156495585):
 Oh -- the proof involves some argument on stalks which for a general site is complicated? Are there universe issues or do you only work with small sites?
 
+
+{% endraw %}

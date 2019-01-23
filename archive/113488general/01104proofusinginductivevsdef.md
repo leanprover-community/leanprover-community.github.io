@@ -9,6 +9,8 @@ permalink: archive/113488general/01104proofusinginductivevsdef.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936109):
 This is quite an esoteric problem, so I'm not sure if anybody would be interested in looking into it. Nonetheless, I thought I'd try to see if anybody had any ideas.
 
@@ -155,3 +157,5 @@ Okay. So I'll stick with the inductive. Lesson learned!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 15 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133995045):
 Inductive propositions are quite handy in those situations. You can do induction on them when they are in your assumptions and it will automatically unify the variables that should be equal and you want have to handle cases where your definition would say `false`
 
+
+{% endraw %}

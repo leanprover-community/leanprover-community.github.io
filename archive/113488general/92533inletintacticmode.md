@@ -9,6 +9,8 @@ permalink: archive/113488general/92533inletintacticmode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 12 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20in%20let%20in%20tactic%20mode/near/126468511):
 ```lean
 definition n : ℕ :=
@@ -33,3 +35,5 @@ I.e. `let d := (nat.succ $ nat.zero)` should work
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 14 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20in%20let%20in%20tactic%20mode/near/126524735):
 See also [Use of $ in tactics](https://groups.google.com/d/msg/lean-user/B5tG4xj4xHc/6z8Ipx1pBQAJ).
 
+
+{% endraw %}

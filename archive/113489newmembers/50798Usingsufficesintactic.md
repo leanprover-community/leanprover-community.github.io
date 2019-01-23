@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/50798Usingsufficesintactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 29 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20suffices%20in%20tactic/near/130509641):
 ```lean
 theorem testit (f:ℕ) (s:ℕ) :
@@ -52,3 +54,5 @@ open smt_tactic.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 29 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20suffices%20in%20tactic/near/130514795):
 those are not imports, they are open statements
 
+
+{% endraw %}

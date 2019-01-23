@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/23913Coeback.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 25 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148320607):
 If I have a positive integer, how do I get a natural number out of it? For more context, I need to use the floor function which outputs an integer and then do induction with this integer, with`let p : ℤ → Prop := λ (m : ℕ), m ≤ n → (n - m ∈ s ∨ (0 : ℤ) ∈ s), ` (s is a set of positive integers). I basically need to prove that if n is in the set, then 0 is in the set as well,  but induction on integers won't work because I can't prove a special case.
 
@@ -218,3 +220,5 @@ begin
 end
 ```
 
+
+{% endraw %}

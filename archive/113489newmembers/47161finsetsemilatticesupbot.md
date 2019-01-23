@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/47161finsetsemilatticesupbot.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Nov 20 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20semilattice_sup_bot/near/148054444):
 Hi! In finset.lean there is
 ```lean
@@ -23,3 +25,5 @@ I don't see any reason why this is missing.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Nov 20 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20semilattice_sup_bot/near/148055198):
 Thanks
 
+
+{% endraw %}

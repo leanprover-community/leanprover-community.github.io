@@ -9,6 +9,8 @@ permalink: archive/113488general/02748Idontunderstandheq.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071940):
 Here's a self-contained extract from `analysis/topology/topological.space_lean`:
 
@@ -78,3 +80,5 @@ Got it :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072138):
 Oh OK, so I do understand this particular use of heq, we're calling a variable by the same name as a Lean function :-)
 
+
+{% endraw %}

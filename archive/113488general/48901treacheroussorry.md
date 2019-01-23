@@ -9,6 +9,8 @@ permalink: archive/113488general/48901treacheroussorry.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 28 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/treacherous%20sorry/near/128764182):
 I'm slowing beginning to understand why trying to formalize math in a top to down way is very dangerous, even if this is very appealing to mathematicians. Today's lesson is about sorried properties. In the minimized version below, say we are trying to build of stub of continuous functions theory.
 ```lean
@@ -164,3 +166,5 @@ This is very interesting to me because we started at the top with perfectoid spa
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/treacherous%20sorry/near/128782917):
 Is `gazillion` defined as `def gazillion : nat := sorry`?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/56647xXPxvsxxXPx.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 22 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%E2%88%83%20x%20%E2%88%88%20X%2C%20P%20x%20vs.%20%E2%88%83%20x%2C%20x%20%E2%88%88%20%20X%20%E2%88%A7%20P%20x/near/134438550):
 Up to now I've been using `∃ x ∈ X, P x` in theorem statements (or also e.g. `∃ X ⊆  Y, Q X`) (where X : finset a and a has decidable_eq) without really thinking about it. First of all, they look like what I'm used to, and second of all, I've been able to get things to work with them up to now. In lean, they translate to `∃ x, ∃ (h : x ∈ X), P x` and `∃ X, ∃ (H : X ⊆ Y), Q X`, and I've just been mindlessly using extra layers of `exists.elim` / `exists.intro` to deal with the `h`'s and `H`'s in proofs.
 
@@ -61,3 +63,5 @@ Be sure to read the discussion in https://leanprover.zulipchat.com/#narrow/strea
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 22 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%E2%88%83%20x%20%E2%88%88%20X%2C%20P%20x%20vs.%20%E2%88%83%20x%2C%20x%20%E2%88%88%20%20X%20%E2%88%A7%20P%20x/near/134442546):
 Yeah, I think I tried to use `∃! x∈ X` once and immediately ran into the issue described there.
 
+
+{% endraw %}

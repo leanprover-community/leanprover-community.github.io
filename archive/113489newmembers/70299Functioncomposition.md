@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/70299Functioncomposition.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 17 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20composition/near/134102575):
 So I wondered if one could just prove Guillermo's `for_all_not_all` using function composition. In some sense this is one of the disadvantages of the currying approach: if a mathematician has functions $$(A\times B)\to C$$ and $$C\to D$$ they can just compose them and get a function $$(A\times B)\to D$$. This is a bit harder in the curried approach, because `A -> B -> C` is `A -> (B -> C)` and `C` is a bit more embedded than function composition would like. I wrote a blog post about it once: https://xenaproject.wordpress.com/2018/05/19/function-composition/  containing Sebastian's cool `((∘) ∘ (∘))` trick. But to apply this trick in Guillermo's situation one needs to get this working for pi types. Here's a formalisation of the situation:
 
@@ -40,3 +42,5 @@ Close, but not so close: `example : Π (a : A), (B a → D) := λ _, g ∘ f _`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 17 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20composition/near/134103346):
 The question isn't really even well-posed. I want no lambdas, but in some sense the boring answer does this -- and function.comp's definition uses lambdas...
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/24388toPropinj.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 11 2019 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/to_Prop_inj/near/154908038):
 ```lean
 lemma to_Prop_inj : Π {a b : bool} (H : (a : Prop) ↔ (b : Prop)), a = b
@@ -19,3 +21,5 @@ lemma to_Prop_inj : Π {a b : bool} (H : (a : Prop) ↔ (b : Prop)), a = b
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 11 2019 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/to_Prop_inj/near/154908043):
 @**Mario Carneiro** is this currently in mathlib?
 
+
+{% endraw %}

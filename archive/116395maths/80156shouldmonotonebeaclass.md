@@ -9,6 +9,8 @@ permalink: archive/116395maths/80156shouldmonotonebeaclass.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/should%20monotone%20be%20a%20class%3F/near/127196629):
 Should
 ```lean
@@ -190,3 +192,5 @@ then you can see them all and cut and paste them all again
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 28 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/should%20monotone%20be%20a%20class%3F/near/127222184):
 and it turns out sometimes they're really ugly and long
 
+
+{% endraw %}

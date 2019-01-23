@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/66707subsetswithinducedstructure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jean Lo (Nov 19 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subsets%20with%20induced%20structure/near/147981000):
 Given a set with some structure, I often would like to think about its subsets that also have a similar structure on it. This seems like a pretty common construction — what would be the idiomatic way to formulate such things in Lean?
 
@@ -60,3 +62,5 @@ So what are the differences between how `is_subgroup` and `submodule`are defined
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Nov 19 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subsets%20with%20induced%20structure/near/147981908):
 Good question! I'm not sure how the new `submodule` stuff works myself.
 
+
+{% endraw %}

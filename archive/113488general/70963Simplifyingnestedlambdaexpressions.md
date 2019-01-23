@@ -9,6 +9,8 @@ permalink: archive/113488general/70963Simplifyingnestedlambdaexpressions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jan 12 2019 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplifying%20nested%20lambda%20expressions/near/154958159):
 It appears that "simp" is not completely robust.  How do I get the following simplification to work?
 ```lean
@@ -30,3 +32,5 @@ I'm using Lean 3.4.1.  Should I update?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jan 12 2019 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplifying%20nested%20lambda%20expressions/near/154959131):
 It does work--I realized I need to type a "," after the "simp" to see the reduction show up in the editor.
 
+
+{% endraw %}

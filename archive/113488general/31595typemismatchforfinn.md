@@ -9,6 +9,8 @@ permalink: archive/113488general/31595typemismatchforfinn.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 11 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579325):
 I am surprised that this doesn't typecheck:
 
@@ -75,3 +77,5 @@ you have to guess the spurious complaint that Lean makes
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 11 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579594):
 for `fin 2n` it wants `A : fin n` and for `fin (2n+1)` it wants `A : fin (2n)`
 
+
+{% endraw %}

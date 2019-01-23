@@ -9,6 +9,8 @@ permalink: archive/116395maths/32980overandundercategories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 17 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/over%20and%20under%20categories/near/151910153):
 Over and under categories show up all over the place (notably covers and structure maps can use over categories, and algebras can use under categories). I've written the definitions and a bunch of simp lemmas in https://github.com/leanprover-community/mathlib/blob/over_under/category_theory/comma.lean#L195
 Now I would like to prove some facts about limits/colimits in these categories. What would be the right file in mathlib to put these?
@@ -36,3 +38,5 @@ Does it mean that Scott's magic auto-param are failing here?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 19 2018 at 05:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/over%20and%20under%20categories/near/152158162):
 Partly, yes. Maybe that would be fixed once `back` and `rewrite_search` are part of mathlib. But another problem is that the code is just terribly slow. At some point I close a goal by `exact foobar` and this takes several seconds. I guess that is just exhibiting that we are stacking lots of stuff on top of each other. (In particular the `pp.all` output is usually not much fun to look at.)
 
+
+{% endraw %}

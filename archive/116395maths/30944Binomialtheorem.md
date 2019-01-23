@@ -9,6 +9,8 @@ permalink: archive/116395maths/30944Binomialtheorem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Jun 08 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Binomial%20theorem/near/127788179):
 Hey! I proved the binomial theorem, if anyone finds it interesting its in a gist here: https://gist.github.com/MonoidMusician/ad43301ee3b4e71c0e1c3d440c6898c5
 
@@ -48,3 +50,5 @@ Last time I looked you were doing great with the bigop thing, there didn't seem 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 11 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Binomial%20theorem/near/127914287):
 I got tired of nat substraction mainly, especially since `cooper` seems to promise to make all this easier
 
+
+{% endraw %}

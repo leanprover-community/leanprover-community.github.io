@@ -9,6 +9,8 @@ permalink: archive/113488general/25467Figureouttherestbycc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779658):
 Can I tell Lean to work out the rest `by cc`:
 ```lean
@@ -108,3 +110,5 @@ isn't the right command `constructor`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780438):
 `constructor` also fails...
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/45015calclhsrhs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 20 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20lhs/rhs/near/148043376):
 When writing `calc` blocks, it would be very convenient if we could have some special symbol that refers to the lhs/rhs of the original goal. Because currently I try to copy paste stuff from the goal, and then Lean starts moaning that it can't figure out the type etc...
 I guess it might be tricky to use literal `lhs`, because people might want to use that as variable name. But maybe something can be done?
@@ -31,3 +33,5 @@ Well... I don't really know how to produce a MWE. I'm not going to trim down my 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 20 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20lhs/rhs/near/148044697):
 Fail... `pp.all` is trimming my output. It is too long :rolling_on_the_floor_laughing:
 
+
+{% endraw %}

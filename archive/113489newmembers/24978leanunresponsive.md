@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/24978leanunresponsive.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Jan 07 2019 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154576468):
 Hi, when I use 3.4.1, there are problems with displaying the goal if proofs get longer. In both Emacs and vscode, the goal is not displayed anymore and the message box just says 'updating'. If the proof is deleted and I restart it, it always happens again in some subcase as soon as the proof gets longer (it is not really that huge though, 20 lines maybe). Lean does not respond if something is typed  (if I type "end" I get the synthesize-placeholder error). Has anyone had this before?
 
@@ -185,3 +187,5 @@ This may be a good time to start using VScode code snippets. In menu File/Prefer
 ```
 Then you can (start to) type  proof and auto-completion will suggests using the snippet. After accepting that suggestion VScode will write "begin", "sorry", "end" and put the cursor at the right position
 
+
+{% endraw %}

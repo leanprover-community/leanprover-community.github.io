@@ -9,6 +9,8 @@ permalink: archive/113488general/55167tacticringfeaturerequests.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 29 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.ring%20feature%20requests/near/124364059):
 ```
 import tactic.ring
@@ -52,3 +54,5 @@ Why can't this just be `by ring`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 29 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.ring%20feature%20requests/near/124368920):
 Can't I promise that I'll only ever call ring with an identity that can be formulated using only the axioms of a semiring?
 
+
+{% endraw %}

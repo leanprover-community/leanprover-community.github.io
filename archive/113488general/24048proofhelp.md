@@ -9,6 +9,8 @@ permalink: archive/113488general/24048proofhelp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 03 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20help/near/135084627):
 How does one prove `1 = n + 1 - n`, without getting your hands dirty? Do we have anything that can help with `nat.sub`?
 
@@ -85,3 +87,5 @@ Seems like `rw` will do the job.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 03 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20help/near/135085692):
 All of these lemmas are in Lean or mathlib I think. I've extensively used subtraction on nats and am not aware of any holes.
 
+
+{% endraw %}

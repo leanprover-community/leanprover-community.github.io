@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/68895Provingsomethingisasubfield.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872747):
 I'm trying to prove that the intersection of two subfields is a subfield -- the problem with using `subfield.mk`, or just using `{...}` directly, is that `subfield` is defined using `extends`, so I need to prove that it's a subring -- and by extension that it is an additive subgroup and a submonoid. What's the notation for this?
 
@@ -295,3 +297,5 @@ This is pretty weird. A more understandable solution would be `λ a b ha hb J HJ
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 16 2019 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155285877):
 Of course you can also use the ugly direct term `@is_add_submonoid.add_mem _ _ _ (H J HJ).to_is_add_submonoid _ _ (ha J HJ) (hb J HJ)`
 
+
+{% endraw %}

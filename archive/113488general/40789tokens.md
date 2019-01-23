@@ -9,6 +9,8 @@ permalink: archive/113488general/40789tokens.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 08 2018 at 08:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tokens/near/135382507):
 Does anyone know where the list of "registered tokens" is?
 > /-- Check that the next token is `tk` and consume it. `tk` must be a registered token. -/
@@ -129,3 +131,5 @@ oh, I thought that was resolved from the comments
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 08 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tokens/near/135419489):
 I was sure it was mentioned a couple more times but I can't find it
 
+
+{% endraw %}

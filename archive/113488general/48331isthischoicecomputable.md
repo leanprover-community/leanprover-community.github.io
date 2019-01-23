@@ -9,6 +9,8 @@ permalink: archive/113488general/48331isthischoicecomputable.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133307935):
 Can the two `sorry`s be filled in?
 ```lean
@@ -70,3 +72,5 @@ I suspect you need decidable equality on I
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133312361):
 that's also what I suspect, but I can't prove
 
+
+{% endraw %}

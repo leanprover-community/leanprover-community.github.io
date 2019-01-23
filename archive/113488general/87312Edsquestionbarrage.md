@@ -9,6 +9,8 @@ permalink: archive/113488general/87312Edsquestionbarrage.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 11 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ed%27s%20question%20barrage/near/131947644):
 Massive thanks to @**Mario Carneiro** for helping me. I'll buy you beers next time we are in the same physical location to within 100m.
 
@@ -768,3 +770,5 @@ Thanks!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 16 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ed%27s%20question%20barrage/near/132257907):
 I like the question barrage :-) but I do see Simon's logic. I often start new threads with more descriptive titles now and it works better for search when I come back to them later.
 
+
+{% endraw %}

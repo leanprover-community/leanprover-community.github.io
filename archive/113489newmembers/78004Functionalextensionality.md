@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/78004Functionalextensionality.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 24 2018 at 23:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Functional%20extensionality/near/130240450):
 Is there a functionality extensionality theorem like the one shown below in one of the libraries:
 
@@ -43,3 +45,5 @@ theorem fun_ext {t} {u} :
 
 Isn't that normal rewriting?
 
+
+{% endraw %}

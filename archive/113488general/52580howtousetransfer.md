@@ -9,6 +9,8 @@ permalink: archive/113488general/52580howtousetransfer.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 06 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299504):
 Okay, here is a mockup use of `transfer`:
 ```lean
@@ -501,3 +503,5 @@ $$U$$ and $$id(U)$$ are canonically isomorphic in the computer-scientist's versi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 06 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135306755):
 In the mathematician's model of this category, these sets are *the same*.
 
+
+{% endraw %}

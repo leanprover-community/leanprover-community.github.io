@@ -9,6 +9,8 @@ permalink: archive/113488general/84306undead.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 23 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132629895):
 "Undead" is a game from [Simon Tatham's portable puzzle collection] (https://www.chiark.greenend.org.uk/~sgtatham/puzzles/). These games are perfect information one player puzzle games, and often solving a level completely (for me at least, in most of these games) involves finding a constructive proof that there is precisely one solution to the level. I'm probably going to supervise a masters project this coming academic year on games like this, so I thought it was about time I understood what I could do with them in Lean.
 
@@ -474,3 +476,5 @@ Most mathematicians think ∃! a b, p a b means what you wrote. They also think 
 ```
 I don't think I'd ever even considered the concept `∃! a, ∃! b, p a b` until this evening and I suspect that many mathematicians would also not have come across it. It looks very weird to me. Of course, hindsight is a wonderful thing...
 
+
+{% endraw %}

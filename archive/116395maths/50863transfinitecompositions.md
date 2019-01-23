@@ -9,6 +9,8 @@ permalink: archive/116395maths/50863transfinitecompositions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 17 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transfinite%20compositions/near/134128023):
 Suppose P is a complete lattice. I can define an increasing sequence of finite length in P either as a subtype of a function type or as an inductive type, as shown below.
 ```lean
@@ -68,3 +70,5 @@ the interesting part is that `iterates` is a `chain` in itself, so it contains i
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 18 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transfinite%20compositions/near/134133872):
 One thing that occurs to me is that my finite sequences are themselves partially ordered by "extends", and the finite prefixes of a countable sequence form a chain
 
+
+{% endraw %}

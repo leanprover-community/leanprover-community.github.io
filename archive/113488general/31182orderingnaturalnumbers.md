@@ -9,6 +9,8 @@ permalink: archive/113488general/31182orderingnaturalnumbers.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Apr 05 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordering%20natural%20numbers/near/124667719):
 It appears that lean can't synthesize what appears to be a natural order on natural numbers, and neither can I.
 
@@ -111,3 +113,5 @@ Last thing: `example : decidable_linear_order ℕ :=  by apply_instance` would h
  great, I think things will be much easier from now on. Thank you! I'm trying to show there are infinitely many primes, which I think is a good exercise, although it's already in mathlib:
 https://github.com/leanprover/mathlib/blob/08f19fde695d20cf1bd899969a1c59b350dd9e43/data/nat/prime.lean#L201
 
+
+{% endraw %}

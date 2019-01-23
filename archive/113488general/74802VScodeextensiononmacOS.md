@@ -9,6 +9,8 @@ permalink: archive/113488general/74802VScodeextensiononmacOS.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ryan Smith (Oct 04 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension%20on%20macOS/near/135152447):
 Do you need to append your lean/bin directory onto $PATH and then launch vscode from the command line in order for the extension to locate lean on macOS?
 
@@ -70,3 +72,5 @@ Right. To be fully explicit, I think the instructions should be edited to say so
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Oct 08 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension%20on%20macOS/near/135405425):
 On OSX, do "brew install gmp"
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/06287divposiffmulposgolf.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700596):
 ```lean
 import analysis.real
@@ -432,3 +434,5 @@ Makes me think: @**Simon Hudon** what happened to your monotonicity tactic?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 15 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147754940):
 Mario is still unhappy with it.
 
+
+{% endraw %}

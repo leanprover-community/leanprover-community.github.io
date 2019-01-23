@@ -9,6 +9,8 @@ permalink: archive/113488general/71476structureturnedintoclass.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 08 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20turned%20into%20class/near/124809321):
 In `topological_space.lean`, I see:
 ```lean
@@ -92,3 +94,5 @@ I am not saying I understand why we want topological space to be this way, but I
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 09 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20turned%20into%20class/near/124813133):
 Johannes' link is to a construction partially ordering all topologies on a fixed type, so he likes `foo` better here because `H.bar` works nicely if we have `H1, H2...`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/48256normnumweirdness.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 18 2019 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_num%20weirdness/near/156327693):
 What's going on here?
 
@@ -233,3 +235,5 @@ I think `n1.to_nat = n2.to_nat` should work for that
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 18 2019 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_num%20weirdness/near/156359764):
 The two "bugs" that it's identified are only kind of bugs.
 
+
+{% endraw %}

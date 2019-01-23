@@ -9,6 +9,8 @@ permalink: archive/116395maths/78247categories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 05 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/categories/near/133380177):
 This new functor arrow doesn't seem to have an abbreviation in emacs.
 'to input: type "C-x 8 RET 2964" or "C-x 8 RET RIGHTWARDS HARPOON WITH BARB UP ABOVE RIGHTWARDS HARPOON WITH BARB DOWN"'
@@ -268,3 +270,5 @@ The connected components are `quot (λ (a b : C), nonempty (a ⟶ b))` (for some
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 10 2018 at 04:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/categories/near/133634200):
 I guess I'll continue to try with the constructive definition if you don't have a strong opinion. The pros and cons of both approaches are pretty minor
 
+
+{% endraw %}

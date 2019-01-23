@@ -9,6 +9,8 @@ permalink: archive/113488general/08987Freshofftheboat.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nima (Mar 29 2018 at 06:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Fresh%20off%20the%20boat/near/124351061):
 Anyone is willing to prove this example for me? It seems too obvious, but I have not luck doing it within the past hour.
 
@@ -4815,3 +4817,5 @@ You can also pick a very bad topic name and change it later as suggestions come 
 No problem,
 Thanks for letting me know your thought.
 
+
+{% endraw %}

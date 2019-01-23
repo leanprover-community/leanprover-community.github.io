@@ -9,6 +9,8 @@ permalink: archive/113488general/68222UpdatingMathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Morenikeji Neri (Aug 10 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Updating%20Mathlib/near/131239650):
 I typed leanpkg upgrade on msys2 but my mathlib doesn't update. Help!
 
@@ -205,3 +207,5 @@ I do sort of like the idea of Windows users having Lean/mathlib/git/etc. running
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 25 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Updating%20Mathlib/near/132755483):
 It might become a very large download though, not sure.
 
+
+{% endraw %}

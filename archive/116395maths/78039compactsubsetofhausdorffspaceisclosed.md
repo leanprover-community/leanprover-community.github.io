@@ -9,6 +9,8 @@ permalink: archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 14 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132127153):
 Hi everyone. I would really appreciate any comments on how to improve this proof. Also, is this result in the library?
 ```lean
@@ -211,3 +213,5 @@ Let me try something more constructive than OS recommendations. Since you like t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 15 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132142828):
 and mathlib name would probably be closer to `neq_bot_of_inf_neq_bot_left`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/66698opensetsareunionsofbasiselements.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495112):
 ```lean
 import analysis.topology.topological_space
@@ -260,3 +262,5 @@ Use `classical.axiom_of_choice`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 13 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126501890):
 Oh yes, sorry for not engaging with the original question, Reid is right that you should use `axiom_of_choice` here
 
+
+{% endraw %}

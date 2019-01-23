@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/88373simpdisplaymode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andreas Swerdlow (Aug 06 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simp%20display%20mode/near/130969966):
 Is there some way of getting lean to show what lemmas simp used in a particular line? I added an include in my file and suddenly a lot of my simps don't do what they used to. I want to be able to see which lemmas it is now having problems with.
 
@@ -42,3 +44,5 @@ https://github.com/leanprover/mathlib/blob/master/docs/extras/simp.md#when-it-is
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 06 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simp%20display%20mode/near/130970809):
 If you're using `simp` in the middle of a proof, then you're asking for trouble. You should only use `simp` to close a goal. Although it's kind of annoying, if your goal is `A` and then `simp` turns it into `B`, you're supposed to write `suffices : B, simpa using this` or `simp [this]` or `simp!` or some other random incantation until `simp` eventually is convinced that it can prove that `B` implies `A`, and then go on. This makes imports far less likely to break code.
 
+
+{% endraw %}

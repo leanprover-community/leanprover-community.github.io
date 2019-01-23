@@ -9,6 +9,8 @@ permalink: archive/116395maths/68271Whenis2asquaremodp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/When%20is%20-2%20a%20square%20mod%20p%3F/near/125797166):
 Is there a proof in Lean that if `p` is a prime congruent to `5` or `7` mod `8` then `-2` is not a square mod p?
 
@@ -153,3 +155,5 @@ That would be impressive
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/When%20is%20-2%20a%20square%20mod%20p%3F/near/125806528):
 lol
 
+
+{% endraw %}

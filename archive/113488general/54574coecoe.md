@@ -9,6 +9,8 @@ permalink: archive/113488general/54574coecoe.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 01 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_coe/near/125958400):
 Just noticed the lemma `coe_coe`, which is tagged as `simp`, does this mean I need to be careful about tagging lemmas that make a double coercion into a single coercion with simp?
 
@@ -133,3 +135,5 @@ infinity doesn't exist
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 02 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_coe/near/125987364):
 and neither do those corollaries, in mathlib
 
+
+{% endraw %}

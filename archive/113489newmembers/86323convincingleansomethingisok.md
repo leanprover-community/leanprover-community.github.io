@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/86323convincingleansomethingisok.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ned Summers (Aug 20 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/convincing%20lean%20something%20is%20ok/near/132461786):
 I'm trying to construct a function `f :  a → b` (as part of an instance of a structure) with two types a and b and non-trivially I have that for some type c defined differently in fact `b=c` (and I can prove that if needed).  
 
@@ -38,3 +40,5 @@ For example (fairly close to what I'm doing), if y were in the center of a group
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 21 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/convincing%20lean%20something%20is%20ok/near/132517275):
 Maybe you should take a look at https://leanprover.github.io/theorem_proving_in_lean/tactics.html#rewriting
 
+
+{% endraw %}

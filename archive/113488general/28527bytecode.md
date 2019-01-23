@@ -9,6 +9,8 @@ permalink: archive/113488general/28527bytecode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Oct 17 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bytecode%3F/near/135998701):
 In a file with `noncomputable theory`, I get the trace message
 ```
@@ -32,3 +34,5 @@ I have a fix for mathlib
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bytecode%3F/near/136006536):
 Thanks :+1:
 
+
+{% endraw %}

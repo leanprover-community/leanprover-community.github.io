@@ -9,6 +9,8 @@ permalink: archive/113488general/05461subtypesvsets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtypes%20v%20sets/near/123245378):
 I have `U : set alpha` and I want to make a Pi type which morally is `\Pi P : U, (some function of P)`
 
@@ -49,3 +51,5 @@ The main downside I can see to the Pi version, is if you ever wanted to prove th
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtypes%20v%20sets/near/123273900):
 In my context I don't think I'll ever want to do this.
 
+
+{% endraw %}

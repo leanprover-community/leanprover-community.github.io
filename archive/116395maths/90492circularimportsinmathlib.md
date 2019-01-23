@@ -9,6 +9,8 @@ permalink: archive/116395maths/90492circularimportsinmathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 02 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/circular%20imports%20in%20mathlib/near/135037582):
 Johannes said in the p-adic PR
 
@@ -20,3 +22,5 @@ I don't like this, as we get into a huge mess if we have too much cyclic depende
 
 I've never thought about these issues. Are there general rules written down somewhere about what is acceptable and what is not when it comes to this sort of question?
 
+
+{% endraw %}

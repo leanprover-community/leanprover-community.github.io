@@ -9,6 +9,8 @@ permalink: archive/113488general/73128aredsimpandsimpidempontent.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 02 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20dsimp%20and%20simp%20idempontent%3F/near/124526028):
 Are dsimp and simp idempontent?
 
@@ -21,3 +23,5 @@ I've never seen simp work twice in a row
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 02 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20dsimp%20and%20simp%20idempontent%3F/near/124527378):
 you're right
 
+
+{% endraw %}

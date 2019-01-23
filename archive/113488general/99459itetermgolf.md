@@ -9,6 +9,8 @@ permalink: archive/113488general/99459itetermgolf.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (May 27 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127155648):
 Suppose I need to prove `ite (x = y) tt ff = tt → x = y` and `x = y → ite (x = y) tt ff = tt`. Is there a succint way to do this in term mode? (I know `simp` and `split_ifs` is amazing here, but I'd like to do inversion by hand if possible)
 
@@ -39,3 +41,5 @@ use `to_bool`, it has lots of lemmas for this
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (May 27 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127165905):
 thanks Nicholas / Mario for the pointers
 
+
+{% endraw %}

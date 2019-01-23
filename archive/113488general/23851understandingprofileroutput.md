@@ -9,6 +9,8 @@ permalink: archive/113488general/23851understandingprofileroutput.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 11 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20profiler%20output/near/126403538):
 So I am 2/3 of the way through a pretty big proof which I am currently reluctant to break up into smaller pieces.
 
@@ -205,3 +207,5 @@ And I also think like https://blog.deepsense.ai/machine-learning-application-in-
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 13 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20profiler%20output/near/126508309):
 Clearly writing this paper without first trying to translate the scheme definition by hand is either stupid or fraud
 
+
+{% endraw %}

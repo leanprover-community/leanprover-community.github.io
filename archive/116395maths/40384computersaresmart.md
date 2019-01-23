@@ -9,6 +9,8 @@ permalink: archive/116395maths/40384computersaresmart.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 04 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computers%20are%20smart%3F%3F/near/127549305):
 So I was going along constructing coequalizers in Top, like you do. A coequalizer is a kind of quotient, so I needed to prove that if $$Z$$ is the quotient of $$Y$$ by a relation, then the quotient map $$Y \to Z$$ is continuous, so that it's a morphism in Top.
 I was all set to add the lemma for that to my `continuity` tactic, when I noticed the tactic had already succeeded before I did so! What happened?
@@ -28,3 +30,5 @@ I did use the coinduced topology (see PR at https://github.com/leanprover/mathli
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 05 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computers%20are%20smart%3F%3F/near/127595747):
 I see. So your `continuity` tactic is not in that PR?
 
+
+{% endraw %}

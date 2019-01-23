@@ -9,6 +9,8 @@ permalink: archive/113488general/85011constructingproofsbyhand.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 10 2018 at 05:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20proofs%20by%20hand/near/124867540):
 If I have `X Y Z : expr`, and a `P : expr` representing a proof that `X = Y`, how do I make the expression that says `(X = Z) = (Y = Z)`?
 
@@ -71,3 +73,5 @@ i'm high rn
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 10 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20proofs%20by%20hand/near/124872919):
 high on homological algebra / wedderburn's theorem
 
+
+{% endraw %}

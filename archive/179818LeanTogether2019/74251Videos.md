@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/74251Videos.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 07 2019 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154553849):
 Videos of the lectures will be available here: https://lean-forward.github.io/lean-together/2019/#videos
 Of course, the university A/V people are having trouble setting up the streaming. It will be working eventually. Hopefully before this afternoon.
@@ -108,3 +110,5 @@ I had the same issue with VLC. If you append (format=mpd-isoff) to Sebastian's U
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 15 2019 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155129028):
 Maybe two sad shooters or one okay bottle.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/07722howexpensiveisrw.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 31 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20expensive%20is%20rw%3F/near/127334288):
 a profiler for a long proof I just typed:
 ```
@@ -102,3 +104,5 @@ Basically, the profile trace isn't all that useful right now
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (May 31 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20expensive%20is%20rw%3F/near/127349707):
 The reason for the comparatively large runtime of `solve1` is not that it is called often, but that it calls the tactic you give it as an argument.  That is, when you have `begin { my_tactic } end`, then `my_tactic` is executed by `solve1` and hence the cumulative runtime of `solve1` includes the runtime of `my_tactic`.
 
+
+{% endraw %}

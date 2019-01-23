@@ -9,6 +9,8 @@ permalink: archive/113488general/37715simptauto.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 31 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127356880):
 So close and yet so far:
 
@@ -39,3 +41,5 @@ The goal is rather complicated (but seems like it should be automatically solvab
 ⊢ s ∈ tl → s = hd ∨ s ∈ tl
 ```
 
+
+{% endraw %}

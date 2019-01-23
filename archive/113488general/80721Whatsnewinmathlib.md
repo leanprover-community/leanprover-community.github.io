@@ -9,6 +9,8 @@ permalink: archive/113488general/80721Whatsnewinmathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 02 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20new%20in%20mathlib/near/135038239):
 There is a thread in the `#maths` stream: https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/What's.20new.20in.20Lean.20maths.3F
 It is a place to announce recent merges to mathlib that have clear mathematical relevance.
@@ -184,3 +186,5 @@ and I'm sure there are more open PRs now than when I started :P
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 22 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20new%20in%20mathlib/near/152398095):
 I think most of the remaining PRs are fairly large though
 
+
+{% endraw %}

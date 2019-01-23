@@ -9,6 +9,8 @@ permalink: archive/116395maths/89771classificationoffinitesimplegroups.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 22 2018 at 08:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/classification%20of%20finite%20simple%20groups/near/134424165):
 I made a very preliminary start on the statement of the classification of finite simple groups.
 
@@ -104,3 +106,5 @@ The url above now has informal description of all sporadic groups that I think s
 
 In describing the sporadic groups, it became apparent that there are numerous constructions from the Feit-Thompson theorem that should be useful.  That project presumably has libraries with topics such as semidirect products, covers, central extensions, extraspecial p-groups, quadratic forms, basic facts about orbits and stabilizers that would be useful here.
 
+
+{% endraw %}

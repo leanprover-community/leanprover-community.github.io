@@ -9,6 +9,8 @@ permalink: archive/116395maths/28850howtoproveoffindsimpletheorem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Truong Nguyen (Aug 10 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20of%20find%20simple%20theorem/near/131837673):
 Hi everyone, I am a new user, my question is maybe too simple. Please make it lear for me.
 Can you tell me how to find in the library or prove the simple theorem like:
@@ -63,3 +65,5 @@ def x := 0 -- or anything -- for some reason you can't use #find immediately
 
 ```
 
+
+{% endraw %}

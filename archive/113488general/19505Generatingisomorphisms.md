@@ -9,6 +9,8 @@ permalink: archive/113488general/19505Generatingisomorphisms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generating%20isomorphisms%3F/near/123269348):
 I have some definition `definition foo (X : Type) : Type := blah`
 
@@ -76,3 +78,5 @@ It's definitely not true in general; for example if `foo X` was `X = nat`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Mar 04 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generating%20isomorphisms%3F/near/123270257):
 This is an interesting question.  I think it is strictly weaker than univalence because it is not an isomorphism.  It looks inconsistent, but I don't immediately see how to derive a contradiction from it.
 
+
+{% endraw %}

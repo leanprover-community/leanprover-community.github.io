@@ -9,6 +9,8 @@ permalink: archive/113488general/32259LogicpuzzlesinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 22 2019 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156635984):
 I'm considering include a couple of small logic puzzles in my Lean exercises. But I realize I don't know how to do that. Probably I should have paid more attention to some of Kevin's messages. Say I want to formalize the solution to the first question in http://www.johnpratt.com/items/puzzles/logic_puzzles.html Say I define `inductive people : Type | Brown | Jones | Smith`. I'd like to do case disjunctions according to whether some term of type people is Brown, Jones or Smith. But `cases` is very disappointing. It replaces only in the current goal. What is the workflow here?
 
@@ -76,3 +78,5 @@ inductive people : Type | Brown | Jones | Smith
 inductive job : Type | doctor | lawyer | teacher
 ```
 
+
+{% endraw %}

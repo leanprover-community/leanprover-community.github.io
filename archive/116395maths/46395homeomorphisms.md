@@ -9,6 +9,8 @@ permalink: archive/116395maths/46395homeomorphisms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 01 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homeomorphisms/near/127431536):
 @**Patrick Massot**, did you have a definition of homeomorphisms somewhere?
 
@@ -81,3 +83,5 @@ In the end, it seems that 1) just doesn't work; I found that I was having to imp
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 02 2018 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homeomorphisms/near/127441301):
 2) mostly works. You develop as much as you need at the level of "independent universe" categories, but then when it makes sense restrict to either `small_category` or `large_category`. Working entirely with independent universe categories becomes problematic, because Lean usually can't infer the morphism universe level. Mostly you can get around this just by specifying that level explicitly, but it also starts to break typeclass inference and so eventually becomes a serious problem.
 
+
+{% endraw %}

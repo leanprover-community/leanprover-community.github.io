@@ -9,6 +9,8 @@ permalink: archive/113488general/29056negationofearliercasesofmatch.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nima (Apr 24 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/negation%20of%20earlier%20cases%20of%20match/near/125618723):
 (deleted)
 
@@ -85,3 +87,5 @@ Exactly
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nima (Apr 24 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/negation%20of%20earlier%20cases%20of%20match/near/125619332):
 Thanks
 
+
+{% endraw %}

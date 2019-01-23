@@ -9,6 +9,8 @@ permalink: archive/113488general/98683recname.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 19 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_name/near/123916531):
 After adding an inductive type to the environment using `add_inductive`, I can use the `induction` tactic, but it doesn't return any useful case names... Can I solve this by defining `rec_name`?
 
@@ -30,3 +32,5 @@ The alternative is to set the case names on your own, using a wrapper around the
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 19 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_name/near/123917471):
 I don't _really_ need the case names so far, but I'm kind of feeling that I don't have enough control over which case belongs to which constructor while the tactic is working on it...
 
+
+{% endraw %}

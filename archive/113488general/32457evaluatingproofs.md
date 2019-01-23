@@ -9,6 +9,8 @@ permalink: archive/113488general/32457evaluatingproofs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 12 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495074):
 @**Mario Carneiro** I think you said that it is possible to evaluate proofs... do you have an example? can we also break proof irrelevance? maybe have an unsound but computable `non-classical.some`?
 
@@ -65,3 +67,5 @@ it is kernel reduction
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 12 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495236):
 interesting
 
+
+{% endraw %}

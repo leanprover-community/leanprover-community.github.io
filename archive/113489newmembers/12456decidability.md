@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/12456decidability.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 12:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/decidability/near/147521031):
 How can you ask lean to decide something which is decidable? e.g. `prime n`
 
@@ -18,3 +20,5 @@ How can you ask lean to decide something which is decidable? e.g. `prime n`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/decidability/near/147521438):
 ok thanks Kevin
 
+
+{% endraw %}

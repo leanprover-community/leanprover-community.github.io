@@ -9,6 +9,8 @@ permalink: archive/113488general/12961subtypeinstance.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 15 2018 at 06:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype_instance/near/135805972):
 I'm having trouble using `subtype_instance`.
 
@@ -45,3 +47,5 @@ Sorry, problem solved.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 09 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype_instance/near/147374270):
 Oh! I just saw that! What was the issue?
 
+
+{% endraw %}

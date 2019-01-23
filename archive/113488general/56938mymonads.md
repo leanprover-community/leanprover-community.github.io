@@ -9,6 +9,8 @@ permalink: archive/113488general/56938mymonads.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 23 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my%20monads%21/near/124112923):
 inside a `tactic` do-block, how do i get a `list expr` out of a `list (tactic expr)`?
 
@@ -18,3 +20,5 @@ inside a `tactic` do-block, how do i get a `list expr` out of a `list (tactic ex
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 23 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my%20monads%21/near/124113009):
 thanks :)
 
+
+{% endraw %}

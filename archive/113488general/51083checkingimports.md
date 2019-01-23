@@ -9,6 +9,8 @@ permalink: archive/113488general/51083checkingimports.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Oct 10 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/checking%20imports/near/135554082):
 whenever I open vscode, lean seems to re-check all imported files... wasn't this better some time ago?
 
@@ -116,3 +118,5 @@ I used to,  ages ago. Before most of the library was moved to `mathlib`... I gue
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 11 2018 at 00:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/checking%20imports/near/135571392):
 Yeah, while Lean itself is stable at the moment, all the instructions people are giving assume you're using a binary (ideally provided by elan). `lean --make` in the `library/` directory of a built-from-sources copy of Lean can help with the issue you were experiencing.
 
+
+{% endraw %}

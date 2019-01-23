@@ -9,6 +9,8 @@ permalink: archive/113488general/35253CompilersmeetTheoremProversETHZurich.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 05 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Compilers%20meet%20Theorem%20Provers%20%40%20ETH%20Zurich/near/133360691):
 Dear Lean Community, we will be having a "Compiler meets Theorem Proving" social @ ETH Zurich next week Thursday.
 
@@ -33,3 +35,5 @@ Btw, we already have 36 registrations. Seems Lean, Johannes, and the other speak
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 17 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Compilers%20meet%20Theorem%20Provers%20%40%20ETH%20Zurich/near/134112712):
 The videos are online: https://www.youtube.com/channel/UC64g7nvgO22-2Vg2iI-WDoA
 
+
+{% endraw %}

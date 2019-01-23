@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/82236Instanceaffectsothersections.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 01 2019 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154128043):
 ```lean
 import data.finsupp
@@ -147,3 +149,5 @@ It's not a nice solution, but adding this line before `x` works `local attribute
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 01 2019 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154137734):
 @**Patrick Massot**  @**Chris Hughes**  Thanks a lot! Both solutions seems to solve my problem.
 
+
+{% endraw %}

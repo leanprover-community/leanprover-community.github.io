@@ -9,6 +9,8 @@ permalink: archive/116395maths/53658namingofbinarypropertieswithleftandright.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 26 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125715828):
 @**Chris Hughes** updated his `finset.disjoint` PR with a [change](https://github.com/leanprover/mathlib/commit/009ff9b) to rename the following:
 
@@ -29,3 +31,5 @@ There's also the question of which one's `right` and which one's `left`. I would
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 30 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125881780):
 I created a [GitHub issue](https://github.com/leanprover/mathlib/issues/129) for this discussion. Please leave any thoughts there.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/68209customrecursor.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123198503):
 I'm creating a recursor for a type that I defined and I'd like `match` and `cases` to pick it instead of what Lean generated. Is there a way to do that?
 
@@ -24,3 +26,5 @@ For `cases` on coinductive types, I can make my own tactics but it would be grea
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 02 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123199079):
 Maybe I should just add that to my wish list
 
+
+{% endraw %}

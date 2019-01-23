@@ -9,6 +9,8 @@ permalink: archive/113488general/78605arrayinduction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 14 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/array%20induction/near/132096387):
 Given a theorem statement involving an `array`, what might I use in the proof where I would normally use induction if the `array` were instead a `list`?
 
@@ -70,3 +72,5 @@ Plus, if you are doing dependent elimination over a quotient the compatibility h
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Minchao Wu (Aug 14 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/array%20induction/near/132119121):
 Right, I just looked into the `multiset.lean` and saw your comments on the dependent recursor
 
+
+{% endraw %}

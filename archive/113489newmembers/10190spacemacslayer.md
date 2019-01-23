@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/10190spacemacslayer.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jared Corduan (Jul 23 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spacemacs%20layer/near/130175116):
 Has anyone here made a spacemacs layer for lean that they would be willing to share?  I'm a long time vim user who has just started reading about spacemacs & emacs last week in order to use lean.  I found https://github.com/jroesch/layer-lean, but I couldn't get it to work.  I'm probably just making silly errors since I'm still unfamiliar with spacemacs.  I'll keep reading the documentation until I figure it out, but if anyone can speed me along that would be much appreciated.
 
@@ -24,3 +26,5 @@ great, thank you!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rudi Grinberg (Oct 18 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spacemacs%20layer/near/136009370):
 I didn't have much luck with that layer either but I ended up taking the keyboard shortcuts it provides
 
+
+{% endraw %}

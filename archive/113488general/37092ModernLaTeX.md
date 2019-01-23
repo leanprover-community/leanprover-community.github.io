@@ -9,6 +9,8 @@ permalink: archive/113488general/37092ModernLaTeX.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 17 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Modern%20LaTeX/near/123843670):
 I don't think it can be used as a preprocessor (that's an interesting question actually)
 
@@ -27,3 +29,5 @@ That's even further away from Type theory
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 17 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Modern%20LaTeX/near/123843780):
 Yeah! That's all the way in Montreal! What's the maximum allowed distance from Type Theory in here?
 
+
+{% endraw %}

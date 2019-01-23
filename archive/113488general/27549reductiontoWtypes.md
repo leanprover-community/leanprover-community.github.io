@@ -9,6 +9,8 @@ permalink: archive/113488general/27549reductiontoWtypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 21 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reduction%20to%20W%20types/near/124010706):
 Is there any chance of simplifying the kernel to only support a fixed set of inductive types, and have everything else compile into them? We already do such reduction for nested inductives and mutual inductives. I envision such a move happening when we write a new equation compiler and inductive compiler in lean (which will probably be late in development of lean 4 if not later). The argument about concern for changing the kernel is now greatly reduced because of the theory work I've been doing to make sure that this is consistent
 
@@ -175,3 +177,5 @@ It might even be possible to have equation lemmas for wf definitions, but only f
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reduction%20to%20W%20types/near/124052775):
 (yes I'm talking about features that probably will never be in leo lean, but maybe in other typecheckers)
 
+
+{% endraw %}

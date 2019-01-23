@@ -9,6 +9,8 @@ permalink: archive/113488general/68329definitiondependingontheorem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20depending%20on%20theorem/near/135382946):
 For my Lean-talk I would like a good example of a definition that depends on a (non-trivial) theorem. I don't want to use perfectoid spaces because that is way too advanced. I want to use this thread to collect a list of cute examples.
 
@@ -33,3 +35,5 @@ Yes, but I will be talking to an audience that partly doesn't know what a sheaf 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 08 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20depending%20on%20theorem/near/135387944):
 What about the definition of addition of real numbers? Or even addition or integers
 
+
+{% endraw %}

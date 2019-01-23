@@ -9,6 +9,8 @@ permalink: archive/113488general/96064divisionandnumerals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 14 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20and%20numerals/near/151792143):
 ```lean
 
@@ -41,3 +43,5 @@ In this example, you can also force instances to be synthesized before elaborati
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 14 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20and%20numerals/near/151798356):
 I now feel like I've asked this question several times. I think it's about time I understood the answer properly. My current understanding of the answer, which I guess I already had when I posted, is "it's all to do with when elaboration occurs". I hadn't realised this one was in the "lemma / example makes a difference" category and I know I've asked at least one of these before.
 
+
+{% endraw %}

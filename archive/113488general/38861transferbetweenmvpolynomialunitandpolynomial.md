@@ -9,6 +9,8 @@ permalink: archive/113488general/38861transferbetweenmvpolynomialunitandpolynomi
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 03 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transfer%20between%20mv_polynomial%20unit%20and%20polynomial/near/133275790):
 Suppose I want to build a slick machine to move back and forth between `mv_polynomial unit` and `polynomial`. Does it make sense to start with
 ```lean
@@ -23,3 +25,5 @@ I thought about this a bit, and I think the function should take an element of a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 03 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transfer%20between%20mv_polynomial%20unit%20and%20polynomial/near/133277077):
 I think the transfer API just has all the lemmas about preserving evaluation, degree, multiplication etc.
 
+
+{% endraw %}

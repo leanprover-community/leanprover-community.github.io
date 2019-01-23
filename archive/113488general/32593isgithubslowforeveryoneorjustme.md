@@ -9,6 +9,8 @@ permalink: archive/113488general/32593isgithubslowforeveryoneorjustme.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20github%20slow%20for%20everyone%20or%20just%20me%3F/near/133728163):
 Both my browser and command line take a very long time getting responses from github (about 30 secs, or something, sometimes timeout). Do others experience this as well?
 
@@ -36,3 +38,5 @@ not for me
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 11 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20github%20slow%20for%20everyone%20or%20just%20me%3F/near/133738454):
 down here it's struggletown https://status.github.com :'(
 
+
+{% endraw %}

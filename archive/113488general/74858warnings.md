@@ -9,6 +9,8 @@ permalink: archive/113488general/74858warnings.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 27 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/warnings/near/152612059):
 There isn't any way to suppress all warnings or specific warnings from lean, is there?
 
@@ -36,3 +38,5 @@ Often I want to suppress the many "warning: imported file uses sorry" messages, 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 27 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/warnings/near/152613016):
 That seems like something that `grep` could do for you.
 
+
+{% endraw %}

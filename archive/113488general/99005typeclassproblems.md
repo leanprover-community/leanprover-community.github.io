@@ -9,6 +9,8 @@ permalink: archive/113488general/99005typeclassproblems.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143681):
 This loop is breaking everything
 ```lean
@@ -853,3 +855,5 @@ I think depth first search is not very good
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 18 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128234704):
 Kenny remember as a last resort you can just override the type class system and give it the instances yourself. I used to do this all the time when I got stuck on (much easier) stuff.
 
+
+{% endraw %}

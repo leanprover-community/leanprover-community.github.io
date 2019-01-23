@@ -9,6 +9,8 @@ permalink: archive/113488general/32223parametricity.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Cyril Cohen (Nov 11 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147487744):
 Hi, @**Johannes Hölzl** @**Mario Carneiro** @**Rob Lewis**,
 I am debugging my -- very buggy -- parametricity plugin. Could you tell me the shortest way to get the name of an inductive type from the name of its recursor? (I found `environment.inductive_type_of` to get it from the name of a constructor, but I cannot find the same for the recursor, and taking just the namespace sounds dirty to me...)
@@ -130,3 +132,5 @@ its a projection. so the projection data you get out of `environment` should tel
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Cyril Cohen (Nov 12 2018 at 00:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147496075):
 Nevermind, I was looking for `environment.unfold_all_macros`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/30186detectingterminalgoals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 26 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/detecting%20terminal%20goals/near/125718057):
 I have a little tactic that is meant to determine with the current goal is "terminal", that is, no other goals depend on it.
 
@@ -227,3 +229,5 @@ I'd be curious to see how you implemented `lock_tactic_state`. Did you deconstru
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 28 2018 at 07:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/detecting%20terminal%20goals/near/125808523):
 I'm looking forward to your next example. I'll probably see it when I wake up. Incidentally, Australia is way too far! Someone should move it closer to Europe and America, that way our days would overlap!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/42739dsimpconfig.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Oct 10 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/135537467):
 Please could someone help me fill in these holes in the docstring for `dsimp_config`?
 ```lean
@@ -60,3 +62,5 @@ I also can't guarantee that the docstrings I added aren't misleading, they are m
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 16 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810263):
 Thanks @**Edward Ayers**
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/54532setunionequality.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20union%20equality/near/125683378):
 `example (X : Type) (R : Type) (D : R → set X) (γ : Type) (f : γ → R) :
   ⋃₀(D '' set.range f) = ⋃ (i : γ), D (f i) := sorry`
@@ -404,3 +406,5 @@ To do this formally you only need to know that every number is even or odd and a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 03:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20union%20equality/near/125752144):
 also you have to know parity rules for adding even and odd
 
+
+{% endraw %}

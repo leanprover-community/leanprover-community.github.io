@@ -9,6 +9,8 @@ permalink: archive/113488general/04301roptionname.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Nov 04 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/roption%20name/near/137151183):
 @**Mario Carneiro** What's the meaning behind the name of the type `roption`? Sorry if I'm missing something obvious :p
 
@@ -27,3 +29,5 @@ haha, fair enough. `part` does seem clearer. A friend of mine guessed "recursive
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 04 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/roption%20name/near/137166356):
 I seem to recall raw. Maybe in contrast with pfun which has an argument, roption is more minimalist
 
+
+{% endraw %}

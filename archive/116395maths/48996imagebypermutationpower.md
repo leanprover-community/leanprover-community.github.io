@@ -9,6 +9,8 @@ permalink: archive/116395maths/48996imagebypermutationpower.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 17 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/image%20by%20permutation%20power/near/125188730):
 ```lean
 variables (α : Type) (g : perm α) (i : ℕ) (U : set α)
@@ -332,3 +334,5 @@ And I'm very happy to see how it looks like now
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 17 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/image%20by%20permutation%20power/near/125194058):
 Ok, it's summer here and I have a lot of maths to read. I'll be trying the IHES garden as a working place, without bringing a computer. See you. :sunglasses:
 
+
+{% endraw %}

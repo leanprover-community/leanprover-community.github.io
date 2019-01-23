@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907204):
 Since fields extend additive groups , I thought that something `hom_int_to_field` below should work:
 
@@ -95,3 +97,5 @@ If I change `theorem` to `instance`, it works.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154908234):
 That's how they do it in mathlib.
 
+
+{% endraw %}

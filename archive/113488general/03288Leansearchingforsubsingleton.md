@@ -9,6 +9,8 @@ permalink: archive/113488general/03288Leansearchingforsubsingleton.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 09 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20searching%20for%20subsingleton%3F/near/147398515):
 https://gist.github.com/kckennylau/2b5890b44f2f66196254a50e9fd6fa96#file-subsingleton-L727
 What motivates Lean to use 10 second to search for a subsingleton instance?
@@ -56,3 +58,5 @@ Usually searches for subsingleton instances are prompted by `congr` (also used i
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 09 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20searching%20for%20subsingleton%3F/near/147401342):
 ok
 
+
+{% endraw %}

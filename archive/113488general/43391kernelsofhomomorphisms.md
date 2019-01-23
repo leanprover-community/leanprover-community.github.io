@@ -9,6 +9,8 @@ permalink: archive/113488general/43391kernelsofhomomorphisms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 23 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/kernels%20of%20homomorphisms/near/125580755):
 Ok, I'm making my feet wet with a first attempt at formalising something. I want to say write down the assumption im(f) = ker(g), where f and g are group homomorphisms. I guess im(f) will be something like `f ' A.univ`. I tried to find kernels in `algebra.group` but did not find anything. Are kernels somewhere else?
 
@@ -41,8 +43,7 @@ Lean does not like my definition of `ker` and`im`
 I get squiggles under the `f`
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 23 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/kernels%20of%20homomorphisms/near/125582759):
-{% raw %}
-`invalid binder declaration, delimiter/bracket expected (i.e., '(', '{', '[', '{{')`{% endraw %}
+`invalid binder declaration, delimiter/bracket expected (i.e., '(', '{', '[', '{{')`
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 23 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/kernels%20of%20homomorphisms/near/125584258):
 You can write
@@ -91,3 +92,5 @@ example inconsistent : false := trivial
 ```
 (hint: it's not proving false)
 
+
+{% endraw %}

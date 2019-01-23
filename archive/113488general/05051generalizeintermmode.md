@@ -9,6 +9,8 @@ permalink: archive/113488general/05051generalizeintermmode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497304):
 ```lean
 @[elab_as_eliminator] def generalize
@@ -593,3 +595,5 @@ this was a big problem in lean 2
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521838):
 when you do a proof with lots of omitted type information relying on lean to pick up the pieces, if something changes in the unification algorithm or something it can be very difficult to understand the broken proof
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/03321Inverseimageoftheindicatorfunction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825505):
 I'm struggling to get a hold of the inverse image of the indicator function:
 ```lean 
@@ -106,3 +108,5 @@ I want to prove a lemma which would possibly rewrite the `{x : s | indicator s a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826609):
 @**Joey van Langen**  thanks I'll try that.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/30795propdecidablebreaksdectrivial.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prop_decidable%20breaks%20dec_trivial%3F/near/130351758):
 ```lean
 local attribute [instance] classical.prop_decidable
@@ -43,3 +45,5 @@ I sometimes wonder why we can't solve diamond issues using priorities. "now we h
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 26 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prop_decidable%20breaks%20dec_trivial%3F/near/130353004):
 Good question!
 
+
+{% endraw %}

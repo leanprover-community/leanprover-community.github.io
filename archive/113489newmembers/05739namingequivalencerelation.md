@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/05739namingequivalencerelation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Sever (Jul 18 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/naming%20equivalence%20relation/near/129879693):
 I have a function `eqd : point → point → point → point → Prop`, and I have made an equivalence relation on `point × point`. Instead of using `setoid.r (a,b) (c,d)`, is it possible to change the notation to be `(a,b) ≡ (c,d)`?
 
@@ -41,3 +43,5 @@ Yes, I should have been more careful and specified which sort of whitespace I me
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 18 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/naming%20equivalence%20relation/near/129883881):
 Another option for the chaotic player is to define a `has_coe_to_fun` from `point` to `point -> (point, point)` which sends `a` to `\lam b, (a, b)`.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/28136Theorems.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Guillermo Barajas Ayuso (Aug 04 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Theorems/near/130894817):
 Hi guys do you know how types can somehow be theorems? E.g. strong_indefinite_description in classical.
 
@@ -21,3 +23,5 @@ Usually we stick to `theorem` or `lemma` for things in `Prop` and `def` for thin
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Guillermo Barajas Ayuso (Aug 05 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Theorems/near/130936748):
 Ok that makes sense, thanks a lot!
 
+
+{% endraw %}

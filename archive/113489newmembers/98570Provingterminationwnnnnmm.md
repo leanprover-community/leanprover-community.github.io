@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/98570Provingterminationwnnnnmm.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) cbailey (Jan 10 2019 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154824198):
 Is there any way to convince Lean that a function  f (n : nat, m : nat) -> T, where each recursive call satisfies ( n' < n \/ ( n' = n /\ m' < m ) ) is indeed terminating without explicitly adding a third parameter to represent (n + m) or gas?
 Thank you!
@@ -53,3 +55,5 @@ def applyTypeSub: ∀ {Γ Γ' T}, SubFn Γ Γ' → Term Γ T → Term Γ' T
 ```
 in order to make all the variables unify correctly.
 
+
+{% endraw %}

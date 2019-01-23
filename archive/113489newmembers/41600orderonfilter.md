@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/41600orderonfilter.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 09 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order%20on%20filter/near/135489142):
 Why is the order on filter reverse inclusion instead of just inclusion?
 
@@ -30,3 +32,5 @@ If you try to do the same thing with filters, the replacement for "continuous" i
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 09 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order%20on%20filter/near/135491420):
 That is, `tendsto id L1 L2` iff `L2 ⊆ L1`
 
+
+{% endraw %}

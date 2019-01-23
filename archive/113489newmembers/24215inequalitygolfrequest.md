@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/24215inequalitygolfrequest.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Nov 21 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inequality%20golf%20request/near/148130620):
 I'm curious to see how simple a lean proof of this can be:
 ```lean
@@ -431,3 +433,5 @@ in a lot of ways, automation for nat subtraction is similar to automating stuff 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 24 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inequality%20golf%20request/near/148270608):
 Yes, that's an insightful comment. Mathematicians know that dividing by zero is something one "never does" so we're always prepared to supply that proof that the denominator is non-zero. But it's easy for us to forget the corresponding precondition for nat subtraction, because nat subtraction just doesn't exist in maths. You define division to be random where we don't define it, but you define nat subtraction to be the wrong thing when we have a perfectly good answer which just happens to be a number which is not a nat.
 
+
+{% endraw %}

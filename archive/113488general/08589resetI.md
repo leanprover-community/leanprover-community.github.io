@@ -9,6 +9,8 @@ permalink: archive/113488general/08589resetI.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 11 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resetI/near/124910648):
 Is there any reason `resetI` wouldn't work in the latest nightly? I have a very short proof with `intro ; resetI` in it and I get:
 
@@ -25,3 +27,5 @@ oh thank god... fixing `resetI` was giving me nightmares
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 11 2018 at 03:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resetI/near/124911556):
 It doesn't seem to give you much leeway in how you use it, am I wrong?
 
+
+{% endraw %}

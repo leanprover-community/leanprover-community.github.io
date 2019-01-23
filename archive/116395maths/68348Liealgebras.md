@@ -9,6 +9,8 @@ permalink: archive/116395maths/68348Liealgebras.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 13 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997275):
 I am completely stuck on the sorried definition. Is this just to ambitious at the moment?
 ```lean
@@ -236,3 +238,5 @@ e.g. one which asks for a proof that n < length before giving you a non-option n
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 13 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000696):
 `list.head'` looks like the best one, depending on the order of your lists.
 
+
+{% endraw %}

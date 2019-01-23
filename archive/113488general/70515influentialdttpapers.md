@@ -9,6 +9,8 @@ permalink: archive/113488general/70515influentialdttpapers.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 01 2018 at 04:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/influential%20dtt%20papers/near/123120262):
 is there a list out there of really important papers in dtt? i recently read "Elimination with a Motive" that was linked in this chat and finally understood how `cases` works
 
@@ -60,3 +62,5 @@ when I read about `no_confusion` in TPIL i was anything but not confused
 ```
 I was just the same. I'd never heard of the concept before and IIRC it's dropped in without any explanation right in the middle of the preliminary discussion on type classes when, rather than talking about things like Haskell type classes (which I kind of understood) they start going on about making a canonical nat and then randomly dropping a proof that 1 isn't 2 using no_confusion. That was a part of TPIL that I had to read again and again before it made sense. I flagged this up to Jeremy who I think might have done some rearranging as a consequence...
 
+
+{% endraw %}

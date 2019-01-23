@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/28310dectrivialfails.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 30 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dec_trivial%20fails/near/136806175):
 ```lean
 import data.rat
@@ -189,3 +191,5 @@ give up? This definition is not intended for kernel reduction
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 31 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dec_trivial%20fails/near/136815862):
 If you need to calculate these things, you can either use the definition, or if we need larger scale computation we can add another `norm_num` add-on for this (I really need to make it extensible via annotation...)
 
+
+{% endraw %}

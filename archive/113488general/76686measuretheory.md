@@ -9,6 +9,8 @@ permalink: archive/113488general/76686measuretheory.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 19 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/measure%20theory/near/129954535):
 Hey, this is just an ad for the rather large commit I just put out. It doesn't add too much new stuff, instead it is doing what I do best, proving the same things other people did but better. :) It's focused primarily on the measure theory development, with the hope that I can bring down some of the compile times in that area. But there are some more substantive changes:
 
@@ -314,3 +316,5 @@ https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/How.20much.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 14 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/measure%20theory/near/135776663):
 ok
 
+
+{% endraw %}

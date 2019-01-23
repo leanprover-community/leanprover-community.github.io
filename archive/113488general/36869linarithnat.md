@@ -9,6 +9,8 @@ permalink: archive/113488general/36869linarithnat.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 30 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134918920):
 @**Rob Lewis** I started remembering to use `linarith` to solve some easy goals like `f < g -> -f - -g <= 0 -> false`.
 Do you have a sense of how hard it would be to support `-` on nat? I guess at least in simple cases there should be a translation to a new linear system (maybe involving adding an extra variable).
@@ -61,3 +63,5 @@ While probably the easiest is to implement omega / cooper / or Leo's extensions 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 17:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134926332):
 I am interested to discuss this topic in more depth (and will also be in Freiburg).
 
+
+{% endraw %}

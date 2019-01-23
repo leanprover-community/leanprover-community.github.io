@@ -9,6 +9,8 @@ permalink: archive/113488general/91542UbuntupackageforLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 02 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ubuntu%20package%20for%20Lean%3F/near/133216835):
 How does that work? I could attempt to maintain it if it's only really a matter of making sure the set up runs on my 18.04 machine and accepting PRs from people who wanted to fix it on other versions of Ubuntu
 
@@ -160,3 +162,5 @@ I'm not sure GSOC would be a good source of funding for release management, prim
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Sep 11 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ubuntu%20package%20for%20Lean%3F/near/133730652):
 Thanks Reid, this is a very insightful perspective. I agree that ultimately MSR will likely take on this responsibility. I was trying to think smaller, and about a solution that would be good for between now and until lean becomes large and old enough to graduate to a software product with its own release manager :).
 
+
+{% endraw %}

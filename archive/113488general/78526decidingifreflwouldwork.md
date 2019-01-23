@@ -9,6 +9,8 @@ permalink: archive/113488general/78526decidingifreflwouldwork.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 22 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deciding%20if%20%60refl%60%20would%20work/near/125526321):
 I have `lhs rhs : expr`, and I would like to know, if the goal were to be `lhs = rhs`,  whether or not `refl` would succeed. I could temporarily make the goal actually `lhs = rhs`, and try `refl`, but I'm wondering if it can be done directly.
 
@@ -30,3 +32,5 @@ If you want to look at it like that, yes :)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 22 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deciding%20if%20%60refl%60%20would%20work/near/125530633):
 What if you try to unify them directly? `unify lhs rhs`
 
+
+{% endraw %}

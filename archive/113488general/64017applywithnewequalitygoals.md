@@ -9,6 +9,8 @@ permalink: archive/113488general/64017applywithnewequalitygoals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 23 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558382):
 Is there a tactic which works like `apply f` except that, if unifying the goal with the result type of `f` fails, it introduces new goals stating that the terms which don't unify are equal?
 Example: I want to prove a statement like `f ⁻¹' (u ∩ v) = ∅`. Suppose I know I want to use `preimage_empty : f ⁻¹' ∅ = ∅`. I would like to obtain `u ∩ v = ∅` as a new goal without spelling it out explicitly (in a `have` or similar).
@@ -469,3 +471,5 @@ Now I need to sleep
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 24 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125632009):
 it would be less than 23 if you finished all your [WIPs] :)
 
+
+{% endraw %}

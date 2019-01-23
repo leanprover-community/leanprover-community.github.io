@@ -9,6 +9,8 @@ permalink: archive/113488general/03089leanprovercommunity.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 25 2018 at 03:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanprover-community/near/134567131):
 I don't seem to have write access to leanprover-community/mathlib; could someone add me?
 
@@ -24,3 +26,5 @@ does this  work for you? https://github.com/leanprover-community/mathlib/invitat
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 25 2018 at 03:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanprover-community/near/134567331):
 Right, I found it. Thanks
 
+
+{% endraw %}

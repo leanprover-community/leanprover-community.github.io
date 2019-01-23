@@ -9,6 +9,8 @@ permalink: archive/116395maths/61848ALEXANDRIAProoffortheWorkingMathematician.ht
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 15 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ALEXANDRIA%3A%20Proof%20for%20the%20Working%20Mathematician/near/126588456):
 **[ALEXANDRIA: Large-Scale Formal Proof for the Working Mathematician](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/)**
 
@@ -392,3 +394,5 @@ A related question -- what about going to Paris _and_ London :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Assia Mahboubi (May 29 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ALEXANDRIA%3A%20Proof%20for%20the%20Working%20Mathematician/near/127247353):
 Hi, indeed I am (co)organizing this Dagstuhl [stuff](https://www.dagstuhl.de/en/program/calendar/semhp/?semnr=18341), with 3 colleagues: [Andrej Bauer](http://www.andrej.com/research.html), [Peter Lumsdaine](http://peterlefanulumsdaine.com/research.html) and  and [Martin Escardo](http://www.cs.bham.ac.uk/~mhe/).  Dagsthul is the CS's Oberwolfach so it is invitation only and  the application (including the list of invitees) has been crafted a long time ago. Before I was even aware that you guys could be interested in this kind of event...
 
+
+{% endraw %}

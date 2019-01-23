@@ -9,6 +9,8 @@ permalink: archive/113488general/25708triviallyfalse.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trivially%20false/near/130883663):
 Am I supposed to resolve situations like
 ```
@@ -46,3 +48,5 @@ I get timeouts on everything that does something equivalent to cases on H, even 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 11:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trivially%20false/near/130884100):
 it must be unfolding things in a weird order
 
+
+{% endraw %}

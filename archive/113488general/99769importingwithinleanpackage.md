@@ -9,6 +9,8 @@ permalink: archive/113488general/99769importingwithinleanpackage.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Mar 24 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/importing%20within%20lean%20package/near/124161392):
 So I've tried to download @**Kenny Lau** and @**Kevin Buzzard**'s stacks project library, but none of the imports are currently working, I get the following message
 ```lean
@@ -252,3 +254,5 @@ I think there are two possibilities: if you're on an official release (say 3.3.0
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 24 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/importing%20within%20lean%20package/near/124164063):
 (deleted)
 
+
+{% endraw %}

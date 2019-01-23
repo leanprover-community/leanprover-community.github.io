@@ -9,6 +9,8 @@ permalink: archive/113488general/04165squares.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 29 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squares/near/127275657):
 Do we have that the square of a real number is nonnegative?
 
@@ -21,3 +23,5 @@ looks promising
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 29 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squares/near/127275750):
 too bad x^2 is not defeq x*x :disappointed:
 
+
+{% endraw %}

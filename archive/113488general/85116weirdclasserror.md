@@ -9,6 +9,8 @@ permalink: archive/113488general/85116weirdclasserror.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 07 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/weird%20class%20error/near/151060003):
 ```lean
 import category_theory.limits.limits
@@ -54,3 +56,5 @@ Also strange: if I change `has_colimits` to a structure, then I need to add univ
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 07 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/weird%20class%20error/near/151120501):
 I think I witnessed similar problems when I tried to get the stuff on presheaves in line with the merged limits PR. But I didn't investigate further.
 
+
+{% endraw %}

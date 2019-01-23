@@ -9,6 +9,8 @@ permalink: archive/116395maths/94981polynomial.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 19 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomial/near/129921310):
 What's happening with polynomials? I see ce990c59d authored by Chris and merged by Johannes but PR171 is still open and active
 
@@ -57,3 +59,5 @@ I think you need `dist x y = dist 0 (x - y)`, as the equivalent of the property 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 19 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomial/near/129941552):
 yes, somthing like this is needed
 
+
+{% endraw %}

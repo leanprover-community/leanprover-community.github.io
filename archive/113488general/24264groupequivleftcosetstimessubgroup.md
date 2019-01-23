@@ -9,6 +9,8 @@ permalink: archive/113488general/24264groupequivleftcosetstimessubgroup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140026):
 ```
 import data.equiv group_theory.coset
@@ -388,3 +390,5 @@ wait, how does that also work :o
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125141327):
 oh, automatic casing
 
+
+{% endraw %}

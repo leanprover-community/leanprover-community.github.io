@@ -9,6 +9,8 @@ permalink: archive/113488general/51786normnumbug.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Calle Sönne (Nov 08 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20bug/near/147321656):
 Here is what I think is a bug in norm_num:
 ```lean
@@ -47,3 +49,5 @@ I once made a stupid tactic to do exactly this: https://github.com/MonoidMusicia
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Nov 11 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20bug/near/147475536):
 you can also do the same with `rat`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/74703writingunicodetofile.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 18 2019 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/writing%20unicode%20to%20file/near/156363926):
 Does anyone have experience using file i/o with unicode characters? Lean seems to be mangling them. But I'm pretty sure something like this has worked for me in the past.
 ```lean
@@ -75,3 +77,5 @@ That still seems reasonable, but it might be better to add a comment explaining 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jan 19 2019 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/writing%20unicode%20to%20file/near/156412135):
 If anyone has advice about what should go there, I'm happy to update that file.
 
+
+{% endraw %}

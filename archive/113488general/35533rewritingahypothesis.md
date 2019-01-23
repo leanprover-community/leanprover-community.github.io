@@ -9,6 +9,8 @@ permalink: archive/113488general/35533rewritingahypothesis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20a%20hypothesis/near/125608657):
 This belongs in its own topic.
 (Originally https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/statement.20of.20the.20five.20lemma/near/125607928)
@@ -504,3 +506,5 @@ it is almost only `apply_assumption` and `cc`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20a%20hypothesis/near/125612179):
 with a very rare `rwa` or `simp`
 
+
+{% endraw %}

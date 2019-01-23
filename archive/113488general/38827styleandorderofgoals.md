@@ -9,6 +9,8 @@ permalink: archive/113488general/38827styleandorderofgoals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 15 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60_%60%20style%20and%20order%20of%20goals/near/125107491):
 I was proving a goal yesterday which was a rather complex maze of essentially trivial things -- everything was either a relatively easy argument or a relatively easy consequence of an already-proved result, and it was very much a case of following my nose. I was in tactic mode. Occasionally there were branches, where I would write something like `refine _ H _` because H was to hand but the two other goals needed a three-line argument, or I had a goal of the form `exists x, exists H, ...` and I would write `existsi _` and move on.
 
@@ -53,3 +55,5 @@ You should not be facing a theorem like this. There are two ways this can come u
 
 Your proof style sounds like a good way to find a proof in the first place, but it definitely requires post-processing once the proof is complete, because if you just leave it like that it will be very brittle since you give very little information about what you are proving. One easy thing to do is never use `existsi _`; once you find out what term goes there (when you finish the proof) you should go back to this line and insert the term. This should also suppress the superfluous branching. (You can get away with `<_, proof>` to prove an exists more often in term mode, since the type of `proof` will often give the term by unification.)
 
+
+{% endraw %}

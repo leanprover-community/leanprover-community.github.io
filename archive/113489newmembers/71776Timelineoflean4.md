@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/71776Timelineoflean4.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) HT (Jun 27 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Timeline%20of%20lean%204%3F/near/128716259):
 Hi, when would lean 4 's repo be public?
 
@@ -203,3 +205,5 @@ This is why I conservatively referred to “hope.” I think there is some risk 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 28 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Timeline%20of%20lean%204%3F/near/128759878):
 I think considerably more than Simon's list of concepts will carry over to lean 4. I know that "the syntax will stay more or less the same" modulo some easy regex fixes, but the elaborator may also change (semi by accident, because it will be re-implemented in lean), and this may cause more subtle breakage
 
+
+{% endraw %}

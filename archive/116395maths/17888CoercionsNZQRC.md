@@ -9,6 +9,8 @@ permalink: archive/116395maths/17888CoercionsNZQRC.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 03 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130849802):
 My students want to move freely between these five basic objects, sometimes because they have made poor design decisions but sometimes for genuine reasons. I figured I'd try to get to the bottom of why they were having problems.
 
@@ -399,3 +401,5 @@ I wouldn't even know where to start looking for the whnf
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130899271):
 My guess is that it is making sure it is a sort first
 
+
+{% endraw %}

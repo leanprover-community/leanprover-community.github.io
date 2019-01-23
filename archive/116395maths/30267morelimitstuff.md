@@ -9,6 +9,8 @@ permalink: archive/116395maths/30267morelimitstuff.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 17 2018 at 05:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151910753):
 I've got the following lemmas
 ```lean
@@ -57,3 +59,5 @@ Though sometimes Lean tries to be too smart, and gets confused by the reassociat
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 17 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/152007178):
 Aah, I see. So the third one can go. That leaves the other 2.
 
+
+{% endraw %}

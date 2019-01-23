@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/48132discretefieldvsfield.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 17 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/discrete_field%20vs%20field/near/152024360):
 Is the idiom to not use `field` at all?
 
@@ -33,3 +35,5 @@ I would petition to name it `field` :P
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/discrete_field%20vs%20field/near/152024590):
 Please, don't feed the trolls...
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/28653dontknowhowto.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Etienne Laurin (Aug 04 2018 at 00:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130864937):
 Hi! I'm a C++ developer in Dublin. I'm trying to learn Lean by doing some exercises.
 ```lean
@@ -255,3 +257,5 @@ When we write `variable [category.{u v} C]`, Lean is reasonably rather hesistant
 
 This then adds a danger: if you write another declaration that doesn't actually care about this category (e.g. one declaration refers to four different categories, but a subsequent one only mentions two), this typeclass variable will still be included as an argument, mucking everything up. Hence `include 𝒞` statements need to be carefully scoped with `section .... end` commands.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/49724Retrievinginteractivelyconstructedterms.ht
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jun 15 2018 at 02:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Retrieving%20interactively%20constructed%20terms/near/128095723):
 Suppose I'd like to construct a term of type `τ` interactively, so I use `e ← assert n '(τ)` and apply some further tactics to close off the goal. Now `e` is bound to a local constant, which is the expr of a term that has type `τ`.
 
@@ -29,3 +31,5 @@ I'm currently experimenting with combinations of `assert` and `mk_meta_var`, but
 
 I'm not sure I understand, what does your use case look like that you don't know when the goal will be solved? Anyway, if you copy and adapt `solve_aux`'s implementation, you should be able to do something like that.
 
+
+{% endraw %}

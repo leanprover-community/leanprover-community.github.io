@@ -9,6 +9,8 @@ permalink: archive/113488general/98726subsingletoninstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Mar 03 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subsingleton%20instances/near/123231023):
 I'm struggling with the following proof
 ```lean
@@ -196,3 +198,5 @@ OK I can now see it
 
 I think his plan is to send an initial PR covering subgroups, normal subgroups, centers, and kernels, and then a second PR with quotient groups and the first isomorphism theorem.
 
+
+{% endraw %}

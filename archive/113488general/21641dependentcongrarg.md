@@ -9,6 +9,8 @@ permalink: archive/113488general/21641dependentcongrarg.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 23 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dependent%20congr_arg%3F/near/125575693):
 I am assuming this is provable: `example (f : ℕ → ℕ) (g : ℕ → ℕ) (H1 : f = g) (H2 : f 0 = 0) (P : Π (h : ℕ → ℕ), h 0 = 0 → Type) : P f H2 = P g (H1 ▸ H2) := sorry`
 
@@ -405,3 +407,5 @@ that's surprising because H1 is `of_comm_ring R S = g ∘ of_comm_ring R S`.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 23 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dependent%20congr_arg%3F/near/125588685):
 I don't need this lemma, I might give up on it.
 
+
+{% endraw %}

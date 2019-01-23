@@ -9,6 +9,8 @@ permalink: archive/113488general/48864Deligneonunivalence.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 09 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Deligne%20on%20univalence/near/133618998):
 http://www.math.ias.edu/calendar/event/138368/1536679800/1536683400
 
@@ -73,3 +75,5 @@ Thanks. I found https://arxiv.org/pdf/1509.07584.pdf which is indeed relevant.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 13 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Deligne%20on%20univalence/near/133896509):
 This talk of topological $$\mathbb{S}^1$$ and homotopy $$S^1$$ reminds me of motivic homotopy theory $$\mathbb{G}_m$$ and $$S^1$$
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/85554ZFCequality.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 28 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197270):
 There were a couple of times in the schemes project when I really had to think "beyond ZFC" -- I had to write down a map, and there were two ways of doing it, and in ZFC they were the *literally the same way* but in Lean they were different. In this example I just chose a random Lean route to model my ZFC thoughts and it got me in to real trouble later.
 
@@ -2904,3 +2906,5 @@ My instructions should bypass mathlib compilation
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 29 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127243059):
 (I'm waiting for my train)
 
+
+{% endraw %}

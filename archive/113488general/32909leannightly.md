@@ -9,6 +9,8 @@ permalink: archive/113488general/32909leannightly.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Feb 27 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean-nightly/near/123035727):
 Is there a way to find out which commit yielded the latest nightly build without installing it? I used to go by the list of commits and select the latest green button but I seem to be missing some
 
@@ -39,3 +41,5 @@ No it's the thing that helps you refusing to help secretaries with their compute
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Feb 27 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean-nightly/near/123036130):
 Haha! Somehow, they always look at me with such anger when I ask them to fire up a bash shell and use apt-get to install a tool :stuck_out_tongue:
 
+
+{% endraw %}

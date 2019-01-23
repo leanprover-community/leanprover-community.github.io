@@ -9,6 +9,8 @@ permalink: archive/116395maths/20349UniformlyContinuousonMetricSpaces.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rohan Mitta (Sep 26 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Uniformly%20Continuous%20on%20Metric%20Spaces/near/134666418):
 Have I formalised this right and is it in mathlib?
 
@@ -44,3 +46,5 @@ Lean will parse that exactly as you originally wrote
 ```
 well not exactly...
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/95007420constructionsoflimits.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 14 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23420%20constructions%20of%20limits/near/135788640):
 This extends the first PR on (co)limits. It
 
@@ -56,3 +58,5 @@ I've already ripped out a huge number of `obviously` in these two PRs. All the s
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 15 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23420%20constructions%20of%20limits/near/135796477):
 I can rip out more, of course ...
 
+
+{% endraw %}

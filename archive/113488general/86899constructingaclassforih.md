@@ -9,6 +9,8 @@ permalink: archive/113488general/86899constructingaclassforih.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 17 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147882679):
 Could anyone point me in a right direction in this proof?
 ```lean
@@ -101,3 +103,5 @@ I don't think induction on `yield m` is a good idea in this case anyway
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 17 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147884616):
 What would one do induction on then?
 
+
+{% endraw %}

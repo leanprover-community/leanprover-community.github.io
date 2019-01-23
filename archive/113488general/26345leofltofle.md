@@ -9,6 +9,8 @@ permalink: archive/113488general/26345leofltofle.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 25 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693526):
 Should we prove `le_of_lt_of_le` so this stuff works?
 ```lean
@@ -41,3 +43,5 @@ dammit I want the proof to be `le_of_lt $ lt_of_lt_of_le`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693709):
 `λ x y, le_of_lt $ lt_of_lt_of_le x y` looks like you're missing a trick
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/17472funextcongrfailsinconv.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 10 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/133645086):
 ```lean
 import data.finset algebra.big_operators
@@ -68,3 +70,5 @@ Hmm, I care a little :-) I would like more tactics inside conv, too :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 15 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/134001871):
 There is very little I can do about bugs in `conv`
 
+
+{% endraw %}

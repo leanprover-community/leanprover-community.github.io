@@ -9,6 +9,8 @@ permalink: archive/113488general/66476tipforfillinginholes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125425455):
 Sometimes in Lean you sit down to write a definition or a theorem, knowing that it will be really easy and fun. I was just in that situation. I need to write down some maps between localized rings and prove that they have some properties, but now I know that the localization interface is excellent and that pretty much every single one of my proofs will look like `name_of_function _ _ _ _ _`.
 
@@ -78,3 +80,5 @@ I feel like there are so many little tips like this, and it's unclear to me wher
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 20 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125427447):
 you don’t need exact _
 
+
+{% endraw %}

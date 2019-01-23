@@ -9,6 +9,8 @@ permalink: archive/113488general/66418haspow.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124446352):
 what's the impact of the new has_pow typeclass being an out_param?
 
@@ -51,3 +53,5 @@ My gut says that will perform better on the whole. We will have to give the type
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 03 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124567281):
 Okay, I'll remove it
 
+
+{% endraw %}

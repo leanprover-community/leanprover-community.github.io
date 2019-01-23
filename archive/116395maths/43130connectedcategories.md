@@ -9,6 +9,8 @@ permalink: archive/116395maths/43130connectedcategories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 12 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/connected%20categories/near/133812119):
 I took a stab at defining an "interface" for what it means for a category to be connected and used it to prove a standard fact about cofinal functors. @**Mario Carneiro** I'm curious to hear whether you would suggest any improvements.
 https://gist.github.com/rwbarton/1ce6aabec33d47213ed11c5b7d907a4f
@@ -22,3 +24,5 @@ I guess I didn't include any way to prove that a category is connected, but I fe
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 12 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/connected%20categories/near/133814587):
 Actually I need the inv_fun direction of `connected_iff_components_trivial` elsewhere, so that can also be considered part of the interface
 
+
+{% endraw %}

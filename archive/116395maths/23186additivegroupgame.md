@@ -9,6 +9,8 @@ permalink: archive/116395maths/23186additivegroupgame.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802827):
 The additive group `add_group` in Lean is defined in core Lean, which means it's hard to change. The definition is this:
 
@@ -78,3 +80,5 @@ Is there a trick?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125803007):
 Can I create one with type class inference and then write over the axiom with a sorry?
 
+
+{% endraw %}

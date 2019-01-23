@@ -9,6 +9,8 @@ permalink: archive/113488general/38477imageofcomplement.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 13 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/image%20of%20complement/near/123655801):
 Do we have `{α : Type*} {β : Type*} (f : α ≃ β) (s : set α) : f '' -s = -(f '' s)` in mathlib?
 
@@ -39,3 +41,5 @@ Ah sorry. Then no: I think its not yet in mathlib.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 13 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/image%20of%20complement/near/123656352):
 Ok, I hope I'll be able to contribute this
 
+
+{% endraw %}

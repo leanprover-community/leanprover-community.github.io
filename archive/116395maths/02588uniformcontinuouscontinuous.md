@@ -9,6 +9,8 @@ permalink: archive/116395maths/02588uniformcontinuouscontinuous.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 20 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform_continuous.continuous/near/152242464):
 Still trying to clean up topology stuff, I realized the proof that [uniform continuous functions are continuous](https://github.com/leanprover/mathlib/blob/caa2076038e2d5a84fd05e9988fbe31d01a7f6ba/analysis/topology/uniform_space.lean#L487-L500) is pretty hard to read. @**Johannes Hölzl** how do you like the following proof:
 ```lean
@@ -74,3 +76,5 @@ I used prod.map for a reformulation of cauchy_seq in the contraction mapping stu
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 20 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform_continuous.continuous/near/152245261):
 @**Johannes Hölzl** see https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/calc.20iff/near/152245238
 
+
+{% endraw %}

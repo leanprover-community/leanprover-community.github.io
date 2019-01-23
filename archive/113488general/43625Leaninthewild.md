@@ -9,6 +9,8 @@ permalink: archive/113488general/43625Leaninthewild.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 29 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/148772776):
 Its always interesting to find unexpected Lean theories: https://github.com/levjj/esverify-theory/
 From a first glance, `esverify` is a Javascript/ECMAScript verifier, and these are some semantics with soundness...
@@ -31,3 +33,5 @@ Anyway, congrats with the visibility!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 08 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/151172723):
 yes... visibility... is a bad thing in my opinion
 
+
+{% endraw %}

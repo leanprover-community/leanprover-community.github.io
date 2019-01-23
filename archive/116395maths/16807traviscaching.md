@@ -9,6 +9,8 @@ permalink: archive/116395maths/16807traviscaching.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 02 2018 at 04:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/travis%20caching/near/127449713):
 ```quote
 > unfortunately we are not quite near that point though
@@ -20,3 +22,5 @@ ah. since `leanpkg` doesn't download binary releases, do you get a lot of functi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 02 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/travis%20caching/near/127449761):
 I can't change the stream though, oops
 
+
+{% endraw %}

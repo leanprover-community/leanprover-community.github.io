@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/11204tacticsinsidedefinitions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Oct 15 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tactics%20inside%20definitions/near/135796356):
 @**Kenny Lau** [said](https://github.com/leanprover/mathlib/pull/421#discussion_r225011707):
 >You shouldn't use any tactics in a definition unless you know what you're doing, I think.
@@ -24,3 +26,5 @@ The rule of thumb is: tactics generate weird proof terms. So sure use tactics wh
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Oct 15 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tactics%20inside%20definitions/near/135797057):
 Thanks, with the exception for "proof bits" of structures this makes much more sense. I just went through the code I've written and I've been more or less following this without knowing it.
 
+
+{% endraw %}

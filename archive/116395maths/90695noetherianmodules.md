@@ -9,6 +9,8 @@ permalink: archive/116395maths/90695noetherianmodules.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/noetherian%20modules/near/133118514):
 What are the next steps for noetherian modules?
 1. We want to prove that if `M` is noetherian, then so are all its submodules and quotients.
@@ -279,3 +281,5 @@ OK so I pushed the proof that a sub of a Noetherian module is Noetherian to comm
 
 I also have a proof that quotients of Noetherian modules are Noetherian, but I was waiting for Chris' quotient module PR to be accepted -- I see that it was accepted an hour ago so I'll work on quotient modules later.
 
+
+{% endraw %}

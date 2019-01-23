@@ -9,6 +9,8 @@ permalink: archive/116395maths/29791finsuppmodules.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 03:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finsupp%20modules/near/148149210):
 I think the module part of finsupp is broken. For example in
 ```lean
@@ -18,3 +20,5 @@ finsupp.sum_map_range_index h0
 ```
 the `g` takes values in the ring `\beta`. But what is realy interesting is if `g` takes values in a module over the ring.
 
+
+{% endraw %}

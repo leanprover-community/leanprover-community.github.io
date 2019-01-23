@@ -9,6 +9,8 @@ permalink: archive/113488general/86357Frozenlocalinstance.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 12 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123599507):
 What is going on in scenarios where Lean tells me `failed to revert 'c', it is a frozen local instance` and then I magically fix everything by calling `tactic.unfreeze_local_instances`?
 
@@ -57,3 +59,5 @@ Ah, that's true. This only is a problem if your typeclass instance is inferred i
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 19 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123910282):
 But that's not to say that it is disallowed, because sometimes you just have to do it, if your typeclass is some complicated inductive thing this may be the only option. But try to get rid of those functions as soon as possible after the cases
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/34800remember.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/remember/near/136927744):
 Is there something similar to coq's remember tactic in lean?
 
@@ -39,3 +41,5 @@ Yes, they both have it: the syntax is `cases (id :)? expr (with id*)?`--check th
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/remember/near/136928315):
 Thanks!
 
+
+{% endraw %}

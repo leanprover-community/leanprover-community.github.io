@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/10911Usageofsimplifier.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 02 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20simplifier/near/136979706):
 Although having read the simplifier in the tutorial: Theorem Proving in Lean and the The Lean Reference Manual
 I'm still not quite understand when to use simplifier and why or why can't simp succeed in some cases,
@@ -26,3 +28,5 @@ I didn't notice this since I defined the addition before the equivalence....
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 02 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20simplifier/near/136981596):
 @**Johan Commelin**  It did simplify a lot ! Totally get rid of the redundant part that I mentioned! (Though still confuse about the usage of simplifier) Thank you very much!!
 
+
+{% endraw %}

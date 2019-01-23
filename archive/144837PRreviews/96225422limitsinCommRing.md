@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/96225422limitsinCommRing.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 15 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23422%20limits%20in%20CommRing/near/135796679):
 @**Patrick Massot**, I've started a WIP branch to construct products and equalizers in CommRing.
 
@@ -201,3 +203,5 @@ There's also an instance where `by subtype_instance` doesn't do what I hoped it 
 ```
 This tactic is really specialized, it's meant to prove substuff is stuff, starting from the definition of substuff, assuming that definition obeys standard naming conventions. It never claimed to be able to prove any random subtype of some stuff is stuff.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/47790deltarings.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 20 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/delta%20rings/near/129993188):
 Fix a prime `p`.
 
@@ -673,3 +675,5 @@ You were able to convince Lean that you get a singleton! I couldn't even get it 
 ```
 Thanks! :clap: :octopus:
 
+
+{% endraw %}

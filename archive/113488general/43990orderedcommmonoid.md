@@ -9,6 +9,8 @@ permalink: archive/113488general/43990orderedcommmonoid.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 29 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered_comm_monoid/near/134890643):
 Why is `ordered_comm_monoid` additive? I thought `{x : real | x ≥ 1}` is a really nice ordered commutative monoid...
 
@@ -36,3 +38,5 @@ ah good point
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 29 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered_comm_monoid/near/134894978):
 Right, somehow, the fact that the inverse is less than one escaped me. You'd need { x : real | x > 0 } for a group.
 
+
+{% endraw %}

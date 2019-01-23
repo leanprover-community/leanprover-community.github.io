@@ -9,6 +9,8 @@ permalink: archive/113488general/74195substsandreflexivity.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 20 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/substs%20and%20reflexivity/near/132442829):
 It seems like `subst` solves a reflexive goal but `substs` does not. If I replace `subst p, subst q`with `substs p q`, I have to add `refl` to solve the goal.
 
@@ -29,3 +31,5 @@ l.mmap' (λ h, get_local h >>= tactic.subst)
 
 Is it enough to add ` >> try (tactic.reflexivity reducible)` to the end of the `substs` definition to recoup this feature? Is there any reason why we shouldn't do this?
 
+
+{% endraw %}

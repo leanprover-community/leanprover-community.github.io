@@ -9,6 +9,8 @@ permalink: archive/113488general/21143newbieprooffromassumptionofinductivelydefi
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Oct 17 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135988274):
 Given a typical definition of an evenness property ...
 
@@ -190,3 +192,5 @@ instance : decidable_pred ev :=
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135998146):
 You should use `bodd` instead, it has an efficient implementation in VM and a not stupid implementation in kernel
 
+
+{% endraw %}

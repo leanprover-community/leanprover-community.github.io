@@ -9,6 +9,8 @@ permalink: archive/113488general/21093Relationshipbetweenreposleanandleannightly
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ching-Tsun Chou (Mar 11 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Relationship%20between%20repos%20lean%20and%20lean-nightly/near/123582525):
 I am confused about the relationship between the following two repos:
 
@@ -43,3 +45,5 @@ Thanks!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 11 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Relationship%20between%20repos%20lean%20and%20lean-nightly/near/123584437):
 The download page will link to the releases page when the change is done
 
+
+{% endraw %}

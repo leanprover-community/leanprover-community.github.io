@@ -9,6 +9,8 @@ permalink: archive/113488general/83927Proofirrelevance.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 13 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20irrelevance/near/151624464):
 Does anyone know whether https://hal.inria.fr/hal-01859964 is something Lean should care about? It's a paper about "Definitional Proof-Irrelevance without K" which explicitly mentions Lean's type theory.
 
@@ -36,3 +38,5 @@ They're essentially just ~~quotients with the universal relation~~ + definitiona
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 13 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20irrelevance/near/151724356):
 I think the moral of the story is that everything you can do with sType is already possible in lean, this paper just describes how
 
+
+{% endraw %}

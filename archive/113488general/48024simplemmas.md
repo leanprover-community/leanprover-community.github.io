@@ -9,6 +9,8 @@ permalink: archive/113488general/48024simplemmas.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Oct 10 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp_lemmas/near/135532880):
 What is the difference between a 'simp' and a 'congr' below?
 ```lean
@@ -72,3 +74,5 @@ So you couldn't do simp with the `<` relation?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Oct 10 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp_lemmas/near/135542107):
 No, because 1) `<` is not reflexive and 2) `has_lt.lt` is not transitive in general.  I think you can turn `nat.le` into a simplification relation though.
 
+
+{% endraw %}

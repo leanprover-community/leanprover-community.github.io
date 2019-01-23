@@ -9,6 +9,8 @@ permalink: archive/113488general/04284linarith.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 21 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith/near/148096612):
 Shouldn't `linarith` be able to take care of this?
 ```lean
@@ -461,3 +463,5 @@ It could try to guess what type to cast to, or it could cast to every type that 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Nov 24 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith/near/148283001):
 Thanks for explaining! As always, there was a lot of complexity lurking here that I didn't appreciate.
 
+
+{% endraw %}

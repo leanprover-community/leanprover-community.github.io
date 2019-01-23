@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/44342Definitionwithimplicittypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 11 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Definition%20with%20implicit%20types/near/129437343):
 Can someone correct the syntax for this definition:
 
@@ -95,3 +97,5 @@ the function expects one or two more values so it just starts eating into the ne
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 11 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Definition%20with%20implicit%20types/near/129456671):
 resulting in errors which completely throw the user
 
+
+{% endraw %}

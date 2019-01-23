@@ -9,6 +9,8 @@ permalink: archive/113488general/75410logistics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Feb 26 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/logistics/near/123005030):
 Is there a way to move messages from one thread to another in here?
 
@@ -66,3 +68,5 @@ Tom&Jerry, of course
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Feb 26 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/logistics/near/123006208):
 *look of disapproval* that's not on par with the Simpsons
 
+
+{% endraw %}

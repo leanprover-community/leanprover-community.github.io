@@ -9,6 +9,8 @@ permalink: archive/113488general/57153mathlibnightly.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 07:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444305):
 Is this possible? @**Mario Carneiro** (or maybe I could host it myself?)
 
@@ -33,3 +35,5 @@ probably object
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124445261):
 https://en.wikipedia.org/wiki/Object_file
 
+
+{% endraw %}

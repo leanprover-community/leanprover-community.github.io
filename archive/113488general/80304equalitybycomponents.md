@@ -9,6 +9,8 @@ permalink: archive/113488general/80304equalitybycomponents.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Feb 27 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20by%20components/near/123047697):
 If my goal is of the form `⟨x, y⟩ = ⟨x', y'⟩`, is there a tactic that will replace it with two new goals `x = x'` and `y = y'`?
 
@@ -21,3 +23,5 @@ I'm also wondering how I could do this when the left and/or right hand side is n
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Feb 27 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20by%20components/near/123051739):
 Lean doesn't have definitional eta for products fyi
 
+
+{% endraw %}

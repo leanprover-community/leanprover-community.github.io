@@ -9,6 +9,8 @@ permalink: archive/113488general/00813obviously.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 23 2018 at 05:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obviously/near/132615425):
 @**Scott Morrison** How can I recover the old behavior of `obviously` which did not trace the steps it took?
 Perhaps the replaceable thing ought to be called `cat_tactic` or something, and `obviously` should return to its old behavior?
@@ -19,3 +21,5 @@ Perhaps the replaceable thing ought to be called `cat_tactic` or something, and 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 25 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obviously/near/132752117):
 Moreover, yesterday Mario and I overhauled tidy from top to bottom. The code is much shorter and saner now. :-)
 
+
+{% endraw %}

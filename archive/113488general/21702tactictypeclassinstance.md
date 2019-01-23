@@ -9,6 +9,8 @@ permalink: archive/113488general/21702tactictypeclassinstance.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Jan 09 2019 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708014):
 ```
 meta def opt_fst (a: tactic unit) (b: tactic unit) : tactic unit := (a >> b) <|> b
@@ -72,3 +74,5 @@ Hmm..seems that this is also hardcoded
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Jan 09 2019 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708504):
 Thanks!
 
+
+{% endraw %}

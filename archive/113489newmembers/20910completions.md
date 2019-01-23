@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/20910completions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 07 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/completions/near/131066750):
 Hi gang where can I get a list of available completions for lean? Eg \all -> forall symbol etc. vscode doesn't give me a list when I type `\`. Also what is the best way to ask questions that have likely come up before?
 
@@ -27,3 +29,5 @@ Still, I think this file should be more visible somehow
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 08 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/completions/near/131087809):
 Maybe the popup could show a link to the translations file? If it is an actual hyperlink, then you don't even have to typeset the entire URL, so it wouldn't even take up much space.
 
+
+{% endraw %}

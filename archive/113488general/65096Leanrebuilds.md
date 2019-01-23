@@ -9,6 +9,8 @@ permalink: archive/113488general/65096Leanrebuilds.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 12 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129503329):
 @**Sebastian Ullrich** What criterion does `leanpkg` use to decide whether a certain file has to be rebuilt or not? I'm caching `.olean` files on travis and the whole thing gets rebuilt anyway. If I also cache `.lean` files, then the rebuild is more conservative.
 
@@ -75,3 +77,5 @@ Ok, I'll remove the guard. That will be easier to handle.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 17 2018 at 03:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787582):
 When stage 2 fails, be sure to restart the whole thing
 
+
+{% endraw %}

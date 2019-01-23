@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/19949issubtypeinjective.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 13 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/is%20%22subtype%22%20injective%3F/near/133907830):
 if {x // p x} = {x // q x}, then is it true that p = q?
 
@@ -85,3 +87,5 @@ I see
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 13 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/is%20%22subtype%22%20injective%3F/near/133909849):
 although you can always define a very general type and then narrow it down from inside a definition, i.e. defining a particular subtype of sigma of W type of whatever rather than writing a new inductive type
 
+
+{% endraw %}

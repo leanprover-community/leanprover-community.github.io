@@ -9,6 +9,8 @@ permalink: archive/113488general/63778coqwoes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coq%20woes/near/125609345):
 I'm stuck on trying to understand something in a Coq proof. Any experts on here who can spare a few minutes to help?
 
@@ -246,7 +248,6 @@ Oh, and I think `pick_freshes`/`pick_freshes_gen` might get `L` from the assumpt
 Via `gather_vars`.
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coq%20woes/near/125611781):
-{% raw %}
 ```coq
 Ltac gather_vars :=
   let A := gather_vars_with (fun x : vars => x) in
@@ -258,7 +259,7 @@ Ltac gather_vars :=
   let G := gather_vars_with (fun x : env => env_fv x) in
   let H := gather_vars_with (fun x : sch => sch_fv x) in
   constr:(A \u B \u C \u D \u E \u F \u G \u H).
-```{% endraw %}
+```
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coq%20woes/near/125611793):
 I suppose the `gather_vars` tactic could also be getting something from `K`.
@@ -513,7 +514,6 @@ Also, there's this dark magic underlying `pick_freshes`:
 ```
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coq%20woes/near/125617855):
-{% raw %}
 Used as so:
 
 ```coq
@@ -527,7 +527,7 @@ Ltac gather_vars :=
   let G := gather_vars_with (fun x : env => env_fv x) in
   let H := gather_vars_with (fun x : sch => sch_fv x) in
   constr:(A \u B \u C \u D \u E \u F \u G \u H).
-```{% endraw %}
+```
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coq%20woes/near/125617906):
 And (it just clicked for me) that is how `typ_fv` and `typ_fv_list` are appearing.
@@ -642,3 +642,5 @@ Oh, but I can remove the `*` from `rewrite*` to see the subgoals. :light_bulb:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 25 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coq%20woes/near/125668364):
 And... my Coq woes are over! I have successfully translated this particular Coq proof into Lean. :raised_hands:
 
+
+{% endraw %}

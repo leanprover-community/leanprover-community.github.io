@@ -9,6 +9,8 @@ permalink: archive/113488general/07323updatingKevinsinstallationinstructions.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 06 2018 at 03:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20Kevin%27s%20installation%20instructions/near/135291857):
 Hi @**Kevin Buzzard**, I'm thinking that since `elan` has now arrived and is pretty good, we should update your blog post.
 
@@ -433,3 +435,5 @@ I didn't realize that Windows doesn't have an equivalent of the command-line arg
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Oct 12 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20Kevin%27s%20installation%20instructions/near/135684178):
 heh, yeah, I just learned that the other day when I went diving into elan's code and the Rust standard library to figure out how process creation worked on Windows
 
+
+{% endraw %}

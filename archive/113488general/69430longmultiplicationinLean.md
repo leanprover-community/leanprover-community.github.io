@@ -9,6 +9,8 @@ permalink: archive/113488general/69430longmultiplicationinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 12 2019 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154983199):
 `nat` is great for proving things, but is computationally inefficient because it uses O(n) memory to store the natural number n:
 
@@ -67,3 +69,5 @@ The reason why `#reduce (10000 : pos_num)` is slow is because the parser produce
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 12 2019 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154986619):
 It looks like the equation compiler definitions of `pos_num.add` and `pos_num.succ` are also significant factors. If I define the functions using `pos_num.rec` or the induction tactic then it goes much faster
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/95366ImportHOLtheorems.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Martin Kolář (Nov 02 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Import%20HOL%20theorems/near/137040429):
 Hi, I'm new here, and I have a question regarding LEAN's versatility.
 
@@ -40,3 +42,5 @@ This sort of proof import/translation is possible in principle, and there are pe
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Nov 08 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Import%20HOL%20theorems/near/147297963):
 In principle, you can try to match Isabelle concepts to Lean concepts, and a good enough interpreter could produce a usable Lean development from elsewhere. This doesn't exist yet and would be extremely hard to do.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/18749finsetwithtwoelements.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131097823):
 @**Morenikeji Neri** has proved `det(AB)=det(A)det(B)` modulo some lemma about switching two rows of a matrix making the sign change, which became a lemma about summing over a set of size 2, which has now been reduced to this:
 
@@ -88,3 +90,5 @@ finset.sum (@finset.univ β _) f = finset.sum finset.univ
 
 which I thought at the time was a good idea, but actually was a pain to apply because I didn't have an equivalence relation on a fintype, I had an equivalence relation on a finset, so there was a certain amount of inelegant scuffling around with `↥↑s` at some point. Wouldn't surprise me if I was missing a trick.
 
+
+{% endraw %}

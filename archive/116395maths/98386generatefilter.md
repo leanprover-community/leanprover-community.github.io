@@ -9,6 +9,8 @@ permalink: archive/116395maths/98386generatefilter.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125807430):
 ```lean
 def generate {α : Type u} (s :set (set α)) : filter α :=
@@ -76,3 +78,5 @@ and I learnt how to use `set.finite.induction_on` :P
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125808157):
 @**Kevin Buzzard** do you think that's enough interface?
 
+
+{% endraw %}

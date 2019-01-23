@@ -9,6 +9,8 @@ permalink: archive/116395maths/97874affineschemesareschemes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 23 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/affine%20schemes%20are%20schemes/near/126963591):
 I just reached a milestone:
 
@@ -383,3 +385,5 @@ That's the tag I did
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 28 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/affine%20schemes%20are%20schemes/near/127202880):
 not the one before
 
+
+{% endraw %}

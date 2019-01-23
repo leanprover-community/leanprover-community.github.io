@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/78247categories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/categories/near/131073671):
 I made a silly .lean file for mathematical category theory.
 https://gist.github.com/EdAyers/87fa2de6ddfc13ab273af52c21d48681
@@ -107,3 +109,5 @@ ok, I'll use that in future! thanks.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) David Michael Roberts (Oct 10 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/categories/near/135529320):
 @**Scott Morrison|110087** thanks, I'll check it out
 
+
+{% endraw %}

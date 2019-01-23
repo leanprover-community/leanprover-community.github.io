@@ -9,6 +9,8 @@ permalink: archive/116395maths/69945Hausdorffification.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026443):
 ```lean
 import analysis.topology.continuity
@@ -188,3 +190,5 @@ I think we also have what we need to define omega_1^CK using computable function
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136093605):
 Is this a reflection?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/39790Noobmetaquestion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 11 2018 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Noob%20meta%20question/near/133727546):
 What's the "correct" way to efficiently implement finitely supported functions in Lean meta. Currently I'm using `list (α × β)` as `α →₀ β`, but this seems totally wrong. By finitely supported, I mean functions for which I only care about the result for finitely many `α`
 
@@ -39,3 +41,5 @@ There doesn't seem to be an `erase` either.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 11 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Noob%20meta%20question/near/133737802):
 Is `rbtree α` isomorphic to `finset α`, and is `rbmap α β` isomorphic to `Σ s : finset α, Π x, x ∈ s → β`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/54951valuations.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 26 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/valuations/near/127105553):
 Both the Fibonacci Squares project and the Adic Space project need valuations on rings -- one in rather more generality than the other. But let's start at the beginning. Does Lean have p-adic valuations on Z? In other words, is the function $$v_p(\cdot)$$ on the non-zero integers (or even rationals) sending $$p^nN$$ (with $$N$$ coprime to the prime $$p$$) to $$n$$? The key theorems are $$v_p(ab)=v_p(a)+v_p(b)$$ and $$v_p(a+b)\geq\min\{v_p(a),v_p(b)\}$$ (where $$v_p(0)$$ is usually taken to be $$+\infty$$).
 
@@ -1600,3 +1602,5 @@ so I broke the sheaf property precisely by breaking injectivity
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 28 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/valuations/near/127191991):
 @**Kevin Buzzard** Re: `@[simp]` and left-to-right rewriting, perhaps, by browsing through the `@[simp]` theorems in [this file](https://github.com/spl/tts/blob/32df31590e3f7a88eeea6d672981ac1de93c0af7/src/env/props.lean), you can get an idea of why they are structured the way they are.
 
+
+{% endraw %}

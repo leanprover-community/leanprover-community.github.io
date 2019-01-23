@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/97741troublerunningleanonmac.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Yuhan Du (Aug 13 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038880):
 ```
 dyn3218-19:bin apple$ ls
@@ -64,3 +66,5 @@ Yuhan also installed git somehow, or had git already, but that was before I arri
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 13 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132040849):
 IIRC, `git` comes with the Xcode command line tools.
 
+
+{% endraw %}

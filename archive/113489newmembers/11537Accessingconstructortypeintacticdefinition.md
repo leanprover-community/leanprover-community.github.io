@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/11537Accessingconstructortypeintacticdefinit
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jesse Michael Han (Oct 18 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Accessing%20constructor%20type%20in%20tactic%20definition/near/136019547):
 Hello everyone,
 
@@ -127,3 +129,5 @@ Sometimes it can be useful to introduce local definitions, e.g. notation for a f
 
 I see---thanks!
 
+
+{% endraw %}

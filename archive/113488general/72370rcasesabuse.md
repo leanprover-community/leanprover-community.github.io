@@ -9,6 +9,8 @@ permalink: archive/113488general/72370rcasesabuse.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 25 2018 at 17:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rcases%20abuse/near/130283155):
 I think I set a new record for my uses of `rcases` with `rcases r_in with ⟨t_α, ⟨r_α, r_α_in, h_α⟩, t_β, ⟨r_β, r_β_in, h_β⟩, h⟩,`
 
@@ -21,3 +23,5 @@ Heh, it took me a while to figure out where to put bracket. This is an artistic 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 25 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rcases%20abuse/near/130283322):
 Also, I blame product uniformities.
 
+
+{% endraw %}

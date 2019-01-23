@@ -9,6 +9,8 @@ permalink: archive/113488general/79130RoomsforLeanTogether.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Nov 24 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rooms%20for%20Lean%20Together/near/148272878):
 Has anyone already made any room reservations for Amsterdam? @**Rob Lewis** do you know of anything?
 
@@ -36,3 +38,5 @@ How much did you pay for the single rooms?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Dec 04 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rooms%20for%20Lean%20Together/near/150838075):
 Double rooms are 50 euros a night
 
+
+{% endraw %}

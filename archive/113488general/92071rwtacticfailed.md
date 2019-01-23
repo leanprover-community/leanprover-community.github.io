@@ -9,6 +9,8 @@ permalink: archive/113488general/92071rwtacticfailed.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 09 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840698):
 ```
 rewrite tactic failed, did not find instance of the pattern in the target expression
@@ -151,3 +153,5 @@ Talking of presheaves, thanks for trying to fix that tensor product file. Presum
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 09 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124849118):
 I removed the `has_smul` typeclass from `group_power`, which should fix the notation overloading problem. This puts us back at square one `local infix` type solutions for using `gsmul`, but it shouldn't interfere with the module smul notation now. I'm not sure about registering every abelian group as a Z-module with an instance, since module still uses an `out_param` for the scalar ring which might get stuck on `int`
 
+
+{% endraw %}

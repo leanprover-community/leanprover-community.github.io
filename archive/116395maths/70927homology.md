@@ -9,6 +9,8 @@ permalink: archive/116395maths/70927homology.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 21 2018 at 17:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homology/near/132522372):
 what is the progress of simplicial/singular homology?
 
@@ -42,3 +44,5 @@ My feeling is that typing Hatcher into Lean is probably not the best approach.
 ```
 From a fun project perspective, typing parts of Hatcher could be nice, but this is certainly not the way to go for mathlib. Hatcher is too pedagogical. We certainly need something more abstract and systematic. What Johan did is already more abstract, since it's based on simplicial sets. But clearly we also need abstract homological algebra for lots of other stuff.
 
+
+{% endraw %}

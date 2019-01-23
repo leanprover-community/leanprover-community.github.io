@@ -9,6 +9,8 @@ permalink: archive/113488general/21660crazyconstructionofastructure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 19 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crazy%20construction%20of%20a%20structure/near/126805454):
 I never knew one could do this: https://github.com/leanprover/mathlib/blob/38d553694351f4c23a8a8216038c7c8abcb7cd32/ring_theory/localization.lean#L80 (definition of ring structure on a localization).
 
@@ -65,3 +67,5 @@ That's because there are underscores around. If you do what I wrote (define oper
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 19 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crazy%20construction%20of%20a%20structure/near/126807101):
 I think
 
+
+{% endraw %}

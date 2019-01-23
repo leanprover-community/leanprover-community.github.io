@@ -9,6 +9,8 @@ permalink: archive/113488general/90698docssprint.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 10 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/docs%20sprint/near/131844734):
 There have been several additions to mathlib recently, many people asking what is there, and Mario's talk giving an overview. I think it's a good time to put some energy into that `docs` directory. Let's try out new community fork on this: https://github.com/leanprover-community/mathlib/commit/cc1f2c6a2a2c00c833d28023a63f9670f175d74d is a starting point. Note that I added links to several files which existed but were not reachable from the README. I also added new files in theory, but they don't contain much yet.
 
@@ -182,3 +184,5 @@ https://github.com/EdAyers/mathlib/blob/doc/docs/unicode.md
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 24 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/docs%20sprint/near/132710084):
 :imp: After three years we will discover that Scott deceived everyone with his cool automation tactics: `obviously` is just `exact trivial` and the Yoneda lemma was pulling this Unicode trick. :rolling_on_the_floor_laughing:
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/26505leanhomepagestillpointingtogitter.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 10 2018 at 08:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20home%20page%20still%20pointing%20to%20gitter/near/135521404):
 I occasionally notice that [Lean's web pages](https://leanprover.github.io/documentation/) still point to gitter, and we occasionally get questions there; perhaps the signage isn't good enough for everyone. How could we go about changing this? I could make a PR but someone will have to point me to the location of the git source for those pages (not least so I can check the PR is not already made).
 
@@ -66,3 +68,5 @@ https://github.com/leanprover/leanprover.github.io/pull/76
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 10 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20home%20page%20still%20pointing%20to%20gitter/near/135568597):
 Good catch Patrick. As you all know I've been pushing for more users in the maths community recently, and it's good to get the docs right. I don't care that Lean 4 is coming and there might be some chaos -- mathematicians need a *lot* of training in general and the sooner they start the better. In fact in some sense now we have a stable Lean it's quite a good time for new users to appear.
 
+
+{% endraw %}

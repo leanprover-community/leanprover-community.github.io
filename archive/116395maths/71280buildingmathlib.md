@@ -9,6 +9,8 @@ permalink: archive/116395maths/71280buildingmathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 19 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/building%20mathlib/near/125292006):
 I'm trying to build the mathlib master with the Lean master. Should this work? I currently get this as the first error (followed by others):
 
@@ -40,3 +42,5 @@ Wow! I just upgraded my Lean and mathlib from February to the latest, and I didn
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 11:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/building%20mathlib/near/125715047):
 that must be a record, two months without a backward incompatibility
 
+
+{% endraw %}

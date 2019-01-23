@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/09648Installationandusageinstructions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 10 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Installation%20and%20usage%20instructions/near/135528888):
 On [my blog home page](https://xenaproject.wordpress.com) there is an "installing Lean and mathlib" link right at the top now. It takes you [here](https://xenaproject.wordpress.com/installing-lean-and-mathlib/) which is a page (not a post, for those of you that understand blogs) which lists everything I could think of which could help a new user getting started. Comments and criticisms very welcome.
 
@@ -89,3 +91,5 @@ This will definitely depend on the connection of your device...
 ```
 Thanks.  There are still some subtle details to address.  E.g., vscode shows a menu in the upper right as slightly off the screen, so I need to make sure to manually move such "X11 overlays" so they are fully visible on screen.  But overall this approach to Linux graphical applications fits into how CoCalc already works, and adds an enormous amount of new functionality.
 
+
+{% endraw %}

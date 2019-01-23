@@ -9,6 +9,8 @@ permalink: archive/113488general/67415mathlibfileorganization.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 01 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406142):
 For those interested in the file organization of mathlib, I've written up a [proposal](https://github.com/leanprover/mathlib/issues/148) for a small change that, I think, will improve things a bit. Feedback welcome!
 
@@ -393,3 +395,5 @@ One more argument in favor of not separating definitions and lemmas: You can mak
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 04 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127543249):
 That's really only an argument for not separating *those* definitions. :wink: (But it is a fine argument in any case.)
 
+
+{% endraw %}

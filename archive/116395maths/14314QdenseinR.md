@@ -9,6 +9,8 @@ permalink: archive/116395maths/14314QdenseinR.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 28 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Q%20dense%20in%20R/near/152627608):
 `theorem rationals_dense (x y : ℝ) (H : x < y) : ∃ q : ℚ, x < q ∧ (q : ℝ) < y :=` Where is this now? I think it was explicitly there before the reals were refactored. Now there is `dense_embedding_of_rat` but then I have to work to get the statement I want.
 
@@ -82,3 +84,5 @@ you can do many things with such a set, the idea is when you need a set and not 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 29 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Q%20dense%20in%20R/near/152699297):
 (deleted)
 
+
+{% endraw %}

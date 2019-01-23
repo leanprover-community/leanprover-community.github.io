@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/85969beginnerproofbyinductionquestion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Aug 30 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133037403):
 I'm trying to prove that $$ \sum_{k=0}^{n-1}F_k = F_{2k-1} $$, where $$F_{k}$$ is the kth Fibonacci number. Here's my attempt so far:
 ```lean
@@ -288,3 +290,5 @@ I used your proof a little bit, to see that I needed induction. Other than that,
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 04 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133334537):
 Thanks, that's very helpful!
 
+
+{% endraw %}

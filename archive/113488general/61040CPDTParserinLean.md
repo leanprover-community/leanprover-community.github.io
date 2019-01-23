@@ -9,6 +9,8 @@ permalink: archive/113488general/61040CPDTParserinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 09 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPDT%20Parser%20in%20Lean/near/127822804):
 My son got interested in parsers and I'm trying to understand them better by implementing the simple parser at the beginning of Certified Programming with Dependent Types. But actually I find making these inductive types quite hard -- in my area of expertise we don't really ever use complicated inductive structures like the ones showing up in these parsers. Here's an example of one I'm struggling with: in Coq it's
 
@@ -177,3 +179,5 @@ but that didn't work so I had to put all the match waffle in. Am I missing somet
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 09 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPDT%20Parser%20in%20Lean/near/127824169):
 No I think that's the way to do it. I was looking to see if it could be generated for you but I haven't found tactics for that
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/24772randommathquestion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462875):
 so, seeing as how there are many mathematicians here, can anyone recommend a textbook on algebraic topology? I'd like to be able to read https://arxiv.org/pdf/1802.04443.pdf
 
@@ -98,3 +100,5 @@ that would be really hard without a good way of handling algebra and probability
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463520):
 er, by algebra i mean matrices
 
+
+{% endraw %}

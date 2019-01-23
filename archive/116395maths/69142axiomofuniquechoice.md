@@ -9,6 +9,8 @@ permalink: archive/116395maths/69142axiomofuniquechoice.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/axiom%20of%20unique%20choice/near/125181778):
 Is the axiom of unique choice strictly weaker than the axiom of choice? From what I know, ZF has axiom of unique choice
 
@@ -30,3 +32,5 @@ although I recall a result that a Tarski universe is well-orderable, so the univ
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 17 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/axiom%20of%20unique%20choice/near/125186508):
 relevant: https://cs.nyu.edu/pipermail/fom/2008-March/012783.html
 
+
+{% endraw %}

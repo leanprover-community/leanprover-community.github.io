@@ -9,6 +9,8 @@ permalink: archive/113488general/70030assertionviolation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 26 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assertion%20violation/near/124242811):
 Kenny found an assertion violation back in Feb or so: `instance foo (α : Type) : group α := { mul_assoc := λ x y z, rfl }`. I just mention it here because it still seems to be there.
 
@@ -45,3 +47,5 @@ Can you reproduce it?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 23 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assertion%20violation/near/126994657):
 Right now it happens every time I touch anything in my norms.lean
 
+
+{% endraw %}

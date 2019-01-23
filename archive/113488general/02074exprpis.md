@@ -9,6 +9,8 @@ permalink: archive/113488general/02074exprpis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 14 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr.pis/near/123711391):
 Why doesn't ``#reduce expr.pis [expr.local_const  ` A `A binder_info.default `(Sort 1)] `(Sort 1)``terminate?
 
@@ -51,3 +53,5 @@ meta instance: has_repr expr := ⟨expr.to_string⟩
 ```
 :smile: I'm not sure if Leo would like a PR though...
 
+
+{% endraw %}

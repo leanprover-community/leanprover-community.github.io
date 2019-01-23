@@ -9,6 +9,8 @@ permalink: archive/113488general/62391Norder0and1.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ned Summers (Aug 18 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369398):
 Hey, I'm trying to prove the seemingly very simple
 ```
@@ -68,3 +70,5 @@ dec_trivial
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ned Summers (Aug 20 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132445610):
 Thanks everyone, dec_trivial is a nice thing to know about. Will be using this to ponder where my break in understanding was.
 
+
+{% endraw %}

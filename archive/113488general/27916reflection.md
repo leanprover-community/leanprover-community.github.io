@@ -9,6 +9,8 @@ permalink: archive/113488general/27916reflection.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Sep 25 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134585528):
 Hi, 
 I'm trying to map meta expressions to an inductive type in the object language (with pattern matching on expr as described in https://leanprover.github.io/papers/tactic.pdf). 
@@ -30,3 +32,5 @@ Or did you mean something else?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Sep 25 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134592201):
 No, that helped, thanks!
 
+
+{% endraw %}

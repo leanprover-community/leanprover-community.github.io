@@ -9,6 +9,8 @@ permalink: archive/116395maths/83619directedmap.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 06 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/directed%20map/near/146847285):
 Does this concept look familiar to anyone?
 ```lean
@@ -57,3 +59,5 @@ I suppose using `filter` for both cases is infeasible, or you wouldn't be asking
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 06 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/directed%20map/near/146874970):
 We could also make use of namespacing perhaps
 
+
+{% endraw %}

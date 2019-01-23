@@ -9,6 +9,8 @@ permalink: archive/113488general/38094splitifs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 04 2018 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/split_ifs/near/127536409):
 @**Gabriel Ebner**, could we have `split_ifs` fail if there are no ifs to split? It's a trivial change, as in https://github.com/leanprover/mathlib/compare/master...semorrison:split_ifs?expand=1.
 
@@ -31,3 +33,5 @@ So far I am just sending PRs for tactics where I run into an inconvenience becau
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jun 04 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/split_ifs/near/127537138):
 Looks good to me if mathlib still builds.
 
+
+{% endraw %}

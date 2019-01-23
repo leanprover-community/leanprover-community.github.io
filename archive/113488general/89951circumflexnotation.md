@@ -9,6 +9,8 @@ permalink: archive/113488general/89951circumflexnotation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Miko de Amsterdamo (Apr 12 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/circumflex%20notation/near/124981819):
 What does this notation do? (hat/circumflex) I'm looking at an example in https://leanprover.github.io/programming_in_lean/#09_Writing_Automation.html and I found it in "(assume ha, h^.left ha)"
 
@@ -24,3 +26,5 @@ That's correct. So `.` has the double duty of qualifying names with name spaces 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Miko de Amsterdamo (Apr 12 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/circumflex%20notation/near/124983730):
 Thanks!
 
+
+{% endraw %}

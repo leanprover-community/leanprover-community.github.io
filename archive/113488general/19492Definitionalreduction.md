@@ -9,6 +9,8 @@ permalink: archive/113488general/19492Definitionalreduction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Jun 04 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Definitional%20reduction/near/127532389):
 If I can `#eval f a b` to `tt`, should I make sure that `example : f a b = tt`is `rfl`? In my case, `b = g a` and `g` seems to be naughty enough for Lean being to unwilling to expand everything. (`f a a = tt` is indeed `rfl`)
 
@@ -33,3 +35,5 @@ there are some terms that `#eval` can evaluate which `#reduce` gets stuck on due
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Jun 05 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Definitional%20reduction/near/127618595):
 I would love to at least try `#reduce` but deterministic timeout is making it somewhat impossible. I am pretty sure everything I use is fairly computable tho. Should I just write a tactic that unfolds everything explicitly until `refl` or should I try to find a way to make the whole thing `rfl`? (In the case where `#eval f x` yields `tt` but `f x = tt` is not `rfl`.)
 
+
+{% endraw %}

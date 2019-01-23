@@ -9,6 +9,8 @@ permalink: archive/113488general/09475Shamelesslean4request.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 23 2018 at 02:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Shameless%20lean%204%20request/near/148202175):
 In Lean 4 could we please please please have something like Haskell's `error`, just a pure function which takes a `string` or `format` or something and otherwise acts just like `sorry` (but gives no `sorry` used warnings). Of course, it would have to be meta.
 
@@ -23,3 +25,5 @@ Praise be! weird name
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 23 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Shameless%20lean%204%20request/near/148202315):
 Haha, yes
 
+
+{% endraw %}

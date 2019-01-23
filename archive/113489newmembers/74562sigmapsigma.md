@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/74562sigmapsigma.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 03 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/sigma/psigma/near/137116492):
 What's the reason for having types like sigma/psigma, sum/psum at the same time?
 
@@ -192,3 +194,5 @@ I presume you misspoke, and meant that there is no solution for `v`? (I agree wi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/sigma/psigma/near/146796140):
 oh, yes you are right
 
+
+{% endraw %}

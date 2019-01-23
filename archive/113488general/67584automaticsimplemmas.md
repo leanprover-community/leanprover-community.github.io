@@ -9,6 +9,8 @@ permalink: archive/113488general/67584automaticsimplemmas.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 15 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151823722):
 We have a lot of simp lemmas in category theory that describe the action of functors, natural isomorphisms, etc. on various things. Johan has a few open PRs adding more of these lemmas (eg #503, #505) and they prompted me to try to understand how to describe these lemmas systematically.
 
@@ -148,3 +150,5 @@ One more thing if anyone doing maths actually uses it: it adds a prime to the pr
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 21 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152351507):
 The interface I had in mind was that you'd write something like `@[simp_fields] def a_cnstr ... := ...`, and it would automatically generate all of the appropriate lemmas.
 
+
+{% endraw %}

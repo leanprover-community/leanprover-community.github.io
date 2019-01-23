@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/73691QuestionsaboutLean4.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joseph Corneli (Jan 07 2019 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Questions%20about%20Lean%204/near/154572312):
 "any chance of the tool you're presenting will allow us to reimplement parameters?"
 
@@ -96,3 +98,5 @@ I asked this directly to Sebastian and he said that 201X was not supposed to imp
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 07 2019 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Questions%20about%20Lean%204/near/154603322):
 @**Kevin Buzzard** That's a fair point. Before it's release, C++ 2011 was known as C++0x
 
+
+{% endraw %}

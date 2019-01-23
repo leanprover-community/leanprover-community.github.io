@@ -9,6 +9,8 @@ permalink: archive/113488general/54293newwritingtechnique.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 04 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20writing%20technique/near/129102181):
 I've found a nice new trick to write obfuscated^W concise code:
 ```lean
@@ -81,3 +83,5 @@ How does this work? What is `simpa` magically doing here? I know `mem_image` is 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 04 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20writing%20technique/near/129104678):
 `∃ (H : a ∈ s), f a = b ==> a ∈ s ∧ f a = b` ` exists_prop`
 
+
+{% endraw %}

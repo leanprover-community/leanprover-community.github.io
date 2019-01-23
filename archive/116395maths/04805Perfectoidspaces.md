@@ -9,6 +9,8 @@ permalink: archive/116395maths/04805Perfectoidspaces.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 30 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/127307288):
 Ok so here is the perfectoid spaces thread. As many people here know, I've long been mulling over the idea of formalising the notion of a perfectoid space in Lean. To the CS people -- it's just some structure, like a group, just a few more axioms and things.
 
@@ -9496,3 +9498,5 @@ yeah, that sounds pretty hopeless
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 17 2019 at 16:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/155346150):
 you can define polynomials in a way that doesn't need decidable eq, but you don't get algebraic closure or integral closure as such in constructive analysis
 
+
+{% endraw %}

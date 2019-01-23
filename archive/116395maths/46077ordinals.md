@@ -9,6 +9,8 @@ permalink: archive/116395maths/46077ordinals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 04 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ordinals/near/135205944):
 If I am interested in sequences indexed by $$\{\,\alpha \mid \alpha \le \gamma\,\}$$ for varying ordinals $$\gamma$$, is it likely to be more convenient to just work with sequences indexed by arbitrary well-ordered sets?
 The problem I found is that if you just write down `{ \a // \a \le \g }`, it lives in the wrong universe.
@@ -46,3 +48,5 @@ You can measure the cofinality of any preorder, I think. Maybe it's easier to wo
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 04 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ordinals/near/135209437):
 but yes, you almost certainly want to reason about ordered types rather than ordinals directly
 
+
+{% endraw %}

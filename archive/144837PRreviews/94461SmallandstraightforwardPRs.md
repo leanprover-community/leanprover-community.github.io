@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/94461SmallandstraightforwardPRs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 20 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Small%20and%20straightforward%20PRs/near/152240964):
 #531 — *feat(data/int/basic) int.cast is ring hom* [changes 1 file, +4 lines]
 #532 — *feat(ring_theory/subring) various lemmas* [changes 1 file, +48 -2 lines] 
@@ -32,3 +34,5 @@ thanks @**Mario Carneiro**
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 20 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Small%20and%20straightforward%20PRs/near/152257976):
 @**Mario Carneiro** Wow thanks!
 
+
+{% endraw %}

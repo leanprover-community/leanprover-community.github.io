@@ -9,6 +9,8 @@ permalink: archive/116395maths/56118newisgrouphom.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152694):
 Recently `is_group_hom` became a class. Previously we had 
 ```lean
@@ -104,3 +106,5 @@ I know how to do this (except I went with `by finish [is_group_hom, conj]` in th
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153261):
 right, which I demonstrated
 
+
+{% endraw %}

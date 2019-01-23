@@ -9,6 +9,8 @@ permalink: archive/116395maths/70527prime617challenge.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130359176):
 ```lean
 import data.nat.prime 
@@ -219,3 +221,5 @@ Kenny it works for me. Did you update your mathlib? This is code that Mario just
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130455927):
 And thanks Mario! I think my students were going to have some trouble with the example sheet questions if they couldn't get as far as 617.
 
+
+{% endraw %}

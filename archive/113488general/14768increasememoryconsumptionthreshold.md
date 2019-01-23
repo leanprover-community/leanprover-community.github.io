@@ -9,6 +9,8 @@ permalink: archive/113488general/14768increasememoryconsumptionthreshold.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 02 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/increase%20memory%20consumption%20threshold/near/130780966):
 Someone is trying to use Lean on a Win 7 machine here and we're constantly running into memory issues. Lean suggests "increase memory consumption threshold" -- is this something which is possible to do and which might actually work? It's a Windows 7 machine using `.olean` files which were built on Windows 10 :-/ but that's only because none of us are using Win7 so we can't make the .olean files for Win7.
 
@@ -49,3 +51,5 @@ I don't think I can run `leanpkg build` -- I didn't try, but the machine did not
 ```
 You can also do `lean --make`
 
+
+{% endraw %}

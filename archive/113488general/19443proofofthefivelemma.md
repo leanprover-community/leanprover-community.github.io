@@ -9,6 +9,8 @@ permalink: archive/113488general/19443proofofthefivelemma.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20of%20the%20five%20lemma/near/125618074):
 Yoohoo, I'm done.
 https://gist.github.com/jcommelin/9ea76f7a1356ed8dd9499e765f580ef8
@@ -561,3 +563,5 @@ Your levels were really helpful for me today. Do you know some abstract type the
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20of%20the%20five%20lemma/near/125791127):
 You understood what Scott was saying
 
+
+{% endraw %}

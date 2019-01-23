@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/30835symmetryofcongruencemod37.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Siedlaczek (Dec 06 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/symmetry%20of%20congruence%20mod%2037/near/151046285):
 I know what I am trying to achieve, however not sure about how to actually execute it in Lean.
 
@@ -87,3 +89,5 @@ theorem R_is_symmetric : symmetric R := λ x y ⟨k, H⟩, ⟨-k, by simp[H]⟩
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 07 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/symmetry%20of%20congruence%20mod%2037/near/151053075):
 It shows clearly that, in this proof, the only tactic which actually does work for you is the simplifier
 
+
+{% endraw %}

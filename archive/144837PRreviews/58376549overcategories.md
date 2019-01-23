@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/58376549overcategories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Dec 21 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23549%20over%20categories/near/152321838):
 Hi @**Johan Commelin**, is it a good idea to define over and under categories in terms of comma categories?
 
@@ -43,3 +45,5 @@ But I'm not at all confident about this.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 05 2019 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23549%20over%20categories/near/154487442):
 @**Reid Barton** What do you think?
 
+
+{% endraw %}

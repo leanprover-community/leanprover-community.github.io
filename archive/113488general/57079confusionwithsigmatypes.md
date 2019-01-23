@@ -9,6 +9,8 @@ permalink: archive/113488general/57079confusionwithsigmatypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 22 2018 at 05:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134419058):
 Oops... oversimplified my example.
 
@@ -63,3 +65,5 @@ Huh? It is a `unit`/`punit` approach. I mean it's even called `psigma`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 22 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134421513):
 Right but what happened with `unit` is that it became a synonym for `punit.{0}`
 
+
+{% endraw %}

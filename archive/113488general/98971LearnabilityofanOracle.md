@@ -9,6 +9,8 @@ permalink: archive/113488general/98971LearnabilityofanOracle.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Learnability%20of%20an%20Oracle/near/154862245):
 Say I have an oracle in my vicinity which answers well-formed queries I pose to it in some language $$L$$. For my application, I am assuming it to be a proof-checker kernel. 
 
@@ -17,3 +19,5 @@ Say I have an oracle in my vicinity which answers well-formed queries I pose to 
 
 Apologies if these questions are vague, I've only just read about this a few hours ago and was curious what the community has to say about them.
 
+
+{% endraw %}

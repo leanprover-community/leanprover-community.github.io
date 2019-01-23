@@ -9,6 +9,8 @@ permalink: archive/113488general/52230tacticforapplyingatappropriateassumptions.
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 03 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126035144):
 I've got a theorem:
 
@@ -457,3 +459,5 @@ Hi @**Sean Leather**, what happened to this tactic? I think I want it now, and I
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 09 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/131155526):
 You mean the one and only tactic I ever wrote? It's [here](https://github.com/spl/tts/blob/69893255c64e407f3b3ca6e9ff6242f7120177d8/src/tactics.lean#L15-L24). I think I use it in the same repository, but I'm not convinced it is actually that useful.
 
+
+{% endraw %}

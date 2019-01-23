@@ -9,6 +9,8 @@ permalink: archive/113488general/71999generalizeproofs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 01 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148900772):
 Does `generalize_proofs` ever work?
 
@@ -94,3 +96,5 @@ I think the problem is that `infer_type` fails given a `sort`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 01 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148905991):
 I think it works as long as there are no binders in the goal
 
+
+{% endraw %}

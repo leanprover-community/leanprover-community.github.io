@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/91335Commutativityofmultiplicationininductiv
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Carlesso Diego (Jan 05 2019 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Commutativity%20of%20multiplication%20in%20inductive%20type/near/154475123):
 Hi! As it is suggested in exercise n1 chapter 7 of "theorem Proving in Lean" I'm trying to define some operations(such as multiplication, predecessor etc.) with the inductive type and then prove some theorem about them as they did with addition. I'm struggling at the moment with trying to prove commutativity of multiplication, in the following code my problems start at the proper comment "HERE".
 
@@ -177,3 +179,5 @@ nat.rec_on n
 ```
 Thanks again!
 
+
+{% endraw %}

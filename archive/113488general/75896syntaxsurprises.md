@@ -9,6 +9,8 @@ permalink: archive/113488general/75896syntaxsurprises.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jun 19 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128299157):
 The Lean 4 parser only understands `prelude`, `import`, and `theory` so far, but I've already learned something surprising: `noncomputable theory` can be used anywhere in a file (also, multiple times)
 
@@ -102,3 +104,5 @@ Will lean 4 allow for gathering the global file structure? For example: find the
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jun 19 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128311421):
 You'll definitely get access to a concrete syntax tree of the entire file. You should also get access to more "dynamic" information like open namespaces (which could be influenced by a `run_cmd`), though it's less clear what that could look like
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/83621structures.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 08 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structures/near/123459639):
 When I was building the complexes, I think I tried to make them a field all in one go, and there were problems which perhaps were something to do with neg or sub. @**Mario Carneiro** showed me how to fix these problems by showing first that the complexes were an additive group and then only afterwards that they were a field. But I cannot remember what the problems were. Can anyone here guess? Was it something to do with defining sub or neg myself vs letting the system somehow do it for me? I now cannot really imagine how the system would do it for me.
 
@@ -157,3 +159,5 @@ Maybe the CS experience is different, but it's very rare for categories to be is
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structures/near/130882101):
 I think it's about as common as equality of categories, like in this case
 
+
+{% endraw %}

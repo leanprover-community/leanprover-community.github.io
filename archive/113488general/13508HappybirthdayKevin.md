@@ -9,6 +9,8 @@ permalink: archive/113488general/13508HappybirthdayKevin.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 21 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Happy%20birthday%2C%20Kevin%21/near/134343927):
 https://github.com/semorrison/kbb
 
@@ -222,3 +224,5 @@ I think @**Reid Barton** was talking about similar stuff in Orsay. This shouldn'
 Yesterday I wrote about half of a detailed outline for model categories.
 Actually I wrote all of the parts up through constructing combinatorial model categories if you don't want any examples :smile:
 
+
+{% endraw %}

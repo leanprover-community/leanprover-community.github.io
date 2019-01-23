@@ -9,6 +9,8 @@ permalink: archive/113488general/13114thisandthatorstructure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/this%20and%20that%2C%20or%20structure%3F/near/125377318):
 I notice that in our schemes work, Kenny and I independently defined the concept of an open immersion between topological spaces.
 
@@ -118,3 +120,5 @@ OTOH, curly braces work much more nicely with the structure.  That is, you can w
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/this%20and%20that%2C%20or%20structure%3F/near/125391137):
 so `\and` is redundant in Lean ;-)
 
+
+{% endraw %}

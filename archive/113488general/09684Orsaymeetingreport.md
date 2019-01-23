@@ -9,6 +9,8 @@ permalink: archive/113488general/09684Orsaymeetingreport.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 30 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Orsay%20meeting%20report/near/133061127):
 We had a Lean user meeting in Laboratoire de Mathématiques d'Orsay on August 27-29th. Participants were 
 Chris Hugues, Johan Commelin, Johannes Hölzl, Kevin Buzzard, Mario Carneiro, Patrick Massot, Reid Barton, Rob Lewis, and Scott Morrison. 
@@ -33,3 +35,5 @@ Wow, that is really impressive! It is great that you were able to sustain that l
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 02 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Orsay%20meeting%20report/near/133226474):
 Yes, it worked really well. But of course it's difficult to precisely assess what happened. I took time to compute those numbers in case someone asks me what I did with the money, but they shouldn't be taken too seriously. These merges were possible because of earlier work that was not yet merged. On the other hand, those numbers also don't include things that began in Orsay but were merged later or are not yet merged (like the noetherian module stuff which is still in https://github.com/leanprover-community/mathlib/tree/noetherian). And more generally we clearly have a boost of productivity since the meeting, using the momentum acquired there. This boost will necessarily fade off at some point, but then I hope we will still have the diffuse motivation and communication benefits coming from knowing each others.
 
+
+{% endraw %}

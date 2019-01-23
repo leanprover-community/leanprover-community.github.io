@@ -9,6 +9,8 @@ permalink: archive/113488general/93941erased.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 05 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124681873):
 @**Gabriel Ebner** What would be the best way to define the following type:
 * `erased A` is a type with a computable function `A -> erased A` and a noncomputable function `erased A -> A`
@@ -250,3 +252,5 @@ def f (x : set ℕ) := x
 def g (x : { s : set ℕ // true }) := x
 ```
 
+
+{% endraw %}

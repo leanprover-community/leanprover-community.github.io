@@ -9,6 +9,8 @@ permalink: archive/113488general/68737equationcompileranddependenttypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 23 2018 at 17:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler%20and%20dependent%20types/near/152434275):
 Is there any way to use the equation compiler with a dependent output? The following works (although I wish the proof part could be `by linarith`):
 ```lean
@@ -45,3 +47,5 @@ def euclid : Π (m : ℕ) (n : { n : ℕ // 0 < n }), {p : ℕ × ℕ // m = n*p
                end, H'⟩⟩
 ```
 
+
+{% endraw %}

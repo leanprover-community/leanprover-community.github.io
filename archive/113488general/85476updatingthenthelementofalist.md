@@ -9,6 +9,8 @@ permalink: archive/113488general/85476updatingthenthelementofalist.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 30 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20the%20nth%20element%20of%20a%20list/near/148832961):
 Do we have something equivalent to
 ```
@@ -70,3 +72,5 @@ Thanks. And yes, let's have more lens. :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Dec 01 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20the%20nth%20element%20of%20a%20list/near/150230501):
 Wait, isn't the syntax to declare functions in lean `meta def ....`? ;)
 
+
+{% endraw %}

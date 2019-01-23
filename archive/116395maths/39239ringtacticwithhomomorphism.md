@@ -9,6 +9,8 @@ permalink: archive/116395maths/39239ringtacticwithhomomorphism.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 30 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20tactic%20with%20homomorphism/near/125892370):
 Consider the following MWE
 ```lean
@@ -59,3 +61,5 @@ Aaah, I see. Yes, that is true.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 01 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20tactic%20with%20homomorphism/near/125920901):
 I'm not so sure about adding this to `ring`. This is outside the scope of `ring` as I see it, which is to solve equations in the first order theory of rings. If you want something like this it should be a different tactic; as Chris says it may be as simple as just `simp` with an appropriate simp set followed by `ring`.
 
+
+{% endraw %}

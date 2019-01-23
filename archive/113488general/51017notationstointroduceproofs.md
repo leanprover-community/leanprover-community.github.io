@@ -9,6 +9,8 @@ permalink: archive/113488general/51017notationstointroduceproofs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Oct 15 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815299):
 In the following snippet,
 ```lean
@@ -240,3 +242,5 @@ Unfortunately I think lean has a bug with generating names for the auxiliary mat
 ```
  Can you use well founded recursion if m and n are left of colon?
 
+
+{% endraw %}

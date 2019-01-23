@@ -9,6 +9,8 @@ permalink: archive/116395maths/62365filterpfiternotp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 15 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20p%20%2B%20fiter%20not%20p/near/132190025):
 ```lean
 import data.multiset
@@ -268,3 +270,5 @@ Moa Johannson has done some work on theory exploration; [IsaHipster](https://git
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 22 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20p%20%2B%20fiter%20not%20p/near/132559474):
 Ugh... I'm not sure I want to be part of a tradition of mathematics that works that way. :-)
 
+
+{% endraw %}

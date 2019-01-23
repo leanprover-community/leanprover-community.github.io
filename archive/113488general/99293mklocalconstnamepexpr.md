@@ -9,6 +9,8 @@ permalink: archive/113488general/99293mklocalconstnamepexpr.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jul 09 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_local_const%20%3A%20name%20-%3E%20pexpr%3F/near/129374884):
 Is there such a function that give a `pexpr` of local constant from the variable name? I can just call `expr.local_const`, but the constructor is kind of complex and not so much documentation, also I don't think it's the way to go.
 
@@ -102,3 +104,5 @@ Please also note https://github.com/leanprover/lean/issues/1921#issuecomment-363
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 10 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_local_const%20%3A%20name%20-%3E%20pexpr%3F/near/129419037):
 Do you mean that this kind of type won't leak through into the Lean code?
 
+
+{% endraw %}

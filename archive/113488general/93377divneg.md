@@ -9,6 +9,8 @@ permalink: archive/113488general/93377divneg.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 25 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22div_neg%22/near/134617532):
 algebra/field.lean L95:
 ```
@@ -673,3 +675,5 @@ Everyone seems to have different opinions about readability. People like Larry P
 
 My opinion is that actually I don't think anyone reads Bourbaki, people read books which are written to be read so that people could learn the material, and Bourbaki was written to be foundational. There is one Bourbaki that people read -- the stuff on algebraic groups -- because it's a really good refrence for e.g. all the facts and figures for the exceptional groups like E_8, G_2 etc -- but in general my experience is that people only read Bourbaki if they're desperate or if they for some reason want to see the theory built up from scratch (and most mathematicians don't). I've come to the conclusion that when it comes to mathlib I don't care whether the proofs are readable or not, because that is not the point of mathlib. I have occasionally in the past written instructive proofs, and actually this term I will be writing a whole bunch of instructive proofs of basic mathematics, with Lean tactic proofs littered with comments. But that's because I'm concentrating on teaching. In my mind the main criteria for a mathlib proof should be "is it easily maintainable?". I am hoping that compilation times are something which can be solved by technology (code to make it so I only have to compile once a month, speed-ups, better hardware) in the long term.
 
+
+{% endraw %}

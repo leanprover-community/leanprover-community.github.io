@@ -9,6 +9,8 @@ permalink: archive/113488general/13525calculationswitheq.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 22 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calculations%20with%20eq/near/128483780):
 Is this provable?
 ```lean
@@ -35,3 +37,5 @@ I couldn't actually prove a contradiction from assuming `subtype p = subtype q`,
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 23 2018 at 04:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calculations%20with%20eq/near/128504956):
 These sorts of things are independent in lean. Injectivity of inductive type constructors is either independent or false in every case I'm aware of.
 
+
+{% endraw %}

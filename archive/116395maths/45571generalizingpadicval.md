@@ -9,6 +9,8 @@ permalink: archive/116395maths/45571generalizingpadicval.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 19 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generalizing%20padic_val/near/147952749):
 In my proof of FTA, I need the highest power of a polynomial that divides another polynomial. Should `padic_val` be generalized to do this. What's the correct generality for this function?
 
@@ -249,3 +251,5 @@ Okay sure.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 23 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generalizing%20padic_val/near/148231085):
 I can't do `inf` computably for the lattice on enat. Should I leave it out?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/64461unexpectedfunextreflbehaviour.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946494):
 ```lean
 set_option pp.universes true -- might help
@@ -196,3 +198,5 @@ changing `example` to `theorem T` gives me the red squiggle on the second funext
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 16 2018 at 23:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125168260):
 I think it might be because the proof could give a clue about universes, but not if the proof is admit.
 
+
+{% endraw %}

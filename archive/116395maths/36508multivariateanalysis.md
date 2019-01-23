@@ -9,6 +9,8 @@ permalink: archive/116395maths/36508multivariateanalysis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jeremy Avigad (Oct 10 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/multivariate%20analysis/near/135568640):
 Friends,
 
@@ -517,3 +519,5 @@ so if you want something that you can iterate you end up in relations
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 09 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/multivariate%20analysis/near/147358485):
 It's not even a functional relation in some edge cases
 
+
+{% endraw %}

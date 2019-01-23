@@ -9,6 +9,8 @@ permalink: archive/116395maths/58005semimodulesneindanke.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 13 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133914925):
 ```
 tactic.mk_instance failed to generate instance for
@@ -644,3 +646,5 @@ will it be finally possible to tell Lean that every abelian group is a Z-module?
 ```
 @**Mario Carneiro** do you think we're ready to teach Lean this fact?
 
+
+{% endraw %}

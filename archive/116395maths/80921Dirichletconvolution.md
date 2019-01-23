@@ -9,6 +9,8 @@ permalink: archive/116395maths/80921Dirichletconvolution.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Elliott Macneil (Aug 15 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Dirichlet%20convolution/near/132182031):
 I'm trying to define the Dirichlet convolution on two arithmetic functions f,g but I'm having difficulty with writing the following sum in Lean.
 ```math
@@ -62,3 +64,5 @@ I should use simp for iff statements more...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Elliott Macneil (Aug 15 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Dirichlet%20convolution/near/132191813):
 Thanks for the help!
 
+
+{% endraw %}

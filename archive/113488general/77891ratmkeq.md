@@ -9,6 +9,8 @@ permalink: archive/113488general/77891ratmkeq.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 25 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rat.mk_eq/near/125675114):
 ```lean
 theorem mk_eq : ∀ {a b c d : ℤ} (hb : b ≠ 0) (hd : d ≠ 0),
@@ -60,3 +62,5 @@ Just use `n / d` where `d : N+`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 25 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rat.mk_eq/near/125680991):
 The only reason you might want `mk_pnat` is if you care about the efficiency of computing this value (this will translate `d` to rat by adding ones)
 
+
+{% endraw %}

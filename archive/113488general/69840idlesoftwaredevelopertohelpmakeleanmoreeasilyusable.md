@@ -9,6 +9,8 @@ permalink: archive/113488general/69840idlesoftwaredevelopertohelpmakeleanmoreeas
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 09 2018 at 15:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idle%20software%20developer%20to%20help%20make%20lean%20more%20easily%20usable/near/131173267):
 Hey guys, one of my student software developers (bright and hard-working, the type I like!) is going idle from today (we've just finished a project). He doesn't do any lean, but he's very good with windows installers, linux packaging, iOS apps, android apps and all sorts of boring software engineering fluff (actually he doesn't think it's boring, which is why I like him even more!). I think lean could use some help in that regard. Happy to chat more if anybody's interested. I vaguely remember @**Kevin Buzzard**  in particular raising some issues with windows installers for lean or something along the lines.
 
@@ -84,3 +86,5 @@ There's this website, which lists some possibilities: https://www.software.ac.uk
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 09 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idle%20software%20developer%20to%20help%20make%20lean%20more%20easily%20usable/near/131177601):
 I'll investigate and let you guys know what I've found
 
+
+{% endraw %}

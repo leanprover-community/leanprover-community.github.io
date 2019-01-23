@@ -9,6 +9,8 @@ permalink: archive/113488general/28785explodecommand.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133093714):
 While on the flight home, I decided to actually write the wishlist tactic I've mentioned to a few people, which displays lean proofs in a line by line style heavily annotated with type ascriptions so it looks more like a Fitch style proof. I'm still tweaking the display options, but here's what it looks like right now:
 ```lean
@@ -181,3 +183,5 @@ Noooo! We triggered Mario's immune defenses. He spent three days with people who
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133121314):
 I originally called it `mmshow` but I decided against metamath branding it
 
+
+{% endraw %}

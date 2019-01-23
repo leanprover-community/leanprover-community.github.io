@@ -9,6 +9,8 @@ permalink: archive/113488general/97622inverseof.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (May 28 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186287):
 is there an inverse of `$`? (the backwards pipe operator`<|`)  i.e. instead of `g (f x)` being written as `g $ f x` I'd like to write `f x <| g`
 
@@ -295,3 +297,5 @@ let res =
 ```
 writing this in Lean using field notation is a little cumbersome, and doesn't look as pretty
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/64106deeplyunhappywithcoercions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 25 2018 at 00:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441426):
 We've tried using coercions throughout the `category_theory/` development within mathlib, so that one can write `F X` for a functor applied to an object, and `a X` for a natural transformation applied to an object.
 
@@ -151,3 +153,5 @@ The real problems are:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 26 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136536535):
 In all, very unpleasant.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/73840tendstoattopattop.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 30 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148827429):
 I'm trying to work out how filters work. Is the following true/easy to prove. Which is the better way to state that a function goes to infinity.
 
@@ -68,3 +70,5 @@ I guess the preorder looks strange to mathematicians because on the whole they d
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 30 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148846741):
 One problem with this order thing is that it depends on the choice of a basepoint, while this can be avoided with the more usual approaches.
 
+
+{% endraw %}

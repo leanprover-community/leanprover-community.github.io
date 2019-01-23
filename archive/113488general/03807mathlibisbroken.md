@@ -9,6 +9,8 @@ permalink: archive/113488general/03807mathlibisbroken.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 12 2019 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20is%20broken/near/154987864):
 The new Lean (merged just yesterday) breaks mathlib
 
@@ -122,3 +124,5 @@ so I need to refrain from using 3.4.2? I really like the `\r` fix though...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Jan 18 2019 at 16:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20is%20broken/near/156375774):
 I've PR'd the 3.4.2 branch: https://github.com/leanprover/mathlib/pull/610
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/98309usecoerceonedependenttypeasanequalone.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Tindall (Sep 23 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use/coerce%20one%20dependent%20type%20as%20an%20equal%20one%3F/near/134479228):
 I am trying to apply a function to a vector, and get the error message 
 ```
@@ -49,3 +51,5 @@ def vec.take' (i n : ℕ) (h : i <= n) : vector α n → vector α i
 ```
 (the implementation can probably even be the same)
 
+
+{% endraw %}

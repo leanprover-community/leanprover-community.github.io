@@ -9,6 +9,8 @@ permalink: archive/113488general/47494deletingvariables.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 03 2018 at 03:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485299):
 Is it possible to delete something that has been declared using `variables`? (I want to "upgrade" an instance variable to a class which extends the original one.)
 
@@ -97,3 +99,5 @@ unless you use `@thm` and notice two underscores in place of one
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 03 2018 at 04:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127486500):
 It would be nice to have warnings for that kind of stuff. Actually, more warnings in general would be nice
 
+
+{% endraw %}

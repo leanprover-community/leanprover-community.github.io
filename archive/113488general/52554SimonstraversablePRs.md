@@ -9,6 +9,8 @@ permalink: archive/113488general/52554SimonstraversablePRs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 27 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simon%27s%20%22traversable%22%20PR%27s./near/130402086):
 What do these do? I can't understand anything :-(
 
@@ -42,3 +44,5 @@ Aah thanks!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 27 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simon%27s%20%22traversable%22%20PR%27s./near/130406943):
 ... and so is `mono`, if people still remember it
 
+
+{% endraw %}

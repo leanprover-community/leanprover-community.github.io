@@ -9,6 +9,8 @@ permalink: archive/113488general/19566modeqrefl.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 30 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911585):
 `@[refl] protected theorem refl (a : ℕ) : a ≡ a [MOD n] := @rfl _ _`
 
@@ -57,3 +59,5 @@ le_refl is refl but not rfl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (May 01 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125934512):
 `rfl`-lemmas show definitional equalities (i.e. `a = b` where `a` and `b` are def-eq).  The three letters `rfl` are essentially hardcoded into the parser for this purpose.  The reason is that typically lemmas are completely independent of their proofs, (well-founded recursion aside) it should not matter what proof you use for a lemma.  However whether an equality is proved by definitional equality has important consequences: for example, `dsimp` can only use definitional equalities.  Hence we have an easy syntactic criterion to determine whether a lemma is proven by definitional equality.
 
+
+{% endraw %}

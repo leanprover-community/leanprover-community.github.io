@@ -9,6 +9,8 @@ permalink: archive/113488general/49946wheredidIgoclassical.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368857):
 ```
 theorem aux3 (n : nat) (H1 : ¬n < 3) (H2 : even n) : aux (n - 2) < aux n :=
@@ -75,3 +77,5 @@ But rewriting ` ¬n < 3 ` to `n <= 3` is not a problem for decidability in Lean.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124380166):
 oh and for the sake of completeness, the final product is here https://github.com/kckennylau/Lean/blob/master/recursion.lean
 
+
+{% endraw %}

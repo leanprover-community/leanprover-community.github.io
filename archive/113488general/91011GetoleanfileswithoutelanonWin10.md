@@ -9,6 +9,8 @@ permalink: archive/113488general/91011GetoleanfileswithoutelanonWin10.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 27 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Get%20olean%20files%20without%20elan%20on%20Win10/near/136602966):
 I'd like to download updates to mathlib manually from github, then produce the olean files. How can I do this? I saw [these](https://github.com/leanprover/lean/blob/master/doc/make/msvc.md) instructions, but apparently they aren't compatible with VS2018.
 
@@ -42,3 +44,5 @@ Ok, that's not a problem, then.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 27 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Get%20olean%20files%20without%20elan%20on%20Win10/near/136605739):
 Yes, I think the issue is exactly with file paths. What's even more frustrating is that apparently the problem has been fixed, but the PR has not yet been accepted (and might never be, I guess, until Lean 4 comes out next year)
 
+
+{% endraw %}

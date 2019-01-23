@@ -9,6 +9,8 @@ permalink: archive/113488general/29680refinementofpartitions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 18 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refinement%20of%20partitions/near/125224068):
 what are the existing lemmas related to refinement of partitions, i.e. the idea that if there are two partitions of a list, then there is a partition that refines both?
 
@@ -27,3 +29,5 @@ well there's a minimal refinement
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 18 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refinement%20of%20partitions/near/125224606):
 I don't think the subpartition relation exists in mathlib, but you could prove it's a lattice
 
+
+{% endraw %}

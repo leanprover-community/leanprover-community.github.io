@@ -9,6 +9,8 @@ permalink: archive/113488general/96918rewritingclassoperations.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 05 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127602788):
 I have this instance:
 ```lean
@@ -71,3 +73,5 @@ This is an ad hoc response to it. @**Reid Barton** Is looking for one solution t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 05 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127606159):
 And won't get longer the longer my goal is
 
+
+{% endraw %}

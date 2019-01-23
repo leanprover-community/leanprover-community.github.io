@@ -9,6 +9,8 @@ permalink: archive/116395maths/62825cardinalityofintegersmodulon.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joey van Langen (Jan 14 2019 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinality%20of%20integers%20modulo%20n/near/155093729):
 I am trying to prove the following result
 ```lean
@@ -704,3 +706,5 @@ That's great, thanks to @**Kenny Lau** .  I am also working on a slightly differ
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 16 2019 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinality%20of%20integers%20modulo%20n/near/155245575):
 Many thanks @**Kenny Lau** ! Neil, you might either find it instructive to see how Kenny rewired your code, or intimidating, depending on how much you can make sense of it I guess. Kenny will have liked your approach because he is at heart a constructivist.
 
+
+{% endraw %}

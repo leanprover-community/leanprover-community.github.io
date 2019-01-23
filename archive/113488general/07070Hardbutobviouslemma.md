@@ -9,6 +9,8 @@ permalink: archive/113488general/07070Hardbutobviouslemma.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 23 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hard%20but%20obvious%20lemma/near/128498549):
 How to prove this? I don't need it, I'm just curious.
 ```lean
@@ -47,3 +49,5 @@ He basically generates all the relevant theorems right? I think that's what `con
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 23 2018 at 04:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hard%20but%20obvious%20lemma/near/128505091):
 yes, he's implemented a tactic meta-theorem for the version you stated
 
+
+{% endraw %}

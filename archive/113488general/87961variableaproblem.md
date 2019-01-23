@@ -9,6 +9,8 @@ permalink: archive/113488general/87961variableaproblem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 08 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20a%20problem/near/123463049):
 This is presumably well-known but it has just bitten one of my undergraduates. They wrote `have Ht2 : (a < nat.succ t) → (nat.succ t < c) → (a < c),` in the middle of a tactic proof, with a,t,c nats, and get a type mismatch error: `term a has type  nat.succ t < c : Prop`. Chris tells me that this is because you can't use `have` in a tactic proof with an implies sign and a variable `a`. That sounds like a bug to me. Is it officially not a bug though?
 
@@ -21,3 +23,5 @@ So we have to wait for the parser refactoring?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 08 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20a%20problem/near/123463636):
 Yes
 
+
+{% endraw %}

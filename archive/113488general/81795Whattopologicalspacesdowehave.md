@@ -9,6 +9,8 @@ permalink: archive/113488general/81795Whattopologicalspacesdowehave.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 28 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20topological%20spaces%20do%20we%20have%3F/near/124293562):
 I'm aware that this place does not value examples, just abstract theorems, but do we have R^n? C^n? S^n? D^n?
 
@@ -114,3 +116,5 @@ https://math.stackexchange.com/a/2712786/328173
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20topological%20spaces%20do%20we%20have%3F/near/124355089):
 if we have enough lemmas we might be able to formalize that
 
+
+{% endraw %}

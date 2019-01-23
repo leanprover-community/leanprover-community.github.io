@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/65833rcaseswithfalse.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 02 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rcases%20with%20false/near/135056202):
 Can I do `rcases` on `p \or false` and end up with one state where we know `p`?
 
@@ -30,3 +32,5 @@ yes. but this is just a minimal example.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rcases%20with%20false/near/135071726):
 I would advise it; if you search for that (with spaces around the `|` ) you will find me use it in several places
 
+
+{% endraw %}

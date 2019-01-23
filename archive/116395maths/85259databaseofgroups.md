@@ -9,6 +9,8 @@ permalink: archive/116395maths/85259databaseofgroups.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/database%20of%20groups/near/148218899):
 Looking at the second year group theory problem sheets, there seem to be just as many "prove this is false" questions as "prove this is true" ones. I want to deduce from this that mathematicians are interested in not only theorems about groups, but examples of groups (e.g. as a source of counterexamples). @**Amelia Livingston** would in particular be interested in these, and we've tentatively begun discussions on what should go in there -- cyclic groups, dihedral groups, C_2 x C_2, symmetric and alternating groups.
 
@@ -66,3 +68,5 @@ of course lots of questions about finitely presented groups are very hard to sol
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 24 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/database%20of%20groups/near/148269104):
 and some are impossible to solve!
 
+
+{% endraw %}

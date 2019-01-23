@@ -9,6 +9,8 @@ permalink: archive/113488general/24896BetterImplication.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nima (Apr 19 2018 at 06:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20Implication/near/125287484):
 I can write `if h:cnd then aa else bb`.
 Inside each breach, I have access to `h`.
@@ -288,3 +290,5 @@ instance {α} [ordered_comm_group α] : has_add (constraint α) := ⟨constraint
 end constraint
 ```
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/23264noobquestionaboutcardinal.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 13 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133871212):
 ```lean
 import set_theory.cardinal
@@ -60,3 +62,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 13 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133873150):
 anyway why do we need so many lines
 
+
+{% endraw %}

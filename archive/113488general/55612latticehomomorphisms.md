@@ -9,6 +9,8 @@ permalink: archive/113488general/55612latticehomomorphisms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 05 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lattice%20homomorphisms/near/135284232):
 Is there such a thing as a lattice homomorphism in mathlib?
 
@@ -30,3 +32,5 @@ On free complete lattices: since the meet and the sup operations can have any ca
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 10 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lattice%20homomorphisms/near/135556327):
 I was aware of this result, but when reading it directly I find it is weaker than expected. The paper constructs a HIT F that implies the existence of an uncountable regular cardinal; but ZFC gives scads of uncountable regular cardinals, like aleph_1. They argue that this gives additional power over ZF (which is true, since you can't prove that aleph_1 is regular without choice) but it's not clear to me how this relates to ZFC.
 
+
+{% endraw %}

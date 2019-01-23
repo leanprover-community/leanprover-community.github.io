@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/72368WhyisissubfieldnotaProp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 12 2019 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20is_subfield%20not%20a%20Prop%3F/near/154987213):
 I want to define
 ```lean
@@ -32,3 +34,5 @@ you can use `nonempty (is_subfield K')`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 12 2019 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20is_subfield%20not%20a%20Prop%3F/near/154990392):
 You can now also just update mathlib :-)
 
+
+{% endraw %}

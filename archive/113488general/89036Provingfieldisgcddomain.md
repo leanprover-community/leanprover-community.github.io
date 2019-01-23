@@ -9,6 +9,8 @@ permalink: archive/113488general/89036Provingfieldisgcddomain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Dec 19 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20field%20is%20gcd%20domain/near/152170274):
 While trying to prove a field is gcd domain, I found out that there seems like a conflict between two fields of class `gcd_domain` to me ...
 ```lean norm_unit_coe_units : ∀(u : units α), norm_unit u = u⁻¹``` and 
@@ -42,3 +44,5 @@ Oh I'm wrong...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Dec 19 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20field%20is%20gcd%20domain/near/152170821):
 Yeah, you're right! It sould be 1!!
 
+
+{% endraw %}

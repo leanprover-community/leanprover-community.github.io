@@ -9,6 +9,8 @@ permalink: archive/113488general/33702Shortestproofchallenge.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 05 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Shortest%20proof%20challenge/near/124686991):
 `example (a b : ℕ) : a ≠ b →  0  < a + b `
 
@@ -36,3 +38,5 @@ I think induction on `b` might fare less well this time.
 ```
 you don't need parentheses to enclose something without space
 
+
+{% endraw %}

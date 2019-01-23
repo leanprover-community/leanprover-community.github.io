@@ -9,6 +9,8 @@ permalink: archive/113488general/94829parsingquestion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 19 2019 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20question/near/156445528):
 tl;dr: what are the binding powers of `Π  _ , _` and `→` in Lean's dependent type theory? Does this even make sense?
 
@@ -47,3 +49,5 @@ OK so the only difference between the 1024 and the 0 with `Σ` and `Pi` is that 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 19 2019 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20question/near/156451293):
 I don't think that first binding power matters at all. Binders are a special parse mode anyway,  it's not clear how binding power would affect it. The important part is the `` `,`:0``, which means that everything after the comma is parsed with very low precedence, so that `\all x, P op Q` will always parse as `\all x, (P op Q)` for any choice of `op`.
 
+
+{% endraw %}

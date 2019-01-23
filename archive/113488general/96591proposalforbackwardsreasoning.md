@@ -9,6 +9,8 @@ permalink: archive/113488general/96591proposalforbackwardsreasoning.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proposal%20for%20%60backwards_reasoning%60/near/135383465):
 I'd like to propose an interactive partner for `solve_by_elim`. The idea is that it will be a tool for applying "backwards reasoning" (i.e. applying lemmas against the goal).
 
@@ -232,3 +234,5 @@ If you want an example of an attribute with arguments, look at `to_additive_attr
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 07:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proposal%20for%20%60backwards_reasoning%60/near/135520477):
 Thanks. I've just made a PR at https://leanprover.zulipchat.com/#narrow/stream/144837-PR-reviews/subject/.23410.20backwards.20reasoning, so perhaps anything further on this thread can go there.
 
+
+{% endraw %}

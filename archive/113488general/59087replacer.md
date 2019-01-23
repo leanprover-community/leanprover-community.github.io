@@ -9,6 +9,8 @@ permalink: archive/113488general/59087replacer.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 11 2018 at 02:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/replacer/near/133700764):
 By the suggestion of Simon, I've extended `replacer` to support parameters in its type. That is, you can define a replaceable definition `foo : A -> tactic B` where you have arbitrary input and output, rather than just `tactic unit`. Incidentally, implementing this required my first attempt at meta-metaprogramming, since the defined tactics are written programmatically.
 
@@ -66,3 +68,5 @@ that's more like alternate universe time travel
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 11 2018 at 03:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/replacer/near/133703163):
 I'm happy with multi-universe interpretations
 
+
+{% endraw %}

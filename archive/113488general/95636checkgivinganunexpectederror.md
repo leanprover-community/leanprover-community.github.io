@@ -9,6 +9,8 @@ permalink: archive/113488general/95636checkgivinganunexpectederror.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) M. Andrew Moshier (Apr 27 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23check%20giving%20an%20unexpected%20error/near/125761013):
 This example illustrates behavior I am not able to explain. #check gives expected answers for sub-expressions, but not for `G.arr A B` unless I explicitly decorate `G.arr` with its type. But the example shows that #check already correctly inferred the type.
 
@@ -115,3 +117,5 @@ and used
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) M. Andrew Moshier (Apr 27 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23check%20giving%20an%20unexpected%20error/near/125761349):
 Thanks both.
 
+
+{% endraw %}

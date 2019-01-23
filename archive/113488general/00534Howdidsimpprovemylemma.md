@@ -9,6 +9,8 @@ permalink: archive/113488general/00534Howdidsimpprovemylemma.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 31 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20did%20simp%20prove%20my%20lemma%3F/near/130640952):
 ```lean
 set_option trace.simp_lemmas true
@@ -85,3 +87,5 @@ oops, I misread
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jul 31 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20did%20simp%20prove%20my%20lemma%3F/near/130641897):
 https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/library/init/data/int/order.lean#L13-L17
 
+
+{% endraw %}

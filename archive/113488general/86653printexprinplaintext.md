@@ -9,6 +9,8 @@ permalink: archive/113488general/86653printexprinplaintext.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Aug 12 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/print%20%60expr%60%20in%20plaintext/near/132012147):
 How to print an `expr` in a plaintext way? That is, represented as all constructors `app` `lam` `var`, etc..
 
@@ -90,3 +92,5 @@ The more you know ... :shooting_star:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 13 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/print%20%60expr%60%20in%20plaintext/near/132013027):
 I'm hoping not in this case :laughing:
 
+
+{% endraw %}

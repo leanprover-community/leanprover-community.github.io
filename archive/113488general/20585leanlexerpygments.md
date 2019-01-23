@@ -9,6 +9,8 @@ permalink: archive/113488general/20585leanlexerpygments.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joseph Corneli (Jul 25 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20lexer%20%28pygments%29/near/130273767):
 FYI I found and reported the following bug in the LeanLexer: [#1459: LeanLexer does not have a "^" operator](https://bitbucket.org/birkenfeld/pygments-main/issues/1459/leanlexer-does-not-have-a-operator).  The fix is simple, but my BitBucket account is locked so I can't submit the fix myself! (... Though I guess I could register another account there easily enough ...) Maybe it's worth setting up a stress-test for the Lexer to make sure that it has all the other required syntax?
 
@@ -27,3 +29,5 @@ The upstream pygments project is unfortunately not very active.  The lean highli
 ```
 Thanks for the tip!  I installed the fork, and got a replacement version of sphinx set up with the correct requirement `'Pygments==2.1a0.dev20180725',` in `setup.py`.  No problems with this version of the LeanLexer.
 
+
+{% endraw %}

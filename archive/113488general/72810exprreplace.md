@@ -9,6 +9,8 @@ permalink: archive/113488general/72810exprreplace.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 19 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr.replace/near/123920774):
 Is there a version of expr.replace that performs replacements until a fixed point is reached?
 
@@ -237,3 +239,5 @@ you have to explicitly traverse the term and `instantiate_local` to go through b
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 22 2018 at 08:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr.replace/near/152379188):
 Okay thanks.
 
+
+{% endraw %}

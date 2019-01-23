@@ -9,6 +9,8 @@ permalink: archive/113488general/71468normnum.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Dec 03 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num/near/150797276):
 I was under the impression that `norm_num` was always successful in its range of expertise. Here is a real-life counterexample:
 ```lean
@@ -167,3 +169,5 @@ ship who?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 04 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num/near/150809032):
 Not sure if this is a serious question, but this is an international forum, so... [ship it](https://english.stackexchange.com/questions/48443/meaning-of-ship-it)
 
+
+{% endraw %}

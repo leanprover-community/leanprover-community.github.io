@@ -9,6 +9,8 @@ permalink: archive/113488general/24087makeonotereprcomputableagain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 20 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/make%20onote.repr%20computable%20again/near/125412217):
 ```lean
 /-- The ordinal denoted by a notation -/
@@ -54,3 +56,5 @@ You may wonder why so many things are noncomputable, when the choice usage is on
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/make%20onote.repr%20computable%20again/near/125471516):
 My question to you: why do you care that `repr` is noncomputable? If the goal is to compute with ordinals, that's the whole reason I wrote the `ordinal_notation` file - it gives computational analogues of the ordinal functions. You will note that `onote.add` and such are all computable. `repr` is only there to make it possible to state correctness results, assuming full choice.
 
+
+{% endraw %}

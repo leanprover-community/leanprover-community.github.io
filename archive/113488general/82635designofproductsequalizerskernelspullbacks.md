@@ -9,6 +9,8 @@ permalink: archive/113488general/82635designofproductsequalizerskernelspullbacks
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 08 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/design%20of%20products/equalizers/kernels/pullbacks/near/131099434):
 I'm looking for some advice/opinions on a design issue for category theory. In particular this is about categorical products (or equalizers, or kernels, or pullbacks). I think there ought to be at least two descriptions of these, along with appropriate lemmas to move back on forth. One description will be as a special case of limits, and the other description will be more "concrete".
 
@@ -79,3 +81,5 @@ What would be really really useful is a convenient way to be able to use all thi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 08 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/design%20of%20products/equalizers/kernels/pullbacks/near/131100843):
 same for the uniqueness up to unique iso of the completion
 
+
+{% endraw %}

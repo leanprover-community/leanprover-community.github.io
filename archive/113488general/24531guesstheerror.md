@@ -9,6 +9,8 @@ permalink: archive/113488general/24531guesstheerror.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 29 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/guess%20the%20error/near/124371146):
 ```
 theorem  easy : let H : 0  <  2  := dec_trivial in
@@ -38,3 +40,5 @@ So this let isn't just syntactic sugar?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 30 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/guess%20the%20error/near/124417030):
 No, let is a primitive term kind supported by the kernel
 
+
+{% endraw %}

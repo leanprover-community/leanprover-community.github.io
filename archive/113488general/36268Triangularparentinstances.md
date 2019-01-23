@@ -9,6 +9,8 @@ permalink: archive/113488general/36268Triangularparentinstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Dec 16 2018 at 05:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864665):
 Is there any way to work around this error?
 ```
@@ -62,3 +64,5 @@ class steppable (t : Type u) (f : out_param $ Type u → Type u) [out_param $ fu
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Dec 16 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151892913):
 There shouldn't be any need for that instance param if it's not used in the class body
 
+
+{% endraw %}

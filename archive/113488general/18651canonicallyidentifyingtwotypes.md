@@ -9,6 +9,8 @@ permalink: archive/113488general/18651canonicallyidentifyingtwotypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125765228):
 How can I beef up "equiv" into "canonical isomorphism"?
 
@@ -5098,3 +5100,5 @@ I finally got around to making this an issue.
 
 https://github.com/leanprover/mathlib/issues/408
 
+
+{% endraw %}

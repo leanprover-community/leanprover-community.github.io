@@ -9,6 +9,8 @@ permalink: archive/113488general/35579Defaultargumentswithtypeparameter.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Aug 18 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132355082):
 I've got a (honest, in-a-program) function
 ````
@@ -52,3 +54,5 @@ ok sweet! cheers!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 18 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357567):
 (actually there is a good reason you can't write a tactic inline, since that would be `meta`)
 
+
+{% endraw %}

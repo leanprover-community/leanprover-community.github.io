@@ -9,6 +9,8 @@ permalink: archive/113488general/14347easydecidabilityq.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 11 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy%20decidability%20q/near/129492071):
 Is this provable:
 
@@ -159,3 +161,5 @@ What's that project?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 11 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy%20decidability%20q/near/129500822):
 She's formalizing some of the theory of dots and boxes
 
+
+{% endraw %}

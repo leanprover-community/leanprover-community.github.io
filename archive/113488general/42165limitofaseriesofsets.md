@@ -9,6 +9,8 @@ permalink: archive/113488general/42165limitofaseriesofsets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 06 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/limit%20of%20a%20series%20of%20sets/near/124704503):
 I have an infinite series of sets that each include their successor and such that each is non-empty. How do I prove that the intersection of all sets is also non-empty?
 
@@ -38,3 +40,5 @@ Damn it! You guys are right! I was hoping to generalize a theorem. I guess I'll 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 06 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/limit%20of%20a%20series%20of%20sets/near/124719698):
 (deleted)
 
+
+{% endraw %}

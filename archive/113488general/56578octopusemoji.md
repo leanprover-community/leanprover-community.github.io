@@ -9,6 +9,8 @@ permalink: archive/113488general/56578octopusemoji.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 10 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/octopus%20emoji/near/124875291):
 What do you use :octopus: for? I'm struggling to understand it, and [searching](https://www.google.com/search?q=octopus+emoji) doesn't clarify much.
 
@@ -78,3 +80,5 @@ There should be a "+1" emoji
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/octopus%20emoji/near/124921330):
 You would imagine that a +1 emoji would be more useful than the "waxing gibbous moon" emoji they have...
 
+
+{% endraw %}

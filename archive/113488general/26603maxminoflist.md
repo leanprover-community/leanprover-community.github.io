@@ -9,6 +9,8 @@ permalink: archive/113488general/26603maxminoflist.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/max/min%20of%20list/near/125938032):
 maybe you'll find this useful:
 ```lean
@@ -40,3 +42,5 @@ I'll take look. First it's lunch time...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 02 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/max/min%20of%20list/near/126003001):
 aha
 
+
+{% endraw %}

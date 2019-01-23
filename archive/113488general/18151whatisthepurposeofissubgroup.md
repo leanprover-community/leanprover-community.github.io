@@ -9,6 +9,8 @@ permalink: archive/113488general/18151whatisthepurposeofissubgroup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124464518):
 what is the purpose of is_subgroup if you don't prove that they are groups?
 
@@ -30,3 +32,5 @@ I guess we will wait until mathlib builds?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 03 2018 at 06:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124559255):
 WIP
 
+
+{% endraw %}

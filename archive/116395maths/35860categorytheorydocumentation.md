@@ -9,6 +9,8 @@ permalink: archive/116395maths/35860categorytheorydocumentation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 01 2019 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20documentation/near/154133811):
 Is there a transcript of the rationale behind the design decisions of the category theory part? Specifically, I'd like to know what were the pros and cons of defining `category` as a type class versus as a structure.
 
@@ -196,3 +198,5 @@ The dictionary for reading mathematics is `Type` = set, and `set` = subset
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 01 2019 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20documentation/near/154142524):
 Ooooh
 
+
+{% endraw %}

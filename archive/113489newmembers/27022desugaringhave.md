@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/27022desugaringhave.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 02 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/desugaring%20have/near/133226383):
 https://gist.github.com/luxbock/f0c19afd8d88fef9c13814ba072b9eb5
 
@@ -54,3 +56,5 @@ My non-expert guess as to what is going on is this. Lean sometimes doesn't have 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 05 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/desugaring%20have/near/133365624):
 yeah it was a good exercise to do, because I learned something from it
 
+
+{% endraw %}

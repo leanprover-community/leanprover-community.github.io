@@ -9,6 +9,8 @@ permalink: archive/113488general/30873importdirectories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 26 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/import%20directories/near/134678473):
 I want to get custom imports (i.e. stuff in `xenalib`) working in cocalc. Here are some dumb questions. Say I have a Lean file whose first line is an import.
 
@@ -38,3 +40,5 @@ The Emacs mode uses one server for all stand-alone Lean files and a separate ser
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 26 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/import%20directories/near/134691615):
 I tried to describe the behavior of the emacs mode earlier, on the CoCalc thread, I believe.
 
+
+{% endraw %}

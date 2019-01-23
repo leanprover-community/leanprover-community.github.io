@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/39790Parser.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Pablo Le Hénaff (Aug 08 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Parser/near/131100158):
 Hello !
 
@@ -66,3 +68,5 @@ Hmm, can't you save the tactics from just before you generate the strings
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 08 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Parser/near/131103754):
 Sure, certainly I can save the tactics: the point is to double-check that the copy-and-pasteable text you're about to present to the human really does what you promise.
 
+
+{% endraw %}

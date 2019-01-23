@@ -9,6 +9,8 @@ permalink: archive/116395maths/73938bicategories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bicategories/near/135502092):
 @**Scott Morrison|110087** have you by any chance done or thought about formalizing bicategories?
 
@@ -63,3 +65,5 @@ As in, something like `obj1:Obj obj2:Obj |- Hom_obj1_obj2 : Cat` and then apply 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bicategories/near/135530891):
 I think the issue is that we don't have a nice solution for monoidal categories, that doesn't require a structure with ~30 fields
 
+
+{% endraw %}

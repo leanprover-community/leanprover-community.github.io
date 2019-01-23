@@ -9,6 +9,8 @@ permalink: archive/113488general/71163multifixbracketnotation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889037):
 Is this bound to become a massive headache, if possible at all?
 ```lean
@@ -220,3 +222,5 @@ implies self-destruction :boom: ?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 12 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127940673):
 Ok, maybe this is asking to much. But would it be ok if we restrict to the case where `R` is a subring, and `f = subtype.val`?
 
+
+{% endraw %}

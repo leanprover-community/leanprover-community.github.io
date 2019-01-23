@@ -9,6 +9,8 @@ permalink: archive/116395maths/41530Wellfounded.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Morenikeji Neri (Aug 22 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Well%20founded/near/132583592):
 Is there a proof that if a set is well founded it contains a minimal element?
 
@@ -27,3 +29,5 @@ What about the empty set :P
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 22 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Well%20founded/near/132593860):
 Ofer is asking less questions of that type now that he is sixty. But he is still less lenient than Lean.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/75408finsetimplementation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 08 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133565775):
 What is the advantage of implementing `finset` as it is now, over implementing it as `multiset` quotient by extensionality?
 
@@ -82,3 +84,5 @@ I can see three reasons for using stacked sets.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586519):
 `qfinset` is then like `set`+ finiteness invariant, similarly to `multiset`
 
+
+{% endraw %}

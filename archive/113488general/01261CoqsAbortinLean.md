@@ -9,6 +9,8 @@ permalink: archive/113488general/01261CoqsAbortinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Oct 08 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%27s%20Abort%20in%20Lean/near/135406580):
 What is Lean's equivalent of Abort in Coq?
 
@@ -119,3 +121,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 10 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%27s%20Abort%20in%20Lean/near/135528193):
 But I still think the Lean-style way to do this is to just leave the example unfinished.
 
+
+{% endraw %}

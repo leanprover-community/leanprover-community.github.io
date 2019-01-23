@@ -9,6 +9,8 @@ permalink: archive/113488general/89093notesonparametricity.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notes%20on%20parametricity/near/125810022):
 Since the subject of parametricity came up, here are some papers which may be of interest and should be relatively readable for mathematicians (especially those who are also Lean users). These papers pertain to non-dependently typed languages; I don't know what differences there might be in the dependently typed setting.
 * Types, abstraction and parametric polymorphism http://www.cse.chalmers.se/edu/year/2010/course/DAT140_Types/Reynolds_typesabpara.pdf
@@ -38,3 +40,5 @@ But I guess if you extend the idea of parametricity to a setting (like Lean) whe
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 28 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notes%20on%20parametricity/near/125826902):
 I see. I'm going to give Wadlers "Theorems for free" a close look. I think it contains important ideas.
 
+
+{% endraw %}

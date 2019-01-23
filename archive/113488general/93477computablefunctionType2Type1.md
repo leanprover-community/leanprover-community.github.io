@@ -9,6 +9,8 @@ permalink: archive/113488general/93477computablefunctionType2Type1.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 31 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computable%20function%20Type%202%20-%3E%20Type%201/near/130632607):
 is there any computable non-constant function Type 2 -> Type 1?
 
@@ -21,3 +23,5 @@ nice
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jul 31 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computable%20function%20Type%202%20-%3E%20Type%201/near/130632821):
 `Type` != `Type 1`.  You need one more `plift`.
 
+
+{% endraw %}

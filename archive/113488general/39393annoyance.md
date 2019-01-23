@@ -9,6 +9,8 @@ permalink: archive/113488general/39393annoyance.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710552):
 ```lean
 import data.set 
@@ -147,3 +149,5 @@ I think that the demographics of this chat are disproportionately skewed towards
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Brendan Zabarauskas (May 18 2018 at 05:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126729800):
 Correct. I'm one who had to learn FP and type theory/programming language stuff in my own time. But might be getting off topic here.
 
+
+{% endraw %}

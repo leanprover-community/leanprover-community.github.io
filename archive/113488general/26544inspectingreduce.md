@@ -9,6 +9,8 @@ permalink: archive/113488general/26544inspectingreduce.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Jun 07 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inspecting%20%23reduce/near/127709156):
 Is there a `set_option` of sorts to see what steps `#reduce` is going through to debug a *(deterministic) timeout*?
 
@@ -68,3 +70,5 @@ I just wanted to avoid having to think about side-effects that can possibly infl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Jun 08 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inspecting%20%23reduce/near/127764406):
 I'll fix it by using less dependent typing, thank you so much, I think I've got this :).
 
+
+{% endraw %}

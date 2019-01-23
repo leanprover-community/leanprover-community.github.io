@@ -9,6 +9,8 @@ permalink: archive/113488general/85526characteristicoffields.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921382):
 @**Mario Carneiro** @**Johan Commelin** @**Kevin Buzzard** how should we define the `char` of a field?
 
@@ -536,3 +538,5 @@ done
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928788):
 @**Mario Carneiro** never mind it's stupid
 
+
+{% endraw %}

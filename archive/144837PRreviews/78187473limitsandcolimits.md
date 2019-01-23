@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/78187473limitsandcolimits.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 19 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23473%20limits%20and%20colimits/near/147952349):
 @**Scott Morrison|110087** has taken this PR through a couple of revisions, but I think it is quite solid and stable now. I've been stress testing it quite a bit on my `sheaf` branch, and I think it works well. Do others have any comments?
 
@@ -321,3 +323,5 @@ Maybe it should be closed, yes. Or at least a big fat notice that we keep it aro
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Dec 02 2018 at 06:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23473%20limits%20and%20colimits/near/150710544):
 I've just closed the original mega-PR.
 
+
+{% endraw %}

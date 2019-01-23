@@ -9,6 +9,8 @@ permalink: archive/113488general/13255generalize.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 19 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize/near/125297691):
 Could someone build a tactic that allows us to generalize at hypotheses?
 
@@ -167,3 +169,5 @@ I see
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 17:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize/near/125454034):
 And you're welcome :)
 
+
+{% endraw %}

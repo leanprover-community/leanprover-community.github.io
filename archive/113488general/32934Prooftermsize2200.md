@@ -9,6 +9,8 @@ permalink: archive/113488general/32934Prooftermsize2200.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jan 10 2019 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154864164):
 I became curious how sizes of proof terms affect speed, so I ran a quick experiment: 
 
@@ -52,3 +54,5 @@ See also https://github.com/leanprover/tc/issues/8
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jan 10 2019 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154876865):
 I see. Thanks!
 
+
+{% endraw %}

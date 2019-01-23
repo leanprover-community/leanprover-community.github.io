@@ -9,6 +9,8 @@ permalink: archive/113488general/25328accrec.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Mar 19 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/acc.rec/near/123928942):
 I've been trying to prove things using acc.rec, and I'm finding it difficult to deal with. Of these three lemmas, only the first compiled. Definitional equality doesn't always seem to work. I'm particularly surprised that the third lemma doesn't reduce, given that the two terms differ only by a proof with the same type.
 ```lean
@@ -55,3 +57,5 @@ Lean's algorithm is an algorithm :-) so it can't be doing definitional equality 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 19 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/acc.rec/near/123936399):
 See Mario's Masters thesis https://github.com/digama0/lean-type-theory/releases/download/v0.1/main.pdf for some more info -- section 3.1.
 
+
+{% endraw %}

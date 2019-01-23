@@ -9,6 +9,8 @@ permalink: archive/116395maths/99122computablefunctionsofreals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 30 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20functions%20of%20reals/near/148864065):
 In my "ordinary maths" research I was confronted with the paper "Computable functions of reals" by Tent and Ziegler, which is really funny because:
 * Already on the first page it talks about nat-subtraction $$\stackrel{\cdot}{-}$$.
@@ -51,3 +53,5 @@ So I guess Mario and Johannes wisely wait for dust to settle
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 30 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20functions%20of%20reals/near/148871171):
 what about my 2 PR about ring theory
 
+
+{% endraw %}

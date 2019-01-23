@@ -9,6 +9,8 @@ permalink: archive/113488general/35875semimodulesmoremoduleheadaches.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133678716):
 @**Johannes Hölzl** I had problems with using `smul_add'` directly on modules, so I had to duplicate the theorems [here](https://github.com/leanprover/mathlib/blob/b33764d942dc8b1b7f55cace89429c948c1a4b2f/algebra/module.lean#L38-L43). Do you have any ideas?
 
@@ -77,3 +79,5 @@ the failing instance problem:
 failed is_def_eq
 ```
 
+
+{% endraw %}

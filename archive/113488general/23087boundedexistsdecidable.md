@@ -9,6 +9,8 @@ permalink: archive/113488general/23087boundedexistsdecidable.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 23 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125567139):
 ```lean
 instance nat.decidable_bexists_lt (n : nat) (P : Π k < n, Prop) :
@@ -45,3 +47,5 @@ would you include them inside?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 23 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125569210):
 Not sure, but I think they might be there for generic fintypes.
 
+
+{% endraw %}

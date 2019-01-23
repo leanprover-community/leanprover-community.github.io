@@ -9,6 +9,8 @@ permalink: archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 02 2018 at 17:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128969240):
 Is there a shorter way to prove this and why isn't `rfl` working? Is it because the type of the lhs is `with_bot ℕ` and the rhs is `option ℕ`? (The types are defeq)
 
@@ -93,3 +95,5 @@ so I think I will change the definition of the `with_bot` instance so that it un
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 03 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128992229):
 fixed
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/52942exactthis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 26 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exact%20this/near/130305391):
 Today I came across several instance of `have := stuff, exact this` closing a goal where `exact stuff` doesn't. I guess this is yet another elaboration subtlety, but I'd like to know if there is a nicer way to do this in one tactic.
 
@@ -72,3 +74,5 @@ Yes, I'm doing an internship under Leo until October
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 26 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exact%20this/near/130356771):
 Oooh, that sounds like a very good idea!
 
+
+{% endraw %}

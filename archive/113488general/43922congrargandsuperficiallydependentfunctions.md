@@ -9,6 +9,8 @@ permalink: archive/113488general/43922congrargandsuperficiallydependentfunctions
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781762):
 I'm having trouble constructing `congr_arg` expressions, where the function superficially looks like a dependent function, but after some definitionally unfolding you can see that it isn't really.
 
@@ -109,3 +111,5 @@ The next question is how to achieve this without making the local hypothesis, so
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Minchao Wu (Aug 03 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130828082):
 Yeah I'm also wondering if there is a neater solution :)
 
+
+{% endraw %}

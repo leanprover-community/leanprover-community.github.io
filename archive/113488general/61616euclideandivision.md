@@ -9,6 +9,8 @@ permalink: archive/113488general/61616euclideandivision.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Mar 26 2018 at 02:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/euclidean%20division/near/124205800):
 Is there a proof of Euclidean division (divmod) in the libraries somewhere? I've been looking around for theorems with `mod` in the core library and mathlib but couldn't find anything ...
 
@@ -23,3 +25,5 @@ ahh that makes sense now, thanks! I must have glossed over it earlier
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 26 2018 at 04:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/euclidean%20division/near/124207315):
 No problems! The naming scheme is fairly regular so if you search for `_mod_` in the core library or mathlib, it should give you a good list of available lemmas. If you miss any, they're usually close to the ones you do find
 
+
+{% endraw %}

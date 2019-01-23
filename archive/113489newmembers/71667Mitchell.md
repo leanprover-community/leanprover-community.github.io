@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/71667Mitchell.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 06 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mitchell/near/123344776):
 Hi @**Mitchell Rowett** ! How is your group theory going?
 
@@ -84,3 +86,5 @@ I meant mathlib has no dependency and is not yet using the new layout so there i
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 06 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mitchell/near/123347443):
 Ah, okay. On the flip side, there really is no benefit of `lean --make` over `leanpkg build` even for mathlib.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/97723modulerefactoring.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359525):
 I'm a bit late for my birthday deadline, but I have enough of the refactoring done that I'm ready to get feedback on it. See [leanprover-community/module](https://github.com/leanprover/mathlib/compare/master...leanprover-community:module). Remarks:
 
@@ -2184,3 +2186,5 @@ It's merged :tada: :thumbs_up: :octopus:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 05 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146804983):
 COMMIT 1000
 
+
+{% endraw %}

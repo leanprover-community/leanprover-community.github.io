@@ -9,6 +9,8 @@ permalink: archive/113488general/02286piinstance.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 08 2018 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pi_instance/near/133560439):
 Maybe we can also extend this tactic to quotients of pi_instances?
 
@@ -18,3 +20,5 @@ How do you mean? Once you know a pi type is a group, you know it's quotient is a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 08 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pi_instance/near/133561825):
 there's not just groups.
 
+
+{% endraw %}

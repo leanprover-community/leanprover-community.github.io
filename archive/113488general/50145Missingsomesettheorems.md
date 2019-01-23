@@ -9,6 +9,8 @@ permalink: archive/113488general/50145Missingsomesettheorems.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Lyle Kopnicky (Jul 25 2018 at 05:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Missing%20some%20set%20theorems%3F/near/130252632):
 Hi folks, I have been following Logic & Proof (https://leanprover.github.io/logic_and_proof/logic_and_proof.pdf) and in Chapter 12, it says to use `import data.set`, but I get an error that that path doesn't exist. However, I am still able to use set membership operators, etc. On the other hand, the book mentions theorems like `mem_inter`, but those aren't in scope. Have they moved to another library? How do I import them? Thanks.
 
@@ -228,3 +230,5 @@ Haha... I didn't manage to do the exercise beforehand. But others in the group d
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Lyle Kopnicky (Jul 27 2018 at 05:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Missing%20some%20set%20theorems%3F/near/130385550):
 But during the meeting, I was able to paste their code into my editor and everything checked out fine. I was projecting it on the whiteboard and they could underline things and draw around them.
 
+
+{% endraw %}

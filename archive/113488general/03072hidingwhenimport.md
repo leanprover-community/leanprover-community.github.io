@@ -9,6 +9,8 @@ permalink: archive/113488general/03072hidingwhenimport.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jun 27 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hiding%20when%20import%3F/near/128737287):
 Hi, is there some way to hiding a name when importing a module?
 
@@ -183,3 +185,5 @@ hmm I feel like I've had trouble with this before... but can't recall the detail
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 27 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hiding%20when%20import%3F/near/128738650):
 And yeah, I used local notation to work around it
 
+
+{% endraw %}

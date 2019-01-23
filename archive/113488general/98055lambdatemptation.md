@@ -9,6 +9,8 @@ permalink: archive/113488general/98055lambdatemptation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 24 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lambda%20temptation/near/125641452):
 Do I get kicked out of this forum by CS people if I use
 ```lean
@@ -43,3 +45,5 @@ It's conceivable that something that is morally "maps to" but isn't literally la
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 25 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lambda%20temptation/near/125659462):
 Actually I think the unicode thin space at the beginning of the notation is worse than the Church sacrilege. But I don't know another way. Maybe I don't know enough about notations in the end.
 
+
+{% endraw %}

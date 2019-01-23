@@ -9,6 +9,8 @@ permalink: archive/113488general/52080lean341branch.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 25 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean-3.4.1%20branch/near/127073781):
 I added a lean-3.4.1 branch to mathlib, which I think should fix the issues with elan/leanpkg (assuming I spelled everything correctly). @**Sebastian Ullrich** Will there be any problem with just keeping the branch up to date with master (although I don't think branch symlinks are a thing)? I don't see any reason not to.
 
@@ -263,3 +265,5 @@ Yes, both ways should work fine
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (May 25 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean-3.4.1%20branch/near/127075796):
 As Mario said, tag support would have to be added to `leanpkg`, unless we'd want `elan` to more or less reimplement and supersede the former. Which is possibly, and https://github.com/Kha/elan/issues/7 already points in that direction, but... not something I want to do right now
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/89367naturalsinreals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Guillermo Barajas Ayuso (Sep 11 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naturals_in_reals/near/133730371):
 Hi guys, how would you express the natural numbers as a subtype of the reals?
 
@@ -71,3 +73,5 @@ nat.cast_lt or something
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Guillermo Barajas Ayuso (Sep 12 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naturals_in_reals/near/133797598):
 Ok, thanks!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/27799rwbrokenin34.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 20 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20broken%20in%203.4/near/125331297):
 @**Sebastian Ullrich** Help! I'm looking at upgrading to 3.4.0, but one of the recent commits introduced a bug that breaks a lot of mathlib stuff. I'm a bit worried I will have to abandon 3.4 and stick to nightlies unless it is fixed.
 ```
@@ -131,3 +133,5 @@ oh, I just noticed that `f` has the wrong type; if it has type `T (id s)` instea
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 25 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20broken%20in%203.4/near/125653815):
 No, that's exactly the issue. The pattern involves two occurrences of `?m_2` in types, which are defeq but not syntactically equal in the target
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/33174fixesagainstthelatestmathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 08 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fixes%20against%20the%20latest%20mathlib/near/124799280):
 now there is a global `^` called `pow`, and now the type of `n` will not be inferred from `f^n` (you need to manually state that `n` is of type `nat`). In that case, `pow` unfolds to `monoid.pow`, which can be unfolded as before the latest version.
 
@@ -30,3 +32,5 @@ depending on the first argument
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 08 2018 at 19:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fixes%20against%20the%20latest%20mathlib/near/124804713):
 Getting rid of `local  infix ` ^ ` := monoid.pow` seems to help, so it uses `has_pow.pow` which is definitionally equal, but has rw lemmas.
 
+
+{% endraw %}

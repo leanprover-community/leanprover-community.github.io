@@ -9,6 +9,8 @@ permalink: archive/113488general/79342assumptionsinbigoperators.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 02 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135034421):
 I was browsing through big_operators and found:
 ```lean
@@ -60,3 +62,5 @@ doing this is in my long TODO list, but it's very low priority
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 02 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135036869):
 Searching `sum_nat_cast` in VScode tells me it's used once in `probability mass function`. It's casting to $$\mathbb{R}$$ there, so no problems synthesizing the `comm_monoid` instance. It is a mistake though and should be changed.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/07055Independentforallonnat.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 03 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Independent%20forall%20on%20nat/near/130859554):
 Are there any known independent propositions of the form `∀ x : ℕ, p x `, where `p` is a decidable predicate?
 
@@ -83,3 +85,5 @@ I was thinking more along the lines of formalizing a syntax for a dependent type
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Independent%20forall%20on%20nat/near/130865404):
 Except easier because there are much simpler languages with the same consistency strength
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/01777Leanunabletocoercefromsettotypeorsometh
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Nov 01 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20unable%20to%20coerce%20from%20set%20to%20type%20%28or%20something%29/near/136915550):
 (approximately M)WE:
 
@@ -72,3 +74,5 @@ Oh -- of course. Thanks.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Nov 01 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20unable%20to%20coerce%20from%20set%20to%20type%20%28or%20something%29/near/136918860):
 And I have no clue why I was putting in the domain and range of `f` instead of `p1`.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/82169inductionargument2notavariable.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Jan 03 2019 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154266676):
 Hi, I have an inductive predicate SN that takes a relation as argument (here eval), see the code snippet below. An induction over the statement ```SN eval st```gives me the error: induction tactic failed, argument #2 of major premise type SN eval st is not a variable. 
 
@@ -103,3 +105,5 @@ Cases adds a hypothesis of type ```R : tm n → tm n → Prop``` (similar to wha
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 04 2019 at 04:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154386747):
 you have `R` in the `sn_step` constructor even though it's already declared, so it's a different `R`
 
+
+{% endraw %}

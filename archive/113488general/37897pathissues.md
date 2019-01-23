@@ -9,6 +9,8 @@ permalink: archive/113488general/37897pathissues.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 12 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/path%20issues%3F/near/123606101):
 I'm getting the following error whenever I run lean from the console instead of vscode:
 ```
@@ -33,3 +35,5 @@ Yes
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 12 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/path%20issues%3F/near/123609406):
 And I don't recommend using it because adjusting PATH is so much easier :)
 
+
+{% endraw %}

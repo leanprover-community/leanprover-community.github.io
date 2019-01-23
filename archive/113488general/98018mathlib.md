@@ -9,6 +9,8 @@ permalink: archive/113488general/98018mathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 10 2018 at 07:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib/near/124871039):
 Is it strange that we have `monoid.pow` and `gpow` (for groups)? Can we make these more uniform?
 
@@ -42,3 +44,5 @@ but I didn't say the current way is at all consistent, nor am I averse to changi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 10 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib/near/124874371):
 I am not suggesting it be changed, I was just being a pedant.
 
+
+{% endraw %}

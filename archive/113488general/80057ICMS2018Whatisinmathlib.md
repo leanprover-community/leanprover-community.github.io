@@ -9,6 +9,8 @@ permalink: archive/113488general/80057ICMS2018Whatisinmathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 27 2018 at 06:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ICMS%202018%3A%20What%20is%20in%20mathlib%3F/near/130389009):
 Hi all, you can check out yesterday's ICMS talk on YouTube: https://youtu.be/5tS4j_A1ZvU
 
@@ -31,3 +33,5 @@ Like, comment and subscribe ;)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 27 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ICMS%202018%3A%20What%20is%20in%20mathlib%3F/near/130405226):
 (not really, I don't really care about getting a youtube audience)
 
+
+{% endraw %}

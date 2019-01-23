@@ -9,6 +9,8 @@ permalink: archive/116395maths/38567leakingconstruction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622397):
 Sometimes I see things like: `quot.lift (λ (a₁ : cau_seq ℚ abs), quotient.lift (has_lt.lt a₁) _ ε) _` in my tactic state when playing with real numbers. It looks like internal details of the constructions are leaking. What does it mean? Can I avoid that?
 
@@ -109,3 +111,5 @@ end
 ```
 Here the annoying part is that we need to focus on the right `nhds` or `at_top`.
 
+
+{% endraw %}

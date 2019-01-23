@@ -9,6 +9,8 @@ permalink: archive/113488general/83475Sequencesintopologicalmetricspaces.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rohan Mitta (Sep 07 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sequences%20in%20topological/metric%20spaces/near/133532026):
 Hi, 
 
@@ -377,3 +379,5 @@ You can get a sequence by for each n taking ε = 1/n and then applying the Cauch
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 13 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sequences%20in%20topological/metric%20spaces/near/133885019):
 I haven't checked but I expect this this defines a Cauchy sequence which you can then use to show the original filter converges.
 
+
+{% endraw %}

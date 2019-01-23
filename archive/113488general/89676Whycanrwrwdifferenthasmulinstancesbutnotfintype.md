@@ -9,6 +9,8 @@ permalink: archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfi
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 14 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128082489):
 In the following code, `rw` manages to recognize that two different expressions involving different paths of inferring the `has_mul` type class are equal. It can't do this with two definitionally equal `fintype` instances however. What's the difference between `has_mul` and `fintype` that leads to this behaviour?
 
@@ -92,3 +94,5 @@ I don't know why your `rw one_times_two` works though.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 14 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083660):
 Yeah, rw is usually really snotty about things like this
 
+
+{% endraw %}

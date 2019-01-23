@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/78740topicnames.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 07 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/topic%20names/near/135349506):
 Can we have slightly more descriptive topic names please? Currently they are just hash-number, and they actually link to issues of the `lean` repo instead of `mathlib`...
 
@@ -39,3 +41,5 @@ Great.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Oct 07 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/topic%20names/near/135350692):
 The topic named `#397` still has the wrong link but I suspect it would update if renamed and then renamed back
 
+
+{% endraw %}

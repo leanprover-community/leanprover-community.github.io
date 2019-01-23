@@ -9,6 +9,8 @@ permalink: archive/113488general/68366howtoleanwithelan.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 20 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/howto%20lean%20with%20elan/near/125446301):
 https://gist.github.com/jcommelin/1d45a0ea7a84a87db8a28a12e93cac32
 This is still WIP. I did not test it yet.
@@ -262,3 +264,5 @@ Basically, I'd change these lines https://github.com/Kha/elan/blob/master/src/el
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Dec 12 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/howto%20lean%20with%20elan/near/151521150):
 I should probably keep testing it. My setup seems a bit broken and I'm not sure if it's because of what I did to Lean (which I think shouldn't break anything) or what I did to `elan` (which I don't think should break anything either)
 
+
+{% endraw %}

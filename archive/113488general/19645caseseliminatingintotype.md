@@ -9,6 +9,8 @@ permalink: archive/113488general/19645caseseliminatingintotype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691805):
 I've just managed to internalise something Mario told me a couple of weeks ago.
 
@@ -266,3 +268,5 @@ AC has some content
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712127):
 Lean kind of gives you the ability to distinguish the two, since LEM is computable but AC is not
 
+
+{% endraw %}

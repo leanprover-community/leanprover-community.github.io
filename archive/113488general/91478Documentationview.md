@@ -9,6 +9,8 @@ permalink: archive/113488general/91478Documentationview.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 15 2019 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Documentation%20view/near/155152756):
 @**Gabriel Ebner** What happened to the documentation view feature of vscode-lean?
 
@@ -44,3 +46,5 @@ The bigger one: once we move from the table of contents to a specific chapter, a
 
 The smaller issue: the natural way to play with the text and examples is to split the screen, put the text in the left, and then run the examples in the right. But even when I have a split screen, when I click on the "try it" button, the window opens on the left, and I have to manually move it to the right. Would it be possible to have the window open on the right?
 
+
+{% endraw %}

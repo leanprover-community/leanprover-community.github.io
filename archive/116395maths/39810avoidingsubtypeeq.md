@@ -9,6 +9,8 @@ permalink: archive/116395maths/39810avoidingsubtypeeq.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 21 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/avoiding%20subtype.eq/near/132541236):
 ```lean
 import data.real.basic
@@ -190,3 +192,5 @@ partially instantiated lemma:
            (@one_div_eq_inv ℝ real.division_ring 3))))
 ```
 
+
+{% endraw %}

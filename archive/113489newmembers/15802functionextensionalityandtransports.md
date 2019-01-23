@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/15802functionextensionalityandtransports.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/function%20extensionality%20and%20transports/near/131125621):
 ```lean
 lemma my_ext 
@@ -41,3 +43,5 @@ lemma my_ext (α :Type)
 by cases (funext p : P = Q); exact funext
 ```
 
+
+{% endraw %}

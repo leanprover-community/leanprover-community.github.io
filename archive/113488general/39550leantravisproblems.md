@@ -9,6 +9,8 @@ permalink: archive/113488general/39550leantravisproblems.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 29 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20travis%20problems/near/124357753):
 https://travis-ci.org/leanprover/lean/jobs/359716662#L1465
 
@@ -139,3 +141,5 @@ why does the latest build fail?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20travis%20problems/near/124433328):
 @**Mario Carneiro**
 
+
+{% endraw %}

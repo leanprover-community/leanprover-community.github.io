@@ -9,6 +9,8 @@ permalink: archive/113488general/27371meminbinder.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 16 2018 at 00:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem%20in%20binder/near/128145487):
 I wrote the code `⨅ U ∈ nhd_zero R, principal {p : R×R | p.2 - p.1 ∈ U}` but now I realize I don't quite understand what's going on under the hood. The inf notation is defined by:
 ```lean
@@ -45,3 +47,5 @@ lemma filter.mem_sets_of_mem_infi {α : Type*} {ι : Sort*} {f : ι → filter �
 A ∈ (⨅ i,f i).sets → ∃ i, A ∈ (f i).sets
 ```
 
+
+{% endraw %}

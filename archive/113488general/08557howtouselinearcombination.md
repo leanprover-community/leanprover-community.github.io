@@ -9,6 +9,8 @@ permalink: archive/113488general/08557howtouselinearcombination.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 23 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130142613):
 ```
 variables {k : Type u} {V : Type v}
@@ -52,3 +54,5 @@ Yes -- try deleting the `variable [field k]` line and see if it works. If it doe
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 24 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130176920):
 Yes, I deleted `variable [field k]`. now it works. Thx!
 
+
+{% endraw %}

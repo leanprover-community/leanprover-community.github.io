@@ -9,6 +9,8 @@ permalink: archive/113488general/66435Whattacticforcesbetareductioningoalorhypot
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Oct 10 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20tactic%20forces%20beta%20reduction%20in%20goal%20or%20hypothesis/near/135516798):
 Clearly a newbie question -- but I don't see the answer at hand. Sorry to have to ask. E.g., if my current goal is 3 * 3 -= 8, how, in a tactic script, do I force the * expression to be evaluated, yielding 9 = 8 as the new goal?
 
@@ -72,3 +74,5 @@ I think we already has the same discussion before (or a closely related one)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 10 2018 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20tactic%20forces%20beta%20reduction%20in%20goal%20or%20hypothesis/near/135565975):
 Maybe `unfold` is what you're looking for? Do you want to post an example of what you're trying to do?
 
+
+{% endraw %}

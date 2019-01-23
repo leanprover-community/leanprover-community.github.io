@@ -9,6 +9,8 @@ permalink: archive/113488general/37726Abeltacticproblem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Neil Strickland (Jan 16 2019 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Abel%20tactic%20problem/near/155242485):
 I tried the following:
 ```lean
@@ -34,3 +36,5 @@ The story is that typeclasses were invented to be a cool way to deal with notati
 
 Could there be a `has_binary_operation` typeclass, not attached to any notation by default, which could somehow be used as a partial fix for all this? Then I think we're back to isomorphic structures and Lean's inability to easily pass theorems and definitions between them.
 
+
+{% endraw %}

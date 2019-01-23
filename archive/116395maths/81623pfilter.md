@@ -9,6 +9,8 @@ permalink: archive/116395maths/81623pfilter.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 08 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/pfilter/near/147287895):
 @Mario
 ```quote
@@ -16,3 +18,5 @@ I'm going to sleep now, but I've got something for you guys to puzzle over tomor
 ```
 I would be surprised if the monads on `filter` and `pfilter` are related. For me the monad of filter is not what is expected (one gets the wrong products), but `applicative` is a nice structure. I don't know about `pfilter`...
 
+
+{% endraw %}

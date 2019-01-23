@@ -9,6 +9,8 @@ permalink: archive/113488general/79543automaticcases.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130457556):
 Can we have a tactic that does `cases` on the argument of `XX.rec` or `XX.rec_on`?
 
@@ -63,3 +65,5 @@ Maybe there should be a basic tactic-writing thread. The workflow I see is: star
 ```
 Or a "tactics" stream? We've got a "maths" stream after all. This seems like a general enough topic (in the non-Zulip sense) to turn it into a stream.
 
+
+{% endraw %}

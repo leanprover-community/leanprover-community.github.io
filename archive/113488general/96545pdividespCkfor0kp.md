@@ -9,6 +9,8 @@ permalink: archive/113488general/96545pdividespCkfor0kp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 14 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135785763):
 Do we have this already?
 
@@ -53,3 +55,5 @@ thank you @**Chris Hughes**
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 14 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135788049):
 PRed
 
+
+{% endraw %}

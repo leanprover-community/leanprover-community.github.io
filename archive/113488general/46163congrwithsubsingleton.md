@@ -9,6 +9,8 @@ permalink: archive/113488general/46163congrwithsubsingleton.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 15 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr%20with%20subsingleton/near/128141922):
 Is this a bug in `congr`?
 ```lean
@@ -82,3 +84,5 @@ OK, the reason `congr` didn't work in my actual code is because I only have a su
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 15 2018 at 23:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr%20with%20subsingleton/near/128143036):
 (Namely, I have a subsingleton instance for `a ⟶ b` only when `a` is the initial object of a category)
 
+
+{% endraw %}

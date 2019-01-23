@@ -9,6 +9,8 @@ permalink: archive/113488general/43666tcloopagain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 28 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tc%20loop%20again/near/127213712):
 I tried to define norms on indexed product, but it seems I have a type class loop again. It's dinner time here, but if someone wants to have a look at why https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/norms.lean#L319 fails I'd be very grateful
 
@@ -262,3 +264,5 @@ Thanks, this is a good explanation. It doesn't work now, but it seams to be a pr
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 31 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tc%20loop%20again/near/127349063):
 So, do we have a solution?
 
+
+{% endraw %}

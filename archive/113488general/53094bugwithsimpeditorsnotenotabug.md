@@ -9,6 +9,8 @@ permalink: archive/113488general/53094bugwithsimpeditorsnotenotabug.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 06 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20simp%20%28editor%27s%20note%3A%20not%20a%20bug%29/near/123327630):
 ```
 import algebra.linear_algebra.basic
@@ -70,3 +72,5 @@ end
 ```
 cause `@eq.rec`s to vanish away again. Right now I have to deal with some jet lag.
 
+
+{% endraw %}

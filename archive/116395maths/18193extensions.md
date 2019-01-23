@@ -9,6 +9,8 @@ permalink: archive/116395maths/18193extensions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 16 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772133):
 @**Johannes Hölzl**  At https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean#L841-L843 do we really need that `[inhabited γ]`? It forces lots of other inhabited assumptions that seem unnecessary from a mathematical point of view. If γ is not inhabited then there shouldn't be that many `f : α → γ` to care about
 
@@ -96,3 +98,5 @@ all the proofs immediately after the definition still work, I may have to hunt d
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 16 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773914):
 and also hunt down the inhabited assumptions
 
+
+{% endraw %}

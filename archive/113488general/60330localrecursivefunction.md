@@ -9,6 +9,8 @@ permalink: archive/113488general/60330localrecursivefunction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 14 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133958735):
 Can you define a recursive function with a `let` inside a `do` block (in a `meta` definition)?
 
@@ -38,3 +40,5 @@ I had to do `by exact` for some reason
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Sep 14 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133964901):
 Now that's just terrible :P
 
+
+{% endraw %}

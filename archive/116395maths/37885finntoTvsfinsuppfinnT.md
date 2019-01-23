@@ -9,6 +9,8 @@ permalink: archive/116395maths/37885finntoTvsfinsuppfinnT.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60fin%20n%20%5Cto%20T%60%20vs%20%60finsupp%20%28fin%20n%29%20T%60/near/127206339):
 General question: (`T` is a type) is it easy to move back and forth between `fin n \to T` and the finsupp variant?
 Specific question: I am working with `nnreal^n`, and I model it as `fin n \to nnreal`. Now I have a map `fin n \to fin m` and I want to get the induced map `nnreal^n \to nnreal^m`. This is almost `finsupp.map_domain`. Except that I finitely supported functions, but general ones. Is it easy to still use `map_domain`?
@@ -43,3 +45,5 @@ def foobar {T : Type*} [has_zero T] [decidable_eq T] {X : Type*}  [fintype X] (f
   mem_support_to_fun := λ x, ⟨λ h, (mem_filter.mp h).2, λ h, (mem_filter.mpr ⟨mem_univ x, h⟩)⟩}
 ```
 
+
+{% endraw %}

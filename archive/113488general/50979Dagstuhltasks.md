@@ -9,6 +9,8 @@ permalink: archive/113488general/50979Dagstuhltasks.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Neil Strickland (Oct 17 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dagstuhl%20tasks/near/135961777):
 Some of you will have seen my post on Mathoverflow (https://mathoverflow.net/q/311159) where I described some tasks that I would like to see formalised for expository purposes, with extensive annotation.  I have carried out two of the tasks, and attempted to write useful annotations,  as shown on these pages:
 
@@ -290,3 +292,5 @@ Including the types explicitly in lines 153 and 159 would make things more reada
 
 I'm not sure what "further problems related to implicit arguments" occurred that required you to write lines 168-178 but if you say more perhaps we can figure it out.
 
+
+{% endraw %}

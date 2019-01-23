@@ -9,6 +9,8 @@ permalink: archive/113488general/21691simpinsideexpressionswithcoetofunsometimes
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948850):
 I've been trying to implement @**Johannes Hölzl** request that in my baby PR for category theory I use coercions to allow applying a functor to an object, as `F X`, rather than having to either write explicitly `F.onObjects X`, or introduce some awkward notation, such as `F +> X`.
 
@@ -309,3 +311,5 @@ the user will want to use coercions whenever possible, so there should be lemmas
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953864):
 besides, I haven't lost hope of an automation solution to this, we're talking about a workaround here
 
+
+{% endraw %}

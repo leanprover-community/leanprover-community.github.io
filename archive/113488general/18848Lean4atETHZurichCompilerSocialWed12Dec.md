@@ -9,6 +9,8 @@ permalink: archive/113488general/18848Lean4atETHZurichCompilerSocialWed12Dec.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Nov 28 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20at%20ETH%20Zurich%20Compiler%20Social%20-%20Wed%2012.%20Dec/near/148708913):
 Dear all,
 
@@ -129,3 +131,5 @@ I'm not really opposed to this practice, besides the fact that this makes it nec
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 26 2018 at 07:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20at%20ETH%20Zurich%20Compiler%20Social%20-%20Wed%2012.%20Dec/near/152540405):
 huh?
 
+
+{% endraw %}

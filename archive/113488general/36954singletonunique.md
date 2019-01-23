@@ -9,6 +9,8 @@ permalink: archive/113488general/36954singletonunique.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 18 2019 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton%20/%20unique/near/156348116):
 It has been remarked before that we need a class that is `nonempty` + `subsingleton`. I guess the canonical name would be `singleton`. How would people want to define it?
 ```lean
@@ -327,3 +329,5 @@ Lol... I've been thinking too much about `unique` :grinning:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 18 2019 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton%20/%20unique/near/156358134):
 Woops, forgot to `git add` the new file.
 
+
+{% endraw %}

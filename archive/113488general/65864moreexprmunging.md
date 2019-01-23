@@ -9,6 +9,8 @@ permalink: archive/113488general/65864moreexprmunging.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605425):
 Say I have an `expr` representing an iterated `pi` type, which is finally an equation, something like `Π (a : ℕ) (b : ℕ), f a b = g (a + b)`. From that, I want to produce `f ?m_1 ?m_2`, where `?m_1` and `?m_2` are newly created metavariables of the appropriate types.
 
@@ -125,3 +127,5 @@ and, happily it all seems to work now!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606776):
 (or at least the "all" that I hoped to have done tonight!)
 
+
+{% endraw %}

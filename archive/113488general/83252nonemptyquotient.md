@@ -9,6 +9,8 @@ permalink: archive/113488general/83252nonemptyquotient.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 30 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nonempty%20quotient/near/134934075):
 Do we already have something like:
 ```lean
@@ -24,3 +26,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 30 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nonempty%20quotient/near/134935619):
 That would be in `data/quot` and I don't see it there.
 
+
+{% endraw %}

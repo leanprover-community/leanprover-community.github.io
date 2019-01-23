@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/63247429finitesubgroupsofintegraldomain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 20 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136142678):
 Can anyone think of a good name for a file containing the proof that any finite subgroup of the units of an integral domain is cyclic? It imports `data.polynomial` and `group_theory.order_of_element`, so a file name that encompasses all thing depending on that would be great. I hate thinking of names.
 
@@ -33,3 +35,5 @@ right, but first the modules need to be refactored
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 20 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136161690):
 I don't think this stops us making the directory :-)
 
+
+{% endraw %}

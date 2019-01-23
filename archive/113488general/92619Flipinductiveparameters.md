@@ -9,6 +9,8 @@ permalink: archive/113488general/92619Flipinductiveparameters.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Jun 05 2018 at 04:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Flip%20inductive%20parameters/near/127578848):
 Is there a way to flip the `Type` and `ℕ` parameters around so I can make this a functor?
 ```
@@ -58,3 +60,5 @@ I get that :) and yes, I have `functor` and `applicative`, working on `is_lawful
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 05 2018 at 05:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Flip%20inductive%20parameters/near/127580157):
 I suggest you make sure that only one is available at any time
 
+
+{% endraw %}

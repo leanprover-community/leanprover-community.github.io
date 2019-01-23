@@ -9,6 +9,8 @@ permalink: archive/113488general/24577idleequivquestion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idle%20equiv%20question/near/125831713):
 ```lean
 universes u v
@@ -50,3 +52,5 @@ sure, `U -> V` is equiv to `ulift U -> V` or `U -> ulift V`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 29 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idle%20equiv%20question/near/125852179):
 (not sure why you are writing it with the funny notation, but that's just the arrow type)
 
+
+{% endraw %}

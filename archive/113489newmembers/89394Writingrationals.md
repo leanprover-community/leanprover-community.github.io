@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/89394Writingrationals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 17 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135984699):
 How can I rewrite a known rational `r : \Q` in the form `rat.mk (...) (...)`?
 
@@ -36,3 +38,5 @@ If you want _anything_ other than what `cases` provides (and you might well find
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 17 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135985883):
 By the way, the actual construtor `rat.mk'` needs a couple of proofs, and that's what you'll get with `cases`. The reason the initial constructor is so inconvenient is that it guarantees that two rationals are equal if and only if they're made with the same data (remember that all proofs of a proposition are equal by definition).
 
+
+{% endraw %}

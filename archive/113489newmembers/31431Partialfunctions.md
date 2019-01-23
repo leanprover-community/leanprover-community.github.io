@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/31431Partialfunctions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) zaa (Oct 02 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Partial%20functions/near/135005256):
 Are there cases where partial functions are actually necessary? [Should probably make a new topic.]
 
@@ -115,3 +117,5 @@ Ok, then partial functions are used only if really necessary. We should do that 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 02 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Partial%20functions/near/135018459):
 I am a mathematician and was very uncomfortable initially with the fact that sqrt(-1) was not `NaN`. But now I interpret it exactly as Mario says -- I have a mental note not to use the square root function on negative numbers in the statements of my theorems because I use it like a partial function even though it's total. Of course in the proofs I can do what I like. The fact that the square root function "should" only be used on non-negative integers is somehow something which a human uses for guidelines, but Lean doesn't need to be told this.
 
+
+{% endraw %}

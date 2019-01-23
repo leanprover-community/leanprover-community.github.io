@@ -9,6 +9,8 @@ permalink: archive/113488general/81802missingextlemmas.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135088491):
 How many of the following should be marked with `@[extensionality]`?
 ```lean
@@ -204,3 +206,5 @@ what about `topological_space_eq`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 03 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135133135):
 yes
 
+
+{% endraw %}

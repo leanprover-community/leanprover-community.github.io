@@ -9,6 +9,8 @@ permalink: archive/141825kbb/13546SL2Zaction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 14 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/SL2Z%20action/near/133942386):
 I'm trying to continue Patrick's work on finiteness of the quotient `SL2Z \ (Mat m)`.
 This is one (approximate) step that would be useful:
@@ -280,3 +282,5 @@ In the end, I would like `Hecke_operator` in `hecke_operators.lean` to have a so
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 15 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/SL2Z%20action/near/133996541):
 It feels to me like all the ingredients are now there... but as you can see, my attempt at writing the definition is :poop:
 
+
+{% endraw %}

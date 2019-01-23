@@ -9,6 +9,8 @@ permalink: archive/113488general/59614VMdoesnothavecodeformultisetstronginductio
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 08 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309672):
 What's happening here? I'm defining a map from `multiset nat` to `nat` :
 
@@ -64,3 +66,5 @@ def B : nat := A
 -- code generation failed, VM does not have code for 'A'
 ```
 
+
+{% endraw %}

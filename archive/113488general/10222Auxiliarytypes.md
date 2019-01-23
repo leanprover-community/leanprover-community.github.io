@@ -9,6 +9,8 @@ permalink: archive/113488general/10222Auxiliarytypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 12 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Auxiliary%20types/near/151490448):
 I've been thinking about auxiliary types. Types like `additive` and `multiplicative`. Types that help the type-class inference system do its job. Interestingly I don't see a wide use of auxiliary types. I understand that one of the inconveniences is that sometimes you want to refer to elements of the original type, and transferring between the real type and the auxiliary type might prove a bit troublesome. What are your thoughts on auxiliary types?
 
@@ -88,3 +90,5 @@ structure module.core (R : Type u) [ring R] (M : Type v) [add_comm_group M] exte
 def module_type {R : Type u} [ring R] {M : Type v} [add_comm_group M] (m : module.core R M) := M
 ```
 
+
+{% endraw %}

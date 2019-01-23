@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/92286dumpexprtocontext.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 24 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dump%20expr%20to%20context/near/148282282):
 Is there a way to dump an expr to the context?
 
@@ -30,3 +32,5 @@ You want a tactic that adds a local hypothesis of type `expr`, defined to be som
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 26 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dump%20expr%20to%20context/near/148359542):
 Can't you just use pose and give it `` `(e) ``, where `e : expr`?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/21791Documentationsession.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 11 2019 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Documentation%20session/near/154914851):
 Could someone please post a short summary of the topic session on documentation?
 
@@ -18,3 +20,5 @@ I missed it so would also welcome any notes.
 Also, it would be great to have something like "clojuredocs" for lean:
 e.g. https://clojuredocs.org/clojure.data/diff
 
+
+{% endraw %}

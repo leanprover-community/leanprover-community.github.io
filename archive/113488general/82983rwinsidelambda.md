@@ -9,6 +9,8 @@ permalink: archive/113488general/82983rwinsidelambda.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 09 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133624964):
 from my experience, `simp` can change things inside lambda, but `rw` cannot. Is there a way to bypass this and let `rw` change inside lambda?
 
@@ -139,3 +141,5 @@ note that `find` is actually a combinator like this inside conv, so you can use 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133646274):
 however, find patterns never work the way I want them to
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/23855ccfailure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 16 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654388):
 Is this a bug?
 ```lean
@@ -90,3 +92,5 @@ The displayed proof state is exactly the same whether you write `existsi _` or `
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 16 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654948):
 but `cc` only works in the second case
 
+
+{% endraw %}

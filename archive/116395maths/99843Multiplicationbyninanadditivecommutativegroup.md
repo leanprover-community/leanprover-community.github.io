@@ -9,6 +9,8 @@ permalink: archive/116395maths/99843Multiplicationbyninanadditivecommutativegrou
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiplication%20by%20n%20in%20an%20additive%20commutative%20group/near/126531796):
 Is this somewhere in mathlib?
 ```lean
@@ -24,3 +26,5 @@ Thanks!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 14 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiplication%20by%20n%20in%20an%20additive%20commutative%20group/near/126550514):
 the "g" stands for "group" in gsmul and gpow.
 
+
+{% endraw %}

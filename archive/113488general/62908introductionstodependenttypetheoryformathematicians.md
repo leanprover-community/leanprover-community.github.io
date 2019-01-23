@@ -9,6 +9,8 @@ permalink: archive/113488general/62908introductionstodependenttypetheoryformathe
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 15 2018 at 06:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/introductions%20to%20dependent%20type%20theory%20for%20mathematicians/near/123737728):
 At tea today some colleagues expressed interest in learning about dependent type theory (interactive theorem proving may still be a bridge too far... :-). Does anyone have favourite recommendations for introductions, especially written for a "working mathematician" audience?
 
@@ -33,3 +35,5 @@ just remember to get off the bus when they start talking about iterated identity
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 15 2018 at 07:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/introductions%20to%20dependent%20type%20theory%20for%20mathematicians/near/123737985):
 Great! I'm very happy that my first two suggestions have been echoed here. :-) I also like Mike Schulman's post at <https://golem.ph.utexas.edu/category/2010/03/in_praise_of_dependent_types.html>.
 
+
+{% endraw %}

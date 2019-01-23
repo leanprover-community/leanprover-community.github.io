@@ -9,6 +9,8 @@ permalink: archive/116395maths/43084bounds.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 17 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147874320):
 This is more of a funny story than anything else.
 
@@ -182,3 +184,5 @@ Oh that's an interesting comment. So there is a place for the has_lt typeclass b
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 17 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147880125):
 It's just in lawless metaland :-)
 
+
+{% endraw %}

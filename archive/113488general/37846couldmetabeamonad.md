@@ -9,6 +9,8 @@ permalink: archive/113488general/37846couldmetabeamonad.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/could%20meta%20be%20a%20monad/near/135797914):
 Something that popped into my head recently, and my curiosity makes me ask this question:
 Could `meta` have been a monad?
@@ -81,3 +83,5 @@ In some contexts these points could be viewed as advantages, but the effect of n
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/could%20meta%20be%20a%20monad/near/136114667):
 The only advantage of `meta` as a monad that I can think of is on the implementation side: Lean would no longer have to track the `meta` property. However, I think there would still be special cases required to reproduce the current behavior, e.g., `meta` inductive types have a relaxed syntax for recursion--Lean would have to make the constructors and/or recursors operate in the `meta` monad
 
+
+{% endraw %}

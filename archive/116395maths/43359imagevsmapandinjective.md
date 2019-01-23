@@ -9,6 +9,8 @@ permalink: archive/116395maths/43359imagevsmapandinjective.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 22 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/image%20vs%20map%20and%20injective/near/128459841):
 In `data.finset`, `finset.map` is defined as mapping an `embedding` or an injective function over a `finset`, and `finset.image` is mapping a function over a `finset`. Other mathlib components (e.g `set`, `multiset`, `list`, `array`, etc.) do not make this distinction using this naming scheme.
 
@@ -70,3 +72,5 @@ with `finset.map` there is a clear difference since the definition is different
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 25 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/image%20vs%20map%20and%20injective/near/128587364):
 Oh, I see. You're referring to the use of `list.map` with an injective function. I was referring to the convenience of writing proofs for `map` with injectivity: you wouldn't have to specify `injective f`. Nonetheless, I concede that it's a pretty weak motivation.
 
+
+{% endraw %}

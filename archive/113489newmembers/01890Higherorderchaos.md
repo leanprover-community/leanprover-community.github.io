@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/01890Higherorderchaos.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 15 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Higher%20order%20chaos/near/129679786):
 I was experimenting with lambda reductions.  Can someone help me complete the following theorem:
 
@@ -218,3 +220,5 @@ That's funny, because last week my son discovered this. IIRC `inversion` is intr
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 15 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Higher%20order%20chaos/near/129697434):
 In my experiments trying to understand `cases` on `eq` I found that it could be used to do a rewrite for either the left or the right hand side (`cases a = blah` and `cases blah = a` both remove `a` and substitute `blah` everywhere). The only disconcerting thing is that the order of the hypotheses gets randomised a bit (presumably because they're reverted and then unreverted under the hood or something)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/08479maxofsubsequence.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Feb 27 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/max%20of%20subsequence/near/123019419):
 is there a concise way, if I have `f : nat -> rat`, to obtain the maximum of the sequence as it ranges from 0..N?
 
@@ -24,3 +26,5 @@ i will investigate this, thanks
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Feb 27 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/max%20of%20subsequence/near/123019673):
 I'm not sure that's actually better than just the recursive definition though
 
+
+{% endraw %}

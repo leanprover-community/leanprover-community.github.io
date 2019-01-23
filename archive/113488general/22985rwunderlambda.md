@@ -9,6 +9,8 @@ permalink: archive/113488general/22985rwunderlambda.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 04 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126107890):
 `rw` refuses to perform rewrites inside a lambda, as far as I can tell. Is there a convenient way to do so?
 For example, frequently my goal is of the form `∃ x, P x ∧ Q x` and I would like to rewrite it to `∃ x, P x ∧ Q' x` (where I know `Q x ↔ Q' x`).
@@ -65,3 +67,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 04 2018 at 23:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126115523):
 `conv in ( _ = _)` would also work, but I would be interested in seeing a solution without pattern matching. It seems we lack some navigation tactic (like `to_lhs`/`to_rhs`,  `congr`). @**Gabriel Ebner**  @**Mario Carneiro** any idea?
 
+
+{% endraw %}

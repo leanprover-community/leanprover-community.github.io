@@ -9,6 +9,8 @@ permalink: archive/116395maths/50225characterisationofreals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 17 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/characterisation%20of%20reals/near/147869830):
 ```lean
 import algebra.archimedean
@@ -31,3 +33,5 @@ I remember talking about this sort of thing with Patrick and others several mont
 
 Is this already in mathlib?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/68203emscriptenbuild.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 30 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887589):
 I see the emscripten situation is as stellar as ever :| .
 Using the official Arch Linux build:
@@ -84,3 +86,5 @@ index 863f6a66d..6163d9b32 100644
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 30 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125891597):
 @**Gabriel Ebner** Seems to work, thanks!
 
+
+{% endraw %}

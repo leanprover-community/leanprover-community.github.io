@@ -9,6 +9,8 @@ permalink: archive/116395maths/59703ringhominducesringhombetweenmvpolynomials.ht
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130203646):
 I am stuck.
 ```lean
@@ -684,3 +686,5 @@ Ok!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131033604):
 Updated the PR
 
+
+{% endraw %}

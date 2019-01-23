@@ -9,6 +9,8 @@ permalink: archive/113488general/04349TPILupdate.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 02 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/TPIL%20update/near/126015047):
 :tada: Jeremy updated TPIL to Lean 3.4.1! :tada:
 
@@ -45,3 +47,5 @@ https://github.com/leanprover/theorem_proving_in_lean/commit/b35ec10c142969d5512
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Miko de Amsterdamo (May 03 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/TPIL%20update/near/126045928):
 Thanks, a good time to re-read the chapter
 
+
+{% endraw %}

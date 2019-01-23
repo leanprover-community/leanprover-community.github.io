@@ -9,6 +9,8 @@ permalink: archive/116395maths/34396categorytheoryPR.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 04 2018 at 05:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20PR/near/127526777):
 @**Kevin Buzzard**, @**Reid Barton**, @**Johan Commelin**, the first cut of my category theory PR has just landed as https://github.com/leanprover/mathlib/pull/152. Criticisms welcome!
 
@@ -72,3 +74,5 @@ I agree, but this is in a not yet revised PR.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ned Summers (Jul 26 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20PR/near/130344859):
 Thanks, Reid. Makes a lot of sense; just getting used to this hesitance about choice. Thanks for the suggestion too of the Prop version.
 
+
+{% endraw %}

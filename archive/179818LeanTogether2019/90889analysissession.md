@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/90889analysissession.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jeremy Avigad (Jan 09 2019 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/analysis%20session/near/154724961):
 Friends, 
 
@@ -118,3 +120,5 @@ Cute, isn't it?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 16 2019 at 07:53)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/analysis%20session/near/155232912):
 I think I like that name! :thumbs_up:
 
+
+{% endraw %}

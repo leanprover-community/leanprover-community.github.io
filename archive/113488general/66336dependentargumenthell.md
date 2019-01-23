@@ -9,6 +9,8 @@ permalink: archive/113488general/66336dependentargumenthell.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 12 2018 at 03:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dependent%20argument%20hell/near/133771753):
 I seem to have backed myself into a corner, and I don't understand how to escape. I would really appreciate some help, as it feels like this problem is an instance of one that will become more and more severe as we do more advanced maths.
 
@@ -730,3 +732,5 @@ def V_pre_pre := Σ (F : Presheaf.{u+1 u} TopRing), stalks_local F
 example : category.{u+1 u} V_pre_pre := by unfold V_pre_pre; apply_instance
 ```
 
+
+{% endraw %}

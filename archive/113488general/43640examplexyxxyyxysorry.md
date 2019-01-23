@@ -9,6 +9,8 @@ permalink: archive/113488general/43640examplexyxxyyxysorry.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60example%20%7Bx%20y%20%3A%20%E2%84%95%7D%20%3A%20x%20%2B%20x%20%3D%20y%20%2B%20y%20%E2%86%92%20x%20%3D%20y%20%3A%3D%20sorry%60/near/124685151):
 How about this one? `example {x y : ℕ} : x + x = y + y → x = y := sorry`.  I ended up proving another lemma `x + x = x * 2` and then rewrote twice and used `nat.mul_div_cancel`.  I thought `x + x = x * 2`
 was a lemma but I can't find it. There is a lemma ` add_self_div_two : ∀ {α : Type u_1} [_inst_1 : linear_ordered_field α] (a : α), (a + a) / 2 = a` (note: linearly ordered field ensures 2 isn't zero). Is there an argument for adding `nat.add_self_div_two` and `int.add_self_div_two`?
@@ -52,3 +54,5 @@ You don't want to call this result mul_two_eq_add_self?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60example%20%7Bx%20y%20%3A%20%E2%84%95%7D%20%3A%20x%20%2B%20x%20%3D%20y%20%2B%20y%20%E2%86%92%20x%20%3D%20y%20%3A%3D%20sorry%60/near/124685572):
 so because I failed I started wishing there was one big bloated tactic which kills them all.
 
+
+{% endraw %}

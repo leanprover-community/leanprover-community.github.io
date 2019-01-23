@@ -9,6 +9,8 @@ permalink: archive/116395maths/21890Therealnumbers.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 31 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/The%20real%20numbers/near/127331937):
 How are our real numbers getting along? Do we have the definition of a differentiable function yet, and of its derivative?
 
@@ -2832,3 +2834,5 @@ but you can verify it
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 04 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/The%20real%20numbers/near/127518498):
 that is a very different thing from understanding it
 
+
+{% endraw %}

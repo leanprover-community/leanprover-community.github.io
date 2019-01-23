@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/97918tacticcasescore.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 24 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tactic.cases_core/near/148270993):
 What is the output of `tactic.cases_core`?
 
@@ -26,3 +28,5 @@ What is the output of `tactic.cases_core`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 24 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tactic.cases_core/near/148286948):
 I don't really understand `a list of substitutions for hypotheses` and the fact that sometimes I get duplicates in that particular list
 
+
+{% endraw %}

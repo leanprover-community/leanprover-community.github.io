@@ -9,6 +9,8 @@ permalink: archive/113488general/01137sumiteoverfin.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 07 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512435):
 How do I kill off this one?
 ```lean
@@ -52,3 +54,5 @@ that's the same thing, and still not found
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 07 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133513251):
 I think it might be new.
 
+
+{% endraw %}

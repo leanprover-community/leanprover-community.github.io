@@ -9,6 +9,8 @@ permalink: archive/113488general/00960Rustverificationworkinggroup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 15 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rust%20verification%20working%20group/near/125118534):
 Did anybody else see this:
 
@@ -116,3 +118,5 @@ But Lean 4 is currently unfinished!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 17 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rust%20verification%20working%20group/near/125186180):
 Ah ha. Therein lies the quandary...
 
+
+{% endraw %}

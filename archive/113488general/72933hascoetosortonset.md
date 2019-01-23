@@ -9,6 +9,8 @@ permalink: archive/113488general/72933hascoetosortonset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 16 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747338):
 What am I doing wrong:
 
@@ -84,3 +86,5 @@ I realize it doesn't save any chars, but it does save some working-out
 ```
 But one should work out to stay Lean... :thinking_face:
 
+
+{% endraw %}

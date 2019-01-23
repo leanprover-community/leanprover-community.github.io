@@ -9,6 +9,8 @@ permalink: archive/113488general/28860seqandcoinduction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 27 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/seq%20and%20coinduction/near/124283402):
 I see this comment in `data.seq.seq`:
 ```
@@ -72,3 +74,5 @@ I see
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 27 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/seq%20and%20coinduction/near/124288176):
 You can promise not to put `[]` in in cycle as well: you could have an assumption `l != []` which would be no fun to work with, or you could have `A` be inhabited so that it returns `[default, default, ...]` in that case, or you could return a `seq` so that this produces an empty seq
 
+
+{% endraw %}

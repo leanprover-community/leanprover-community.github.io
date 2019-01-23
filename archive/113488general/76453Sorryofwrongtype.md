@@ -9,6 +9,8 @@ permalink: archive/113488general/76453Sorryofwrongtype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 21 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sorry%20of%20wrong%20type%21/near/124004577):
 Heh...
 ```lean
@@ -59,3 +61,5 @@ It's like the dual problem of proving an inconsistency :)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 21 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sorry%20of%20wrong%20type%21/near/124006030):
 https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/too.20many.20axioms.20in.20comm_ring.20class/near/123391025
 
+
+{% endraw %}

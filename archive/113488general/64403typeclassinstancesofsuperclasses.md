@@ -9,6 +9,8 @@ permalink: archive/113488general/64403typeclassinstancesofsuperclasses.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 21 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414454):
 Given roughly the following combination of classes and instances:
 
@@ -123,3 +125,5 @@ Do you know about `#print instances`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 22 2018 at 17:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128476919):
 oops! Sorry!
 
+
+{% endraw %}

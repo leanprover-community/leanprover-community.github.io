@@ -9,6 +9,8 @@ permalink: archive/113488general/29908simpdocumentation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 15 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728672):
 @**Kevin Buzzard** I'm having a look at your recent PR. In "When it is unadvisable to use simp", why not use `show` instead of `suffices`?
 
@@ -69,3 +71,5 @@ for golf, `simpa [bla] using bla` is even more effective
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 15 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123729053):
 also, you can just write `suffices : (simplified thing), {simpa}`
 
+
+{% endraw %}

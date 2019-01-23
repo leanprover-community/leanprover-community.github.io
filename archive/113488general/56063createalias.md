@@ -9,6 +9,8 @@ permalink: archive/113488general/56063createalias.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Aug 17 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309111):
 How can I create an alias to anther declaration? Say, in my namespace `foo` I want to create a `true` such that users can see `foo.true` and the prover treats it equally to `true` from core.
 
@@ -147,3 +149,5 @@ you can replace `true` with `true'` anywhere in the proof with no changes
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Aug 17 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310605):
 ok. I guess I overlooked lean's ability of identifying equalities.
 
+
+{% endraw %}

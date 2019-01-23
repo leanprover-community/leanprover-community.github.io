@@ -9,6 +9,8 @@ permalink: archive/113488general/91947namespacedesignissuesvspedagogy.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Aug 03 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130837483):
 The context for the following is an effort to use Lean in teaching a lower-level undergraduate course. Students are easily confused. I'm trying to use namespaces in the usual way so that we can recapitulate the definitions of built-in types, such as bool, without getting name conflicts. It "works", but in the course of figuring out the details, I noted some inconsistencies that I myself found confusing and that students are likely to find confusing, too. I comment the code. The key lines are marked AAA through EEE.
 
@@ -200,3 +202,5 @@ inductive bar : Type 4
 
 then it's a little easier to figure out which `bar` is which when you're experimenting ;-)
 
+
+{% endraw %}

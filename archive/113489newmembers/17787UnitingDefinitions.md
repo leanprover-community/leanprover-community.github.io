@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/17787UnitingDefinitions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Sever (Jul 28 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniting%20Definitions/near/130457466):
 Is there a way I can join perp, perp1 and perp2 into 1 definition? Same thing for perpx.  `l : point → point → set point`
 ```lean
@@ -204,3 +206,5 @@ Now that I have VS Code back up, I'll use your suggestion until Monday, and then
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 29 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniting%20Definitions/near/130493666):
 Seriously, as far as choosing how to represent things, you could really use fifteen years of work gathered at http://geocoq.github.io/GeoCoq/ Definitions in Coq should be easy to read if you have the maths translation explained in the paper, eg https://hal.inria.fr/hal-00727117/file/adg2012_braun_narboux_postproc.pdf You would still have fun I think
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/11809ofastrueproofs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Dec 28 2018 at 03:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152632359):
 I'm trying to build up a mental model of the efficiency of using decidable predicates to construct proofs in tactics..
 Let's say I have a decidable predicate `P : nat -> Prop` with an instance `h : decidable_pred P`, and a concrete value `x : nat` in a tactic.  
@@ -198,3 +200,5 @@ this is a limitation of lean 3 tactic framework
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 28 2018 at 10:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152645210):
 You could create objects that are like `expr` but not meta, and then post process at the end, but that would add some extra overhead
 
+
+{% endraw %}

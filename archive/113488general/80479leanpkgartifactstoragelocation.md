@@ -9,6 +9,8 @@ permalink: archive/113488general/80479leanpkgartifactstoragelocation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Aug 01 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20artifact%20storage%20location/near/130723831):
 Hi there! Does anyone know of a particular reason why leanpkg copies dependencies into a "_target" directory in the project folder, as opposed to keeping a directory of artifacts in your home directory (e.g. like maven does)? It'd certainly avoid unnecessarily compiling mathlib multiple times when playing around with little projects.
 
@@ -42,3 +44,5 @@ What Rust's `cargo` (which is the direct inspiration for `leanpkg`) does is it c
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 03:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20artifact%20storage%20location/near/130751692):
 I see, but that wouldn't save on rebuilding mathlib between different projects, which is the real payoff.
 
+
+{% endraw %}

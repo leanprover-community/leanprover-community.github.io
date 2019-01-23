@@ -9,6 +9,8 @@ permalink: archive/113488general/64142aorborcord.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 04 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20or%20b%20or%20c%20or%20d/near/130900638):
 If I have `a or b or c or d`, can I split into four goals in one go?
 
@@ -66,3 +68,5 @@ brackets are syntax, so I don‘t think they can have _types_, nor kinds, nor so
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Aug 05 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20or%20b%20or%20c%20or%20d/near/130907192):
 we’re going to run out of variants of words soon to describe these things
 
+
+{% endraw %}

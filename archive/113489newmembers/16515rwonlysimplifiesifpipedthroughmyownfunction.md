@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/16515rwonlysimplifiesifpipedthroughmyownfunc
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 07 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20only%20simplifies%20if%20piped%20through%20my%20own%20function/near/133491472):
 My first beginners question. I tampered with this since a while, but maybe somebody has a quick explanation for this:
 
@@ -323,3 +325,5 @@ We really need to think about automatic lemma selection for rewrite_search.
 ```
 This is all very nice, but don't forget that this is a whole research area. So don't expect this to be super easy, and maybe have a look at what already exists. I think the keyword is "relevance filter"
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/76761recursiononconstructorwithlistargument.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jun 09 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127832469):
 I'm experimenting with embedding first-order logic in Lean, and I'm using the following definition of terms : 
 ``` 
@@ -61,3 +63,5 @@ This is a known issue with nested inductives. Like Simon suggests, you should us
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jun 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127867644):
 Thank you. It looks a lot better with mutual recursion now.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/53591abbreviation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 03 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/150746902):
 I don't suppose `abbreviation` is documented anywhere?
 
@@ -30,3 +32,5 @@ Is there a catch?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 03 2018 at 03:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/150747018):
 You can also do more interesting things like `abbreviation my_add' (α : Type) := has_add (list α)`
 
+
+{% endraw %}

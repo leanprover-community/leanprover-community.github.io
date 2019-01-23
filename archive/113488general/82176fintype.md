@@ -9,6 +9,8 @@ permalink: archive/113488general/82176fintype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Feb 27 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123059884):
 What's the reason fintype isn't marked as Prop?
 
@@ -60,3 +62,5 @@ damn topics
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Feb 28 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123067953):
 Didn't know about finite. I'll have to look at it.
 
+
+{% endraw %}

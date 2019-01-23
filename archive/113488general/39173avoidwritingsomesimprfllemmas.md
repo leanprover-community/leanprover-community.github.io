@@ -9,6 +9,8 @@ permalink: archive/113488general/39173avoidwritingsomesimprfllemmas.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 27 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20writing%20%28some%3F%29%20simp-rfl%20lemmas/near/148623451):
 I've brought this up before, but I'dd really hope that there is a way to get rid of blocks like this:
 ```lean
@@ -65,3 +67,5 @@ this would basically be the same thing that the equation compiler does
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 27 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20writing%20%28some%3F%29%20simp-rfl%20lemmas/near/148635832):
 I see. I hope someone with a lot of tactic-fu will pop up and write something like this (-;
 
+
+{% endraw %}

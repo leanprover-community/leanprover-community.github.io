@@ -9,6 +9,8 @@ permalink: archive/113488general/90420sortvstype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 03 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sort%20vs%20type/near/129031745):
 I realise that I don't actually quite understand what the distinction is between sort and type. Somehow I treat them as interchangeable, but of course that is not a very solid strategy. So, what exactly is a sort, and when should I use it?
 
@@ -24,3 +26,5 @@ Hmm, so that kind explains my thinking that I could equate `Sort*` and `Type*`. 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 04 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sort%20vs%20type/near/129068681):
 Thanks!
 
+
+{% endraw %}

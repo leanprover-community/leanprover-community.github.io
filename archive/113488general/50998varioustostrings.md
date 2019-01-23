@@ -9,6 +9,8 @@ permalink: archive/113488general/50998varioustostrings.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Oct 01 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/various%20to_strings/near/134964035):
 Hi all, when should I use the following typeclasses to display information?
 - `has_repr`
@@ -30,3 +32,5 @@ Ok, so they are exactly the same except with how they deal with chars and string
 ```
 I suppose so. I haven't looked into it myself.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/26974Substructuraltypesystems.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Wojciech Nawrocki (Oct 31 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Substructural%20type%20systems/near/136882886):
 Has anyone looked at or is familiar with Lean formalisations of substructural type systems (like linear types whose instances have to be used exactly once)?
 
@@ -38,3 +40,5 @@ I have not done PTSs in Lean, but in Coq only: http://florisvandoorn.com/ptsf/in
 I'm now indeed working on first-order logic in Lean also using de Bruijn variables: https://github.com/flypitch/flypitch/blob/master/src/fol.lean
 First-order logic is a bit simpler than lambda calculus, but the bookkeeping with de Bruijn variables is the same (search for `lift_term_at`, `lift_formula_at`, `subst_term` and `subst_formula` and their properties).
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/85635Bayestheoremfuturedirections.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Dec 21 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Bayes%20theorem%20%2B%20future%20directions/near/152309690):
 hello,
 
@@ -19,3 +21,5 @@ i had set this target as a first milestone in formalizing the (G)ARCH time serie
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 21 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Bayes%20theorem%20%2B%20future%20directions/near/152309951):
 Matrices are in `ring_theory/matrix`
 
+
+{% endraw %}

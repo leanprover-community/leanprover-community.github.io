@@ -9,6 +9,8 @@ permalink: archive/113488general/61969universepolymorphicversionofempty.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jul 05 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20polymorphic%20version%20of%20empty%3F/near/129158168):
 RT? The current empty is at Type 0
 
@@ -56,3 +58,5 @@ def clause : list (Type u) → Type u
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 05 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20polymorphic%20version%20of%20empty%3F/near/129159557):
 Use `ulift empty` instead of `ulift.up empty`. `ulift.up` is something you use on a term. On a type, you use simply `ulift`
 
+
+{% endraw %}

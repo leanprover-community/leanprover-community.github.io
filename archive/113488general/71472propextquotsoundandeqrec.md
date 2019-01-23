@@ -9,6 +9,8 @@ permalink: archive/113488general/71472propextquotsoundandeqrec.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 09 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135462261):
 Is every `nat` defined using `propext`, `quot.sound` and `eq.rec` but without choice guaranteed to reduce to `succ $ succ $ succ ... zero`?
 
@@ -311,3 +313,5 @@ this is just a funny way of writing `bad.to_list.equations._eqn_1 L` of course
 ```
 In this particular case it actually works out since `propext iff.rfl` has type `a = a` for some `a`, and then `eq.rec` reduces by axiom K.
 
+
+{% endraw %}

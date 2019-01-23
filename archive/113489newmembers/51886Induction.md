@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/51886Induction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Sep 25 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/134579977):
 Hello again! I'm still having a little trouble with my induction. In the example below the second dite gives me
 ```lean
@@ -252,3 +254,5 @@ def is_subterm (e : exp) : exp → bool
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Thomas (Jan 03 2019 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/154270926):
 @**Gabriel Ebner** Cool. Could something similar be done for the set of all lambda terms?
 
+
+{% endraw %}

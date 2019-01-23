@@ -9,6 +9,8 @@ permalink: archive/113488general/07437namedtheorems.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 12 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/named%20theorems/near/123598899):
 We had endless conversation about lemmas which don't have names in maths and need a name in a proof assistant. But what about theorems that do have a name? Now in mathlib we have the squeeze theorem, that some mathematicians call the sandwich theorem and French mathematicians call the "théorème des gendarmes" (gendarme is a military version of policeman) but [mathlib](https://github.com/leanprover/mathlib/blob/fe0f2a34b2bc71d480c5fc7766d889e0a4de3ccd/analysis/topology/topological_structures.lean#L346) calls it: `tendsto_of_tendsto_of_tendsto_of_le_of_le` and we have Lagrange's theorem on the order of subgroups called [in mathlib](https://github.com/leanprover/mathlib/blob/b97b7c38416d4f6f258882f807458d4f980976ef/group_theory/subgroup.lean#L88) `group_equiv_cosets_times_subgroup`. Isn't it slightly problematic?
 
@@ -42,3 +44,5 @@ Once you've disambiguated a theorem from all other theorems in the database, the
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 12 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/named%20theorems/near/123601823):
 Maybe the simplest solution is just good docstrings, which mention all of the common names of a theorem. The fact that different cultures use the same ideas has always resulted in different naming conventions. I noticed when I lived in Paris that many results had some generic name in English but were called <French person>'s Theorem in French, for example (e.g. Bezout's Lemma, I had never heard it called that in the UK in the 90s).
 
+
+{% endraw %}

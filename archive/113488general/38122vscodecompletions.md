@@ -9,6 +9,8 @@ permalink: archive/113488general/38122vscodecompletions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991476):
 Sometimes I will type `\langle` or whatever and vscode won't underline it and I will have to delete it all and keep typing `\` until eventually the underline appears. Then when I click space it will complete. This is extremely annoying and happens every other time seemingly randomly. Are there some settings that will prevent this?
 
@@ -106,3 +108,5 @@ Ok I've wopped a zero to the end of the delay time and it's utterly fabulous.
 Fixed in vscode-lean 0.11.14, coming to a vscode installation near you any moment now.
 BTW, the vim plugin is officially supported and tested since the main extension developer uses it exclusively.
 
+
+{% endraw %}

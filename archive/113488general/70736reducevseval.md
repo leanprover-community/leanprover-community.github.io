@@ -9,6 +9,8 @@ permalink: archive/113488general/70736reducevseval.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Feb 27 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20vs%20%23eval/near/123060876):
 Does it ever happen that #reduce runs forever while #eval terminates immediately?
 
@@ -49,3 +51,5 @@ Anyway, you made your point. Truncating the tree is probably much more expensive
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Feb 27 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20vs%20%23eval/near/123061736):
 Thanks!
 
+
+{% endraw %}

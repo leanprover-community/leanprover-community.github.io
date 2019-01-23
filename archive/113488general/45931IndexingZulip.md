@@ -9,6 +9,8 @@ permalink: archive/113488general/45931IndexingZulip.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 20 2019 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/156498766):
 At the meeting in Amsterdam, someone raised the question of archiving the Zulip chat and making it accessible to search engines. It's hard to find answers to Lean questions online right now. You have to register and search here specifically. 
 
@@ -163,3 +165,5 @@ People who want to play with it can get their own key
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 23 2019 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/156678201):
 And for the theme, I picked the first "basic" theme I found, it shouldn't be too hard to reskin.
 
+
+{% endraw %}

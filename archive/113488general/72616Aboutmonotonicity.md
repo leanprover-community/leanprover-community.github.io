@@ -9,6 +9,8 @@ permalink: archive/113488general/72616Aboutmonotonicity.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123813072):
 I'm currently working on monotonicity related simplification. In some places I consider associativity and commutativity with regards to monotonicity but let's leave that aside for now.
 
@@ -170,3 +172,5 @@ And if you only want a few steps of mono, you can use `mono^3` instead and it wi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817872):
 The point is, in a monotonic context, you can get rid of all lot of noise in one shot using `mono` or `ac_mono`
 
+
+{% endraw %}

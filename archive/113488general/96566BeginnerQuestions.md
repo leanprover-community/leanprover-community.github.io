@@ -9,6 +9,8 @@ permalink: archive/113488general/96566BeginnerQuestions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Clyde Watson (Jun 28 2018 at 04:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beginner%20Questions/near/128751244):
 I'm really new to LEAN (and anything like it), and I've had some problems that might be considered a little too simple.
 
@@ -694,3 +696,5 @@ It looks like `apply` is written in C, not Lean
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Jul 09 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beginner%20Questions/near/129343466):
 I probably speak C++ better than lean, but still I will rather find another exercise, this one is not for me!
 
+
+{% endraw %}

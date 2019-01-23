@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/47318Exerciseschapter4xrr.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Carlesso Diego (Dec 04 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837580):
 Hello! First time I write here! I'm trying to learn Lean step by step following the online tutorial "theorem proving in Lean" doing as many exercises as I can. 
 At the moment I'm having a problem (probably more on the logic part of the thing) on the first one of exercise 2 in chapter 4:
@@ -156,3 +158,5 @@ Carlesso, What Kevin means is you should include your `variables (α : Type) (r 
 ```
  Don't worry!, I didn't think about the variables thing, I'm working with different exercises in the same file and I forgot about them, totally my fault. Thank you for your time anyway! :)
 
+
+{% endraw %}

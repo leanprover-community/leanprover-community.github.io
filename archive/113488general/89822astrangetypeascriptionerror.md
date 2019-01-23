@@ -9,6 +9,8 @@ permalink: archive/113488general/89822astrangetypeascriptionerror.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 22 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128464038):
 I am getting an error of the form 
 ````
@@ -40,3 +42,5 @@ In my case the offending tactic was `induction using quotient.ind`; from your re
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 22 2018 at 16:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128475337):
 I guess the main point is that "the goal in tactic mode is well-typed" is not a 100% iron-clad guarantee, although it surely indicates a bug somewhere if it is violated.
 
+
+{% endraw %}

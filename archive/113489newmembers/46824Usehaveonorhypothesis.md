@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/46824Usehaveonorhypothesis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 06 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Use%20%22have%22%20on%20%22or%22%20hypothesis/near/135318782):
 If we had a hypothesis "HX: ∀x : nat, x ^ 2 - 3 * x + 2 = 0" and wanted to prove "false", we could do so by writing "have H3 := HX 3," and then revert and do norm_num.
 
@@ -330,3 +332,5 @@ The point simply seems to be that whilst there are several methods for "fixing t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 07 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Use%20%22have%22%20on%20%22or%22%20hypothesis/near/135346514):
 What they need instead is to be educated that the CS functions are different and to be aware of this.
 
+
+{% endraw %}

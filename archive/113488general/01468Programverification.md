@@ -9,6 +9,8 @@ permalink: archive/113488general/01468Programverification.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) William Whistler (Jan 12 2019 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Program%20verification/near/154986620):
 The stub for the program verification chapter in "Programming in Lean" says "Give some natural examples, for example, proving properties of functions of lists, sorting routines, properties of the extended gcd. Discuss two styles: separating functions and properties, and combining them, using subtypes."
 
@@ -32,3 +34,5 @@ Most of the mathlib examples use the "separate function and properties" style
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 12 2019 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Program%20verification/near/154986794):
 Minchao Wu presented a pretty good example of the "dependent types" proof approach at lean together this week
 
+
+{% endraw %}

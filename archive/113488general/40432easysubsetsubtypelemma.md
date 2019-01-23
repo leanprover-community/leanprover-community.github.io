@@ -9,6 +9,8 @@ permalink: archive/113488general/40432easysubsetsubtypelemma.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 16 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy%20subset/subtype%20lemma/near/129752088):
 I've reduced my goal to
 
@@ -55,3 +57,5 @@ Thanks Mario.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 16 2018 at 16:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy%20subset/subtype%20lemma/near/129754286):
 @**Luca Gerolla** is doing homotopy theory in Lean and this was all that was left for proving that a function on [0,1] is continuous iff its restriction to [0,1/2] and [1/2,1] is.
 
+
+{% endraw %}

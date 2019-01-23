@@ -9,6 +9,8 @@ permalink: archive/113488general/04369unfoldrefusestounfold.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Arseniy Alekseyev (May 12 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60unfold%60%20refuses%20to%20unfold/near/126471033):
 Here `t2_to_t1` is fully applied to a constructor, but lean still refuses to unfold/reduce. How so?
 
@@ -169,3 +171,5 @@ Yes, if you are familiar with HoTT terminology then "singleton" is "contractible
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 12 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60unfold%60%20refuses%20to%20unfold/near/126471879):
 I also find it a bit funny that -2 truncated types have elements while -1 truncated types may not, but the ordering there makes sense: every -2 truncated type is -1 truncated but not the other way around.
 
+
+{% endraw %}

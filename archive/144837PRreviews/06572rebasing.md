@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/06572rebasing.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 13 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/rebasing/near/147631335):
 Hi @**Reid Barton**, @**Johan Commelin**. I'm about to rebase `limits-others-new`. This is going to leave `adjunctions` and `sheaf` in a strange position.
 
@@ -95,3 +97,5 @@ There was a universe issue, a missing simp lemma, and the syntax of yoneda had c
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 14 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/rebasing/near/147661373):
 @**Scott Morrison|110087** Thanks a lot! (Sorry, I had seminars and then lunch...)
 
+
+{% endraw %}

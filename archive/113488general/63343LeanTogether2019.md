@@ -9,6 +9,8 @@ permalink: archive/113488general/63343LeanTogether2019.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jul 04 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20Together%202019/near/129082918):
 Hi everyone! @**Johannes Hölzl**  and I are organizing a Lean workshop in Amsterdam, Jan 7-11 2019. https://lean-forward.github.io/lean-together/2019/ The meeting will also be a "kickoff" for Jasmin Blanchette's new project, Lean Forward: https://lean-forward.github.io/
 
@@ -373,3 +375,5 @@ I just made a new stream for the workshop so we can avoid spamming people who ar
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 04 2019 at 17:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20Together%202019/near/154419678):
 Don't they deserve to be spammed?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/77414wlogexample.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 02 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog%20example/near/124531148):
 What about: 
 
@@ -189,3 +191,5 @@ I mean, it passed those simple examples in the tests
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog%20example/near/125330112):
 Can you show what you tried?
 
+
+{% endraw %}

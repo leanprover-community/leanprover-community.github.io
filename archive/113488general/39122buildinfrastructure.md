@@ -9,6 +9,8 @@ permalink: archive/113488general/39122buildinfrastructure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 19 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/build%20infrastructure/near/147995454):
 Ok, I think I am going to take a pause on "math in Lean", and do some infrastructure work.
 
@@ -212,3 +214,5 @@ Ok, thanks. I'll try to do that
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 22 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/build%20infrastructure/near/148148031):
 That can be a viable solution but if someone wanted to figure out how to setup sccache to share storable, I think that would be more effective. That way, we wouldn't have to upload a new version of mathlib every few day. Just compiling would get the mathlib that others have compiled
 
+
+{% endraw %}

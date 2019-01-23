@@ -9,6 +9,8 @@ permalink: archive/113488general/20171rewriteoccs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 10 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546271):
 Can anyone help me understand why the 2nd example in the following doesn't work?
 ```lean
@@ -440,3 +442,5 @@ I think you could edit a few sentences to conform to this recommendation
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 12 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123598385):
 I tried to respond to Kevin's parentheticals in the PR comments, so hopefully they will be addressed in the next revision
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/62325editinghorriblemisspellings.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Cyril Cohen (Mar 01 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/editing%20horrible%20misspellings%3F/near/123140234):
 How do I edit my horrible english faults in the messages I already posted?
 
@@ -27,3 +29,5 @@ I just removed the window. There is still an edit history.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 01 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/editing%20horrible%20misspellings%3F/near/123143884):
 Don't worry, I trained them in deciphering French English
 
+
+{% endraw %}

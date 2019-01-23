@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/43083indirectrecursioncheck.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 27 2018 at 03:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134713724):
 A while ago I was porting some code from Coq to Lean and it was going very well, but there was one definition that reduces to something like this:
 
@@ -111,3 +113,5 @@ I would need a more concrete example to demonstrate
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 27 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720386):
 I've got to head out for now but I'll come back to this with more details
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/67390quadraticreciprocitygraph.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 16 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quadratic%20reciprocity%20graph/near/134058821):
 Chris just sent me a text file of all the theorems used in his proof of quadratic reciprocity
 
@@ -537,3 +539,5 @@ I think I could explain it to someone at the board and there aren't really any m
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 18 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quadratic%20reciprocity%20graph/near/134134314):
 Whereas the Zagier proof has a couple ring computations to do plus various facts about linear inequalities to check
 
+
+{% endraw %}

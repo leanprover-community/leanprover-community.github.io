@@ -9,6 +9,8 @@ permalink: archive/116395maths/968692variablesfunctions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 15 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/2%20variables%20functions/near/151852102):
 Is it evil to do something like:
 ```lean
@@ -41,3 +43,5 @@ it's not particularly evil to make the definition (although you could use the cr
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 16 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/2%20variables%20functions/near/151874113):
 Cue link to my blog post
 
+
+{% endraw %}

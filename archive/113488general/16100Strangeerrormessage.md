@@ -9,6 +9,8 @@ permalink: archive/113488general/16100Strangeerrormessage.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 24 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strange%20error%20message/near/125639855):
 `code generation failed, VM does not have code for 'classical.choice'` seems to be Lean trying to tell me to stop considering examples and go back to work
 
@@ -33,3 +35,5 @@ So the line can prevent computing even things which are actually computable. Tha
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 24 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strange%20error%20message/near/125642446):
 You can use `local attribute [instance, priority 0] classical.prop_decidable` to preserve computability when possible.
 
+
+{% endraw %}

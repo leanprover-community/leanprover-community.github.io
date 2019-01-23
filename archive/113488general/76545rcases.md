@@ -9,6 +9,8 @@ permalink: archive/113488general/76545rcases.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 07 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rcases%3F/near/133502924):
 Is there a way to use `rcases` with `?` to get hints, or just `rintros`?
 
@@ -24,3 +26,5 @@ Wait, how do I use `rintros?` again? It's telling me "unexpected token".
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 07 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rcases%3F/near/133508629):
 @**Kenny Lau** You missed a chance to formulate that as a question.
 
+
+{% endraw %}

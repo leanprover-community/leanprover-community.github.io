@@ -9,6 +9,8 @@ permalink: archive/113488general/19268onlineleanprover.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 14 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/147701238):
 just how outdated is this thing? I posted some code somewhere public and then one guy complained they can't run it in the online lean prover
 
@@ -153,3 +155,5 @@ More on firefox issues: After playing around more with `lean-web-editor` and `le
 
 Unfortunately, [per earlier discussion here](https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/lean-web-editor.20not.20compiling.3F/near/124566399), compiling a wasm build with emscripten requires linux, so it will be hard for me to investigate this further on my own.
 
+
+{% endraw %}

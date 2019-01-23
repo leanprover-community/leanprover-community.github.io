@@ -9,6 +9,8 @@ permalink: archive/113488general/48906whyisquotanaxiom.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 21 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152363029):
 Can't we just do it like this?
 
@@ -159,3 +161,5 @@ and derive funext and the others by constructing everything from sets
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 24 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152463123):
 if you want to convince yourself, make a copy of `set.ext` as an actual axiom, and then derive all that and check that you didn't use propext or quot.sound in `#print axioms`
 
+
+{% endraw %}

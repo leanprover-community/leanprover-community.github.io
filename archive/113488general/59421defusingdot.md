@@ -9,6 +9,8 @@ permalink: archive/113488general/59421defusingdot.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 05 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/def%20using%20dot/near/124678478):
 How does this definition work? 
 ```lean
@@ -65,3 +67,5 @@ To give you an intuition for when this zero-equation magic works, recall that th
 example : ¬ (∃ n, n < 0).
 ```
 
+
+{% endraw %}

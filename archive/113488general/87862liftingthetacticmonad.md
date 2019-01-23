@@ -9,6 +9,8 @@ permalink: archive/113488general/87862liftingthetacticmonad.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 24 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682369):
 Several times I have wanted to use a lift of the tactic monad, in order to carry along some additional state. (As a simple example, I would like to carry along a ℕ that limits how much more computation is allowed, that several different subtactics need to respect.)
 
@@ -166,3 +168,5 @@ Yeah, it's way more important for `tactic` since it has a bunch of combinators l
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 28 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132912880):
 Using `monad_state`works really well for me.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/37173newbehaviourofext.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 12 2018 at 05:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20behaviour%20of%20ext%3F/near/133776231):
 Hi @**Simon Hudon**, did the behaviour of ext just change? I'm finding the hypotheses of my ext lemmas being added as goals in a different order than previously.
 
@@ -30,3 +32,5 @@ I find that instead it's more likely to give me confusing goals with metavariabl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 12 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20behaviour%20of%20ext%3F/near/133801826):
 The order of assumptions should not have changed. What might have changed is the exact extensionality rule that gets applied. For instance, we're trying to avoid funext if set.ext is more relevent. I'm hoping this should make your proofs more stable even as the set of extensionality lemmas changes with time.
 
+
+{% endraw %}

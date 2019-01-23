@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/11831defsyntax.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 21 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148134203):
 Is there a way to make a definition with a condition that is not decidable? I need something like 
 ```
@@ -167,3 +169,5 @@ I am starting to think that I am doing something wrong because this is getting w
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 22 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148182360):
 There is a way to make this computable.
 
+
+{% endraw %}

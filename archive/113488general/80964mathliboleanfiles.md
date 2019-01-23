@@ -9,6 +9,8 @@ permalink: archive/113488general/80964mathliboleanfiles.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 22 2019 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20olean%20files/near/156626057):
 I just upgraded to Lean 3.4.2 and mathlib master. I've got everything compiling. @**Chris Hughes**  and @**Kenny Lau** I know it's a pain for you to compile mathlib sometimes. Here is a link: [mathlib.tar](http://wwwf.imperial.ac.uk/~buzzard/xena/mathlib.tar)  . I packed up mathlib (including all the .olean files) into a "tarball" (using POSIX tar so file timestamps should be to the nearest nanosecond or whatever). Q1 : can you untar this file back into a mathlib directory? And Q2: if you can, what are the timestamps like? For me, if I look in `src/topology` then I see `basic.lean` was created at 16:12 today and `basic.olean` at 16:49, so Lean knows that I didn't edit `basic.lean`after I created `basic.olean`. I took the tarball and untarred it on another unix computer and the timestamps survived. If by the time these files get to you the timestamps of `basic.lean` and `basic.olean` are "the time it is now", then the experiment has failed (do files have timestamps in Windows? I know nothing!) because Lean might decide it's time to recompile basic.lean anyway. But if the times are different then maybe this saves you some time compiling mathlib.
 
@@ -63,3 +65,5 @@ anyway, I'm still at work! I just finished talking to Ramon, who has actually st
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 22 2019 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20olean%20files/near/156638858):
 (deleted)
 
+
+{% endraw %}

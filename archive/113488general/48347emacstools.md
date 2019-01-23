@@ -9,6 +9,8 @@ permalink: archive/113488general/48347emacstools.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 03 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emacs%20tools/near/127482729):
 Is it possible in emacs lisp to use `lean-server-session-send-command` to get the text of a definition? Failing that, is it possible to use it with the command `'info` to get the line info of the next command in the file that contains it? I'm trying to create a command to display the definition of the symbol the cursor is currently on.
 
@@ -107,3 +109,5 @@ It looks like maybe M-, already does the same thing? but I have that mapped to a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 04 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emacs%20tools/near/127520133):
 You're right! I undid my changes and `M-.` `M-.` `M-,` `M-,` brings me back to the beginning. It looks like my pull request will be the empty set. I hope it's approved!
 
+
+{% endraw %}

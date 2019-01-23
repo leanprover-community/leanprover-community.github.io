@@ -9,6 +9,8 @@ permalink: archive/113488general/93893newsteamforPRdiscussions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 07 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20steam%20for%20PR%20discussions/near/135347475):
 I've just created a new stream, after a brief discussion with Mario, for discussion of current PRs.
 
@@ -51,3 +53,5 @@ Here it is: https://leanprover.zulipchat.com/#narrow/stream/144837-PR-reviews/su
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rohan Mitta (Dec 13 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20steam%20for%20PR%20discussions/near/151606970):
 Whoops! Thanks Johan
 
+
+{% endraw %}

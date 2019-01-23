@@ -9,6 +9,8 @@ permalink: archive/113488general/08878fromtacticstoterms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 24 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/from%20tactics%20to%20terms/near/132682307):
 Even though I'm beginning to understand a bit of the `meta`-world, I still don't fully comprehend the tactic monad. For example: is it possible to extract a concrete term from a `begin ... end`-block?
 
@@ -37,3 +39,5 @@ sounds ironic
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Aug 24 2018 at 17:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/from%20tactics%20to%20terms/near/132702583):
 @**Johan Commelin** See `tactic.trace_result`
 
+
+{% endraw %}

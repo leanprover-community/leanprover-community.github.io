@@ -9,6 +9,8 @@ permalink: archive/141825kbb/60837mergingintomathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 24 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/merging%20into%20mathlib/near/134535620):
 Clearly some parts of `kbb` are not mathlib-ready, but other parts are.
 
@@ -117,3 +119,5 @@ Probably
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 28 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/merging%20into%20mathlib/near/134811260):
 Kenny did sign and stuff, which is also in mathlib.
 
+
+{% endraw %}

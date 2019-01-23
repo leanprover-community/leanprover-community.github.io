@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/42505Metafunctionswithhigherordervariables.h
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 29 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Meta%20functions%20with%20higher%20order%20variables/near/130493380):
 How can I get the following to parse:
 ```lean
@@ -28,3 +30,5 @@ on the first %%f.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 29 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Meta%20functions%20with%20higher%20order%20variables/near/130503396):
 You should use an explicit type annotation `(%%f : ...) s`. Though if you don't statically know the type, you shouldn't use expr quotations.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/81309Dagstuhl.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 20 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dagstuhl/near/132481772):
 So, how is the Dagstuhl meeting going on?
 
@@ -110,3 +112,5 @@ Did anyone give Neil Strickland a pointer to Zulip?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 03 2018 at 12:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dagstuhl/near/133252096):
 "You are absolutely welcome to come and hang out with us any time at the Zulip chat. We're going to have perfectoid spaces soon". From my sent-mail.
 
+
+{% endraw %}

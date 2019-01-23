@@ -9,6 +9,8 @@ permalink: archive/113488general/03125Leanlibraryfixes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Dec 04 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20library%20fixes/near/150883678):
 The lean3 repo indicates that only major bugfixes will be accepted.  Are there any official or semi-official repos for more minor fixes that could be merged, but aren't?  e.g. make a `monad_except` instance for `except`, add missing `decidable` instances for predicates?
 I currently just add them as needed to my code, but figure they could be worth sharing.
@@ -70,3 +72,5 @@ Nice, `reopt-vcg` is Lean in the wild stuff!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Dec 11 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20library%20fixes/near/151468629):
 Yeah, I'm really interested in being able to use Lean as another programming language for developing verification/satisfiability checking tools, and then being able to prove soundness.
 
+
+{% endraw %}

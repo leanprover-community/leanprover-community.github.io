@@ -9,6 +9,8 @@ permalink: archive/113488general/60703CSstuff.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 30 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CS%20stuff/near/133077454):
 I wrote a package for serialization in Lean. Is this something people would like to have in `mathlib` or the nursery?
 
@@ -281,3 +283,5 @@ I think you're right that we should try to distribute more of the maintenance bu
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 01 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CS%20stuff/near/133189901):
 I just pushed my serialization stuff to the nursery. I'd love to know if people find it useful or if there are ways I can improve it. I'd like it to find its way to mathlib at some point too so if @**Mario Carneiro** and @**Johannes Hölzl** have advice, I think I'll try editing the nursery version before I create a PR.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/06317erroraftercompletingtacticproof.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 17 2018 at 07:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147866833):
 ```lean
 type mismatch at application
@@ -85,3 +87,5 @@ Hmm, no, that wasn't the issue... it reappeared...
 I pushed an update to the `sheaf` branch. The trouble is with this def: https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L241
 If any of the experts would want to take a look, I would be very grateful.
 
+
+{% endraw %}

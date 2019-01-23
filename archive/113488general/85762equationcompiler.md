@@ -9,6 +9,8 @@ permalink: archive/113488general/85762equationcompiler.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Minchao Wu (Jul 24 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222550):
 Hi friends, is there a way to fill up this underscore?
 ```lean
@@ -176,3 +178,5 @@ I'm going to embrace it from now on :)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Jul 25 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130244135):
 (deleted)
 
+
+{% endraw %}

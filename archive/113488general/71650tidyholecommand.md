@@ -9,6 +9,8 @@ permalink: archive/113488general/71650tidyholecommand.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 03 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133272160):
 @**Scott Morrison** The tidy hole command is really marvellous. Here are some trivialities that might give epsilon improvement:
 (1) If `tidy` generates the proof `begin refl end`, generate `rfl` instead.
@@ -62,3 +64,5 @@ I think it also does more definitional reduction
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 03 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133277646):
 Can you give an example? If I prove something with `by refl`, the proof term is just `eq.refl _` which is `rfl`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/44550Projectionaftermkstructure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 16 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Projection%20after%20mk-structure/near/134060550):
 Say I've got a function `mk_struct` which takes some arguments and produces something of type `struct`. The function `mk_struct` needn't be the `struct.mk` constructor---maybe it takes some arguments, proves some stuff about them, and then packages it all up by calling the constructor `struct.mk` (the point is that the arguments of `mk_struct` can be totally different).
 
@@ -49,3 +51,5 @@ meta def mk_iff_mp_app (iffmp : name) : expr → (nat → expr) → tactic expr
 ```
 it constructs the term `\lam x y z, iff.mp (f x y z)`
 
+
+{% endraw %}

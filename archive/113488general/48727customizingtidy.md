@@ -9,6 +9,8 @@ permalink: archive/113488general/48727customizingtidy.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 03 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127504066):
 @**Scott Morrison** I used your `tidy` tactic to automatically generate a bunch of continuity proofs that I was formerly writing out manually like
 ```lean
@@ -71,3 +73,5 @@ Okay, there's a new commit of `lean-tidy`, that now allows calling `tidy { tacti
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 04 2018 at 02:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127521936):
 I'd also be very happy to try to improve my list so it also works on your continuity problems. Having the best possible "out of the box" tidying is nice. :-)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/11367matchindefs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 02 2018 at 17:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20in%20defs/near/124532070):
 Out of the following two definitions, I find the first much easier to use.
 ```lean
@@ -85,3 +87,5 @@ Sorry that, was the wrong place to write that.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 03 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20in%20defs/near/124552882):
 sorry
 
+
+{% endraw %}

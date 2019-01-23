@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/22656Compoundstatmenttoadmitsecondgoalofhave
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 21 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Compound%20statment%20to%20admit%20second%20goal%20of%20have/near/130061451):
 I tried the following to do a "have" and admit the second goal.  What is the correct syntax:
 
@@ -354,3 +356,5 @@ is not definitionally equal to
 
 It appears the bound variable "x" is being changed to "e".  Why is this happening?  It appears the capture mechanism is not naming variables properly.
 
+
+{% endraw %}

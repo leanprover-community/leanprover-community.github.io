@@ -9,6 +9,8 @@ permalink: archive/113488general/84049parsingtechnology.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Assia Mahboubi (Jun 08 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20technology/near/127768347):
 Hi there, can someone help me finding the code of Lean's parser and/or its documentation?
 
@@ -18,3 +20,5 @@ Hi Assia. There is basically no documentation - this should certainly change for
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Assia Mahboubi (Jun 08 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20technology/near/127769336):
 Thanks a lot @**Sebastian Ullrich** !
 
+
+{% endraw %}

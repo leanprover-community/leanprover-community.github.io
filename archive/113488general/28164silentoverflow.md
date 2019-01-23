@@ -9,6 +9,8 @@ permalink: archive/113488general/28164silentoverflow.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 09 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/silent%20overflow/near/124842273):
 ```lean
 #check id -- all seems fine
@@ -196,3 +198,5 @@ In the sane promise APIs I know, not extracting the exception will make the prom
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 09 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/silent%20overflow/near/124845954):
 We could do the same
 
+
+{% endraw %}

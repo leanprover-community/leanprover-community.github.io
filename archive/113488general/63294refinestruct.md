@@ -9,6 +9,8 @@ permalink: archive/113488general/63294refinestruct.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 31 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refine_struct/near/127375963):
 @**Patrick Massot** I finally got around to writing a `refine_struct` tactic to generalize and simplify the automation of the `indexed_product` proofs. 
 
@@ -228,3 +230,5 @@ The benefit over the previous automation is, even if you do need specialized cod
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 01 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refine_struct/near/127425124):
 I like this approach for exactly this reason. I wasn't a fan of `pi_instance` originally because it was a lot of code for a specialized problem; this puts most of the code in an obviously general setting and now `pi_instance` is both simpler and requires less input
 
+
+{% endraw %}

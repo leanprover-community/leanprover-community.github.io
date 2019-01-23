@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/99756468revisedlimitsPR.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 09 2018 at 04:51)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23468%20revised%20limits%20PR/near/147348952):
 Is this the biggest PR so far? Adds +3,634 lines.
 
@@ -27,3 +29,5 @@ If someone wants to prove me wrong, and start writing a `dualize` tactic, that w
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 15 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23468%20revised%20limits%20PR/near/147769590):
 I've just removed `examples/CommRing/equalizers.lean`, that still deserved more work, and so the `limits` branch is ready for further review and/or merging.
 
+
+{% endraw %}

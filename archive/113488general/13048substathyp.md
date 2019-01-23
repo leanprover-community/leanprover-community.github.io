@@ -9,6 +9,8 @@ permalink: archive/113488general/13048substathyp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 07 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497289):
 Could we have `subst foobar at hyp` for substituting in the hypotheses of the local context? Currently I am using `repeat {rw foobar at hyp}` which feels a bit verbose...
 
@@ -122,3 +124,5 @@ I added your name.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 07 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133498642):
 lol
 
+
+{% endraw %}

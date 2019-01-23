@@ -9,6 +9,8 @@ permalink: archive/113488general/22086computableminreal.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 14 2018 at 13:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computable%20min%20%28real%29/near/123699788):
 Do we have a computable function that gives the minimum of two real numbers?
 
@@ -82,3 +84,5 @@ That will be the major part of showing that the sequence `min (f n) (g n)` is ca
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 14 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computable%20min%20%28real%29/near/123724108):
 right
 
+
+{% endraw %}

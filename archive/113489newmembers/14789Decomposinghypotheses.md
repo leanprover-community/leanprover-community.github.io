@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/14789Decomposinghypotheses.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 25 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130287397):
 ```lean
 theorem test_split { P : Prop } { Q : Prop } { R : Prop } { S : Prop } :
@@ -117,3 +119,5 @@ begin
 end
 ```
 
+
+{% endraw %}

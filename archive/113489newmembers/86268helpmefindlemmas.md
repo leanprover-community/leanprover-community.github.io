@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/86268helpmefindlemmas.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 24 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20me%20find%20lemmas/near/148255862):
 Surely these are somewhere?
 ```
@@ -225,3 +227,5 @@ I got rid of that ```precedence `?`:0``` thing that worried you scott too
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 26 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20me%20find%20lemmas/near/148342141):
 (I'll continue this in the `PR reviews` stream.
 
+
+{% endraw %}

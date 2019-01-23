@@ -9,6 +9,8 @@ permalink: archive/113488general/70079autoderivingdecidable.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jun 20 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20deriving%20decidable/near/128374348):
 Is there some way to derive decidable instance from a inductive definition?
 
@@ -26,3 +28,5 @@ by mk_dec_eq_instance
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 20 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20deriving%20decidable/near/128377002):
 or `@[derive decidable_eq]`
 
+
+{% endraw %}

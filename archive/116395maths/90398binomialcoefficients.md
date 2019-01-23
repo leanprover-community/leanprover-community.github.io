@@ -9,6 +9,8 @@ permalink: archive/116395maths/90398binomialcoefficients.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 07 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/binomial%20coefficients/near/146974762):
 Preparing a lecture on the binomial and multinomial theorem. For pedagogical reasons I will not prove the binomial theorem the way it's proved in Lean (although the students who come to the "extra material" session will see the Lean proof). In Lean I guess the binomial coefficient $$\binom{n}{r}$$ is defined to be $$\frac{n!}{r!(n-r)!}. $$ So is there in Lean a proof that $$\binom{n}{r}$$ equals the number of $$r$$-element subtypes of a a type of size $$n$$? [this is my definition of the binomial coefficient in my lectures]
 
@@ -216,3 +218,5 @@ lemma foo {α : Type*} : ∀ (n : ℕ) (l : list α) (f g : list α → list α)
 ```
 The theorem you want is now a simple corollary
 
+
+{% endraw %}

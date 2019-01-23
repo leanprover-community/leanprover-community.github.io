@@ -9,6 +9,8 @@ permalink: archive/116395maths/14012modulogroupaction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 13 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/modulo%20group%20action/near/133907297):
 Do I understand correctly that we have a file defining group action and a file defining left and right cosets in a group, but no link between those? And we don't have G\X if G acts on X?
 
@@ -92,3 +94,5 @@ Does someone know where is the lemma saying that if a finite set surjects onto a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 13 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/modulo%20group%20action/near/133911324):
 Thanks!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/99336notationinstructures.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 22 2019 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20in%20structures/near/156598822):
 Can someone explain me how notation in structures works? Simon changed the definition of a category to:
 ```lean
@@ -41,3 +43,5 @@ Ah, yes
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 22 2019 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20in%20structures/near/156599516):
 Ok, thanks. Everything's cleared up (-;
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/66414groupactingongroup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 09 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20acting%20on%20group/near/124835829):
 Do we have a name for a group acting on another group that is compatible with the group structure?
 
@@ -72,3 +74,5 @@ and for higher cohomology groups one has to use fancy stuff like gerbes
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 09 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20acting%20on%20group/near/124836577):
 See Serre's book on Galois cohomology (some appendix) for a brief and clear introduction.
 
+
+{% endraw %}

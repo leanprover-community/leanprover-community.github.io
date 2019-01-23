@@ -9,6 +9,8 @@ permalink: archive/113488general/60832listprod.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 20 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.prod/near/128334739):
 Was there any point in time where `list.prod [t]` was definitionally equivalent to `t * 1`?
 
@@ -70,3 +72,5 @@ and was there any point in time where `list.prod (x :: L) = x * list.prod L` was
 ```
 I don't think it was even equal to that with non commutative multiplication, `list.prod (x :: L) = list.prod L * x`at the moment.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/23060existsXY.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exists%20%28X%29%20%28Y%29/near/126709974):
 `topological_space.is_topological_basis` has, as part of its definition, `∃ (t₃ : set α) (H : t₃ ∈ s), x ∈ t₃ ∧ ...`, that is, "there exists a set with some property such that..."
 
@@ -348,3 +350,5 @@ Patrick -- can choice be used to replace cases everywhere?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 03 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exists%20%28X%29%20%28Y%29/near/127516364):
 Skolem normal form?
 
+
+{% endraw %}

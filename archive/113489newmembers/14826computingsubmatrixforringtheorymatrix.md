@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/14826computingsubmatrixforringtheorymatrix.h
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134897036):
 On another lean saturday afternoon, I continued looked forther into formalizing another basic lean maths. This time I want to compute sub-matrixes for ring_theory.matrix.
 
@@ -612,3 +614,5 @@ Especially the last one is more a RFC, as I am not sure if limiting these functi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 05 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135242722):
 My lean time is over for today. Will look at potential feedback later tonight. Thanks everyone again!
 
+
+{% endraw %}

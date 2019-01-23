@@ -9,6 +9,8 @@ permalink: archive/113488general/85093doingcastswithsimp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 23 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/doing%20casts%20with%20%60simp%60/near/132631368):
 ```lean
 import set_theory.cardinal
@@ -33,3 +35,5 @@ Richard Thomas asked a question about the number 3
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 23 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/doing%20casts%20with%20%60simp%60/near/132631823):
 but then complained when I assumed it was finite
 
+
+{% endraw %}

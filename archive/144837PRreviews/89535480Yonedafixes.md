@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/89535480Yonedafixes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 28 2018 at 04:29)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23480%20Yoneda%20fixes/near/148686856):
 Travis seems to be screwing something up with https://github.com/leanprover/mathlib/pull/480. It’s complaining about invalid imports in files that aren’t even in this PR anymore. @**Mario Carneiro**, are you able to reset it somehow?
 
@@ -62,3 +64,5 @@ and states as a separate lemma the componentwise version of the Yoneda lemma:
 ```
 Oh -- and adds the definition of `representable`, which will be needed shortly for the limits PRs.
 
+
+{% endraw %}

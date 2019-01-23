@@ -9,6 +9,8 @@ permalink: archive/113488general/83527semiringwith01.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 12 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semiring%20with%200%20%E2%89%A0%201/near/126453723):
 Is there a type class for a semiring with `0 ≠ 1`?
 
@@ -103,3 +105,5 @@ Do you mean extending `ring` or with `ring` as an argument?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 12 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semiring%20with%200%20%E2%89%A0%201/near/126460138):
 `nonzero_ring` would `extends ring`, `is_nonzero : Prop` would have `[ring A]`
 
+
+{% endraw %}

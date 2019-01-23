@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/67680proofofsomethingthatevalreducecomputes.
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 21 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20something%20that%20%23eval%20/%20%23reduce%20computes/near/134343915):
 If I have:
 ```lean
@@ -65,3 +67,5 @@ Yes, both those expressions are computable. Basically anything you can write dow
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20something%20that%20%23eval%20/%20%23reduce%20computes/near/134388942):
 But comparing computable numbers is also undecidable
 
+
+{% endraw %}

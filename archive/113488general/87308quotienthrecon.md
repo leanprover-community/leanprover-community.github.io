@@ -9,6 +9,8 @@ permalink: archive/113488general/87308quotienthrecon.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 06 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.hrec_on%E2%82%82/near/130971695):
 I've got a [definition](https://github.com/spl/lean-finmap/blob/fb3f562de05059f136f855b88bf616c8aac7f365/src/data/multiset/dict.lean#L162-L172):
 
@@ -479,3 +481,5 @@ l : list (sigma β)
 ⊢ list.nodup_keys l
 ```
 
+
+{% endraw %}

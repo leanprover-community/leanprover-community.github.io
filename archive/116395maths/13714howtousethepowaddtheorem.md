@@ -9,6 +9,8 @@ permalink: archive/116395maths/13714howtousethepowaddtheorem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Truong Nguyen (Sep 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225323):
 Dear Alls,
 The pow_add theorem is as follow:
@@ -125,3 +127,5 @@ I think we don't have anything better than https://github.com/leanprover/mathlib
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Truong Nguyen (Sep 03 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133270921):
 Oh, thank you
 
+
+{% endraw %}

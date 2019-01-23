@@ -9,6 +9,8 @@ permalink: archive/113488general/91089structurevsclass.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 02 2018 at 06:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20vs%20class/near/124512218):
 The age-old question: when to use `structure` and when to use `class`?
 
@@ -353,3 +355,5 @@ I once opened this Bourbaki seminar and decided it was not written for me :wink:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 04 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20vs%20class/near/124642590):
 But, to be honest, I don't think Fontaine would say the Bourbaki I wrote about flexibility of contact structures in higher dimensions was written for him.
 
+
+{% endraw %}

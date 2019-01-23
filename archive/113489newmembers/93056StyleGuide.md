@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/93056StyleGuide.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Jan 14 2019 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Style%20Guide/near/155053062):
 Would someone kindly point me to the Lean coding style guide. When to use greek letters, and all that? Thanks, can't seem to find it.
 
@@ -21,3 +23,5 @@ I always just get to it via the mathlib README
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Jan 14 2019 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Style%20Guide/near/155085316):
 Thanks. Knew it was out there!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/10702githelp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 11 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20help/near/124926688):
 Sorry to have to ask about mundane things like how to use git, but... Say that I've got a fork of mathlib that is borked in some way (in my case, I merged in a commit from master, that Mario shortly thereafter deleted, but I have a branch that includes it).
 
@@ -51,3 +53,5 @@ Wow, amazing! Everything is beautiful. :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 11 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20help/near/124927025):
 :)
 
+
+{% endraw %}

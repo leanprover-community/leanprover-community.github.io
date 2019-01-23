@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/30462Timeoutwiththemathematicalbrackets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 04 2018 at 05:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Time%20out%20with%20the%20mathematical%20brackets/near/137141051):
 I've defined a prime field, and tried to define a function that maps `int` to`pf`, but somehow timeout at the function...
 ```
@@ -66,3 +68,5 @@ lean does not have a subtyping relation, so if something has type `pf p` it does
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 04 2018 at 07:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Time%20out%20with%20the%20mathematical%20brackets/near/137145499):
 Oh!! Got it! thanks a lot!!
 
+
+{% endraw %}

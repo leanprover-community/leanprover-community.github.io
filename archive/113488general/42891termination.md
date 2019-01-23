@@ -9,6 +9,8 @@ permalink: archive/113488general/42891termination.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 23 2018 at 03:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148203856):
 https://gist.github.com/petercommand/91e72613af95bde16baadf484abd1368
 lean fails to prove that this code terminates, but this code is structurally recursive
@@ -188,3 +190,5 @@ great
 
 It works just fine as long as you don't need recursion; pattern-matching is no problem.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/47376freegroup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 01 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20group/near/124494694):
 @**Kevin Buzzard**  here's my old version of free group https://github.com/kckennylau/Lean/blob/c6eac863b23d58d40deaab62489f6069f860407e/free_group.lean
 
@@ -308,3 +310,5 @@ which reduces to `red IT x y -> red IT (a * x * b) (a * y * b)`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 02 2018 at 07:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20group/near/124513325):
 (You could also do the left and right multiplications as separate lemmas)
 
+
+{% endraw %}

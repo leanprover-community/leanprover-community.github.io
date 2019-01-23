@@ -9,6 +9,8 @@ permalink: archive/113488general/02347namingpartofthegoal.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 01 2019 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20part%20of%20the%20goal/near/154143914):
 I discovered a trick for referring to parts of the goal without having to write them out. For example, suppose your goal is to prove that some really complicated expression equals 0. You can give that expression a name `lhs` by writing
 ```lean
@@ -55,3 +57,5 @@ so if the goal was `\exists y, (x - 3) + 1 + y = x - 3` then the inner match `(x
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 02 2019 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20part%20of%20the%20goal/near/154163289):
 @**Reid Barton** That's brilliant!
 
+
+{% endraw %}

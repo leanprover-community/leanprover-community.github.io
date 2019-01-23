@@ -9,6 +9,8 @@ permalink: archive/116395maths/36129Sumsoverfinsets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 22 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126924811):
 I'm stuck on the following triviality
 ```lean
@@ -30,3 +32,5 @@ Ok, thanks!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 22 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126933905):
 Ok, I proved the lemma using `bind` and `ext.2`. Thanks a lot!
 
+
+{% endraw %}

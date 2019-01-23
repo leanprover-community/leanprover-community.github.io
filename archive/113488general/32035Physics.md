@@ -9,6 +9,8 @@ permalink: archive/113488general/32035Physics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Wojciech Nawrocki (Sep 27 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Physics%3F/near/134742787):
 Hey, I'm curious - are there any physicists here looking at formalising some of the vector algebra for quantum theory? I couldn't find anything related to e.g. Hilbert spaces.
 
@@ -34,3 +36,5 @@ Ok, thanks! I was looking at (maybe) formalising some results that require notio
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andreas Swerdlow (Sep 28 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Physics%3F/near/134779717):
 Hopefully, but it probably needs some cleaning up
 
+
+{% endraw %}

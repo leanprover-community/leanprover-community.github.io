@@ -9,6 +9,8 @@ permalink: archive/113488general/74262lookwhatIfoundontheinternet.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/133750937):
 https://mathematicswithoutapologies.wordpress.com/2018/09/11/guest-post-by-kevin-buzzard/
 
@@ -21,3 +23,5 @@ https://jiggerwit.wordpress.com/2018/09/18/a-review-of-the-lean-theorem-prover/
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) William Stein (Sep 18 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/134185186):
 Thanks!
 
+
+{% endraw %}

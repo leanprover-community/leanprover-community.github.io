@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/01810natsubtraction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Thomas (Dec 22 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152392979):
 I am a bit confused by the results of the following:
 
@@ -306,3 +308,5 @@ example : ind_1 → ind_2 :=
 						show Q n, from eq.subst s14 s13
 ```
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/80075choosingfromdifferenceoffinsets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 09 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133619465):
 Here's my "Tactic State":
 ```lean
@@ -190,3 +192,5 @@ classical.some $ classical.not_forall.1 $
 mt finset.eq_empty_of_forall_not_mem h
 ```
 
+
+{% endraw %}

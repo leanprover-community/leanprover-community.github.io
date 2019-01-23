@@ -9,6 +9,8 @@ permalink: archive/113488general/85628CategorytheoryPR.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 07 2018 at 07:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Category%20theory%20PR/near/131024775):
 Hi @**Mario Carneiro**, I didn’t understand your suggestion to use “`functor.id` (protected)”. What is “protected”?
 
@@ -229,3 +231,5 @@ Hi @**Reid Barton** sometime soon we should  do some coordination to combine the
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 08 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Category%20theory%20PR/near/131100538):
 This should definitely be one of our small groups in Orsay (although you can start online of course).
 
+
+{% endraw %}

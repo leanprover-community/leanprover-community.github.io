@@ -9,6 +9,8 @@ permalink: archive/113488general/58856andiffandofiffandiff.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135087802):
 Would this be a useful lemma for mathlib? If so, where should it go? I currently solve this by `split; intros; split,` but that is a bit of a hack, and creates 4 goals where usually 2 should suffice.
 ```lean
@@ -40,3 +42,5 @@ You will also find custom `congr` lemmas for things like `list.map_congr`, where
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135088324):
 so many higher order functions have some kind of altered `congr` lemma
 
+
+{% endraw %}

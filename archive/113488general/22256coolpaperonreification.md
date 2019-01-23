@@ -9,6 +9,8 @@ permalink: archive/113488general/22256coolpaperonreification.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 03 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cool%20paper%20on%20reification/near/127486086):
 just in case anybody else is interested in proofs by reflection: https://people.csail.mit.edu/jgross/personal-website/papers/2018-reification-by-parametricity-itp-draft.pdf
 
@@ -127,3 +129,5 @@ theorem cie_sound : ∀ n, check_is_even n = tt → is_even n :=
 example : is_even 2000 := by do timetac "" `[exact cie_sound 2000 rfl]
 ```
 
+
+{% endraw %}

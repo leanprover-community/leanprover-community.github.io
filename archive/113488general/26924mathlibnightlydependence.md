@@ -9,6 +9,8 @@ permalink: archive/113488general/26924mathlibnightlydependence.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 12 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly%20dependence/near/124969893):
 could mathlib stop depending on nightlies?
 
@@ -107,3 +109,5 @@ Well yes, I haven't touched it yet :)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 12 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly%20dependence/near/124982169):
 I think that's the wrong approach to fixing it :stuck_out_tongue_closed_eyes:
 
+
+{% endraw %}

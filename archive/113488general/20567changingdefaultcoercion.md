@@ -9,6 +9,8 @@ permalink: archive/113488general/20567changingdefaultcoercion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 20 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/changing%20default%20coercion/near/125456190):
 I've just defined the integers mod n, and since they are a `comm_ring` there is a default coercion from `int`. However rather than using the default coercion, it would be nicer to have `quotient.mk` as the coercion. Is there a way to change this?
 
@@ -52,3 +54,5 @@ That said, in the specific case of replacing the default coercion, you can do it
 
 Coercions are transitive, in the sense that if there is `has_coe A B` and `has_coe B C` and a `C` is needed where `A` is given, Lean will insert a single `coe` up-arrow with a composite typeclass instance. However, mathlib has a simp lemma explicitly to break these composite arrows up, because they work poorly with other simp lemmas that are all keyed to single coercions.
 
+
+{% endraw %}

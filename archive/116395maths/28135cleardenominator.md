@@ -9,6 +9,8 @@ permalink: archive/116395maths/28135cleardenominator.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 30 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/clear_denominator/near/127303903):
 Let's start a new thread about this
 
@@ -54,3 +56,5 @@ And we clearly need this field tactic (but Mario always want us to suffer instea
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Assia Mahboubi (May 30 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/clear_denominator/near/127306985):
 The ``field`` problem is more difficult than the ``ring`` one. It probably has to start as a partial procedure, like the one you describe, because a complete one is much more delicate from an algorithmic point of view (you need stuff like subresultants or even may be probabilistic methods otherwise the complexity and growth of the polynomials are dreadful).
 
+
+{% endraw %}

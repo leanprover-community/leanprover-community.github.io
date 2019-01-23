@@ -9,6 +9,8 @@ permalink: archive/113488general/01960nthmap.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 13 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509555):
 Do we have something like
 ```lean
@@ -129,3 +131,5 @@ and generalizing all the `range'` lemmas to this case
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 14 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126512722):
 That makes sense. I guess you could define `range'` generalized to any semiring, although it doesn't have the "consecutivity" property except in `nat` and `int`
 
+
+{% endraw %}

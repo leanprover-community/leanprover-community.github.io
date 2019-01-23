@@ -9,6 +9,8 @@ permalink: archive/113488general/29043hiddenfunction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 15 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151838238):
 I just noticed a very clever trick that was used in a Coq development. We can define the following function:
 ```lean
@@ -166,3 +168,5 @@ so sneaky
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 30 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052693):
 I guess this is so that `#print theorem` doesn't show `theorem thm : T := _` which would not be nice
 
+
+{% endraw %}

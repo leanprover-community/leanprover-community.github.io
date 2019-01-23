@@ -9,6 +9,8 @@ permalink: archive/113488general/85907Botsforzulip.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 20 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bots%20for%20zulip%3F/near/123984503):
 Is it possible to have bots listening to Zulip channels?
 
@@ -39,3 +41,5 @@ Me too! And it doesn't take space in the thread for applauding stuff you like
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 20 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bots%20for%20zulip%3F/near/123984720):
 Indeed. It's something like "starring" a message at times and someone just casually perusing the conversation has a greater chance of stumbling upon something useful and / or funny.
 
+
+{% endraw %}

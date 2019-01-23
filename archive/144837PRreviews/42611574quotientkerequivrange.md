@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/42611574quotientkerequivrange.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 05 2019 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23574%20quotient_ker_equiv_range/near/154473405):
 @**Chris Hughes** Nice job. Should you also prove that the equiv is an iso?
 
@@ -45,3 +47,5 @@ Category theory will give you the latter (and also require `to_inv` to be a grou
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 05 2019 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23574%20quotient_ker_equiv_range/near/154475012):
 Definitely an equiv
 
+
+{% endraw %}

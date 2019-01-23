@@ -9,6 +9,8 @@ permalink: archive/113488general/99796cantmanuallydunfoldreals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 21 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20manually%20%60dunfold%60%20reals/near/148102409):
 ```lean
 import data.real.basic
@@ -171,3 +173,5 @@ The short answer is: the kernel says they are defeq, but the elaborator says the
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 21 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20manually%20%60dunfold%60%20reals/near/148108095):
 Sebastian many thanks for your succinct but extremely helpful contributions to this thread.
 
+
+{% endraw %}

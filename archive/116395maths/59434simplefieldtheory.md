@@ -9,6 +9,8 @@ permalink: archive/116395maths/59434simplefieldtheory.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joey van Langen (Dec 04 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/simple%20field%20theory/near/150851783):
 I would like to work on some simple results about fields to contribute to the math library. Results that seem achievable are: field extensions and their degree, splitting fields, the existence and uniqueness of finite fields, maybe some galois theory. Is anyone working in this direction? If so, what has already been done?
 
@@ -71,3 +73,5 @@ My student @**Aditya Agarwal** has expressed some interest in doing some Galois 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 12 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/simple%20field%20theory/near/151553124):
 I've started work on splitting fields https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting.20fields
 
+
+{% endraw %}

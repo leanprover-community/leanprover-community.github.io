@@ -9,6 +9,8 @@ permalink: archive/113488general/61101simpausinghvssimpathsimph.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 17 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simpa%20using%20h%20vs%20simp%20at%20h%2C%20simp%20%5Bh%5D/near/134084181):
 On a few occasions, I've found that `simp at h, simp [h]` works when `simpa using h` does not. I thought the latter was intended to replace the former. Is this not the case?
 
@@ -39,3 +41,5 @@ Hmm, I don't know. I'm just looking at that document for the first time. I don't
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 17 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simpa%20using%20h%20vs%20simp%20at%20h%2C%20simp%20%5Bh%5D/near/134101631):
 To make matters even more interesting, I have a goal that isn't solved by `by simp at h, simp [h]` but is solved by `by simp at h; simp; exact h` or `by simp at h; simp [h] {contextual := tt}` or `λ x, by simpa using h x`. After `by simp at h; simp`, `h` and the goal look exactly the same (with `set_option pp.all true`). I'm not clear on why it can't be solved.
 
+
+{% endraw %}

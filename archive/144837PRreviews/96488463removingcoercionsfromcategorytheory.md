@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/96488463removingcoercionsfromcategorytheory.h
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 07 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23463%20removing%20coercions%20from%20category_theory//near/146929906):
 For your consideration, @**Mario Carneiro**, @**Johannes Hölzl**, @**Johan Commelin**, @**Reid Barton**, @**Michael Jendrusch**.
 
@@ -116,3 +118,5 @@ go for launch
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 08 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23463%20removing%20coercions%20from%20category_theory//near/147287069):
 merged
 
+
+{% endraw %}

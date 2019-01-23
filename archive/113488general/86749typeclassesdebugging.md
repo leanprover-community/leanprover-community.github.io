@@ -9,6 +9,8 @@ permalink: archive/113488general/86749typeclassesdebugging.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Dec 29 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20classes%20debugging/near/152707443):
 A t2 space is a topological space with some separation property. Every metric space is a t2 space. If you try
 ```lean
@@ -148,3 +150,5 @@ aha, even though R is an orderable topology its subspaces aren't necessarily
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 29 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20classes%20debugging/near/152716666):
 I think the `top_space` and `linear_order` arguments should be implicit in the two `t2_space` instances
 
+
+{% endraw %}

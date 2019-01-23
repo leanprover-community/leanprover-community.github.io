@@ -9,6 +9,8 @@ permalink: archive/113488general/63481leanmake.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 15 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20--make/near/132187468):
 When I rebuild mathlib, I get the impression that it is recreating olean files for all lean files, even if they (and their dependencies) were not touched since the last build. Is that impression correct?
 
@@ -138,3 +140,5 @@ I have to use `winpty lean --make` on msys2 to get output
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20--make/near/136928309):
 I think the terminal detection is broken
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/25766Userdefinableoptions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Jan 12 2019 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/154955190):
 Is there a way that I can set user definable options that can be parsed by tactics?  I have some proofs that take a while to run, and I'd like to be able to have an option at the file or lean package level that let me configure whether they ran or not.  e.g., during interactive development I disable proofs I'm not actually working on, but in a regression test they are enabled.
 I noticed within a single run of the tactic monad, I can set custom option names (e.g., `set_options (opt.set_bool "enable_unsafe_tac" tt)`), but the value doesn't appear to show up in tactics farther down the file.  The set_option command also doesn't allow custom options.
@@ -59,3 +61,5 @@ Is this improving in lean 4? More generally, it would be nice if there was a way
 I could see use cases for persisting data, but I also think it's important that tactics could be run concurrently, and the results cached.  Given that goal, `set_options` behavior  doesn't seem to surprising.
 In Haskell, you can define package level options and use them to define constants that can be checked at compile time (via CPP).  That's what I was hoping for here, so I could pass a flag to build or configure that controlled whether an axiom was allowed to be used.  The attribute trick doesn't seem too bad though.
 
+
+{% endraw %}

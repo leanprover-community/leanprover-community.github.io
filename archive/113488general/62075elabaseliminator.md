@@ -9,6 +9,8 @@ permalink: archive/113488general/62075elabaseliminator.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 27 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740170):
 Is there an explanation of what `elab_as_eliminator` actually does somewhere? I once tried reading the source, but wasn't enlightened.
 I know there is a selection bias at work here, in that I never notice when it does the right thing, but several times I've found that it fails to infer apparently obvious type parameters, where `elab_with_expected_type` succeeds.
@@ -108,3 +110,5 @@ def mod_dvd (n k : ℤ) : Z_mod (n * k) → Z_mod n :=
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 28 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741411):
 this works
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/64871pnatandequationcompiler.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 16 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850385):
 Can I somehow make the equation compiler work on pnat as well as it works on nat? Something like
 
@@ -29,3 +31,5 @@ right. Lean 3 doesn't have the necessary customizability for this
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 16 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850924):
 Although we could write our own equation compiler if we write our own version of `def`
 
+
+{% endraw %}

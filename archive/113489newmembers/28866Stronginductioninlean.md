@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/28866Stronginductioninlean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Calle Sönne (Nov 19 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Strong%20induction%20in%20lean/near/147975900):
 I want to prove strong induction in lean but Im having a hard time writing it out. Is it possible to do and-statements of variable length in lean? Something like this is what I want to do in lean:
 ```lean
@@ -33,3 +35,5 @@ Note that the devious case `H 0` says that if something is true for all elements
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Calle Sönne (Nov 19 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Strong%20induction%20in%20lean/near/147984947):
 Ah forgot about that trick, thank you!
 
+
+{% endraw %}

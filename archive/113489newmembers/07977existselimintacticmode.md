@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/07977existselimintacticmode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 11 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135602582):
 Hi -- I've been trying to prove a certain relation is symmetric -- is there a way to use "exists.elim" in tactic mode? It always gives me errors.
 
@@ -54,3 +56,5 @@ Elegance was never my strong point when it came to Lean code.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 11 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135616293):
 Lucky I might now have an MSc student who will elegantify my code :D
 
+
+{% endraw %}

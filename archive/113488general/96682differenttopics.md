@@ -9,6 +9,8 @@ permalink: archive/113488general/96682differenttopics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Feb 26 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/different%20topics/near/123012798):
 ```quote
 I think it would be great if you suggest a different topic for a given post
@@ -24,3 +26,5 @@ quote and reply
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Feb 26 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/different%20topics/near/123012869):
 Nice! thanks! Maybe we should tag the person we're responding to as well if we're changing topic
 
+
+{% endraw %}

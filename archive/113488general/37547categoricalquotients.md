@@ -9,6 +9,8 @@ permalink: archive/113488general/37547categoricalquotients.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 30 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/categorical%20quotients/near/125870843):
 Is everyone ready for a new puzzle about how to formalise things mathematicians use without thinking about? :-)
 
@@ -162,3 +164,5 @@ This is very much related to all this canonical stuff I'm thinking about, so I w
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 02 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/categorical%20quotients/near/126005124):
 But here it's not just a relation on the object X you want to quotient, there is a group action. @**Scott Morrison** did you need something more general than this? Note that X isn't a type in the version I know, it's an object in the category.
 
+
+{% endraw %}

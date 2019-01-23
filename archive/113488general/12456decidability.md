@@ -9,6 +9,8 @@ permalink: archive/113488general/12456decidability.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 30 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/124428848):
 Are there things that are decidable but not yet proven?
 
@@ -108,3 +110,5 @@ I think Sebastian is seriously looking at making this kind of thing easier with 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/124433346):
 I still don't know why the latest build fails
 
+
+{% endraw %}

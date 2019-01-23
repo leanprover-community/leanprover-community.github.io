@@ -9,6 +9,8 @@ permalink: archive/113488general/51801monoandacmonointhenursery.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 22 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mono%20and%20ac_mono%20in%20the%20nursery/near/132589831):
 My `mono` and `ac_mono` are, I believe, ready for use. I have put them in the nursery https://github.com/leanprover-community/mathlib-nursery so that people can try them out as I get them merged into mathlib.
 
@@ -51,3 +53,5 @@ I'm hoping it will be. Please report any trouble you run across, I feel like I m
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 22 2018 at 22:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mono%20and%20ac_mono%20in%20the%20nursery/near/132598785):
 Unfortunately  I don't think any of my current projects will need this, but certainly I will need it at some point.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/90773invalidcalctransitivityrule.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 03:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20%27calc%27%3A%20transitivity%20rule/near/125130147):
 > invalid 'calc' expression, transitivity rule is not defined for current step
 
@@ -198,3 +200,5 @@ cardinalities don't interact well with quotients
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20%27calc%27%3A%20transitivity%20rule/near/125139460):
 (deleted)
 
+
+{% endraw %}

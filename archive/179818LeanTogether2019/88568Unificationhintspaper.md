@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/88568Unificationhintspaper.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) William Whistler (Jan 10 2019 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Unification%20hints%20paper/near/154848944):
 https://www.cs.unibo.it/~sacerdot/PAPERS/tphol09.pdf
 
@@ -169,3 +171,5 @@ See also the examples in https://github.com/leanprover/presentations/tree/master
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 15 2019 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Unification%20hints%20paper/near/155168644):
 In particular https://github.com/leanprover/presentations/blob/master/20170116_POPL/backchain/back.lean#L87-L88 directly mentions that paper
 
+
+{% endraw %}

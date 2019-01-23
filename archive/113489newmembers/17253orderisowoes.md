@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/17253orderisowoes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Oct 10 2018 at 03:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135512696):
 I'm trying to generalize [this function](https://github.com/leanprover-community/mathlib/blob/tutorials/order/partitions.lean#L366) (there's a typo, that should be a def not a lemma; nonetheless it works...). I want to prove that an `order_iso`gives rise to a `galois_insertion` but I'm stuck on what seems to me to be simple:
 ```lean
@@ -142,3 +144,5 @@ Isn't this exactly related to https://leanprover.zulipchat.com/#narrow/stream/11
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Oct 10 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135541695):
 Thanks Kenny! I'm glad it turned out to be something simple.
 
+
+{% endraw %}

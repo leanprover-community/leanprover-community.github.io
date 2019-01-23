@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/56200416limitsandcolimits.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 12 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23416%20limits%20and%20colimits/near/135665324):
 Okay, here is limits and colimits (just for general shapes, not all the useful special cases yet), with no dependency on new-fangled tactics.
 
@@ -228,3 +230,5 @@ We talked about that in Orsay. I think Mario and Scott came to the conclusion th
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 17 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23416%20limits%20and%20colimits/near/135963653):
 For example, a lot of names change.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/35408existsiissodumb.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 19 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60existsi%60%20is%20so%20dumb/near/147962582):
 I often really feel like the `existsi` tactic is slacking off. It is always moaning that it doesn't know the type of what I suggest, even though it knows exactly the type it is expecting to get. And now this!
 ```lean
@@ -198,3 +200,5 @@ When you're proving `∃ x, P x` in tactic mode, and the proof of `P a` is long,
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 21 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60existsi%60%20is%20so%20dumb/near/148119507):
 Jeremy, the comparison is not with `exact` and `refine`. `use` is meant as a better behaved drop-in replacement of `existsi`
 
+
+{% endraw %}

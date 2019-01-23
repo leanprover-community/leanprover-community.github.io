@@ -9,6 +9,8 @@ permalink: archive/113488general/93323Iaccidentallychangedacorefile.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 06 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20accidentally%20changed%20a%20core%20file/near/133444111):
 I accidentally changed a core file and everything is now shit. I honestly don't know what to do.
 
@@ -74,3 +76,5 @@ and I guess it is best to cd into build/release and run ninja again, but not obl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 06 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20accidentally%20changed%20a%20core%20file/near/133447150):
 oh ok
 
+
+{% endraw %}

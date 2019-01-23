@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/58886partialorderformatrix.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 18 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134185883):
 Dear all, as you know I just get up-to-speed on lean (and theorem proving) and don't do it fulltime for now. However, I picked as first toy-project to get started the extension of matrix as an instance of partial_order. (See https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean)
 
@@ -1082,3 +1084,5 @@ Will need to read up on exactI in type definitions.
 
 Note that tactics are simply ways of generating code. They can appear in definitions or proofs. It's just that they are most useful in proofs.
 
+
+{% endraw %}

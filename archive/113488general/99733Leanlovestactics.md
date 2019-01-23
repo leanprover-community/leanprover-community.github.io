@@ -9,6 +9,8 @@ permalink: archive/113488general/99733Leanlovestactics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 26 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128672482):
 Why?
 ```clean
@@ -69,3 +71,5 @@ Does elaboration always happen before type class resolution?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 26 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673704):
 I'm unsure whether elaboration is completed before type class resolution begins but most of it is done before type class resolution
 
+
+{% endraw %}

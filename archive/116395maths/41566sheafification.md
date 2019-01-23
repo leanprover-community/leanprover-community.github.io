@@ -9,6 +9,8 @@ permalink: archive/116395maths/41566sheafification.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 07 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sheafification/near/146939281):
 @**Scott Morrison|110087** @**Reid Barton** It seems that on a general site, sheafification needs localisation of categories and calculus of fractions. I would like to hear from you if you think it is realistic to work on this now, or is this to hard for now?
 
@@ -33,3 +35,5 @@ I'm not sure exactly what the third statement means, but it sounds potentially f
 Ok, cool! I'm not surprised that localisations are not-so-easy. But I think it would be awesome if we could have them.
 For stalks: either you do this for points of a topos, and I would think it is then pretty formal (but maybe less intuitive for those not familiar with them, like me). Or you do it for stalks of points in a topological space, which is less general, and you would have to build more bridges. But large parts of it should be formal anyway, since stalks are by definition filtered colimits, and I hope those are preserved by the right sort of adjoint functor.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/21663behaviourofsimpachanged.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/behaviour%20of%20simpa%20changed/near/133365192):
 A few of my proofs have broken since the recent changes to `simpa`. For example this one.
 ```lean
@@ -20,3 +22,5 @@ It fails if it solves the goal without using `hn`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 05 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/behaviour%20of%20simpa%20changed/near/133392023):
 You should just use `by cases n; simp [_root_.pow_succ, lt_irrefl, hn]` here. `simpa` is not supposed to be a replacement for `simp`
 
+
+{% endraw %}

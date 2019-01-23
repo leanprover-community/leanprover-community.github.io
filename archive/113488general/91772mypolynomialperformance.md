@@ -9,6 +9,8 @@ permalink: archive/113488general/91772mypolynomialperformance.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 17 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147887874):
 I tried proving that the polynomial ring functor is left adjoint to the forgetful functor CommRing -> Set but I gave up because doing anything with `mv_polynomial` was so slow. @**Kenny Lau** you were having similar problems with `mv_polynomial` right?
 I think something is wrong there, but I couldn't figure out what.
@@ -43,3 +45,5 @@ but sure it tells us a lot
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 00:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147895604):
 yeah it doesn't know when to shut up
 
+
+{% endraw %}

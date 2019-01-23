@@ -9,6 +9,8 @@ permalink: archive/113488general/70493Unexpectedoccurenceofrecursivefuntion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Minchao Wu (Jul 08 2018 at 16:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20occurence%20of%20recursive%20funtion/near/129302165):
 Hi friends, I'm wondering what's the right way to let Lean accept recursive calls with list.map?
 For example:
@@ -52,3 +54,5 @@ def bar : ℕ → ℕ
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Minchao Wu (Jul 08 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20occurence%20of%20recursive%20funtion/near/129307790):
 Great, this looks like a general solution. Thanks!
 
+
+{% endraw %}

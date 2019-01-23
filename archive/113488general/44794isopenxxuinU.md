@@ -9,6 +9,8 @@ permalink: archive/113488general/44794isopenxxuinU.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 10 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open%20%7Bx%20%7C%20x%20%2B%20u%20%5Cin%20U%7D/near/133679397):
 Given a topological additive monoid, I expected theorems that say that you can translate opens along addition by a given element. But I could not find those... is this in mathlib, or do I need to roll my own?
 
@@ -66,3 +68,5 @@ Related: https://github.com/leanprover-community/mathlib/blob/completions/analys
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 10 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open%20%7Bx%20%7C%20x%20%2B%20u%20%5Cin%20U%7D/near/133681885):
 Reid: yes, please!
 
+
+{% endraw %}

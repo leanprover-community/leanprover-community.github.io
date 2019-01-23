@@ -9,6 +9,8 @@ permalink: archive/113488general/36054uncheckedcast.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 15 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unchecked%20cast/near/134005017):
 ```lean
 #eval @unchecked_cast int nat (-3) -- 2147483645
@@ -71,3 +73,5 @@ rofl the "need help" bit.
 Interesting, it hadn't occurred to me that you could define `unchecked_cast` (in `meta`) yourself, without a special constant.
 I wonder how badly you can break things with it. I tried casting a nat to a function nat -> nat and then applying it, hoping for a crash, but all I got was a boring vm check failure.
 
+
+{% endraw %}

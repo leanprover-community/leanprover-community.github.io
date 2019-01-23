@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/98412Unfoldingdefinitionswithmatch.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 25 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unfolding%20definitions%20with%20match/near/130244220):
 I'm trying to prove the following:
 ```lean
@@ -69,3 +71,5 @@ begin
 end
 ```
 
+
+{% endraw %}

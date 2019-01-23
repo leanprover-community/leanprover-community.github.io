@@ -9,6 +9,8 @@ permalink: archive/116395maths/49995quiversanddiagrams.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 01 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937757):
 I've got the following snippet
 ```lean
@@ -132,3 +134,5 @@ But that is not how we use them, I think
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937981):
 is it not?
 
+
+{% endraw %}

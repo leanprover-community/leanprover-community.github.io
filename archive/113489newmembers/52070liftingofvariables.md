@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/52070liftingofvariables.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 22 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%25%25%20lifting%20of%20variables/near/130095457):
 I've discovered that %% automatically lifts bound variables as shown in the following example:
 
@@ -49,3 +51,5 @@ It also works with Pi-binders:
    return $ pis [my_var] e
 ```
 
+
+{% endraw %}

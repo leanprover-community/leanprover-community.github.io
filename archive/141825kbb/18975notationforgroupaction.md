@@ -9,6 +9,8 @@ permalink: archive/141825kbb/18975notationforgroupaction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 14 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/notation%20for%20group%20action/near/133932189):
 I think we should just group actions an instance of `has_smul`. What do others think?
 
@@ -21,3 +23,5 @@ And then we get `group_module G A` with an instance to `module (group_ring G) A`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 14 2018 at 07:33)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/notation%20for%20group%20action/near/133933127):
 Ooo, I guess it just means we will always have to explicitly write the coercion `G → (group_ring G)` to distinguish which action we mean.
 
+
+{% endraw %}

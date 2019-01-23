@@ -9,6 +9,8 @@ permalink: archive/113488general/01789generalisationofmkeqsymm.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 16 2018 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123790494):
 I am really struggling to write a tactic that "does mk_eq_symm, but even inside binders". I would like to have something that given `h : \forall x : X, f x = g x`, spits back `\forall x : X, g x = f x`. Can anyone point me in the right direction?
 
@@ -189,3 +191,5 @@ which still needs a little more wrapper before you can use it in interactive mod
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123792018):
 Thanks for this. I know I could just try to learn tactics by reading the tactic code in core Lean etc but the problem with doing that is that it can often be pretty hard-core. It's like trying to learn Lean by reading core lean and instantly finding opt_params everywhere with no explanation as to what they are.
 
+
+{% endraw %}

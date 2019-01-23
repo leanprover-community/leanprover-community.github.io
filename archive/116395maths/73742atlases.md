@@ -9,6 +9,8 @@ permalink: archive/116395maths/73742atlases.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 26 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/atlases/near/128648910):
 I decided to try to move forward in my differential topology project without waiting for experts to sort out the module type class issues. So let's say I'm ready to sorry the definition of a diffeomorphism between two open subsets of R^n. Then the definition to formalize is https://en.wikipedia.org/wiki/Differentiable_manifold#Atlases I have no idea how to attack this coercion mess. I'd like to understand the definition of the transitions maps, and understand they are maps between open subsets of R^n
 
@@ -369,3 +371,5 @@ although it is likely that `inv_fun_on` can be moved to set safely
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 02 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/atlases/near/128955147):
 I like to think of the `logic` directory as covering more or less the "pure type theory" part of lean, just functions and pis and such
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/65709anotherCPPpaper.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 22 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20CPP%20paper/near/136242945):
 Hi all, I wanted to share my own submission in CPP this year, which just made it on arXiv: [Formalizing computability theory via partial recursive functions](https://arxiv.org/abs/1810.08380)
 
@@ -51,3 +53,5 @@ Also: congrats with the paper! (@**Simon Hudon** One telltale sign about the typ
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 22 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20CPP%20paper/near/136245108):
 yes Bryan, the conference is supposed to supply the appropriate template during preparation
 
+
+{% endraw %}

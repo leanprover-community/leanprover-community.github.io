@@ -9,6 +9,8 @@ permalink: archive/116395maths/65770promotingequiv.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 10 2018 at 11:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/promoting%20equiv/near/124877520):
 In mathematics, people constantly invoke the idea that an object is "defined up to unique isomorphism".
 
@@ -423,3 +425,5 @@ so now I start the painful task of taking some exact sequence, replacing every t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/promoting%20equiv/near/125763283):
 not painful because it's hard, but painful because it's obvious :-)
 
+
+{% endraw %}

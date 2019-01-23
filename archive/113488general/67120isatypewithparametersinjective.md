@@ -9,6 +9,8 @@ permalink: archive/113488general/67120isatypewithparametersinjective.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Buckley (May 02 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20a%20type%20with%20parameters%20injective%3F/near/125994740):
 forgive me for perhaps not using the correct terminology. what i want to know is similar to below:
 
@@ -44,3 +46,5 @@ function.cantor_injective _
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Buckley (May 03 2018 at 03:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20a%20type%20with%20parameters%20injective%3F/near/126023472):
 I thought that may be the case, however I couldn't understand why, but your example makes it clear. Thanks very much! :)
 
+
+{% endraw %}

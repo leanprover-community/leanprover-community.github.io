@@ -9,6 +9,8 @@ permalink: archive/113488general/42283intersections.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 03 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intersections/near/129031496):
 Do we have a better way to do
 ```lean
@@ -492,3 +494,5 @@ And I'm sure this `rintro` tactic will soon be all over the place.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 06 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intersections/near/129187492):
 What is this `rintro` thing?
 
+
+{% endraw %}

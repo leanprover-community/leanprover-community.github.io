@@ -9,6 +9,8 @@ permalink: archive/116395maths/34767Suggestionsformathscomputingprojects.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 29 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Suggestions%20for%20maths/computing%20projects/near/134880233):
 In the UK the system is that the undergraduates come into university having chosen their major and can only do classes offered by the corresponding department(s). The third year undergraduates doing a joint maths/computing degree hence know quite a bit of maths and CS. I have been asked to suggest possible projects for these students. No other pure mathematicians ever get involved. If anyone has any suggestions for projects they they think might be appropriate then I would be very interested to hear them.
 
@@ -145,3 +147,5 @@ What about doing more elementary stuff?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 17:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Suggestions%20for%20maths/computing%20projects/near/134926064):
 I am very interested in having functionality similar to: http://ssr.msr-inria.inria.fr/doc/mathcomp-1.5/MathComp.mxalgebra.html
 
+
+{% endraw %}

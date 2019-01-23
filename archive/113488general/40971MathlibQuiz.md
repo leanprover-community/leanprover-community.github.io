@@ -9,6 +9,8 @@ permalink: archive/113488general/40971MathlibQuiz.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 25 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mathlib%20Quiz/near/132761188):
 On the occasion of the first Orsay Lean User Meeting, I've created a small Mathlib quizz at https://www.quiz-maker.com/QTNPVLT I'd be interested to see how well people here can estimate answers to these questions. It starts easy, but quickly becomes hard if you are not very familiar with either mathlib or Lean introspection capabilities.
 
@@ -111,3 +113,5 @@ One could also play to compute cumulative sizes of proofs in various ways
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 28 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mathlib%20Quiz/near/132898487):
 I'm surprised more people didn't guess “blah.” :rolling_eyes:
 
+
+{% endraw %}

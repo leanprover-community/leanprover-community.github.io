@@ -9,6 +9,8 @@ permalink: archive/113488general/00401Areallinductivetypesenumerable.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 01 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20all%20inductive%20types%20enumerable%3F/near/130696713):
 Are all inductive types enumerable?
 
@@ -27,3 +29,5 @@ https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/Lean.20as
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 01 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20all%20inductive%20types%20enumerable%3F/near/130696921):
 You can prove finite trees are enumerable by using `denumerable (list A)` recursively
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/36088golftime.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 11 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golf%20time/near/126431532):
 ```lean
 open finset
@@ -302,3 +304,5 @@ But I don't know if this was continued with new stuff in mathlib
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 15 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golf%20time/near/126609677):
 More precisely, I added comments on every `def` and `class` and `structure` and `inductive`. I think that is still mostly the case, I can do another pass to make sure
 
+
+{% endraw %}

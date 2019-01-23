@@ -9,6 +9,8 @@ permalink: archive/113488general/97238RepresentingLeanatDeepSpecSummerSchool.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 07 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Representing%20Lean%20at%20DeepSpec%20Summer%20School/near/129267892):
 I've been invited to give a talk about Lean tactics at the upcoming DeepSpec summer school. It's a 5-10 minute talk that other participants do as well. I'd like to walk the audience through the writing of a tactic that I can contrast with Coq tactics. I thought of presenting tactics like `refine_struct` but it plays a lot with the internals and I'm not sure that a non-Lean-user would see the point. 
 
@@ -80,3 +82,5 @@ They get a contradiction if they assume no cake exists. I guess Kenny wouldn't c
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 07 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Representing%20Lean%20at%20DeepSpec%20Summer%20School/near/129270458):
 But Kenny gets handed a recipe to make cake. Sure, it's convincing but it tastes like paper
 
+
+{% endraw %}

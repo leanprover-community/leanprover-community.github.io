@@ -9,6 +9,8 @@ permalink: archive/113488general/46360rewritesearch.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 10 2018 at 07:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite_search/near/147422501):
 Hi @**Keeley Hoek**, I think I'm getting `"XXX" is not a valid rewrite lemma!` errors which I shouldn't be. I think in this case the problem is you need to unfold a step before the lemma looks right. Can we make `rewrite_search` more forgiving?
 
@@ -42,3 +44,5 @@ ah, I see I want `dsimp`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 11 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite_search/near/147462547):
 Hmm... it seems to unfold projections when I pass in arguments, but it doesn't deduce their type
 
+
+{% endraw %}

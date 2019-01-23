@@ -9,6 +9,8 @@ permalink: archive/113488general/52941fromfinsettoset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/from%20finset%20to%20set/near/126256617):
 I can't find a way to go from `finset` to `set` in the `finset.lean` file. How do I do this?
 
@@ -27,3 +29,5 @@ Ok, then I'll use curly braces {-;
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 08 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/from%20finset%20to%20set/near/126258082):
 There's a `has_lift` instance for finset to set in `data.set.finite`
 
+
+{% endraw %}

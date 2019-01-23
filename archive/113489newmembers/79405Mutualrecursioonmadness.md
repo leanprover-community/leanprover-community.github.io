@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/79405Mutualrecursioonmadness.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 25 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutual%20recursioon%20madness/near/130250392):
 How do I complete the following theorem:
 ```lean
@@ -146,3 +148,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 29 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutual%20recursioon%20madness/near/130520265):
 changed the definition of `rangeSet` and `rangeSetList`
 
+
+{% endraw %}

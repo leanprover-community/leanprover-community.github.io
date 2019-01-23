@@ -9,6 +9,8 @@ permalink: archive/113488general/27607rationalsthatareactuallyintegers.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 08 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rationals%20that%20are%20actually%20integers/near/131122581):
 By some elaborate method I have defined a polynomial with coefficients in `rat`. Now there is a math theorem (which I hope to turn into a Lean theorem) that says that my polynomial actually has coefficients in `int`. But this is not at all clear from the definition. What is the best way to turn my polynomial into something with integral coefficients?
 (For reference, my actual use case with mv_polynomials can be found here: https://github.com/jcommelin/mathlib/blob/witt/algebra/witt_vector.lean#L215)
@@ -82,3 +84,5 @@ I first define `witt_structure_rat` in terms of `X_in_terms_of_W`. And those lat
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 09 2018 at 07:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rationals%20that%20are%20actually%20integers/near/131151897):
 There might be an entirely different way of defining `witt_structure_int`, but I don't know this.
 
+
+{% endraw %}

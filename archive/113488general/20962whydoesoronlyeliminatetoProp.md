@@ -9,6 +9,8 @@ permalink: archive/113488general/20962whydoesoronlyeliminatetoProp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 22 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124063589):
 I just noticed this. Chris Hughes wrote a proof for me, but in my application of his proof I have a function from `fin n` to `nat`, and he has implemented his proof using a function from `nat` to `nat` which he only ever evaluates at numbers less than `n`. Given my function from `fin n` to `nat` I hence need to come up with a function from `nat` to `nat` which extends it and I thought I'd just define it using `or.elim (decidable.em (i<n))` but this won't work because the target can't be `nat`.
 
@@ -75,3 +77,5 @@ you have to also have stuff like `A -> Sort 1 <= A -> Sort 2`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 24 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152723):
 ... and now that I think of it, might get tricky for generic monadic code, if you want to allow`m α` `m β` even when `α`, `β` are in different universes. You might need covariance / contravariance hints in the type of `m`
 
+
+{% endraw %}

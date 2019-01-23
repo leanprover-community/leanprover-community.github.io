@@ -9,6 +9,8 @@ permalink: archive/113488general/67899existsdata.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 24 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exists%20data/near/152455922):
 Is there a clean way to avoid the `, true` in this condition?
 ```lean
@@ -26,3 +28,5 @@ that's `nonempty`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 24 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exists%20data/near/152456723):
 Ok, I'll try using it again.
 
+
+{% endraw %}

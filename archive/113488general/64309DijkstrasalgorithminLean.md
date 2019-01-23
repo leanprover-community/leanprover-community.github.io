@@ -9,6 +9,8 @@ permalink: archive/113488general/64309DijkstrasalgorithminLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 08 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151183263):
 One of my children was explaining Dijkstra's algorithm to me -- they are far more computer-sciency than I am. After some conversation I decided that they might be saying this:
 
@@ -89,3 +91,5 @@ It probably is a different game whether you use `meta` or not.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Dec 08 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151194004):
 There's a bit on graphs in Coq here: https://softwarefoundations.cis.upenn.edu/vfa-current/Color.html, if this has caught your interest.
 
+
+{% endraw %}

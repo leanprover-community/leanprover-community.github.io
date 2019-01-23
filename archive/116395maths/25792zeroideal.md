@@ -9,6 +9,8 @@ permalink: archive/116395maths/25792zeroideal.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ideal/near/152032669):
 I lost the zero ideal during the module refactor. Does anyone know where it ended up?
 
@@ -64,3 +66,5 @@ from the type
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ideal/near/152033761):
 hmm
 
+
+{% endraw %}

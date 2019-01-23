@@ -9,6 +9,8 @@ permalink: archive/113488general/11441equalityofpitypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Buckley (Apr 26 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125702762):
 Hi guys, I'm stuck trying to prove the following, which seems intuitively true to me:
 ```
@@ -119,3 +121,5 @@ hmm
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 28 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127219583):
 The converse is false for some choices of T1, and independent for others
 
+
+{% endraw %}

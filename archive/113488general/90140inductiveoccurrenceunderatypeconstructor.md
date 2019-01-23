@@ -9,6 +9,8 @@ permalink: archive/113488general/90140inductiveoccurrenceunderatypeconstructor.h
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Arseniy Alekseyev (Jul 18 2018 at 00:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838639):
 I've got a rose tree definition:
 
@@ -107,3 +109,5 @@ Those f.equations are pretty cool, thank you!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 18 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839226):
 (Your example doesn't show too much of this since it is nonrecursive, but recursive definitions use a completely different meta implementation in `#eval`)
 
+
+{% endraw %}

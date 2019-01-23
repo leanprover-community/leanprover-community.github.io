@@ -9,6 +9,8 @@ permalink: archive/113488general/76230withoutlossofadvertisement.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/without%20loss%20of%20advertisement/near/125491146):
 Let me share my joy of using @**Simon Hudon** recent contributions (not yet merged, see https://github.com/PatrickMassot/mathlib/tree/wlog_ext for a version including both relevant PR if you want to play with it).
 
@@ -247,3 +249,5 @@ I was teaching a class of 220 students in one of the terms, and being head of pu
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/without%20loss%20of%20advertisement/near/125509733):
 On the other hand I pretty much gave up all of my other hobbies
 
+
+{% endraw %}

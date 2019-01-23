@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/15266emacstipfilladapt.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joseph Corneli (Aug 07 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131036154):
 I had run into an [issue](https://github.com/leanprover/lean-mode/issues/7) with filling block comments in lean-mode.
 
@@ -64,3 +66,5 @@ OK I'll try to tidy up and send there. Thanks!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 07 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131063330):
 :+1:
 
+
+{% endraw %}

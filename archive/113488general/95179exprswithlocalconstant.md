@@ -9,6 +9,8 @@ permalink: archive/113488general/95179exprswithlocalconstant.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 02 2019 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr%27s%20with%20local%20constant/near/154192394):
 What's the best way of getting something a bit like this to work?
 ```lean
@@ -210,3 +212,5 @@ I don't think there's any caching in Lean...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 02 2019 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr%27s%20with%20local%20constant/near/154199887):
 Imagine how bad it would be if I'd filtered all the functions to prove `fintype_perm` like some people suggested.
 
+
+{% endraw %}

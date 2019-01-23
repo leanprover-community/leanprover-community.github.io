@@ -9,6 +9,8 @@ permalink: archive/113488general/73481workingwithfinitesequences.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 09 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20with%20finite%20sequences/near/123486171):
 Kenny and I will need to do some work with finite sequences to prove that affine schemes are schemes. Here is an example of the sorts of issues we are running into.
 
@@ -748,3 +750,5 @@ theorem structural_theorem (f : free_abelian_group β γ) :
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 03 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20with%20finite%20sequences/near/124551662):
 nvm, I proved it
 
+
+{% endraw %}

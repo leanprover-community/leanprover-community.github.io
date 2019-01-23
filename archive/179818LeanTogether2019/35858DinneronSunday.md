@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/35858DinneronSunday.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jan 06 2019 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Dinner%20on%20Sunday/near/154523689):
 So, who would like to meet up for dinner?  Jeremy suggested https://deveranda.nl/ in the other topic.  Since everybody seems to be heading to de Hortus afterwards, how about something more in the center?  Yesterday we saw a nice Indonesian place: http://www.restaurantdesa.com/
 
@@ -33,3 +35,5 @@ You've probably missed dinner with Gabriel and Mario. We're meeting at https://w
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Jan 06 2019 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Dinner%20on%20Sunday/near/154528519):
 I just got some fries from Frietfabrik, close to the Forest Hotel. Definitely recommendable, if you want something to take away...
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/56392Usingrewritetosimplifyaboundvariableexp
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 06 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950190):
 ```lean
 theorem fsimp3 { x : ℕ } : x=0 → f x = 1 :=
@@ -110,3 +112,5 @@ However, the error I got is confusing.  The "x=0" got changed to "x" on the scre
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 03:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130951440):
 this proof attempt is not valid for the same reason as before. You can't try to prove the functions are equal because they aren't. You can only prove that the functions *evaluated at `e`* are equal, so you need to do beta reduction first (using `dsimp`) and then try to prove it
 
+
+{% endraw %}

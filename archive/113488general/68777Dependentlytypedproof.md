@@ -9,6 +9,8 @@ permalink: archive/113488general/68777Dependentlytypedproof.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Frantisek Silvasi (Feb 27 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependently%20typed%20proof/near/123038173):
 I don't suppose this sorry is provable - how does one convince Lean that whatever it is that I am mapping over comes from the list being mapped over? I can show that: `x ∈ filter P xs -> P x`, but I can't tell map `x ∈ filter P xs`, even though it's "obvious". This is a toy version of what I am trying to do:
 ```
@@ -81,3 +83,5 @@ Thank you kindly for your help, I'm going to take `pmap` for a spin.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Feb 27 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependently%20typed%20proof/near/123051610):
 @**Frantisek Silvasi** The combination of filter and map in the positive case is `filter_map`. You should `filter_map` with the function `if h : x > 0 then some (is_positive x h) else none`
 
+
+{% endraw %}

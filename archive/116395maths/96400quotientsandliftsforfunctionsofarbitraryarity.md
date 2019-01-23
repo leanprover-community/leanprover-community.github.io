@@ -9,6 +9,8 @@ permalink: archive/116395maths/96400quotientsandliftsforfunctionsofarbitraryarit
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) William DeMeo (Dec 02 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150709555):
 I'm trying to learn how to implement general quotient structures.  Unfortunately, I've only been able to figure out how to lift unary operations.  How does one lift operations of arbitrary arity?
 
@@ -99,3 +101,5 @@ added both `quotient.choice` and a computable `finset` version
 ```
  Awesome!  Thanks @**Reid Barton**  I'll see if I can use those types to do exactly what I want.  If not, I'll have to roll my own, but it's good to see these examples that show how things should be done.
 
+
+{% endraw %}

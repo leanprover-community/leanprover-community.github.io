@@ -9,6 +9,8 @@ permalink: archive/113488general/31387typeclassinferences.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 06 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695237):
 https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72
 In L72 of this, I needed to type `@linear_map R M (Hom_R_Q_div_Z R) _ _ (Hom_R_Q_div_Z.module R)`, i.e. I needed to manually provide the proof term `Hom_R_Q_div_Z.module R` that `Hom_R_Q_div_Z R` is a module, despite it being attributed as `instance`. Why is this the case?
@@ -73,3 +75,5 @@ I suspect it is because of the ` injective.to_module `
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 06 2018 at 02:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124697747):
 interfering with the typeclass resolutions
 
+
+{% endraw %}

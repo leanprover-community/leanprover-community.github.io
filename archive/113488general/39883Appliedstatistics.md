@@ -9,6 +9,8 @@ permalink: archive/113488general/39883Appliedstatistics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 06 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Applied%20statistics/near/129172046):
 I haven't done any statistics in a while. Can someone point me to a formula I can use to calculate the probability that `x ≤ y` if both are normally distributed random variables?
 
@@ -326,3 +328,5 @@ oh of course it's 50%, it's symmetric
 ```
 I think the means are different
 
+
+{% endraw %}

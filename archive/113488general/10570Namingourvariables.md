@@ -9,6 +9,8 @@ permalink: archive/113488general/10570Namingourvariables.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 07 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Naming%20our%20variables/near/124741274):
 ```quote
 For consistency, please change your upper case type names to `α, β, γ` etc.
@@ -108,3 +110,5 @@ then I would just use H for groups
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 07 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Naming%20our%20variables/near/124758948):
 so that sort of rule is easy to abide by
 
+
+{% endraw %}

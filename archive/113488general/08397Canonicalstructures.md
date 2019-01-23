@@ -9,6 +9,8 @@ permalink: archive/113488general/08397Canonicalstructures.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Oct 09 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Canonical%20structures/near/135481621):
 Will there be, or is there, an analog of Coq's "canonical structures", complementary to typeclasses, in Lean? 
 
@@ -35,3 +37,5 @@ I found it using search -- searching for canonical structures gave me a bunch of
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 10 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Canonical%20structures/near/135533733):
 About canonical structures, the only interesting thing I remember is that, in the Coq bigop paper, they insist a lot on the fact that canonical structures can be associated to terms and not only types, and this is meant to be a huge advantage over type classes. But this does not apply to Lean type classes. For instance the is_commutative type class in https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/library/init/algebra/classes.lean#L13 is about a term.
 
+
+{% endraw %}

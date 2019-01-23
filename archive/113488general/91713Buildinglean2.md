@@ -9,6 +9,8 @@ permalink: archive/113488general/91713Buildinglean2.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 01 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130742054):
 Is anyone able to build lean2 on their machine? I've tried twice already and its always failed. I am currently trying a third time. I am building on Ubuntu bionic
 
@@ -62,3 +64,5 @@ I have managed to build it now. The whole problem was no having ninja.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 02 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130746386):
 I guess I can uninstall ninja now its built
 
+
+{% endraw %}

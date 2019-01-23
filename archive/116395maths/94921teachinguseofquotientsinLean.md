@@ -9,6 +9,8 @@ permalink: archive/116395maths/94921teachinguseofquotientsinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 09 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131184986):
 I once found it hard to use quotients in Lean. I typically wanted to use quotients to define mathematical objects (like quotient rings) and the example (unordered pairs) in TPIL was a bit CSish for me. The first time I needed them was for localisation of rings and Kenny wrote everything for me. But I needed them more and more, and eventually I had to learn how they worked. I wrote code for the integers mod n, but at the time I didn't understand the type class inference system very well either, and the code was not great. @**Luca Gerolla** needs to work with quotients for his work on the fundamental group and it occurred to me that I should revisit the work and tidy it up. One problem with integers mod n which I think could confuse beginners was a problem discussed here once, namely that it's hard to use type classes to put the equivalence relation of being congruent mod n onto Z, because that's one equivalence relation per n, and type class inference would rather there just be one equivalence relation on a type. The fix suggested to me at the time was to use a new version of Z for each integer, but having mulled this over for a while I decided that it added another layer of complexity which was unsuitable for the beginner. So I decided to choose everyone (except Johan)'s favourite integer 37, and just construct the integers mod 37 instead.
 
@@ -364,3 +366,5 @@ Nobody has time to remember all the magic git invocations, so a gui wrapper real
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 09 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131197153):
 I used to believe that. So I advised computer afraid colleagues to use source tree and, after many rescuing operations, I realized command line is much simpler. Because you don't have to know about all commands and options that are not written in your git cheat sheet.
 
+
+{% endraw %}

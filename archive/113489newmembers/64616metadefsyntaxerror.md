@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/64616metadefsyntaxerror.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 18 2018 at 04:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129846795):
 I was trying out the example from the Lean meta programming paper.  However their example gives a syntax error:
 
@@ -45,3 +47,5 @@ the `command expected` error is often fixed by scrolling down or setting the lea
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 18 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129848796):
 Or restarting lean.
 
+
+{% endraw %}

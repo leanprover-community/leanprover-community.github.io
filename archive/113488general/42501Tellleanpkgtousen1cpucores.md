@@ -9,6 +9,8 @@ permalink: archive/113488general/42501Tellleanpkgtousen1cpucores.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tell%20leanpkg%20to%20use%20%28n-1%29%20cpu%20cores/near/131029086):
 Yesterday I rebuilt mathlib and it froze my desktop for > 2hrs. I would like to tell leanpkg to use only 3 of my 4 cores. I'm on Linux. Should I use fancy `cgroups` for this, or is there some easy method?
 
@@ -124,3 +126,5 @@ Now the compile is running smoothly again!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tell%20leanpkg%20to%20use%20%28n-1%29%20cpu%20cores/near/131033155):
 I guess I need more RAM
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/51153addinganelementtoaset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130330334):
 The notation `+` is attached to `has_add.add : X -> X -> X`. Mathematicians use `+` in more general ways though. I find myself wanting to write `r + J` for `r` an element of, and `J` a subset of, an additive abelian group (`J` is a subgroup in fact). This is standard notation in mathematics and I suspect I can't have it given the set-up we have. Does anyone have any thoughts as to how I might try and represent such an idea in Lean? I can make the object I want no problem, the issue is simply that I want the notation to be as close to what a mathematician would write as possible.
 
@@ -51,3 +53,5 @@ I would prefer readable notation.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130332818):
 I would prefer the notation mathematicians use, i.e. what we can't have.
 
+
+{% endraw %}

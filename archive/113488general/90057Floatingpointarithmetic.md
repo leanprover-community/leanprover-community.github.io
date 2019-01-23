@@ -9,6 +9,8 @@ permalink: archive/113488general/90057Floatingpointarithmetic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 13 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Floating%20point%20arithmetic/near/125010724):
 A student here has a lovely suggestion for a simple application of machine learning to automation. I’d love to try implementing it with her, but quickly realised that we’d need to do floating point arithmetic (just some gradient descent problems, so essentially inverting numerical matrices).
 
@@ -82,3 +84,5 @@ Would the Lean Mathematica interface be useful here?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 13 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Floating%20point%20arithmetic/near/125032505):
 That sounds like a good idea to me. It might simplify things even more because matrix multiplication / inversion is already implemented in Mathematical
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/88411libgmpdependency.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 26 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libgmp%20dependency/near/134657745):
 I know on macOS you have to install `libgmp` before Lean will work. Does anyone know if there is a similar requirement on linux? (There doesn't appear to be on Windows.)
 
@@ -18,3 +20,5 @@ The toolchains installed by elan contain static binaries, which I find a bit sur
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Sep 26 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libgmp%20dependency/near/134685427):
 Yes, on Linux it's definitely a static binary. I'm not even sure why it's not on macOS
 
+
+{% endraw %}

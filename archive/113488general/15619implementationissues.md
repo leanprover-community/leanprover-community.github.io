@@ -9,6 +9,8 @@ permalink: archive/113488general/15619implementationissues.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 11 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implementation%20issues/near/133692574):
 Implementation issues occasionally have knock-on effects. For example the coercion `of_nat` from `nat` to `int` is not a generic coercion from `nat` to a monoid with 0 and 1, and as a consequence all of the standard coercion lemmas like `\u(a+b)=\u a+\u b` have to be proved for `of_nat`separately, giving us `int.coe_nat_add` as well as `nat.cast_add`.
 
@@ -216,3 +218,5 @@ Is this basically: To prove a decidable statement, have the VM evaluate the deci
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 23 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implementation%20issues/near/136347448):
 Yeah. It's using the VM as an oracle for decidable statements.
 
+
+{% endraw %}

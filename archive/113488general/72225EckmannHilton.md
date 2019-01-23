@@ -9,6 +9,8 @@ permalink: archive/113488general/72225EckmannHilton.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 07 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Eckmann%E2%80%93Hilton/near/133496192):
 Today I thought it was a good idea to stretch the type class system a bit. In fact, I ended up not using it at all :rolling_on_the_floor_laughing:
 https://gist.github.com/jcommelin/2e031b5446ca54089576ea9f66f12abf
@@ -77,3 +79,5 @@ Yes! I thought that was hilarious :rolling_on_the_floor_laughing:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 10 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Eckmann%E2%80%93Hilton/near/133684290):
 PR'd this: https://github.com/leanprover/mathlib/pull/335
 
+
+{% endraw %}

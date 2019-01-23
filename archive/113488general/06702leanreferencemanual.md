@@ -9,9 +9,13 @@ permalink: archive/113488general/06702leanreferencemanual.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Feb 26 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20reference%20manual/near/123013797):
 @**Sebastian Ullrich** do you know if you should do something to get https://github.com/leanprover/reference/commit/53ecf0a3292c5d95066f9d7a79c339eb5618f610 released?
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Feb 27 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20reference%20manual/near/123033993):
 I believe Jeremy does manual releases. Maybe he'll release it together with https://github.com/leanprover/reference/pull/13
 
+
+{% endraw %}

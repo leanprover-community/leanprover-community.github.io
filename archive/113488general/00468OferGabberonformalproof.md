@@ -9,6 +9,8 @@ permalink: archive/113488general/00468OferGabberonformalproof.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 17 2019 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ofer%20Gabber%20on%20formal%20proof/near/155353065):
 Ofer Gabber is an extremely precise pure mathematician, and has even been known to refuse to put his name on a paper containing joint work with others because he didn't 100% check all of the work of all of the other people. 
 
@@ -40,3 +42,5 @@ Both Illusie and Gabber were at my talk on formal proofs at the Loeser conferenc
 
 Gabber had questions and comments after my talk, and we also talked after my Bourbaki seminar on formal proofs a few years ago.    I'm not sure why he would have a issue with a trusted kernel with proof correctness verified by the type system.
 
+
+{% endraw %}

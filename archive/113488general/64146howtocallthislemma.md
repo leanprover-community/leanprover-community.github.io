@@ -9,6 +9,8 @@ permalink: archive/113488general/64146howtocallthislemma.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131039906):
 ```lean
 lemma quux {A : Type*} [add_comm_group A] {n : ℕ} (f : fin (n+1) → A) : sum univ f = f n + sum univ (λ i : fin n, f i.raise) :=
@@ -86,3 +88,5 @@ what's the use of this lemma if you could just `simp`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131046678):
 That's exactly my point.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/42731algebraonsubtypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 19 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algebra%20on%20subtypes/near/129923410):
 @**Johan Commelin** Simon has been working for us, and Mario promptly merged. You can update mathlib to at least c2f54ad03 and try to understand how to use the magic in https://gist.github.com/PatrickMassot/8afef3917a917300cf31c1396a895705
 
@@ -108,3 +110,5 @@ I like your use of "obviously"
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 19 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algebra%20on%20subtypes/near/129927939):
 We shouldn't forget the PR to https://github.com/leanprover/vscode-lean/blob/master/translations.json
 
+
+{% endraw %}

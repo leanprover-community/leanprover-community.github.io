@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/55857Typeequality.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 11 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478097):
 Is it possible to decide whether two types are equal?
 
@@ -51,3 +53,5 @@ Well, it depends on what you mean. That will not get `id bool = bool`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147513299):
 sure yep
 
+
+{% endraw %}

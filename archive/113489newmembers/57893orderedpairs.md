@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/57893orderedpairs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077221):
 I'm defining a subset of the Cartesian product of two types, specifically: 
 
@@ -305,3 +307,5 @@ Why does the same convention not apply to sets?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079571):
 I don't really understand the question. A set is not a type; perhaps that's the answer
 
+
+{% endraw %}

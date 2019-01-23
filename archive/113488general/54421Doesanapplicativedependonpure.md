@@ -9,6 +9,8 @@ permalink: archive/113488general/54421Doesanapplicativedependonpure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 10 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Does%20an%20applicative%20depend%20on%20pure%3F/near/131222242):
 A surprisingly hard problem: Prove or construct a counterexample to the following claim: If two (lawful) applicative structures on `F` have the same `seq` function, then they are equal.
 
@@ -19,3 +21,5 @@ $$f\cdot p_1(x)=p_1(\lambda g.\, g\,x)\cdot f$$
 $$p_1(\circ)\cdot h\cdot g\cdot x=h\cdot (g\cdot x)$$
 $$p_1(id)\cdot x=x$$
 
+
+{% endraw %}

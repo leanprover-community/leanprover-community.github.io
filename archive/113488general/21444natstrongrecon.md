@@ -9,6 +9,8 @@ permalink: archive/113488general/21444natstrongrecon.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133965949):
 Can we make this `@[elab_as_eliminator]`?
 
@@ -53,3 +55,5 @@ begin
 end
 ```
 
+
+{% endraw %}

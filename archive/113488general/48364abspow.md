@@ -9,6 +9,8 @@ permalink: archive/113488general/48364abspow.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 03 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abs_pow/near/126016992):
 ```lean
 theorem abs_pow {α : Type*} [decidable_linear_ordered_comm_ring α]
@@ -43,3 +45,5 @@ aha
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 03 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abs_pow/near/126034387):
 very consistent naming
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/45845weirdLeanproofs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 29 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148758351):
 Lemma. If $$t : (X_j)_{j \in J} \to X$$ is a colimit cocone in Set, then every element of $$X$$ is in the image of $$X_j \to X$$ for some $$j \in J$$.
 
@@ -62,3 +64,5 @@ It might actually end up being easier in Lean than the one I outlined above, bec
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 03 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/150792953):
 You might be thinking of the situation where you have a type X and some subsets whose union is all of X, and you want to prove that X is some kind of colimit of the subsets
 
+
+{% endraw %}

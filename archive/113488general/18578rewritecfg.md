@@ -9,6 +9,8 @@ permalink: archive/113488general/18578rewritecfg.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 21 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite_cfg/near/134366830):
 Recently Johannes wrote `rwa [htop] {occs := occurrences.pos [2]}` and I suddenly became aware of the rewrite tactic configuration options. Is it only me who missed this? I don't see anything about this in TPIL or the reference manual. I searched a bit and found: https://github.com/leanprover/lean/blob/master/library/init/meta/rewrite_tactic.lean#L11 and https://github.com/leanprover/lean/blob/master/library/init/meta/occurrences.lean. So in case some terms appear several times, you can tell `rw` where you want to rewrite: everywhere (this is the default), only at a list of positions, everywhere except at a list of positions. There are two other parameters. `symm` presumably has to do with backward rewriting. Does it mean everything backward? Or try backward if forward doesn't work? We can experiment if nobody knows. And the last parameter is `md` which seem related to reducibility stuff.
 
@@ -46,3 +48,5 @@ Yes, documentation for tactics in the core lib is in the reference manual, which
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 22 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite_cfg/near/134413575):
 The `occs` parameter for `rewrite` is a bit unreliable (or at least its behaviour is somewhat unintuitive).
 
+
+{% endraw %}

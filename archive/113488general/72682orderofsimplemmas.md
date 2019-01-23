@@ -9,6 +9,8 @@ permalink: archive/113488general/72682orderofsimplemmas.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 25 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/order%20of%20simp%20lemmas/near/148324441):
 There are in `data/set/basic.lean` the following two simp lemmas, in this order:
 ```lean
@@ -28,3 +30,5 @@ Is there a way to tell Lean that it should try `ball_image_iff` before `mem_imag
 
 A somewhat hackish (but working) solution is to add another simp lemma that starts from the result of the simplification under `mem_image`, and brings it to what we want. But this is not really satisfactory...
 
+
+{% endraw %}

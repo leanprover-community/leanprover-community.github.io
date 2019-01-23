@@ -9,6 +9,8 @@ permalink: archive/116395maths/39678LIVECHATStructuresformathematicians.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 29 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/LIVE%20CHAT%3A%20Structures%20for%20mathematicians/near/127264270):
 At 8pm UK time (2000 BST, so 1900 GMT) I am going to a live Lean explanation, in this thread, of a very simple mathlib file which defines a (non-inductive) structure. Mathematicians need to learn how to make structures, it's something we do very differently in mathematics. Here we need a far more formal kind of interface. I will hopefully do a few of these. It's like "talking people through mathlib files".
 
@@ -2322,3 +2324,5 @@ and it was much easier to write than a proper document
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 29 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/LIVE%20CHAT%3A%20Structures%20for%20mathematicians/near/127274613):
 Thanks for the help Mario and Patrick and Johan and others
 
+
+{% endraw %}

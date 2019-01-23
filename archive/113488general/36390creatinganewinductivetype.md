@@ -9,6 +9,8 @@ permalink: archive/113488general/36390creatinganewinductivetype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123817890):
 What happens to the underlying system when a new inductive type `X` is created in Lean? A new axiom seems to appear, namely the eliminator for the type -- `X.rec`. Is that right? A new axiom appears? Is that the only new axiom that appears, and all of the other stuff I see when I type `#print prefix X` is always deducible from `X.rec`? I see that occasionally other stuff is used, like `and` or `eq.rec` or propext. Is it possible to list exactly which functions are used when creating these new facts? I am trying to get to the bottom of the difference between equality and definitional equality and I think one main difference is these random axioms that seem to appear every time to create a new type.
 
@@ -333,3 +335,5 @@ Aah, you really should see this paper I'm working on
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 17 2018 at 04:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123825973):
 I basically lay all of this out in precise (too precise, probably) detail
 
+
+{% endraw %}

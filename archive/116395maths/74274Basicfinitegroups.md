@@ -9,6 +9,8 @@ permalink: archive/116395maths/74274Basicfinitegroups.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 27 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130387854):
 Do we have the symmetry group of order n!?
 
@@ -1201,3 +1203,5 @@ rofl I had a scratch file open with the "not working" theorem A, and I just impo
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 30 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130563041):
 lol
 
+
+{% endraw %}

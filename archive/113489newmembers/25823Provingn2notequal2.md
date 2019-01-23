@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/25823Provingn2notequal2.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Yuhan Du (Aug 31 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132228):
 I am trying to prove the statement that $$n^2 \neq 2$$
 ```lean
@@ -340,3 +342,5 @@ I think I learned a few things along the way, though it still feels like I've go
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 04 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133295018):
 of course anyone reading this thread and seeing several very long proofs that 2 isn't a square might argue that we all have a long way to go before we can do anything useful...
 
+
+{% endraw %}

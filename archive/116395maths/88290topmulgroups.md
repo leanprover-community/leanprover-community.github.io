@@ -9,6 +9,8 @@ permalink: archive/116395maths/88290topmulgroups.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 06 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/top%20mul%20groups/near/135306917):
 Am I blind or is the definition of multiplicative topological groups is missing in mathlib?
 
@@ -73,3 +75,5 @@ Thanks!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 11 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/top%20mul%20groups/near/135625428):
 And thanks for working on this branch again
 
+
+{% endraw %}

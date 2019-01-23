@@ -9,6 +9,8 @@ permalink: archive/113488general/67858GroebnerBasisTactics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Syx Pek (Sep 09 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Groebner%20Basis%20Tactics/near/133625535):
 Is there currently a way to do Groebner Basis in Lean?
 
@@ -30,3 +32,5 @@ I'm guessing that doing the computations in Lean would be a lot slower (for now)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 10 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Groebner%20Basis%20Tactics/near/133641505):
 We only got polynomials in one variable about a month ago, I think groebner bases are some time off yet.
 
+
+{% endraw %}

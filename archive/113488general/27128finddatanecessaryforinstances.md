@@ -9,6 +9,8 @@ permalink: archive/113488general/27128finddatanecessaryforinstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joey van Langen (Jan 09 2019 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/find%20data%20necessary%20for%20instances/near/154708830):
 Is there an easy way to find which fields should be provided when defining an instance?
 For example making an instance of a ring requires you to fill in a lot of data from different classes and manually going through each class in the hierarchy and finding the names of the respective data is quite some work
@@ -61,3 +63,5 @@ If you press tab, one of the options should be "Instance Stub — Generate a ske
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 09 2019 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/find%20data%20necessary%20for%20instances/near/154709450):
 It requires importing the mathlib module that Rob mentioned
 
+
+{% endraw %}

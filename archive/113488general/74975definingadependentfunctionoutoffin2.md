@@ -9,6 +9,8 @@ permalink: archive/113488general/74975definingadependentfunctionoutoffin2.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038733):
 I'm stuck on something basic to do with `fin n`.
 
@@ -212,3 +214,5 @@ I think I'll also write a `fin_cases` tactic, that works with a `fin n` hypothes
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134043808):
 (and actually gives you all the cases)
 
+
+{% endraw %}

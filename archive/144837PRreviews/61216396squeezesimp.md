@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/61216396squeezesimp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 07 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23396%20squeeze_simp/near/135353930):
 #396
 
@@ -117,3 +119,5 @@ With `git log meta/rb_map.lean`, you can check what is the latest commit that ch
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 07 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23396%20squeeze_simp/near/135363086):
 Actually, let me look into it, I'll create the PR while I'm at it
 
+
+{% endraw %}

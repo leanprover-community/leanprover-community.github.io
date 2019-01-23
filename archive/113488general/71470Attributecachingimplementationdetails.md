@@ -9,6 +9,8 @@ permalink: archive/113488general/71470Attributecachingimplementationdetails.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 08 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Attribute%20caching%20implementation%20details/near/147281757):
 (Warning: I don't know how lean being multithreaded works.)
 
@@ -35,3 +37,5 @@ What happens if two tactics running in proofs of separate `theorem`s set conflic
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 26 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Attribute%20caching%20implementation%20details/near/148372975):
 Oh sorry, you explained---the changes are forgotten
 
+
+{% endraw %}

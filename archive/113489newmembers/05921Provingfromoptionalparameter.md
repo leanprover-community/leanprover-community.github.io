@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/05921Provingfromoptionalparameter.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Nov 13 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20from%20optional%20parameter/near/147601867):
 How do I fill in the sorry?
 
@@ -27,3 +29,5 @@ Maybe you want `let g := ... in ...`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 13 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20from%20optional%20parameter/near/147610158):
 If you have `let g := something` in some proof, you can prove `g = something`   with `rfl`.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/74219Multipleusesofexistsi.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Calle Sönne (Nov 20 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Multiple%20uses%20of%20existsi/near/148043024):
 I have the following goal:
 ```lean
@@ -42,3 +44,5 @@ end
 ```
 I have almost given up on `existsi`, it doesn't try hard enough.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/66348natint.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 09 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20%3D%20int/near/135492419):
 Is `nat = int` consistent with Lean?
 
@@ -234,3 +236,5 @@ I should note that I have written a paper on this topic and I still haven't full
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 09 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20%3D%20int/near/135496776):
 it is much easier to read the reference typecheckers like trepplein
 
+
+{% endraw %}

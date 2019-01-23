@@ -9,6 +9,8 @@ permalink: archive/113488general/54886functorialitytactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 08 2018 at 00:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functoriality%20tactic/near/133540754):
 I wonder how hard it would be to write a tactic which takes an expression which is supposed to be the object mapping part of a functor, and tries to guess the morphism mapping part.
 
@@ -224,3 +226,5 @@ Slightly less silly notation idea is `\lam'`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 08 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functoriality%20tactic/near/133565802):
 The fact that the Yoneda definition now looks like that is in some sense indicative of how little content is involved in any of the checks -- the content is in the idea that the functor exists rather than the verification that it does. I don't think it's silly at all really, I think that in some sense all that is left in the code is the idea, and a machine is doing the rest -- which is what machines are supposed to do. There are plenty of "follow your nose" definitions and theorems in mathematics. I started noticing this when I introduced the following technique into my teaching: I would state a theorem (e.g. "if a_n tends to a and b_n tends to b then (a_n + b_n) tends to a+b") and during the proof I would highlight the *idea* in the proof, which in this case is "epsilon / 2 not epsilon". I would encourage students not to learn the proof but to learn the idea, and to let the rest of the proof flow naturally. That's what's happening here -- it turns out that there are no ideas in the checks, the idea is the map on objects, and that is now all that's left.
 
+
+{% endraw %}

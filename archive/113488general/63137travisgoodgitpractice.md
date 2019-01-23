@@ -9,6 +9,8 @@ permalink: archive/113488general/63137travisgoodgitpractice.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 12 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20/%20good%20git%20practice/near/133791639):
 I am trying to use all this git/github/community mathlib infrastructure maturely now.
 
@@ -86,3 +88,5 @@ I meant just plain `git rebase`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 27 2018 at 05:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20/%20good%20git%20practice/near/136589490):
 which should have roughly the same merge behavior as `git merge` except that the final commits are arranged linearly
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/48560environmentsandparameters.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Apr 20 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/environments%20and%20parameters/near/125449732):
 So I want to emulate inductive types defined in some section with parameters (or variables, I don't care). Can I do that by adding the paramters as local consts to some evironment `e` and then use `e.add_inductive`?
 
@@ -33,3 +35,5 @@ Do you have an idea how to solve that annoyance? Because it really makes my code
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Apr 20 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/environments%20and%20parameters/near/125451136):
 It sometimes seems a bit arbitrary what's exposed as meta constants and what isn't...
 
+
+{% endraw %}

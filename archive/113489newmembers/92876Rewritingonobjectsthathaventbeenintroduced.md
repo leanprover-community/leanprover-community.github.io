@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/92876Rewritingonobjectsthathaventbeenintrodu
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Nov 19 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rewriting%20on%20objects%20that%20haven%27t%20been%20introduced/near/147983997):
 I have the following term in my goal:
 ```lean
@@ -52,3 +54,5 @@ See https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Nov 19 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rewriting%20on%20objects%20that%20haven%27t%20been%20introduced/near/147984664):
 Thanks, I'll have a look at it.
 
+
+{% endraw %}

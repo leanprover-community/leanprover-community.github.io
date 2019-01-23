@@ -9,6 +9,8 @@ permalink: archive/116395maths/01990hornerpolynomials.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 29 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/horner%20polynomials/near/148810007):
 I remember @**Johannes Hölzl**  saying something in Orsay about having an interface for polynomials in horner form? What exactly did he mean by this? Is something like this worth having, and is it worth proving the equation lemmas for this, and proving it in a semiring? It does make some proofs easier.
 ```lean
@@ -47,3 +49,5 @@ And it would not be limited to a recursor, but would also include a lot of rewri
 
 I also tried to define polynomials using the horner scheme, i.e. `subtype` on `list` with an additional non-leading zero assumption.
 
+
+{% endraw %}

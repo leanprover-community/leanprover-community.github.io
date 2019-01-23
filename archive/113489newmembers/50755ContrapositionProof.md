@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/50755ContrapositionProof.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Cameron Crossman (Dec 04 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contraposition%20Proof/near/150809932):
 I am a new user and I am just getting my bearings with the platform.  Would someone be able to walk me through a proof of Contraposition written in Lean? (p → q) → (¬q → ¬p). Much appreciated!  I know the general steps but am getting confused about how to translate that into Lean.
 (p → q)
@@ -32,3 +34,5 @@ Lean's logic is similar to natural deduction, where `¬p` means `p -> false` so 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Cameron Crossman (Dec 04 2018 at 02:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contraposition%20Proof/near/150816560):
 Thank you!
 
+
+{% endraw %}

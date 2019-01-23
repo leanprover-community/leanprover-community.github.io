@@ -9,6 +9,8 @@ permalink: archive/116395maths/03937cardinalsandordinals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132580778):
 In lean they are not sets? i.e. `set_theory/zfc.lean` and `set_theory/cardinal.lean` are independent?
 
@@ -152,3 +154,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 23 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132605703):
 that's the round trip in one direction
 
+
+{% endraw %}

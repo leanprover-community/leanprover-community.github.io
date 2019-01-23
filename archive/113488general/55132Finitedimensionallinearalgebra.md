@@ -9,6 +9,8 @@ permalink: archive/113488general/55132Finitedimensionallinearalgebra.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 05 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129146008):
 @**Kenny Lau**  I am currently doing linear algebra on lean. I heard that you already did something on it. Could you plz tell me how far are you?
 
@@ -33,3 +35,5 @@ Is it worth making a new type `finite_dimensional_vector_space`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 06 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129214320):
 Yup, I think we need to make a new type for it
 
+
+{% endraw %}

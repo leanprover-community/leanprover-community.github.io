@@ -9,6 +9,8 @@ permalink: archive/113488general/40322easyinmathsunionquestion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 17 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy-in-maths%20union%20question/near/125196178):
 ```lean
 import data.set 
@@ -208,3 +210,5 @@ right
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 17 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy-in-maths%20union%20question/near/125205075):
 This trick is sufficiently important that it should be mentioned in the simp docs.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/43082538opposites.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 20 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/152229118):
 maybe someone can write a tactic!
 
@@ -517,3 +519,5 @@ done
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 23 2019 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156650116):
 Actually I'm not in a hurry; I would rather #614 to be merged first
 
+
+{% endraw %}

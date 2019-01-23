@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/19171builtintactics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 15 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134011488):
 is there an even simpler way to write `{ left, assumption} <|> { right, assumption }` ?
 
@@ -76,3 +78,5 @@ so far my strategy for solving these exercises has been just staring at the tact
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 15 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134025763):
 you can use constructor as long as only one of the constructors is applicable
 
+
+{% endraw %}

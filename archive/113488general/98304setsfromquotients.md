@@ -9,6 +9,8 @@ permalink: archive/113488general/98304setsfromquotients.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Feb 26 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sets%20from%20quotients/near/123007417):
 Sets from quotients. Is there a function in lean which basically gives me this `{a : α // setoid.r (quot.out x) a}`. Also is there any tutorial anywhere on how things like heq, eq.dcases_on, eq.rec_on etc work?
 
@@ -30,3 +32,5 @@ This can also be expressed as `{a // ⟦a⟧ = x}`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Feb 27 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sets%20from%20quotients/near/123019369):
 I just realised that. Probably more sensible.
 
+
+{% endraw %}

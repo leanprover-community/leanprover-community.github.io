@@ -9,6 +9,8 @@ permalink: archive/113488general/04154datalistbasictoobig.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 22 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/data/list/basic%20too%20big%3F/near/128444963):
 Is this output from travis:
 ````
@@ -92,3 +94,5 @@ calc -x = -x ⊓ (x ⊔ y)    : by simp [s]
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 25 2018 at 17:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/data/list/basic%20too%20big%3F/near/128605112):
 I don't often write `calc` proofs, so that probably has something to do with it.
 
+
+{% endraw %}

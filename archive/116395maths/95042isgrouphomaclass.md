@@ -9,6 +9,8 @@ permalink: archive/116395maths/95042isgrouphomaclass.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 02 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_group_hom%60%20a%20class%3F/near/133222930):
 I was surprised to hear @**Johannes Hölzl** saying in Paris that he thought `is_group_hom` should not be a class. The problem is that people often compose group homomorphisms by simply composing them rather than using `function.comp` or the notation for it. On the other hand, the last time I looked, `is_group_hom` was indeed a class. Should there be a discussion about whether this is the correct decision?
 
@@ -21,3 +23,5 @@ I agree with that. The current inconsistency is because different parts of the a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 02 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_group_hom%60%20a%20class%3F/near/133223693):
 and at different times
 
+
+{% endraw %}

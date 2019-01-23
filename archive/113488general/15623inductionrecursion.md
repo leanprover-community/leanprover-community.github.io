@@ -9,6 +9,8 @@ permalink: archive/113488general/15623inductionrecursion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Max New (Apr 25 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20recursion%3F/near/125688817):
 Does lean support inductive-recursive definitions?
 
@@ -97,3 +99,5 @@ define the sigma type inductively
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20recursion%3F/near/125827025):
 I'd also appreciate a type theory expert confirming whether or not this is an example of induction-recursion at all, since induction-recursion is an unfamiliar thing and the typical examples are even more unfamiliar things, while CW complexes are something that all mathematicians learn about.
 
+
+{% endraw %}

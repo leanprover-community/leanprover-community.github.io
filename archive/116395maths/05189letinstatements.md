@@ -9,6 +9,8 @@ permalink: archive/116395maths/05189letinstatements.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 19 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207819):
 How does mathlib like using `let` in order to unclutter a statement, as in:
 ```lean
@@ -30,3 +32,5 @@ Note that the above snippet also use full type ascriptions in lets in order to c
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Dec 19 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152212620):
 Seems like a good idea.
 
+
+{% endraw %}

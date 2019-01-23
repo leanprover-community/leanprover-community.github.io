@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/37551casesalternative.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Dec 18 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cases%20alternative/near/152139969):
 Hi, using ``cases`` on an hypothesis sometimes gives me really huge terms in the resulting hypotheses. It's happened if the hypothesis contains recursive definitions, and I fixed it in one case by marking the definition as ``irreducible``.
 However, now I get the same problem for the definition
@@ -39,3 +41,5 @@ inductive fin2 : ℕ → Type
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Dec 19 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cases%20alternative/near/152145711):
 That helped, thanks!
 
+
+{% endraw %}

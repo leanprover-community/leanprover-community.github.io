@@ -9,6 +9,8 @@ permalink: archive/116395maths/74041categorytheorynotations.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20notations/near/125808846):
 I am very-nearly-just-about ready with my category theory PR. I would like some help with notations, however.
 
@@ -153,3 +155,5 @@ because this would be an extremely good stress test for your category theory lib
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20notations/near/125817905):
 and I believe it is within reach
 
+
+{% endraw %}

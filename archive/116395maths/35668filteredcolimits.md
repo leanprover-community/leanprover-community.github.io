@@ -9,6 +9,8 @@ permalink: archive/116395maths/35668filteredcolimits.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 21 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filtered%20colimits/near/152355333):
 Has anyone been working with filtered colimits? Perhaps @**Ramon Fernandez Mir** @**Kevin Buzzard**?
 
@@ -27,3 +29,5 @@ Minor discussion on 17th May about directed systems around line 25. Note that th
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 21 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filtered%20colimits/near/152362014):
 Kenny -- will this PR be resurrected one day? I need it for schemes.
 
+
+{% endraw %}

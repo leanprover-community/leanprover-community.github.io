@@ -9,6 +9,8 @@ permalink: archive/113488general/47442leanwebeditornotcompiling.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 03 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean-web-editor%20not%20compiling%3F/near/124551978):
 @**Gabriel Ebner**, I'm trying to build the lean-web-editor from scratch, and running into a problem.
 
@@ -36,3 +38,5 @@ But I'd suggest to do the emscripten build in docker or a VM instead.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 03 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean-web-editor%20not%20compiling%3F/near/124567096):
 And feel free to set up a Travis script :smile:
 
+
+{% endraw %}

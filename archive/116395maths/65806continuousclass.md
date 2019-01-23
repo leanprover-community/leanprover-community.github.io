@@ -9,6 +9,8 @@ permalink: archive/116395maths/65806continuousclass.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 30 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20class/near/130544108):
 Should we turn `continuous` into a class `is_continuous` like we did for group homorphisms? I spent quite a lot of time explicitly invoking lemmas that could be handled by type class inference. Same question for uniform continuity.
 
@@ -50,3 +52,5 @@ Yes, I had the same experiences.
 What I'm currently using: https://gist.github.com/rwbarton/d088776fa881a00c6820a02d14c5c9e0
 It's based on (a somewhat old version at this point of) Scott's `tidy` library.
 
+
+{% endraw %}

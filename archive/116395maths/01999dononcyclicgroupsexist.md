@@ -9,6 +9,8 @@ permalink: archive/116395maths/01999dononcyclicgroupsexist.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811479):
 ```lean
 import group_theory.order_of_element
@@ -422,3 +424,5 @@ decidable_gpowers :
 -/
 ```
 
+
+{% endraw %}

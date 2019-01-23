@@ -9,6 +9,8 @@ permalink: archive/113488general/66627lean4branch.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 11 2018 at 04:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%204%20branch/near/124913759):
 For those who are interested: Leo just added a bunch of commits to a new lean 4 branch, primarily just removing lean 3 cruft, and you can see a taste of what it means for the size of corelib.
 * He's already taken a hatchet to most of the math in the corelib library, leaving only definitions of stuff like `int.mul` without proving it's a comm_ring, etc.
@@ -73,3 +75,5 @@ Two motives, but it would work.  So no recursing through `map`, apparently. :dis
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 30 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%204%20branch/near/125884409):
 @**Gabriel Ebner** I talked with Leo about nested recursion again yesterday and we want to keep using well-founded recursion for this for now. I.e. you should be able to recursive through a dependently-typed `pmap` variant of `map`, which hopefully the default `dec_tac` should make easy to do. Perhaps a future equation compiler, probably written in Lean, will do cleverer things like transforming `map` automatically.
 
+
+{% endraw %}

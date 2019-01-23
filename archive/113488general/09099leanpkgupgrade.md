@@ -9,6 +9,8 @@ permalink: archive/113488general/09099leanpkgupgrade.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 13 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906249):
 It seems `leanpkg upgrade` doesn't want to upgrade mathlib past 120635628368ec261e031cefc6d30e0304088b03 Is someone else seeing this?
 
@@ -42,3 +44,5 @@ Someone messed up
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 13 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906467):
 I took the opportunity to update community mathlib
 
+
+{% endraw %}

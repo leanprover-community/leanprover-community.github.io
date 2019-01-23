@@ -9,6 +9,8 @@ permalink: archive/113488general/35992stacksprojectschemes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Feb 28 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/stacks%20project%20/%20schemes/near/123081857):
 Thought this was worth its own topic because we all know there are people here who are less interested in the maths side of things. Here's an update.
 
@@ -462,3 +464,5 @@ We are a couple of theorems away from this.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 07 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/stacks%20project%20/%20schemes/near/123415572):
 Now for perfectoid spaces ;-)
 
+
+{% endraw %}

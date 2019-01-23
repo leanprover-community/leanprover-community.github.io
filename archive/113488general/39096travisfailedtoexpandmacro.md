@@ -9,6 +9,8 @@ permalink: archive/113488general/39096travisfailedtoexpandmacro.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 13 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20%22failed%20to%20expand%20macro%22/near/147562010):
 I just got another of these:
 ```
@@ -33,3 +35,5 @@ I remember someone else hitting this recently, but can't find it.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 13 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20%22failed%20to%20expand%20macro%22/near/147562036):
 ah, okay, you're absolutely right, my mistake!
 
+
+{% endraw %}

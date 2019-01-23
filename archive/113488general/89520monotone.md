@@ -9,6 +9,8 @@ permalink: archive/113488general/89520monotone.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/monotone/near/124357030):
 sehr geehrter @**Johannes Hölzl** , monotone doesn't mean what you think it means
 
@@ -31,3 +33,5 @@ Not in order theory, the "Monotonicity in order theory" section in https://en.wi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/monotone/near/124357695):
 fair enough
 
+
+{% endraw %}

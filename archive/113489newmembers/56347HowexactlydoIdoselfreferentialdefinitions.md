@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/56347HowexactlydoIdoselfreferentialdefinitio
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20exactly%20do%20I%20do%20self-referential%20definitions%3F/near/135792425):
 I'm trying to define a relation R such that `for all x, x R (x + 1)` and `transitive R`. Now I know I could probably do this inductively, but I don't want to (because I want the method to apply even if I had, e.g. `symmetric R`). My instinct was to use a non-constructive definition, like this (I know this is nonsense,  but it's just a sketch of what I want to do):
 
@@ -130,3 +132,5 @@ you just can't evaluate that statement
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 14 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20exactly%20do%20I%20do%20self-referential%20definitions%3F/near/135792837):
 Yeah, you're right, I got confused.
 
+
+{% endraw %}

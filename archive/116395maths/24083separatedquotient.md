@@ -9,6 +9,8 @@ permalink: archive/116395maths/24083separatedquotient.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 30 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/separated%20quotient/near/134934490):
 @**Johannes Hölzl** why https://github.com/leanprover-community/mathlib/blob/completions/analysis/topology/completion.lean#L185 is not an instance?
 
@@ -416,3 +418,5 @@ After that we need to take a level-headed look at how much is appropriate for ma
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 04 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/separated%20quotient/near/135155170):
 (and I don't know what the conclusion will be)
 
+
+{% endraw %}

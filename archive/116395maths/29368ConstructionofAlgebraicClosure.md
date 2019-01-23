@@ -9,6 +9,8 @@ permalink: archive/116395maths/29368ConstructionofAlgebraicClosure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 29 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Construction%20of%20Algebraic%20Closure/near/127264707):
 I saw many constructions of the algebraic closure of a field **k** using direct limit, but I have a different construction in mind:
 The set **k-bar** is { (f,n) in k[X] x N | f is irreducible and n < deg f }. The n represents the n-th root of the polynomial.
@@ -174,3 +176,5 @@ The axiomatically basic one is `nat.find`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Assia Mahboubi (May 29 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Construction%20of%20Algebraic%20Closure/near/127274688):
 Hi again @**Patrick Massot**! Don't worry, I am just saying that for countable fields, classical proofs are constructive, in fact. I don't think that constructivism is the difficult issue here but I may well have forgotten how easy classical life is.
 
+
+{% endraw %}

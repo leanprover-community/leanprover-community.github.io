@@ -9,6 +9,8 @@ permalink: archive/116395maths/54841haltingproblem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 23 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964377):
 https://github.com/leanprover/mathlib/commit/d62bf5605ec8971d446a01af40abf9183447cb42#diff-6650f7dae83be3a52c8eb036a23d7b26R175
 
@@ -80,3 +82,5 @@ you have a halting problem
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (May 23 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126979574):
 https://travis-ci.org/leanprover/mathlib now looks more promising
 
+
+{% endraw %}

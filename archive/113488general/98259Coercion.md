@@ -9,6 +9,8 @@ permalink: archive/113488general/98259Coercion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ned Summers (Jul 23 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coercion/near/130142384):
 For context, in Scott Morrison's category theory code he introduces isomorphism as the structure:
 ```
@@ -102,3 +104,5 @@ variables {K : Type} [field K] [decidable_eq K]
 lemma eval_works (k : K) : eval k X = k := by simp
 ```
 
+
+{% endraw %}

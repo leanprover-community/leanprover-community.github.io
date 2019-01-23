@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/89980definingahilbertspace.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joseph Corneli (Jul 31 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130645249):
 Hi, this looks like something that might be near the edge of what's possible to define right now; would a more experienced person be able to give me some guidance?
 
@@ -329,3 +331,5 @@ This definition would have to be modified to work for any field of scalars.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 02 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130772943):
 @**Andreas Swerdlow** I have located @**Minh Hieu Le (Kai)**  -- he's sitting opposite me right now :-)
 
+
+{% endraw %}

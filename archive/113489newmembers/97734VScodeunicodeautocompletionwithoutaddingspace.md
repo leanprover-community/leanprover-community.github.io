@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/97734VScodeunicodeautocompletionwithoutaddin
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Aug 15 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/VS%20code%20unicode%20autocompletion%20without%20adding%20space/near/132179797):
 Currently if I want to type `α₁` in VS Code, I type `\a` then hit space, and then hit backspace before typing `\1`+space again. Is there a way to do this without having to hit backspace all the time?
 
@@ -104,3 +106,5 @@ That was the whole point about the undocumented`setContext` command.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Aug 15 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/VS%20code%20unicode%20autocompletion%20without%20adding%20space/near/132186642):
 Thanks again Gabriel!
 
+
+{% endraw %}

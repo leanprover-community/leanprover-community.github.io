@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/10846RFCoperatornorm.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jan-David Salchow (Dec 28 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/RFC%3A%20operator%20norm/near/152676704):
 I've been playing with the space of bounded linear maps between normed space, see https://github.com/jdsalchow/mathlib/blob/calculus/analysis/functional/operator_norm.lean
 
@@ -23,3 +25,5 @@ Is there a way to forget a local attribute when it's not needed anymore?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 29 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/RFC%3A%20operator%20norm/near/152699337):
 put it inside a section
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/53564Parameterssectionsandnamespaces.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mark Dickinson (Dec 28 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parameters%2C%20sections%20and%20namespaces/near/152645325):
 I've just encountered the fact that parameters behave differently inside and outside namespaces, and was wondering whether anyone has either an explanation or a pointer to documentation. Here's a toy example (cut down from a real one):
 
@@ -180,3 +182,5 @@ I think SAGE uses GMP-based integers instead of Python bigints, which makes sens
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mark Dickinson (Dec 28 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parameters%2C%20sections%20and%20namespaces/near/152663078):
 @**Reid Barton** Thanks for the tips and links! I'll take a look shortly. At this point I'm finding other people's code to be by far the best resource for learning how to use Lean better.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/91327producttopology.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rohan Mitta (Jul 24 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20topology/near/130223243):
 Hi! I'm trying to define the product topology and am running into issues. I may have made a silly mistake somewhere, but it seems  to me that "I" should have type set (set (α × β)), but I get a type mismatch error. Any help would be greatly appreciated.
 
@@ -91,3 +93,5 @@ The reason it says this is that the induced topology on $$\alpha\times\beta$$ co
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 00:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20topology/near/130242945):
 And the reason that this is the product topology is first that all those sets are open in the product topology, and conversely that in any topology where these sets are all open, the intersection of two such sets is open, and that's precisely $$U\times V$$, so any such topology will contain all the sets which are open in the product topology.
 
+
+{% endraw %}

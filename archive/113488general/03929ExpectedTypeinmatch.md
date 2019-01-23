@@ -9,6 +9,8 @@ permalink: archive/113488general/03929ExpectedTypeinmatch.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nima (Apr 21 2018 at 08:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Expected%20Type%20in%20match/near/125483132):
 Is there anyway to **explicitly** tell lean the expected type of `match`, so I would not receive the following error:
 ```quote
@@ -35,3 +37,5 @@ Thank you, this following worked (the other one did not),
 `match a, b : \forall a b, expected_type_of_match with ... end`
 ```
 
+
+{% endraw %}

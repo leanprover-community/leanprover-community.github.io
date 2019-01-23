@@ -9,6 +9,8 @@ permalink: archive/113488general/91640derivehasreflect.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 21 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Bderive%20has_reflect%5D/near/148090195):
 For long-enough structure definitions, e.g.
 ````
@@ -42,3 +44,5 @@ Turn on profiling and see if it tells you something useful?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 21 2018 at 07:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Bderive%20has_reflect%5D/near/148090946):
 turns out its the fault of `tactic.add_decl` :(
 
+
+{% endraw %}

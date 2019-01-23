@@ -9,6 +9,8 @@ permalink: archive/116395maths/88592Cantorgolf.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 12 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151537525):
 1) Is there a very short proof of this in Lean / mathlib?
 
@@ -160,3 +162,5 @@ and I was attempting to expand this into a tactic mode proof. I could just use r
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Dec 12 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151551702):
 You can use `simpa using Hlogical_nonsense` to avoid the weird `tauto` behavior, but I guess it doesn't look quite as good when you have to name the hypothesis.
 
+
+{% endraw %}

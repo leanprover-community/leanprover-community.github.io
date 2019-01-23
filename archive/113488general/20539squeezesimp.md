@@ -9,6 +9,8 @@ permalink: archive/113488general/20539squeezesimp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squeeze_simp/near/135401004):
 @**Simon Hudon** To what extend do you think `sed` and `lean` could cooperate to automatically turn every `simp` into a `squeeze_simp`, and then every `squeeze_simp` into a `simp only`? Can we automate Kenny?
 
@@ -200,3 +202,5 @@ In the parser `cur_pos` can give me an arbitrary position. I'm putting it at the
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squeeze_simp/near/135417980):
 Ooh, this is nice. Can we just get a generic hook for writing things from lean?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/65678Saturdaydinner.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 05 2019 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Saturday%20dinner/near/154470066):
 If anyone is in town tonight, a few of us are planning to meet up for dinner. Let me know if you'd like to join.
 
@@ -27,3 +29,5 @@ You're legendary! When do you think the workshop will end?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 05 2019 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Saturday%20dinner/near/154482531):
 some time after it starts
 
+
+{% endraw %}

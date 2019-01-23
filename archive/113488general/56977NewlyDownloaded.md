@@ -9,6 +9,8 @@ permalink: archive/113488general/56977NewlyDownloaded.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean G McCain (Oct 31 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newly%20Downloaded/near/136883261):
 I am using LEAN for a discrete math class. I just downloaded it for a project. Is there anything that I need to also download or is using the LEAN extension in Visual Studio all I need to get going?
 
@@ -30,3 +32,5 @@ Look at Scott's channel
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 31 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newly%20Downloaded/near/136886433):
 https://www.youtube.com/watch?v=k8U6YOK7c0M&t=7s is the mac one. If you are only doing super-basic maths then core Lean might have what you need, but the moment you want something like the binomial theorem you're going to need the maths library.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/13941Importinganalysisnormedspacedmakesthing
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Dec 18 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Importing%20analysis.normed_spaced%20makes%20things%20noncomputable/near/152088656):
 The following code:
 
@@ -28,3 +30,5 @@ def seq_smul (c : ℝ) : seq → seq := λ s n, c * (s n)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 18 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Importing%20analysis.normed_spaced%20makes%20things%20noncomputable/near/152088730):
 hm, I guess the instance priorities need adjustment
 
+
+{% endraw %}

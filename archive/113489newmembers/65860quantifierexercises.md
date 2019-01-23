@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/65860quantifierexercises.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 08 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/quantifier%20exercises/near/133561165):
 could I get a hint how to make progress here:
 
@@ -183,3 +185,5 @@ example {α} (b : α) (r : α → α → Prop)
   (H : ∀ x : α, r b x ↔ ¬ r x x) : false := sorry
 ```
 
+
+{% endraw %}

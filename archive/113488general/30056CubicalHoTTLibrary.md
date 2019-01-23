@@ -9,6 +9,8 @@ permalink: archive/113488general/30056CubicalHoTTLibrary.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Namdak Tonpa (Jan 07 2019 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20HoTT%20Library/near/154560608):
 Greetings to everybody! TWIMC, Ground Zero, cubical base library embedded into Lean 3.4.1: https://github.com/groupoid/lean
 
@@ -35,3 +37,5 @@ Yes you are right. There is another place where we can get an inconsistency—gr
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Uranus Testing (Jan 08 2019 at 05:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20HoTT%20Library/near/154622491):
 Quotients require equality type in Prop: https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/src/kernel/quotient/quotient.cpp#L61, so we cannot do init_quotient with our (ground_zero.types.eq) equality type.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/62392piecewisefunctions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Aymon Wuolanne (Dec 20 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152232475):
 Does anyone have any tips for dealing with piecewise functions, in particular showing that they're continuous? I have something like the following in mind:
 ```
@@ -92,3 +94,5 @@ It looks pretty good. there is absolutely no chance of a conflict of interest, y
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 20 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152285645):
 Would you give this PR a master's thesis?
 
+
+{% endraw %}

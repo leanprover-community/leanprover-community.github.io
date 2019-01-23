@@ -9,6 +9,8 @@ permalink: archive/113488general/33035oldstructurecmdinstructureliterals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146821394):
 Here's a strange discovery:
 ```lean
@@ -61,3 +63,5 @@ uff, luckily I didn't run into this. Does the `{ f := _, .. _}` notation depend 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Nov 06 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146851533):
 The structure instance notation is pretty complex and fragile in Lean 3. I'm really not sure what we should do with it in Lean 4.
 
+
+{% endraw %}

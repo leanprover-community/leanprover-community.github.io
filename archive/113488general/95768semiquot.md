@@ -9,6 +9,8 @@ permalink: archive/113488general/95768semiquot.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 09 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semiquot/near/126308546):
 A minor advertisement for `data/semiquot` because I think it's a cool idea. I've mentioned this approach before, but this data type makes it easy to work with nondeterministic functions using quotient types.
 
@@ -32,3 +34,5 @@ I think the correct answer is it is meant for *verified* programming, which of c
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 09 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semiquot/near/126311762):
 Thanks for the advertisement anyway, I think it's a good idea to advertise each new stuff in mathlib here
 
+
+{% endraw %}

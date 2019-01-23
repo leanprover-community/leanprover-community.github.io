@@ -9,6 +9,8 @@ permalink: archive/116395maths/42829Defininginstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Oct 13 2018 at 18:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Defining%20instances/near/135736954):
 I am trying to define an instance of a normed space starting from a norm satisfying the right axioms, but I would need some help. Here is the situation:
 ```lean
@@ -124,3 +126,5 @@ If you just factor out the `let`-statement into a separate `instance`. Or am I m
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 13 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Defining%20instances/near/135738727):
 Maybe some `refine_struct` magic could also help. But I'm not an expert on this.
 
+
+{% endraw %}

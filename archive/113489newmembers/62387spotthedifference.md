@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/62387spotthedifference.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 11 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spot%20the%20difference/near/154913709):
 ```lean
 invalid type ascription, term has type
@@ -48,3 +50,5 @@ example : A = λ n, A n := rfl -- fails
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 11 2019 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spot%20the%20difference/near/154923694):
 "Probably a bug", says Sebastian
 
+
+{% endraw %}

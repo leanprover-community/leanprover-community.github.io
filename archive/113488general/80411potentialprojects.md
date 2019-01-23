@@ -9,6 +9,8 @@ permalink: archive/113488general/80411potentialprojects.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 28 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/potential%20projects/near/132925636):
 At our Orsay meeting we just wrote a list of interesting-but-not-impossible projects for formalisation in Lean.
 
@@ -21,3 +23,5 @@ Please add to it, add links to wikipedia definitions or elsewhere, add your name
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 29 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/potential%20projects/near/132981685):
 I see we forgot to add Kevin's theorem (THE UNIFORM LIMIT OF CONTINUOUS FUNCTIONS IS CONTINUOUS)
 
+
+{% endraw %}

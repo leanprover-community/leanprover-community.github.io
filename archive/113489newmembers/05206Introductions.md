@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/05206Introductions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Xita Meyers (Sep 06 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Introductions/near/133439634):
 Hello, I have never asked a public question on Zulip before, and in order for me to get used to doing so, I have been ordered by @**Kenny Lau**  to state the following in order to introduce myself: 
 
@@ -410,3 +412,5 @@ Sorry for the slow response, went on vacation right after learning about Lean :)
 
 I actually left academia a couple years ago for industry, and I've been thinking about find project that would allow me to be more involved with math and work on something that would useful to the community.
 
+
+{% endraw %}

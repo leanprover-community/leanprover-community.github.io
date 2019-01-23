@@ -9,6 +9,8 @@ permalink: archive/113488general/58749iffassoc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff.assoc/near/130294374):
 Chris asked today if `iff` was associative and a room full of mathematicians had no clue between them :-) We proved it by checking all 8 cases in Lean :-) 
 
@@ -142,3 +144,5 @@ I think topological space is another semantics
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 26 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff.assoc/near/130327904):
 topos!
 
+
+{% endraw %}

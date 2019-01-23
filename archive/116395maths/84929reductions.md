@@ -9,6 +9,8 @@ permalink: archive/116395maths/84929reductions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 28 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/reductions/near/127179083):
 What are alpha, beta, delta, zeta, eta, iota reudctions?
 
@@ -51,3 +53,5 @@ actually alpha is not a reduction, and eta is not usually used as a reduction ei
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 28 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/reductions/near/127179406):
 and alpha isn't even needed in lean because de bruijn indices make alpha equivalent expressions syntactically equal
 
+
+{% endraw %}

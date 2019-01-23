@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/68806Replacingrwwithterms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andreas Swerdlow (Sep 15 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Replacing%20rw%20with%20terms/near/134012592):
 I have some proofs written in tactic mode that contain a lot of rewrites, including rewrites of hypotheses. Is there a way to easily convert such proofs into term mode. I know about eq.subst but can’t see a way to do this that won’t take aeons. 
 
@@ -32,3 +34,5 @@ Is there any advantage to term mode in a case like this?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 15 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Replacing%20rw%20with%20terms/near/134019185):
 I think term mode proofs are less likely to break, or perhaps they break in very predictable ways. But I honestly don't know. I just get the feeling that the mathlib people like term mode better if possible, so that's what I'm working towards. I don't have any maintainer experience.
 
+
+{% endraw %}

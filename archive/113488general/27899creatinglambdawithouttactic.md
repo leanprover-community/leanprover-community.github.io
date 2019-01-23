@@ -9,6 +9,8 @@ permalink: archive/113488general/27899creatinglambdawithouttactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jul 30 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130588564):
 meta programming problem: So I have a function body represented as `expr -> expr`, which receives a reference to the argument, and return the body. Is it possible to abstract the argument away(that is, wrap it with a lambda) and get the anonymous function back as `expr`?
 
@@ -75,3 +77,5 @@ I'm actually thinking about using `pexpr.var : nat -> pexpr` which is de-bruijn 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jeremy Avigad (Jul 31 2018 at 00:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130609351):
 If you are building Lean expressions, don't hesitate to use the tactic framework. You will probably need constants from the environment anyway, and your code will be easier to debug if you elaborate expressions piece by piece.
 
+
+{% endraw %}

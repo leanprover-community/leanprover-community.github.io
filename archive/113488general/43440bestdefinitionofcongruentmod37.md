@@ -9,6 +9,8 @@ permalink: archive/113488general/43440bestdefinitionofcongruentmod37.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 25 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/best%20definition%20of%20%22congruent%20mod%2037%22/near/132741889):
 ```lean
 
@@ -170,3 +172,5 @@ my objection is that you don't just have some random types
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 25 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/best%20definition%20of%20%22congruent%20mod%2037%22/near/132746954):
 if it's a group like the integers are, then you should just use quotient groups
 
+
+{% endraw %}

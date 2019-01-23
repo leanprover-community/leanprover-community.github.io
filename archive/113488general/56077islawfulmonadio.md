@@ -9,6 +9,8 @@ permalink: archive/113488general/56077islawfulmonadio.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Dec 14 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_lawful_monad%20io/near/151810212):
 I can't seem to find an instance of `is_lawful_monad io` in Lean 3.  Is that a deliberate omission in that `io` is not intended to satisfy the monad laws, or just something that wasn't implemented?  Is there a good way to manually introduce this?
 
@@ -46,3 +48,5 @@ Another alternative, if you are interested in provably correct IO, is to have a 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Dec 15 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_lawful_monad%20io/near/151828407):
 Yes, I've done something like that with a free monad.  In this case, I was just wondering if I overlooked existing `io` monad laws.
 
+
+{% endraw %}

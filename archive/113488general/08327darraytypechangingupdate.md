@@ -9,6 +9,8 @@ permalink: archive/113488general/08327darraytypechangingupdate.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 26 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125705649):
 In `data.array.basic`, there's an optimized mutation function:
 
@@ -221,3 +223,5 @@ I assume the kind of optimization you're talking about is to queue up updates un
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708292):
 Actually I'm not exactly sure, I haven't studied the implementation in detail. I think the updates are in chunks though, there is a "buffer" aspect to it as well which makes repeated `push_back` like I've done here not stupidly inefficient
 
+
+{% endraw %}

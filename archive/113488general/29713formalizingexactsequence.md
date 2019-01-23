@@ -9,6 +9,8 @@ permalink: archive/113488general/29713formalizingexactsequence.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 27 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/formalizing%20exact%20sequence/near/124273688):
 How would you formalize exact sequences in Lean? Let's say they are R-modules for a commutative ring R.
 I have the following exact sequences in mind:
@@ -1460,3 +1462,5 @@ I wouldn't believe anything I say :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 30 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/formalizing%20exact%20sequence/near/124427966):
 @**Kevin Buzzard** please moderate my comment
 
+
+{% endraw %}

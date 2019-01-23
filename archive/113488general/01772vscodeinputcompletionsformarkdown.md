@@ -9,6 +9,8 @@ permalink: archive/113488general/01772vscodeinputcompletionsformarkdown.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Sep 17 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode%20input%20completions%20for%20markdown/near/134090703):
 I love the way that Lean does unicode completions so much that I copied the vscode-lean project and made it also work for markdown. Could markdown unicode completions be added as a feature to the vscode-lean extension? Or is it better being a separate extension? Happy to submit a PR doing this.
 
@@ -18,3 +20,5 @@ Seems like @**Gabriel Ebner** is the one to ask about this.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Sep 17 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode%20input%20completions%20for%20markdown/near/134091160):
 I'd prefer to keep it all in one extension if possible.  Ideally you could enable the unicode completions for specific file types and also specific files (via a command).  I'm happy about a PR for this feature.  That said, I'm on vacation until October.
 
+
+{% endraw %}

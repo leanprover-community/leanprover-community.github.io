@@ -9,6 +9,8 @@ permalink: archive/113488general/47722unfoldpartialapplication.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Pablo Le Hénaff (Jun 08 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfold%20partial%20application/near/127766659):
 Hey.
 I'm trying to unfold my own definition which is only applied partially, e.g.
@@ -36,3 +38,5 @@ i.e. write `my_function (s : some_type) : α -> some_comm_monoid_type := λa, ..
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 08 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfold%20partial%20application/near/127766794):
 assuming you always want to unfold this function in such a partially applied environment
 
+
+{% endraw %}

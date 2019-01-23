@@ -9,6 +9,8 @@ permalink: archive/113488general/53481Guessingthetype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 21 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Guessing%20the%20type/near/148130635):
 ```
 import data.rat
@@ -80,3 +82,5 @@ The problem here is that we unify the return type of the field notation applicat
 The reason this only happens for the field notation case is that field notations are elaborated in two steps.  Essentially `not_exists.mp h x` is elaborated as `(iff.mp not_exists : _) h x` (which also fails).
 If you write e.g. `iff.mp not_exists h x` then the return type of `iff.mp` is `?m_1 ↔ ?m_2` which does not induce a problematic second-order unification problem.
 
+
+{% endraw %}

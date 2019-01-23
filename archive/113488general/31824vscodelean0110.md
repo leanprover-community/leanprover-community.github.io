@@ -9,12 +9,13 @@ permalink: archive/113488general/31824vscodelean0110.html
 
 ---
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Apr 21 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode-lean%200.11.0/near/125499751):
+
 {% raw %}
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Apr 21 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode-lean%200.11.0/near/125499751):
 I just pushed a new update for the vscode extension.  A few bugfixes and features have accumulated over the last few months:
  * The new `visibleRanges` API in vscode is supported now.  Per default, we no longer check the whole file on every keystroke, but only the currently visible lines (and the rest of the file above).  This new API is only present in vscode >=1.22 (released in March), no idea if it works with older vscode versions.  Please complain (or upgrade) if you run into any troubles.
  * You can now input ⦃⦄ using `\{{`
- * Fewer complaints about `leanpkg.path` changes.{% endraw %}
+ * Fewer complaints about `leanpkg.path` changes.
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode-lean%200.11.0/near/125504461):
 can you also type ⟦⟧ using `\[[`?
@@ -26,8 +27,7 @@ No, it seems.
 How do you check what version of the extension is used? How do you upgrade?
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 21 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode-lean%200.11.0/near/125505255):
-{% raw %}
-I clicked on extensions on the left pane, and I clicked the reload button. Try typing` \{{` and  if it turns into special brackets, you have the upgrade.{% endraw %}
+I clicked on extensions on the left pane, and I clicked the reload button. Try typing` \{{` and  if it turns into special brackets, you have the upgrade.
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode-lean%200.11.0/near/125505262):
 I didn't see a reload button
@@ -349,3 +349,5 @@ I didn't find anything off-the-shelf after a quick search.  But it shouldn't be 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (May 25 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode-lean%200.11.0/near/127075505):
 The easiest way is to open the extension in vscode and press `F5`. This will compile it and start a new vscode window with the development version of the extension.  This is also documented in the README: https://github.com/leanprover/vscode-lean#development
 
+
+{% endraw %}

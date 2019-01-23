@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/19038Installationquestions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Oct 06 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Installation%20questions/near/135290991):
 Here's a new thread for installation questions.
 
@@ -233,3 +235,5 @@ We use 3.4.1 Lean
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Jan 15 2019 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Installation%20questions/near/155129521):
 see also https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib.20is.20broken
 
+
+{% endraw %}

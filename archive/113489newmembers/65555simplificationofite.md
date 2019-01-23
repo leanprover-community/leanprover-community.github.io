@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/65555simplificationofite.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 11 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simplification%20of%20ite/near/131967259):
 How do I complete the following theorem:
 ```lean
@@ -48,3 +50,5 @@ what does the v stand for?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 11 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simplification%20of%20ite/near/131967708):
 Btw @**Ken Roe**, feel free to migrate your questioning to the `general` stream of Zulip. `new members` is more for introductions I believe.
 
+
+{% endraw %}

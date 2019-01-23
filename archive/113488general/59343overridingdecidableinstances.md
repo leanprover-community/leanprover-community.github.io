@@ -9,6 +9,8 @@ permalink: archive/113488general/59343overridingdecidableinstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 22 2018 at 08:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/overriding%20decidable%20instances/near/134423873):
 Can someone point me to an example of overriding a `decidable` instance with a faster algorithm?
 
@@ -30,3 +32,5 @@ For checking `nodup` of big things like those lists of numbers, it helps if you'
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 22 2018 at 08:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/overriding%20decidable%20instances/near/134424560):
 Oh, wait this doesn't work for cycles, since the order matters. You can still improve on the n^2 performance of the default implementation by utilizing the order. If you sort the list then you can check for duplicates in linear time
 
+
+{% endraw %}

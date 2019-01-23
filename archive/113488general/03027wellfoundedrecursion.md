@@ -9,6 +9,8 @@ permalink: archive/113488general/03027wellfoundedrecursion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Dec 16 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20recursion/near/151874709):
 Given that a relation ```R : a -> a -> Prop``` satisfies ```{ f : stream a // forall n, R (f (n + 1)) (f n)} -> false```, is it possible to get ```well_founded R```?
 
@@ -62,3 +64,5 @@ Aah. To get a non-increasing sequence you could use countable dependent choice.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 16 2018 at 18:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20recursion/near/151888044):
 https://gist.github.com/rwbarton/7bd5b3b19d930f577355a596a5ed8b4d is basically dependent choice, without the choice part (but you could use choice in the inductive step)
 
+
+{% endraw %}

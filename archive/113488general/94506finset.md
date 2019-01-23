@@ -9,6 +9,8 @@ permalink: archive/113488general/94506finset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Nov 20 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset/near/148072219):
 Is the following result somewhere in mathlib? If not, are there results which make it less painful than proving it from scratch using lists?
 ```
@@ -269,3 +271,5 @@ Is there no `preimage` for `finset`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 28 2018 at 06:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset/near/148690350):
 you could use `finset.filter`
 
+
+{% endraw %}

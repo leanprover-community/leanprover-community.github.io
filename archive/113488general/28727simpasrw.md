@@ -9,6 +9,8 @@ permalink: archive/113488general/28727simpasrw.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Sever (Sep 15 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20as%20rw/near/133984046):
 Recently I have come across many cases where rw cannot rewrite the thing I need it to. Usually simp can do the trick, but I know it's bad practice to not close a goal after using simp. I was wondering if it's ok to use `simp only` and not close a goal?
 Also, is there a reason rw cannot rewrite under lambdas, or stuff with type class inference (there probably is a good reason, most likely one I won't understand)?
@@ -43,3 +45,5 @@ Mario has a lot of experience in something I'm a complete novice at -- maintaini
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 15 2018 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20as%20rw/near/134004250):
 Currently I'm learning how to write code which is maintainable. But I'm trying to preach the basics to people like you Ali.
 
+
+{% endraw %}

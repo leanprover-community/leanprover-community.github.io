@@ -9,6 +9,8 @@ permalink: archive/116395maths/62892WhatsnewinLeanmaths.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 09 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%27s%20new%20in%20Lean%20maths%3F/near/133605485):
 This thread is for people to occasionally announce or flag code which they or others have written, which is publically available, finished / usable, and which might be of general use or interest to the lean community. I'm starting it because I find looking through mathlib commits confusing and time-consuming, and because there are things which are happening other than mathlib commits.
 
@@ -284,3 +286,5 @@ PR #553 was merged, we have now Lipschitz continuous functions, the Banach fixed
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Jan 23 2019 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%27s%20new%20in%20Lean%20maths%3F/near/156682413):
 We also have the point wise order on products as the canonical order structure
 
+
+{% endraw %}

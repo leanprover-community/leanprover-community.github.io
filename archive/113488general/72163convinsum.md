@@ -9,6 +9,8 @@ permalink: archive/113488general/72163convinsum.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Morenikeji Neri (Aug 01 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20in%20sum/near/130723162):
 I would like to show
 ```lean
@@ -25,3 +27,5 @@ I recommend you make a minimal working example so that people can have a look in
 
 I think `congr' 1, ext, rw mul_assoc` could help.
 
+
+{% endraw %}

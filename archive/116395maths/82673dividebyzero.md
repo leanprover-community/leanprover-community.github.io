@@ -9,6 +9,8 @@ permalink: archive/116395maths/82673dividebyzero.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Aug 11 2018 at 02:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/divide%20by%20zero/near/131929327):
 Lean was mentioned in a blog post about 1/0 = 0! https://www.hillelwayne.com/post/divide-by-zero/
 
@@ -20,3 +22,5 @@ These things are conventions, exactly the same as announcing that x^-n = 1/x^n a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 11 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/divide%20by%20zero/near/131938204):
 Aaaahrg... They chose `19` instead of `57`. Do they want a broken system anyway!?
 
+
+{% endraw %}

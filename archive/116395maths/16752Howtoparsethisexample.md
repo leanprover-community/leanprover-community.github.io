@@ -9,6 +9,8 @@ permalink: archive/116395maths/16752Howtoparsethisexample.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) None proffered (Aug 07 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20parse%20this%20example%3F/near/131060242):
 How to parse this example?
 
@@ -40,3 +42,5 @@ example : (∃ x, p x → r) → (∀ x, p x) → r := by finish
 ```
 So it is provable in one direction unconditionally, but the bidirectional version requires some `a : A`, i.e. `A` has to be nonempty.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/23022Nuancesregardingnaturality.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Nuances%20regarding%20naturality/near/135266364):
 https://mathoverflow.net/questions/244131/nuances-regarding-naturality?noredirect=1&lq=1
 
@@ -85,3 +87,5 @@ For the infinite case you can't do it, but who cares when cardinals don't have d
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Nuances%20regarding%20naturality/near/135274977):
 so essentially I'm asking for a term of the type `\Pi (k : Type u) (V : Type v) [field k] [vector_space k V], trunc (basis k V)`
 
+
+{% endraw %}

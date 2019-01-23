@@ -9,6 +9,8 @@ permalink: archive/113488general/45326Fieldsmedals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 31 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Fields%20medals/near/130662923):
 Who wants to bet on Fields medals that will be awarded tomorrow? I mean the other Fields medals, not Scholze's.
 
@@ -203,3 +205,5 @@ what a turn of events
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 01 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Fields%20medals/near/130742554):
 Schapira will give (or has given?) the laudatio for Kashiwara, this may be fun. It will make up a bit for the fact that Fontaine is not giving the laudatio for Scholze.
 
+
+{% endraw %}

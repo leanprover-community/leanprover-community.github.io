@@ -9,6 +9,8 @@ permalink: archive/113488general/37598sumrec.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 01 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum.rec/near/125949453):
 I'm having a surprisingly hard time working with `sum.rec`. Specifically, I'm having trouble convincing Lean to give me an ordinary, non-dependent function as the result. I pasted a transcript here: https://gist.github.com/rwbarton/b6cbf07bd07afd89f8c2b4feef8cec5f
 
@@ -165,3 +167,5 @@ it isn't automatically generated
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum.rec/near/125960649):
 but indeed, @**Mario Carneiro** should have made it protected
 
+
+{% endraw %}

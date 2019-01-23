@@ -9,6 +9,8 @@ permalink: archive/113488general/99190isthistruewithoutdecidable.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 07 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20true%20without%20decidable/near/133509753):
 ```lean
 example (R : Type) [ring R] (i j : ℕ) (hnat : i ≠ j)
@@ -32,3 +34,5 @@ I thought this was my goal state. But it's not. `i` and `j` are coerced somewher
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 07 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20true%20without%20decidable/near/133510154):
 /me needs to look at the `pp.all true` variant of the goal state.
 
+
+{% endraw %}

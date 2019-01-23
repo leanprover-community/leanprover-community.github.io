@@ -9,6 +9,8 @@ permalink: archive/113488general/11013Newbieerror.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254021):
 I've got the following code
 ```lean
@@ -296,3 +298,5 @@ Ok, thanks! I hope to get the hang of it as well...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 08 2018 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126266785):
 Or perhaps `@set.univ M`
 
+
+{% endraw %}

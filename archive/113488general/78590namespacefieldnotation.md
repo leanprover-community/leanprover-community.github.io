@@ -9,6 +9,8 @@ permalink: archive/113488general/78590namespacefieldnotation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 11 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20field%20notation/near/124921576):
 Before I disappeared for a month to handle a visiting-family exception, I was experimenting with using more “namespace field notation.” That is, instead of using `list.map f l`, I would use `l.map f`. I like the conciseness gained by removing the namespace `list`.
 
@@ -252,3 +254,5 @@ No I don't think so.  I think the only proposal that aimed to simplify chaining 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 11 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20field%20notation/near/124924578):
 @**Sean Leather** Ah sorry, I was thinking of the basic field notation, which will pick up fields from super structures as well. But it doesn't work with functions in the namespace... yet
 
+
+{% endraw %}

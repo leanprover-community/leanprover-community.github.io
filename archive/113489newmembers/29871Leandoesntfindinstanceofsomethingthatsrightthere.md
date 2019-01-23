@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/29871Leandoesntfindinstanceofsomethingthatsr
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 16 2018 at 00:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20doesn%27t%20find%20instance%20of%20something%20that%27s%20right%20there/near/135863594):
 Weird problem -- I have my goal, which is `(x ⋆ y) → (y ⋆ z) → (x ⋆ z)` (for some operation `⋆`) and I have a hypothesis `Hxy : x = y`. But when I try `rw Hxy,` Lean tells me:
 
@@ -54,3 +56,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 16 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20doesn%27t%20find%20instance%20of%20something%20that%27s%20right%20there/near/135864852):
 Yeah, I've encountered that before, but that actually makes sense (and is useful!). Treating rewrites differently based on whether they're done on a natural number or a proof is just weird.
 
+
+{% endraw %}

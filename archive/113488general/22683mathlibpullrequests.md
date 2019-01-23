@@ -9,6 +9,8 @@ permalink: archive/113488general/22683mathlibpullrequests.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 19 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20pull%20requests/near/128290679):
 @**Mario Carneiro** and @**Johannes Hölzl**: There are a lot of pending [PRs](https://github.com/leanprover/mathlib/pulls). What would you like to do with them?
 
@@ -94,3 +96,5 @@ https://github.com/leanprover/mathlib/issues/160
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 20 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20pull%20requests/near/128358661):
 (deleted)
 
+
+{% endraw %}

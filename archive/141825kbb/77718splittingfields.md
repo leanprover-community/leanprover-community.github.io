@@ -9,6 +9,8 @@ permalink: archive/141825kbb/77718splittingfields.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 14 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/splitting%20fields/near/133967305):
 It would be great if we could push the splitting fields branch to the point where we can define the Galois group of a splitting field.
 
@@ -406,3 +408,5 @@ Nice! I think the hope was to make progress on splitting field, which will proba
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 19 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/splitting%20fields/near/134260795):
 Once that is know, I think we can start some sort of construction of splitting fields that inducts on the degree of the polynomial.
 
+
+{% endraw %}

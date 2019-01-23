@@ -9,6 +9,8 @@ permalink: archive/113488general/79918notopic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Feb 26 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28no%20topic%29/near/123008190):
 So general chatter goes in "archives" topic?
 
@@ -234,3 +236,5 @@ Can't wait to write WebSocket binary protocol for Lean4!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Jan 07 2019 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28no%20topic%29/near/154584968):
 This is the kind of flooding that is appreciated. By all means do continue to flood.
 
+
+{% endraw %}

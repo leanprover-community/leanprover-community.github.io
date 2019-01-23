@@ -9,6 +9,8 @@ permalink: archive/116395maths/59310Perfectfield.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 17 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135957480):
 Currently this is my definition:
 ```lean
@@ -33,3 +35,5 @@ use `discrete_field`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135990773):
 `field` is deprecated
 
+
+{% endraw %}

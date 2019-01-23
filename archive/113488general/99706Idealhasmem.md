@@ -9,6 +9,8 @@ permalink: archive/113488general/99706Idealhasmem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 30 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ideal%20has_mem/near/148853358):
 I don't get why `test₁` type checked but `test₂` will result in deterministic timeout...?
 
@@ -226,3 +228,5 @@ The printing thing seems easy enough to correct at https://github.com/leanprover
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 30 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ideal%20has_mem/near/148858035):
 but it's very probably not worth the trouble
 
+
+{% endraw %}

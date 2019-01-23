@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/23550listmapwithpi.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 09 2018 at 08:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147355746):
 Hello. I have an issue using dependent function space in conjunction with `list.map`. Could anyone take a peek?
 In the following state:
@@ -68,3 +70,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Nov 10 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147436358):
 Note that this `rw` now also rewrites the type of `f`.
 
+
+{% endraw %}

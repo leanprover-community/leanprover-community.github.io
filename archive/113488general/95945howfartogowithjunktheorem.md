@@ -9,6 +9,8 @@ permalink: archive/113488general/95945howfartogowithjunktheorem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20far%20to%20go%20with%20junk%20theorem/near/147692754):
 If `noncomputable definition nth_root (x : ℝ) (n : ℕ) : ℝ :=
 exp (log x / n)` then because log of a non-positive real is explicitly defined to be zero (log going out of its way to not ask for positivity there), we have that
@@ -30,3 +32,5 @@ If you use the fact at least once, there should be a theorem describing "out of 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20far%20to%20go%20with%20junk%20theorem/near/147695912):
 and if it eliminates a hypothesis you should use "out of domain" behavior of functions in the proof
 
+
+{% endraw %}

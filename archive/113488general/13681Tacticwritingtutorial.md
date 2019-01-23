@@ -9,6 +9,8 @@ permalink: archive/113488general/13681Tacticwritingtutorial.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 03 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20writing%20tutorial/near/150758082):
 More and more people are writing tactics, and providing bits of explanations here, but I never remember. So I decided to use my last hope option: I tried to teach it. The result is at https://github.com/leanprover-community/mathlib/blob/tactic_tutorial/docs/extras/tactic_writing.md Not only I hope this will help me remember this stuff, but also I hope it will allow experts to clear my misconceptions. And of course it would be a nice extra if it could teach someone something useful, so I'd be interested to know if any tactic writing newbie can read it (I know Johan already read it, because he carefully monitors our community repository).
 
@@ -199,3 +201,5 @@ This looks really nice, Patrick, thanks! I see a few small mistakes/typos. I can
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 04 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20writing%20tutorial/near/150833417):
 Actually maybe we should consider including a Lean file gathering all examples from the tutorial. I have it on my computer of course, but I wouldn't know where to put it in the repository
 
+
+{% endraw %}

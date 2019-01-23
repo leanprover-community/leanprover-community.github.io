@@ -9,6 +9,8 @@ permalink: archive/113488general/55671convertrefl.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 27 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/convert%2C%20refl/near/148646168):
 This is a new one for me--`convert` left a goal which I could close with `refl`
 
@@ -21,3 +23,5 @@ Maybe `refl` closed some later goal, fixing a metavariable, and that caused an e
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 27 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/convert%2C%20refl/near/148646658):
 I do have a `_` in the argument to `convert`
 
+
+{% endraw %}

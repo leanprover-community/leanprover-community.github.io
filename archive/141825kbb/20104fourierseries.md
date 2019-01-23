@@ -9,6 +9,8 @@ permalink: archive/141825kbb/20104fourierseries.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 04:30)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/fourier%20series/near/133773844):
 I think one of the foundational things about modular forms is their Fourier series. Do people think it is reasonable to attack this is the coming week?
 
@@ -18,3 +20,5 @@ I don't see how we could get series expansion for holomorphic functions so quick
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 12 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/fourier%20series/near/133838148):
 (deleted)
 
+
+{% endraw %}

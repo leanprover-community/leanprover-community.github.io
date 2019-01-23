@@ -9,6 +9,8 @@ permalink: archive/116395maths/39702euclideandomains.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 20 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/euclidean%20domains/near/129982059):
 Currently, the definition of a Euclidean domain has the field
 ```lean
@@ -65,3 +67,5 @@ Nice! I like your speed!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 20 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/euclidean%20domains/near/129996118):
 Cool, you add an instance for `int`!
 
+
+{% endraw %}

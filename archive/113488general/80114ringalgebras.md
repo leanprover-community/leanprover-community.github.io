@@ -9,6 +9,8 @@ permalink: archive/113488general/80114ringalgebras.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring%20algebras/near/133299335):
 This problem has come up several times in this year, and I decided it's time to face it instead of to avoid it. This is the definition of an algebra over a commutative ring:
 ```lean
@@ -411,3 +413,5 @@ how is the Lean 4 system better?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Dec 10 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring%20algebras/near/151266584):
 I don't know, it hasn't changed yet
 
+
+{% endraw %}

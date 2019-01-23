@@ -9,6 +9,8 @@ permalink: archive/113488general/67902structureequalityfromparts.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Mar 21 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality%20from%20parts/near/124033267):
 Hi, I'm totally new here, I've spent about a day with Lean so far.
 
@@ -313,3 +315,5 @@ true, and that's essentially what the more general swapping does too
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Mar 22 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality%20from%20parts/near/124036972):
 thanks for all the help!!
 
+
+{% endraw %}

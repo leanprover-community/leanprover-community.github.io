@@ -9,6 +9,8 @@ permalink: archive/113488general/00248multiset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 12 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiset/near/129522842):
 @**Ellen Arlt** and I are putting `multiset.lean` through its paces.
 
@@ -1020,3 +1022,5 @@ Half of the work is taking your "definition" and turning it into something lean 
 ```
 This is somehow the key point. I have quite a flexible way of thinking about definitions and their basic properties, I guess because mathematicians are trained like that. Some properties of a definition are so completely basic that I think I've got into the habit of simply *assuming* that they will be (a) true and (b) `rfl`. For simple functions this might well be the case. For more complex definitions which need some bending to shove into Lean, life might not be so easy. I have a definition by induction on two variables, and Mario's equation lemma is exactly how I am thinking the definition "works". I shove the definition into Lean in perhaps an inelegant way ("Mario wrote `multiset.strong_induction_on` and I can apply it twice, that'll do") and now I need to be aware of the fact that Lean's understanding of the function is now quite far from my intuitive idea of how it works, and it should now be a top priority to sort this situation out by proving the lemmas which say that the definition behaves the way I expect it to. If I'm writing some API then I might want to consider proving these so-called "equation lemmas" -- this is an informal definition and it seems to mean "the lemmas which an end user might expect to be true by definition, whether or not they are true by `rfl`" -- immediately after the definition of the function. Some might already be there with exotic names with `_`s in, and the ones that are not should be written as a matter of priority or other mathematicians will not be able to use the function in the intuitive way which they would like to.
 
+
+{% endraw %}

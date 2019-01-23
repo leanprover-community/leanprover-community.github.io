@@ -9,6 +9,8 @@ permalink: archive/113488general/30622memeqself.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731070):
 Harder than I expected!
 
@@ -67,3 +69,5 @@ We're evaluating `lam x, 3 = 3` at `x=3` :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731300):
 so indeed it's refl
 
+
+{% endraw %}

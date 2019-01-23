@@ -9,6 +9,8 @@ permalink: archive/113488general/68393zsqrtdnonsquareinnumbertheorypell.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/zsqrtd.nonsquare%20in%20number_theory/pell/near/127162105):
 This should be a `Prop` @**Mario Carneiro**
 
@@ -27,3 +29,5 @@ I fixed it, decidability is a bit weird since it's a typeclass
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 16:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/zsqrtd.nonsquare%20in%20number_theory/pell/near/127166130):
 it's also a proposition
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/10216recursingonmutualinductivetypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (May 28 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127212172):
 What's the best way to prove a theorem about a mutual type where the induction should use both types?
 
@@ -90,3 +92,5 @@ there isn't really any dichotomy between ands in lean, so it's not a big problem
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (May 29 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127268297):
 Oh right... `pprod` then
 
+
+{% endraw %}

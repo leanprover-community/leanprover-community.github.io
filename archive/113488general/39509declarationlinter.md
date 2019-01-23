@@ -9,6 +9,8 @@ permalink: archive/113488general/39509declarationlinter.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20linter/near/136122617):
 I wrote a "declaration linter" that processes each declaration and checks for things that look dodgy.
 Currently, it looks for lemmas whose type is not a Prop, and structures/classes which could be Props but aren't.
@@ -26,3 +28,5 @@ Start at line 141
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20linter/near/136122980):
 Ah, I figured out why--some leftover testing code.
 
+
+{% endraw %}

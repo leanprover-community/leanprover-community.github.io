@@ -9,6 +9,8 @@ permalink: archive/113488general/60703hasmemdisjoint.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Oct 02 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_mem%20disjoint/near/135017185):
 Currently, there is this definition in `data/list/basic.lean`:
 
@@ -233,3 +235,5 @@ That may be.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 02 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_mem%20disjoint/near/135057773):
 You could have a function `to_set [has_mem a b] : b -> set a` for which @**Sean Leather**' version of `disjoint` is consistent with `to_set a ∩ to_set b = ∅` even if `a` and `b` have different types.
 
+
+{% endraw %}

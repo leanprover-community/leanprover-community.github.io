@@ -9,6 +9,8 @@ permalink: archive/116395maths/49506xorisnotassociative.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 18 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/xor%20is%20not%20associative/near/125256439):
 Could someone prove that xor is not associative constructively, perhaps by constructing a Kripke model where this fails?
 
@@ -394,3 +396,5 @@ thanks
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Peter Jipsen (Apr 24 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/xor%20is%20not%20associative/near/125626599):
 A interesting test problem is to decide if the two definitions of xor are intuitionistically equivalent. I would like to understand how one would use Lean to help prove or refute it. E.g. is there a tactic that implements tableau?
 
+
+{% endraw %}

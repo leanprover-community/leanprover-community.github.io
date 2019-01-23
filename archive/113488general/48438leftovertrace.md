@@ -9,6 +9,8 @@ permalink: archive/113488general/48438leftovertrace.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 29 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leftover%20trace%3F/near/134895750):
 When I build mathlib, I see:
 
@@ -32,3 +34,5 @@ Is there a debug trace left somewhere?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 30 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leftover%20trace%3F/near/134899203):
 You can use `grep` on the mathlib directory. It's probably one of the flavors of `#print`
 
+
+{% endraw %}

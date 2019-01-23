@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/04864Trigonometricfunctions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Zimmer (Sep 29 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trigonometric%20functions/near/134883106):
 I'd like to learn how to use lean, by attempting to prove something nontrivial. Looking through the potential projects wiki page, trigonometric functions seems like the most promising (in that I can confidently prove the basic identies, facts about pi, etc. from first principles).
 
@@ -331,3 +333,5 @@ I think that this is a really good way of looking at it.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 27 2018 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trigonometric%20functions/near/136599443):
 (deleted)
 
+
+{% endraw %}

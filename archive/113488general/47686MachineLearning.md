@@ -9,6 +9,8 @@ permalink: archive/113488general/47686MachineLearning.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Machine%20Learning/near/124463630):
 @**Andrew Ashworth** Let's switch threads
 
@@ -111,3 +113,5 @@ back in the day, when humans interpreted radar returns, firing a bad operator wa
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Machine%20Learning/near/124464292):
 I'm slowly getting to respect the development of cowboy developers and I realize that everything doesn't need to be bullet proof. But there is an extent where rolling out a technology should be after proper study
 
+
+{% endraw %}

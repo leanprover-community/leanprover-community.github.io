@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/65124Macinstallation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) David Michael Roberts (Oct 08 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mac%20installation/near/135389084):
 I notice @**Scott Morrison|110087** put up a nice short video on getting required dependencies, VS Code and Lean installed on Mac, here: https://www.youtube.com/watch?v=k8U6YOK7c0M
 
@@ -202,3 +204,5 @@ I was fearing this. Can we get it to track master somehow?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 10 2018 at 08:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mac%20installation/near/135521976):
 Does someone want to write a git hook so that when I commit to master lean-3.4.1 moves too?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/94368FeedbackHeineBorelinprogress.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Guillermo Barajas Ayuso (Sep 16 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134030478):
 Hi, I have uploaded some code in the link  https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/Topology/Heine-Borel%20(incomplete) , I'll leave it here in case you want to give me some feedback. Thank you for your time! :-)
 
@@ -218,3 +220,5 @@ Or even `by simp`. Grr. What is the point of this `abel` tactic? I still haven't
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 17 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134106299):
 Hopefully `abel` is a step towards the `module` tactic which should be more useful
 
+
+{% endraw %}

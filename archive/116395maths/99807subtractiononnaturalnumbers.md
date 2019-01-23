@@ -9,6 +9,8 @@ permalink: archive/116395maths/99807subtractiononnaturalnumbers.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 11 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subtraction%20on%20natural%20numbers/near/124913490):
 Is there a name and notation to distinguish between subtraction on natural numbers and subtraction on integers? This is for my dissertation rather than a Lean proof
 
@@ -88,3 +90,5 @@ My favorite way to reason about `2 - 3` is to consider that `2 - 3 : nat` (since
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 11 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subtraction%20on%20natural%20numbers/near/124920993):
 I think it suffices to just remind people that this isn't a partial function
 
+
+{% endraw %}

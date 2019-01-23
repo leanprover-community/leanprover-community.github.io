@@ -9,6 +9,8 @@ permalink: archive/116395maths/49648foundationsofmathematics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 10 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/foundations%20of%20mathematics/near/124875861):
 I spent some time over the last couple of days learning about Voevodsky's work in type theory. I found this paper https://arxiv.org/abs/1711.01477 by Dan Grayson quite illuminating.
 
@@ -854,3 +856,5 @@ If you want to write a tactic-centric lean tutorial, I would suggest to begin wi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 11 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/foundations%20of%20mathematics/near/124907734):
 It is a good point that mathematicians know perfectly well about lambdas, they just write them $x \mapsto f(x)$.
 
+
+{% endraw %}

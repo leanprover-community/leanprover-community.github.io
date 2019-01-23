@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/47853inductionmissingconstraint.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Etienne Laurin (Sep 01 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133180811):
 Given `(a b : ℕ) (h : a ≤ b)`, after doing `induction h`, the `case less_than_or_equal.refl` doesn't have any hypothesis allowing to conclude `a = b`. Why not? Is there another way to perform induction that does introduce `a = b` in that case?
 
@@ -54,3 +56,5 @@ Oh nice. But I notice that doesn't work too well if I haven't imported the right
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 01 2018 at 17:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181720):
 `#find` might be helpful for you. But I would definitely recommend (a) learning the rules of thumb for lemma names and (b) the ctrl-space dance for auto-completion. If you're trying to prove something about int then just import `data.int.basic`
 
+
+{% endraw %}

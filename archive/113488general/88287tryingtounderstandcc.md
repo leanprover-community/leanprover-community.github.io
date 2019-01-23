@@ -9,6 +9,8 @@ permalink: archive/113488general/88287tryingtounderstandcc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125602905):
 I had hoped this would work:
 ```lean
@@ -298,3 +300,5 @@ theorem test : ∀ (m n : ℕ), m + n = n + m :=
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 25 2018 at 15:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672553):
 Oh interesting! I didn't think it would
 
+
+{% endraw %}

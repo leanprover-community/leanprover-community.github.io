@@ -9,6 +9,10 @@ permalink: archive/116395maths/03150Explicitissubmodule.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 15 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Explicit%20%60is_submodule%60/near/129679386):
 What's the reason lemmas like `span_eq_of_is_submodule` in `linear_algebra.basic` take an explicit `is_submodule` argument, rather than using type class inference?
 
+
+{% endraw %}

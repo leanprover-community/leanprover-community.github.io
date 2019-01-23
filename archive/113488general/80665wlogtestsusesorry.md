@@ -9,6 +9,8 @@ permalink: archive/113488general/80665wlogtestsusesorry.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 09 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog%20tests%20use%20sorry/near/123507100):
 @**Simon Hudon**, I noticed your tests for the `wlog` tactic contain sorries, and these cause warning messages when compiling mathlib. Perhaps this is worth fixing, so we can all have clean outputs.
 
@@ -69,3 +71,5 @@ I didn't create a fake Github account only to post a link to the Lean FAQ ::stuc
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 09 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog%20tests%20use%20sorry/near/123509350):
 heh
 
+
+{% endraw %}

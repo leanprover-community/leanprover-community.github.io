@@ -9,6 +9,8 @@ permalink: archive/113488general/31671cpuonmac.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034358):
 Anyone had an issue with lean using > 95% cpu on mac?
 
@@ -72,3 +74,5 @@ O
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036883):
 it's down to 10 now :sweat_smile: I think it should be fine, thank you!
 
+
+{% endraw %}

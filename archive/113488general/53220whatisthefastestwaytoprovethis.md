@@ -9,6 +9,8 @@ permalink: archive/113488general/53220whatisthefastestwaytoprovethis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 25 2018 at 17:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20fastest%20way%20to%20prove%20this/near/125675713):
 ```lean
 p q t : ℕ+,
@@ -184,3 +186,5 @@ no, I just want to learn
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 25 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20fastest%20way%20to%20prove%20this/near/125686447):
 But seriously, it is certainly a fun exercise. Let me know if you have questions
 
+
+{% endraw %}

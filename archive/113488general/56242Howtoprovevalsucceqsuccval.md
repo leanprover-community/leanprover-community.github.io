@@ -9,6 +9,8 @@ permalink: archive/113488general/56242Howtoprovevalsucceqsuccval.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 15 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20val_succ_eq_succ_val/near/126591309):
 This feels almost defeq to me. But I am stumped how to prove this:
 ```lean
@@ -82,3 +84,5 @@ I would call the theorem `succ_val` though
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 16 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20val_succ_eq_succ_val/near/126660987):
 Done: https://github.com/leanprover/mathlib/pull/138
 
+
+{% endraw %}

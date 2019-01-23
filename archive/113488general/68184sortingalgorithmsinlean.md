@@ -9,6 +9,8 @@ permalink: archive/113488general/68184sortingalgorithmsinlean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Mar 30 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sorting%20algorithms%20in%20lean/near/124411849):
 Hi guys,
 
@@ -69,3 +71,5 @@ Fair enough guys, I find Mario's and Andrew's points entirely convincing, and of
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 30 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sorting%20algorithms%20in%20lean/near/124421994):
 Another possibility for simpler verified programs is the functions in `list.basic`. There are lots of interesting examples of simple list functions and proofs that they have the expected properties. For example, `list.filter` has a two-line definition, and its proof of correctness is `list.mem_filter` (among others; that doesn't uniquely define the function).
 
+
+{% endraw %}

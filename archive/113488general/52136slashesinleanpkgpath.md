@@ -9,6 +9,8 @@ permalink: archive/113488general/52136slashesinleanpkgpath.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 06 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212544):
 What does leanpkg.path look like on windows? I have about 20 minutes to get mathlib up and running on a win7 machine with no admin access and hence no git (apparently!). Are they `/` or `\`, and one or two?
 
@@ -64,3 +66,5 @@ I have some here for unix :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 06 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129213107):
 I don't know if Windows oleans are any different
 
+
+{% endraw %}

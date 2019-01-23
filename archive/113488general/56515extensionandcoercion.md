@@ -9,6 +9,8 @@ permalink: archive/113488general/56515extensionandcoercion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 13 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123660814):
 A long time ago, I wrote:
 ```lean
@@ -118,3 +120,5 @@ I don't see the value in `by_double_inclusion`. You could just use `apply subset
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 14 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123695171):
 Thank you very much @**Johannes Hölzl** I'm sorry my Lean time is very fragmented those days, so I suddenly stopped answering. I already had some infrastructure but it is only partially compatible with what you wrote. I'll need time to make the whole story consistent, including probably some more lemmas assuming only injectivity or surjectivity.
 
+
+{% endraw %}

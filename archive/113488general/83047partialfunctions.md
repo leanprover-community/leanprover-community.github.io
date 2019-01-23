@@ -9,6 +9,8 @@ permalink: archive/113488general/83047partialfunctions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Victor Porton (Jul 07 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129261641):
 Why this does not work?
 
@@ -460,3 +462,5 @@ And furthermore there is already a definition which gives this isomorphism, `as_
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 08 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307457):
 It's not undocumented, but it's a pain to work with
 
+
+{% endraw %}

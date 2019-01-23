@@ -9,6 +9,8 @@ permalink: archive/113488general/61179aboutcompilation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 08 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/about%20compilation/near/147299477):
 why do we need to re-compile the file as well as all the files that depend on the file even if all we did is adding a space?
 
@@ -66,3 +68,5 @@ I think the easiest thing to do would be to get a build system to hash the olean
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 11 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/about%20compilation/near/147464339):
 Changing a proof would still trigger a rebuild but adding a space wouldn't
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/85801computabledivisionbynonzeroreal.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 09 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188580):
 If I have a proof that `r : ℝ` is non-zero, can I make `def f : ℝ → ℝ := λ x, x / r` computable?
 
@@ -250,3 +252,5 @@ Oh, I found a counterexample for the computability claim. Let $$X$$ be a quotien
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 09 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131190754):
 Because Luca was dividing by a positive real which I could prove was greater than 1/10 and so I realised that probably I could make some of his noncomputable code computable. I hence wondered whether it would be an easy fix to make his fundamental group computable. But as Mario pointed out, there are other problems with computability, and I've now decided not to worry about it.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/74349provingequalityofstructures.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 16 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126644596):
 Is there a tactic or something that's like `apply subtype.eq`, but works for a general structure? Or do I have to write down the equality lemma manually?
 
@@ -74,3 +76,5 @@ I don't have the necessary stuff to test your example, but I think it is possibl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (May 17 2018 at 05:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126679010):
 Yes, that proof works too.
 
+
+{% endraw %}

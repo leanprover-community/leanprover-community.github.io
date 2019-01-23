@@ -9,6 +9,8 @@ permalink: archive/113488general/42057listnotation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jason Dagit (Aug 23 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20notation/near/132651314):
 I saw this snippet in the tutorial in the "inductive types" section:
 
@@ -37,3 +39,5 @@ Thanks for the explanation, I think that makes sense and answers all the questio
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 23 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20notation/near/132652449):
 Let me know if you need more. It might be useful if you find other information I could include in the documentation.
 
+
+{% endraw %}

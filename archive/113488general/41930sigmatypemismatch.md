@@ -9,6 +9,8 @@ permalink: archive/113488general/41930sigmatypemismatch.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 26 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sigma%20type%20mismatch/near/124220067):
 `stalk2` below doesn't typecheck:
 
@@ -107,3 +109,5 @@ which will happen in 15 minutes
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 26 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sigma%20type%20mismatch/near/124231348):
 I pushed as far as I got. Thanks.
 
+
+{% endraw %}

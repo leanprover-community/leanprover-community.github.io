@@ -9,6 +9,8 @@ permalink: archive/113488general/77009AccessingNattypewithininductiveTyp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Cameron Crossman (Dec 13 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151722800):
 I have the following inductive definition
 inductive Typ
@@ -59,3 +61,5 @@ Maybe you want to define an interpretation `Typ -> Type`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Cameron Crossman (Dec 13 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151724268):
 thanks!
 
+
+{% endraw %}

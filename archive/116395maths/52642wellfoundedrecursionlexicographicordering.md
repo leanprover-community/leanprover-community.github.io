@@ -9,6 +9,8 @@ permalink: archive/116395maths/52642wellfoundedrecursionlexicographicordering.ht
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Sep 14 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941390):
 Hi, I have a pleb question about how Lean infers whether recursion is well-founded or not.
 I'm writing a recursive function whose first two arguments are of type `fin m` and `fin n`,  and my algorithm:
@@ -59,3 +61,5 @@ the linked notes explain how to change the well-order on your input.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941991):
 well I mean, what are you trying to do, instead of MWE of the error
 
+
+{% endraw %}

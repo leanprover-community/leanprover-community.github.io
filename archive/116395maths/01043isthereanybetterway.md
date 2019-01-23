@@ -9,6 +9,8 @@ permalink: archive/116395maths/01043isthereanybetterway.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Truong Nguyen (Sep 03 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is%20there%20any%20better%20way%3F/near/133271618):
 Hi Everybody,
 I this this way of proving 1 < 4 is not a smart way. Do you have any better way for doing this. Thanks
@@ -117,3 +119,5 @@ theorem tyyy (a b: ℕ ):
 nat.modeq.modeq_add (eq.symm (nat.mod_mod _ _)) (eq.symm (nat.mod_mod _ _))
 ```
 
+
+{% endraw %}

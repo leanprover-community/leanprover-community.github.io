@@ -9,6 +9,8 @@ permalink: archive/113488general/53884casesfailsonexists.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nima (Apr 21 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485520):
 Can you explain this error message (it happens when I say `cases hm with aa bb`, but `by_cases number.has_min α with hm` works perfectly fine):
 ```lean
@@ -217,3 +219,5 @@ Is this code to be `#eval`d? Compiled to C++ and then run? Used only for correct
 But that is for `inf` and not `has_inf`.
 Right now I know nothing about automatic code generation in lean. I doubt it does exactly what I wish (not sure what exactly that is either). For example, if I have a constraint, I want it to be mutable. If I define addition of two constraints, there is going to be 5 (I guess) additions, but in lean I will have only one. So mostly manual transformation. That could also be a reason why I am not a fan of `match` in lean. I don't know any formal semantics for c++, so not much into verification/validation. But I was thinking about an interval that support both strict and non-strict constraint in both dynamic and static, and realized that is too much for me to verify on my mind. So it would be nice if I can prove the operations first (on a scratch paper) and then at least be sure about the correct behavior.
 
+
+{% endraw %}

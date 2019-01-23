@@ -9,6 +9,8 @@ permalink: archive/113488general/40609Whatsthefastestwaytoprovethis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20the%20fastest%20way%20to%20prove%20this%3F/near/127145665):
 ```lean
 example : ∀ m n : ℕ, m = m * n → m = 0 ∨ n = 1 := sorry
@@ -38,3 +40,5 @@ https://github.com/leanprover/lean/blob/master/library/init/data/nat/lemmas.lean
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 03:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20the%20fastest%20way%20to%20prove%20this%3F/near/127146625):
 thanks
 
+
+{% endraw %}

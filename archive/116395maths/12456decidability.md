@@ -9,6 +9,8 @@ permalink: archive/116395maths/12456decidability.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 17 2018 at 17:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decidability/near/147882267):
 tldr; why do we have `linear_order` and `decidable_linear_order`?
 
@@ -187,3 +189,5 @@ zero, because it's there already
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Nov 18 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decidability/near/147895978):
 Oh, you're right! I stared at `finset.sup` before but I didn't understand what I was looking at until now.
 
+
+{% endraw %}

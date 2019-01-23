@@ -9,6 +9,8 @@ permalink: archive/113488general/65095Leantrustedbase.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Karl Palmskog (Jan 12 2019 at 04:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20trusted%20base/near/154966417):
 Does anyone know if there is a breakdown of the Lean trusted base somewhere? As in, "to trust your Lean code/proofs, you have to accept ...", which is done for Coq in its wiki: https://github.com/coq/coq/wiki/Presentation#what-do-i-have-to-trust-when-i-see-a-proof-checked-by-coq
 
@@ -29,3 +31,5 @@ hmm, assumptions seem to be different from axioms (section variables apparently 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 12 2019 at 08:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20trusted%20base/near/154973055):
 Section variables are added to the types of any definitions in the section which use them, and so they would be supplied where that definition is used.
 
+
+{% endraw %}

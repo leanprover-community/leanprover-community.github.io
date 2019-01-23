@@ -9,6 +9,8 @@ permalink: archive/113488general/34376hascoetofunquestions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 31 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136859792):
 1) What's going on here?
 
@@ -51,3 +53,5 @@ One might wonder why the universe parameters are not filled in by stating `has_c
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 31 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860778):
 Thanks to both of you. I remember it taking me a very long time to understand type class inference, and I had always assumed I understood it until I started thinking about it more carefully just the other day. For (1) I remember running into these subtleties with the difference between `definition` and `theorem` before, but maybe I have just never fully understood them. Usually they only show up (for me) when I foolishly use the wrong one :-) I think we should have a little VS Code paperclip that pops up saying "I see you're writing a theorem. Do you want some help with that, specifically because you seem to be constructing a term whose type is not a proposition?".
 
+
+{% endraw %}

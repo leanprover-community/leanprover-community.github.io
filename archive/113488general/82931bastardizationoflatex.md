@@ -9,6 +9,8 @@ permalink: archive/113488general/82931bastardizationoflatex.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 22 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bastardization%20of%20latex/near/124064895):
 the usage of a different font (times new roman I guess?) bastardizes the entirety of latex...
 
@@ -33,3 +35,5 @@ yay we can do maths
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 22 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bastardization%20of%20latex/near/124073197):
 I noticed this too when we first moved to Zulip. I think it is stuck in the "quick render" mode of mathjax
 
+
+{% endraw %}

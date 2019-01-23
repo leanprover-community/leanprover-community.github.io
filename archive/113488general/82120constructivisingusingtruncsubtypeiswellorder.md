@@ -9,6 +9,8 @@ permalink: archive/113488general/82120constructivisingusingtruncsubtypeiswellord
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructivising%20using%20%60trunc%20%28subtype%20%28is_well_order%20_%29%29%60/near/148204645):
 How many things can we constructivise with a `trunc (subtype (is_well_order _))` hypothesis? I'm sure we can make a truncated basis this way... Maybe if it can constructivise a lot of stuff, I would imagine making it as wide-used as `decidable_eq`
 
@@ -30,3 +32,5 @@ I think `is_well_order` is not as useful constructively as it is in classical ma
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 23 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructivising%20using%20%60trunc%20%28subtype%20%28is_well_order%20_%29%29%60/near/148208346):
 in particular `is_well_order.min` is not constructive
 
+
+{% endraw %}

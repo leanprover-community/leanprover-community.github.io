@@ -9,6 +9,8 @@ permalink: archive/113488general/93439testing.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 31 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing/near/136886579):
 @**Kevin Buzzard** do you get a ping?
 
@@ -39,3 +41,5 @@ I didn't get a mention
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 31 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing/near/136887011):
 ok, thanks for your 9 minutes
 
+
+{% endraw %}

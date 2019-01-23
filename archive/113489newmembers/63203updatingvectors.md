@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/63203updatingvectors.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Marcus Klaas (Dec 11 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/updating%20vectors/near/151447262):
 Hi! Can anyone provide some pointers here? I'm trying to define a function that updates a vector at a given index. This seems to work, but it's very unwieldy:
 ```lean
@@ -96,3 +98,5 @@ Hmm, yeah, I should finish those slides at some point.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Marcus Klaas (Dec 11 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/updating%20vectors/near/151450283):
 ^^
 
+
+{% endraw %}

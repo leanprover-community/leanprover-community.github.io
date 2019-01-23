@@ -9,6 +9,8 @@ permalink: archive/113488general/32921moreproblemswithcoercions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958740):
 So... I've been trying to implement @**Mario Carneiro**'s suggestion that I define the coercion allowing `F X` for a functor `F` on an object `X`, and define a @[simp] lemma unfolding the coercion.
 
@@ -156,3 +158,5 @@ similarly there is `iff.rfl` and `iff.refl`, etc. The naming convention has `rfl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130961287):
 Thanks for explaining this `rfl` vs `refl` thing. Switching to `rfl` really helps, both here and elsewhere. :-)
 
+
+{% endraw %}

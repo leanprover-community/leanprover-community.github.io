@@ -9,6 +9,8 @@ permalink: archive/113488general/63156DependentlyTypedFoldsforNestedDataTypes.ht
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 05 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependently%20Typed%20Folds%20for%20Nested%20Data%20Types/near/129137513):
 @**Sebastian Ullrich** [wrote](https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/cases/near/126323093):
 
@@ -119,3 +121,5 @@ data BushN : Nat -> Set -> Set where
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 06 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependently%20Typed%20Folds%20for%20Nested%20Data%20Types/near/129190559):
 Oh, I missed that
 
+
+{% endraw %}

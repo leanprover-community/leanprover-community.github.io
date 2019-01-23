@@ -9,6 +9,8 @@ permalink: archive/113488general/63764structuralrecursion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 29 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structural%20recursion/near/132971116):
 I have the following code for which Lean cannot prove termination because it's trying to use well-founded recursion:
 
@@ -58,3 +60,5 @@ def get_m.up' : Π {α : Type u} {β : Type.{max u v}} (Heq : α → β), get_m 
 
 I really don't like it but it type checks.
 
+
+{% endraw %}

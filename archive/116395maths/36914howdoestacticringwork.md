@@ -9,6 +9,8 @@ permalink: archive/116395maths/36914howdoestacticringwork.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 13 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20does%20tactic.ring%20work%3F/near/128000315):
 @**Kevin Buzzard** Re 2: Because `znum` is a fast (but somewhat "unmathematical") implementation of `int`.
 
@@ -21,3 +23,5 @@ If that's the only reason then I might rip them out and replace them with ints b
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 13 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20does%20tactic.ring%20work%3F/near/128000410):
 Hmm, I can't change the stream... even though I changed the topic... [meeh]
 
+
+{% endraw %}

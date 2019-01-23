@@ -9,6 +9,8 @@ permalink: archive/113488general/19144intorder.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 13 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int%20order/near/133888086):
 Why is most of https://github.com/leanprover/mathlib/blob/master/data/int/order.lean commented out? Do we have these theorems elsewhere?
 
@@ -165,3 +167,5 @@ you permuted two lemmas!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 13 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int%20order/near/133900919):
 (deleted)
 
+
+{% endraw %}

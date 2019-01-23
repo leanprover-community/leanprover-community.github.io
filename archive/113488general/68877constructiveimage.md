@@ -9,6 +9,8 @@ permalink: archive/113488general/68877constructiveimage.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 27 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructive%20image/near/124280837):
 Maybe we should define the image of a map f:X->Y to be X quotient by the relation that x~y iff f(x)=f(y)
 
@@ -60,3 +62,5 @@ lol
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 27 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructive%20image/near/124285605):
 @**Patrick Massot** I searched it and saw you crap-talking about constructivism :P
 
+
+{% endraw %}

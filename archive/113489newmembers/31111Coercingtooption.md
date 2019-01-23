@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/31111Coercingtooption.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204948):
 Where can I find lemmas about coercing to option (e.g. `ℕ` to `option ℕ`)? I want basic things like `↑(n - m) = ↑n - ↑m`.
 
@@ -87,3 +89,5 @@ that's a different thing
 ```
  It's a definitionally equal thing. Definitional equality is a subtle beast. At times you should just treat definitionally equal things as the same, but at other times you shouldn't, and this is one of those times. This came up today in my M1P1 talk. We tried `linarith` to finish the proof that any two limits of a sequence were equal, and it failed, because we had hypotheses of the form `l < m -> false`. When we changed them to the definitionally equal `\not (l < m)` linarith suddenly worked! What is going on, I guess, is that linarith is looking at what "kind" of an expression it can see, and `l < m -> false` is "just some function" to linarith, whereas `\not (l < m)` is "a linear inequality that I can use". Similarly type class inference for + is going to trigger on `with_bot nat` but perhaps not on `option nat` even though they're definitionally equal. I hope I've got this mostly right. These things might be definitionally equal, but they are different expressions so tactics or other bits of Lean might treat them in different ways. For unification they will be the same but for rewrites they won't. etc etc.
 
+
+{% endraw %}

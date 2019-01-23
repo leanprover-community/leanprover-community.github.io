@@ -9,6 +9,8 @@ permalink: archive/113488general/73933typeclassinferencesystem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 05 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20system/near/127610700):
 Two (classes of) related questions:
 1) Is there some reference for the type class inference algorithm that Lean uses? Is it ad hoc, or does it follow some established algorithm? Is it documented in some paper?
@@ -46,3 +48,5 @@ Once Lean 4 is ready, someone should write "The Leanbook". Alas, I hear that Don
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 05 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20system/near/127611690):
 I would love to understand the inner workings of Lean. But I'm not a very proficient source reader. In that regard I found the TeXbook very enlightening.
 
+
+{% endraw %}

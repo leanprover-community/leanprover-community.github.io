@@ -9,6 +9,8 @@ permalink: archive/113488general/05990checkingvisiblelinesandabove.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 11 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/checking%20visible%20lines%20and%20above/near/129473320):
 Whilst the VS Code option "checking visible lines and above" is probably a useful mode to be in if you're working on a large file, for my users it causes more problems than it solves. I know how to change it to "checking visible files", but every time I open a new folder it changes back. Is there a way to globally change the default once and for all?
 
@@ -29,3 +31,5 @@ It doesn't seem to say what the "checking visible files" option would be - could
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 12 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/checking%20visible%20lines%20and%20above/near/129527279):
 `visible` is the visible files option
 
+
+{% endraw %}

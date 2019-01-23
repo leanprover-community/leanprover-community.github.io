@@ -9,6 +9,8 @@ permalink: archive/113488general/77786Modules.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Morenikeji Neri (Jul 26 2018 at 00:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Modules/near/130306693):
 Why is is_linear_map not a class?
 
@@ -42,3 +44,5 @@ What are these issues? I used modules yesterday and they worked fine....ooh! A l
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Modules/near/130328062):
 Wait, that link tells me nothing. I wanted to add to it but I'm hoping that someone other than me adds to it. I am adding something now.
 
+
+{% endraw %}

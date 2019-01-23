@@ -9,6 +9,8 @@ permalink: archive/113488general/88527idempotentconstructionsanduniverses.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 12 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idempotent%20constructions%20and%20universes/near/135671325):
 I think there might be general theory behind this. I will just start with an example:
 There is this thing called a *topos*. It shows up in geometry, topology, and also logic. It is the natural category theoretic places where a *sheaf* lives. If you have a topological space `X`, you can form `Sh(X)`: the category of all sheaves on `X`. This is the prototypical example of a topos. It turns out that topological spaces are to restrictive, we need to categorify them, what you get is *sites*: a category `C` together with a *Grothendieck topology* on `C`. Every Grothendieck topos is (by definition) the category of sheaves on some site.
@@ -326,3 +328,5 @@ Do you need the theory of integral extensions here? Sum of two elements integral
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 12 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idempotent%20constructions%20and%20universes/near/135698778):
 Honestly this code should be waiting until after the module refactoring :-/
 
+
+{% endraw %}

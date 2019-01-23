@@ -9,6 +9,8 @@ permalink: archive/113488general/56940piinstancewoes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 14 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pi_instance%20woes/near/128076746):
 A product of topological groups is a topological group.
 
@@ -542,3 +544,5 @@ It's going to be pretty tough inferring what alpha is given that it's never ment
 ```
 I fixed this in my simplicial branch. But it hasn't made it into mathlib yet.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/56373everypartialordercanbeorderembeddedintoapowe
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781096):
 ```lean
 section
@@ -60,3 +62,5 @@ It's the enriched Yoneda lemma where the enriching category is the poset of trut
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 27 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125783948):
 I guess there's slightly more going on here because you said "embedded into a powerset" = all functions from \a to V = {false -> true}, while the Yoneda embedding lands in order-reversing maps \a to V, i.e., lower sets of \a.
 
+
+{% endraw %}

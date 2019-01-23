@@ -9,6 +9,8 @@ permalink: archive/113488general/22304notationthatdoesnothing.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 21 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148107367):
 I want something like this:
 ```lean
@@ -71,3 +73,5 @@ And I definitely want `[n]` notation. It's just silly that the notation for list
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 21 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148136538):
 Making copies of inductive types is not uncommon. If you want to do congruence mod n on the integers, you run into problems because equivalence relations are a class but you want more than one equivalence relation on the integers. You can fix it by making these fake copies.
 
+
+{% endraw %}

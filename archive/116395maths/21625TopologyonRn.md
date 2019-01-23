@@ -9,6 +9,8 @@ permalink: archive/116395maths/21625TopologyonRn.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528202):
 I have the following code
 ```lean
@@ -148,3 +150,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530844):
 Not term-mode, but I don't care too much (-;
 
+
+{% endraw %}

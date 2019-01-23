@@ -9,6 +9,8 @@ permalink: archive/116395maths/81138smallchangesinnatandorderedgroupsinequalitie
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Apr 07 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/small%20changes%20in%20nat%20and%20ordered%20groups%20inequalities/near/124761510):
 Proposal 1.
 
@@ -79,3 +81,5 @@ For now I'm keeping the possibility open but not making any steps towards a fork
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 08 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/small%20changes%20in%20nat%20and%20ordered%20groups%20inequalities/near/124791116):
 I really hope Lean 4 and its reduced core lib will make all these problem disappear
 
+
+{% endraw %}

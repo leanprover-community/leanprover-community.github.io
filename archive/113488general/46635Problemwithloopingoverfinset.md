@@ -9,6 +9,8 @@ permalink: archive/113488general/46635Problemwithloopingoverfinset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 15 2019 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20looping%20over%20finset/near/155177808):
 Given `s : finset ℕ`,  how can I construct `s' : finset (ℕ × ℕ)` s.t.  `∀ a b,  a b ∈ s ↔ (a, b) ∈ s'` ?
 
@@ -55,3 +57,5 @@ I guess there is a missing monad instance for `finset` that would allow you to u
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 15 2019 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20looping%20over%20finset/near/155179484):
 Oh! Thanks a lot !!
 
+
+{% endraw %}

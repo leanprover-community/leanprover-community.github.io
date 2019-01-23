@@ -9,6 +9,8 @@ permalink: archive/113488general/45957reStructuredTextandLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reStructured%20Text%20and%20Lean/near/128224433):
 I'm looking at the build system of https://github.com/leanprover/theorem_proving_in_lean to adapt Software Foundations and I can't find where the html and latex lean syntax highlighting is defined. Can someone give me a hint?
 
@@ -644,3 +646,5 @@ https://github.com/alashworth/sf-lean/blob/lean-3.4.1/src/basics.lean
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Elliott Macneil (Jul 02 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reStructured%20Text%20and%20Lean/near/128955765):
 Thanks!
 
+
+{% endraw %}

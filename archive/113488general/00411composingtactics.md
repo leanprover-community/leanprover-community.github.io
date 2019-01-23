@@ -9,6 +9,8 @@ permalink: archive/113488general/00411composingtactics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 02 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/composing%20tactics/near/127458510):
 Suppose I prove a goal using `by repeat {constructor}`. What is the syntax for creating a new def of type `tactic unit` that does the same thing? Do I have to drop down into using the non-interactive tactics?
 
@@ -24,3 +26,5 @@ ahh, figured it out. it's just `interactive.repeat interactive.constructor`. I d
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jun 02 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/composing%20tactics/near/127460634):
 2) You can use `` `[repeat {constructor}] `` to use interactive tactic syntax outside of begin-end blocks.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/77939AdventofCode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Dec 01 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Advent%20of%20Code/near/150682850):
 adventofcode.com in Lean?
 
@@ -200,3 +202,5 @@ oh, lovely
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 04 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Advent%20of%20Code/near/150841529):
 I'm hoping that the conventional programming capabilities of lean will be boosted by these attempts
 
+
+{% endraw %}

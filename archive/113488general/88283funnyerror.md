@@ -9,6 +9,8 @@ permalink: archive/113488general/88283funnyerror.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 31 2018 at 05:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127342120):
 I could not minimize this error.
 
@@ -51,3 +53,5 @@ were you making a big structure and doing crazy stuff like sorrying out constant
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 31 2018 at 06:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127344193):
 I find these sorts of things a bit annoying to do for reasons like this
 
+
+{% endraw %}

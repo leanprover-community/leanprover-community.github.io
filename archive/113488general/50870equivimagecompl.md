@@ -9,6 +9,8 @@ permalink: archive/113488general/50870equivimagecompl.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 01 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.image_compl/near/124501726):
 Do we have `example (f : equiv a b) (s : set a) : f '' -s = - f '' s` hidden somewhere?
 
@@ -252,3 +254,5 @@ And it's even better if I can get the opportunity to deduce from this the statem
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 02 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.image_compl/near/124519491):
 excluded middle is an overgeneralization of the situation observed from finite situations
 
+
+{% endraw %}

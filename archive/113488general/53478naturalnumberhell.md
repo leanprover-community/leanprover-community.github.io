@@ -9,6 +9,8 @@ permalink: archive/113488general/53478naturalnumberhell.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 15 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580412):
 I want to use `big.map` once I have the `map`
 
@@ -469,3 +471,5 @@ you just introduce another variable
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 16 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643823):
 you do all that before you start the simp
 
+
+{% endraw %}

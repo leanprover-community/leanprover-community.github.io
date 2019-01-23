@@ -9,6 +9,8 @@ permalink: archive/113488general/00113leaninternals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) VinothKumar Raman (Mar 13 2018 at 16:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123659092):
 Is there any good reference to learn how to elaborate implicit arguments to a coc like core? Like how lean does? I am trying to build a coc like language
 http://godel.yellowflash.in/
@@ -184,3 +186,5 @@ so there are lots of heuristics for when to unfold something
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) VinothKumar Raman (Mar 14 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123695033):
 Oh ok
 
+
+{% endraw %}

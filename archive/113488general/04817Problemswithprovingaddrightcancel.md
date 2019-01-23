@@ -9,6 +9,8 @@ permalink: archive/113488general/04817Problemswithprovingaddrightcancel.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Lyle Kopnicky (Nov 28 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148741055):
 Hi folks, I'm a beginner at lean and I was trying my hand at proving one of the arithmetic identities, `add_right_cancel`. Here's my attempt (please note this is done within a hidden namespace so it does not conflict with the usual definition):
 
@@ -334,3 +336,5 @@ Proof terms are highly unreadable to me. One can't inspect them without having t
 Exactly!
 I've somewhat gotten the hang of writing term mode proofs by keeping a sufficient number of `_` to the right of my cursor. But inspecting a term-mode proof is a nightmare.
 
+
+{% endraw %}

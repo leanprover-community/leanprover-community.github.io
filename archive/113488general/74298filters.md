@@ -9,6 +9,8 @@ permalink: archive/113488general/74298filters.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rohan Mitta (Sep 05 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133377621):
 Hi,
 
@@ -110,3 +112,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 05 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379874):
 Thanks Patrick to actually look at the proof (obviously, I didn't ...)
 
+
+{% endraw %}

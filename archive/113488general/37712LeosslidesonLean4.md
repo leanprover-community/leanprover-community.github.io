@@ -9,6 +9,8 @@ permalink: archive/113488general/37712LeosslidesonLean4.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 03 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Leo%27s%20slides%20on%20Lean%204/near/133248994):
 ```quote
 Apropos Lean 4: Leo gave a new talk at Galois inc. You find the slides on leanprover.github.io: http://leanprover.github.io/talks/LeanAtGalois.pdf Some new information about Lean4!
@@ -83,3 +85,5 @@ One thing you can do today to emulate `vm_compute` is to normalize a term in the
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 04 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Leo%27s%20slides%20on%20Lean%204/near/133290558):
 What worries me is that if we use this kind of feature, we may not have a choice to trust a lot of software. If one of our libraries use it, everything downstream won't be able to check using a small kernel
 
+
+{% endraw %}

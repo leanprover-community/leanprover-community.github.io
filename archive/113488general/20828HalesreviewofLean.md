@@ -9,6 +9,8 @@ permalink: archive/113488general/20828HalesreviewofLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 18 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hales%27%20review%20of%20Lean/near/134182451):
 Johan mentioned this but I thought it deserved its own stream. I would like to hear the community's response to the negative points.
 
@@ -413,3 +415,5 @@ I also hope that Lean will have in the non to distant future tactics similar to 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 19 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hales%27%20review%20of%20Lean/near/134226465):
 I think currently it is not possible to find a theorem prover were you don't need to write vastly more steps than a textbook proof would need. Hopefully somewhere in the future this is possible. But we are far from this.
 
+
+{% endraw %}

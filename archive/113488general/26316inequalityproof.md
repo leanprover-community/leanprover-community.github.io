@@ -9,6 +9,8 @@ permalink: archive/113488general/26316inequalityproof.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Sep 14 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inequality%20proof/near/133955902):
 What is the simplest exact proof term that proves ~0=1 (not zero equals one)?
 
@@ -134,3 +136,5 @@ eq.dcases_on : ∀ {α : Type} {a : α} {C : Π (a_1 : α), a = a_1 → Prop} {a
 ```
 Thank you. That got me where I needed to go.
 
+
+{% endraw %}

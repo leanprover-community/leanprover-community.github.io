@@ -9,6 +9,8 @@ permalink: archive/113488general/67651Tryitonline.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Try%20it%20online%21/near/124444027):
 [Lean is now available at tio.run](https://tio.run/##y0lNzPv/PzO3IL@oRCExLzGnsjizWK8oNTGHSzk5IzU5WyEvsUQvMSUlPjk/NxcmpmGkYKUAUqT5/z8A)
 
@@ -144,3 +146,5 @@ I don't see any reason we shouldn't have the stirling numbers defined, especiall
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 16 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Try%20it%20online%21/near/147851151):
 I'm not saying we should all go out and formalize OEIS, but if someone has already gone to the trouble of formalizing some of it, I'd like to get in on that
 
+
+{% endraw %}

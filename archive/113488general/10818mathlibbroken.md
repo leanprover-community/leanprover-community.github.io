@@ -9,6 +9,8 @@ permalink: archive/113488general/10818mathlibbroken.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 04 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20broken%3F/near/124599682):
 Actually, it seems like the problem is just in mathlib.
 
@@ -167,3 +169,5 @@ Yes, see previous discussion here: https://leanprover.zulipchat.com/#narrow/stre
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 05 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20broken%3F/near/124660826):
 @**Mario Carneiro** Thanks for the quickfix :) . I'll have to supervise an exam today first, but after that I'll continue working on a proper leanup.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/16807traviscaching.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 31 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127367872):
 @**Gabriel Ebner** Could you help me try to set up build caching on travis? The from-scratch build times are nearing the time limit for public jobs. I tried following https://docs.travis-ci.com/user/caching/ but I can't find the *Build branch updates* option.
 
@@ -203,3 +205,5 @@ Can't you have it push the build logs by ssh to some web server?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 07 2018 at 07:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127695909):
 Yes, that's what I had in mind. I guess I was asking if someone knows of an easy-to-configure Jenkins plugin that does this. I'd be happy to contribute hardware and a little setup time, but I don't want to feel responsible for managing an intricate web of scripts. :-)
 
+
+{% endraw %}

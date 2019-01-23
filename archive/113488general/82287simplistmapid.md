@@ -9,6 +9,8 @@ permalink: archive/113488general/82287simplistmapid.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 28 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20list.map%20id/near/134810749):
 Interesting that `simp` doesn't solve `list.map (λ t, t) l = l`.
 
@@ -22,3 +24,5 @@ I suppose I could add this to the `simp`:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 28 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20list.map%20id/near/134810856):
 Yep, `simp [list.map_id']` does the job.
 
+
+{% endraw %}

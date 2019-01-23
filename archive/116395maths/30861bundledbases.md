@@ -9,6 +9,8 @@ permalink: archive/116395maths/30861bundledbases.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 17 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135955551):
 I pushed the results of yesterdays painful efforts to https://github.com/leanprover-community/mathlib/blob/open_set/category_theory/examples/topological_spaces.lean. This wouldn't have been possible without the great help of @**Johannes Hölzl** 
 I guess that some of the proofs need to be minimised. I obfuscated them as much as possible, and don't see how to squeeze out more. If someone wants to take a look, please go ahead.
@@ -178,3 +180,5 @@ I've been wondering about this one --- can we make `attribute [extensionality] s
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136047463):
 ext can chain them, but you will get `x \in U.val` instead of `x \in U`
 
+
+{% endraw %}

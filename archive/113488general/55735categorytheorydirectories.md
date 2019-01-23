@@ -9,6 +9,8 @@ permalink: archive/113488general/55735categorytheorydirectories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 23 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20directories/near/132605394):
 @**Scott Morrison**, would you accept PRs to `lean-category-theory` and `lean-category-theory-pr` which move everything from `categories/` to `category_theory/`?
 
@@ -33,3 +35,5 @@ It's missing some things that used to be in `lean-category-theory`, in particula
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 25 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20directories/near/132752036):
 It turned out `.isomorphisms` was the only module I was using, so it was easy to work around.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/07922reflectbool.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 03 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflect%20bool/near/130821232):
 I'm running the following code:
 
@@ -42,3 +44,5 @@ Thanks! I was able to use this trick with `user_attribute.get_param_untyped` to 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 03 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflect%20bool/near/130839561):
 (by wrapping the return with `id`: ```to_expr ``(id %%r)```)
 
+
+{% endraw %}

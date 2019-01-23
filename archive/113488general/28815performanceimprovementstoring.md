@@ -9,6 +9,8 @@ permalink: archive/113488general/28815performanceimprovementstoring.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 02 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20improvements%20to%20ring/near/133227901):
 @**Rob Lewis** The latest commit replaces some of the `mk_app` applications used in `ring`, and there was a *huge* performance gain. Now `ring` will solve `(x + y)^n = (x+y)^n` up to `n = 60` before hitting the timeout, compared to `n = 11` before
 
@@ -105,3 +107,5 @@ Argh, this is so annoying. I inserted explicit change proof terms in the proof. 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Sep 04 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20improvements%20to%20ring/near/133295842):
 Thanks! Will do.
 
+
+{% endraw %}

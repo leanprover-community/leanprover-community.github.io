@@ -9,6 +9,8 @@ permalink: archive/113488general/86695VscodeTranslationsfile.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Jan 10 2019 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Vscode%20Translations%20file/near/154843392):
 Dear all I am cleaning up the vscode translations file. I've removed all of the accents which are rejected by Lean. Are there any shortcuts that people find they mistype frequently or which stop a useful character from being corrected?
 Eg I often write "\de" and have it corrected to "\dei" = "ϯ" instead of "\delta". Would people also be interested in having two letter shortcuts for all of the lower case greek letters? Ie "\ta" corrects to tau and so on.
@@ -278,3 +280,5 @@ We could switch to nightlies earlier, I guess.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Jan 17 2019 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Vscode%20Translations%20file/near/155358522):
 I think so
 
+
+{% endraw %}

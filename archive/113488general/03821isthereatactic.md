@@ -9,6 +9,8 @@ permalink: archive/113488general/03821isthereatactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785751):
 Is there a tactic for (part of) this?
 
@@ -122,3 +124,5 @@ https://github.com/leanprover/mathlib/commit/e95111d38c0b2d666f70624ce25a5d728e0
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133787037):
 @**Keeley Hoek** No, certainly not. Thanks!
 
+
+{% endraw %}

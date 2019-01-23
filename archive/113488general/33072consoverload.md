@@ -9,6 +9,8 @@ permalink: archive/113488general/33072consoverload.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 18 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cons%20overload/near/125243066):
 kinda annoyed by the fact that `list.cons` and `multiset.cons` both use `::`
 
@@ -48,3 +50,5 @@ Why not open an issue in mathlib?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 18 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cons%20overload/near/125243340):
 If Lean 4 is not going to be compatible with Lean 3 then this is an argument for not fussing too much about simple changes such as this.
 
+
+{% endraw %}

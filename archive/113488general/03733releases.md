@@ -9,6 +9,8 @@ permalink: archive/113488general/03733releases.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 05 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/releases/near/123313063):
 Is there anything like a Lean release policy? It seems to me quite a bit happened since Lean 3.3.0 and I don't see any indication that some new release is coming.
 
@@ -54,3 +56,5 @@ Yes, and that plugin would allow us to show both branch contents on the same pag
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 06 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/releases/near/123350064):
 That sounds nice, I'll try to push this idea. You can go back to think about smarter issues :smile:
 
+
+{% endraw %}

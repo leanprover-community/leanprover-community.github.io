@@ -9,6 +9,8 @@ permalink: archive/113488general/44283Thiswillbrickyourcomputer.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133943778):
 ```lean
 import data.int.basic
@@ -86,3 +88,5 @@ oh wow it's already done
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 17 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083271):
 i'm lucky i realized so soon
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/91735isidealnegiff.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 06 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_ideal.neg_iff/near/135313777):
 ```lean
 import ring_theory.ideals
@@ -43,3 +45,5 @@ But it shouldn't be unfolding this at all, right?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 06 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_ideal.neg_iff/near/135314392):
 Yeah that part I am not sure about.
 
+
+{% endraw %}

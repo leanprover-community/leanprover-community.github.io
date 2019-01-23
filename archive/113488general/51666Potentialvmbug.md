@@ -9,6 +9,8 @@ permalink: archive/113488general/51666Potentialvmbug.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Aug 11 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950146):
 The following code typechecks:
 ````
@@ -55,3 +57,5 @@ Does anyone know if there is a way to discover what coercions are occurring in a
 #print instances has_coe
 ```
 
+
+{% endraw %}

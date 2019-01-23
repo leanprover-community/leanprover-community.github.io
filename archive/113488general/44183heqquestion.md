@@ -9,6 +9,8 @@ permalink: archive/113488general/44183heqquestion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 20 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/heq%20question/near/126840954):
 I wanted to get affine scheme = scheme finished today, but I have run into a problem whereby restricting to an open subset is not quite the same as restricting to the same not-defeq version of trhe open subset
 
@@ -920,3 +922,5 @@ You can tell the difference between pens? Does he have a fountain pen?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (May 25 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/heq%20question/near/127092857):
 Perhaps Kenny uses one of those rainbow pencils.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/00342efficiency.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 13 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570420):
 Hi @**Mario Carneiro**, @**Keeley Hoek**  and I are having some "fun" profiling `rewrite_search`, and discovered that all the arithmetic is slow.
 
@@ -119,3 +121,5 @@ I don't write tactics...
 :D
 It's on the list, then!
 
+
+{% endraw %}

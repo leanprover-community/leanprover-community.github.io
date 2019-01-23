@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/21875slowreduction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 28 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/slow%20reduction/near/134782780):
 I have a `#reduce` that's leading to "(deterministic) timeout" and I'm wondering what I can do to find out what's taking so long. Can I `#reduce` step-by-step?
 
@@ -49,3 +51,5 @@ run_cmd guard (2 + 2 = 5) -- failed
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 28 2018 at 03:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/slow%20reduction/near/134784267):
 Perfect, thanks!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/29020rewriting.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Pablo Le Hénaff (Jun 08 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting/near/127773629):
 Hey again,
 I'm stuck with this rewriting issue, I don't understand why it won't match :'(
@@ -39,3 +41,5 @@ Sorry, I misread. You're asking why it can?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 08 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting/near/127793688):
 Yes. I always have this problem with fintype.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/08643partialordernoobquestions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 04 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20order%20noob%20questions/near/133302203):
 OK so I appear to be engaging with orders for the first time in my Lean career.
 
@@ -113,3 +115,5 @@ heh, so I switched to @ because I couldn't get `le_antisymm` working, and after 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 04 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20order%20noob%20questions/near/133331784):
 This is kind of annoying. This `order_iso` stuff just seems to work with not an actual partial order or preorder or anything, but any binary relation at all. So I was expecting to see a lemma saying "if X and Y are equivalent partial orders, i.e. they have the same <=, then they have the same < too", but somehow this isn't covered by what `order_iso` does, despite its name.
 
+
+{% endraw %}

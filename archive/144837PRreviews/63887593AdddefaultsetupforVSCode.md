@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/63887593AdddefaultsetupforVSCode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Jan 14 2019 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23593%20Add%20default%20setup%20for%20VS%20Code/near/155096087):
 I would like to propose to add a `.vscode/settings.json` file. @**Gabriel Ebner** mentioned that this may be a problem if somebody uses this file for their own personal `mathlib` settings. Is anybody using it?
 
@@ -44,3 +46,5 @@ Ok, then this should be in the enforced things. But I think rulers shouldn't
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Jan 23 2019 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23593%20Add%20default%20setup%20for%20VS%20Code/near/156682868):
 Okay, I just needed to merge another PR which had the wrong file endings. I will merge the current setup, and adopt it when people start complaining about it
 
+
+{% endraw %}

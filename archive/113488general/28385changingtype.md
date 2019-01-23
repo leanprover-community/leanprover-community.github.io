@@ -9,6 +9,8 @@ permalink: archive/113488general/28385changingtype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 06 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60%40%60%20changing%20type%3F/near/129193790):
 What's going on here?
 
@@ -95,8 +97,7 @@ Do I correctly infer from Kevin's example that Lean does not remember that `Zero
 I think the problem is that when Lean sees `Zero` with `{}` it immediately tries to fill in the `{}` variable, so `Zero` is the same as `@Zero _` which is not the same as `@Zero`
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 06 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60%40%60%20changing%20type%3F/near/129194750):
-{% raw %}
-If you use `{{}}` then Lean decides to wait until later before guessing what goes in the brackets{% endraw %}
+If you use `{{}}` then Lean decides to wait until later before guessing what goes in the brackets
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 06 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60%40%60%20changing%20type%3F/near/129194801):
 The easiest fix is just to use `(X : Type)` I guess
@@ -105,9 +106,10 @@ The easiest fix is just to use `(X : Type)` I guess
 When defining a type as a pi like this, you almost never want to use `Pi {X}` because of "surprises" like this
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 06 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60%40%60%20changing%20type%3F/near/129194818):
-{% raw %}
-This is one of the main use cases for `Pi {{X}}`{% endraw %}
+This is one of the main use cases for `Pi {{X}}`
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 06 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60%40%60%20changing%20type%3F/near/129194820):
 like in the definition of `set.subset`
 
+
+{% endraw %}

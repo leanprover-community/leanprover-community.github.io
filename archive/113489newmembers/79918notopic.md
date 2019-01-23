@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/79918notopic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Feb 26 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/123002439):
 This message has no topic
 
@@ -647,3 +649,5 @@ what error does lean give you when you write `x^2`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 17 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/135938425):
 `import algebra.group_power`
 
+
+{% endraw %}

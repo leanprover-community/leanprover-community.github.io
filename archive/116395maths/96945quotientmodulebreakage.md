@@ -9,6 +9,8 @@ permalink: archive/116395maths/96945quotientmodulebreakage.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 20 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotient_module%20breakage/near/134325716):
 ```lean
 import data.set.basic
@@ -115,3 +117,5 @@ Great!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 20 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotient_module%20breakage/near/134331986):
 It gets my vote
 
+
+{% endraw %}

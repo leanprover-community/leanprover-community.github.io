@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/14013LeadingTermofMultivariatePolynomial.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 18 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leading%20Term%20of%20Multivariate%20Polynomial/near/147908130):
 I wanted to write a function which return the leading term of a multivariate polynomial
 But I have no idea how to do it with the multivariate polynomial in mathlib ....
@@ -30,3 +32,5 @@ leading term of `y^2 + x*y + x^2 + y` will depends on our choice
 So have to define a monomial ordering first
 i.e If `u ≤ v` and `w` is any other monomial, then `u w ≤ v w`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/60002notationwithunknownsymbols.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20with%20unknown%20symbols/near/125496391):
 Is it possible to have notation using unknown symbols? Say I want a new notation for lambda abstraction (this is not my use case, I try to minimize). I try:
 ```lean
@@ -347,3 +349,5 @@ No
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20with%20unknown%20symbols/near/125506172):
 Actually Lean is hanging
 
+
+{% endraw %}

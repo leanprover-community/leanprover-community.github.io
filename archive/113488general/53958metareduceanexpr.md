@@ -9,6 +9,8 @@ permalink: archive/113488general/53958metareduceanexpr.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Aug 11 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bmeta%5D%20reduce%20an%20expr/near/131968299):
 So I have an `expr` of the form `not a`, can I evaluate this expr further? because `not` is defined as `\lam a, (a -> false)`.
 
@@ -30,3 +32,5 @@ I see what you are saying, thank you.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Aug 17 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bmeta%5D%20reduce%20an%20expr/near/132324576):
 (deleted)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/33061Documentationstrings.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Aug 06 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Documentation%20strings/near/131003087):
 Is there a convention in Lean for attaching documentation to specific declarations as in Haddock or Javadoc?
 
@@ -36,3 +38,5 @@ Thanks!  I see it now.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Documentation%20strings/near/131004824):
 for other places in a definition you should just use normal comments (`--` or `/- -/`), not doc comments
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/97591mutualinductives.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132804):
 What's the "canonical" proof that the Types A and B are empty. I proved it by reference to the auxiliary `A._mut_`. Is there a nicer way?
 ```lean
@@ -46,3 +48,5 @@ def AB.reca : Π {Ca : A → Sort*} {Cb : B → Sort*}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137133175):
 you can write one
 
+
+{% endraw %}

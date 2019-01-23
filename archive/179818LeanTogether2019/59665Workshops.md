@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/59665Workshops.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 08 2019 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Workshops/near/154651219):
 There have been a number of future workshops and conferences advertised during this one. Here's a running list:
 Free Computational Mathematics (Feb 11, Luminy): https://opendreamkit.org/2019/02/11/FreeComputationalMathematicsConference/
@@ -27,3 +29,5 @@ I don't know if there's a web page yet.
 ```
  There is a webpage: https://dream.inf.ed.ac.uk/projects/mathsomac/newton-icms-big-proof.html - like most ICMS things the event is by invitation; many here will be invited already, and the "informal enquiries" will definitely be followed up on.  But there is a limited capacity for the space.
 
+
+{% endraw %}

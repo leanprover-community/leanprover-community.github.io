@@ -9,6 +9,8 @@ permalink: archive/113488general/27427howdoestypeclassinferencework.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 10 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/151259224):
 ```lean
 class foo (A : Type) :=
@@ -344,3 +346,5 @@ OK this is great. I have to interview a bunch of people now but I will probably 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Dec 10 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/151390897):
 Conceptually, Lean could require one to prove instance backchaining is well-founded.  Haskell has static checks to ensure this, but those can be bypassed via language pragma.
 
+
+{% endraw %}

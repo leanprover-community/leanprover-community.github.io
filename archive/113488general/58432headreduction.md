@@ -9,6 +9,8 @@ permalink: archive/113488general/58432headreduction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Oct 23 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/head%20reduction/near/136343289):
 Is there a way to do head reduction on a term until the head changes? So I want to do something very similar to `whnf`, except I want to stop reducing as soon as the head changes.
 Alternatively, I want a tactic which does a *single* head reduction step.
@@ -37,3 +39,5 @@ I think you should try to unify the types for this
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 23 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/head%20reduction/near/136349454):
 You can figure out the number of underscores by adding them until you get something that is a type
 
+
+{% endraw %}

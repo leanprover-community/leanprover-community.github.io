@@ -9,6 +9,8 @@ permalink: archive/113488general/85028preorder.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 03 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder/near/133250860):
 ```lean
 class preorder (α : Type u) extends has_le α, has_lt α :=
@@ -43,3 +45,5 @@ That we want to overwrite `<` is not necessary due to more efficient computation
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 03 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder/near/133254462):
 Kevin what you say is right. Also worth noting is that every preorder has a canonical equivalence (in the category theory sense) to a poset, so there's not much harm in treating posets and preorders as the same thing.
 
+
+{% endraw %}

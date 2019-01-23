@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/16724pairsequaliffprojectionsare.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Marcus Klaas (Dec 02 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/pairs%20equal%20iff%20projections%20are%3F/near/150722245):
 Can anyone give me a pointer on how prove this?
 ```lean
@@ -62,3 +64,5 @@ You folks are amazing. Thank you.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/pairs%20equal%20iff%20projections%20are%3F/near/150722619):
 Just to be clear -- moving stuff to before or after the colon doesn't change the proposition, it's just a trick for controlling whether or not you have to give the inputs yourself in the "first line" of your proof.
 
+
+{% endraw %}

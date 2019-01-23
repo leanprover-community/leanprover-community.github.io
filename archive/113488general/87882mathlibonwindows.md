@@ -9,6 +9,8 @@ permalink: archive/113488general/87882mathlibonwindows.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jeremy Avigad (Sep 16 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20on%20windows/near/134031931):
 I am trying to install mathlib on a windows laptop. In mingw I set all the paths, but I get this:
 ```
@@ -82,3 +84,5 @@ Update: deleting all the`. olean` files (`del /s *.olean` in `library`) and rebu
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Sep 17 2018 at 04:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20on%20windows/near/134075802):
 I just released a new version of elan that seems to fix the issue
 
+
+{% endraw %}

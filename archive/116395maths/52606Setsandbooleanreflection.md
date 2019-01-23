@@ -9,6 +9,8 @@ permalink: archive/116395maths/52606Setsandbooleanreflection.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 19 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134259292):
 ssreflect has a pattern `[pick x in A | P] == Some x` (See: http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html) which is used in a proof that I want to translate from COQ. @**Johannes Hölzl** already showed me how to model other parts of ssreflect in pure lean. I wonder if there is a canonical way to express this pattern in lean?
 
@@ -46,3 +48,5 @@ def Gaussian_elimination [ordered_ring α] [decidable_eq α]:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 19 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134265203):
 This gives me an error ```maximum class-instance resolution depth has been reached (the limit can be increased by setting option 'class.instance_max_depth') (the class-instance resolution trace can be visualized by setting option 'trace.class_instances')```
 
+
+{% endraw %}

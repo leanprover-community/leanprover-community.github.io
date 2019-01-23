@@ -9,6 +9,8 @@ permalink: archive/113488general/84894propaganda.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 05 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propaganda/near/124688670):
 Today I attended a talk by Warwick Tucker, the Lorenz attractor guy. I told him about Lean and he seemed to be very interested (he does computer assisted proofs and would like to use proof assistants)
 
@@ -21,3 +23,5 @@ Fabian Immler (who formalized a lot of theory of differential equations in Isabe
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 08 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propaganda/near/124809315):
 Yep, Warwick mentioned this. But he was not aware of the existence of Lean, and he seemed very interested, especially by the fact that it has some documentation targeting mathematicians (TPIL) and a more friendly interface than Coq.
 
+
+{% endraw %}

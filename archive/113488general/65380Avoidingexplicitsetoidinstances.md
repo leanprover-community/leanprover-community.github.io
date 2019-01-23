@@ -9,6 +9,8 @@ permalink: archive/113488general/65380Avoidingexplicitsetoidinstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 04 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558107):
 Below is my proof that quotient by a normal subgroup is a group. I can't do it without giving explicit setoid instances everywhere. Using `haveI` at the beginning of the proof just gives me the error that inferred and synthesized instances are not definitionally equal. Also, in my `begin` `end` tactics blocks, I have to use `assume` within tactics blocks, otherwise my goal is just a metavariable. Is there a way of doing this nicely?
 ```lean
@@ -115,3 +117,5 @@ instance: group (left_cosets H) :=
     (λ a, show ⟦_⟧ = ⟦_⟧, by rw inv_mul_self) }
 ```
 
+
+{% endraw %}

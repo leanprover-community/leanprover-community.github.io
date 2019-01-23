@@ -9,6 +9,8 @@ permalink: archive/113488general/04673calcwithbijon.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 06 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20with%20bij_on/near/127674091):
 Is there a way I could use `calc` to chain together `bij_on_comp`?
 `bij_on_comp : bij_on g b c → bij_on f a b → bij_on (g ∘ f) a c`
@@ -40,3 +42,5 @@ You should add a comment to the docs :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 06 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20with%20bij_on/near/127676823):
 I guess the elaborator just does its best. This software is so cool
 
+
+{% endraw %}

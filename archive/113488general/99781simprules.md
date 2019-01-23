@@ -9,6 +9,8 @@ permalink: archive/113488general/99781simprules.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Dec 04 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20rules/near/150877417):
 I see there are many things that I would like to add as simp rules. For instance `le_refl`. And all de Morgan's rules that take a `not` and push it inside logical connectives, to get to some kind of a normal form, like `theorem not_or_distrib : ¬ (a ∨ b) ↔ ¬ a ∧ ¬ b`. Are there good reasons not to do it?
 
@@ -48,3 +50,5 @@ I think that propositional structure in lean quite often reflects a certain stru
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 04 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20rules/near/150878221):
 even if we are being classical, lean is still easier to use when you "go with the flow" of the logic, and other stuff requires applying theorems explicitly
 
+
+{% endraw %}

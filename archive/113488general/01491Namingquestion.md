@@ -9,6 +9,8 @@ permalink: archive/113488general/01491Namingquestion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Naming%20question/near/124463575):
 ```quote
 @**Simon Hudon** do you have any suggestions?
@@ -39,3 +41,5 @@ and it would probably take me twice as long since I'm not named Mario :)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Naming%20question/near/124463783):
 @**Kenny Lau**  The boring answer might be `free_group_aux`. But a nicer name might express what it does for `free_group`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/54550unfreezelocalinstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Feb 27 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfreeze_local_instances/near/123043264):
 Should we reply to https://github.com/leanprover/lean/issues/1920#issuecomment-368691909 ? I'd like someone to thank Leo, but I'm not sure what would upset him more (I could thank him myself, but discovering some new Lean user could be upsetting).
 
@@ -21,3 +23,5 @@ Ok, I tried my luck.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Feb 27 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfreeze_local_instances/near/123053839):
 Now to wait and see the reaction ... *eats pop corn* :wink:
 
+
+{% endraw %}

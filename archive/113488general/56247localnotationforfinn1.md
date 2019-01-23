@@ -9,6 +9,8 @@ permalink: archive/113488general/56247localnotationforfinn1.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 24 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20notation%20for%20fin%20%28n%2B1%29/near/127019139):
 How do I make the following work?
 ```lean
@@ -128,3 +130,5 @@ but global notations require global coordination
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 24 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20notation%20for%20fin%20%28n%2B1%29/near/127042033):
 Ok, understood
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/93837CharacterencodingofVM.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Aug 13 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132047636):
 Does anyone know the internal character encoding of strings after a to_char_buffer? It seems to not be UTF-8.
 
@@ -157,3 +159,5 @@ I've stress-tested the read/write io calls on 100mb of utf8 nonsense, and everyt
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Dec 10 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/151268884):
 @**Keeley Hoek** did you see this?
 
+
+{% endraw %}

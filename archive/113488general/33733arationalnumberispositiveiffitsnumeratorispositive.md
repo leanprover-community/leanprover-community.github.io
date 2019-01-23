@@ -9,6 +9,8 @@ permalink: archive/113488general/33733arationalnumberispositiveiffitsnumeratoris
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 30 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20rational%20number%20is%20positive%20iff%20its%20numerator%20is%20positive/near/125905999):
 do we have that?
 
@@ -343,3 +345,5 @@ Ok, understood. Somehow laziness feels natural to me. But I don't have that much
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 01 2018 at 07:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20rational%20number%20is%20positive%20iff%20its%20numerator%20is%20positive/near/125929676):
 The point I was (too obliquely) trying to make before is that if Lean were lazy, then it would presumably have no reason to do the GCD computation, either
 
+
+{% endraw %}

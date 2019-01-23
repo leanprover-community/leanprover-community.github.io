@@ -9,6 +9,8 @@ permalink: archive/113488general/64067PropositionsasTypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Lyle Kopnicky (Apr 16 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125127870):
 I'm not clear why the definition of `p1` below is not a type error. What can it possibly mean for `p1` to be a proof of a proof of a proposition?
 
@@ -377,3 +379,5 @@ In lean this is not necessary because it's fully dependent anyway. Haskell is ge
 ```
 I watched a talk by Edward Kmett on youtube recently -- "typeclasses against the world" (about Haskell and typeclasses) and, if I understood correctly, Kmett said at some point that a problem with typeclasses in DTT was that you get diamonds, and in Haskell these couldn't occur.
 
+
+{% endraw %}

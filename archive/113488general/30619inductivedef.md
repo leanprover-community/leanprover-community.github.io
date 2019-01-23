@@ -9,6 +9,8 @@ permalink: archive/113488general/30619inductivedef.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 01 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20def/near/150691842):
 I very rarely use inductive def so I'm a bit confused by:
 ```lean
@@ -43,3 +45,5 @@ I was like "...yeah, but what is `a` equal to??". It's equal to the `a` before t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 01 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20def/near/150692857):
 Thanks!
 
+
+{% endraw %}

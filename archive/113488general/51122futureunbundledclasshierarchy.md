@@ -9,6 +9,8 @@ permalink: archive/113488general/51122futureunbundledclasshierarchy.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 15 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/future%20unbundled%20class%20hierarchy/near/129698387):
 Sebastian Ullrich said (in the multiset thread)
 
@@ -116,3 +118,5 @@ I'd seen that wiki page several times before, and my interpretation of it was "i
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 15 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/future%20unbundled%20class%20hierarchy/near/129698852):
 I now think this interpretation might be incorrect -- it might say "even though there is `use_old_structure_command` or whatever it's called, there are still some things here which are not in Lean and might in the future be in Lean"
 
+
+{% endraw %}

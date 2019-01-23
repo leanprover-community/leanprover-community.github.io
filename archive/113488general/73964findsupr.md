@@ -9,6 +9,8 @@ permalink: archive/113488general/73964findsupr.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 09 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/find%20supr/near/147368449):
 I have found
 ```lean
@@ -28,3 +30,5 @@ Ok, I've figured out that I should just use `supr_le` for this one.
 Here is another one. Should there be a lemma called `mem_of_mem_supr`?
 It would state that if `x ∈ ⊔s ∈ S, s` then there is an `s ∈ S` such that `x ∈ s`.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/21725codeextraction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) jacke (Apr 17 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/code%20extraction/near/125171529):
 I would like to extract c++ programs from my lean code, but the question is how to do it! Page 6 of Programming in Lean says that " Programs
 written in the language can be evaluated efficiently by Lean’s virtual-machine interpreter or translated automatically to C++ and compiled"
@@ -65,3 +67,5 @@ I'm toying with the idea of doing this as a dissertation project, but probably c
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 17 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/code%20extraction/near/125172374):
 That would be awesome! I'm thinking of doing that myself because I need such a feature but it's a bit of a distraction for me. One the examples in my dissertation is a non-blocking double ended queue. It would be fun if I could refine it down to executable code.
 
+
+{% endraw %}

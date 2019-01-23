@@ -9,6 +9,8 @@ permalink: archive/116395maths/80189weirdtypeclassissue.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026131):
 Consider this code:
 ```lean
@@ -316,3 +318,5 @@ end covering_family
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 19 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136107519):
 But there are still a lot of typeclass issues.
 
+
+{% endraw %}

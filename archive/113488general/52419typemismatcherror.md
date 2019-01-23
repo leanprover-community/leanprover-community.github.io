@@ -9,6 +9,8 @@ permalink: archive/113488general/52419typemismatcherror.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 09 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375133):
 I don't have a good strategy for debugging errors like this:
 ```lean
@@ -224,3 +226,5 @@ That looks encouraging, right? Especially that `order_dual` that is leaking thro
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 09 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147377202):
 Ok, need to go. But now I think I can complete this. Thanks a lot!
 
+
+{% endraw %}

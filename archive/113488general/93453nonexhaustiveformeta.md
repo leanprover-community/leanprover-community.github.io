@@ -9,6 +9,8 @@ permalink: archive/113488general/93453nonexhaustiveformeta.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jul 09 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/non-exhaustive%20for%20meta/near/129371844):
 If we allow non-termination at meta level, shouldn't we also allow non-exhaustive match?
 
@@ -51,3 +53,5 @@ There is also `undefined_core "my error message"`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jul 09 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/non-exhaustive%20for%20meta/near/129374011):
 @**Gabriel Ebner** I think that's what I wanted.
 
+
+{% endraw %}

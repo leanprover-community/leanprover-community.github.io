@@ -9,6 +9,8 @@ permalink: archive/113488general/11952metatheorylibrariesframeworks.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Brendan Zabarauskas (May 17 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metatheory%20libraries/frameworks/near/126680432):
 Hello, I was wondering if anybody was working on libraries/frameworks for making defining metatheory stuff in Lean easier. I'm thinking like LN for Coq: http://www.chargueraud.org/softs/ln/ - Context is that I'd like to prove some properties about my language Pikelet. See this issue: https://github.com/brendanzab/pikelet/issues/39
 
@@ -104,3 +106,5 @@ LICENSE added.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Brendan Zabarauskas (May 17 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metatheory%20libraries/frameworks/near/126683544):
 Thanks! Might be a while till I actually get around to getting started on formalisation, but it's handy to have your stuff around as reference.
 
+
+{% endraw %}

@@ -9,9 +9,13 @@ permalink: archive/113488general/11399CantlogintoZulipinaniOSbrowser.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 06 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%E2%80%99t%20login%20to%20Zulip%20in%20an%20iOS%20browser/near/123360330):
 Can anyone log in to Zulip on an iOS device? I’ve tried both chrome and safari, logging in with a password, via google, or via github. In every case, I just get dumped back to the login screen.
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 06 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%E2%80%99t%20login%20to%20Zulip%20in%20an%20iOS%20browser/near/123360378):
 I’m asking because the native iOS app seems pretty bad.
 
+
+{% endraw %}

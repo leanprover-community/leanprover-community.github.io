@@ -9,6 +9,8 @@ permalink: archive/113488general/55527whyisthishappening.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 16 2019 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155291582):
 ```lean 
 open tactic expr
@@ -140,3 +142,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 16 2019 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155293593):
 Okay that was silly. Thanks @**Kenny Lau**
 
+
+{% endraw %}

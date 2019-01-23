@@ -9,6 +9,8 @@ permalink: archive/116395maths/87044linarithfailure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 17 2019 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363230):
 I've started doing basic analysis in Lean with the undergraduates and I'm really using `linarith` a lot, it's really handy for this sort of thing. I was trying to prove that 1/n tended to zero using it, and I ran into this: 
 
@@ -117,3 +119,5 @@ so my plan was to spend the term trying to prove the things he proved, but in Le
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 17 2019 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/156324714):
 Never mind, I fixed it tonight. There could be some similar cases that this fix misses though.
 
+
+{% endraw %}

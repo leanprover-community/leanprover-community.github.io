@@ -9,6 +9,8 @@ permalink: archive/113488general/67859uniquetyping.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 15 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unique%20typing/near/123746502):
 Success! I managed to finally show that Lean's full type system has unique typing (which implies stuff like it is impossible to prove `Type 0 : Type 0`), even if you use "full" definitional equality, i.e. the transitive and undecidable ideal version of what lean checks. Since it uses a reduction that is guaranteed to run forever on subsingleton eliminators like `acc`, it yields an alternative semi-decision procedure for testing definitional equality.
 
@@ -244,3 +246,5 @@ As far as Con(lean) is concerned, the easy/lazy approach (that I will take, at l
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 16 2018 at 00:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unique%20typing/near/123772972):
 By the way, https://www.fing.edu.uy/~amiquel/publis/types02.pdf "The not so simple proof-irrelevant model of CC" is my competition in the soundness part; I contend that it is exactly as simple as it looks, and they made some poor modeling decisions in there that made things complicated
 
+
+{% endraw %}

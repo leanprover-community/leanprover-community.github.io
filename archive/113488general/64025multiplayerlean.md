@@ -9,6 +9,8 @@ permalink: archive/113488general/64025multiplayerlean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 29 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148818374):
 At Xena today about six people collaborated in CoCalc using mathlib, and they made dihedral groups! @**Amelia Livingston** @**Kenny Lau** @**Jean Lo** @**Chris Hughes** @**Calle Sönne** @**Ken Lee** together wrote the below. It was *really funny* watching it happen, not least at the beginning when people kept changing the definition of multiplication and/or inverse because it wasn't quite right, whilst other people were trying to prove things about these functions at the same time. Once it stabilised things worked quite well. They also implemented https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/ . It's still going, although several of the contributors have left now; they're proving stuff like how dihedral groups aren't abelian etc.
 
@@ -135,3 +137,5 @@ This is something I've wondered about, since I've experienced this too.  It depe
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) William Stein (Nov 30 2018 at 07:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148844401):
 @**Kevin Buzzard** I also implemented "run a bash command line in every student project" in case that helps you workaround the path issue more easily.
 
+
+{% endraw %}

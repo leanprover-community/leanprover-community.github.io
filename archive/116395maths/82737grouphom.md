@@ -9,6 +9,8 @@ permalink: archive/116395maths/82737grouphom.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 12 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group_hom/near/151505639):
 Can we define `is_group_hom` to be `is_monoid_hom` and make it reducible? It would avoid cycles.
 
@@ -21,3 +23,5 @@ Whether it should be reducible, I don't know.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 12 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group_hom/near/151510669):
 If it's reducible then every  group hom is automatically a monoid hom and vice versa
 
+
+{% endraw %}

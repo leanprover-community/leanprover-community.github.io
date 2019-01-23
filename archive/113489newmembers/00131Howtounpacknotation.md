@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/00131Howtounpacknotation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 14 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135784139):
 How can I "unpack" notation like `∉`, `∩`, etc.? I want to convert a proposition of the form `x ∉ S` to `x ∈ S → false`. Is this possible just definitionally or do I need to apply some lemma?
 
@@ -112,3 +114,5 @@ o_O?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 14 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135791495):
 `change` also has `change with` which is like definitional `rw`
 
+
+{% endraw %}

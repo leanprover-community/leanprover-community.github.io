@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/60427Whydoesntdectrivialsolveprime3.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 24 2018 at 17:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20doesn%27t%20dec_trivial%20solve%20%60prime%203%60%3F/near/136416609):
 In `prime.lean`, the following statements are made:
 
@@ -292,3 +294,5 @@ The next question of course is how feasible it is to square 77232917 numbers mod
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 28 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20doesn%27t%20dec_trivial%20solve%20%60prime%203%60%3F/near/136670082):
 It's probably worth pointing out that if numbers are somehow being stored in binary, then reducing modulo a number of the form $$2^n-1$$ can be done using specialised code which would perhaps be more efficient than usual Euclid? But I have no idea whatsoever how reasonable it would be to expect Lean to do any arithmetic at all with numbers so large.
 
+
+{% endraw %}

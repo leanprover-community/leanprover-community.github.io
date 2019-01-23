@@ -9,6 +9,8 @@ permalink: archive/113488general/20674customwellfounded.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 19 2018 at 07:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20well-founded/near/125289818):
 ```lean
 inductive red.step : list (α × bool) → list (α × bool) → Prop
@@ -169,3 +171,5 @@ theorem red.append : ∀ {L₁ L₂ L₃ L₄ : list (α × bool)},
 
 ```
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/49532shouldfintypetakeasort.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 06 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/should%20fintype%20take%20a%20sort%3F/near/130982613):
 This instance would be possible if `fintype` took a sort instead of a Type. Is it worth changing?
 `instance (p : fin 3 → Prop) [decidable_pred p] : fintype (Π a, p a → fin 3) := by apply_instance`
@@ -88,3 +90,5 @@ but for functions defined on an arbitrary Type, I don't see a downside.
 
 I agree. Although, I find that universe constraints have a way of propagating to infect every definition once you have one. Being more polymorphic seems easier said than done.
 
+
+{% endraw %}

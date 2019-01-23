@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/80970392emetricspaces.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23392%20emetric%20spaces/near/135384309):
 I am wondering: `dist` of a metric space takes values in `ℝ`, while the `edist` of an emetric space takes values in `ennreal`. Should the latter maybe take values in `with_top ℝ`?
 
@@ -105,3 +107,5 @@ I nearly responded "well he's certainly not giving the talk"
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 09 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23392%20emetric%20spaces/near/147372294):
 This PR is now merged! Hurray! :tada: :octopus:
 
+
+{% endraw %}

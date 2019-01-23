@@ -9,6 +9,8 @@ permalink: archive/113488general/96433Tactictonotactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nima (Apr 21 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125479107):
 Is there an easy way to re-write the last function without using tactic?
 ```lean
@@ -57,3 +59,5 @@ I wrote it that way for a reason. You should not rely on definitional expansion 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125482447):
 The usage of `iff` is by convention since these are propositions
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/92980vscodesettingsbug.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Aug 13 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode%20settings%20bug/near/132051901):
 There is a bug in the vscode plugin where in the "User Settings" panel the default settings for numerical constants like "lean.memoryLimit" are given in inverted commas (e.g. "4096"), when they actually shouldn't be.
 
@@ -36,3 +38,5 @@ At least on my computer, using inverted commas gives the vscode error "Incorrect
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Aug 16 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode%20settings%20bug/near/132252469):
 It's a warning, and it will probably still work.  Nevertheless, use `"lean.memoryLimit": 4096`.  Just a bare number.
 
+
+{% endraw %}

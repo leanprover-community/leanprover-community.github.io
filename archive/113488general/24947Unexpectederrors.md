@@ -9,6 +9,8 @@ permalink: archive/113488general/24947Unexpectederrors.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 27 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171623):
 Just finished proving this theorem about roots of polynomials, but I'm getting the following errors and I don't understand why
 ```
@@ -113,3 +115,5 @@ use `by clear roots_aux; finish` instead
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 27 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172981):
 I found it by just replacing things by `sorry` until the error went away
 
+
+{% endraw %}

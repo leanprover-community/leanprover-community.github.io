@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/31826whatdoesmeanhere.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Aug 30 2018 at 16:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/what%20does%20.%20mean%20here%3F/near/133063613):
 I copied this from [library/init/data/nat/basic.lean](https://github.com/leanprover/lean/blob/master/library/init/data/nat/basic.lean#L84).
 ```lean
@@ -53,3 +55,5 @@ OK, that makes sense, thanks!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) cbailey (Aug 30 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/what%20does%20.%20mean%20here%3F/near/133064965):
 Oh I was way off lol. My apologies.
 
+
+{% endraw %}

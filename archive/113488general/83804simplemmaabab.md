@@ -9,6 +9,8 @@ permalink: archive/113488general/83804simplemmaabab.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 05 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945303):
 @**Guillermo Barajas Ayuso** wanted
 
@@ -95,3 +97,5 @@ and you need to keep up performance in the other areas too
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945930):
 I think Johannes was working on adding "simpprocs" to the simplifier, which would enable this kind of adaptivity. It would notice we are doing algebra and fire up the algebra module that knows to do cancellation and stuff
 
+
+{% endraw %}

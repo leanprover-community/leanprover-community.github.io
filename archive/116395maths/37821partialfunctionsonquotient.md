@@ -9,6 +9,8 @@ permalink: archive/116395maths/37821partialfunctionsonquotient.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 05 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/partial%20functions%20on%20quotient/near/130929260):
 What's the easiest way to define a partial function on a quotient type, where the proof that it is well defined depends on the predicate? I tried `quotient.hrec_on` but whilst I can define the function, it's hard to prove things about it due to `motive is not type correct` errors. For context, I'm experimenting with defining the signature of a permutation as being derived from this.
 ```lean
@@ -61,3 +63,5 @@ Or there are other facts you could start from, like $$O(n)$$ (or $$GL(n, \mathbb
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 05 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/partial%20functions%20on%20quotient/near/130940233):
 To prove that the n'th exterior power is not zero I guess you have to explicitly construct some alternating form? If you could come up with some definition of det which had the property that switching two rows changed the sign etc then you might be in good shape, but the only way I know how to do this is to come up with the definition of det, and the definition of det I know involves signatures. I half-suspect that there were some comments about this in my UG notes, in my office, I'll try and remember to dig them up when I get back to London.
 
+
+{% endraw %}

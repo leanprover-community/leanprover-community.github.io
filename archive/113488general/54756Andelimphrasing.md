@@ -9,6 +9,8 @@ permalink: archive/113488general/54756Andelimphrasing.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Stevens (May 28 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/And-elim%20phrasing/near/127218529):
 Noob question here, trying to improve my mental model of Lean.
 I have an inhabitant h of "and p q" in scope, and I want to create named inhabitants hp, hq of p and q respectively. I'm in tactic mode. One way to do this is "have hp : p, from h.left"; is that the one true way? Are there any other ways (that aren't just interchanging "and.left h" or "and.elim_left")?
@@ -43,3 +45,5 @@ Yeah, I recommend a few rounds of reading that chapter and then playing around w
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 28 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/And-elim%20phrasing/near/127222394):
 We're trying to write docs, they appear in random places, but theorem proving in lean is where most of us started
 
+
+{% endraw %}

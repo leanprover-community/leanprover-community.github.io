@@ -9,6 +9,8 @@ permalink: archive/113488general/60588Areelementsofasubtypedeterminedbytheirvalu
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 22 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915156):
 ```lean
 import order.bounds algebra.ordered_group analysis.real analysis.topology.infinite_sum
@@ -127,3 +129,5 @@ OK great -- I just assumed it was an iff from something someone said earlier
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 22 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126921310):
 I guess it's protected because if you open subtype then all of a sudden you have clobbered the definition of eq
 
+
+{% endraw %}

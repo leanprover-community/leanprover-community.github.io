@@ -9,6 +9,8 @@ permalink: archive/116395maths/67365constructivezerology.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 17 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20zerology/near/129817429):
 @**Kenny Lau** I have a question for you. Do you have a proof without `decidable` or `classical` of:
 ```lean
@@ -267,3 +269,5 @@ All this for the cheap price of a few hours and a `local attribute [instance] cl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 17 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20zerology/near/129832630):
 And I can see wisdom is coming to Kenny. He didn't write anything about that last classical detail.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/13525512discretecategories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Dec 05 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23512%20discrete%20categories/near/150904838):
 Really this is "everything that I thought worth saving from the old limits PR, not including anything about special shapes".
 
@@ -49,3 +51,5 @@ Yes, although we don't have Cat as a category yet.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Dec 20 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23512%20discrete%20categories/near/152244018):
 I've updated this PR now. (Sorry it was a grab-bag PR. I'll avoid these in future.)
 
+
+{% endraw %}

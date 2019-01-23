@@ -9,6 +9,8 @@ permalink: archive/113488general/55645nattostring.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 10 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20to%20string%3F/near/124861127):
 How to I get a string from a nat?
 
@@ -29,3 +31,5 @@ try `to_string k`. It's part of the `has_to_string` class so it won't support fi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 10 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20to%20string%3F/near/124861359):
 thank you!
 
+
+{% endraw %}

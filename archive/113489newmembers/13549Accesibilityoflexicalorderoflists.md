@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/13549Accesibilityoflexicalorderoflists.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 27 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Accesibility%20of%20lexical%20order%20of%20lists/near/148644364):
 I've seen there are proofs for accessibility and well-founded for lexical order of product
 And I also find out there is a definition for lexical order of list, but I can't find any proofs for it's accessibility and well-founded...
@@ -236,3 +238,5 @@ But I don't know how to tell lean that the recursion application will decrease..
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 29 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Accesibility%20of%20lexical%20order%20of%20lists/near/148782527):
 prove it? lol
 
+
+{% endraw %}

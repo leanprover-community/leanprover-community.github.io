@@ -9,6 +9,8 @@ permalink: archive/113488general/31843unfoldingdefinitions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Guy Leroy (Aug 22 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573040):
 I have the following def:
 ```lean
@@ -43,3 +45,5 @@ Thank you very much!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 22 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132583964):
 Out of curiosity, have you tried `dunfold`? It is based on `dsimp` which is more careful about preserving definitional equality.
 
+
+{% endraw %}

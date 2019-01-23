@@ -9,6 +9,8 @@ permalink: archive/113488general/58029closurecompleqvsclosurecompl.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 02 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/closure_compl_eq%20vs%20closure_compl/near/135058320):
 [closure_compl_eq vs closure_compl](/user_uploads/3121/799w6_d5y5HxDNH8PGRRdgyJ/2018-10-02-6.png)
 
@@ -64,3 +66,5 @@ I guess one could try and use meta magic to search for theorems with two distinc
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 03 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/closure_compl_eq%20vs%20closure_compl/near/135086020):
 In principle this is very easy
 
+
+{% endraw %}

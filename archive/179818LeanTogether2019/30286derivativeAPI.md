@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/30286derivativeAPI.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 09 2019 at 10:30)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/derivative%20API/near/154710820):
 @**Assia Mahboubi** and @**Cyril Cohen** both were concerned about a stylistic issue which came up in Mario's live coding session. We were looking at differentiating bounded linear maps, but my understanding of the issue (which is generally poor) is that it would apply equally if we were just talking about differentiating functions `f: ℝ → ℝ`. So say `f` and `g` are functions from the reals to the reals. Let's define `V` to be the type of these functions.
 
@@ -165,3 +167,5 @@ I do hope no one wants us to call `/` `pre_div`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 09 2019 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/derivative%20API/near/154715016):
 heh :-) But I have argued in the past that it should not be called `/`; I encourage my students to read it as "computer scientist division", and see it as a division sign with a little "^*" next to it.
 
+
+{% endraw %}

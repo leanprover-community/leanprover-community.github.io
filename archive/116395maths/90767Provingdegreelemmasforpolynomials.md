@@ -9,6 +9,8 @@ permalink: archive/116395maths/90767Provingdegreelemmasforpolynomials.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 07 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20degree%20lemmas%20for%20polynomials/near/131063700):
 I wrote some stuff on polynomials recently, which has been merged, but I was never that happy with it, because I knew that proving basic lemmas about degree was going to be quite hard. For example
 ```lean
@@ -33,3 +35,5 @@ because I guess there's an algorithm; however it reminds me a bit of the `ring` 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 07 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20degree%20lemmas%20for%20polynomials/near/131066276):
 It would be `dec_trivial` if it was integers, the fact that the type is a variable is the problem.
 
+
+{% endraw %}

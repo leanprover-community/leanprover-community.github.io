@@ -9,6 +9,8 @@ permalink: archive/113488general/77339livestreaming.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 08 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/live%20streaming/near/133567651):
 I'm going to try out this streaming thing: https://www.twitch.tv/colimit/
 No audio or webcam for now, sorry.
@@ -73,3 +75,5 @@ I am tempted to do it too, I figured there was no reason not to stream every tim
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 11 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/live%20streaming/near/133731159):
 Yes I hope you find a chance to do so!
 
+
+{% endraw %}

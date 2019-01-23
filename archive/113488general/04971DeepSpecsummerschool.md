@@ -9,6 +9,8 @@ permalink: archive/113488general/04971DeepSpecsummerschool.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 11 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/DeepSpec%20summer%20school/near/123577208):
 The registrations are open for the DeepSpec summer school 2018: https://deepspec.org/event/dsss18/
 
@@ -299,3 +301,5 @@ I'll probably wait for the talk abstracts, but it seems I shouldn't be too optim
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 14 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/DeepSpec%20summer%20school/near/123699174):
 And now I have to teach finite fields
 
+
+{% endraw %}

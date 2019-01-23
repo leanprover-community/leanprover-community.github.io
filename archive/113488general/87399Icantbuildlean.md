@@ -9,6 +9,8 @@ permalink: archive/113488general/87399Icantbuildlean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457140):
 `ninja` gives me error. here's an excerpt:
 ```
@@ -184,3 +186,5 @@ parabens por mim, it worked
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 08 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458722):
 I just built lean head on Ubuntu 16.04 -- hopefully no memory leaks any more!
 
+
+{% endraw %}

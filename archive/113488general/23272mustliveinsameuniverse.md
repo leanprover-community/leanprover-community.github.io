@@ -9,6 +9,8 @@ permalink: archive/113488general/23272mustliveinsameuniverse.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 17 2018 at 05:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790411):
 Any insight into this error?
 ```lean
@@ -45,3 +47,5 @@ You can define it if you use `meta inductive`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 17 2018 at 05:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790781):
 Oh nice, `meta` is good enough for me (for now anyways)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/82464meetinopensX.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 10 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meet%20in%20opens%20X/near/147442296):
 If I have `U V : opens X`, then `(U ⊓ V).val` is not defeq to `U.val ∩ V.val`. Can this be fixed while still using the galois insertion to define the lattice structure on `opens X`?
 
@@ -99,3 +101,5 @@ The one that is meaningless is `Inf`: it is the interior of an arbitrary interse
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 05 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meet%20in%20opens%20X/near/150903641):
 #511
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/57659anonymousrecursivefunctions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 17 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128191984):
 is it possible to define an anonymous recursive function? so for I've been making auxiliary defs as needed, but I'm copying a development from coq that uses them a lot
 
@@ -81,3 +83,5 @@ by exact Σ n, _let_match (t n)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 17 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128211909):
 Cool hack :grin:
 
+
+{% endraw %}

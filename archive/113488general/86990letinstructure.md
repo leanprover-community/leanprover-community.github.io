@@ -9,6 +9,8 @@ permalink: archive/113488general/86990letinstructure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 05:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20in%20structure/near/127451506):
 ```lean
 structure foo :=
@@ -556,3 +558,5 @@ begin
 end
 ```
 
+
+{% endraw %}

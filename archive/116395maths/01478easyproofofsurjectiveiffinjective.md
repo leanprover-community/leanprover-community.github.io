@@ -9,6 +9,8 @@ permalink: archive/116395maths/01478easyproofofsurjectiveiffinjective.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 06 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/easy%20proof%20of%20surjective_iff_injective/near/124726537):
 Is there an easy proof of 
 ```lean
@@ -125,3 +127,5 @@ So just the opposite really.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 06 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/easy%20proof%20of%20surjective_iff_injective/near/124738150):
 Glad to hear it :)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/09015detectingsorry.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 02 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/detecting%20sorry/near/123177763):
 I am assuming that the following should be easy, or at least possible.
 
@@ -89,3 +91,5 @@ but in my mind bar is not yet finished because it relies on unfinished foo
 ```
 seems to work
 
+
+{% endraw %}

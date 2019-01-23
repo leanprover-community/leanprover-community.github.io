@@ -9,6 +9,8 @@ permalink: archive/116395maths/48739euclideandomain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 15 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/euclidean%20domain/near/147742225):
 Euclidean domains are extending integral domains, but the entire file doesn't use this. We could just as well extend `comm_ring`. @**Kevin Buzzard** Do you know if every *Euclidean ring* is automatically an integral domain?
 
@@ -78,3 +80,5 @@ example : euclidean_domain.integral_domain ℤ = linear_ordered_comm_ring.to_int
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 15 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/euclidean%20domain/near/147762970):
 Great!
 
+
+{% endraw %}

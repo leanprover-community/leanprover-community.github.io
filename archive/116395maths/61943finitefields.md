@@ -9,6 +9,8 @@ permalink: archive/116395maths/61943finitefields.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joey van Langen (Jan 09 2019 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20fields/near/154730425):
 I'm going to do some works concerning finite fields. (number of elements, existence and uniqueness)
 Can anyone tell me if the following things exist for lean in mathlib or somewhere else and where I can find them?
@@ -105,3 +107,5 @@ It basically depends on imports. Probably ideals imports everything you need, so
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 11 2019 at 17:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20fields/near/154926308):
 @**Mario Carneiro** Could you please give @**Joey van Langen** push access on community mathlib? He's a PhD student of Sander Dahmen.
 
+
+{% endraw %}

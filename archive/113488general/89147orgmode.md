@@ -9,6 +9,8 @@ permalink: archive/113488general/89147orgmode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 12 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/org-mode/near/123623451):
 Has anyone ever used org-mode to do literate programming in Lean?
 
@@ -21,3 +23,5 @@ see https://github.com/leanprover/mkleanbook
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 12 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/org-mode/near/123625948):
 Nice! thanks!
 
+
+{% endraw %}

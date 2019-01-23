@@ -9,6 +9,8 @@ permalink: archive/113488general/54221associativity.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 30 2018 at 04:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/associativity/near/130552015):
 I'm writing a tactic about associativity and I'm inferring the associativity of the operators that appear in an expression. It turns out that this is the bottleneck of my script: building an instance of `is_associative` takes hundreds of ms. Is there a faster way to do it?
 
@@ -269,3 +271,5 @@ Yes you're right. The other thing that such a generalization helps with is separ
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 01 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/associativity/near/130733213):
 I chose `assoc_rw` to conform with `ac_refl`. I think I could be convinced in favor of `rw_assoc`
 
+
+{% endraw %}

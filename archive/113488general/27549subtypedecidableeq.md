@@ -9,6 +9,8 @@ permalink: archive/113488general/27549subtypedecidableeq.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 04 2019 at 16:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.decidable_eq/near/154417392):
 `subtype.decidable_eq` sometimes fails to reduce in the kernel. Not sure why this is, it doesn't use `propext` or anything. The `instance` `foo` that I wrote in this code does work for some reason.
 ```lean
@@ -75,3 +77,5 @@ if it said `is_true (eq.rec (λ (w_property : p val), _) a w_property)` there wo
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 04 2019 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.decidable_eq/near/154423514):
 the culprit is the `subst` here -> https://github.com/leanprover/lean/blob/master/library/init/meta/mk_dec_eq_instance.lean#L76 . Unfortunately I'm not sure there is anything we can do about it from mathlib
 
+
+{% endraw %}

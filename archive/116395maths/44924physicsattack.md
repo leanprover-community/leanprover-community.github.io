@@ -9,6 +9,8 @@ permalink: archive/116395maths/44924physicsattack.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 19 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/physics%20attack/near/134230265):
 Argg, mathlib is under attack from the physics department!
 
@@ -87,3 +89,5 @@ yes, it's computer imitating ants who are stupid but exhibit collective intellig
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 19 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/physics%20attack/near/134232462):
 done
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/57681sourcecodebrowser.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 03 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/source%20code%20browser/near/133246061):
 Is there some way to easily turn a repo of Lean files into a hyperlinked bunch of HTML files? If we want to showcase some code to mathematicians, we should take into account that they have never heard of git or github before. Also, on github you can't click on an imported file, or a token, to go somewhere else. And we can't expect people who want to read some source files to install VScode before they are able to really use it.
 
@@ -172,3 +174,5 @@ I do think probably the clearest use of such a tool is to advertise what we are 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 03 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/source%20code%20browser/near/133274134):
 Right, and it might not be unthinkable that demand for such usage will increase in the next months. When the word spreads about the perfectoid project, and when more senior mathematicians hear about the teaching that Kevin and Patrick are doing.
 
+
+{% endraw %}

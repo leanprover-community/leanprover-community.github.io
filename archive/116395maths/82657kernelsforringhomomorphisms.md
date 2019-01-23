@@ -9,6 +9,8 @@ permalink: archive/116395maths/82657kernelsforringhomomorphisms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Casper Putz (Jan 14 2019 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20for%20ring%20homomorphisms/near/155081960):
 Hi, I wanted to use kernels of ring homomorphisms for the finite fields stuff I am working on with @**Joey van Langen** . They are not implemented for ring homs, but you would define them exactly the same as is done for linear maps (in linear_algebra.basic). I cannot easily reuse the one for linear maps as a ring homomorphism is not necessarily a linear map of modules. However, all the basic properties of the kernel of a linear map (and ring hom) only depend on the underlying additive group stucture. One could define a kernel of a group_hom and then the kernel (pullback) can be lifted.
 
@@ -35,3 +37,5 @@ Beware! In Lean there is currently a difference between `group` and `add_group`.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 14 2019 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20for%20ring%20homomorphisms/near/155082770):
 You would have to refactor `is_ring_hom`. Which I think makes sense... but it might cause a lot of breakage (it shouldn't).
 
+
+{% endraw %}

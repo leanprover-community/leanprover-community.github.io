@@ -9,6 +9,8 @@ permalink: archive/113488general/47376freegroup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 01 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free%20group/near/124469539):
 I have constructed the free group of a set here: https://github.com/kckennylau/Lean/blob/master/free_group.lean
 
@@ -3075,3 +3077,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free%20group/near/125492273):
 why so long
 
+
+{% endraw %}

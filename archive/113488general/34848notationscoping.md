@@ -9,6 +9,8 @@ permalink: archive/113488general/34848notationscoping.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (May 28 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20scoping/near/127193572):
 https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/local.20notation.20for.20fin.20(n.2B1)/near/127041848
 >  This is exactly how lean 2 notation used to work. Why it changed, I don't know, and I'm not clear on whether to expect this to be different in lean 4.
@@ -175,3 +177,5 @@ So I agree with you that there should be an attribute, but there should also be 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 28 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20scoping/near/127202415):
 Sure, that sounds reasonable.
 
+
+{% endraw %}

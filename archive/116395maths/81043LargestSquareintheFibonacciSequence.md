@@ -9,6 +9,8 @@ permalink: archive/116395maths/81043LargestSquareintheFibonacciSequence.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 23 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Largest%20Square%20in%20the%20Fibonacci%20Sequence/near/126977998):
 Did you know that 144 is the largest square in the Fibonacci sequence?
 
@@ -2565,3 +2567,5 @@ I call things lemma 3.1
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 28 2018 at 05:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Largest%20Square%20in%20the%20Fibonacci%20Sequence/near/127186351):
 What do I know about names
 
+
+{% endraw %}

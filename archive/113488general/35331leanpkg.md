@@ -9,6 +9,8 @@ permalink: archive/113488general/35331leanpkg.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Feb 27 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg/near/123021774):
 It is possible to specify git branches in `leanpkg`?
 
@@ -591,3 +593,5 @@ For me it was an issue with a setting in my console program, [`cmder`](http://cm
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Neil Strickland (Jan 18 2019 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg/near/156378147):
 Thanks.  That suggestion doesn't seem immediately applicable to me as I am just using git bash in vscode (and git bash outside vscode seems to handle unicode correctly).  I poked around a bit more and found this page https://github.com/Microsoft/vscode/issues/60330, but the suggestions there seemed to have no effect.  I'll probably just leave it now as it is not really causing me any trouble, it's just untidy.
 
+
+{% endraw %}

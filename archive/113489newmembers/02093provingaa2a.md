@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/02093provingaa2a.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Atze van der Ploeg (Jan 11 2019 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20a%20%2B%20a%20%3D%202%2A%20a/near/154909221):
 I'm trying to prove the shocking lemma ∀ n : ℕ, n + n = 2*n , how do i tell lean to unfold the definition of *?
 
@@ -45,3 +47,5 @@ There's also `two_mul` in the standard library:
 two_mul : ∀ {α : Type u_1} [_inst_1 : semiring α] (n : α), 2 * n = n + n
 ```
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/65805479equivalences.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 16 2018 at 04:17)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23479%20equivalences/near/147792343):
 This one was overdue, and lurking in my other repository.
 
@@ -163,3 +165,5 @@ It should be named `ess_left_inverse_on_objects` (or maybe right--I've lost any 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 28 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23479%20equivalences/near/148741371):
 Okay! I will rename it to something sufficiently unpleasant looking to warn people off. :-)
 
+
+{% endraw %}

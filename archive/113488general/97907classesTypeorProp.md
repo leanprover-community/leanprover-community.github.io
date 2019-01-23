@@ -9,6 +9,8 @@ permalink: archive/113488general/97907classesTypeorProp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 27 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classes%20Type%20or%20Prop/near/125747081):
 Is there any particular reason not to make `t2_space` and similar classes a Prop?
 ```lean
@@ -47,3 +49,5 @@ concrete basis itself. This allows us to declare these type classes as `Prop` to
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 03:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classes%20Type%20or%20Prop/near/125751920):
 I think that's a typo. I'll change it
 
+
+{% endraw %}

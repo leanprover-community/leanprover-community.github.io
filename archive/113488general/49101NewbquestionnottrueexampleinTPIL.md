@@ -9,6 +9,8 @@ permalink: archive/113488general/49101NewbquestionnottrueexampleinTPIL.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ben Weinstein-Raun (Jun 04 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newb%20question%20/%20not-true%20example%20in%20TPIL%3F/near/127526038):
 Hi, I'm a total newb to Lean and to proof assistants generally. I'm working through Chapter 4 of TPIL, and in particular the [example statements in 4.4](https://leanprover.github.io/live/3.4.1/#code=open%20classical%0A%0Avariables%20(%CE%B1%20:%20Type)%20(p%20q%20:%20%CE%B1%20%E2%86%92%20Prop)%0Avariable%20a%20:%20%CE%B1%0Avariable%20r%20:%20Prop%0A%0Aexample%20:%20(%E2%88%83%20x%20:%20%CE%B1,%20r)%20%E2%86%92%20r%20:=%20sorry%0Aexample%20:%20r%20%E2%86%92%20(%E2%88%83%20x%20:%20%CE%B1,%20r)%20:=%20sorry%0Aexample%20:%20(%E2%88%83%20x,%20p%20x%20%E2%88%A7%20r)%20%E2%86%94%20(%E2%88%83%20x,%20p%20x)%20%E2%88%A7%20r%20:=%20sorry%0Aexample%20:%20(%E2%88%83%20x,%20p%20x%20%E2%88%A8%20q%20x)%20%E2%86%94%20(%E2%88%83%20x,%20p%20x)%20%E2%88%A8%20(%E2%88%83%20x,%20q%20x)%20:=%20sorry%0A%0Aexample%20:%20(%E2%88%80%20x,%20p%20x)%20%E2%86%94%20%C2%AC%20(%E2%88%83%20x,%20%C2%AC%20p%20x)%20:=%20sorry%0Aexample%20:%20(%E2%88%83%20x,%20p%20x)%20%E2%86%94%20%C2%AC%20(%E2%88%80%20x,%20%C2%AC%20p%20x)%20:=%20sorry%0Aexample%20:%20(%C2%AC%20%E2%88%83%20x,%20p%20x)%20%E2%86%94%20(%E2%88%80%20x,%20%C2%AC%20p%20x)%20:=%20sorry%0Aexample%20:%20(%C2%AC%20%E2%88%80%20x,%20p%20x)%20%E2%86%94%20(%E2%88%83%20x,%20%C2%AC%20p%20x)%20:=%20sorry%0A%0Aexample%20:%20(%E2%88%80%20x,%20p%20x%20%E2%86%92%20r)%20%E2%86%94%20(%E2%88%83%20x,%20p%20x)%20%E2%86%92%20r%20:=%20sorry%0Aexample%20:%20(%E2%88%83%20x,%20p%20x%20%E2%86%92%20r)%20%E2%86%94%20(%E2%88%80%20x,%20p%20x)%20%E2%86%92%20r%20:=%20sorry%0Aexample%20:%20(%E2%88%83%20x,%20r%20%E2%86%92%20p%20x)%20%E2%86%94%20(r%20%E2%86%92%20%E2%88%83%20x,%20p%20x)%20:=%20sorry). I haven't been able to prove the last two of them, and I'm beginning to suspect that the last one, at least, is actually false.
 
@@ -48,3 +50,5 @@ No worries
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 04 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newb%20question%20/%20not-true%20example%20in%20TPIL%3F/near/127526373):
 :smile:  :thumbs_up:
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/84699Heisenbug.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 26 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Heisenbug/near/132789693):
 I just found a Heisenbug: a proof that doesn't typecheck correctly, but if you add `tactic.result >>= tactic.trace` at the end, it does!
 
@@ -21,3 +23,5 @@ I suspect that pretty printing either does some type checking (forcing some unif
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 26 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Heisenbug/near/132790899):
 I'm in the midst of further changes that will affect how my metavariables get handled, so I think I'm going to defer diagnosing this bug, hoping that if I don't look at it it will disappear permanently. :-)
 
+
+{% endraw %}

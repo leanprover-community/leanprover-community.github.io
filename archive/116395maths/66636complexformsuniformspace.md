@@ -9,6 +9,8 @@ permalink: archive/116395maths/66636complexformsuniformspace.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222007):
 ```lean
 import analysis.real analysis.complex
@@ -303,3 +305,5 @@ The circle *metric* is certainly the right one, but I wonder if the *topology* s
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239681):
 which will make your filter theorem essentially by definition, and the bulk of that proof will be transferred to the construction of the metric_space instance
 
+
+{% endraw %}

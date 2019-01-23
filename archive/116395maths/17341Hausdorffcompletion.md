@@ -9,6 +9,8 @@ permalink: archive/116395maths/17341Hausdorffcompletion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 11 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorff%20completion/near/129461026):
 @**Johannes Hölzl** around https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L1102, is there any reason why you didn't push to the Hausdorff completion? Is the idea that users should easily combine stuff in this section with the https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L928 section? Or did you intend to continue this?
 
@@ -85,3 +87,5 @@ Adjunctions are not yet in mathlib, so I mean all the ingredients are there
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 15 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorff%20completion/near/135846966):
 There is a map from a uniform space to its completion: https://github.com/leanprover/mathlib/blob/80d688e3ae2a721ab61f4cd000ea3e336158b04f/analysis/topology/topological_groups.lean#L27 (it's called `coe` because it is setup as a coercion in Lean sense). Maps into a completed Hausdorff space factor through the completion: https://github.com/leanprover/mathlib/blob/80d688e3ae2a721ab61f4cd000ea3e336158b04f/analysis/topology/completion.lean#L651 This is used to build the action of the completion functor on arrows: https://github.com/leanprover/mathlib/blob/80d688e3ae2a721ab61f4cd000ea3e336158b04f/analysis/topology/completion.lean#L670 this is functorial https://github.com/leanprover/mathlib/blob/80d688e3ae2a721ab61f4cd000ea3e336158b04f/analysis/topology/completion.lean#L700 etc. etc. (I'm skipping a lot. I think everything is there)
 
+
+{% endraw %}

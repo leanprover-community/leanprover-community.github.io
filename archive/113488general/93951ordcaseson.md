@@ -9,6 +9,8 @@ permalink: archive/113488general/93951ordcaseson.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jul 02 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or.dcases_on/near/128973389):
 In general, what does this message mean? induction tactic failed, recursor "or.dcases_on" can only eliminate into Prop.
 
@@ -244,3 +246,5 @@ thanks, I will look into it.
 yeah I give up. Here is the line causing this error:
 https://github.com/riaqn/smtlean/blob/6e5c20aaa344e972528d8089af01f638819ff06c/src/cvc4.lean#L129
 
+
+{% endraw %}

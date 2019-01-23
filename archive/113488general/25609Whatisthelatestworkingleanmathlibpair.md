@@ -9,6 +9,8 @@ permalink: archive/113488general/25609Whatisthelatestworkingleanmathlibpair.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ching-Tsun Chou (Mar 26 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203602):
 A pair of git commit ids would suffice.
 
@@ -68,3 +70,5 @@ That latest commit is about making it work with the latest nightly instead of HE
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 26 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204564):
 yes
 
+
+{% endraw %}

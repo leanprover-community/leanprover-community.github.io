@@ -9,6 +9,8 @@ permalink: archive/113488general/25920structureequality.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 06 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129218426):
 How do we prove equality of two terms whose type is a structure mixing data and Prop? I would like to prove each data holding field matches. I thought this has something to do with `no_confusion` but I can't get it to work.
 
@@ -60,3 +62,5 @@ I'm wrapping up a round of optimization of `tauto`. When it works, it should be 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 06 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129222738):
 Great!
 
+
+{% endraw %}

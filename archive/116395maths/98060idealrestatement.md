@@ -9,6 +9,8 @@ permalink: archive/116395maths/98060idealrestatement.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 29 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ideal%20restatement/near/134885438):
 As often, I find myself moving stuff around without doing anything. I just wrote:
 ```lean
@@ -64,3 +66,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 29 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ideal%20restatement/near/134885537):
 By the way, I have no idea why `split` is happy to transform the goal `is_ideal' S` into the expected three goals, but doesn't want to do anything with the goal `is_ideal S`
 
+
+{% endraw %}

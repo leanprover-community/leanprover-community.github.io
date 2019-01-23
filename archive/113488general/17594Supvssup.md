@@ -9,6 +9,8 @@ permalink: archive/113488general/17594Supvssup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 06 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sup%20vs%20sup/near/150984986):
 Is there something in mathlib expressing compatibility between `Sup` and `sup` for complete lattices?
 I would expect something like
@@ -25,3 +27,5 @@ also it might be expressed in terms of `Sup (insert a s)`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 06 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sup%20vs%20sup/near/150985153):
 Aah, there is a `Sup_insert`. And that can be chained with `Sup_singleton`
 
+
+{% endraw %}

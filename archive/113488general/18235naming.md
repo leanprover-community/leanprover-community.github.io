@@ -9,6 +9,8 @@ permalink: archive/113488general/18235naming.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 09 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming/near/133613270):
 So I have a bunch of standard math terminology which contains a variable (a regular cardinal $$\kappa$$) in the middle of the term. For example:
 * A set is $$\kappa$$-small if its cardinality is less than $$\kappa$$.
@@ -47,3 +49,5 @@ but I don't know whether that is mathlib-approved
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming/near/133620266):
 We also have that kind of problem in symplectic topology. We things called J-holomorphic curves, or ξ-convex surfaces, even when we don't specify an almost complex structure J or a contact structure ξ
 
+
+{% endraw %}

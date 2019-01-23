@@ -9,6 +9,8 @@ permalink: archive/113488general/86943recfnmacro.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ben Sherman (May 21 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126885006):
 I just updated Lean from 3.3.0 to 3.4.1, and now when I write this code:
 ```
@@ -206,3 +208,5 @@ perhaps you have oversimplified your example?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ben Sherman (Nov 08 2018 at 03:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/147271849):
 Thanks! I didn't know that details about the well-foundedness. Then I indeed oversimplified my example - originally it was nat. Let me backtrack with a revised example.
 
+
+{% endraw %}

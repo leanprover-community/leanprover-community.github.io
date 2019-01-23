@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/15929proveppwithoutclassical.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Skiba (Aug 31 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29%20without%20classical/near/133107905):
 The examples at the end of chapter 3 of tutorial "Theorem proving in Lean" are very easy, except the one in subj. If I try to construct it as is, I have to construct false from two functions, which I can get by iff.mp and iff.mpr - but I have no objects to apply these functions. I found propext constant, which allowed me to convert iff to an equality of p = ¬p, but I don't see how to prove (p = ¬p) → false. In Idris language such proofs are built by "impossible" keyword, but I cannot find anything similar in Lean. Am I missing something basic?
 
@@ -116,3 +118,5 @@ This problem seems to be a fairly popular question here [1](https://leanprover.z
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 31 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29%20without%20classical/near/133125379):
 Yeah, for some reason it's tripping up a lot of people working through TPIL. We need a FAQ!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/89018algorithmsinthetacticmonad.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 05:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593072):
 I need some remedial help with functional programming. 
 
@@ -184,3 +186,5 @@ I found some paper on the topic which contains a lemma which bounds the cardinal
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133618942):
 Thanks for the attempt at giving me an introduction. I'm afraid I'm more of a noob than that when it comes to category theory
 
+
+{% endraw %}

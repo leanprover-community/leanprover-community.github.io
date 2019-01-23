@@ -9,6 +9,8 @@ permalink: archive/113488general/94038equalityoffunctionswithboundedfinitedecide
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 20 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148032872):
 Is `eq_of_yield` provable? Do I need to lose computability with functional extensionality? 
 ```lean
@@ -198,3 +200,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 20 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037550):
 Thank you, @**Kenny Lau** . I appreciate your help. The transition from nondependent `range` to the bounded mapping is a step I'm having difficulties with. There's a bit of magic in `convert` it would appear, I'll have to take a closer look. Thanks again, I'm going to step over the proofs.
 
+
+{% endraw %}

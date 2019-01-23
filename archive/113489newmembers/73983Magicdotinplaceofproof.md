@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/73983Magicdotinplaceofproof.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mark Dickinson (Nov 05 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Magic%20dot%20in%20place%20of%20proof%3F/near/146826913):
 Looking through the standard library, I see this in `basic.lean`:
 ```lean
@@ -49,3 +51,5 @@ I've sometimes found it useful when rewriting a proof,  e.g. instead of temporar
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 06 2018 at 00:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Magic%20dot%20in%20place%20of%20proof%3F/near/146833077):
 I usually insert a `#exit`
 
+
+{% endraw %}

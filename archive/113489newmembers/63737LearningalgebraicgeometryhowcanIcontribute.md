@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/63737LearningalgebraicgeometryhowcanIcontrib
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Soham Chowdhury (Sep 02 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20algebraic%20geometry%3B%20how%20can%20I%20contribute%3F/near/133214542):
 Hi everyone! A friend sent me a link to @**Kevin Buzzard**'s answer on the "What are perfectoid spaces?" MO question, which is how I got here. I'm learning algebraic geometry right now. More to the point, I have some experience using Agda and Idris (but not Lean).
 
@@ -112,3 +114,5 @@ I'm going to check back here if (rather, when) I have questions. Thanks for the 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 03 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20algebraic%20geometry%3B%20how%20can%20I%20contribute%3F/near/133239139):
 Also see this thread in Zulip: https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/noetherian.20modules (You might need to enable the "maths" stream somewhere in your settings; but I thought this was done by default nowadays.)
 
+
+{% endraw %}

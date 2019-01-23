@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/65569Productmetaprogram.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 29 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Product%20meta%20program/near/130535258):
 Here is a simple meta program to simplify a product expression.  It does not seem to match anything.  Can someone explain what is happening?
 
@@ -129,3 +131,5 @@ I'll put it up in a day or two.  The code isn't stand alone.  It is dependent on
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 06 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Product%20meta%20program/near/130956238):
 I've posted the source code that I have of my separation framework so far here: https://github.com/kendroe/pedantic2.  Some of my future questions will point to this repository.  I'm porting the Coq implementation.  Information on this implementation (and repository link) can be found here: http://www.cs.jhu.edu/~roe.
 
+
+{% endraw %}

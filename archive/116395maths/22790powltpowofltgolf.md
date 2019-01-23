@@ -9,6 +9,8 @@ permalink: archive/116395maths/22790powltpowofltgolf.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/pow_lt_pow_of_lt%20golf/near/147671439):
 ```lean
 variable (x : ℝ) -- or [linear_ordered_field]
@@ -383,3 +385,5 @@ bar : ∀ (A B C : Prop), A ∧ (B ∨ C) → A ∧ B ∨ A ∧ C
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/pow_lt_pow_of_lt%20golf/near/147681164):
 also pp.beta helps sometimes
 
+
+{% endraw %}

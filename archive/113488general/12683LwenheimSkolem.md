@@ -9,6 +9,8 @@ permalink: archive/113488general/12683LwenheimSkolem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 09 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/L%C3%B6wenheim-Skolem/near/135492014):
 Is Löwenheim-Skolem true in Lean?
 
@@ -66,3 +68,5 @@ Maybe Mario or Gabriel or one of the other experts that hang around here will ju
 For higher-order logic with standard semantics, of course, Löwenheim-Skolem is false; we can write down categorical axiomatizations of the reals. 
 If you think of higher-order logic in a first-order way -- i.e. a model of higher-order logic is just a many-sorted theory (so each type is a sort) with operations for application and lambda abstraction satisfying the requisite comprehension axioms, Löwenheim-Skolem is true. These are sometimes called "Henkin models". I am sure all this will carry over to dependent type theory. The hard part is saying what a model is. But e.g. the usual term model is a countable model.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/06586groupcounterexample.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214352):
 Q1 part (i) on the 2nd year group theory sheet at Imperial (where $$G$$ is a group throughout) is "True or false : If we can find elements $$g$$, $$h$$ in $$G$$ such that $$gh = hg$$ then $$G$$ is abelian."
 
@@ -78,3 +80,5 @@ What you can do instead is show a counterexample in a particular universe, which
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217369):
 So do I have to use `ulift` to get `replace H := H (perm (fin 3))` working? I've never used `ulift` before.
 
+
+{% endraw %}

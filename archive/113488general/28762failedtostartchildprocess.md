@@ -9,6 +9,8 @@ permalink: archive/113488general/28762failedtostartchildprocess.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jul 25 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failed%20to%20start%20child%20process/near/130257139):
 I have a student who can't run leanpkg on Windows: `leanpkg.bat new test` says: "failed to start child process", and doesn't create a new directory.
 
@@ -55,3 +57,5 @@ I might give using WSL a try, although I'm afraid that configuring VSCode might 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 12 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failed%20to%20start%20child%20process/near/133812101):
 I suppose another thing I could try is compiling Lean from source and hoping that that fixes the issue.
 
+
+{% endraw %}

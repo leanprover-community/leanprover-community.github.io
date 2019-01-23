@@ -9,6 +9,8 @@ permalink: archive/113488general/81772RichStandardLibrary.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Speee (Jul 14 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rich%20Standard%20Library%3F/near/129671263):
 I see that Jeremy Avigad boasts of a rich standard library in Lean here (pdf): https://leanprover.github.io/talks/stanford2017.pdf
 
@@ -153,3 +155,5 @@ I do prefer readability most of all (and Lean shines here), but I could use a ma
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 18 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rich%20Standard%20Library%3F/near/129838358):
 I don't know how mathlib rates on maturity, but there is certainly more than enough for comparing your own work against
 
+
+{% endraw %}

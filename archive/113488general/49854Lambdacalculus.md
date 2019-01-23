@@ -9,6 +9,8 @@ permalink: archive/113488general/49854Lambdacalculus.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexander Bentkamp (Dec 17 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152020148):
 Hello,
 Does anyone know of a formalization of the lambda calculus in Lean?
@@ -151,3 +153,5 @@ oh... context...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Thomas (Jan 02 2019 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203800):
 Sorry about that.
 
+
+{% endraw %}

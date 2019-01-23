@@ -9,6 +9,8 @@ permalink: archive/113488general/62254atactictoforgetthedefinition.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 07 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20forget%20the%20definition/near/147254137):
 Can we make a tactic to forget the definition of something in the local context while keeping everything else unchanged?
 
@@ -24,3 +26,5 @@ it isn't
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 08 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20forget%20the%20definition/near/147266720):
 you could `replace h := h` I think
 
+
+{% endraw %}

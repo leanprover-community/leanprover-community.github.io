@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/58383495multiplicity.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 29 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23495%20multiplicity/near/148810765):
 `multiplicity` requires a decidable dvd argument currently. However there are applications where we don't have decidable dvd in general but we do for particular elements, in particular, for multiplicities of roots of polynomials over a comm ring, it is decidable whether or not `X - C a` divides a polynomial but not easily in general - the divisor needs to be monic. What's the best way of dealing with this?
 
@@ -91,3 +93,5 @@ but I could imagine a more complicated polynomial factoring algorithm that decid
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 17 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23495%20multiplicity/near/152029219):
 @**Chris Hughes** Would it be possible to split this PR into smaller pieces? For example: 1 PR that adds `enat`; 1 PR that makes lots of little changes in several files; 1 PR that adds the notion `multiplicity`; and finally 1 PR that replaces `padic_val` with `multiplicity`.
 
+
+{% endraw %}

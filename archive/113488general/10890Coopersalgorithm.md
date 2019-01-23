@@ -9,6 +9,8 @@ permalink: archive/113488general/10890Coopersalgorithm.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (May 20 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cooper%27s%20algorithm/near/126812643):
 I've implemented Cooper's algorithm for linear integer arithmetic as a Lean tactic (https://github.com/skbaek/qelim). It's still quite limited, but it should work for simple goals.
 * `cooper` is the completely verified tactic that is proof-producing all the way. Unfortunately, it is unusably slow.
@@ -265,3 +267,5 @@ can I do targetted dsimp?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 29 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cooper%27s%20algorithm/near/127246896):
 This is a new thread. Hang on
 
+
+{% endraw %}

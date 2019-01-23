@@ -9,6 +9,8 @@ permalink: archive/113488general/01184libaryinitalgebragroup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509188):
 L165:
 ```lean
@@ -85,3 +87,5 @@ See you!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125510125):
 I just woke up
 
+
+{% endraw %}

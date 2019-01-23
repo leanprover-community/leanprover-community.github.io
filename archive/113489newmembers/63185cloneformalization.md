@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/63185cloneformalization.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Miroslav Olšák (Oct 23 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/clone%20formalization/near/136329846):
 Hello everybody, we tried a testing formalization of a simple proposition about clones in several ITP's for comparison. LEAN seems pretty nice so far. However, I believe that there should be a better approach to certain parts the proof (if we just knew LEAN better).
 You can see the task description,  together with my complains (/ TODO) under the link.
@@ -104,3 +106,5 @@ In this case, I will point you to [`nat.primrec'`](https://github.com/leanprover
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Miroslav Olšák (Oct 24 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/clone%20formalization/near/136396537):
 Interesting. Do you think that vectors behave in Lean better than arrays in general? (even though they are mathematically the same).
 
+
+{% endraw %}

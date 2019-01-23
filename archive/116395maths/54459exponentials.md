@@ -9,6 +9,8 @@ permalink: archive/116395maths/54459exponentials.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125775813):
 @**Chris Hughes** what happened to your PR's about exp?
 
@@ -26,3 +28,5 @@ theorem const (x : X) (y : Y) : tendsto (λ _ : X, y) (nhds x) (nhds y) :=
 ```
 This was an exercise I set to myself (I know it's in mathlib already)
 
+
+{% endraw %}

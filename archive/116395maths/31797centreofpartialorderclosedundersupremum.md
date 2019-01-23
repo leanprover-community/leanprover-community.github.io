@@ -9,6 +9,8 @@ permalink: archive/116395maths/31797centreofpartialorderclosedundersupremum.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823474):
 Let (P, <=) be a partially ordered set.
 
@@ -45,3 +47,5 @@ by haveI := classical.dec; exact
     ((hs _).1 (le_refl _) _ sc)
 ```
 
+
+{% endraw %}

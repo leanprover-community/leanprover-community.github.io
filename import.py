@@ -105,8 +105,8 @@ def write_topic(messages, stream_name, stream_id, topic_name, outfile):
         name = c['sender_full_name']
         date = datetime.fromtimestamp(c['timestamp']).strftime('%b %d %Y at %H:%M')
         msg = c['content']
-        if '{{' in msg:
-            msg = "{% raw %}\n" + msg + "{% endraw %}"
+        #if '{{' in msg:
+        #    msg = "{% raw %}\n" + msg + "{% endraw %}"
         link = structure_link(stream_id, stream_name, topic_name, c['id'])
         outfile.write(format_message(name, date, msg, link))
         outfile.write('\n\n')
@@ -149,7 +149,9 @@ def get_topic_and_write(stream, topic):
     f.close()
     o = open_outfile(md_root / Path(sanitize_stream(stream['name'], stream['id'])), Path(sanitize_topic(topic['name']) + '.md'), 'w+')
     o.write(format_topic_header(stream, topic['name']))
+    o.write('\n{% raw %}\n')
     write_topic(messages['messages'], stream['name'], stream['id'], topic['name'], o)
+    o.write('\n{% endraw %}\n')
     o.close()
 
 def write_markdown():

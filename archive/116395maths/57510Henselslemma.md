@@ -9,6 +9,8 @@ permalink: archive/116395maths/57510Henselslemma.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133747941):
 @**Rob Lewis** has PR'd Hensel's lemma for the p-adics! :tada: :octopus: :muscle:
 https://github.com/leanprover/mathlib/pull/337/files?w=1
@@ -61,3 +63,5 @@ Did you have a look at Simon's mono tactic? It's not yet merged but it's in the 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133786975):
 @**Rob Lewis** Thanks for the documentation!
 
+
+{% endraw %}

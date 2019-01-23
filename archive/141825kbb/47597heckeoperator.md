@@ -9,6 +9,8 @@ permalink: archive/141825kbb/47597heckeoperator.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 14 2018 at 18:32)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/hecke%20operator/near/133964447):
 The next step would be to define https://en.wikipedia.org/wiki/Hecke_operator#Explicit_formula on the subspace of `Petersson_weight k` functions on the upper half plane.
 
@@ -542,3 +544,5 @@ Reid quoted some formulas containing the Petersson slash operator (of weight `k`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 19 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/hecke%20operator/near/134225043):
 (Oooh, I also pushed those small rewrites.)
 
+
+{% endraw %}

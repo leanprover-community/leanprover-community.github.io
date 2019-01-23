@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/34446leanpath.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Hendrik (Sep 22 2018 at 06:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20path/near/134421026):
 I have the following problem: After installing the lean vs code extension and downloading the math library, adding the math library to a workspace results in unresolved imports because the math library is not inside the LEAN_PATH.
 
@@ -40,3 +42,5 @@ When exactly does the failed to start child process error occur, and does it say
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 23 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20path/near/134487011):
 @**Hendrik** It looks like this issue has been figured out [here](https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/leanpkg/near/134482297). One quick solution is simply to try the git-bash shell if you have that installed.
 
+
+{% endraw %}

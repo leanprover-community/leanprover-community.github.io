@@ -9,6 +9,8 @@ permalink: archive/113488general/72117deconstructsigmatypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 30 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deconstruct%20sigma%20types/near/148871250):
 ```lean
 -- works fine
@@ -124,3 +126,5 @@ We're making colimits in the category of commutative rings!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 30 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deconstruct%20sigma%20types/near/148874306):
 Without it, it will be `x.1.1.1` everywhere
 
+
+{% endraw %}

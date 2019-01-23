@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/08397Usingaddrightinj.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 13 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%40add_right_inj/near/135737105):
 How many parameters do I need to specify to use `←@add_right_inj`? I'm trying to understand how to use tactics with implicit parameters, but can't seem to get it right. I keep getting `failed to synthesize type class instance`
 
@@ -210,3 +212,5 @@ If you ever see the word "instance" in Lean code it just means "definition, and 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 13 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%40add_right_inj/near/135747304):
 So for example the construction of the ring structure on the integers will be defined as an instance rather than a definition, and then any lemmas about rings will automatically apply to the integers
 
+
+{% endraw %}

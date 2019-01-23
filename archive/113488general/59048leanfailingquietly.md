@@ -9,6 +9,8 @@ permalink: archive/113488general/59048leanfailingquietly.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 06 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20failing%20quietly/near/123370593):
 Lean has got worse and worse recently, at least for me. I am sorely tempted to just check out a version from a week or two ago and compile that and use it instead. I have a largeish file open (350 lines) and after Lean: Restart in VS Code I get the orange "compiling" lines and then they just disappear, there are no red failure lines, nothing in lean messages, and lean isn't running any more in the sense that none of my `#check`s are underlined in green.
 
@@ -42,3 +44,5 @@ Probably the default memory limit in the VS Code and emacs extensions should jus
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 07 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20failing%20quietly/near/123372504):
 On the other hand, Lean silently failing is bad news. If you’ve got something that reproducibly causes VS Code’s Lean extension to silently fail, you should 1. Check if `lean —make` also fails (it may tell you something more informative) 2. Post it here!
 
+
+{% endraw %}

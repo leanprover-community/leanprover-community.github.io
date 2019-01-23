@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/13245Whichruletouseforarithmeticcalculations
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Yufan Lou (Oct 12 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135641895):
 I am trying to prove for any odd number n, 3n + 5 is even as a practice. In the calc steps I have:
 3 * n + 5 = ...
@@ -399,3 +401,5 @@ the defeq chain looks like this btw:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 12 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135645741):
 I'll omit the steps that unfold the definition of `+`. :)
 
+
+{% endraw %}

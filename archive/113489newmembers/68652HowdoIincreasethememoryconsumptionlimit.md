@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/68652HowdoIincreasethememoryconsumptionlimit
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Nov 11 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20increase%20the%20memory%20consumption%20limit%3F/near/147477161):
 I keep getting "excessive memory consumption" errors in Lean. How can I increase the memory consumption limit? Presumably this is a Lean setting, right?
 
@@ -45,3 +47,5 @@ or `leanpkg build`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 11 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20increase%20the%20memory%20consumption%20limit%3F/near/147480220):
 If code takes a long time to run you can try and figure out what's going on by sticking #exit in the code and working out which line is causing the problem. October binaries are fine I'm sure. But there is perhaps a line which is bad style or could be rewritten to solve your problems
 
+
+{% endraw %}

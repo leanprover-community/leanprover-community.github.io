@@ -9,6 +9,8 @@ permalink: archive/113488general/71528ext1vsext1.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 28 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ext1%20vs%20ext%20%3A%201/near/134847162):
 Is there any difference between `ext1` and `ext : 1`?
 
@@ -63,3 +65,5 @@ It's still better than before @**Patrick Massot** started his crusade: most are 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ext1%20vs%20ext%20%3A%201/near/134858714):
 Absolutely! :-)
 
+
+{% endraw %}

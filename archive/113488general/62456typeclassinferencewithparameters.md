@@ -9,6 +9,8 @@ permalink: archive/113488general/62456typeclassinferencewithparameters.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Nov 07 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146970992):
 Is there a way to tell type class inference to "use the current parameter"? In the following code, the `apply_instance` fails, because the argument of type `decidable_eq A` is a metavariable, and I want Lean to use the parameter.
 ```
@@ -71,3 +73,5 @@ Yeah, I know, but I don't want to add instances on the fly, I just want that in 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 07 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146973032):
 I see. I mistook your issue. I think the problem is that your instance depend on stuff that can't be inferred. You may have to make `some_data` a class locally.
 
+
+{% endraw %}

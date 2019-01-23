@@ -9,6 +9,8 @@ permalink: archive/113488general/16468existsofnotforallnot.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 10 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exists_of_not_forall_not/near/123536960):
 I am a classical guy. Is `example (α : Type) (P : α → Prop) : (¬ (∀ a : α, ¬ P a)) → (∃ a : α, P a) := sorry` already in Lean or mathlib?
 
@@ -27,3 +29,5 @@ I thought the convention was that lemmas should be named after their conclusion.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 10 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exists_of_not_forall_not/near/123540476):
 Yes but the lemma in the library was an iff ;-)
 
+
+{% endraw %}

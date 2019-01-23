@@ -9,6 +9,8 @@ permalink: archive/116395maths/72883discretespaces.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/discrete%20spaces/near/136077573):
 ```quote
 **[feat(analysis/topology): add type class for discrete topological spaces](https://github.com/leanprover/mathlib/commit/f6812d5a881b1bca826808e6bd40eb3e75979d2a)**
@@ -28,3 +30,5 @@ Hence, I would like to keep it as an mixin (i.e. a predicate, not containing the
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/discrete%20spaces/near/136112844):
 Ah, I see. I can imagine a situation where you have a manifold or a topological ring or something, and then also want to assume or prove that the topology is discrete. Makes sense.
 
+
+{% endraw %}

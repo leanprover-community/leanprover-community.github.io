@@ -9,6 +9,8 @@ permalink: archive/113488general/52145submodulespan.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 18 2018 at 04:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/submodule.span/near/147901978):
 I am trying to understand submodule.span, why can the type of ```Inf { p | s \sub p } ``` (set beta) be converted to ```submodule \alpha \beta```? Thanks!
 
@@ -42,3 +44,5 @@ like where the coercion is defined
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 18 2018 at 04:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/submodule.span/near/147902280):
 Ah, there is only one ```submodule.has_coe``` in submodule.lean
 
+
+{% endraw %}

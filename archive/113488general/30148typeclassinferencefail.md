@@ -9,6 +9,8 @@ permalink: archive/113488general/30148typeclassinferencefail.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 08 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20fail/near/127760290):
 ```lean
 don't know how to synthesize placeholder
@@ -175,3 +177,5 @@ something like "if that worked, then this important file would take 100 years to
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20fail/near/127760811):
 But I'm not sure, what happened with the changes to type class inference is beyond my pay grade
 
+
+{% endraw %}

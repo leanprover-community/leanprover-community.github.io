@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/12422HelpwithLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 10 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411503):
 I just started using Lean.  Can someone help me by telling me what I need to replace "sorry" with to prove this theorem:
 
@@ -108,3 +110,5 @@ definition fib : nat → nat
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 10 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129416618):
 You shouldn't be reading anything written for Lean 2. This is all difficult enough without adding this layer of confusion. Reading https://leanprover.github.io/theorem_proving_in_lean/ will already bring you a long way
 
+
+{% endraw %}

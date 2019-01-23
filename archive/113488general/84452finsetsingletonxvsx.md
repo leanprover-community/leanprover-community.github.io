@@ -9,6 +9,8 @@ permalink: archive/113488general/84452finsetsingletonxvsx.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 28 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22finset.singleton%20x%22%20vs%20%22%7Bx%7D%22/near/134833971):
 there are two ways to write the same finset. there's a simp lemma converting the latter to the former. however there are also many lemmas written using the latter instead of the former. so what is the standard?
 
@@ -30,3 +32,5 @@ I think so... unfortunately root.singleton is a definition rather than a typecla
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 28 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22finset.singleton%20x%22%20vs%20%22%7Bx%7D%22/near/134839212):
 it is also marginally faster to execute
 
+
+{% endraw %}

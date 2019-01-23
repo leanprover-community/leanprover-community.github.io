@@ -9,6 +9,8 @@ permalink: archive/113488general/25118intereqofselfofsubset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 22 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inter_eq_of_self_of_subset/near/152376322):
 Should these lemmas from `data.set.basic` be simp lemmas? I was surprised when `simp` didn't solve these statements automatically.
 ```lean
@@ -19,3 +21,5 @@ theorem inter_eq_self_of_subset_right {s t : set α} (h : t ⊆ s) : s ∩ t = t
 by finish [subset_def, ext_iff, iff_def]
 ```
 
+
+{% endraw %}

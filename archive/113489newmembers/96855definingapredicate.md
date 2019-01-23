@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/96855definingapredicate.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Thomas (Nov 26 2018 at 05:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20predicate/near/148346494):
 Hi,
 
@@ -108,3 +110,5 @@ by simp [P'] at this; rwa nat.add_sub_cancel' mn at this
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Thomas (Nov 28 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20predicate/near/148691325):
 Thank you! This has helped.
 
+
+{% endraw %}

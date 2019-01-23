@@ -9,6 +9,8 @@ permalink: archive/113488general/22601calciff.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 20 2018 at 10:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152244122):
 Is there anything we can do to get something like
 ```lean
@@ -154,3 +156,5 @@ It's just that all my constructions build on these two PRs, so there is no way I
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 20 2018 at 12:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152249801):
 yeah okay. I've been putting it off because it's a big PR and I had to check it out and fiddle with stuff, but I will work on that now
 
+
+{% endraw %}

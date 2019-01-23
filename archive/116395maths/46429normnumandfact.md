@@ -9,6 +9,8 @@ permalink: archive/116395maths/46429normnumandfact.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_num%20and%20fact/near/147921330):
 ```lean
 import data.nat.basic
@@ -36,3 +38,5 @@ example : fact 7 ≥ 3 ^ 7 :=
 by dsimp only [fact, succ_eq_add_one]; norm_num
 ```
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/52683unexpectedlylong.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 28 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134828020):
 ```lean
 import data.finset
@@ -113,3 +115,5 @@ What I want to do is search and replace `simp` (not preceded by a square bracket
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134841212):
 But now that I know about `hole_command` attributes, I think I might start with that to test out my idea
 
+
+{% endraw %}

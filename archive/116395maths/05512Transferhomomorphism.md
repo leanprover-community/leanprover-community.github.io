@@ -9,6 +9,8 @@ permalink: archive/116395maths/05512Transferhomomorphism.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127678):
 Let G be a group and H a subgroup of finite index. Then, pick a set-theoretic section s:G/H->G where G/H is the right cosets. Then, the transfer homomorphism G^ab -> H^ab is defined by sending [[g]] to prod[x in G/H] s(x) g s(xg)^-1.
 
@@ -448,3 +450,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 16 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128164386):
 Canceling s -- [[]] is being used for both the map G->Gab and H->Hab so they don't cancel. Spending the weekend in a field without much internet so don't expect too much from me until sun pm
 
+
+{% endraw %}

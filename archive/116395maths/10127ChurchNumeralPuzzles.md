@@ -9,6 +9,8 @@ permalink: archive/116395maths/10127ChurchNumeralPuzzles.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 02 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Church%20Numeral%20Puzzles/near/126010843):
 I am trying to understand church numerals by writing a collection of basic theorems about them.
 
@@ -798,3 +800,5 @@ Check this out: http://www.cs.bham.ac.uk/~udr/papers/logical-relations-and-param
 ```
 That paper
 
+
+{% endraw %}

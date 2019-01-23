@@ -9,6 +9,8 @@ permalink: archive/113488general/42593classonitp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jeremy Avigad (Oct 14 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/class%20on%20itp/near/135780395):
 Hey, check out the flyer I made up for an Interactive Theorem Proving class I am teaching next semester: http://www.andrew.cmu.edu/user/avigad/itp/. Comments are welcome. The course schedule goes live next week and I'll circulate it then. 
 @**Kevin Buzzard** How is your experience with CoCalc? Is there anything I should know?
@@ -79,3 +81,5 @@ I'm happy to see a reference to software / hardware verification :)
 Thanks, @**Simon Hudon**. I know enough to point students to Chlipala's CPDT and FRAP, and Nipkow and Klein's Concrete Semantics. Porting anything from those to Lean is a reasonable project. If I have any students that are looking for something more creative, I'll send them to you.
 And thanks, @**Kevin Buzzard**. This is helpful. I have got until January to figure it out, so I'll likely come back with more specific questions later.
 
+
+{% endraw %}

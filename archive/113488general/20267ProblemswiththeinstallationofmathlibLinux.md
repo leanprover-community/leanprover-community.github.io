@@ -9,6 +9,8 @@ permalink: archive/113488general/20267ProblemswiththeinstallationofmathlibLinux.
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bruno Bentzen (Oct 10 2018 at 05:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20the%20installation%20of%20mathlib%20%28Linux%29/near/135515887):
 Hello,
 
@@ -74,3 +76,5 @@ It's not a silly question at all -- in fact it's a valuable data point! The comm
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bruno Bentzen (Oct 10 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20the%20installation%20of%20mathlib%20%28Linux%29/near/135522854):
 I am glad to hear that, thanks Kevin! :)
 
+
+{% endraw %}

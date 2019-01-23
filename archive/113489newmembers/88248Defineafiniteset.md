@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/88248Defineafiniteset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 15 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Define%20a%20finite%20set/near/135797911):
 How do I define a finite set only giving information of its cardinality? I'd like to define something like this:
 
@@ -851,3 +853,5 @@ I'm guessing reference and equation numbering don't count.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 17 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Define%20a%20finite%20set/near/135933569):
 I'm not sure I numbered any equations but I almost certainly numbered theorems (did you notice that here they name them instead?) and no I didn't count those numbers :-)
 
+
+{% endraw %}

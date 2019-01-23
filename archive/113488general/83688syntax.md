@@ -9,6 +9,8 @@ permalink: archive/113488general/83688syntax.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 04 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/127544480):
 Fun fact: `notation` applies even in `namespace` commands, so if you write ``notation `foo` := bar`` and then `namespace foo` it means `namespace bar`
 
@@ -67,3 +69,5 @@ Let's... say that we're transitioning from the planning phase to the implementat
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 04 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/127545899):
 Exciting :D I can't wait to see where that will end up!
 
+
+{% endraw %}

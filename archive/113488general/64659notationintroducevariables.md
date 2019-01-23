@@ -9,6 +9,8 @@ permalink: archive/113488general/64659notationintroducevariables.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Aug 10 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20introduce%20variables/near/131200648):
 Is it possible to write notation that will allow introducing variables?  e.g. have something like the following work:
 ```
@@ -39,3 +41,5 @@ Great.  Thanks for finding that.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 10 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20introduce%20variables/near/131202453):
 :+1: To be fair, a few months back, there was intense session on gitter, looking through the C++ code and figuring out the ins and outs of the `notation` notation
 
+
+{% endraw %}

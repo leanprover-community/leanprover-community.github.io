@@ -9,6 +9,8 @@ permalink: archive/113488general/45420metamutualdeferrors.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 24 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697613):
 Does anyone know the source of this error? I get `unexpected error, failed to generate equational lemmas in the front-end` even though it's a meta def so it shouldn't have equations
 ```lean
@@ -64,3 +66,5 @@ And this only happens in `meta`.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 24 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697846):
 Oh well! :-)
 
+
+{% endraw %}

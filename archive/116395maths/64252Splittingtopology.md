@@ -9,6 +9,8 @@ permalink: archive/116395maths/64252Splittingtopology.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 22 2019 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20topology/near/156605219):
 @**Mario Carneiro** @**Johannes Hölzl** @**Reid Barton** I continued moving on the topology reorganization project. The next step was to split `topology.basic` and `topology.continuity` while gathering the basics of continuity and the basics of topological spaces. My current result is at https://github.com/leanprover-community/mathlib/tree/top_split I need comments before moving on. My next step would be to reorganize uniform spaces and topological structures, still following the general scheme discussed in Amsterdam
 
@@ -58,3 +60,5 @@ So, should I open a PR?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Jan 22 2019 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20topology/near/156645505):
 Yes, I think this is a good PR
 
+
+{% endraw %}

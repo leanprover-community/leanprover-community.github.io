@@ -9,6 +9,8 @@ permalink: archive/113488general/79962windowsnightlylinkbroken.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 08 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/windows%20nightly%20link%20broken/near/123463240):
 https://ci.appveyor.com/api/projects/leodemoura/lean/artifacts/build/lean-nightly-windows.zip?branch=master (the usual link to lean nightly windows) doesn't work currently -- I mean the link doens't work, rather than the zip file not compiling.
 
@@ -51,3 +53,5 @@ Not pushing a build, obviously :smile: . We already need to compare against the 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 09 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/windows%20nightly%20link%20broken/near/124836574):
 Cool :)
 
+
+{% endraw %}

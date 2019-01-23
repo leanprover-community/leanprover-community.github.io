@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/90813Provingbasicinequalitiesofnaturalnumber
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Zimmer (Oct 13 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20basic%20inequalities%20of%20natural%20numbers/near/135737118):
 linarith doesn't seem to be good enough to prove this basic inequality
 ```lean
@@ -41,3 +43,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Zimmer (Oct 13 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20basic%20inequalities%20of%20natural%20numbers/near/135737406):
 Thanks, I would have never thought of that first solution.
 
+
+{% endraw %}

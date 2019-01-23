@@ -9,6 +9,8 @@ permalink: archive/113488general/25923hottinjection.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Oct 22 2018 at 23:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hott%20injection/near/136298806):
 what is the hott-safe replacement for `injection`? Say I have `e : sum.inl a = sum.inr b` in the context and want to solve the goal by pointing out that contradiction...
 
@@ -31,3 +33,5 @@ Okay, I started porting `types/sum.hlean`...
 Just so you know: there is more ported on my branch, https://github.com/fpvandoorn/hott3
 I haven't ported sum yet. Also, it doesn't currently compile. If I have time I'll look at it tomorrow, and see if I can clean it up and push it to the main repo.
 
+
+{% endraw %}

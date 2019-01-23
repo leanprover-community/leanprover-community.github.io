@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/08348parallelcombinator.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 13 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133876440):
 is there a way to use the `exact` tactic with the parallel tactic combinator:
 
@@ -99,3 +101,5 @@ Yeah, `to_expr` is creating a new elaborator. This is horrible, haha
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Sep 13 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133912887):
 Well, I guess it could just skip auxiliary names that have already been taken
 
+
+{% endraw %}

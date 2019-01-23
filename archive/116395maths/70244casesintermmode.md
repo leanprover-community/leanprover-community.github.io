@@ -9,6 +9,8 @@ permalink: archive/116395maths/70244casesintermmode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 01 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937140):
 I am trying to tell Lean what a path in a quiver is. How do I finish `is_a_path`?
 ```lean
@@ -146,3 +148,5 @@ you probably need induction-recursion-recursion or something
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937655):
 hmm
 
+
+{% endraw %}

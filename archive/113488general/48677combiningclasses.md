@@ -9,6 +9,8 @@ permalink: archive/113488general/48677combiningclasses.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 13 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/combining%20classes/near/151584488):
 If I have `class C t extends A t, B t.` I guess it doesn't mean that anything which is an instance of `A` and `B` is automatically an instance of `C`? Does it make sense to write an instance for `C` to make that true?
 
@@ -92,3 +94,5 @@ In principle, there is no fundamental reason why we couldn't do something like t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 13 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/combining%20classes/near/151594520):
 Ooh, too bad. I thought I heard at some point that it would be possible...
 
+
+{% endraw %}

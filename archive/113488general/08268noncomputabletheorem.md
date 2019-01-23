@@ -9,6 +9,8 @@ permalink: archive/113488general/08268noncomputabletheorem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136123067):
 Is there any sense in writing `noncomputable theorem`, as in mathlib `logic.basic` lines 516-519?
 
@@ -54,3 +56,5 @@ If you mark something as *either* `noncomputable` or `theorem`, then the VM does
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 00:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136143757):
 @**Reid Barton**
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/29305monotonicisomorphismbetweenfinitesets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 18 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/monotonic%20isomorphism%20between%20finite%20sets/near/132370926):
 I'm looking for a lexicographic total order on `fin a × fin b` and a proof that's it's isomorphic to the lexicographic total order on `fin b × fin a`. Is this easy in lean?
 
@@ -97,3 +99,5 @@ classical.choice $ ordinal.type_eq.1 $ (ordinal.fintype_card (<)).trans (ordinal
 #check something
 ```
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/45346equivanduniverses.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 02:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837442):
 I am interested in beefing up equiv but I am only now coming to terms with how universes work and do not yet really understand how they affect the picture if at all
 
@@ -56,3 +58,5 @@ You can think of Lean universes as corresponding to Grothendieck universes excep
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 29 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125839130):
 To "move" a type from one universe to a bigger one, use `ulift`. The new type is `equiv` to the old one (`equiv.ulift`).
 
+
+{% endraw %}

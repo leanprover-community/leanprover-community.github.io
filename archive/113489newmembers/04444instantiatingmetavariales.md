@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/04444instantiatingmetavariales.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 24 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/instantiating%20meta%20variales/near/130230234):
 Is there a way to instantiate meta variables.  Consider the theorem below:
 ```lean
@@ -46,3 +48,5 @@ as explained by Kevin
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 24 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/instantiating%20meta%20variales/near/130232781):
 You can also use `show` if you have only one goal of that type
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/84622hascoeoffunction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 08 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe%20of%20function/near/131112779):
 Are there any problems with a coercion of a function?
 
@@ -70,3 +72,5 @@ def sext {w:ℕ} {f} [has_coe1 f value] (x:f (bv w)) (o:ℕ) : value (bv o) := .
 
 This approach might provide a more general solution to the monad special case mentioned in issue 1402, but still feels fairly special case.
 
+
+{% endraw %}

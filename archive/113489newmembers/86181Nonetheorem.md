@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/86181Nonetheorem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Sep 01 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/None%20theorem/near/133185891):
 Does someone know what tactic to use to prove the following:
 
@@ -54,3 +56,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 01 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/None%20theorem/near/133189359):
 For question 1 I recommend using leanpkg. The advice on the [xena blog](https://xenaproject.wordpress.com/2017/12/02/how-to-install-mathlib-and-keep-it-up-to-date/) is a little old but still worked for me a month or so ago.
 
+
+{% endraw %}

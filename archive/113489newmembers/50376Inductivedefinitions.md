@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/50376Inductivedefinitions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 28 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926297):
 I see a number of comments in my code that a definition of the form:
 ```lean
@@ -51,3 +53,5 @@ begin
 end
 ```
 
+
+{% endraw %}

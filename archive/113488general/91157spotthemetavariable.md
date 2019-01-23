@@ -9,6 +9,8 @@ permalink: archive/113488general/91157spotthemetavariable.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 09 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124814424):
 ```lean
 #print false.rec -- protected eliminator false.rec : Π (C : Sort l), false → C
@@ -102,3 +104,5 @@ Thanks for your help, by the way!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Apr 09 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832894):
 You're welcome.
 
+
+{% endraw %}

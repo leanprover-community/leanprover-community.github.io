@@ -9,6 +9,8 @@ permalink: archive/113488general/20463uniformaddgroupvstopologicaladdgroup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/uniform_add_group%20vs%20topological_add_group/near/136891308):
 We know that a topological additive abelian group is a uniform additive group, and that a uniform additive group is a topological additive group
 
@@ -170,3 +172,5 @@ I don't know
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 01 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/uniform_add_group%20vs%20topological_add_group/near/136948798):
 You can remove this.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/79129whatiswrongwithHoTT.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 05 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20wrong%20with%20HoTT/near/135265404):
 Let me start by saying that I really don't want to start a flamewar. I am just very uneducated.
 My question is simply this:
@@ -687,3 +689,5 @@ In ordinary maths we are using setoids and quotients for all of this. (So instea
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 31 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20wrong%20with%20HoTT/near/136870378):
 I have googled the definition of fundamental group, but I don't know much more than that about them. I understand it well enough to understand most of the analogies given when reading about HoTT, but I had no idea why they were relevant to Type theory until now. I think I'll have to read up on higher inductive types. Thanks @**Floris van Doorn**
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/96443unificationmagic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 23 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20magic/near/125543006):
 I wrote a `noncomputable definition` which was an instance of a structure. The structure had 6 fields, and I was filling in the last one, which was a proof. The other 5 fields had already used a bunch of constructions. I was filling in this 6th field and I started by getting the syntax right and writing `_` for several things, including a function `_ : R -> S` between two rings. Once I'd got the syntax correct and complete, Lean evaluated the term and to my surprise found no problems with it.  In particular I think it must have figured out which function I meant.
 
@@ -183,3 +185,5 @@ i cracked open PIL, saw it had only a few chapters finished, and then walked awa
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 23 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20magic/near/125544405):
 My _impression_ is that the missing chapters in PIL are mostly stuff which is documented in TPIL
 
+
+{% endraw %}

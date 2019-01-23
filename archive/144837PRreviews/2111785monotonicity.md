@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/2111785monotonicity.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 07 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%2385%20monotonicity/near/135362082):
 @**Mario Carneiro** @**Johannes Hölzl**: what is missing on this PR?
 
@@ -189,3 +191,5 @@ But maybe what Neil has written is an excellent start.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 18 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%2385%20monotonicity/near/136045229):
 On the subject of `mono`, do we agree that if the tactic is called `mono`, `mono` is also a good name for the attribute?
 
+
+{% endraw %}

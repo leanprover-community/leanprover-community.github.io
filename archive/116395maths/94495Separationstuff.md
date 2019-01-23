@@ -9,6 +9,8 @@ permalink: archive/116395maths/94495Separationstuff.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 19 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Separation%20stuff/near/134237694):
 @**Johannes Hölzl** I'm working on uniform spaces again, and I have a couple of question. 
 * First, at https://github.com/leanprover/mathlib/blob/master/analysis/topology/topological_space.lean#L638-L640 the comment mentions two possible definitions of T1 spaces. Am I right to think the equivalence of those definitions is not in mathlib?
@@ -1437,3 +1439,5 @@ For `completion α` to be a group, we already need to know that `α` has a unifo
 
 A diamond would mean we have `group_to_uniform ∘ completion = completion ∘group_to_uniform`. But `completion` doesn't work on groups without the uniformity. So we actually have `group_to_uniform ∘ completion ∘group_to_uniform = completion ∘group_to_uniform`. Now it is enough to prove `group_to_uniform ∘ G = G`, where `G` is already a group with compatible uniformity.
 
+
+{% endraw %}

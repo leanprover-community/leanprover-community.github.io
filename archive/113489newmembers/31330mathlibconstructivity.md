@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/31330mathlibconstructivity.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 25 2018 at 06:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20%26%20constructivity/near/134574550):
 is there a standard library structure for isomorphisms, like this type in Idris? https://github.com/idris-lang/Idris-dev/blob/bae730a7ffaeae09a835a35bac132c141f3b50b3/libs/base/Control/Isomorphism.idr#L10-L16
 
@@ -668,3 +670,5 @@ I heard FLT uses universes
 ```
 Kenny that is fake news, but the rumour seems hard to kill. Some people might argue that "the proof is written using universes" (because at some point Wiles says the word "representable functor" and at some other point uses etale cohomology) but they can easily be expunged using standard tricks.
 
+
+{% endraw %}

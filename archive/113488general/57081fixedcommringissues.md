@@ -9,6 +9,8 @@ permalink: archive/113488general/57081fixedcommringissues.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 18 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fixed%29%20comm_ring%20issues/near/129856041):
 I've got the following context/goal:
 ```lean
@@ -88,3 +90,5 @@ Not the bit on commutative rings.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 18 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fixed%29%20comm_ring%20issues/near/129857317):
 Only plain old rings
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/48938optiontroubles.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 09 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135487811):
 I have `x : option X`, and `h : x ≠ none`. How do I turn this into a `y : X` such that `x = some y`? I want to use `option.get` and `option.is_some`. But I can't figure out how to use `h`.
 
@@ -50,3 +52,5 @@ there is `is_none_iff_eq_none`, but nothing connecting `is_some` and `is_none`. 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 09 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135489316):
 but the basic story is `option.get` is supposed to do this
 
+
+{% endraw %}

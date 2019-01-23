@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/73892maximalfinsetinfinsetoffinsets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 13 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133904539):
 Excuse the weird title. I'm trying to prove that a finset of subsets of a finset must contain an element of largest size, without relying on classical choice:
 ```lean
@@ -175,8 +177,7 @@ Yeah, the max/min stuff should be on multisets.
 Unfortunately, here max/min don't work directly since it's not a poset
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 13 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905633):
-{% raw %}
-you can have zorn on a set (i.e. type) S as long as you have a choice function on P(P(S))\{{}}, right{% endraw %}
+you can have zorn on a set (i.e. type) S as long as you have a choice function on P(P(S))\{{}}, right
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 13 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905662):
 yes, but we don't have that here and I claim it's still provable
@@ -255,3 +256,5 @@ I care a little bit about constructivity, but maybe I'll see how far I can get w
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 13 2018 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133909339):
 oops, I didn't see that you just quoted chris's solution
 
+
+{% endraw %}

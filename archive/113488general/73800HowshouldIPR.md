@@ -9,6 +9,8 @@ permalink: archive/113488general/73800HowshouldIPR.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 01 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20should%20I%20PR%3F/near/133189632):
 I think I have been using the wrong method, so maybe I should unlearn what I have learnt. The main problem is that one never PR's a single independent file, i.e. often there are files in mathlib that need to be changed. How should I make sure that the changes will compile fine? Should I have another branch of mathlib locally?
 
@@ -174,3 +176,5 @@ you can always set timestamps
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 02 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20should%20I%20PR%3F/near/133220186):
 Could it be a community project somehow? Mathlib gets updated, someone on Ubuntu 18.04 compiles it and shares the .olean files, then Ubuntu users can have that as a dependence instead of mathlib. Is it as easy as that? Or did Sebastian U say you couldn't even share .olean files between two different computers running the same OS?
 
+
+{% endraw %}

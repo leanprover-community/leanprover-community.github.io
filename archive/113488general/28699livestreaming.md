@@ -9,6 +9,8 @@ permalink: archive/113488general/28699livestreaming.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 23 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/livestreaming/near/134489511):
 More livestreaming: https://www.twitch.tv/colimit
 Trying something a little different today: going to try to solve [problem 5](https://artofproblemsolving.com/wiki/index.php?title=2018_IMO_Problems/Problem_5) from this year's IMO in Lean.
@@ -52,3 +54,5 @@ Continuing Sunday night's stream: https://twitch.tv/colimit
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 29 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/livestreaming/near/134885604):
 Continuing from Tuesday: https://twitch.tv/colimit
 
+
+{% endraw %}

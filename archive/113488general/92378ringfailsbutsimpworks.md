@@ -9,6 +9,8 @@ permalink: archive/113488general/92378ringfailsbutsimpworks.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 08 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring%20fails%20but%20simp%20works/near/124808425):
 In the following context `simp [mul_comm, mul_left_comm, mul_assoc]` solved the goal, but `ring` failed. What's going on?
 ```lean
@@ -43,3 +45,5 @@ i j : fin (list.length L)
       -(f L j ^ r j * (t i).fst * (f L i ^ n i j * f L j ^ n i j) * (f L i ^ (N - n i j) * f L j ^ (N - n i j)))
 ```
 
+
+{% endraw %}

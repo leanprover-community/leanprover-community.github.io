@@ -9,6 +9,8 @@ permalink: archive/113488general/45525tacticnoobie.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 14 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20noobie/near/133947182):
 I'm taking a stab at the `tfae` tactic. This is what I have so far:
 ```lean
@@ -44,3 +46,5 @@ Maybe working on the main goal (`target`) is good enough. I'm looking at the spl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 14 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20noobie/near/133947696):
 I think this is going to need the tfae stuff to be defined already
 
+
+{% endraw %}

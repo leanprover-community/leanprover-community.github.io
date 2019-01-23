@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/66073finsetsdecidablememandfilter.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 11 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finsets%2C%20decidable_mem%2C%20and%20filter/near/133708032):
 I have a filter on a finset (of finsets) that I want to construct and for some reason I'm stubbornly trying to do it constructively. Here's a stripped down version of what I have (which is part of some stuff on matroids):
 ```lean
@@ -93,3 +95,5 @@ The honest reason is that I don't know any better. What precisely should I be av
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 11 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finsets%2C%20decidable_mem%2C%20and%20filter/near/133709251):
 Oh, you mean just the names `is_in` and `is_out`. Those are artifacts of my making a MWE; in reality, there's a structure that I have to pull the finset from.
 
+
+{% endraw %}

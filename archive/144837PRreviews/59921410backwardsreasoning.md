@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/59921410backwardsreasoning.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23410%20backwards%20reasoning/near/135520408):
 I've just made a `[WIP]` pull request for the backwards reasoning tactic which has been discussed in <https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proposal.20for.20.60backwards_reasoning.60>.
 
@@ -685,3 +687,5 @@ but in this case `::` is already overloaded in core so there isn't much we can d
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 05 2018 at 14:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23410%20backwards%20reasoning/near/150928495):
 Sorry, I didn't realize this was in core
 
+
+{% endraw %}

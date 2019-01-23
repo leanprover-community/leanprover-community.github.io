@@ -9,6 +9,8 @@ permalink: archive/116395maths/12722zeroinsubring.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 18 2018 at 17:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20in%20subring/near/134172339):
 I just added to the perfectoid project:
 ```lean
@@ -17,3 +19,5 @@ instance subring_has_zero (R : Type*) [comm_ring R] (S : set R) [HS : is_subring
 ```
 It seems this used to be unnecessary. Any idea what happened? Trying `apply_instance` loops forever
 
+
+{% endraw %}

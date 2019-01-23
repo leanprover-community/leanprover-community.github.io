@@ -9,6 +9,8 @@ permalink: archive/116395maths/34371GaussLemmaandEisensteinsCriterion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Aditya Agarwal (Nov 13 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Gauss%20Lemma%20and%20Eisenstein%27s%20Criterion/near/147559555):
 Is anyone working on Gauss Lemma and Eisenstein's Criterion or are they present in mathlib?
 
@@ -27,3 +29,5 @@ although I guess Rob Lewis proved all the stuff about valuations for the integer
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 13 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Gauss%20Lemma%20and%20Eisenstein%27s%20Criterion/near/147576816):
 https://github.com/leanprover/mathlib/blob/master/data/padics/padic_norm.lean The first 370 or so lines of that file are the basics of the p-adic valuation on the integers and rationals. That should all be ported to a general UFD really, if one is to do this properly. One needs it in the proofs of such things as R a UFD -> R[X] a UFD.
 
+
+{% endraw %}

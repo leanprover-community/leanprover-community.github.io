@@ -9,6 +9,8 @@ permalink: archive/113488general/49396addinductive.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 21 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010223):
 Why does
 ```
@@ -56,3 +58,5 @@ I started working on that a while back, but then the ground started shaking and 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 21 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124011580):
 Very poetic!
 
+
+{% endraw %}

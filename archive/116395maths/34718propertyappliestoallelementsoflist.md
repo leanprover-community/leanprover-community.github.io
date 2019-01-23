@@ -9,6 +9,8 @@ permalink: archive/116395maths/34718propertyappliestoallelementsoflist.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 30 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/property%20applies%20to%20all%20elements%20of%20list/near/125884050):
 Is there another, convenient way one might specify this given what exists in mathlib?
 
@@ -51,3 +53,5 @@ lemma ball_cons (p : α → Prop) (a : α) (l : list α) : (∀ x ∈ (a :: l), 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 30 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/property%20applies%20to%20all%20elements%20of%20list/near/125884401):
 There are `forall_mem_nil` and `forall_mem_cons`, but the append theorem is not there. You can probably get the singleton theorem by simp
 
+
+{% endraw %}

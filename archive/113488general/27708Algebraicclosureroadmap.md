@@ -9,6 +9,8 @@ permalink: archive/113488general/27708Algebraicclosureroadmap.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 14 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Algebraic%20closure%20roadmap/near/135781672):
 I've created a roadmap for constructing an algebraic closure of a field: https://github.com/kckennylau/Lean/blob/master/algebraic-closure-roadmap.md
 
@@ -702,3 +704,5 @@ I mean if $$R\subseteq S$$ and $$R'$$ is the integral closure of $$R$$ in $$S$$ 
 ```
 @**Kevin Buzzard** @**Johan Commelin** done
 
+
+{% endraw %}

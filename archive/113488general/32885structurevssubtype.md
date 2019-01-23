@@ -9,6 +9,8 @@ permalink: archive/113488general/32885structurevssubtype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 04 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20vs.%20subtype/near/129073745):
 I was wondering why one would choose a `structure` over a `subtype` (or vice versa) for `finset` or any similar construction. It seems like the two are equivalent, but I might be missing something. I don't see an advantage for using a `structure`. Using a `subtype` gives you a few existing simple lemmas that you wouldn't have to write, but that's the only advantage I see, and it's relatively minor.
 
@@ -158,3 +160,5 @@ Though I'm happy to see other threads branch off on related topics.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 09 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20vs.%20subtype/near/129344097):
 The results of my `finset` `structure` → `subtype` experiment: https://github.com/leanprover/mathlib/pull/183
 
+
+{% endraw %}

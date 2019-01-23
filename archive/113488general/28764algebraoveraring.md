@@ -9,6 +9,8 @@ permalink: archive/113488general/28764algebraoveraring.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 08 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebra%20over%20a%20ring/near/151193725):
 @**Mario Carneiro** Can we do algebra over a ring now? Can we prove that every ring is an Z-algebra? every abelian group is a Z-module?
 
@@ -36,3 +38,5 @@ I think that in the case of algebras I would go category-theoretic straight away
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 08 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebra%20over%20a%20ring/near/151194272):
 Unfortunately I'm not sure we got enough module refactor yet. As far as I understand, Mario still has to work on getting modules over several base rings to behave nicely
 
+
+{% endraw %}

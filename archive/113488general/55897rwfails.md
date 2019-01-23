@@ -9,6 +9,8 @@ permalink: archive/113488general/55897rwfails.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 24 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286611):
 What have I done wrong here?
 
@@ -87,3 +89,5 @@ So, `by simpa using H.pf`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 24 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286967):
 je kant het proberen... toch
 
+
+{% endraw %}

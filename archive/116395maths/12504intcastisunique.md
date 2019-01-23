@@ -9,6 +9,8 @@ permalink: archive/116395maths/12504intcastisunique.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 21 2019 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541423):
 Do we already know that `int.cast` is the unique ring hom `ℤ → R`?
 
@@ -39,3 +41,5 @@ If we have two ring homomorphisms from $$A$$ to $$B$$ then the subset of $$A$$ w
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 21 2019 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156543031):
 Aah... nice. Too bad it isn't stated in terms of ring homs.
 
+
+{% endraw %}

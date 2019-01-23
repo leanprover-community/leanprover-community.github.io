@@ -9,6 +9,8 @@ permalink: archive/113488general/72607Documentingnoninteractivetactics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 24 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Documenting%20non-interactive%20tactics/near/125638696):
 @**Mario Carneiro** what's the problem with documenting non-interactive tactics?
 
@@ -42,3 +44,5 @@ Patrick -- I have pre-docs at https://github.com/kbuzzard/mathlib/tree/WIP_docs/
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Documenting%20non-interactive%20tactics/near/125659576):
 When I'm done with affine schemes (and I know I'm always saying this but I am nearly done -- I currently find myself actually working on an interface for localization of rings) I was going to spend some time taking stock and working out what to do next, and I might well spend some time tidying stuff up.
 
+
+{% endraw %}

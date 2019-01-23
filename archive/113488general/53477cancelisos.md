@@ -9,6 +9,8 @@ permalink: archive/113488general/53477cancelisos.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 23 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cancel%20isos/near/132617646):
 @**Scott Morrison** Somehow, `cancel_epi` with `f = ↑i` (`i : x ≅ y`) doesn't work any more.
 I managed to track this down far enough to find that adding the line (which used to be in `tidy.tidy`)
@@ -44,3 +46,5 @@ Also I can see the Notre Dame from where I'm sitting.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 25 2018 at 17:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cancel%20isos/near/132753363):
 Cheese, Notre-Dame and Lean seems to be a good combination
 
+
+{% endraw %}

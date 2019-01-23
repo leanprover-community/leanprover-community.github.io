@@ -9,6 +9,8 @@ permalink: archive/113488general/06640sowhatiseqrec.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134272):
 I'm stuck in this state:
 ```
@@ -237,3 +239,5 @@ so maybe `drec` would have worked?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 16 2018 at 06:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134506):
 I guess it uses `eq.drec` since you also need to replace `hx` in the term with `eq.refl`, but it's not necessary provided you generalize `hx` by proof irrelevance
 
+
+{% endraw %}

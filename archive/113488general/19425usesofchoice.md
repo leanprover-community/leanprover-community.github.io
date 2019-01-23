@@ -9,6 +9,8 @@ permalink: archive/113488general/19425usesofchoice.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Oct 07 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/uses%20of%20choice/near/135362955):
 Inspired by my post in the thread "what is wrong with HoTT" I had two questions:
 
@@ -191,3 +193,5 @@ What's interesting, is that we can express this situation very nicely in HoTT. I
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/uses%20of%20choice/near/135415608):
 This sounds really cool!
 
+
+{% endraw %}

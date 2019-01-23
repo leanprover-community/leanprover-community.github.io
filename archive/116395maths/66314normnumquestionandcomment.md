@@ -9,6 +9,8 @@ permalink: archive/116395maths/66314normnumquestionandcomment.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_num%20question%20and%20comment/near/132069983):
 ```lean
 import data.real.basic 
@@ -33,3 +35,5 @@ I don't really know why the first example hangs. I can believe that Lean is relu
 
 Is making `norm_num` just act on the current goal something that can be trivially done? I know about the `{norm_num}` trick but this was an undergraduate that tripped up, not me.
 
+
+{% endraw %}

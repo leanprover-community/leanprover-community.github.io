@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/38744twofunctionswiththesamename.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Sever (Aug 10 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/two%20functions%20with%20the%20same%20name/near/131229114):
 Is there a reason why lean doesn't let me make two functions with the same name? Even if they take different arguments?
 
@@ -30,3 +32,5 @@ You can also use default values and optional arguments to make a single definiti
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 10 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/two%20functions%20with%20the%20same%20name/near/131233997):
 Also note that `+` is kind of like several functions with the same name -- and looking at the types of the inputs is exactly how Lean decides which function to actually use.
 
+
+{% endraw %}

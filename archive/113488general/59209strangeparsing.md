@@ -9,6 +9,8 @@ permalink: archive/113488general/59209strangeparsing.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 19 2018 at 06:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20parsing/near/126782270):
 I just discovered that this parses:
 ```
@@ -54,3 +56,5 @@ I think it's possible to define new commands, because sometimes I can import som
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (May 19 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20parsing/near/126797466):
 No, the longest match wins
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/55694namespace.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 21 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace/near/130048945):
 I thought it was about time I read through theorem proving in Lean again, to make sure I understand it 100% now. I don't. 
 
@@ -129,3 +131,5 @@ Thanks for the detective work!
 
 I'm 1/3 of the way through my 100% playthrough of TPIL.
 
+
+{% endraw %}

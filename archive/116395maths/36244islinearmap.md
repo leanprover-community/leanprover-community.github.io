@@ -9,6 +9,8 @@ permalink: archive/116395maths/36244islinearmap.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148162896):
 Is there a reason why `is_linear_map` does not extend `is_add_group_hom`?
 
@@ -116,3 +118,5 @@ you have another function for that; the function parts will be equal (even defeq
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 22 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148182132):
 so e.g. the map is `mul` and the linear_map is `lmul`
 
+
+{% endraw %}

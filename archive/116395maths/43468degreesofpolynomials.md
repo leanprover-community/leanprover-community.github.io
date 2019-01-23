@@ -9,6 +9,8 @@ permalink: archive/116395maths/43468degreesofpolynomials.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 07 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/degrees%20of%20polynomials/near/133505238):
 @**Chris Hughes** told me a while ago that the degree of a polynomial is a bit of a nightmare, because the zero polynomial has degree -1 or -infinity or something, and these are not nats. It seems that he went with `degree` into `with_bot nat` and `nat_degree` into `nat` (with nat_degree of 0 being 0). I am now faced with goals like
 
@@ -27,3 +29,5 @@ I think `with_bot.coe_add` is the lemma you need.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 07 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/degrees%20of%20polynomials/near/133505354):
 oh boy -- so I'm right but they're already there? Thanks Chris!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/03820finhasnorecursor.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 30 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402350):
 fin doesn’t have the morally correct recursor. we should prove it maybe.
 
@@ -35,3 +37,5 @@ there should be more consistent naming here...
 i.succ_rec H0 Hs
 ```
 
+
+{% endraw %}

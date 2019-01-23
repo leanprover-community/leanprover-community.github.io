@@ -9,6 +9,8 @@ permalink: archive/113488general/40518tidylostmymetavars.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 29 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148774987):
 Somehow `tidy` claims it closed all goals, but the kernel says there are still metavariables left. Is there a good approach to debugging this? Somewhere a metavariable got removed from the goal-list without being fully instantiated. I guess it should be possible to track this, right?
 
@@ -69,3 +71,5 @@ That could create metavariables which don't get fully bound by the `apply` maybe
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 29 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787258):
 Thanks for debugging this!
 
+
+{% endraw %}

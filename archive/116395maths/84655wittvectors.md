@@ -9,6 +9,8 @@ permalink: archive/116395maths/84655wittvectors.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/130216141):
 Anyone interested in sharpening his teeth on polynomials is encouraged to look here: https://gist.github.com/jcommelin/77240367c2815ca0c45da188ba78be19
 
@@ -621,3 +623,5 @@ but I'm not sure
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 08 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/131109373):
 I think we could have a tactic doing only this and unfolding composition (ie `rw comp_app`)
 
+
+{% endraw %}

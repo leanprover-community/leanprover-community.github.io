@@ -9,6 +9,8 @@ permalink: archive/113488general/61650congrtactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Mar 01 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr%20tactic/near/123137699):
 How do I know when to use the `congr` tactic? It's not in the Lean reference. Are there any good examples? I should've [learned](https://gitter.im/leanprover_public/Lobby?at=5a8d2134c3c5f8b90de5020b) already, but I'm slow. :simple_smile:
 
@@ -32,3 +34,5 @@ With regards to the other thread: congr (and all other uses of congruence lemmas
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Mar 01 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr%20tactic/near/123137911):
 Looking back, this may have been a bad example.  The point is: if you have an equality, then `congr` stubbornly reduces it to equalities of subterms (the topmost positions where the two sides differ, that is).
 
+
+{% endraw %}

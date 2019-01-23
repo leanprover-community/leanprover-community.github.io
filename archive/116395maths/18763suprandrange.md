@@ -9,6 +9,8 @@ permalink: archive/116395maths/18763suprandrange.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 13 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147609120):
 There are the following definitions in mathlib:
 ```lean
@@ -54,3 +56,5 @@ Yes, `def supr (s : ι → α) : α := Sup (range s)`
 ```
 Done in #PR474. It was slightly more painful than I expected, as I had to fix the library all over the place...
 
+
+{% endraw %}

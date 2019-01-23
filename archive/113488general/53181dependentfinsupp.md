@@ -9,6 +9,8 @@ permalink: archive/113488general/53181dependentfinsupp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dependent%20finsupp/near/133297941):
 I want to make finsupp dependent, and then build the current finsupp as a special case. Is this a good idea?
 
@@ -169,3 +171,5 @@ But after the module refactor Kenny will be too busy working on algebraic closur
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 07 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dependent%20finsupp/near/135343213):
 ok no problem
 
+
+{% endraw %}

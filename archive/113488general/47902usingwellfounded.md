@@ -9,6 +9,8 @@ permalink: archive/113488general/47902usingwellfounded.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 28 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/132934326):
 I'm looking at RB trees again. I found a really good implementation in Coq that I am copying over to Lean: https://github.com/coq/coq/blob/a1fc621b943dbf904705dc88ed27c26daf4c5e72/theories/MSets/MSetRBT.v
 Here is the start of my code:
@@ -70,3 +72,5 @@ at least I think that's why
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 28 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/132953908):
 thanks Leo! sorry I didn't spot them.
 
+
+{% endraw %}

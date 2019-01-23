@@ -9,6 +9,8 @@ permalink: archive/113488general/79327finitesumpuzzle.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 30 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20sum%20puzzle/near/124390119):
 ```
 import tactic.ring
@@ -521,3 +523,5 @@ In fact my initial draft had an error in which I only spotted when I tried to pr
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Mar 30 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20sum%20puzzle/near/124407580):
 @**Kevin Buzzard** I did define sums and sums between nats here. https://github.com/dorhinj/lean/blob/master/sum_between_nats.lean The proofs aren't mathlib ready and I don't think series is a particularly good name. I proved various basic properties as well.
 
+
+{% endraw %}

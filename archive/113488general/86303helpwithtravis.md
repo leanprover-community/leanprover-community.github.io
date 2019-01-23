@@ -9,6 +9,8 @@ permalink: archive/113488general/86303helpwithtravis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 14 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790347):
 Hmm, a strange error:
 
@@ -34,3 +36,5 @@ Is this that two files, which are never imported in the same place, have the sam
 ```
 That's right
 
+
+{% endraw %}

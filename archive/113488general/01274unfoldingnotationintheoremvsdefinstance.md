@@ -9,6 +9,8 @@ permalink: archive/113488general/01274unfoldingnotationintheoremvsdefinstance.ht
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 31 2018 at 04:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20notation%20in%20theorem%20vs%20def/instance/near/127341302):
 ```lean
 instance pi.comm_ring_i {I : Type*} {f : I → Type*} [∀ i, semigroup $ f i] : semigroup (Π i : I, f i) :=
@@ -133,3 +135,5 @@ But it will have to wait till Monday before I get back to Lean.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 16 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20notation%20in%20theorem%20vs%20def/instance/near/128178398):
 I write all my code just using Type. I believe in ZFC!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/41867bugwithtypeclasses.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 07 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20typeclasses/near/123411400):
 Forgive me for not minimizing:
 
@@ -109,3 +111,5 @@ and so on and so on
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20typeclasses/near/123458500):
 @**Mario Carneiro** could you have a look?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/61444Compactopentopology.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 24 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Compact-open%20topology/near/134554654):
 I see @**Johannes Hölzl**  merged https://github.com/leanprover/mathlib/pull/368 before Reid answered my comments. Was this done on purpose?
 
@@ -86,3 +88,5 @@ If you do it the other way then `g (f s)` will look like `T.rec_on (S.rec_on s .
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 01 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Compact-open%20topology/near/134968087):
 FYI: I added a proper constant for the type of continuous maps and renamed the theory to `continuous_map`.
 
+
+{% endraw %}

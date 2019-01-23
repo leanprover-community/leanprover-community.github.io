@@ -9,6 +9,8 @@ permalink: archive/113488general/16816Uselistasanargument.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 11 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Use%20list%20as%20an%20argument/near/129458509):
 I define a function which takes a list as a argument but I do not know why it always break when I use it in my other theorem or function.
 my function no error:
@@ -110,3 +112,5 @@ ordering basis elements -- it's a funny situation! In the general case you seem 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 11 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Use%20list%20as%20an%20argument/near/129462488):
 @**Blair Shi** yes -- if you are doing vector spaces over a field field `k` then you don't want to have to keep mentioning `k`. If you're doing `k`-linear maps between vector spaces `V` and `W` then you probably want to mention `V` but if you're doing things with a fixed `V` like showing that sets of size less than dim(V) can't span then you might not even want to mention `V`. This is how those `{}` and `()` brackets that I talked about in my lecture on Monday work in practice. There are tricks to change the variable from `()` to `{}`and back in the middle of a file which I can tell you about later if you need them.
 
+
+{% endraw %}

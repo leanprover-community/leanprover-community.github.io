@@ -9,6 +9,8 @@ permalink: archive/113488general/48009leangolf.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Feb 28 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123089630):
 Shortest proof of this?
 
@@ -430,3 +432,5 @@ not constructively
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136061506):
 (oops, wrong thread, this should be in [Hausdorffification](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/Hausdorffification/near/136026443))
 
+
+{% endraw %}

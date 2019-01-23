@@ -9,6 +9,8 @@ permalink: archive/113488general/26111interfacefordite.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125812949):
 ```lean
 noncomputable def succ (C : set (set α)) : set (set α) :=
@@ -99,3 +101,5 @@ I know
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821167):
 but the elaborator fails lol
 
+
+{% endraw %}

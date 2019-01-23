@@ -9,6 +9,8 @@ permalink: archive/113488general/20749leanisprettysweet.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 14 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20is%20pretty%20sweet/near/123678987):
 i went back to doing some programming in fsharp since its the only mixed-paradigm language with any traction, and i really miss lean
 
@@ -108,3 +110,5 @@ This reminds me of those people that wrote a BF interpreter in C++ template lang
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) VinothKumar Raman (Mar 14 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20is%20pretty%20sweet/near/123695640):
 Yea, it felt more like programming in BF itself. But I understand a lot about types now after the ordeal.
 
+
+{% endraw %}

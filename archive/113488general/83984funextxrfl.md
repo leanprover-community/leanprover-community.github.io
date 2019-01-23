@@ -9,6 +9,8 @@ permalink: archive/113488general/83984funextxrfl.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 02 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funext%20%24%20%CE%BB%20x%2C%20rfl/near/124521378):
 conjecture: everything that can be proven using `funext $ λ x, rfl` can be proven using `rfl`
 
@@ -80,3 +82,5 @@ which is an iff and is marked as a simp lemma
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 02 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funext%20%24%20%CE%BB%20x%2C%20rfl/near/124523635):
 so I was hopeful that `by simp` would work, but I couldn't get it to
 
+
+{% endraw %}

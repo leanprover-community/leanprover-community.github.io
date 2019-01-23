@@ -9,6 +9,8 @@ permalink: archive/113488general/09959equivsubsingleton.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 14 2019 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv_subsingleton/near/155086021):
 I couldn't find this in mathlib. Is this considered useful enough to include?
 ```lean
@@ -33,3 +35,5 @@ I misread the statement
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 15 2019 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv_subsingleton/near/155147420):
 Yes it is useful. Not sure about the name though, it should be in the `equiv` namespace. Perhaps `equiv.of_subsingleton`?
 
+
+{% endraw %}

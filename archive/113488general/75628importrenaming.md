@@ -9,6 +9,8 @@ permalink: archive/113488general/75628importrenaming.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 09 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/import%20renaming%3F/near/131161156):
 can someone point me to the syntax for import renaming? I can't find it. :-(
 
@@ -33,3 +35,5 @@ I don't think you learnt that here...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Aug 09 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/import%20renaming%3F/near/131184956):
 Declarations in a Lean environment aren't grouped by modules, so I don't see how this would be implemented without fundamentally changing the architecture. Which we don't plan to do, afaik.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/15006openset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 09 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open_set/near/135489758):
 @**Scott Morrison|110087** I'm curious why you reversed the direction of the arrows of `open_set`. I would rather put the contravariant-ness in the notion of (pre)sheaf.
 
@@ -27,3 +29,5 @@ Right, but once we start doing sheaves over sites we will want contravariant (pr
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 10 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open_set/near/135521274):
 Another question of course is where you want the `op` -- source or target. It's funny this is coming up now. I distinctly remember Scott saying "eew there are `op`s everywhere, but I've had a brilliant idea -- if we just redefine the open set category then they all go away and it's much easier to use" and it was one of those moments where I just thought "yeah, it's not ideal but I can completely see his point. It removes all of them at once."
 
+
+{% endraw %}

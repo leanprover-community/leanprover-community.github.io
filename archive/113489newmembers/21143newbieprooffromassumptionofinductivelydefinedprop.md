@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/21143newbieprooffromassumptionofinductivelyd
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 17 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135989819):
 [moving to `new members` stream]. You could prove that `ev n` was decidable, and then use `dec_trivial` to decide it.
 
@@ -22,3 +24,5 @@ begin
 end
 ```
 
+
+{% endraw %}

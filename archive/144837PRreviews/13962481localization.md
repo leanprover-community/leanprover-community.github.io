@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/13962481localization.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 20 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23481%20localization/near/152240956):
 I need a better interface
 
@@ -66,3 +68,5 @@ Hmpf, can you explain what problems you are hitting?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 22 2018 at 05:40)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23481%20localization/near/152375140):
 Hmm... it looks quite fine to me. At least *I* don't see a way to improve this. (Apart from the suggestion Mario made above.)
 
+
+{% endraw %}

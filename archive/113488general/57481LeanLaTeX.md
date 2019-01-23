@@ -9,6 +9,8 @@ permalink: archive/113488general/57481LeanLaTeX.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 23 2019 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156681378):
 I've been reading work of Lamport about structured proofs.  Here's an extract from https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean :
 
@@ -62,3 +64,5 @@ I meant this one: http://neil-strickland.staff.shef.ac.uk/dagstuhl/Systems/Lean_
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 23 2019 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156683049):
 Ooh -- thanks for digging that up! @**Neil Strickland** how did you make this? My plan would be to hide the Lean completely and just have standard maths proof prose visible initially, but one can somehow open up the Lean to see it if one wants to.
 
+
+{% endraw %}

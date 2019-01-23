@@ -9,6 +9,8 @@ permalink: archive/113488general/38425isleftidrwmystery.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570810):
 ```lean
 example (R : Type) (op nil a) [is_left_id R op nil] : op nil a = a := by rw is_left_id.left_id
@@ -67,3 +69,5 @@ Yes, this is the main problem with the new alg hierarchy. To be fair to Leo, he'
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125576476):
 Ok, it makes sense. Do you agree that the new hierarchy seems more suitable if we want a big_op library that is really operator centric as in mathcomp?
 
+
+{% endraw %}

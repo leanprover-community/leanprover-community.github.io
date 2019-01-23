@@ -9,6 +9,8 @@ permalink: archive/113488general/78986drophypothesisfromlocalcontext.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 25 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/drop%20hypothesis%20from%20local%20context/near/127077557):
 Please remind me, which tactic removes hypotheses from the local context? Because I have used up some hyptheses, and I won't use them again, but the proof state is filling an entire screen.
 
@@ -36,3 +38,5 @@ You can also use `replace` in place of `have` to clear old hyps as well
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 25 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/drop%20hypothesis%20from%20local%20context/near/127077717):
 I didn't know about [`replace`](https://github.com/leanprover/mathlib/blob/add172ddc03b10734cb34bdcab77861c94235504/tactic/interactive.lean#L160-L174).
 
+
+{% endraw %}

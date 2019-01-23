@@ -9,6 +9,8 @@ permalink: archive/116395maths/71101extendpresheaffrombasis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135529957):
 @**Scott Morrison|110087** Somehow this is not doing what I hoped:
 ```lean
@@ -1278,3 +1280,5 @@ then it should just be called `galois_nnection`
 ```
 or a cogalois-nnection (sorry)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/91108Differencebetweenconstantandaxioms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Dec 31 2018 at 07:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154074362):
 I just noticed that `propext` is defined as a constant:
 
@@ -387,3 +389,5 @@ Also, we've discussed impredicative encodings of inductive types before, like `x
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 01 2019 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154132846):
 Or when we have an object that is "defined by a universal property" and we want to just write that property but it doesn't work because the universe quantifier isn't large enough, so instead we re-express it by some kind of construction "from below"... that's predicativity
 
+
+{% endraw %}

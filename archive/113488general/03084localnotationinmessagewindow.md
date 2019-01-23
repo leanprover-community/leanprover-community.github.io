@@ -9,6 +9,8 @@ permalink: archive/113488general/03084localnotationinmessagewindow.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20notation%20in%20message%20window/near/125571696):
 I have a local infix notation for an operation which is a local variable. Is there any hope to see Lean using this notation in the Lean messages window?
 
@@ -97,3 +99,5 @@ I don't see the relation between the hierarchy and the problem we discuss here
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 23 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20notation%20in%20message%20window/near/125575103):
 Try making `op` a parameter and wrap it and the related definitions in a section
 
+
+{% endraw %}

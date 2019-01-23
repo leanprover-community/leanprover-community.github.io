@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/02213DoesLeancontainnumericalbases.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Nov 10 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Does%20Lean%20contain%20numerical%20bases%3F/near/147407947):
 Specifically, I want a way to extract the base-n digits of a number as a list. Does this already exist?
 
@@ -60,3 +62,5 @@ Nice!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 10 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Does%20Lean%20contain%20numerical%20bases%3F/near/147432166):
 The way to find it is to think "hmm, how are naturals being printed?" then "hmm, what is the definition of `nat.repr`?"
 
+
+{% endraw %}

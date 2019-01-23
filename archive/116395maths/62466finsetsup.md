@@ -9,6 +9,8 @@ permalink: archive/116395maths/62466finsetsup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Oct 03 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135087348):
 I can't find the lemma saying that, in a linear order (with bot, probably), the sup of a finset is `< a` if all its elements are `< a`(and `\bot < a`). I guess it has to be somewhere, but there are so many files and so many different classes for orders. Some help would be most welcome!
 
@@ -172,3 +174,5 @@ Yes, I am talking about Isabelle/HOL.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Oct 03 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135130413):
 You can develop any logic in Isabelle, this is a framework, in a sense. But Isabelle/HOL is the most developed (and usable, and used) instance.
 
+
+{% endraw %}

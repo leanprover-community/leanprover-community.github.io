@@ -9,6 +9,8 @@ permalink: archive/113488general/96935multisetminonwithtop.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 12 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiset%20min%20on%20with_top/near/129562759):
 Back in the days before `with_top` I rolled my own instance of `decidable_linear_order (option nat)` (with `none` = +infinity), and defined `min` on `multiset (option nat)` as `lam s, multiset.fold (min) none s`. It compiled and worked fine and I thought no more about it. 
 
@@ -37,3 +39,5 @@ I think that's just what we now call `with_bot`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 19 2018 at 06:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiset%20min%20on%20with_top/near/129910548):
 You can use `sup` and `inf` instead of `min` and `max` for a more order-based definition
 
+
+{% endraw %}

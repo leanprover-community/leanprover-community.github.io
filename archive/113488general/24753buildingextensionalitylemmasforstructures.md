@@ -9,6 +9,8 @@ permalink: archive/113488general/24753buildingextensionalitylemmasforstructures.
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 13 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/building%20%40%5Bextensionality%5D%20lemmas%20for%20structures/near/132045472):
 Hi @**Simon Hudon**, I'm wondering if you've thought recently about building `@[extensionality]` lemmas for structures automatically. I know we had some discussion about this a long time ago (gitter?), and some attempts at a `congr_struct` tactic.
 
@@ -84,3 +86,5 @@ I'm surprised. You can clean them up I think using `match_eq` / `match_heq` and 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 15 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/building%20%40%5Bextensionality%5D%20lemmas%20for%20structures/near/132141380):
 Sorry, haven't got back to it. Writing `ext` lemmas by hand is annoying but not critical. :-)
 
+
+{% endraw %}

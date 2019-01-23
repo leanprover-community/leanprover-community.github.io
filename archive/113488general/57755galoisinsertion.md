@@ -9,6 +9,8 @@ permalink: archive/113488general/57755galoisinsertion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 25 2018 at 07:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/galois%20insertion/near/134575752):
 ```lean
 import algebra.archimedean
@@ -98,3 +100,5 @@ I was surprised to find that this wasn't already proven... more accurately there
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/galois%20insertion/near/134879976):
 `a - b <= c <-> a <= b + c` is the galois connection, which is an insertion since `(a + b) - b = a`. Take `b = 1` and you have succ/pred
 
+
+{% endraw %}

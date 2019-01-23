@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/07107462idealoperations.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 07 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23462%20ideal%20operations/near/146936148):
 @**Kevin Buzzard** @**Mario Carneiro** `pow` comes for free after I've proved semiring! :D
 
@@ -204,3 +206,5 @@ def colon (N P : submodule R M) : ideal R :=
 annihilator (P.map N.mkq)
 ```
 
+
+{% endraw %}

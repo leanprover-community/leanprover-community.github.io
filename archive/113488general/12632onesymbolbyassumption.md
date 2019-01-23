@@ -9,6 +9,8 @@ permalink: archive/113488general/12632onesymbolbyassumption.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 27 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/one-symbol%20%22by%20assumption%22/near/152620996):
 How would people feel about a 1-symbol version of `by assumption`? I now often have hypotheses with unenlightening names `H1` ... `H5`, and these labels are all over the place in my proofs. But they don't really convey any information. I could use the french quotes to tell Lean the type, and it will start looking for a fitting assumption. But often I find that pretty verbose. Because usually, it's just an annoying proof obligation that we want to get rid of. How about `!`, or maybe the unicode `…`?
 
@@ -60,3 +62,5 @@ I would prefer it just replace the hole with a reference to the actual hypothesi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 28 2018 at 07:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/one-symbol%20%22by%20assumption%22/near/152638457):
 Why not the `\f< the_type \f>` version? It is less "Lean-explicit" but it is a whole lot more "math-explicit".
 
+
+{% endraw %}

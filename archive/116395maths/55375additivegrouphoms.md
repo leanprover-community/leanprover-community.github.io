@@ -9,6 +9,8 @@ permalink: archive/116395maths/55375additivegrouphoms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126990085):
 This has come up before. I need additive group homs. I can duplicate Patrick's work on group homs, but I also saw `@[to_additive finsupp.sum_map_range_index]` in `data/finsupp.lean`. Can someone explain to me how that magic works? Would it be enough to sprinkle some `@[to_additive ...]`'s into `algebra/group.lean` to have everything work?
 
@@ -568,3 +570,5 @@ They have different customs here.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 10 2018 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/129399170):
 Did we get anywhere with this additive group homs thread? @**Mario Carneiro** what is the definition you recommend in the end?
 
+
+{% endraw %}

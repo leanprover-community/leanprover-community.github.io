@@ -9,6 +9,8 @@ permalink: archive/113488general/39361diagnosingloopsinsimp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (May 30 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/diagnosing%20loops%20in%20%60simp%60/near/127288635):
 Can someone remind me what I'm meant to do to diagnose `simp` apparently going into an endless loop, and ending in a timeout? There must be some option to set so I can see which lemmas it is attempting to apply.
 
@@ -33,3 +35,5 @@ and edit it and email it me.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 30 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/diagnosing%20loops%20in%20%60simp%60/near/127309200):
 Let's get these answers down in a canonical place.
 
+
+{% endraw %}

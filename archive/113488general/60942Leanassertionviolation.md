@@ -9,6 +9,8 @@ permalink: archive/113488general/60942Leanassertionviolation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 05 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20assertion%20violation/near/123293256):
 ```
 universes u v 
@@ -348,3 +350,5 @@ Yep, same assertion
 [users.png](/user_uploads/3121/JbuLIJprxGe-IqMGOyrrJlyK/users.png)
 One little bug and everybody flies out, except devs. So sad...
 
+
+{% endraw %}

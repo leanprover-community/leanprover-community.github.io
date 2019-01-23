@@ -9,6 +9,8 @@ permalink: archive/113488general/23938export.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 13 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/export%3F/near/127995777):
 From lean core:
 
@@ -74,3 +76,5 @@ Got it -- obviously to get powers in a ring the key import is `group_power.lean`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 13 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/export%3F/near/127996088):
 [mumble mumble monoid]
 
+
+{% endraw %}

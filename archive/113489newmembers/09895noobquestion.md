@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/09895noobquestion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Wojciech Nawrocki (Sep 04 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question/near/133315850):
 Hello! Very new to Lean and logic in general;  i'm interested in how i can find the function names that i might need for various deduction steps (e.g. `and.intro`), since the std/maths library sections of "theorem proving in lean" are empty :anguished: in particular, i want to go from `¬p → false` to `p`
 
@@ -744,3 +746,5 @@ The idea being, `Foo.is_A` is a family of propositions. For any `n : nat`, `Foo.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Nov 18 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question/near/147934510):
 Thanks! I'd tried adding `n` after `bar` and I forgot that the parentheses were necessary.
 
+
+{% endraw %}

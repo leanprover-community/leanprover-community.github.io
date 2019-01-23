@@ -9,6 +9,8 @@ permalink: archive/113488general/77961elanonwindows.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 26 2018 at 07:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elan%20on%20windows/near/134647268):
 @**Sebastian Ullrich**,
 
@@ -289,3 +291,5 @@ elan is written in Rust so we probably don't need to think about the exact Windo
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Oct 12 2018 at 17:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elan%20on%20windows/near/135683846):
 I posted an issue to the elan repo: https://github.com/Kha/elan/issues/16
 
+
+{% endraw %}

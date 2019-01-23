@@ -9,6 +9,8 @@ permalink: archive/113488general/34126bundledincategorytheory.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Oct 04 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20in%20category_theory/near/135174961):
 I just discovered `bundled` in `category_theory.category`:
 
@@ -75,3 +77,5 @@ but I don't think you will gain much over just writing that one line
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 06 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20in%20category_theory/near/135303809):
 it's not like there are that many bundled classes. This is a negligible fraction of the work
 
+
+{% endraw %}

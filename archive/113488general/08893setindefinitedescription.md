@@ -9,6 +9,8 @@ permalink: archive/113488general/08893setindefinitedescription.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 04 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150884816):
 Is it possible to fill in this sorry?
 ```lean
@@ -63,3 +65,5 @@ this ▸ ps⟩
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 05 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150891740):
 when I revisited bases recently, we discussed changing the definition of a basis from a set to a family over a type. In that case it wouldn't be computationally irrelevant
 
+
+{% endraw %}

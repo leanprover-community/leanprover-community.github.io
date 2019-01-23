@@ -9,6 +9,8 @@ permalink: archive/116395maths/56000closureundercolimits.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 08 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/closure%20under%20colimits/near/151163961):
 Suppose C is a `category.{u v}` that `has_colimits` and I have a family A_i of objects of C indexed by a `Type v`. I also have (let's say for simplicity) a fixed J which is a `small_category.{v}`. I want to construct the closure of the objects A_i under colimits of shape J, as a new family also indexed on a `Type v`. Is it possible?
 
@@ -21,3 +23,5 @@ I thought about adding the value of the object as an index of the type, but then
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 08 2018 at 07:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/closure%20under%20colimits/near/151164310):
 The only thing I can think of is to do some manual transfinite recursion up to an ordinal of large enough cofinality (I know... that's my solution to everything).
 
+
+{% endraw %}

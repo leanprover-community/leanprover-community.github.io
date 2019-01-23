@@ -9,6 +9,8 @@ permalink: archive/116395maths/61359Missingmathstactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Missing%20maths%20tactic%3F/near/148250605):
 `example (a b c d : ℤ) (H : a - b = c * d) : b - a = c * (-d) := by simp [H] -- fails`.
 
@@ -389,3 +391,5 @@ And using notation, that might be improved to `ring using [H1 + H2]`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 25 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Missing%20maths%20tactic%3F/near/148296295):
 that seems more reasonable. You give some linear combination of hypotheses, like `a * h1 + x^2 * h2`, and it checks that `goal - (a*h1 + x^2 * h2)` is an equality of ring expressions
 
+
+{% endraw %}

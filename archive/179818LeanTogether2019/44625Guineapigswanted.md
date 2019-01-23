@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/44625Guineapigswanted.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jan 11 2019 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Guinea%20pigs%20wanted%21/near/154915324):
 Due to popular demand, I hacked up something in the vscode extension.  Interested victims can now build the git version of the extension and try out ctrl+shift+p "open documentation view" and then try "try it!".
 
@@ -39,3 +41,5 @@ It open either TPIL or the reference manual in VScode, as you would see it onlin
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 14 2019 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Guinea%20pigs%20wanted%21/near/155090073):
 @**Gabriel Ebner** if you need more guinea pigs then I guess you should ask on the general stream
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/58083universeparametersofinstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 03 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20parameters%20of%20instances/near/127507965):
 Is this a known issue?
 ```lean
@@ -365,3 +367,5 @@ And then you need to express that `p` and `p+k` have a prime gap of size `k` in 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 11 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20parameters%20of%20instances/near/127889246):
 @**Thang Nguyen**, just a suggestion --- in zulipchat you can set the "topic" name for a conversation, and it helps organise the conversation here a lot! For example, this one could have been "help with a statement about primes".
 
+
+{% endraw %}

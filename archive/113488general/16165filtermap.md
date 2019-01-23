@@ -9,6 +9,8 @@ permalink: archive/113488general/16165filtermap.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126378246):
 Is this already somewhere in core or mathlib?
 ```lean
@@ -220,3 +222,5 @@ Given that theorem proving is a formal method, what does an eroded formal method
 
 Ah ha! :light_bulb: This must be why the name “lean” was chosen: the methodological mountain was so eroded, it couldn't stand up straight.
 
+
+{% endraw %}

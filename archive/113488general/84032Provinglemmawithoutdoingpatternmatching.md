@@ -9,6 +9,8 @@ permalink: archive/113488general/84032Provinglemmawithoutdoingpatternmatching.ht
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Jan 14 2019 at 16:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20lemma%20without%20doing%20pattern%20matching/near/155091905):
 ```
 lemma eq.subst' {α : Sort u} {a b : α} {P : Π (m: α), (m = a) ∨ (m = b) → Prop} 
@@ -31,3 +33,5 @@ I thought the generated program doesn't typecheck
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 16 2019 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20lemma%20without%20doing%20pattern%20matching/near/155271925):
 (deleted)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/67298VSCodeinCoCalc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 06 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20in%20CoCalc%21/near/146831167):
 http://blog.sagemath.com/cocalc/2018/11/05/x11.html
 
@@ -30,3 +32,5 @@ Very nice. How is the lag? Is typing comfortable?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Nov 06 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20in%20CoCalc%21/near/146856232):
 Wow, that's impressive.
 
+
+{% endraw %}

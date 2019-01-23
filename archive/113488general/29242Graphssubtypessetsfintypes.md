@@ -9,6 +9,8 @@ permalink: archive/113488general/29242Graphssubtypessetsfintypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Pablo Le Hénaff (Jun 15 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121007):
 Hello hello
 I would like to formalize some theorems of graph theory, but before going any further I would like to get the basis of the implementation right.
@@ -69,3 +71,5 @@ the subset itself can just be a `set A`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121456):
 but if you want to talk about the induced subgraph you can use `subtype`
 
+
+{% endraw %}

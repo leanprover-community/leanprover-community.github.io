@@ -9,6 +9,8 @@ permalink: archive/116395maths/73541iscontinuumhypothesistrueinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 11 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is%20continuum%20hypothesis%20true%20in%20Lean%3F/near/126419454):
 Is the continuum hypothesis true in Lean’s model of ZFC?
 
@@ -105,3 +107,5 @@ In lean, you can only "assume CH inside". So if you assume it the proof is trivi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 12 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is%20continuum%20hypothesis%20true%20in%20Lean%3F/near/126440920):
 (actually if lean |- X then ZFC+inaccessibles |- X, but it is known that large cardinals don't affect the independence of CH.)
 
+
+{% endraw %}

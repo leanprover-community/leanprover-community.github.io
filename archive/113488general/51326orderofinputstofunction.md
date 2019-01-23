@@ -9,6 +9,8 @@ permalink: archive/113488general/51326orderofinputstofunction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/order%20of%20inputs%20to%20function/near/147668376):
 Sorry if this is already covered somewhere. What should the order of the inputs be in a definition such as
 
@@ -22,3 +24,5 @@ lemma nth_root_pow_left {x : ℝ} {m n : ℕ} (Hm : 0 < m) (Hx : 0 < x) :
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 14 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/order%20of%20inputs%20to%20function/near/147668608):
 `x` before `m`, so `x` before `m`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/79076Mathematicianslearningtactics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 30 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mathematicians%20learning%20tactics/near/127318046):
 ```lean
 instance : comm_monoid ℕ+ :=
@@ -459,3 +461,5 @@ Feel free to try your hand on https://gist.github.com/cipher1024/72af1694ce395d7
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 31 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mathematicians%20learning%20tactics/near/127349075):
 Thanks Simon! I'll have a very close look at that (but probably not today :disappointed: )
 
+
+{% endraw %}

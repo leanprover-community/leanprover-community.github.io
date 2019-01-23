@@ -9,6 +9,8 @@ permalink: archive/113488general/99039Tacticasmacro.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nima (Apr 24 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20as%20macro/near/125622203):
 Is there anyway I can define a tactic (or something local to a proof) that does a fixed number of steps, so I would not need to repeat the whole thing multiple times? For example, a tactic or local definition name `finish_it` that does the following:
 ```lean
@@ -64,3 +66,5 @@ But suppose I remove the last two lines from `finish_it` (`try { contradiction }
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 24 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20as%20macro/near/125632538):
 This is because `try { ... }` is an interactive mode tactic, so you need the interactive mode `;`, so `finish_it` needs to also be defined in the interactive namespace (`tactic.interactive.finish_it`) if you want to use it in tactics. If you say `finish_it` in a `begin ... end` or `by ...` block and `tactic.interactive.finish_it` doesn't exist, then it will assume it is a term of type `tactic unit` and will find it in the current namespace, but since it's using regular term parsing you won't get nice syntaxes like `try { ... }` that only work in interactive mode.
 
+
+{% endraw %}

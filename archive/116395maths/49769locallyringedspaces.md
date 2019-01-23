@@ -9,6 +9,8 @@ permalink: archive/116395maths/49769locallyringedspaces.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 01 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/locally%20ringed%20spaces/near/133171105):
 In [`lean-category-theory`](https://github.com/semorrison/lean-category-theory/blob/master/src/category_theory/locally_ringed.lean) I've added a definition of `locally_ringed_space`.
 
@@ -99,3 +101,5 @@ Yes, that's a nice thing to do when you have users :)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 01 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/locally%20ringed%20spaces/near/133175086):
 Though maybe I could just work in a branch of your library for now
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/53317NewversionsofPresburgertactics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Oct 30 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136761498):
 This project has been neglected for a long time, so I decided to tidy it up a bit. The new versions are available at https://github.com/skbaek/qe/. The main changes are :
 
@@ -130,3 +132,5 @@ Nice. Some expressions already work nicely.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 30 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136804252):
 Others time out quite a bit.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/58005Cardinality.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Huyen Chau Nguyen (Jun 22 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cardinality/near/128461092):
 Hey guys, I want to ask about the cardinality of sets. I'm totally newbie to Lean so the questions might be trivial and silly. Still, I need your help.
 
@@ -60,3 +62,5 @@ If you know your set is bound by a natural number `n` you can write `((finset.ra
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Jun 22 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cardinality/near/128476976):
 If you have a proof that a `s : set α` is finite (i.e. `finite s`), then you can use `set.finite.to_finset` to get the `finset` of a `set`.
 
+
+{% endraw %}

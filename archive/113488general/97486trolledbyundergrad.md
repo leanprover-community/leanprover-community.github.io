@@ -9,6 +9,8 @@ permalink: archive/113488general/97486trolledbyundergrad.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 20 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130014811):
 It took me 20 minutes to diagnose this deterministic time-out:
 
@@ -252,3 +254,5 @@ it would certainly be good if at least potential writing of the typeclass search
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 22 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130103093):
 Yes, exactly
 
+
+{% endraw %}

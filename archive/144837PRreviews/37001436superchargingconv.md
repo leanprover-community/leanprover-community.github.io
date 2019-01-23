@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/37001436superchargingconv.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 23 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23436%20supercharging%20conv/near/136319794):
 Thanks @**Keeley Hoek**! I've wished for these features quite often. :tada:
 
@@ -18,3 +20,5 @@ Thanks @**Keeley Hoek**! I've wished for these features quite often. :tada:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Oct 24 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23436%20supercharging%20conv/near/136394335):
 :+1: it looks like `congr` too
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/09865443docsforNZQRC.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 27 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136607409):
 Mathematicians find it frustrating when their goal is "obviously the same" as a hypothesis, except the hypothesis is about integers and the goal is about real numbers. These docs attempt to give some hints about how to deal with this, plus a slightly more in-depth discussion about what is going on for those who are interested. Comments are welcome.
 
@@ -681,3 +683,5 @@ No
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 29 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136727490):
 But actually you might find similar problems with more complicated statements involving things like exists.
 
+
+{% endraw %}

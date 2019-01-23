@@ -9,6 +9,8 @@ permalink: archive/113488general/87350Stilldontunderstandsimp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 27 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Still%20don%27t%20understand%20simp/near/130435282):
 I still don't understand simp. I tried
 
@@ -230,3 +232,5 @@ I would do `intros y H; simpa using H`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 27 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Still%20don%27t%20understand%20simp/near/130438163):
 `simp {contextual := tt}` often works in these situations, but I don't think it simplifies the assumptions first
 
+
+{% endraw %}

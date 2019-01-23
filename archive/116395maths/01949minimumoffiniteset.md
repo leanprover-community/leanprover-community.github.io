@@ -9,6 +9,8 @@ permalink: archive/116395maths/01949minimumoffiniteset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 23 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/minimum%20of%20finite%20set/near/126993170):
 ```quote
 with `sup` you don't need to use `iget`. `max` is the better name but I think `sup` has the better behaviour.
@@ -222,3 +224,5 @@ I'm not sure yet. I didn't try to write the proof only using the `option` varian
 ```
 @**Johannes Hölzl** No, I haven't started using the `max` in mathlib.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/96722continuousofconst.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous_of_const/near/152017837):
 This is very much related to my question in the https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/Empty.20or.20not.20empty/near/152017713, but has some (tiny) math content. Can anyone golf the following ridiculous lemma?
 ```lean
@@ -87,3 +89,5 @@ I have a long way to go before becoming a true obfuscation master...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous_of_const/near/152019513):
 Thanks anyway!
 
+
+{% endraw %}

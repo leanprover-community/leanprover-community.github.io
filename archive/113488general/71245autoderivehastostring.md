@@ -9,6 +9,8 @@ permalink: archive/113488general/71245autoderivehastostring.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jul 21 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069413):
 RT, something like this in lean?
 
@@ -44,3 +46,5 @@ You're welcome
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 21 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070237):
 @**Mario Carneiro** Such a derive handler seems like a lot of work but I'm wondering if piggy backing on top of `has_reflect` might help us be extra lazy
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/90227equationallemmas.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 05 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equational%20lemmas/near/129109127):
 when using `add_decl` to create a definition, is it possible to declare an accompanying equational lemma?
 
@@ -206,3 +208,5 @@ this is so sad
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 04 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equational%20lemmas/near/133330102):
 I'm hopeful it'll get better in Lean 4
 
+
+{% endraw %}

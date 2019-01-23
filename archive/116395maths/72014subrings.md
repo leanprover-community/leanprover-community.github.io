@@ -9,6 +9,8 @@ permalink: archive/116395maths/72014subrings.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 07 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subrings/near/127699034):
 ```lean
 /-- `S` is a subgroup: a set containing 1 and closed under multiplication, addition and and additive inverse. -/
@@ -360,3 +362,5 @@ And I couldn't just easily prove stuff.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 08 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subrings/near/127782026):
 (I don't have Lean here atm... so I can't reproduce the exact problem I ran into.
 
+
+{% endraw %}

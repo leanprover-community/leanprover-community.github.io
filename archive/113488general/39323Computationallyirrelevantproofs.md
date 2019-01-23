@@ -9,6 +9,8 @@ permalink: archive/113488general/39323Computationallyirrelevantproofs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 04 2019 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Computationally%20irrelevant%20proofs/near/154428282):
 Is there any tactics for handling program containing computationally irrelevant proof?
 Sometimes it's annoying that the non-trivial proof been replace by `_`...
@@ -140,3 +142,5 @@ To resurrect this a bit, has there been a tactic that just introduces casts as n
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 11 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Computationally%20irrelevant%20proofs/near/154948114):
 You can often get `simp` to do this, or `conv`, because they use congruence lemmas for rewriting
 
+
+{% endraw %}

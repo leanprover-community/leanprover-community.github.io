@@ -9,6 +9,8 @@ permalink: archive/113488general/17192timeout.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 08 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout/near/147329792):
 ```lean
 theorem is_noetherian_ring_mv_polynomial_fin {n : ℕ}
@@ -71,3 +73,5 @@ I basically changed the definitions of polynomial and mv_polynomial and that cut
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 09 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout/near/147368074):
 Kenny can you make a MWE? It's hard to run your code.
 
+
+{% endraw %}

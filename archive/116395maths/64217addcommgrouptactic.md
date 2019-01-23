@@ -9,6 +9,8 @@ permalink: archive/116395maths/64217addcommgrouptactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 08 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_group%20tactic/near/131120526):
 Could we get a scaled down `ring` tactic handling `add_comm_group`? My current goal is `φ (x', y') - φ (x, y) =   φ (x', y₁) - φ (x, y₁) + (φ (x', y') - φ (x', y₁) - (φ (x, y') - φ (x, y₁))) + (φ (x₁, y') - φ (x₁, y)) + (φ (x, y') - φ (x, y) - (φ (x₁, y') - φ (x₁, y)))` and I can't face proving it by hand
 
@@ -130,3 +132,5 @@ Which is the best idea?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 08 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_group%20tactic/near/131134156):
 No problem, go ahead
 
+
+{% endraw %}

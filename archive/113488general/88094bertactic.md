@@ -9,6 +9,8 @@ permalink: archive/113488general/88094bertactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 03 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098666):
 I'm trying to automate my demo file, for comparison. Is there any reason not to try to write a monster tactic trying all automation we have (except speed reason)? Something like:
 ```lean
@@ -362,3 +364,5 @@ and I believe there was a trick using quotations somehow
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 03 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135113247):
 https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/algebra.20on.20subtypes/near/129927817
 
+
+{% endraw %}

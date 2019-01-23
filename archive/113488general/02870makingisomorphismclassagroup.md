@@ -9,6 +9,8 @@ permalink: archive/113488general/02870makingisomorphismclassagroup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464358):
 Let's say I have a bunch of groups, and I use `quotient` to make isomorphism classes. Is there a constructive way to make the isomorphism classes inherit the structure of a group?
 
@@ -707,3 +709,5 @@ and then take the intersection over all the subgroups containing the image of S
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 01 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494362):
 This should definitely be in #**maths**
 
+
+{% endraw %}

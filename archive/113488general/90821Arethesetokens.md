@@ -9,6 +9,8 @@ permalink: archive/113488general/90821Arethesetokens.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 01 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20these%20tokens%3F/near/124499064):
 In VS Code, if I type `#check nat.`and then, with the cursor just to the right of the `.` I type Esc then ctrl-space (possibly more than once) then I get, I think, to see a list of things which the Lean VS Code plugin thinks might come next. In this particular case,  the list seems to naturally split into two types of things.
 
@@ -102,3 +104,5 @@ Reading through the docs of Lean VS Code extension doesn't seem to mention these
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 01 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20these%20tokens%3F/near/124499792):
 `coinductive` is a lean command, but it only supports coinductive predicates. It is defined as a user command in `init/meta/coinductive_predicates.lean`
 
+
+{% endraw %}

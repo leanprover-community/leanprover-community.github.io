@@ -9,6 +9,8 @@ permalink: archive/116395maths/24585productsofgroups.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 25 2018 at 04:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20groups%3F/near/128578863):
 Do we have instances that provide (pairwise) products of groups in mathlib? I know about `pi_instances` for indexed products, but can't find anything for the pairwise case.
 
@@ -24,3 +26,5 @@ If not I can do it sometime.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 25 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20groups%3F/near/128597115):
 All mathlib product instances are hidden in https://github.com/leanprover/mathlib/blob/master/linear_algebra/prod_module.lean, in particular product groups. At some point I tried to move them when preparing a PR but I gave up because everything broke?
 
+
+{% endraw %}

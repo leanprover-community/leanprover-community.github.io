@@ -9,6 +9,8 @@ permalink: archive/113488general/74575Forwarddeclarations.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Aug 10 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227150):
 Is it possible to forward declare definitions in lean? I'd like to write something like
 ````
@@ -120,3 +122,5 @@ I don't know if it does something special for meta mutual inductives, but I doub
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 10 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131229297):
 the goal is to have a strong enough type system that lean can assume powerful things about your code. Functional stuff like common subexpression evaluation is one simple example
 
+
+{% endraw %}

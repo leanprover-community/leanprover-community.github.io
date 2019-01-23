@@ -9,6 +9,8 @@ permalink: archive/113488general/83865infixnotationprecedence.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 07 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infix%20notation%20precedence/near/127717979):
 I want something that is effectively equivalent to this:
 
@@ -48,3 +50,5 @@ If you use `infixr` instead and do `#print d∉`, you'll see that the RHS now ha
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 08 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infix%20notation%20precedence/near/127757084):
 Thanks, @**Sebastian Ullrich**!
 
+
+{% endraw %}

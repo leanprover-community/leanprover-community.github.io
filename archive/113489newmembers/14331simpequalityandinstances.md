@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/14331simpequalityandinstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Winwood (Sep 25 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simp%2C%20equality%2C%20and%20instances/near/134561065):
 Hi, I am trying to prove that list intersection with a singleton list is essentially a filter, and get this sub-goal:
 ```
@@ -55,3 +57,5 @@ Although I'm not sure I want this particular theorem, it seems a bit specialized
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Winwood (Sep 25 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simp%2C%20equality%2C%20and%20instances/near/134562143):
 This is a helper lemma, so maybe not.  It looks like mathlib has a bunch of lemmas which may do what I want, anyway.  Thanks!
 
+
+{% endraw %}

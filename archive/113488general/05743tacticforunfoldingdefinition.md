@@ -9,6 +9,8 @@ permalink: archive/113488general/05743tacticforunfoldingdefinition.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 15 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20unfolding%20definition/near/123764614):
 If I've defined `def A := B` and my goal / hypothesis contains A, how do I replace A with B?
 
@@ -65,3 +67,5 @@ They might consider it in the future. Recently, they have adopted implicit field
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Mar 15 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20unfolding%20definition/near/123765042):
 You can sort of emulate it with multiple structures, like how the algebraic classes are build on top of `has_foo` classes and so can take advantage of intervening `notation` declarations
 
+
+{% endraw %}

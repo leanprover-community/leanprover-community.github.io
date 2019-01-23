@@ -9,6 +9,8 @@ permalink: archive/113488general/08294orderonoptions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 23 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/order%20on%20options/near/134463860):
 Is there an instance of `decidable_linear_order` on `option` in Mathlib or core? I can't find one
 
@@ -124,3 +126,5 @@ If you pass an order that is not linear to a function expecting one in the type,
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 23 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/order%20on%20options/near/134464920):
 I think comparing it the a quickcheck property would be closer to the truth, when you decide to write them, they nudge you in the right direction
 
+
+{% endraw %}

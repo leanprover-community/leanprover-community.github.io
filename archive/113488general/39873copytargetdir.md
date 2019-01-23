@@ -9,6 +9,8 @@ permalink: archive/113488general/39873copytargetdir.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 28 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204618):
 I really don't understand how the `_target` directory works
 
@@ -39,3 +41,5 @@ but maybe it was only Kevin's code
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204871):
 I have symlinked the `_target` dir before. It seems to work fine.
 
+
+{% endraw %}

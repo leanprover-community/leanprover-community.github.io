@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/39139Unabletounfold.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 02 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968269):
 I'm trying to prove the prime field addition that I defined is correct,  but somehow I can't unfold the equation...
 https://gist.github.com/potsrevennil/0cbf2204a8a16daa6eab367f153be748#file-primefield-lean-L71
@@ -45,3 +47,5 @@ But after unfold add, I still cannot unfold eq....
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 02 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136970809):
 Anyway `eq.symm (add_equiv _)` is really a nice solution, thanks a lot!
 
+
+{% endraw %}

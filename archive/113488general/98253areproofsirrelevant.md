@@ -9,6 +9,8 @@ permalink: archive/113488general/98253areproofsirrelevant.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121844):
 (working example, far from minimal, sorry for that)
 https://gist.github.com/kckennylau/4a009e228980fdbe9f6c879f9fa0eca5
@@ -84,3 +86,5 @@ what should I do?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122146):
 ah I solved it by making `topological_group.coinduced` a theorem
 
+
+{% endraw %}

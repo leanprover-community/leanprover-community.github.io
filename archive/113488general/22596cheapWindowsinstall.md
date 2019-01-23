@@ -9,6 +9,8 @@ permalink: archive/113488general/22596cheapWindowsinstall.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 25 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cheap%20Windows%20install/near/134581500):
 Over the weekend, all of the PC's in the computer room where we do Xena got upgraded from Windows 7 to Windows 10 (the hardware didn't change, but they are decent machines). One of the things I did yesterday (when I was ignoring chat) was to get bleeding edge Lean and make a basic repository with a toml and path file and one .lean file with a proof that 2+2=4, add mathlib as a dependency, make all the .olean files and then zip the whole lot up at http://wwwf.imperial.ac.uk/~buzzard/xena/Xena.zip . 
 
@@ -52,3 +54,5 @@ sure, sounds great!
 ```
 No, I never tried it
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/58237haveinmathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Jan 05 2019 at 12:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/have%20in%20mathlib/near/154469705):
 I am definitely very grateful to Mario for everything he does, but there is one question I want to raise on mathlib style. In general programming practice, comments are considered good, and even necessary. In lean, you can have lean-checked comments, in the form of `have`or `show`statements which, while unncessary to the compiler, increase a lot maintainability, readability, reusability (I mean, if you want to adapt a proof to suit your needs and you see what the proof is doing, then this is much easier), and make the learning curve less steep (by browsing through understandable code, one understands better what is going on). But this is at the price of compactness, or golfedness, which is very much valued in mathlib. 
 
@@ -85,3 +87,5 @@ I think the compilation time thing is currently crucial, and shouldn't be. Today
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Jan 05 2019 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/have%20in%20mathlib/near/154471838):
 I have a separate copy of mathlib for each branch I am working on. So, I don't ever switch branches, as it is too painful otherwise. Clearly suboptimal, but efficient enough.
 
+
+{% endraw %}

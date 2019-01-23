@@ -9,6 +9,8 @@ permalink: archive/113488general/85208contextlikeexprlists.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 13 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/context%20like%20expr%20lists%3F/near/123654389):
 How do I construct a list of expressions where later entries can depend on earlier ones? Like `(A : Sort u) (a : A)` as a minimal example... Do I have to use local constants?
 
@@ -114,3 +116,5 @@ What is the purpose of the second `name` argument to `expr.local_const`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 14 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/context%20like%20expr%20lists%3F/near/123706023):
 Ah, got it, pretty printer name...
 
+
+{% endraw %}

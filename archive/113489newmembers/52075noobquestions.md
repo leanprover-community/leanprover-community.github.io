@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/52075noobquestions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Wojciech Nawrocki (Nov 20 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/148007940):
 What's the command to make Lean automatically derive `decidable_eq` for some custom inductive type?
 
@@ -766,3 +768,5 @@ In any case this is pretty awesome, all my proofs have shortened by half now wit
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 23 2019 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156653719):
 For this, you should decide whether you prefer to write the empty context as `0` or `[]`, and write a simp lemma like `0 = []` if you want to get rid of the 0 everywhere. In this case you should also make sure that all your other simp lemmas use the "preferred form" of this element on the LHS
 
+
+{% endraw %}

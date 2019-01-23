@@ -9,6 +9,8 @@ permalink: archive/113488general/31957mathlibfiles.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 18 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152106884):
 @**Mario Carneiro** and @**Johannes Hölzl** Would you be open to a PR reorganizing files in the analysis part of mathlib? There are huge files with a strange import graph. I would like to create new sub-folders  an move stuff around so that it get easier to guess what is in what file
 
@@ -372,3 +374,5 @@ All this sounds good to me. I agree with Mario that `topology` is better than `g
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 16 2019 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155237245):
 I just renamed general_topology to topology, and moved instances there. Is everybody happy?
 
+
+{% endraw %}

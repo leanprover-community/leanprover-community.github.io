@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/81809classinstanceresdepthreachedfintypeclas
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871036):
 Hi guys, I am trying to model ssreflects 'pick' method using classical.some. The code I came up with reads:
 
@@ -258,3 +260,5 @@ def pick_encodable (α : Type) (p : α → Prop) [decidable_pred p]:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134896882):
 This probably needs some more cleanup, but or now it does what I want.
 
+
+{% endraw %}

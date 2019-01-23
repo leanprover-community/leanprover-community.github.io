@@ -9,6 +9,8 @@ permalink: archive/116395maths/47306natandpnat.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 27 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat%20and%20pnat/near/127168435):
 Should I not be using these functions:
 
@@ -653,3 +655,5 @@ https://github.com/leanprover/mathlib/blob/master/data/pnat.lean
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 28 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat%20and%20pnat/near/127188139):
 Maybe one day it will come back with super powers
 
+
+{% endraw %}

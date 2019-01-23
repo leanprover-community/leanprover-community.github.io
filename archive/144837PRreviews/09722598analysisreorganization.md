@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/09722598analysisreorganization.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Jan 17 2019 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23598%20analysis%20reorganization/near/155347359):
 I am confused: is it normal that there are still several references to `general_topology`?
 
@@ -111,3 +113,5 @@ A while back, you proposed `functor_struct` (in the context of `category`, actua
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 18 2019 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23598%20analysis%20reorganization/near/156395950):
 and you want that to be the folder name?
 
+
+{% endraw %}

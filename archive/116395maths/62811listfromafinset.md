@@ -9,6 +9,8 @@ permalink: archive/116395maths/62811listfromafinset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 13 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/list%20from%20a%20finset/near/125032331):
 Is there a way to get a `list` from a `finset` without using `finset.sort` or writing my own recursive function on `finset`?
 
@@ -226,3 +228,5 @@ I assume you used `finset.fold` or something to define the nat function
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 19 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/list%20from%20a%20finset/near/125301330):
 True, but that doesn't mean I have to write the `list` function itself.
 
+
+{% endraw %}

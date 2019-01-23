@@ -9,6 +9,8 @@ permalink: archive/116395maths/56592strictification.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 26 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strictification/near/127137722):
 If `α` is a type, then as @**Kevin Buzzard** describes near https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/affine.20schemes.20are.20schemes/near/126963972, we can interpret `α` as a groupoid whose objects are the "inhabitants of α up to defeq" and whose morphisms are propositional equalities, that is, the morphisms from `a` to `b` are the inhabitants of `a = b` (and so a morphism from `a` to `b` is unique if it exists, by proof irrelevance).
 Suppose now `α` is a `monoid`. Then associativity is a propositional equality `(a * b) * c = a * (b * c)` and not necessarily a defeq, so under this interpretation `α` corresponds to a monoidal groupoid which is not necessarily strict.
@@ -38,3 +40,5 @@ https://gist.github.com/rwbarton/658ccdd57986b32fd8be0c155c63d47e#file-strictifi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 26 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strictification/near/127139758):
 Now as soon as I write this I realize I actually need the additive version, hah.
 
+
+{% endraw %}

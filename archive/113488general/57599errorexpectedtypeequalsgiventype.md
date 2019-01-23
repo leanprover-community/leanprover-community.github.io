@@ -9,6 +9,8 @@ permalink: archive/113488general/57599errorexpectedtypeequalsgiventype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 15 2019 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155160367):
 A mystery:
 ```lean
@@ -226,3 +228,5 @@ I think you want high precedence (above `max = 1024`) to get `presheaf Xᵒᵖ` 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 16 2019 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155248248):
 @**Reid Barton** Thanks!
 
+
+{% endraw %}

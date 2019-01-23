@@ -9,6 +9,8 @@ permalink: archive/113488general/20508patternmatching101.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 25 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662292):
 Easy question: how do I do pattern matching against values? Given `k : nat`, naively I could try writing
 ```
@@ -116,3 +118,5 @@ I'm sure there's a `#print` that'll tell you, but I never remember which one. :b
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 25 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125672780):
 Perhaps `#print <type-name>.decidable_eq`?
 
+
+{% endraw %}

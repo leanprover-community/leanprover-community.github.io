@@ -9,6 +9,8 @@ permalink: archive/113488general/03873isleftassociative.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5E%20is%20left%20associative/near/123659529):
 Is that normal? `#eval 2^3^2` gives 64. I don't know any other language where this is the case. I just tried python, pari, sage and they all give me 2^(3^2)=512.
 
@@ -87,3 +89,5 @@ I am just cloning, editing the file, and then making
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5E%20is%20left%20associative/near/123675216):
 I've done it three times now so I suspect that it's not me failing to edit the file or failing to run the correct binary, I think now that it's more likely either that the generic build instructions are somehow clobbering my edits or that there's something else I'm missing. I've tried defining a new right associative operator to mean nat.pow and it works fine. It's just `^` that is still misbehaving
 
+
+{% endraw %}

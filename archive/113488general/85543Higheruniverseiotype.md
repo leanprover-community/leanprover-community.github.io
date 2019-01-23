@@ -9,6 +9,8 @@ permalink: archive/113488general/85543Higheruniverseiotype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Aug 10 2018 at 16:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22Higher%20universe%22%20io%20type/near/131240824):
 Consider the following silly lean program:
 ````
@@ -170,3 +172,5 @@ https://github.com/cipher1024/slim_check/blob/f6c44cc48bc44c108ce88c4b1d5cad7b3f
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 10 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22Higher%20universe%22%20io%20type/near/131842166):
 I can put it in the nursery
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/69770rewriteentire.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 14 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679200):
 Hi all, this is a follow-up to my difficulties with the `occs` configuration for `rw`. I'm still not there writing a "please find _all_ the possible rewrites" function.
 
@@ -63,3 +65,5 @@ Oh... I was asking for the wrong thing, and I don't think I know how to do it. S
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 14 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123699509):
 I'm guessing I need to ... `infer` the type of my expression, and then while the type is Pi, replace the expression with a lambda wrapped around it, and then when there are no more Pis use `mk_eq_symm`?
 
+
+{% endraw %}

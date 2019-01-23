@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/31377Traceofsimpsteps.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 25 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300149):
 I applied "simp" to a complex hypothesis and got an unexpected result.  Is there a way to get a trace of the steps taken by simp?
 
@@ -27,3 +29,5 @@ but why not both
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 25 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300213):
 trace.simplify.rewrite will show just the successful steps
 
+
+{% endraw %}

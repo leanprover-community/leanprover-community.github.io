@@ -9,6 +9,8 @@ permalink: archive/116395maths/36524matrixupdates.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 11 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/matrix%20updates/near/133716760):
 @**Kevin Buzzard** I worked a bit on matrices on the side. I don't know if you'll be happy with the differences with [#334](https://github.com/leanprover/mathlib/pull/334), so I PR'd [#2](https://github.com/leanprover-community/mathlib/pull/2) to your branch on `leanprover-community/mathlib`. Let me know what you think.
 
@@ -33,3 +35,5 @@ Yes, all the credit should go to people who worked on it before me. I just build
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 06:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/matrix%20updates/near/133778267):
 Somehow Travis is now failing (and it is not a timeout). It didn't receive any output for 10min.
 
+
+{% endraw %}

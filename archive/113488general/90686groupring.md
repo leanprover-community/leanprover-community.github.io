@@ -9,6 +9,8 @@ permalink: archive/113488general/90686groupring.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20ring/near/124361143):
 Do we have group rings? It's an instance of finsupp
 
@@ -70,3 +72,5 @@ Yes, usually in maths the monoid is written multiplicatively, because the multip
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 29 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20ring/near/124363928):
 In fact I suspect that the monoid ring R[M] is probably some adjoint functor to the forgetful functor sending an R-algebra to the underlying multiplicative monoid
 
+
+{% endraw %}

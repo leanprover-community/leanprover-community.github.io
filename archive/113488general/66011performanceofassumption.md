@@ -9,6 +9,8 @@ permalink: archive/113488general/66011performanceofassumption.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Oct 31 2018 at 14:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20of%20%60assumption%60/near/136852607):
 I just encountered a weird performance issue. In the middle of a rather long proof, I have just proved a fact that I want to use next. If I use `exact this`, this takes less than 3ms. But `assumption` takes 7 seconds... Of course, in this specific case this is not a problem, but first I was using a tactic that calls `assumption`, several times in the proof, and the whole proof then took more than 30s. Is there a way to understand what is going on?
 
@@ -206,3 +208,5 @@ Looking at the implementation, it seems like `assumption` is already calling `un
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Nov 01 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20of%20%60assumption%60/near/136923989):
 I think a whole lot more should be irreducible, like `add`, `neg`, `mul` and `inv` for `cau_seq.completion`.
 
+
+{% endraw %}

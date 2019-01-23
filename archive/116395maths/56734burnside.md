@@ -9,6 +9,8 @@ permalink: archive/116395maths/56734burnside.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125134940):
 ```
 theorem burnside : nonempty ((Σ g, fixed G X g) ≃ (orbits G X × G)) :=
@@ -67,3 +69,5 @@ free group
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138659):
 https://github.com/leanprover/mathlib/pull/89#discussion_r179398893
 
+
+{% endraw %}

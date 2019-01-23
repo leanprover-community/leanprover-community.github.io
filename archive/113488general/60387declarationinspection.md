@@ -9,6 +9,8 @@ permalink: archive/113488general/60387declarationinspection.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 15 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132184814):
 I'm still trying to discover what a Lean file can reveal about itself. I found https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean and https://github.com/leanprover/lean/blob/master/library/init/meta/declaration.lean but there still very basic questions I can't answer. Say I have an environment and a declaration name. I can distinguish a lemma/theorem from a definition or constant (although I'm not sure what's the difference between definition and constant). But how can I distinguish between `def`, `class`, `instance`, `structure`, `inductive`? I saw the series of functions around https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean#L47 but trying them on examples only confuses me.
 
@@ -325,3 +327,5 @@ pure synonyms
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 21 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132542484):
 thanks
 
+
+{% endraw %}

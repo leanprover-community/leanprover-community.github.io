@@ -9,6 +9,8 @@ permalink: archive/113488general/31254equationhasnotbeenusedinthecompilation.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 15 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20has%20not%20been%20used%20in%20the%20compilation/near/134002534):
 This is the first time I've seen the error below. What does it mean? What might be causing it?
 
@@ -36,3 +38,5 @@ def f : ℕ → ℕ
 | (n+1) := n -- not used
 ```
 
+
+{% endraw %}

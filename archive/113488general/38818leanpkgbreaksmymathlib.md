@@ -9,6 +9,8 @@ permalink: archive/113488general/38818leanpkgbreaksmymathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 10 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20breaks%20my%20mathlib/near/129401172):
 ```
 buzzard@bob:~/Lean/lean-projects/xena-UROP-2018$ more leanpkg.toml 
@@ -200,3 +202,5 @@ fixed
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 10 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20breaks%20my%20mathlib/near/129402686):
 Many thanks for the prompt work!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/03459convexample.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651407):
 I was trying to write an example to illustrate the power of `conv`, by finding an example where the entire goal was difficult to work with because it contained implicit proofs. I realised that there were two things I didn't understand properly. Here's some code.
 
@@ -539,3 +541,5 @@ the `discharger`is a `tactic unit`, so you have to write it in non-interactive m
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725719):
 but it's not that useful compared to `simp *`
 
+
+{% endraw %}

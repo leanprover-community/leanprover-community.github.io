@@ -9,6 +9,8 @@ permalink: archive/113488general/89366precompiledmathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 20 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/precompiled%20mathlib/near/125449071):
 ```quote
 That being said, we really need mathlib nightlies (ie. precompiled mathlib) — Patrick Massot
@@ -26,3 +28,5 @@ I think a fully compiled mathlib including sources is about 15mb
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 20 2018 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/precompiled%20mathlib/near/125452572):
 So I think it is not too much of a burden to push back to github
 
+
+{% endraw %}

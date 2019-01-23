@@ -9,6 +9,8 @@ permalink: archive/113488general/76053Simplifier.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Oct 23 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplifier/near/136326024):
 I'm realizing I don't understand how the simplifier works. I have a complicated goal involving product spaces, and in the middle of this goal there is the expression `(f, x).fst`. When I apply `simp` to my goal, it does not reduce to `f`. To help simp, I wrote down an auxiliary statement exactly with the good types and elements `f` and `x`, but still it does not help `simp`. Even when I turn on `set_option pp.all true` I can't see what is wrong.
 My helper lemma is `should_help : (prod.mk f x).fst = f`. Fully expanded, it reads
@@ -61,3 +63,5 @@ but only because `is_prime` is a proposition. If you replace `is_prime` by `vect
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 23 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplifier/near/136357623):
 Actually it will work as long as the second argument is a subsingleton. This is because this cast thing is being inserted by the congr lemma, that automatically discharges subsingleton arguments (even if they are in Type)
 
+
+{% endraw %}

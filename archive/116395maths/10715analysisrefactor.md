@@ -9,6 +9,8 @@ permalink: archive/116395maths/10715analysisrefactor.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 21 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis%20refactor/near/132541838):
 @**Johannes Hölzl** If you have some time, I'd be interested to know what is the big plan underlying your recent mathilb commits
 
@@ -92,3 +94,5 @@ Thanks for the more detailed example. Having both `nndist` and `dist` is a good 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 22 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis%20refactor/near/132581576):
 Also totally agree with your second paragraph. An even more basic example is the extended metric space of (not necessarily bounded) functions from a given set to a given metric space, with the sup/uniform metric.
 
+
+{% endraw %}

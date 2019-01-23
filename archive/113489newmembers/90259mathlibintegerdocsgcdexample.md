@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/90259mathlibintegerdocsgcdexample.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Aug 09 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20integer%20docs%20gcd%20example/near/131176076):
 The final `example` in [this file from the mathlib docs](https://github.com/leanprover/mathlib/blob/master/docs/theories/integers.md) (I guess it originally comes from [this page on the xena blog](https://xenaproject.wordpress.com/maths-in-lean-integers/)) doesn't seem to typecheck for me:
 ```lean
@@ -50,3 +52,5 @@ It would be really nice to find a workflow making sure examples in the docs are 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 09 2018 at 18:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20integer%20docs%20gcd%20example/near/131182072):
 Thanks Mario! I wonder if this is my new merge time record. I already hit some similar score a long time ago.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/68210makingawelldefineddefinition.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Sever (Aug 05 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/making%20a%20well-defined%20definition/near/130922260):
 I have two sets `A B` and I want to define `f A B = g A b`(another set) for some `b ∈ B`.  I have the fact that `∃ b, b ∈ B`, but I'm not allowed to use Exists.dcases_on. Also, how/when do I prove this is well-defined and doesn't depend on the choice of `b`?
 
@@ -42,3 +44,5 @@ I just want to use the existence to show the set is non-empty. I think I might h
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 05 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/making%20a%20well-defined%20definition/near/130925602):
 Computing the set can't be done constructively, but I should think that proving it's non-empty might be possible. If your goal is the assertion that some set is non-empty then you'll be able to uses cases on the exists normally, because your goal is to prove a proposition, not to construct some data.
 
+
+{% endraw %}

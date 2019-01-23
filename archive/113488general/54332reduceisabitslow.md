@@ -9,6 +9,8 @@ permalink: archive/113488general/54332reduceisabitslow.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Arseniy Alekseyev (Jul 17 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129783924):
 These reductions work a bit slow for me:
 
@@ -98,3 +100,5 @@ In any case, avoid kernel computation.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 17 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129800877):
 Lean was not designed to do fully-verified computation quickly :-) `#reduce 10000+10000` will bring the system to its knees. This is the whole point of `#eval`
 
+
+{% endraw %}

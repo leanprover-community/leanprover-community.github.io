@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/19690Recursivelyprove.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 03 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137105029):
 Sorry, this might seems to be stupid, but I just can't figure out how to prove the problem inductively....
 
@@ -69,3 +71,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 04 2018 at 04:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137140650):
 Oh!! Thanks a lot for the explanation!!
 
+
+{% endraw %}

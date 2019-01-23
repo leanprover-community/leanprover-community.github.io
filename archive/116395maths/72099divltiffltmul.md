@@ -9,6 +9,8 @@ permalink: archive/116395maths/72099divltiffltmul.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 15 2019 at 12:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_lt_iff_lt_mul/near/155161891):
 I just wanted to get from `a<b*c` to `a/c<b` (on the real  numbers) with a hypothesis that `c>0`. I was surprised to find that although all three of `div_lt_iff_lt_mul`, `lt_mul_of_div_lt` and `div_lt_of_lt_mul` were in Lean, they were in `data.int.basic` :-) and only applied to ints. This should be some general lemma about ordered monoids or some such thing, right? I might start doing what Chris always encourages me to do, which is to make a super-short PR, assuming that this is actually something missing from mathlib. But is it there and I missed it?
 
@@ -45,3 +47,5 @@ Had I taken the trouble to try and formalise what statement I thought was true f
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_lt_iff_lt_mul/near/155165038):
 you might wonder why division isn't defined for groups, and this is one of the differences from add_groups, which have subtraction, but there is a difference between the total division on groups and the almost total division on fields and it doesn't seem to be helpful to unify them; lots of theorems overlap with a name conflict, but they are all proven differently
 
+
+{% endraw %}

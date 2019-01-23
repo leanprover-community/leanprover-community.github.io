@@ -9,6 +9,8 @@ permalink: archive/113488general/53290LUGFreiburg2018.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/LUG%20Freiburg%202018/near/133714386):
 Hi everyone, I am organising a Lean User Group meeting in Freiburg (Germany). Dates: Monday 5 November – Wednesday 7 November.
 I would like to mimic the model of the very succesful meeting in Orsay. So it will be a free-form hackathon with some spontaneous talks. Nevertheless it may be useful to broadly sketch a topic: I would like to use this workshop to work on mathematical topics revolving around geometry, algebra and number theory (e.g., manifolds, schemes, homological algebra, number fields, and any category theory that shows up along the way). Besides that we can also discuss and improve tactics/automation that will streamline our work.
@@ -562,3 +564,5 @@ Ok, I've updated the report after your suggestions. I will send it to my supervi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 08 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/LUG%20Freiburg%202018/near/147285100):
 merged!
 
+
+{% endraw %}

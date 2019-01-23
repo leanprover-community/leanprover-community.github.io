@@ -9,6 +9,8 @@ permalink: archive/113488general/04116cardnonempty.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 08 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577651):
 Is there some easy way to tackle this goal:
 ```lean
@@ -57,3 +59,5 @@ It is in mathlib. `fintype.card_pos_iff` I believe.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 08 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133578180):
 Aaah, thanks! (Sorry, Kenny)
 
+
+{% endraw %}

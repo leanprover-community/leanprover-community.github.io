@@ -9,6 +9,8 @@ permalink: archive/116395maths/79835Linearmapsandmodulehomomorphisms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20maps%20and%20module%20homomorphisms/near/126260883):
 In `algebra/module.lean` on line 78 there is `structure is_linear_map`. I have two questions:
 (1) Why is this not a class?
@@ -35,3 +37,5 @@ A group gives you extra data, being a group_hom is merely a property
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20maps%20and%20module%20homomorphisms/near/126261252):
 This is maybe reflected in the terminology
 
+
+{% endraw %}

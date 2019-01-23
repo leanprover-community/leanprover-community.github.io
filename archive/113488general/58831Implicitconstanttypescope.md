@@ -9,6 +9,8 @@ permalink: archive/113488general/58831Implicitconstanttypescope.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 14 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implicit%20constant-type%20scope/near/123699670):
 Is there a way to tell lean that every numeric constant (a'la `1` `42`) I use in <some scope> is actually from `Z` rather than `N` or am I stuck with `(0 : Z)`? (Coq has `Open Scope ZScope` command that lets me do this sort of thing.)
 
@@ -153,3 +155,5 @@ etc etc
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 15 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implicit%20constant-type%20scope/near/123746096):
 Here's my favourite mental model of when to not worry about IEEE floats. When you use it for natural quantities that one needs to measure, they implicitly capture the imprecision. So when you want to model something like weight and you say that my thing weighs 1 kilogram, floats will give you some approximation to it and that should be fine considering pretty much nothing weighs **exactly** 1 kilogram anyway, probably even the platinum-irridium thing that is supposed to weigh exactly 1 kilogram (in our corner of the universe). It's only man-made entities where floats become a problem, because those were made from our understanding of fractions and reals and we would expect them to behave accordingly (the obvious example is balance in your bank account, you don't want floats to randomly round nor not add associatively).
 
+
+{% endraw %}

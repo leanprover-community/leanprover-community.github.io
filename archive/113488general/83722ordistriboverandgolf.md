@@ -9,6 +9,8 @@ permalink: archive/113488general/83722ordistriboverandgolf.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 18 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or%20distrib%20over%20and%20golf/near/136067247):
 A student just asked me this:
 
@@ -63,3 +65,5 @@ This isn't exactly golfing it, but I find it really clear for proofs that are me
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or%20distrib%20over%20and%20golf/near/136075871):
 Thanks for all of these -- I believe the student is a learner and is reading the answers so it's great to see the options which are available
 
+
+{% endraw %}

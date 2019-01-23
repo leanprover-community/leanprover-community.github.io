@@ -9,6 +9,8 @@ permalink: archive/113488general/02530convert.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 31 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/convert/near/127339342):
 maybe `convert` can automatically `apply_instance`?
 
@@ -33,3 +35,5 @@ oh, `convert` generates auxiliary goals, some of which are `apply_instance` solv
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 31 2018 at 04:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/convert/near/127341039):
 e.g. `finsupp.sum_zero_index`
 
+
+{% endraw %}

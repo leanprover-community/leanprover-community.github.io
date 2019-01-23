@@ -9,6 +9,8 @@ permalink: archive/113488general/26122unfoldingfromcases.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 28 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20from%20cases/near/148714917):
 ```lean
 def x : ℕ := 1 + 1 + 1 + 1
@@ -35,3 +37,5 @@ example {a} (h : P a) : a = 0 := begin
 end
 ```
 
+
+{% endraw %}

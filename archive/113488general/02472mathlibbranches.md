@@ -9,6 +9,8 @@ permalink: archive/113488general/02472mathlibbranches.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 20 2018 at 03:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20branches/near/128338643):
 What's the plan with branches for `mathlib`? We seem to have gone back and forth between using `master` and using `lean-3.4.1`. I'd just gone to the effort of creating `lean-3.4.1` branches in all my repos, and making them the default, so that `leanpkg upgrade` would successfully pull new changes from `mathlib`, but now it seems we've going back to using `master`.
 
@@ -357,3 +359,5 @@ But I can't think of any situation as a third party developer to want to update 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 20 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20branches/near/128384338):
 i.e. if you say "let's use version X from now on", it should always be the case that X is the current master or nightly at the time of the announcement
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/40788filtersinfinf.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 16 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filters%20inf%20inf/near/128166284):
 @**Johannes Hölzl** I have difficulties setting up my uniform space structure on topological groups. Basically the trouble is the definition involves dependent nested infimum. I tried to mimick the metric space case where you wrote:
 ```lean
@@ -186,3 +188,5 @@ transitivity, i.e. the `uniform_space.comp` rule, is a little bit harder to show
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Jun 17 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filters%20inf%20inf/near/128214772):
 Would you suggest any changes to this? if not I will just add this to mathlib
 
+
+{% endraw %}

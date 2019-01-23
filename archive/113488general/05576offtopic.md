@@ -9,6 +9,8 @@ permalink: archive/113488general/05576offtopic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Feb 26 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/off-topic/near/123008244):
 or you could have an off-topic topic, very meta
 
@@ -139,3 +141,5 @@ You can also choose to view one topic at a time or all topics on a stream (or on
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Feb 26 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/off-topic/near/123013910):
 For now, there's little enough traffic (here and on the gitter) that it probably doesn't make sense to create additional streams, but if, say, the stacks project grows to the point where not all lean users want to see all the discussion about the project, that's when having a separate stream would be useful.
 
+
+{% endraw %}

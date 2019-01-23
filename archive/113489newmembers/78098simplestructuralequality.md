@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/78098simplestructuralequality.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20structural%20equality/near/131121507):
 How would I prove this?
 ```lean
@@ -82,3 +84,5 @@ theorem mystr_eq : ∀ (x y : mystr) (A_eq : x.A = y.A) (B_eq : x.B = y.B), x = 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20structural%20equality/near/131122397):
 I was about to post that term proof but Mario just beat me to it. When I was a beginner I found those sorts of proofs miraculous; that's why I thought it was worth mentioning. The equation compiler is so clever.
 
+
+{% endraw %}

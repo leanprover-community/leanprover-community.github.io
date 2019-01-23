@@ -9,6 +9,8 @@ permalink: archive/113488general/43828Gabrielschallenge.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 02 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Gabriel%27s%20challenge/near/124504672):
 Can you do Gabriel's exercise?
 
@@ -324,3 +326,5 @@ by do exact $
   (expr.const ``unit [])
 ```
 
+
+{% endraw %}

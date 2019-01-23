@@ -9,6 +9,8 @@ permalink: archive/116395maths/79853annoyingproofchallenge.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 01 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698181):
 Is there a nice way to prove this?
 ```lean
@@ -93,3 +95,5 @@ it does `option.no_confusion`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 01 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698763):
 `option.no_confusion` is such a great name for a function. I might get it on a t-shirt.
 
+
+{% endraw %}

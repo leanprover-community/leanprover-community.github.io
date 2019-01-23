@@ -9,6 +9,8 @@ permalink: archive/113488general/47957awholenewerror.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483415):
 ```lean
 invalid pattern, 'choice (frozen_name multiset.cons) (frozen_name list.cons)' is overloaded, and this kind of overloading is not currently supported in patterns
@@ -76,3 +78,5 @@ and I don't have to change the rest
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484613):
 which is again a testimony of the theory of interface
 
+
+{% endraw %}

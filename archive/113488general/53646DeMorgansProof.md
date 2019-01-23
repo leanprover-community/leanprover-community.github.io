@@ -9,6 +9,8 @@ permalink: archive/113488general/53646DeMorgansProof.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Stephanie Wang (Dec 13 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151734970):
 I'm new to Lean, can someone help me out with this proof of this version of De Morgan's Law? I'm having trouble coming up with the forward proof
 ``` 
@@ -126,3 +128,5 @@ theorem demorgans_law'' (p q : Prop): ¬(p ∨ q) ↔ ¬p ∧ ¬q :=
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Stephanie Wang (Dec 13 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151736196):
 Ok this makes a lot of sense to me, thanks so much.
 
+
+{% endraw %}

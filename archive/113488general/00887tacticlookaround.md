@@ -9,6 +9,8 @@ permalink: archive/113488general/00887tacticlookaround.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 06 2018 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20look%20around/near/123344266):
 Assume I write
 ```lean
@@ -61,3 +63,5 @@ Here's what I ended up with: https://github.com/PatrickMassot/lean-differential-
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 07 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20look%20around/near/123376765):
 The Lean developers added `pexpr.mk_structure_instance` after I complained about it but I never got around to using it. I think it's a very nice feature.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/24026Categorytheory.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 01 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/124502143):
 https://github.com/kckennylau/category-theory/blob/master/src/adjunction_examples.lean
 
@@ -1554,3 +1556,5 @@ I am completely snowed under with teaching and reference writing
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ramon Fernandez Mir (Dec 23 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/152438280):
 @**Reid Barton** sorry I just saw this. I was playing with that code a few days ago and I didn't manage to make it work with forget. What is the "C" argument meant to be?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/73586rwunderaunion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 14 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126553772):
 ```lean
 import data.set 
@@ -867,3 +869,5 @@ Because this `{contextual := true}` discussion I'm back to beginner level. Excep
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 17 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126718124):
 And often it works!
 
+
+{% endraw %}

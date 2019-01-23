@@ -9,6 +9,8 @@ permalink: archive/116395maths/53771natpowandring.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 09 2018 at 03:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802027):
 ```lean
 import tactic.ring 
@@ -59,3 +61,5 @@ The `ring` tactic is already very useful but it has bugs
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 09 2018 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127822932):
 How hard would it be to state a theorem about the `ring` tactic, and prove that the implementation is compliant? Then we are sure we won't have bugs. But I guess that the `meta` stuff makes this complicated.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/69142axiomofuniquechoice.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 06 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/axiom%20of%20unique%20choice/near/123358619):
 Can I define a `def unique_choice {α} {P : α → Prop} (s : subsingleton {a // P a}) (e : ∃ a, P a) : {a // P a} := sorry` without using classical choice? Or does Lean’s type theory not allow even this?
 
@@ -254,3 +256,5 @@ I agree! Interestingly, the mathlib definition of basis did not change, but the 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 08 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/axiom%20of%20unique%20choice/near/123439774):
 I will get back to you on all this later (Saturday?). I really like this starring in Zulip; it really helps my workflow.
 
+
+{% endraw %}

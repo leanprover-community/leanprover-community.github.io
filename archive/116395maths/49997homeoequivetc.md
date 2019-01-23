@@ -9,6 +9,8 @@ permalink: archive/116395maths/49997homeoequivetc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 03 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homeo%20equiv%20etc./near/124593811):
 A more specific version of https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/structure.20vs.20class/near/124574243 (it may be easier to understand my problem by looking at code) is https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/support.lean#L188 where I'm clearly very stupidly trying to Lean some trivial lemma. I'm completely tangled in coercions and type classes
 
@@ -860,3 +862,5 @@ It seemed to me that one problem was you had coes from homeo to perm, from perm 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 06 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homeo%20equiv%20etc./near/124714443):
 I've read `erw` does that, but I've never managed to use it.
 
+
+{% endraw %}

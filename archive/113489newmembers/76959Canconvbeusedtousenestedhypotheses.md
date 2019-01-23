@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/76959Canconvbeusedtousenestedhypotheses.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Dec 04 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%20conv%20be%20used%20to%20use%20nested%20hypotheses%3F/near/150884801):
 The situation is as follows: I have a proof of:
 ```lean
@@ -95,3 +97,5 @@ As I wrote, I know this is only experimentation, but I hope it's still useful to
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 05 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%20conv%20be%20used%20to%20use%20nested%20hypotheses%3F/near/150927255):
 Well, it's more honest to point to https://github.com/math-comp/analysis/blob/master/derive.v#L687-L697
 
+
+{% endraw %}

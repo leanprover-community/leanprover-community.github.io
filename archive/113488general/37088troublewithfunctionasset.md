@@ -9,6 +9,8 @@ permalink: archive/113488general/37088troublewithfunctionasset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Marcus Klaas (Dec 02 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trouble%20with%20function%20as%20set/near/150700590):
 Hi! Is this a proper channel for asking (elementary) questions?
 
@@ -111,3 +113,5 @@ Post some working code?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trouble%20with%20function%20as%20set/near/150701615):
 But yes, `rw` needs things to be unravelled explicitly.
 
+
+{% endraw %}

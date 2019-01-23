@@ -9,6 +9,8 @@ permalink: archive/116395maths/42755localisation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 23 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localisation/near/148248534):
 @**Kenny Lau** Did you have a proof somewhere that if you localise a ring at `S`, then `S` maps to `units` of the localisation?
 
@@ -60,3 +62,5 @@ Anyway, @**Kenny Lau** it's cool that this is coming to mathlib in some near fut
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 23 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localisation/near/148249209):
 I vote for reviewing that PR! And also the #where PR
 
+
+{% endraw %}

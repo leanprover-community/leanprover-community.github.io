@@ -9,6 +9,8 @@ permalink: archive/113488general/06120tactictoexpr.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Dec 11 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151462345):
 How can I get `tactic.to_expr` to not apply metavariables to implicit arguments? That is;
 ``` lean
@@ -41,3 +43,5 @@ run_cmd do
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Dec 11 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151470588):
 Yeah, that's better here, although I guess it depends on the real context.
 
+
+{% endraw %}

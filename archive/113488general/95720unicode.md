@@ -9,6 +9,8 @@ permalink: archive/113488general/95720unicode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unicode/near/124443168):
 Does every symbol have a non-unicode equivalent?
 
@@ -22,3 +24,5 @@ theorem «a strange-identifier!» : true := trivial
 ```
 the double french quotes escape everything, and have no non-unicode equivalent
 
+
+{% endraw %}

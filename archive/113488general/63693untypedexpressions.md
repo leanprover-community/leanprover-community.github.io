@@ -9,6 +9,8 @@ permalink: archive/113488general/63693untypedexpressions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Apr 19 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/untyped%20expressions/near/125308427):
 When referring to local constants it's pretty annoying that I have to give the type every time. Can't I used leave the type unelaborated until the local constant is abstracted away anyway?
 
@@ -27,3 +29,5 @@ Well, so I just use `(Type)?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 19 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/untyped%20expressions/near/125308733):
 yeah
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/14638Basicquestions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Charles Rezk (Oct 18 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Basic%20questions/near/136010459):
 How would I go about proving things about functions between sets, especially finite sets?  I see some machinery for sets (really, "subsets" of a given type), but nothing about functions between them.  On the other hand, I can certainly have functions between types, but I don't see a convenient way to produce a particular "finite type".
 
@@ -325,3 +327,5 @@ The writers of TPIL probably fit the bill:
 
 https://leanprover.github.io/theorem_proving_in_lean/type_classes.html#decidable-propositions
 
+
+{% endraw %}

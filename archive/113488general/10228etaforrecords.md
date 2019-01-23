@@ -9,6 +9,8 @@ permalink: archive/113488general/10228etaforrecords.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 09 2019 at 08:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20records/near/154705125):
 (:warning: I'm a mathematician who is about to use some terminology he doesn't understand.)
 What are the pros and cons of eta for records? Why does Lean not have eta for records?
@@ -28,3 +30,5 @@ example (C) [𝓒 : category C] := opposite (opposite 𝓒) = 𝓒 := rfl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jan 09 2019 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20records/near/154707306):
 Agda has (opt-out) eta for inductive, non-recursive records. Which at least terminates, but may still slow down unification.
 
+
+{% endraw %}

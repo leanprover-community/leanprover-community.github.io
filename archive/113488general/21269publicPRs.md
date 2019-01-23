@@ -9,6 +9,8 @@ permalink: archive/113488general/21269publicPRs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/public%20PRs/near/131008853):
 I'd like to introduce a slight change in PR management on mathlib. In order to support third party contribution to PRs, I would like to introduce "PR branches" to mathlib. The basic idea is, if there is a PR that is currently in review, for which you are not the author, and you would like to help get it into mathlib, just ask to have it made public on the PR page, and I will add it as a branch on the mathlib repo. This way, if a PR is stalled, you can get it back on track. I think this will make collaboration on WIPs easier, although it will probably confuse GitHub a bit, because of the way PR pages are set up. If you PR to a PR branch, make sure to reference the original PR # so that we can navigate between them through GitHub.
 
@@ -715,3 +717,5 @@ Ok. That's good to know. I'll be offline again for a couple of days, and I still
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 18 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/public%20PRs/near/132358263):
 and I will be traveling this weekend and in germany next week, not sure how much free time there will be
 
+
+{% endraw %}

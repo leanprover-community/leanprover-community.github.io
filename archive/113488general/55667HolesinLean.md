@@ -9,6 +9,8 @@ permalink: archive/113488general/55667HolesinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Stevens (May 29 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Holes%20in%20Lean/near/127223244):
 Last noob question of the night from me: "holes" in Lean are not the same thing as holes in Agda, right? Agda lets you use the question mark symbol to create what they call a "hole", which is a subgoal; the prover can take a guess at how to fill if you ask it. I found http://leodemoura.github.io/files/lean_cade25.pdf which suggests that the underscore should do something similar in Lean, but my feeble attempts with the underscore and with curly braces don't seem to replicate what Agda does.
 
@@ -45,3 +47,5 @@ I'm not sure why it needs a special syntax, I'm not too familiar with holes. The
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 30 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Holes%20in%20Lean/near/127278347):
 I see holes all the time in tactic mode. I try and make my tactic proof run at all times, and fill the holes with sorry, and then sometimes remove one and just look at the output to see what I have to fill. It's so much easier in tactic mode which is why I use tactic mode for anything non-trivial basically
 
+
+{% endraw %}

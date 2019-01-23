@@ -9,6 +9,8 @@ permalink: archive/116395maths/77646Workingwithfinnandite.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Working%20with%20%60fin%20n%60%20%28and%20%60ite%60%3F%29/near/126534552):
 How should I do this:
 ```lean
@@ -136,3 +138,5 @@ Re: `fin`, I did a lot of index work like this in `dioph`, using `fin2` for conv
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Working%20with%20%60fin%20n%60%20%28and%20%60ite%60%3F%29/near/126552700):
 Thanks!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/17893Notexpectedbehaviorusingnormnum.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bruno Bentzen (Dec 21 2018 at 03:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Not%20expected%20behavior%20using%20norm_num/near/152302446):
 Hi everyone,
 
@@ -53,3 +55,5 @@ Thanks! I'm fixing the build, I think it should work now.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bruno Bentzen (Dec 21 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Not%20expected%20behavior%20using%20norm_num/near/152304585):
 It works now. Thanks, Bryan and Mario!
 
+
+{% endraw %}

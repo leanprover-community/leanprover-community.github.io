@@ -9,6 +9,8 @@ permalink: archive/116395maths/47427M1M1MathematicalMethodsinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 13 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%28M1M1%29%20Mathematical%20Methods%20in%20Lean/near/135729301):
 The joint maths and computer science students at Imperial College London are doing four courses this term. One on Haskell, one on logic, my course M1F, and a course called M1M1, which is a mathematical methods course, where the derivative of sin is cos just like it was at school and nobody really bothers with why that's true.
 
@@ -138,3 +140,5 @@ I think at this point we all know that it's pointless to keep saying that so and
 ```
 Just adding to this thread that to a 1st year maths undergraduate it is "obvious" that the derivative of $$\sin(x)$$ is $$\cos(x)$$ (because they "learnt it at school") and I think that having this in Lean would be a very natural goal. It will be interesting to see if our new cohort of freshers were up to the task.
 
+
+{% endraw %}

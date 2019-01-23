@@ -9,6 +9,8 @@ permalink: archive/113488general/34354tacticexprininteractivemode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130780443):
 Say I have a `tactic expr`. If I'm in interactive mode, how do I invoke it and assign the result to a named hypothesis?
 
@@ -76,3 +78,5 @@ Thanks, that works. Still struggling with my bigger problem, but that was helpfu
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 03 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130821219):
 Let us know what the bigger problem is. I'll have a look when I wake up
 
+
+{% endraw %}

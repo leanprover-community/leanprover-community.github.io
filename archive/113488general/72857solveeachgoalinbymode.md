@@ -9,6 +9,8 @@ permalink: archive/113488general/72857solveeachgoalinbymode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 19 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125302926):
 In `by` mode, i.e. `by xxx; yyy; zzz`, is there a way to not apply the tactics to every goal?
 
@@ -52,3 +54,5 @@ If you have to represent complicated control flow, you probably shouldn't be usi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 19 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125303150):
 at some point it's saving lines by just deleting newlines
 
+
+{% endraw %}

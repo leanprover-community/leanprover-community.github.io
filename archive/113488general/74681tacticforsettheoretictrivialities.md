@@ -9,6 +9,8 @@ permalink: archive/113488general/74681tacticforsettheoretictrivialities.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 21 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866089):
 I am beginning to tire of goals of the form `Ua ∩ Ub ∩ Uc ⊆ Ua ∩ Ub ∩ (Ua ∩ Uc)`
 
@@ -183,3 +185,5 @@ Anyway, we live and learn, and I've certainly learnt something over the last cou
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 21 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126867301):
 ~~Leaner~~Lea(r)ner
 
+
+{% endraw %}

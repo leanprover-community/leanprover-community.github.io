@@ -9,6 +9,8 @@ permalink: archive/113488general/58529prettyprintingunderscores.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 27 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148406464):
 Is there a good way to pretty print expressions, so metavariables get replaced by `_` characters?
 
@@ -52,3 +54,5 @@ Resist the temptation to use `string.iterator`s
 I thought they were the future (they are VM implemented), and changed the `expr` deserialiser to use them
 About a 5% slowdown
 
+
+{% endraw %}

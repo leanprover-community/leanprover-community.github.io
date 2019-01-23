@@ -9,6 +9,8 @@ permalink: archive/113488general/03982Universeissues.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 06 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Universe%20issues/near/124734232):
 I seem to not understand universes properly, or more precisely how to use them properly. I ran into the following issue with some code:
 
@@ -443,3 +445,5 @@ No, not at all.  It is the only possible choice, the elaborator just can't figur
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jun 01 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Universe%20issues/near/127407052):
 (The universe parameter `.{u}` is always there, whether you write it explicitly or not.)
 
+
+{% endraw %}

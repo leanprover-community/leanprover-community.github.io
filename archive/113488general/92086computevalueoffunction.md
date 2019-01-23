@@ -9,6 +9,8 @@ permalink: archive/113488general/92086computevalueoffunction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) jmc (Mar 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932056):
 Hi. Lean-newbie here. I've got a function f : \N \to \Z with a pretty involved definition. I would like to see what Lean thinks that the value of f is on 0,1,2,3 for example.
 My current approach has been:
@@ -120,3 +122,5 @@ Anyway, the function in question is the Ramanujan tau function (https://en.wikip
 Already `#reduce \tau 2` is extremely slow for my implementation.
 But `#eval \tau 4` is pretty fast. And the first 5 values are correct (^;
 
+
+{% endraw %}

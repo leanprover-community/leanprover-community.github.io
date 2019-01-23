@@ -9,6 +9,8 @@ permalink: archive/116395maths/92196refactorfunctornotation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 17 2019 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/refactor%20functor%20notation/near/155354489):
 Has anyone started the big functor notation search and replace?
 
@@ -27,3 +29,5 @@ I'm not too concerned. I'd prefer a tiny bit that we don't use local notations i
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jan 19 2019 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/refactor%20functor%20notation/near/156411255):
 I don't particularly mind the current functor arrow.
 
+
+{% endraw %}

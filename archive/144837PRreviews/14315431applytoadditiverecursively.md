@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/14315431applytoadditiverecursively.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 30 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23431%20apply%20%60to_additive%60%20recursively/near/148869284):
 @**Simon Hudon** Somehow I missed this PR, but it looks awesome! Kudos :octopus: :tada: 
 Too bad that Travis is saying that there is some error:
@@ -36,3 +38,5 @@ but is expected to have type
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 30 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23431%20apply%20%60to_additive%60%20recursively/near/148869890):
 Thanks :) I have put it on hold for now. There was a strange rabbit hole right in the model. I'll see if I can get back to it next time I need to procrastinate
 
+
+{% endraw %}

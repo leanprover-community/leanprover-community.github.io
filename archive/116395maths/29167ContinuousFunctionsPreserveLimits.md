@@ -9,6 +9,8 @@ permalink: archive/116395maths/29167ContinuousFunctionsPreserveLimits.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rohan Mitta (Sep 26 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Continuous%20Functions%20Preserve%20Limits/near/134671259):
 Is this in mathlib (or anything like this)? 
 
@@ -213,3 +215,5 @@ Okay whoops, I've saved and pushed again. Hopefully its all there now?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 26 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Continuous%20Functions%20Preserve%20Limits/near/134684774):
 Congratulations Rohan!
 
+
+{% endraw %}

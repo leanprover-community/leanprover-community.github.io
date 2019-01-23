@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/05825ordersonproducts.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 08 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/orders%20on%20products/near/151190056):
 I want definitions like
 ```lean
@@ -74,3 +76,5 @@ I thought it might work out of the box. But no.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 08 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/orders%20on%20products/near/151194686):
 Maybe the reason it's not an instance is that some people might want to use lex order in some cases
 
+
+{% endraw %}

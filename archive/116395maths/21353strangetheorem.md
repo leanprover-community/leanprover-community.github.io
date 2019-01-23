@@ -9,6 +9,8 @@ permalink: archive/116395maths/21353strangetheorem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20theorem/near/125808366):
 ```lean
 α : Type u,
@@ -33,3 +35,5 @@ I was going to say, I'm pretty sure *I* can prove it, since I can use LEM :simpl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20theorem/near/125808418):
 :D
 
+
+{% endraw %}

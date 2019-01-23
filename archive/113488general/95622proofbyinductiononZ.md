@@ -9,6 +9,8 @@ permalink: archive/113488general/95622proofbyinductiononZ.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 09 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20by%20induction%20on%20Z/near/151232278):
 Why is a thing like this not possible?
 ```lean
@@ -111,3 +113,5 @@ using_well_founded
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 09 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20by%20induction%20on%20Z/near/151233113):
 I understand why you suggest the other strategy...
 
+
+{% endraw %}

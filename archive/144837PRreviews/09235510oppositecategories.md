@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/09235510oppositecategories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 20 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23510%20opposite%20categories/near/152239436):
 @**Scott Morrison|110087** I saw you fixed some stuff, but Travis is still complaining... If you don't have time for this, just let me know, and I'll try to take a look.
 
@@ -99,3 +101,5 @@ I would also be willing to try just using a structure
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 22 2019 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23510%20opposite%20categories/near/156606540):
 In fact, maybe we can even reuse https://github.com/leanprover/mathlib/pull/538?
 
+
+{% endraw %}

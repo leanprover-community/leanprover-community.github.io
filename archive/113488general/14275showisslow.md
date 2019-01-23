@@ -9,6 +9,8 @@ permalink: archive/113488general/14275showisslow.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888169):
 ```lean
 import data.real.basic 
@@ -393,3 +395,5 @@ You can prove that the real 3 is the coercion of the integer 3 using simp as wel
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130898142):
 I don't think `rfl` wins over `simp` here even in the "good" case, at least not if your numbers are moderately large. Calculating `4 : real` directly requires a number of gcd calculations, which are slow
 
+
+{% endraw %}

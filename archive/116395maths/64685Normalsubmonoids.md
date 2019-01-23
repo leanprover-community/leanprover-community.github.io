@@ -9,6 +9,8 @@ permalink: archive/116395maths/64685Normalsubmonoids.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 10 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Normal%20submonoids/near/131229964):
 Are these a thing? The natural definition of normal subgroup extends to the monoid case as `a + b \in S -> b + a \in S`
 
@@ -91,3 +93,5 @@ Hi @**Andreas Swerdlow** Additive subgroups have just been put into mathlib: htt
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andreas Swerdlow (Aug 13 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Normal%20submonoids/near/132038273):
 @**Scott Morrison** @**Johan Commelin**  thanks for the help. I've rewritten the subfield part, so that it builds off of what Johan wrote for subrings, and created a fork of leanprover-community/mathlib with both Johan's subring file in ring_theory/subring.lean and the subfield stuff in field_theory/subfield.lean. The fork is here: https://github.com/amswerdlow/mathlib. Any suggestions are welcome before I PR
 
+
+{% endraw %}

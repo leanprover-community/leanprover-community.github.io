@@ -9,6 +9,8 @@ permalink: archive/113488general/42366howtoproveavectorspace.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Aug 13 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20prove%20a%20vector%20space/near/132037240):
 I want to prove `vector_space F (has_space n F)`and I have proved `module F (has_space n F)`
 ```
@@ -32,3 +34,5 @@ https://github.com/leanprover/mathlib/blob/7dc1f5d2dbda9dd412bb58636f4261bb259ad
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20prove%20a%20vector%20space/near/132038599):
 `has_space F n` is the finite-dimensional vector space F^n. What is a better name for this function?
 
+
+{% endraw %}

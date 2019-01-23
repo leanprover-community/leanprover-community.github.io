@@ -9,6 +9,8 @@ permalink: archive/113488general/87225finiteness.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 04 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finiteness/near/124610398):
 Do mathlib have something that behaves like:
 ````
@@ -56,3 +58,5 @@ your `Finite` should be equivalent to the conjunction of `fintype` and `decidabl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 04 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finiteness/near/124611585):
 ah, okay.
 
+
+{% endraw %}

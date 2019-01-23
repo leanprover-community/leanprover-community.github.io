@@ -9,6 +9,8 @@ permalink: archive/113488general/73070isomorphisms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 19 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphisms/near/152166179):
 If I want to define `ring_equiv` and `group_equiv` and etc (I don't have any more examples at the moment), where should I put them?
 
@@ -37,3 +39,5 @@ https://github.com/leanprover-community/mathlib/pull/12
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andreas Swerdlow (Dec 19 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphisms/near/152202430):
 Is it worth adding the "lemmas" about ring_equiv from https://github.com/leanprover-community/mathlib/blob/inner_product_spaces/ring_theory/ring_hom_isom_invo.lean into your PR?
 
+
+{% endraw %}

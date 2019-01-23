@@ -9,6 +9,8 @@ permalink: archive/116395maths/96209canonicalringhomfrominttoR.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 23 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130132971):
 Does the canonical ring homomorphism from `int` to a ring `R` already have a name in Lean?
 
@@ -57,3 +59,5 @@ I used it extensively over the weekend in the middle of code just to make sure t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 23 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130137155):
 Just debugging lines which I'd delete after, checking my quotient group instances were working
 
+
+{% endraw %}

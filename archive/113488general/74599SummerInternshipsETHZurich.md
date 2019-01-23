@@ -9,6 +9,8 @@ permalink: archive/113488general/74599SummerInternshipsETHZurich.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Nov 24 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Summer%20Internships%20ETH%20Zurich/near/148276335):
 Dear students,
 
@@ -68,3 +70,5 @@ This specific program is our flagship program to attract young students. It is a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Nov 24 2018 at 16:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Summer%20Internships%20ETH%20Zurich/near/148281176):
 Thanks for reaching out.
 
+
+{% endraw %}

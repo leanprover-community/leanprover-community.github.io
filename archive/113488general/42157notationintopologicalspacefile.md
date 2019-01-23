@@ -9,6 +9,8 @@ permalink: archive/113488general/42157notationintopologicalspacefile.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 12 2018 at 19:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20in%20topological%20space%20file/near/123620935):
 In `analysis/topology/topological_space.lean` we have s and t being used for more than one thing. Even in the definition of a topological space we have
 ```
@@ -31,3 +33,5 @@ I believe there is a similar convention of changing font registers in standard m
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 12 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20in%20topological%20space%20file/near/123621093):
 I usually reserve `I` or `ι` for the index set of a type/set family, say if I was discussing the indexed union instead of the set union
 
+
+{% endraw %}

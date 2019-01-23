@@ -9,6 +9,8 @@ permalink: archive/113488general/97444naminghelp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 24 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20help/near/130194006):
 What names would you give these definitions?
 
@@ -28,3 +30,5 @@ The first says a `sigma β` should be considered a function: equal arguments (`f
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 24 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20help/near/130194091):
 The second says that a function on `sigma`s preserves (injective) equality on the `fst`s.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/19335module.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 23 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module/near/148227117):
 @**Mario Carneiro** Shouldn't this be flipped, for consistency with `comp` and `llcomp`?
 ```lean
@@ -57,3 +59,5 @@ So, may I then complain that the name is slightly confusing?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 23 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module/near/148241025):
 @**Mario Carneiro** I couldn't find where the zero linear map is defined, but apparently it is somewhere. However `⇑0 m` doesn't `simp` to `0`. Where should I add this simp rule?
 
+
+{% endraw %}

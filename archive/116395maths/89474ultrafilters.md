@@ -9,6 +9,8 @@ permalink: archive/116395maths/89474ultrafilters.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ultrafilters/near/136077666):
 I want to define the ultrafilter monad. I suppose this means I need a bundled type: filter plus the ultrafilter property. (Currently, we have `ultrafilter : Π {α : Type u}, filter α → Prop`.) Thoughts on naming?
 
@@ -33,3 +35,5 @@ renaming `ultrafilter` to `is_ultrafilter` is fine for me.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 19 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ultrafilters/near/136094337):
 Alternatively, you could have called it `Ultrafilter`...
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/44470SoftwareFoundations.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 01 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Software%20Foundations/near/125958987):
 @**Kevin Buzzard** I think a while back you were looking at Software Foundations using Lean. Did you write anything up?
 
@@ -214,3 +216,5 @@ It's definitely easier to use the equation compiler, though. :simple_smile:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Jul 03 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Software%20Foundations/near/129020861):
 I should definitely learn to use the equation compiler, thanks guys!
 
+
+{% endraw %}

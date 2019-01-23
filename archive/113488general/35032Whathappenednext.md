@@ -9,6 +9,8 @@ permalink: archive/113488general/35032Whathappenednext.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 04 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124638598):
 ```
 example (d : ℕ) (H : 1  =  2  * nat.succ d) : 1  =  2  * d +  2  :=
@@ -51,3 +53,5 @@ So the goal becomes
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 04 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124640345):
 but that's because `2` isn't defined to be `succ 1` here, it's defined to be `bit0 1`
 
+
+{% endraw %}

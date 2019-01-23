@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/99121natinequalities.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 25 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20inequalities/near/134592941):
 What is the most efficient way to solve situations like this? I get a bit lost in all the details of lt, le, negations, and symmetries...
 
@@ -143,3 +145,5 @@ I see, i think it gave me the branch named lean-3.4.1 instead of master
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 25 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20inequalities/near/134619039):
 Does `linarith` work for your kind of inequality?
 
+
+{% endraw %}

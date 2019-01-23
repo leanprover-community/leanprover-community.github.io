@@ -9,6 +9,8 @@ permalink: archive/113488general/90648masterbranchisbroken.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 07 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340328):
 Ugh, `master` is broken in mathlib.
 
@@ -47,3 +49,5 @@ eh, can you PR it? It takes me an hour to move to and from `module` branch
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 07 2018 at 08:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340729):
 Here you go: https://github.com/leanprover/mathlib/pull/398
 
+
+{% endraw %}

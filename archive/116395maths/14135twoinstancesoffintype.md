@@ -9,6 +9,8 @@ permalink: archive/116395maths/14135twoinstancesoffintype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Casper Putz (Jan 18 2019 at 13:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/two%20instances%20of%20fintype/near/156362890):
 Hi, I have the following code where I explicitely constructed an equivalence between two types ``α`` and ``β → γ``, and all types are fintypes. I want to conclude that ``α.card = γ.card ^ β.card`` but I have a problem with instances. I would like to something like this:
 
@@ -40,3 +42,5 @@ calc card α = @card (β → γ) (of_equiv α f) : eq.symm $ of_equiv_card f
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Casper Putz (Jan 18 2019 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/two%20instances%20of%20fintype/near/156363562):
 Yes! I also needed ``[decidable_eq β]``, but then it worked :). Thanks!
 
+
+{% endraw %}

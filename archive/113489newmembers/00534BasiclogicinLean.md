@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/00534BasiclogicinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20logic%20in%20Lean./near/135404145):
 There has been some discussion about Q4 of my first M1F example sheet. The question and my solution are [here](https://github.com/kbuzzard/xena/tree/master/M1F/problem_bank/PB0104) . My solution from this time last year is [here](https://github.com/kbuzzard/xena/blob/a61d6db673ae8ab2672cbf6522894f743b08a6e6/M1F/2017-18/Example_Sheet_01/Questions_02_to_4/M1F_sheet01_solutions02_to_04.lean#L60) and is completely different. @**Chris Hughes** and @**Kenny Lau**  -- did you ever attempt to do M1F sheet 1 Q4 in Lean this time last year?
 
@@ -114,3 +116,5 @@ If you run `touch a b c d`, then `touch` will assign the same timestamp to all f
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 09 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20logic%20in%20Lean./near/135481231):
 Oh that's pretty cool. I had just assumed it was running the command on each successful find.
 
+
+{% endraw %}

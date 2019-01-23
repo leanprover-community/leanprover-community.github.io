@@ -9,6 +9,8 @@ permalink: archive/113488general/65968LeostalkinOxford.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 07 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Leo%27s%20talk%20in%20Oxford/near/129228419):
 https://easychair.org/smart-program/FLoC2018/FM-2018-07-16.html
 
@@ -209,3 +211,5 @@ Another Lean4 change, important for writing tactics: Leo told me that the `local
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 16 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Leo%27s%20talk%20in%20Oxford/near/129749982):
 that's probably a good thing, currently the type attached to a `local_const` is wrong half the time anyway so you have to use the local context
 
+
+{% endraw %}

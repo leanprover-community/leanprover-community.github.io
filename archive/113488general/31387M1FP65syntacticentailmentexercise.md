@@ -9,6 +9,8 @@ permalink: archive/113488general/31387M1FP65syntacticentailmentexercise.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 22 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28M1F/P65%29%20syntactic%20entailment%20exercise/near/136257251):
 At Imperial in the 3rd year logic course M3P65 they're doing first order propositional logic, soundness and completeness etc. In a guest M1F lecture (my course) John Britnell went through some of this stuff with the first years, and the last question on his problem sheet was a real stinker. @**Abhimanyu Pallavi Sudhir** [asked about it on math SE](https://math.stackexchange.com/questions/2962525/derive-simple-logical-laws-in-a-structure-with-not-and-implies) and got what looks like a couple of nice answers. I'd like the stufents to check those answers in Lean but I'd like to make it as easy as possible for them, by setting up the underlying infrastructure, so they have easy access to the axioms, and only the axioms. 
 
@@ -840,3 +842,5 @@ The Lucasiewicz axioms seem to be pretty popular for hilbert style axiomatizatio
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 24 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28M1F/P65%29%20syntactic%20entailment%20exercise/near/136429705):
 Metamath has `mp` the way you stated it, but it also has no notion of partial application. You will notice I make use of partially applied `mp'` a few times
 
+
+{% endraw %}

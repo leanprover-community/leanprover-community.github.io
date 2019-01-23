@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/26709cardinality.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Huyen Chau Nguyen (Jun 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cardinality/near/128461029):
 Hey guys, I want to ask about the cardinality of sets. I'm totally newbie to Lean so the questions might be trivial and silly. Still, I need your help. 
 
@@ -18,3 +20,5 @@ Thank you for your responses.
 
 P.S.: I'm from Vn so please excuse-me for my English too.
 
+
+{% endraw %}

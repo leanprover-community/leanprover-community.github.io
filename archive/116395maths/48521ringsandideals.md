@@ -9,6 +9,8 @@ permalink: archive/116395maths/48521ringsandideals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 21 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/rings%20and%20ideals/near/130050846):
 @**Kenny Lau** and @**Chris Hughes** with the recent merge of [PR196](https://github.com/leanprover/mathlib/pull/196) how does current mathlib compare to [Lean 2 lib](https://github.com/leanprover/lean2/blob/master/library/theories/commutative_algebra/ideal.lean)?
 
@@ -36,3 +38,5 @@ It can be helpful to change the statement the way you need it, if it is going to
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/rings%20and%20ideals/near/130064346):
 I have said before that the most important thing about many of the early files is the statements, not the proofs
 
+
+{% endraw %}

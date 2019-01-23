@@ -9,6 +9,8 @@ permalink: archive/113488general/37571Simplequestionaboutonlinetutorialexample.h
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) M. Andrew Moshier (May 20 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simple%20question%20about%20online%20tutorial%20example/near/126819103):
 The following from the online Lean tutorial (Lean 2) doesn't work as is in Lean 3. I figured out that I needed to change underscores in the tutorial into inaccessibles in the mutual theorem. Fine. But I still don't see how to prove `not_odd_zero`.
 
@@ -47,3 +49,5 @@ theorem odd_of_even_succ : ∀ n, even (n + 1) → odd n
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) M. Andrew Moshier (May 20 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simple%20question%20about%20online%20tutorial%20example/near/126836719):
 I know it doesn't need to be mutual. This is lifted as is (except the change to inaccessibles) from the tutorial. My vscode is using 3.2.x; Emacs is using 3.4.x.  I'll fix that. Thanks.
 
+
+{% endraw %}

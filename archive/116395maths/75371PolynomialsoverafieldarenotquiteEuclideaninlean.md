@@ -9,6 +9,8 @@ permalink: archive/116395maths/75371PolynomialsoverafieldarenotquiteEuclideaninl
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 28 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Polynomials%20over%20a%20field%20are%20not%20quite%20Euclidean%20in%20lean/near/127196752):
 I've been trying to prove polynomials over a field are a Euclidean domain. The only trouble is, they do not meet the axioms if I use degree as valuation since for two constant polynomials, degree (a % b) =  degree b. Does anyone have experience doing this in any other theorem prover and can recommend a sensible solution. The most obvious is to define`new_degree 0 = 0`, and `new_degree p = degree p + 1` for `p ≠ 0`. Is this the best option?
 
@@ -88,3 +90,5 @@ Where is this class defined? I definitely prefer the idea of option nat over 2^d
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 28 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Polynomials%20over%20a%20field%20are%20not%20quite%20Euclidean%20in%20lean/near/127218435):
 `with_bot` is in `lattice.bounded_lattice`, `with_zero` is in `algebra.group`. Basically it should already be available if you have the basic mathlib lemmas
 
+
+{% endraw %}

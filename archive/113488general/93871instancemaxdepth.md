@@ -9,6 +9,8 @@ permalink: archive/113488general/93871instancemaxdepth.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 10 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance_max_depth/near/147440040):
 I am really proud of me :) Just encountered the famous message `maximum class-instance resolution depth has been reached`. And indeed it worked by increasing it to 38. I can't really figure out why, however, since this looks like a trivial instance to me:
 ```lean
@@ -83,3 +85,5 @@ https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/maximum.2
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 11 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance_max_depth/near/147469609):
 This is not a MWE as the facts that a sum and a product of compact spaces are compact is not in mathlib (yet). I tried to cook up a MWE with just these instances, but then the instance_max_depth is not reached when I deal with the above example of `(α ⊕ β) × (α ⊕ β)` . I guess the problem comes from more clutter in my files...
 
+
+{% endraw %}

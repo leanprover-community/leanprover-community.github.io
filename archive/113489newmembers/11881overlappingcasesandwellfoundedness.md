@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/11881overlappingcasesandwellfoundedness.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mark Dickinson (Oct 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136220983):
 I'm trying to define a simple `ℕ → ℕ → ℕ` function using well-founded recursion. At top-level, I'm splitting on cases, and those cases overlap:
 
@@ -41,3 +43,5 @@ def isqrt_inner : ℕ → ℕ → ℕ
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mark Dickinson (Oct 21 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136221244):
 Beautiful! Thank you.
 
+
+{% endraw %}

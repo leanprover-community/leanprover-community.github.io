@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/27988reasoningaboutemptysetinlean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Marcus Klaas (Dec 02 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729616):
 Hi y'all. Sorry to bother again. I'm having trouble working with the empty set. Specifically, I'd like to prove that a set is not empty whenever I can produce a concrete element of it:
 ```lean
@@ -65,3 +67,5 @@ basically by adding what Kevin just wrote as a `relfexivity` lemma
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729838):
 @**Marcus Klaas** mathlib is great. It's not just for mathematicians. It has a bunch of useful tactics in, and a whole host of useful data structures. If you work with Lean projects (as I do -- all my files, even scratch files, are within a Lean project) then you can just make mathlib a dependency for that project and then `leanpkg upgrade` will download mathlib.
 
+
+{% endraw %}

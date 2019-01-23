@@ -9,6 +9,8 @@ permalink: archive/113488general/68176unfoldingissue.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 22 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20issue/near/126947033):
 `(presheaf_of_types_pullback_under_open_immersion {F := F, res := res, Hid := Hid, Hcomp := Hcomp} id _).res`
 
@@ -148,3 +150,5 @@ proof is refl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (May 23 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20issue/near/126955573):
 it seems you discover cool new things daily! perhaps you can include a mathematician's tips and tricks section in the textbook you want to write this summer
 
+
+{% endraw %}

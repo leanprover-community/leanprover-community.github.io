@@ -9,6 +9,8 @@ permalink: archive/113488general/03149inconsistencyoftheoremnaming.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 27 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inconsistency%20of%20theorem%20naming/near/130393117):
 ```lean
 #check list.index_of_nth_le _
@@ -34,3 +36,5 @@ in the last example, the actual order in the statement is the same as the order 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 27 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inconsistency%20of%20theorem%20naming/near/130393173):
 but in the first two examples, the order is swapped
 
+
+{% endraw %}

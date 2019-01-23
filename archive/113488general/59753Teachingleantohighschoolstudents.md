@@ -9,6 +9,8 @@ permalink: archive/113488general/59753Teachingleantohighschoolstudents.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Jul 12 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Teaching%20lean%20to%20high%20school%20students/near/129529806):
 Hey guys, I'll be talking about lean to a bunch of smart high school kids (BMO/ BIO type of crowd, they can program in python and write down "normal" maths proofs at a high school level).
 
@@ -302,3 +304,5 @@ Yes, when we re-run the lean workshop next year, I'll fix it all up, but for now
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joseph Corneli (Aug 16 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Teaching%20lean%20to%20high%20school%20students/near/132229450):
 Sounds like a great initiative!  I wonder if there's anything at all similar here in Edinburgh, or with my colleagues in Dundee.  I'll ask around.  Also will PM you about Friday afternoon!
 
+
+{% endraw %}

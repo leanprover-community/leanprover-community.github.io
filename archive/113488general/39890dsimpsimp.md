@@ -9,6 +9,8 @@ permalink: archive/113488general/39890dsimpsimp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 03 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%3B%20simp/near/137130133):
 I think I set a new personal record:
 `by dsimp [is_limit.equiv, adjunction.cone_equivalence]; simp; dsimp; simp`
@@ -28,3 +30,5 @@ instead of saying that Lean is not ready for it
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 03 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%3B%20simp/near/137131315):
 Absolutely, I agree it should be expanded massively.
 
+
+{% endraw %}

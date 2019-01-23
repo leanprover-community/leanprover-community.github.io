@@ -9,6 +9,8 @@ permalink: archive/113488general/69128canmetadef.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 05 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20meta%20%60def%60%3F/near/133394258):
 Can you have meta code that writes definitions and lemmas for you? Probably yes, and this is how things like `to_additive` work. Is that right?
 
@@ -110,3 +112,5 @@ the function itself: `f : A -> B` and a proof `forall a : A, p a -> q (f b)`. Th
 
 My idea for a lift function would be: get typing information (which includes the information for which types the representation should change) and the term to lift. Then it puts `lift` or `cases` around the term to translate into the other type. All further proofs are left as subgoals to the user. Finally it produces the constant itself, and a rewrite rule which adds coercions etc at all places necessary to remove all lift constants.
 
+
+{% endraw %}

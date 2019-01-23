@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/20471Topicsessions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 04 2019 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Topic%20sessions/near/154426066):
 Maybe we could already gather extra suggestions for the topic sessions on Thursday and Friday. I have one: the end of Patrick's talk :stuck_out_tongue_wink:
 
@@ -48,3 +50,5 @@ I'm fine with using the beginning of the Lean 4 discussion slot (first slot on T
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Cyril Cohen (Jan 09 2019 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Topic%20sessions/near/154714998):
 @**Sebastian Ullrich** great!
 
+
+{% endraw %}

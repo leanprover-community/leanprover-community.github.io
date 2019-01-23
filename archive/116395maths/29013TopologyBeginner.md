@@ -9,6 +9,8 @@ permalink: archive/116395maths/29013TopologyBeginner.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Luca Gerolla (Jul 05 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20-%20Beginner/near/129159440):
 Hello, I am a beginner and I am trying to define a path (in particular a path from `x` to `y` on a topological space).
 I am sorry for the (temporary) maths notation of topological spaces and definitions.
@@ -627,3 +629,5 @@ Thank you very much, `is_closed_le' ` and  `is_closed_ge'  allowed me to prove [
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Luca Gerolla (Jul 27 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20-%20Beginner/near/130415717):
 `is_closed_Icc ` would have made it even quicker! (should have updated my mathlib to notice it!)  :)
 
+
+{% endraw %}

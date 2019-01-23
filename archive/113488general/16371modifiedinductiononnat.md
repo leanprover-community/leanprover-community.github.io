@@ -9,6 +9,8 @@ permalink: archive/113488general/16371modifiedinductiononnat.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147917777):
 I am doing the homework I set my students. I seem to often want "induction on n >= 1" and in this question I even want "induction starting at n = 2". I have a family of propositions `P n` for `n : nat`, which are true for n >= 2 (and this can be proved by induction on n>=2), and I also have the hypothesis `Hn2 : n >= 2`. Currently (in tactic mode) I write
 
@@ -163,3 +165,5 @@ I don't think you can do it using the equation compiler
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Dec 01 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/150689522):
 Yes, I have probably to use `nat.rec_on`, but this looks really arcane.
 
+
+{% endraw %}

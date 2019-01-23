@@ -9,6 +9,8 @@ permalink: archive/113488general/01593giveevalmoretime.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 09 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/give%20%23eval%20more%20time/near/133615259):
 Is there a way to give `#eval` more time before a deterministic timeout?
 
@@ -49,3 +51,5 @@ Thanks. I have now managed to compute that my proof of quadratic reciprocity use
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 09 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/give%20%23eval%20more%20time/near/133617608):
 That's cool! Have you posted the script for doing that somewhere?
 
+
+{% endraw %}

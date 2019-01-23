@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/75913Weirdbehaviorofrw.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Zimmer (Sep 29 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20behavior%20of%20rw%3F/near/134890495):
 I'm trying to shorten the following proof:
 
@@ -85,3 +87,5 @@ Different typeclass requirements, I guess:
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 29 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20behavior%20of%20rw%3F/near/134893977):
 It's a core thing. Every linear ordered field has characteristic zero, but `two_ne_zero` is in core, so it can't be changed, and therefore we need a version for `char_zero` as well.
 
+
+{% endraw %}

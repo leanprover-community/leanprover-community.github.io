@@ -9,6 +9,8 @@ permalink: archive/116395maths/20928CauchySchwarzcalc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 29 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy-Schwarz%20calc/near/127276213):
 Sometimes when someone new comes here to ask maths questions, I wonder if we have a new mathematician interested in Lean. So I googled @**Patrick Stevens**  and found https://www.patrickstevens.co.uk/cauchy-schwarz-proof/
 
@@ -408,3 +410,5 @@ Is there a one-line explanation of what "simpprocs" are?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 30 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy-Schwarz%20calc/near/127324193):
 instead of simp rules, it is a tactic which gets invoced by the simplifier. E.g. canellation would be a simproc which is called on a pattern of the form `_ = _` where the type of _  has a cancellative monoid, then it tries to find common elements on both sides of the equation and remove them.
 
+
+{% endraw %}

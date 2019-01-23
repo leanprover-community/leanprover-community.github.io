@@ -9,6 +9,8 @@ permalink: archive/113488general/82902easyfinitesetquestion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 15 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy%20finite%20set%20question/near/125096226):
 ```lean
 import data.set
@@ -51,3 +53,5 @@ Thanks Kenny. I have spent all evening reducing the statement that Spec(R) is co
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 15 2018 at 04:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy%20finite%20set%20question/near/125096598):
 nice
 
+
+{% endraw %}

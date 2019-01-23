@@ -9,6 +9,8 @@ permalink: archive/113488general/72721timeoutwithsplitifs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130454443):
 ```lean
 import data.fin
@@ -80,3 +82,5 @@ Apparently `simp` cannot simplify the second ite.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456480):
 thanks
 
+
+{% endraw %}

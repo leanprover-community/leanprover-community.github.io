@@ -9,6 +9,8 @@ permalink: archive/113488general/50743autoparamininstance.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 18 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autoparam%20in%20instance/near/152102423):
 Is it possible to use autoparam in instances? I have a `is_add_group_hom` instance that never triggers, probably because is it contains a continuity assumption. The following doesn't seem to help:
 ```lean
@@ -57,3 +59,5 @@ how is it done in your category theory?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 18 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autoparam%20in%20instance/near/152106769):
 Continuous maps not a class -- Johannes has explained this before on this forum, although I have never really internalised the issue.
 
+
+{% endraw %}

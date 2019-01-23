@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/00350Classicallogic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 21 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Classical%20logic/near/148124896):
 What is the problem with classical logic in Lean? Why does one have to use `open classical` in order to use the law of the excluded middle? Also what is up with all the `decidable` that I see in some theorems? Does classical logic (somehow) create any problems to computation (aka it slows down the computation)?
 
@@ -65,3 +67,5 @@ Most of the library is not avoiding classical logic
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Nov 21 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Classical%20logic/near/148129380):
 One example why proving decidability of (some) propositions is useful, instead of just assuming that all propositions are decidable, is that you can run the proofs. For example, in `core` there is a proof that `<` on `nat` is decidable. This means that you can prove `3 < 5` by saying "run the proof of decidability, and check that it is true" (the notation for this is `dec_trivial`).
 
+
+{% endraw %}

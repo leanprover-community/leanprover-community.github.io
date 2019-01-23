@@ -9,6 +9,8 @@ permalink: archive/113488general/74264minofnonemptysetofnats.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 30 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/min%20of%20non-empty%20set%20of%20nats/near/130570396):
 Presumably this is easy?
 
@@ -28,3 +30,5 @@ nat.find_min' H hy.1⟩
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 30 2018 at 12:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/min%20of%20non-empty%20set%20of%20nats/near/130570608):
 Thanks Kenny.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/72590Fromfieldstosets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Anthony Bordg (Oct 04 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135217336):
 Hello,
 
@@ -45,3 +47,5 @@ What do you use it for? Typically, I don't see that set used much because the ty
 ```
 You're right, I realized that I don't need it. :+1:
 
+
+{% endraw %}

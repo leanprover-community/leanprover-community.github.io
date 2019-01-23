@@ -9,6 +9,8 @@ permalink: archive/113488general/00690VSCodehoverissue.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 12 2019 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20issue/near/154997129):
 ```lean
 example (A C D : Type) (zzz : A → C) (g : C → C → D) (a : A) : D :=
@@ -40,3 +42,5 @@ So it's the Lean server which ships these little windows out?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 12 2019 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20issue/near/154997714):
 can we have the complicated diagram again?
 
+
+{% endraw %}

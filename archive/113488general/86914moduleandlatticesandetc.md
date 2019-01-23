@@ -9,6 +9,8 @@ permalink: archive/113488general/86914moduleandlatticesandetc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 06 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20and%20lattices%20and%20etc/near/146859692):
 ```lean
 def module_of_module_of_ring_hom {R : Type u} [ring R]
@@ -33,3 +35,5 @@ module.of_core {
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 06 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20and%20lattices%20and%20etc/near/146894746):
 module.of_ring_hom maybe?
 
+
+{% endraw %}

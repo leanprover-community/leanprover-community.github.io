@@ -9,6 +9,8 @@ permalink: archive/113488general/74199greeklettertactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 28 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/greek%20letter%20tactic/near/127201952):
 Is there a tactic doing only that greek letter which transforms `(λ  a, f a) x` to `f x`?
 
@@ -81,3 +83,5 @@ The slightly annoying thing about that is sometimes it won't rewrite because it'
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 28 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/greek%20letter%20tactic/near/127222466):
 You need to set pp.beta true in rw as well :-)
 
+
+{% endraw %}

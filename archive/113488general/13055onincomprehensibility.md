@@ -9,6 +9,8 @@ permalink: archive/113488general/13055onincomprehensibility.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 20 2018 at 04:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20incomprehensibility/near/136149992):
 I managed to turn a screen-long argument (Theorem 4.3 [here](https://ncatlab.org/nlab/show/relational+beta-module#conc)) which I don't really understand into 4 lines of lean which I also don't really understand--the last four lines below. (What I'm formalizing is not exactly the same thing as that page is talking about, but I think it's closely related.)
 ```lean
@@ -48,3 +50,5 @@ Also, I learned "why" this statement `J` is true (it's somehow exactly because t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 05:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20incomprehensibility/near/136152145):
 it might help if you gave things more than one letter names :)
 
+
+{% endraw %}

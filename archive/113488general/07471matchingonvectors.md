@@ -9,6 +9,8 @@ permalink: archive/113488general/07471matchingonvectors.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Oct 19 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/matching%20on%20vectors/near/136140175):
 Is there a library of vectors, defined inductively?
 ```
@@ -140,3 +142,5 @@ oh,  I thought I renamed it
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 21 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/matching%20on%20vectors/near/136190149):
 or maybe it was `fin2 n -> A`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/52974whatdoesmean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 03:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20does%20.%20mean%3F/near/125129469):
 ```
 type mismatch at application
@@ -53,3 +55,5 @@ Do you have a proof of an existential quantification somewhere in there?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 16 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20does%20.%20mean%3F/near/125130200):
 the `.` there is the pp printing of an inaccessible pattern. I'm not exactly sure what you are looking at, but you can safely ignore it
 
+
+{% endraw %}

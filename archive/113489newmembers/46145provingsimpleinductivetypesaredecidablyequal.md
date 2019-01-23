@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/46145provingsimpleinductivetypesaredecidably
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Nov 06 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20simple%20inductive%20types%20are%20decidably%20equal/near/146870382):
 Suppose I make
 ```lean
@@ -53,3 +55,5 @@ I would really like some feedback on my `iso_induction` approach sketched in the
 
 It needs more examples of definitions shown to be functorial in their arguments (hopefully automatically) before you can really see how it would work.
 
+
+{% endraw %}

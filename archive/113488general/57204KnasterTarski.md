@@ -9,6 +9,8 @@ permalink: archive/113488general/57204KnasterTarski.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Knaster-Tarski/near/124351778):
 https://github.com/kckennylau/Lean/blob/master/Knaster-Tarski.lean
 @**Mario Carneiro** por favor diz que nao fazias isso
@@ -316,3 +318,5 @@ Perhaps `tag00EJ` is as bad as `aux1` right? ;-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Knaster-Tarski/near/124358499):
 right
 
+
+{% endraw %}

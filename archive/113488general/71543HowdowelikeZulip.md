@@ -9,6 +9,8 @@ permalink: archive/113488general/71543HowdowelikeZulip.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Feb 27 2018 at 07:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20we%20like%20Zulip/near/123030078):
 I must say that the linear conversation of Gitter is easier to follow. This interleaving of streams and topics: having to figure out where the conversation flows and which topic to post to is a bit of a cognitive load for casual chat.
 
@@ -467,3 +469,5 @@ We still need someone to follow up the pygment issue
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 19 2018 at 08:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20we%20like%20Zulip/near/125291071):
 We still need someone to follow up the pygment issue
 
+
+{% endraw %}

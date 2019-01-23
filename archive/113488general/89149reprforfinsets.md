@@ -9,6 +9,8 @@ permalink: archive/113488general/89149reprforfinsets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Pablo Le Hénaff (Jun 20 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/repr%20for%20finsets/near/128364636):
 Is there a way to define a has_repr instance for finsets ?
 
@@ -99,3 +101,5 @@ Why were you goofing around with pnat?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 20 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/repr%20for%20finsets/near/128382797):
 I was trying to get on top of exactly what one should do when defining a new structure in Lean. If I had to define pnat I would start by writing down the definition as a subtype, and then I realised that I would not really know what to do next. So I read pnat.lean quite carefully to try and get a feeling for it. I then read `real.lean` for the same sort of reason.
 
+
+{% endraw %}

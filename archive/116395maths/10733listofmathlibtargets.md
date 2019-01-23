@@ -9,6 +9,8 @@ permalink: archive/116395maths/10733listofmathlibtargets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 25 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/list%20of%20mathlib%20targets/near/132746533):
 Over the next couple of days I'm going to have a good look at the perfectoid project from a "bottom up" perspective and try and get a coherent idea of some easy targets for mathlib. For example (although not directly related to the perfectoid project) I would imagine it would be relatively easy to define PID's now and prove that Euclidean domains are PID's and that PID's are UFD's. My feeling is that achievable goals like this should be on some sort of informal list somewhere. Once the p-adic numbers get accepted then defining the adeles of a number field should also be on this list (and if people aren't happy with a definition being on the list then I can propose a random simple theorem about adeles, but for me a definition is fine). Where should such a list live? I remember once, when I was thinking about formalising my graduate course of earlier this year, I thought about formalising the adeles and I made it an issue in mathlib, but now I realise that probably there is a huge list of little things which I'd like to see in mathlib (several of which I'll probably end up doing myself) and I don't think it's sane to have an issue for each of them.
 
@@ -197,3 +199,5 @@ I saw that yesterday!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 26 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/list%20of%20mathlib%20targets/near/132788248):
 I'm hoping we can bring the proof down to something much smaller. After all, to explain it to a human is only a few lines!
 
+
+{% endraw %}

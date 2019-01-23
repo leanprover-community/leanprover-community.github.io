@@ -9,6 +9,8 @@ permalink: archive/116395maths/62584polynomials.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 04 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/124608289):
 Where can I find the following facts: `Z[x] is a commutative ring`, and `evaluation at x = i is a ring homomorphism`?
 
@@ -21,3 +23,5 @@ Scott -- Kenny has been working on adjoint functors of various forgetful functor
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 04 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/124615433):
 @**Kevin Buzzard**  https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/category.20theory.20libraries/near/124608241
 
+
+{% endraw %}

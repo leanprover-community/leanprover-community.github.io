@@ -9,6 +9,8 @@ permalink: archive/116395maths/38132shouldthisbedectrivial.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 16:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/should%20this%20be%20dec_trivial%3F/near/147920509):
 `example (n : ℕ) : n > 0 → n ≤ 6 → fact n < 3 ^ n := dec_trivial -- fails`
 
@@ -68,3 +70,5 @@ dec_trivial times out for 7 :-/
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/should%20this%20be%20dec_trivial%3F/near/147921463):
 (hence the norm_num approach, which was also troublesome -- see other thread)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/56034isopenunivempty.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 04 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open_%7Buniv%2Cempty%7D/near/150866118):
 Is there a reason for the following discrepancy?
 ```lean
@@ -44,3 +46,5 @@ Yes, I was.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 04 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open_%7Buniv%2Cempty%7D/near/150866893):
 There is all sorts of asymmetry. But using the `_root_` version solves all my headaches (-;
 
+
+{% endraw %}

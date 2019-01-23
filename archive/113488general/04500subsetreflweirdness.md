@@ -9,6 +9,8 @@ permalink: archive/113488general/04500subsetreflweirdness.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 04 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20refl%20weirdness/near/126108434):
 Is this a bug?
 ```lean
@@ -57,3 +59,5 @@ I just tried my theory and the lemma I proved with rfl was tagged `@[_refl_lemma
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 05 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20refl%20weirdness/near/126151045):
 `@[refl]` means it's a proof that a relation is reflexive and is for the `refl` tactic. `@[_refl_lemma]` means it's a proof of equality proved using `rfl` for the `dsimp` tactic.
 
+
+{% endraw %}

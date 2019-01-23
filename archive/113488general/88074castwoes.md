@@ -9,6 +9,8 @@ permalink: archive/113488general/88074castwoes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 25 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127073963):
 ```lean
 import data.int.basic data.nat.cast 
@@ -192,3 +194,5 @@ Applying `simp` to nat `M + 1` doesn't change it, but applying `simp` to real `M
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 23 2019 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/156678755):
 I know I can use some cast_lt or whatever, but this is exactly what I am trying to avoid. `simp` is usually good at these.
 
+
+{% endraw %}

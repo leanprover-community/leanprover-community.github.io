@@ -9,6 +9,8 @@ permalink: archive/113488general/63906Automaticvariablenames.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Stevens (May 29 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Automatic%20variable%20names/near/127275253):
 Another noob question, sorry. I haven't found an answer out there because everyone always proves this theorem using `simp`.
 
@@ -91,3 +93,5 @@ I never know whether using `have :...` (and thus making a variable called `this`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 30 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Automatic%20variable%20names/near/127277444):
 I tend to name all my have variables except for the ones I instantly use and throw away on the next line
 
+
+{% endraw %}

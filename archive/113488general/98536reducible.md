@@ -9,6 +9,8 @@ permalink: archive/113488general/98536reducible.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 01 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124484786):
 When should I use `@[reducible] def` and when to just use `def`?
 
@@ -80,3 +82,5 @@ instead, you should have a simp lemma that says `g \in stab x <-> g \bu x = x`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 03 2018 at 05:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124558783):
 aha
 
+
+{% endraw %}

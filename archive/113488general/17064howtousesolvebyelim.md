@@ -9,6 +9,8 @@ permalink: archive/113488general/17064howtousesolvebyelim.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 17 2018 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20%60solve_by_elim%60/near/132313630):
 What is the syntax for giving `solve_by_elim` a discharger. I tried ``solve_by_elim `[cc] `` like the docs suggest, but I couldn't get it to work.
 
@@ -94,3 +96,5 @@ Ah! I see! How do you suggest to solve this?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 06 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20%60solve_by_elim%60/near/135298736):
 It's pretty easy: see https://github.com/leanprover/mathlib/pull/393/commits/3fab845ccdfb081febf09821c4c1e43dbb82f75b
 
+
+{% endraw %}

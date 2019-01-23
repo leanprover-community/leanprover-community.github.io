@@ -9,6 +9,8 @@ permalink: archive/113488general/30952nightlyversionstapling.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 04 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nightly%20version%20stapling/near/123270930):
 sneak peek: https://github.com/leanprover/lean-nightly/releases
 
@@ -565,3 +567,5 @@ The package and Lean root layout is the same. The only difference is that the bi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 15 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nightly%20version%20stapling/near/125107319):
 Windows nightlies _finally_ working now https://github.com/leanprover/lean-nightly/releases/tag/nightly-2018-04-14
 
+
+{% endraw %}

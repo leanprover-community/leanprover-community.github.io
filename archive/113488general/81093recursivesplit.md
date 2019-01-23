@@ -9,6 +9,8 @@ permalink: archive/113488general/81093recursivesplit.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 02 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursive%20split/near/128962808):
 Do we have a recursive split tactic? My goal looks likes `a ∧ b ∧ c ∧ d` and I would like to write one word and get four non-nested goals.
 
@@ -59,3 +61,5 @@ begin
 end 
 ```
 
+
+{% endraw %}

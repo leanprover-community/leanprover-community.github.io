@@ -9,6 +9,8 @@ permalink: archive/113488general/91354changeof.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 06 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/change%20of%20%5E/near/124717957):
 Are there any general tips for how to fix up files which no longer compile because of changes to `^`? I have files which start ``local  infix ` ^ ` := monoid.pow``, and for x and y in a comm_semiring ` (x + y) ^ 0 = x ^ 0 * y ^ 0` used to be solved by simp and now does not seem to be.
 
@@ -21,3 +23,5 @@ but basically our stacks project is quite broken now I upgraded to the current n
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 06 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/change%20of%20%5E/near/124719712):
 `simp [pow_succ, pow_zero]`?
 
+
+{% endraw %}

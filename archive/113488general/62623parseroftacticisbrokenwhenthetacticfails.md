@@ -9,6 +9,8 @@ permalink: archive/113488general/62623parseroftacticisbrokenwhenthetacticfails.h
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parser.of_tactic%20is%20broken%20when%20the%20tactic%20fails/near/133093024):
 I just stumbled on the following issue:
 ```
@@ -21,3 +23,5 @@ example : true := by tac.
 ```
 The problem appears to be that nothing catches an error thrown in a tactic when it is passed through the `of_tactic` builtin function
 
+
+{% endraw %}

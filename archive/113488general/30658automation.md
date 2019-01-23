@@ -9,6 +9,8 @@ permalink: archive/113488general/30658automation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574167):
 I was just having a look at @**Chris Hughes**'s nice PR for quotient groups.
 
@@ -92,3 +94,5 @@ I am pretty sure that these tactics will make life much easier for mathematician
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 05 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127586790):
 Automation is clearly the key. Proof assistants can become useful tools for mathematicians only if every stupid proof eventually gets automatic
 
+
+{% endraw %}

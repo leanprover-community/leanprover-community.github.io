@@ -9,6 +9,8 @@ permalink: archive/113488general/16265excessivememory.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 24 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/excessive%20memory/near/134535868):
 On my laptop I get the following error pretty often:
 ```
@@ -133,3 +135,5 @@ At least in docker, the processes are being killed (exit code 137) much faster t
 
 OK, that's weird.  By default, I don't think anything is ever killed by cocalc in Docker, since there are no quotas/upgrades/etc. for docker-cocalc.  Also, CoCalc doesn't kill processes when something is idle -- it kills entire projects.  So it may be something particular to your Docker setup.   What's the simplest example that I can try to reproduce of what you're observing?
 
+
+{% endraw %}

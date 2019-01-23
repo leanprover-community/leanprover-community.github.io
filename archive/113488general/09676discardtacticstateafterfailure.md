@@ -9,6 +9,8 @@ permalink: archive/113488general/09676discardtacticstateafterfailure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 03 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/discard%20tactic_state%20after%20failure%3F/near/135090187):
 Is there an existing tactic that runs a tactic, then restores the original tactic_state if it fails?
 
@@ -27,3 +29,5 @@ So you write `try tac`, `tac` unifies variables and then fails and the unificati
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 03 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/discard%20tactic_state%20after%20failure%3F/near/135091563):
 Hmm, it seems I was wrong, as sticking such a tactic into the place I thought would fix things, hasn't fixed things. Maybe more later, sorry for the noise!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/11403reflexivetransitiveclosureandrecursion.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Shachar Itzhaky (Jun 12 2018 at 17:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflexive-transitive%20closure%20and%20recursion/near/127960102):
 Lean has a transitive closure but I want a reflexive-transitive one. So I wrote the following definition:
 ```lean
@@ -202,3 +204,5 @@ Of course. The analogue that I can refer to is that in Coq I wrote the same proo
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Shachar Itzhaky (Jun 13 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflexive-transitive%20closure%20and%20recursion/near/128002573):
 I still see that as a form of recursion though, since it's expressed via `Fixpoint`.
 
+
+{% endraw %}

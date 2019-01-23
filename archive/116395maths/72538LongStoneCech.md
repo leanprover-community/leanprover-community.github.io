@@ -9,6 +9,8 @@ permalink: archive/116395maths/72538LongStoneCech.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 22 2019 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598228):
 @**Reid Barton** https://github.com/leanprover/mathlib/blob/master/src/topology/stone_cech.lean#L253 takes forever to elaborate. Do you care if I change it to:
 ```lean
@@ -47,3 +49,5 @@ Yes. I'm splitting `topology.basic` and `topology.continuity`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 22 2019 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156599697):
 And guess what I learned? Non-finishing calls to `simp` are evil
 
+
+{% endraw %}

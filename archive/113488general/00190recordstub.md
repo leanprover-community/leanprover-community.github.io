@@ -9,6 +9,8 @@ permalink: archive/113488general/00190recordstub.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 20 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136169584):
 The hole command to create a record stub is really nice!
 Can any emacs gurus (@**Simon Hudon**?) tell me how I can write an emacs command that will insert `{! !}` at the point, navigate inside it (if necessary), and then invoke the Instance Stub hole command?
@@ -86,3 +88,5 @@ To be fair, I'm still new to emacs. Maybe @**Sebastian Ullrich** can shed some l
 
 which I built from copying bits from `lean-hole`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/54876rwcantmatchthis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 15 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20can%27t%20match%20this/near/123765206):
 ```
 @has_mem.mem.{u u} α α
@@ -109,3 +111,5 @@ into a separate definition
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 15 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20can%27t%20match%20this/near/123765947):
 thanks
 
+
+{% endraw %}

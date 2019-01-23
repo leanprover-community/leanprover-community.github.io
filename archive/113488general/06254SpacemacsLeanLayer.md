@@ -9,6 +9,8 @@ permalink: archive/113488general/06254SpacemacsLeanLayer.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Robert Kornacki (Oct 05 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Spacemacs%20Lean%20Layer/near/135231987):
 Recently I just quickly put together a Spacemacs layer for lean which pretty much just rebinds lean-mode to be as expected for the Spacemacs vim crowd. Thought it'd be worth sharing for anyone else who's a Spacemacs user https://github.com/robkorn/spacemacs-lean-layer
 
@@ -36,3 +38,5 @@ I also use Spacemacs's standard `g d` for navigation
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Oct 06 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Spacemacs%20Lean%20Layer/near/135290872):
 Great, thanks!
 
+
+{% endraw %}

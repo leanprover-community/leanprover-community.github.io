@@ -9,6 +9,8 @@ permalink: archive/113488general/89956quotindinmetatheorypaper.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Oct 29 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quot.ind%20in%20metatheory%20paper/near/136716513):
 In Section 2.7 of Mario's metatheory of Lean paper, I'm missing the fact that `quot.ind` is a axiom in Lean. Is this an omission, or is there an implicit claim here that `quot.ind` is derivable from the other constants/axioms?
 
@@ -67,3 +69,5 @@ yes
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 29 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quot.ind%20in%20metatheory%20paper/near/136737064):
 All of the known examples of failure of transitivity involve some kind of subsingleton elimination, where an inductive type in Prop recurses over Type. So it is reasonable to conjecture that without `acc` and with `quot` out of `Prop` the algorithmic equality becomes transitive, and so coincides with ideal defeq which becomes decidable.
 
+
+{% endraw %}

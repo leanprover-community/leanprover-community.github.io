@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/12978461integralclosure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 10 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23461%20integral%20closure/near/147449667):
 @**Johannes Hölzl** I've finished adding content to my PR, you can review it now
 
@@ -60,3 +62,5 @@ It looks like we have some PR crisis again. PR piled up in topology, category th
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 17 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23461%20integral%20closure/near/152025673):
 @**Patrick Massot** I just helped increase the PR crisis by adding a trivial PR to the queue...
 
+
+{% endraw %}

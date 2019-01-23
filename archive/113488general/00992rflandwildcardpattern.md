@@ -9,6 +9,8 @@ permalink: archive/113488general/00992rflandwildcardpattern.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127771996):
 Have a look at https://github.com/kbuzzard/lean-perfectoid-spaces/blob/b1e6489145be504e64a009226c6811bfd84a5070/src/valuations.lean#L143-L151:
 ```lean
@@ -251,3 +253,5 @@ do b ← target >>= is_prop,
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 11 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127888806):
 Just arrived back from underwater. I've starred the proof you asked about, @Patrick, and will try out `obviously`. I suspect it requires more case bashing (on `option`) than obviously is by default willing to do.
 
+
+{% endraw %}

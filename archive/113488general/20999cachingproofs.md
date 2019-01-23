@@ -9,6 +9,8 @@ permalink: archive/113488general/20999cachingproofs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 18 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/caching%20proofs/near/134150227):
 So I'm moving it here.
 
@@ -253,3 +255,5 @@ Amateurs. Here's my workflow: https://xkcd.com/378/
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 19 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/caching%20proofs/near/134256955):
 @**Sean Leather** I think this is a case in which, before you see what you're missing out on, you don't know that you're missing out. I find it incredibly useful when writing tactic that, as I type and change my scripts, I can see the print out of the example I'm using the tactic on. That save a whole lot of time
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/49265alternativedefinitionoflistisprefix.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 19 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285727):
 Could we have a subtype instead of an existential here, as the data is lost in the latter?
 
@@ -46,3 +48,5 @@ theorem suffix_iff_eq_append (l₁ l₂ : list α) : l₁ <:+ l₂ ↔ take (len
 end, λ e, ⟨_, e⟩⟩
 ```
 
+
+{% endraw %}

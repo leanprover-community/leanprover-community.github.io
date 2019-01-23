@@ -9,6 +9,8 @@ permalink: archive/116395maths/28918vectorspacesvsmodulesoverafield.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 18 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/vector%20spaces%20vs%20modules%20over%20a%20field/near/128233939):
 I have a module over a field. How do I upgrade it to a vector_space? We can't have a generic instance, because we would immediately get loops (every vector_space is already a module).
 
@@ -154,3 +156,5 @@ That's a good solution, I guess (-;
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Jun 18 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/vector%20spaces%20vs%20modules%20over%20a%20field/near/128263024):
 I don't remember why I changed it to a `class` maybe I had a problem in combination with the `inout` parameter. We can change it back and see what happens.
 
+
+{% endraw %}

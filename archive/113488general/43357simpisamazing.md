@@ -9,6 +9,8 @@ permalink: archive/113488general/43357simpisamazing.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Mar 04 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20is%20amazing/near/123265688):
 I was proving some lemmas about disjoint finsets, and I was amazed to find that this goal was solved by `simp {contextual := tt}`, when I previously had a 10 line proof.
 ```lean
@@ -125,3 +127,5 @@ Yes. It's more a comment to your first bullet than a third one
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 04 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20is%20amazing/near/123274002):
 If you want a cheap way to document stuff about simp not in TPIL you can also search for simp in https://github.com/leanprover/lean/blob/master/doc/changes.md
 
+
+{% endraw %}

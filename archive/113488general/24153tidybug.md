@@ -9,6 +9,8 @@ permalink: archive/113488general/24153tidybug.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060203):
 Can someone try
 ```lean
@@ -236,3 +238,5 @@ example (X Y : Type) (f : X → Y) (g : Y → X) (h : ∀ z, (f ∘ g) z = id z)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 03 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135085753):
 Thanks Kenny, but this is the version I don't want, because `h` is stated un-mathematically
 
+
+{% endraw %}

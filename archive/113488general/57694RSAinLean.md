@@ -9,6 +9,8 @@ permalink: archive/113488general/57694RSAinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/RSA%20in%20Lean/near/133784575):
 I have to give a talk for high school students. Topic: cryptography.
 I've done this before, and I would usually fool around in Python. Does anyone know of an implementation of DH or RSA in Lean?
@@ -100,3 +102,5 @@ It's very different to how it was 20 years ago
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 12 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/RSA%20in%20Lean/near/133785615):
 so my guess is no
 
+
+{% endraw %}

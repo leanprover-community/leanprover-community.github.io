@@ -9,6 +9,8 @@ permalink: archive/113488general/00919moretypeclassinferenceissues.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320059):
 It seems to me that for classes like `ring`defined in core lean or mathlib, you are kind of supposed to use type class inference to make them work.
 
@@ -1890,3 +1892,5 @@ Hmm, I need to run. In fact, I should try to get rid of those `include ri la`, b
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115887):
 Anyway, I'll be back later. AFK
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/46061installingmathlibglobally.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 25 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128610501):
 Cocalc want to install one mathlib globally. I think Sebastian Ullrich once told me that there was no documentation for `leanpkg.path` because this was not a file that an end user was ever supposed to mess with. I am assuming `builtin_path` points to where the core lean library is. I am assuming that there's no file with the same name in Lean and mathlib, so I guess in theory they could do the slightly horrible-sounding thing of dumping all of mathlib in the core lean directory. But actually I am a bit confused about what is really reading leanpkg.path. Oh -- is this something the lean plugin does in VS Code?
 
@@ -75,3 +77,5 @@ This will be for kids who want to do their homework in Lean but don't want to go
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 25 2018 at 22:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128619714):
 The default accounts on CoCalc do not have internet access
 
+
+{% endraw %}

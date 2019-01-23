@@ -9,6 +9,8 @@ permalink: archive/116395maths/56373fundamentalsystemofneighborhoods.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 04 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fundamental%20system%20of%20neighborhoods/near/135166983):
 Do we have the notion of a *fundamental system of neighborhoods of 0* for topological groups?
 
@@ -193,3 +195,5 @@ It may also cause a problem when we have a conflicting meaning for multiplicatio
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 04 2018 at 17:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fundamental%20system%20of%20neighborhoods/near/135195018):
 I think `has_sub` has a conflict
 
+
+{% endraw %}

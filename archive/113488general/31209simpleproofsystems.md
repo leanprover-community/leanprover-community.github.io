@@ -9,6 +9,8 @@ permalink: archive/113488general/31209simpleproofsystems.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 14 2018 at 04:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simple%20proof%20systems/near/135758238):
 Sorry in advance for a rather vague question, hopefully I can make it clear what I'm looking for.
 Suppose I wanted to "compile" Lean formulas and proof terms to some other logical system. How "simple" could the target logical system be?
@@ -497,3 +499,5 @@ You have a clear choice then :-) Human efforts with wrong statements, or `topolo
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simple%20proof%20systems/near/135797803):
 @**Mario Carneiro** @**Reid Barton** I find this topic of cryptographic proof certificates really interesting! Do you know if anything like this has been implemented for some theorem prover? I've thought about this on and off (basically as an amateur) and I couldn't find anything written about it. Are there references that go beyond speculating how nice it would be to have this? From Reid's description it is still quite a leap to an actual (fast) implementation.
 
+
+{% endraw %}

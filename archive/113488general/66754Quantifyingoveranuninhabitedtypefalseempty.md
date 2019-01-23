@@ -9,6 +9,8 @@ permalink: archive/113488general/66754Quantifyingoveranuninhabitedtypefalseempty
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Mar 22 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Quantifying%20over%20an%20uninhabited%20type%20%28false/%20empty%29/near/124058931):
 I'm wondering whether this is something I should be able to prove (I think I should). It came up when I was trying to show that two definitions of primality are equivalent.
 
@@ -97,3 +99,5 @@ Thanks, this makes sense.
 
 The problem extends to `is_prime2 0`, since `k < 0 → false` and we end up with the same problems. Definition of primality in mathlib excludes  these cases, just as you pointed out, before the quantifier:  `def  prime (p : ℕ) := p ≥  2  ∧  ∀ m ∣ p, m =  1  ∨ m = p`
 
+
+{% endraw %}

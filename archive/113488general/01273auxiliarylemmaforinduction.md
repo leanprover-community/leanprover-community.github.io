@@ -9,6 +9,8 @@ permalink: archive/113488general/01273auxiliarylemmaforinduction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 23 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132633649):
 ```lean
 structure foo :=
@@ -52,3 +54,5 @@ Any time :)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 23 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132639260):
 I wonder if it would be worth combining the two tactics so that `induction e` (with `e` an arbitrary expression) would produce the equality assumption.
 
+
+{% endraw %}

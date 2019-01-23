@@ -9,6 +9,8 @@ permalink: archive/113488general/65330cfarmtetaneutralnetCompileFarm.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 09 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cfarm.tetaneutral.net%20-%20Compile%20Farm/near/135489637):
 @**Tobias Grosser** I have an account now. How do I use it?
 
@@ -540,3 +542,5 @@ Maybe they should have chosen a less easily confused name, like `rustup`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 12 2018 at 00:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cfarm.tetaneutral.net%20-%20Compile%20Farm/near/135640888):
 you want the downloader for lean to be called `rustup`? That's indeed less easily confused with `lean`
 
+
+{% endraw %}

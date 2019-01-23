@@ -9,6 +9,8 @@ permalink: archive/113488general/52447mathlibdirectories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 20 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20directories/near/152288114):
 Not sure whether joke suggestion: one top-level directory per arXiv primary category.
 
@@ -39,3 +41,5 @@ I would broadly categorize it as "stuff useful for programming, but not meta"
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Dec 21 2018 at 02:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20directories/near/152301210):
 I think we should reserve the `/math.GM/` folder for crank contributions to mathlib, keeping with tradition. Maybe we could hardcode leanpkg to not compile math.GM unless you are a "contributor" to that folder?
 
+
+{% endraw %}

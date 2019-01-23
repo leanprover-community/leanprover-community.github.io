@@ -9,6 +9,8 @@ permalink: archive/113488general/44024invalidoccurrenceofrecursivearg.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 13 2019 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg/near/155020104):
 What does this error message mean and is there a workaround?
 ```lean
@@ -44,3 +46,5 @@ Lean is a bit picky about the order of the arguments to constructors.  A long ti
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 13 2019 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg/near/155022542):
 Interesting, thanks!
 
+
+{% endraw %}

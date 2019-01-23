@@ -9,6 +9,8 @@ permalink: archive/113488general/66487TypevsType.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 26 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%2A%20vs%20Type%20_/near/125719177):
 What's the difference between `(a: Type*)` and `(a: Type _)`?
 
@@ -39,3 +41,5 @@ But this is orthogonal to my question
 ```
 I would say it's more of a footnote (`*`) to your question.
 
+
+{% endraw %}

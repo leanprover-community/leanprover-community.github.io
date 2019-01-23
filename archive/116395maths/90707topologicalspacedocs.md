@@ -9,6 +9,8 @@ permalink: archive/116395maths/90707topologicalspacedocs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topological%20space%20docs/near/125088079):
 Ok so after a ropey start (see my heq thread earlier) I made it through the `topological_space.lean` file today and wrote some docs on it: https://github.com/kbuzzard/mathlib/blob/docs-topspaces/docs/theories/topological_spaces.md . I needed to read this file for my work on schemes -- in particular I had to finally understand what a filter was and what they had to do with topological spaces.
 
@@ -385,8 +387,7 @@ sorry, methods
 but I didn't realise this had anything to do with topological spaces at the time
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 15 2018 at 00:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topological%20space%20docs/near/125089505):
-{% raw %}
-One reasonably basic example of a gnarly construction is the Kuratowski pair (a,b) = {{a}, {a, b}}{% endraw %}
+One reasonably basic example of a gnarly construction is the Kuratowski pair (a,b) = {{a}, {a, b}}
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 15 2018 at 00:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topological%20space%20docs/near/125089506):
 eew
@@ -413,8 +414,7 @@ so we point the user to where that is proved
 and they can't see the disgusting truth behind it all
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 15 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topological%20space%20docs/near/125089559):
-{% raw %}
-and later, we might want to change the definition for some reason to, say, {{0,a}, {1, b}} and that's okay as long as we can still prove the defining property, since no user depended on the specific construction{% endraw %}
+and later, we might want to change the definition for some reason to, say, {{0,a}, {1, b}} and that's okay as long as we can still prove the defining property, since no user depended on the specific construction
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 15 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topological%20space%20docs/near/125089560):
 but the compactness thing is different. We go for Kuratowski because all the choices are horrible and this one is the least horrible
@@ -789,3 +789,5 @@ I want to refactor the filter stuff so that `.sets` is superfluous, i.e. `s \in 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Apr 16 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topological%20space%20docs/near/125138117):
 Setting up a `has_mem` for filter is surely a good idea.
 
+
+{% endraw %}

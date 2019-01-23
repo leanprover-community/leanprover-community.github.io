@@ -9,6 +9,8 @@ permalink: archive/113488general/09115lefordiv.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Apr 04 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124631308):
 This seems like a silly question but I've scoured mathlib and init for this lemma and I can't find it: `∀ {n m : ℕ} (h : n ≤ m) {k}, n/k ≤ m/k`
 I don't think it can be derived from `div_le_of_le_mul` since `k*(n/k) = n` does not necessarily hold (only if `k | n`)
@@ -96,3 +98,5 @@ protected theorem div_le_div {n m : ℕ} (h : n ≤ m) {k : ℕ} : n / k ≤ m /
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 05 2018 at 03:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650653):
 looking at the differences, I guess I didn't do much besides compactify the same steps, more or less
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/00258Beklemishevsworms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 31 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154084805):
 ```lean
 def next_aux (N : nat) : list nat -> nat
@@ -69,3 +71,5 @@ if ∀ x ∈ l, x = 0 then l.length else
 list.sum (list.pmap (λ a h, ω ^ map a) (build l) (build_lt l))
 ```
 
+
+{% endraw %}

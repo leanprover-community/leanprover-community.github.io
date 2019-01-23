@@ -9,6 +9,8 @@ permalink: archive/113488general/98442mulandaddtypeclasshierarchies.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Oct 04 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20and%20add%20type%20class%20hierarchies/near/135157838):
 I'm curious why we have two nearly duplicate type class hierarchies – multiplicative and additive – in Lean. It seems like it would be better to have the type classes be parameterized by the binary operator instead of inheriting the operator. I suppose there are technical/practical problems here which led to the current design.
 
@@ -30,3 +32,5 @@ Also https://github.com/leanprover/lean/wiki/Refactoring-structures
 ```
 I've tried to read that before and my eyes glazed over every time.
 
+
+{% endraw %}

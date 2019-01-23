@@ -9,6 +9,8 @@ permalink: archive/113488general/84549idlytryingsoftwarefoundations.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 27 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idly%20trying%20software%20foundations/near/124286568):
 I am working through software foundations. I'm finding the first book relatively straightforward, which is a relief. I was trying to do the exercises in a golf-like way. Why doesn't this work:
 
@@ -1047,3 +1049,5 @@ and i think the nodup and nostutter predicates are interesting since they are re
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ching-Tsun Chou (Mar 29 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idly%20trying%20software%20foundations/near/124383111):
 I would be interested to know if anyone can prove the pigeonhole principle (last exercise of the IndProp chapter) without excluded_middle.
 
+
+{% endraw %}

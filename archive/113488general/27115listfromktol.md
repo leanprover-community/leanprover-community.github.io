@@ -9,6 +9,8 @@ permalink: archive/113488general/27115listfromktol.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 17 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125191252):
 Is there a built-in way to generate the list of natural numbers from k to l? I can use `def myrange (k n : ℕ) := list.map (λ i, i + k) (list.range $ n-k+1)` but I'd like to know if this is already in
 
@@ -55,3 +57,5 @@ Only `list` has support for non-commutative product. The above statement is the 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125195523):
 https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/.60.5Ba.2Ca.2B1.2Ca.2B2.2C.2E.2E.2E.2Cb-1.5D.60.3F
 
+
+{% endraw %}

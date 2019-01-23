@@ -9,6 +9,8 @@ permalink: archive/113488general/88707subsetorsubtype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268484):
 I wrote presheaves of types twice in my life and I see now that my definitions differ.
 
@@ -67,3 +69,5 @@ I don't know what the practical implications are, though.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Mar 04 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123269187):
 (I would also set it up so that I can write `U : T.open_set`, and use $$\cap$$ and $$\cup$$ and $$\subset$$ directly on open sets, etc.)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/26591palindromes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591860):
 For recreational reasons I was interested in working with lists which were palindromes, i.e. lists `G` satisfying `G = list.reverse G`. I wanted to prove a bunch of stuff about these things but I couldn't prove anything by induction because lists don't decompose like that. I wanted to write a general `G` of length 2 or more as `G=[head G] ++ middle G ++ [head G]` and have a recursor of the form `C [] -> C [x] -> forall palindromes H, C H -> C ([a] ++ H ++ [a]) -> forall palindromes G, C G`
 
@@ -337,3 +339,5 @@ It's not about knowing what's there, it's knowing what's probably there.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 05 2018 at 03:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124650234):
 Your `listunfold` is defined in core and proven in mathlib, by the name `list.join`. It is the monad "flattening" operation for lists
 
+
+{% endraw %}

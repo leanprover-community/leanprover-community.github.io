@@ -9,6 +9,8 @@ permalink: archive/113488general/96702anatisjustanonnegativeint.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 18 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20nat%20is%20just%20a%20non-negative%20int/near/134155954):
 Over the summer I watched students struggling with easy number theory for the wrong reasons. They were asked questions about `nat` but their solutions involve dabbling with `int`. First they had to realise that subtraction was broken in `nat`. Then they had to coerce everything. And then they ended up with random goals like `of_nat x < \u y` where they knew `x < y` but didn't know how to finish. Any attempt to use induction in tactic mode produced goals mentioning terms of the form `-[1+ succ e]` or some such thing, and again they didn't by default know what to do with such terms. The fact that `-[1+ e]` is not defeq to the coercion of `-(1+e)` did not help either (it turns out to be defeq to `-(e+1)`, which in some sense indicates that the notation is not great, but I don't know if there are technical problems with changing it). 
 
@@ -233,3 +235,5 @@ at the end I use it to squash all of these at once, after applying `div_nonneg` 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 20 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20nat%20is%20just%20a%20non-negative%20int/near/134326914):
 `norm_num`?
 
+
+{% endraw %}

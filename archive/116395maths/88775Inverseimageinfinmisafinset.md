@@ -9,6 +9,8 @@ permalink: archive/116395maths/88775Inverseimageinfinmisafinset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 16 2018 at 16:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20in%20%60fin%20m%60%20is%20a%20%60finset%60/near/126647766):
 The following code is (obviously) not typechecking. How do I make this work?
 ```lean
@@ -233,3 +235,5 @@ That's why I can't use `algebra.big_operators`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 16 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20in%20%60fin%20m%60%20is%20a%20%60finset%60/near/126649647):
 @**Johan Commelin** `algebra.big_operators` is probably better than Patrick's big operators in this case.
 
+
+{% endraw %}

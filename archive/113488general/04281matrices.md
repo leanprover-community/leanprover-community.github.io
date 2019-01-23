@@ -9,6 +9,8 @@ permalink: archive/113488general/04281matrices.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 08 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/matrices/near/124777985):
 any of the coq experts out there know what the most complete linalg / tensor package is out there for theorem provers? I'd like to look into what's out there for computing with complex matrices. quaternions would be cool too
 
@@ -62,3 +64,5 @@ I'm busy today doing admin but I dumped ellen's code and Sean's comments on it h
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 13 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/matrices/near/129604201):
 @**Yulia Zaplatina** if you pull the xena-UROP-2018 repo and open the folder in VS Code then you should be able to type stuff like `import xenalib/Ellen_Arlt_matrix_rings` and get her definitions. Someone should merge Sean's edits as well but I need to go and throw eggs at Trump
 
+
+{% endraw %}

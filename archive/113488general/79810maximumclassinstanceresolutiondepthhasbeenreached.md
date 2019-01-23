@@ -9,6 +9,8 @@ permalink: archive/113488general/79810maximumclassinstanceresolutiondepthhasbeen
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/maximum%20class-instance%20resolution%20depth%20has%20been%20reached/near/125627176):
 I was writing some random universal property code
 
@@ -385,3 +387,5 @@ R_alg_equiv_of_unique_homs
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/maximum%20class-instance%20resolution%20depth%20has%20been%20reached/near/125644009):
 All universal properties
 
+
+{% endraw %}

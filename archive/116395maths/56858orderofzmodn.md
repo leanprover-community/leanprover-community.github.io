@@ -9,6 +9,8 @@ permalink: archive/116395maths/56858orderofzmodn.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Guy Leroy (Aug 02 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130770849):
 Hi, I'm trying to find the order of zmod n.
 Chris helped me and wrote this code:
@@ -74,3 +76,5 @@ they're doing UROP
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 02 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130772978):
 I force them to come in :-) In fact I don't even know why we're meeting in the computer room -- everyone brings their own computers.
 
+
+{% endraw %}

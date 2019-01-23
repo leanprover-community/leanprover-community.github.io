@@ -9,6 +9,8 @@ permalink: archive/116395maths/65578basiccomplexnumbercomputations.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 11 2018 at 17:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/basic%20complex%20number%20computations/near/129477726):
 @**VeraZZ** is doing basic computations with complex numbers and I'm still not 100% sure that we're doing it right.
 
@@ -47,3 +49,5 @@ That sounds like a tactic I might be able to write.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 11 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/basic%20complex%20number%20computations/near/129478809):
 sure: ``meta def cplx_ring : tactic unit := `[apply complex.ext ; {simp, ring}]``
 
+
+{% endraw %}

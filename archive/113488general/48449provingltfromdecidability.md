@@ -9,6 +9,8 @@ permalink: archive/113488general/48449provingltfromdecidability.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Apr 05 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661129):
 I'd like to show the following lemma:
 
@@ -554,3 +556,5 @@ You need to compare with https://github.com/leanprover/mathlib/blob/master/leanp
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 05 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687820):
 Thanks
 
+
+{% endraw %}

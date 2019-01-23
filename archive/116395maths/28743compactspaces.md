@@ -9,6 +9,8 @@ permalink: archive/116395maths/28743compactspaces.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 22 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20spaces/near/134451428):
 I'm inclined to add the following class, following the naming scheme of `t2_space`, `separable_space`, etc.
 ```lean
@@ -26,3 +28,5 @@ My only comment was that ever since I saw the definition of compact I was surpri
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 23 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20spaces/near/134455015):
 I agree. I don't think there is much advantage to working with subsets here, since you get exactly the right behavior with `compact_space s` with the subtype coercion
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/37089VScodeinthebrowser.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 27 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20in%20the%20browser/near/125773025):
 Has anyone seen https://spiffcode.github.io/ghedit/ before?
 
@@ -63,3 +65,5 @@ lol you have a lecture in 2 days and you just messed up your sleeping schedule
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20in%20the%20browser/near/125822497):
 A powerful and stable release of Lean and Mathlib makes teaching so much easier, and I feel that we are nearly there.
 
+
+{% endraw %}

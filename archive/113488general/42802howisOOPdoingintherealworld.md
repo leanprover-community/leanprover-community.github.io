@@ -9,6 +9,8 @@ permalink: archive/113488general/42802howisOOPdoingintherealworld.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Apr 06 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20is%20OOP%20doing%20in%20the%20%22real%20world%22/near/124721653):
 @**Moses Schönfinkel**  @**Patrick Massot** @**Kevin Buzzard** 
 
@@ -233,3 +235,5 @@ Likewise, I will have  a lot of people writing software in my professional netwo
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Apr 08 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20is%20OOP%20doing%20in%20the%20%22real%20world%22/near/124797942):
 What you need is better DLHE data. As it is DLHE is just too coarse: https://unistats.ac.uk/subjects/employment/10003270FT-G100/ReturnTo/Search
 
+
+{% endraw %}

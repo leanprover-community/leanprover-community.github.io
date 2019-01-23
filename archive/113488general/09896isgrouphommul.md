@@ -9,6 +9,8 @@ permalink: archive/113488general/09896isgrouphommul.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 12 2018 at 07:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_group_hom.mul/near/124970058):
 This is what `is_group_hom.mul` looked like on [Apr 5](https://github.com/leanprover/mathlib/blob/22e671c5ed5fd1b891fb73aa10c9425d1c6cfd3d/algebra/group.lean#L493):
 ```
@@ -81,3 +83,5 @@ I agree with that change, it makes more sense the other way around to match with
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 12 2018 at 08:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_group_hom.mul/near/124970294):
 but one thing I will not do is avoid small consistency changes because of a worry of breaking things. Once you start doing that, it will only become more crufty as time goes on
 
+
+{% endraw %}

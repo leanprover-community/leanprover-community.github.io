@@ -9,6 +9,8 @@ permalink: archive/113488general/27997moreleanincompleteness.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 04 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20lean%20incompleteness/near/124609074):
 @**Gabriel Ebner** I found another place where I lie in the paper compared to lean's actual behavior:
 ```
@@ -20,3 +22,5 @@ inductive fooSort : Sort u | mk : ℕ → fooSort
 ```
 I assumed the last definition should work, writing the universe constraint as `imax v u <= u` where `u` is the sort of the inductive type itself (here `u`) and `v` is the sort of the constructor argument (here `1`). Is this just because lean doesn't know how to prove `imax 1 u <= u`?
 
+
+{% endraw %}

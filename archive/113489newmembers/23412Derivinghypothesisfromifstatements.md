@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/23412Derivinghypothesisfromifstatements.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056007):
 Hi, I am currently cleaning up my gaussian elimination proof. At one point I defined the following functions:
 ```lean
@@ -346,3 +348,5 @@ Seems that's a problem in my case. Any reason why it would not work?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 03 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135089959):
 Oops, I guess the description is outdated. It will work on `nat`, but it isn't complete (it's just doing Fourier Motzkin elimination). It also doesn't know about nat subtraction, which could be a problem in your case.
 
+
+{% endraw %}

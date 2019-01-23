@@ -9,6 +9,8 @@ permalink: archive/116395maths/66292semiringhomomorphisms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semiring%20homomorphisms/near/126249853):
 There is a class for ring homomorphisms: https://github.com/leanprover/mathlib/blob/7d1ab388bb097db5d631d11892e8f110e1f2e9cd/algebra/ring.lean#L60
 But there is no class for semiring homomorphisms. Does it make sense to change broaden this class into semiring homomorphisms?
@@ -82,3 +84,5 @@ Well, `transport_to_additive` can be seen as a special case of parametricity
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 08 2018 at 08:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semiring%20homomorphisms/near/126250863):
 but there is also a lot of renaming to be done by the tactic
 
+
+{% endraw %}

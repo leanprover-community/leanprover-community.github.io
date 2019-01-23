@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/51517UranusTesting.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 05 2019 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uranus%20Testing/near/154466208):
 Welcome @**Uranus Testing** in UTC+7 (Russia, Mongolia, Christmas Island, Cambodia, Central Kalimantan, Java, Sumatra, West Kalimantan, Laos, Thailand, Vietnam)
 
@@ -54,3 +56,5 @@ your name is... interesting enough
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Uranus Testing (Jan 06 2019 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uranus%20Testing/near/154518255):
 What is wrong with it?
 
+
+{% endraw %}

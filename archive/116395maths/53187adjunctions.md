@@ -9,6 +9,8 @@ permalink: archive/116395maths/53187adjunctions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 07 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146960106):
 I feel like it is time we get adjoint functors. We now have `map` and `comap` for over-categories. They form an adjoint pair, and this would allow us to prove useful stuff. Has anyone given thought to implementing adjunctions in Lean? Are there any traps that should be avoided?
 
@@ -546,3 +548,5 @@ The induction step generates 3 goals.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 22 2019 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156610749):
 So if I want to be explicit in the `simp`-part, I need to tackle the 3 goals separately...
 
+
+{% endraw %}

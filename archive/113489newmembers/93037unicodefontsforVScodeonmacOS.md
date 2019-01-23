@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/93037unicodefontsforVScodeonmacOS.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Aug 15 2018 at 01:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unicode%20fonts%20for%20VS%20code%20on%20macOS/near/132142135):
 Does anyone have any recommendations for macOS fonts that include all the unicode symbols in mathlib? On Windows the default fonts seem good so far but there are some missing symbols on macOS like `ₘ`.
 
@@ -33,3 +35,5 @@ Thanks, installing [the DejaVu fonts](https://dejavu-fonts.github.io/) seems to 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 15 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unicode%20fonts%20for%20VS%20code%20on%20macOS/near/132173814):
 Interesting. It seems you're right. I confirmed with Font Book. The Mac symbol viewer only shows the DejaVu fonts under Font Variation for `ₘ`. I previously checked in iTerm2, so, yeah, somebody must be filling in `ₘ` from some other font. I wonder where it's coming from.
 
+
+{% endraw %}

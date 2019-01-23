@@ -9,6 +9,8 @@ permalink: archive/113488general/02007namingissues.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 02 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125982093):
 ```lean
 #check sub_pos_of_lt
@@ -63,3 +65,5 @@ although the usage of `pos` and `neg` as names for >0 and <0 is problematic sinc
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 02 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125991698):
 maybe `-x` should be called `minus` instead of `neg`?
 
+
+{% endraw %}

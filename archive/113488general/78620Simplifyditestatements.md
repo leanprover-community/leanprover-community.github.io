@@ -9,6 +9,8 @@ permalink: archive/113488general/78620Simplifyditestatements.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Aug 10 2018 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131233579):
 I've noticed the following:
 ```lean
@@ -96,3 +98,5 @@ by simp only [p, hn, dif_neg, not_false_iff]
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Aug 10 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131234265):
 Aha! Thanks.
 
+
+{% endraw %}

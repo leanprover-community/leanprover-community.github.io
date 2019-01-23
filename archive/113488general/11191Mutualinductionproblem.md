@@ -9,6 +9,8 @@ permalink: archive/113488general/11191Mutualinductionproblem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Neil Strickland (Nov 02 2018 at 18:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137068101):
 Here is an attempt at a mutually inductive definition, which is a bit more intricate than the ones in the book.  
 ```lean
@@ -113,3 +115,5 @@ Unfortunately, since `blocks n` refers to `partitions n` the default well founde
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137078619):
 you can hack together the right well founded relation, but dealing with that relation will dominate the size of the definition itself
 
+
+{% endraw %}

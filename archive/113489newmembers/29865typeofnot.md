@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/29865typeofnot.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Oct 09 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20of%20%60not%60/near/135432721):
 Is there a reason we have `def not : Prop → Prop` rather than `def not : Sort u → Prop`?
 
@@ -20,3 +22,5 @@ It's probably a matter of convention. `¬p`, you usually assume that `p` is a pr
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 09 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20of%20%60not%60/near/135434043):
 there used to be a `~A` notation for this, but it didn't get used enough to be worth it.
 
+
+{% endraw %}

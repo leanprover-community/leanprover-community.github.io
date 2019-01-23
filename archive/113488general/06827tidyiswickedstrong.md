@@ -9,6 +9,8 @@ permalink: archive/113488general/06827tidyiswickedstrong.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 03 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20is%20wicked%20strong/near/130822631):
 Kudos to Scott!
 ```lean
@@ -101,3 +103,5 @@ It is such a pity that they did their work in their own private interactive theo
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 03 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20is%20wicked%20strong/near/130832996):
 Thanks @**Rob Lewis** for the reference. This is very different than what we're trying.
 
+
+{% endraw %}

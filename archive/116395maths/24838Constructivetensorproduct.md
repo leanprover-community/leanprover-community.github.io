@@ -9,6 +9,8 @@ permalink: archive/116395maths/24838Constructivetensorproduct.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 03:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Constructive%20tensor%20product/near/130248625):
 https://github.com/kckennylau/Lean/blob/master/constructive_tensor_product.lean
 
@@ -48,3 +50,5 @@ hmm
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Constructive%20tensor%20product/near/130293213):
 let's prove the separability lemma first
 
+
+{% endraw %}

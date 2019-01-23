@@ -9,6 +9,8 @@ permalink: archive/113488general/79105extensionality.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extensionality/near/127167357):
 Now that we have the `ext` tactic, let's get started tagging every theorem with `@[extensionality]` :D
 
@@ -652,3 +654,5 @@ This is a standard problem with *changing* behavior--it's hard to evaluate how u
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 07 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extensionality/near/151129776):
 In this case, it is hard to imagine any compelling argument for changing the default behavior anyways.
 
+
+{% endraw %}

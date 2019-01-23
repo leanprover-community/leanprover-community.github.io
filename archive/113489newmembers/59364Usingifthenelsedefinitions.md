@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/59364Usingifthenelsedefinitions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mark Dickinson (Nov 03 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20if-then-else%20definitions/near/137127809):
 I'm missing something fundamental. If I've defined a function `ℕ → ℕ` by making use of the if-then-else construct, how do I go about proving anything about that function? For example, given:
 ```lean
@@ -50,3 +52,5 @@ Thanks, both.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 03 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20if-then-else%20definitions/near/137128585):
 This time last year I remember Kenny and I fretting over exactly this question -- a constructor for `ite` -- and I found `if_pos` by grepping through the source code :-)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/58787428BanachContraction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 11 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151452941):
 PR by @**Rohan Mitta**.
 
@@ -147,3 +149,5 @@ Let's begin with this very natural case disjunction!
 ```
  That's pretty much how the proof I was taught as an undergraduate began!
 
+
+{% endraw %}

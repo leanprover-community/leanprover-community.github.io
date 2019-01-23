@@ -9,6 +9,8 @@ permalink: archive/113488general/21598Precedenceoffunctionapplication.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Aug 08 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131073950):
 Can notation bind tighter than function application?  e.g. For an operator `^` make `f x ^ y` parse as `f (x ^ y)`?
 
@@ -40,3 +42,5 @@ Yes, you can. The binding power of application is `max = 1024`, which despite th
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) François G. Dorais (Aug 08 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131078180):
 BTW: `max_plus` is useful, it evaluates to 1034 (aka `max+10`) and avoids silly incidents like `max+11` (aka `max_spinal_tap`).
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/55460regularcardinals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 08 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/regular%20cardinals/near/133571077):
 @**Mario Carneiro** I want to show that if $$\kappa$$ is a regular cardinal, then the sum of fewer than $$\kappa$$ cardinals smaller than $$\kappa$$ is less than $$\kappa$$. Is there an easy way to do this from what's already there about regular cardinals?
 
@@ -318,3 +320,5 @@ Just to give you a taste, in the theory of model categories all this machinery i
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 09 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/regular%20cardinals/near/133625739):
 (My secret plan is to formalize the proof of this theorem.)
 
+
+{% endraw %}

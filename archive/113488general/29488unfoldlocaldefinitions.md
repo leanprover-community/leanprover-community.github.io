@@ -9,6 +9,8 @@ permalink: archive/113488general/29488unfoldlocaldefinitions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 10 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfold%20local%20definitions/near/126372867):
 Is there a way in tactic mode to unfold something bound by a surrounding `let`?
 
@@ -32,3 +34,5 @@ end
 Oh. Thanks!
 I guess I never tried precisely this, but only `unfold` and `rw`.
 
+
+{% endraw %}

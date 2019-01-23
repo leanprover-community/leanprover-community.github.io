@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/45468letwithpropositionintacticmode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 13 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151616438):
 ```lean
 import tactic.interactive
@@ -70,3 +72,5 @@ Moral: don't use `let` with propositions?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151618280):
 Background: Kenny just watched me giving a live Lean talk and I used `let` with a proposition :P
 
+
+{% endraw %}

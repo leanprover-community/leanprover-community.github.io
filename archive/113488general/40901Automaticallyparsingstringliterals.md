@@ -9,6 +9,8 @@ permalink: archive/113488general/40901Automaticallyparsingstringliterals.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Dec 12 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Automatically%20parsing%20string%20literals/near/151491800):
 I have a type A and a partial function `parseA : string -> except string A`, is there an easy way to get Lean to automatically call `parseA` parser when I have a literal `("foo" : A)`? If `parseA "foo"` returns `except.ok r` then I'd like `r` to be used, and if it fails I'd like Lean to report the error.
 I'm starting down the path of a coercion with a custom tactic, and realized somebody may have done this before.   It's for a library for s-expression parsing/generation.
@@ -55,3 +57,5 @@ You can't access the parser's set of local variables directly, but you can call 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Joe Hendrix (Dec 12 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Automatically%20parsing%20string%20literals/near/151541375):
 @**Simon Hudon** @**Sebastian Ullrich** Thanks for the pointers.  I have to work on something else for a bit, but will get back to this soon.
 
+
+{% endraw %}

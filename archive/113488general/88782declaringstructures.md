@@ -9,6 +9,8 @@ permalink: archive/113488general/88782declaringstructures.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 10 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaring%20structures/near/123537345):
 Can I declare structures in the meta lang?
 
@@ -30,3 +32,5 @@ But that doesn't mean that using `environment.add_inductive` will render the typ
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 11 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaring%20structures/near/123568493):
 It's useless to end users, but not useless to other meta programs like the coinductive predicates
 
+
+{% endraw %}

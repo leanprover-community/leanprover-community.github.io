@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/40095finsetsubsetunion.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 16 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset.subset_union_%2A/near/134038959):
 Is there a reason why `finset.subset_union_left` and `finset.subset_union_right`have implicit arguments `{s₁ s₂ : finset α}` and the corresponding `set.` theorems have explicit arguments `(s t : set α)`?
 
@@ -21,3 +23,5 @@ Given that `mem_union_left` exists, I think they should be explicit.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 16 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset.subset_union_%2A/near/134053191):
 That's what I thought too. [PR here](https://github.com/leanprover/mathlib/pull/353).
 
+
+{% endraw %}

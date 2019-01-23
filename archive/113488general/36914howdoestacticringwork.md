@@ -9,6 +9,8 @@ permalink: archive/113488general/36914howdoestacticringwork.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 11 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20tactic.ring%20work%3F/near/127888870):
 I have read through programming in Lean a couple of times and now wonder if it's time I started reading something else. I decided to read the ring tactic (not least because it failed to prove something relatively simple the last time I tried to use it and I'd rather fix it myself than pester Mario, not that I have any idea about how far I need to go before I am anywhere close to being able to fix it).
 
@@ -1288,3 +1290,5 @@ This is chapter 3 of your book?
 ```
 I am not sure if this is book material.
 
+
+{% endraw %}

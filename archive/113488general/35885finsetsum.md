@@ -9,6 +9,8 @@ permalink: archive/113488general/35885finsetsum.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Morenikeji Neri (Aug 06 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130977419):
 I'm having some trouble proving this. Help would be much appreciated.
 ```lean lemma sum_keji {α β : Type*} [add_comm_monoid α] {f : β → α}
@@ -516,3 +518,5 @@ I worked on my bigop attempt today, reaching a new sorry-free equilibrium point.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 26 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148371544):
 Ok, I pushed https://github.com/leanprover-community/mathlib/tree/bigop Any contributor is very welcome. In particular, cleaning up https://github.com/leanprover-community/mathlib/blob/bigop/pending_lemmas.lean  requires no big operators skills, only knowing mathlib (or searching efficiently), or being good at either list or nat vs int bashing.
 
+
+{% endraw %}

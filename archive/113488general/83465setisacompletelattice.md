@@ -9,6 +9,8 @@ permalink: archive/113488general/83465setisacompletelattice.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 13 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037337):
 mathlib proof:
 ```
@@ -91,3 +93,5 @@ It just means that you never have to use the lemma `succ_le_of_lt`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Apr 13 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125039063):
 you can `match` or use the equation compiler to do case analysis and inductionon `<`, with the definition following the default setup this would be not possible.
 
+
+{% endraw %}

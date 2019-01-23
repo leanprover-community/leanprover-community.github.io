@@ -9,6 +9,8 @@ permalink: archive/113488general/88851supeqmax.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 06 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sup_eq_max/near/129199027):
 Is there a nice way to state the lemma `a ⊔ b = max a b`, in general, for when `sup` is not derived from `max` such as on `with_bot`, or do I just have to prove it for `with_bot`
 
@@ -49,3 +51,5 @@ Why did that message appear next to your name instead of beneath?
 ```
 Yeah, I'm old. My IRC habits betray me. (Hint: type `/me` before your message.)
 
+
+{% endraw %}

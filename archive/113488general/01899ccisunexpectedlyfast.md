@@ -9,6 +9,8 @@ permalink: archive/113488general/01899ccisunexpectedlyfast.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 17 2018 at 08:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20is%20unexpectedly%20fast/near/132284614):
 [2018-08-17-1.png](/user_uploads/3121/H2XKxrFTq7Uuh78QYpIZg00o/2018-08-17-1.png)
 
@@ -24,3 +26,5 @@ theorem test : 1001 = 2000 → false :=
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 17 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20is%20unexpectedly%20fast/near/132284942):
 That's not cheating. That's being smart (-;
 
+
+{% endraw %}

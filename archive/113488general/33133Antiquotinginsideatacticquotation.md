@@ -9,6 +9,8 @@ permalink: archive/113488general/33133Antiquotinginsideatacticquotation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Sep 17 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Antiquoting%20inside%20a%20tactic%20quotation/near/134069500):
 Hi!! So I'm trying to write my first tactic and I have something that looks like this:
 ```lean
@@ -89,3 +91,5 @@ would that be `rewrite_target`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 17 2018 at 17:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Antiquoting%20inside%20a%20tactic%20quotation/near/134108985):
 I was about to suggest `rewrite_target` but it requires that you encode `<- ` by hand
 
+
+{% endraw %}

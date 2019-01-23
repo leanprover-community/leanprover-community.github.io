@@ -9,6 +9,8 @@ permalink: archive/113488general/08179LeanassignmentfromKenny.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 30 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20assignment%20from%20Kenny/near/130567187):
 (optional) assignment for the people here who are too bored:
 Consider this inductive type:
@@ -97,3 +99,5 @@ then why are you asking me lol
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 31 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20assignment%20from%20Kenny/near/130627720):
 I'm asking you to implement it ;-)
 
+
+{% endraw %}

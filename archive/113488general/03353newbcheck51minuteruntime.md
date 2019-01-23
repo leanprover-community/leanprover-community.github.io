@@ -9,6 +9,8 @@ permalink: archive/113488general/03353newbcheck51minuteruntime.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) drocta (May 31 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newb%2C%20%20%22%23check%205%22%201%20minute%20runtime%3F/near/127381913):
 First, sorry if this is not the correct place for me to seek help for this. I haven't used zulip before and couldn't find a page with the rules to follow for this specific chat. (Should I have put this in an existing topic?)
 I tried installing Lean 3.4.1 on windows 7, and when I try to run a test2.lean which consists of just "#check 5", it takes a minute and 5 seconds before it gives me the output.
@@ -97,3 +99,5 @@ Interesting. I guess the precompiled binaries don't contain precompiled .olean f
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 01 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newb%2C%20%20%22%23check%205%22%201%20minute%20runtime%3F/near/127388291):
 I almost always use linux nightlies and they have plenty of .olean files usually
 
+
+{% endraw %}

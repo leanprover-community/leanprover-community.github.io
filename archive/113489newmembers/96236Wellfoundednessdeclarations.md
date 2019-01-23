@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/96236Wellfoundednessdeclarations.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 11 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Well%20foundedness%20declarations/near/129479543):
 It seems for the mutually recursive function below, Lean cannot find the well founded relation.  How can I specify the relation?
 
@@ -60,3 +62,5 @@ with findRecordHelper : ℕ → (list Value) → (list Value)
 end.
 ```
 
+
+{% endraw %}

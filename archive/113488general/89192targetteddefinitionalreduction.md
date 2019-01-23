@@ -9,6 +9,8 @@ permalink: archive/113488general/89192targetteddefinitionalreduction.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 29 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/targetted%20definitional%20reduction/near/127246965):
 The history of this question is the following: I had a complicated goal which could be reduced using a definitional unfolding which for some reason wasn't happening -- "unfold" wouldn't work
 
@@ -271,3 +273,5 @@ like `(f x y z).F`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 30 2018 at 00:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/targetted%20definitional%20reduction/near/127278247):
 right
 
+
+{% endraw %}

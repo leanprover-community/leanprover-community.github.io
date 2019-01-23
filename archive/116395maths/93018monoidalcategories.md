@@ -9,6 +9,8 @@ permalink: archive/116395maths/93018monoidalcategories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 07 2018 at 04:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/monoidal%20categories/near/146915123):
 @**Michael Jendrusch** has recently started work on monoidal categories again. (Yay!)
 
@@ -381,3 +383,5 @@ I have tried this, ..., but it was a long time ago and I don't really remember w
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 10 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/monoidal%20categories/near/147448765):
 @**Michael Jendrusch**, I started adding the monoidal structure on any category with products, that should subsume your initial example of `Type u`. It's not there yet, but I think it's a fun test of our limits library to make sure this is doable with no more effort than in the `Type u` case.
 
+
+{% endraw %}

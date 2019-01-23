@@ -9,6 +9,8 @@ permalink: archive/113488general/81209PolynomialFunctors.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Feb 26 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Polynomial%20Functors/near/123006369):
 Can someone remind me why have I got a 429 page pdf about polynomial functors open on my desktop?
 
@@ -55,3 +57,5 @@ So anyway, by definition every W-type T is the initial algebra of some functor F
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tim Carstens (Feb 26 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Polynomial%20Functors/near/123008578):
 this level of abstract nonsense is not useful for actually writing programs as far as I can tell; certainly it's a horrible way to work with inductive types in Lean, which already has good syntax for working with inductives
 
+
+{% endraw %}

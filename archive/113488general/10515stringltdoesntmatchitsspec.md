@@ -9,6 +9,8 @@ permalink: archive/113488general/10515stringltdoesntmatchitsspec.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 21 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128386824):
 @**Gabriel Ebner** @**Sebastian Ullrich** I started trying to prove that `string.lt` is a total order, and then I discovered it's not true:
 ```
@@ -61,3 +63,5 @@ instance decidable_rel [decidable_eq α] (r : α → α → Prop)
 end
 ```
 
+
+{% endraw %}

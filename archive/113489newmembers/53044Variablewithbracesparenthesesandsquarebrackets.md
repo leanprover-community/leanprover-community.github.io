@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/53044Variablewithbracesparenthesesandsquareb
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 08 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147280537):
 The below code works.
 However, if I changed the `h` to `pp` in function `p_mod_range`, pp will become unknown identifier....
@@ -213,3 +215,5 @@ Oh!! Thank you very much! (Didn't notice this... as I can't find zmod via C-c C-
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 08 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147296994):
 Yes, didn't even notice that there were `pnat`, this really helped a lot! Thank you!
 
+
+{% endraw %}

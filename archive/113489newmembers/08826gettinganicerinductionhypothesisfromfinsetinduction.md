@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/08826gettinganicerinductionhypothesisfromfin
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 24 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20a%20nicer%20induction%20hypothesis%20from%20finset.induction/near/134558327):
 I'm working on formalizing a proof where the idea is to induct on the size of $$Y \setminus X$$ for two finsets $$X, Y$$. I've currently set up something like the following:
 ```lean
@@ -69,3 +71,5 @@ You could just assume `fintype α`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 25 2018 at 02:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20a%20nicer%20induction%20hypothesis%20from%20finset.induction/near/134566466):
 Ah, so that's what `generalizing` does! I wasn't able to make sense of that part of the docstring. As for fintype, I can see that will make things much easier. I just kind of rushed ahead without looking beyond `finset` when I started this. Thanks!
 
+
+{% endraw %}

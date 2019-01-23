@@ -9,6 +9,8 @@ permalink: archive/113488general/84434addingadefinition.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 14 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20a%20definition/near/133939240):
 I'd like implement a `[user_command]` which adds a definition to the environment at the place where the `[user_command]` is executed. Of course, there is `environment.add`, but I have to build a `declaration` and in particular pass a `name`. This won't act the same way as writing `def blah : type = foo ...` on that line because the latter will have a "full name" `me.my_namespace.blah` if this all goes on inside `namespace me.my_namespace`. Is there a way to fix this: either to get the current namespace, or to make a declaration as if it happened using a `def`?
 
@@ -110,3 +112,5 @@ I don't even think we need my thing to do this actually Scott, since we could al
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 14 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20a%20definition/near/133966107):
 I think I should talk to you more about what exactly it should do, since it seems hard to decide whether for example `{X Y : D}` in the above example should have curly brackets instead of parentheses.
 
+
+{% endraw %}

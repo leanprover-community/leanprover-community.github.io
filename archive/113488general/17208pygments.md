@@ -9,6 +9,8 @@ permalink: archive/113488general/17208pygments.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Feb 26 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pygments/near/123002866):
 my understanding was zulip uses an old version of pygments, and that the lean pygments update was never merged to begin with
 
@@ -208,3 +210,5 @@ Yes, because I prove that it gives what you expect: for any embeddings of X and 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Jan 15 2019 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pygments/near/155187605):
 In fact, the API is designed so that, in the end, you should completely forget that it was defined using $$\ell^\infty(\mathbb{N})$$: this is just a handy technical tool in the construction.
 
+
+{% endraw %}

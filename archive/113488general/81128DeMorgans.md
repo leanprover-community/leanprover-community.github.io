@@ -9,6 +9,8 @@ permalink: archive/113488general/81128DeMorgans.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Lee (Oct 23 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136299566):
 Just proved $$\neg (P \lor Q ) \iff \neg P \land \neg Q$$ and $$\neg P \lor \neg Q \to \neg (P \land Q)$$ in Lean. I don't see why the converse would require classical logic though. Can someone please explain?
 
@@ -327,3 +329,5 @@ it might make more sense if `g` is called `throw` instead
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 23 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319468):
 and `callcc` is `catch`
 
+
+{% endraw %}

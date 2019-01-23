@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/27081Leavetermmodecalconceyouenterit.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 11 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135604247):
 Part of my proof involved calc, but now I want to return to tactic mode to complete my proof. How do I do this?
 
@@ -82,3 +84,5 @@ You need a comma at the end of the `calc`.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 11 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135607719):
 Oh... thanks. Yep, now it's working.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/65236singleton.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976871):
 Am I just missing a `singleton` class, the pushout of `inhabited` and `subsingleton`? Am I meant to define my own?
 
@@ -137,3 +139,5 @@ okay, kids need lunch!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977396):
 I'm open to slick binder notations for that
 
+
+{% endraw %}

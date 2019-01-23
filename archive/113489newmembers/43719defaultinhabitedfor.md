@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/43719defaultinhabitedfor.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Aug 13 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/default%20/%20inhabited%20for%20%E2%84%9A%2C%20%E2%84%9D%2C%20%E2%84%82/near/132070075):
 I'm going through [TPIL's chapter on typeclasses](https://leanprover.github.io/theorem_proving_in_lean/type_classes.html#type-classes-and-instances) and while messing around tried the following:
 ```lean
@@ -169,3 +171,5 @@ Type class inference is quite clever.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Aug 14 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/default%20/%20inhabited%20for%20%E2%84%9A%2C%20%E2%84%9D%2C%20%E2%84%82/near/132075092):
 It looks much more persistent than clever when I put on `set_option trace.class_instances true` :wink:
 
+
+{% endraw %}

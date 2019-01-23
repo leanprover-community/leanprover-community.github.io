@@ -9,6 +9,8 @@ permalink: archive/113488general/32676heqhellagain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 09 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/heq%20hell%20again/near/135479776):
 My current goal looks like `eq.mpr comm_ring._proof_2 (quotient_ring.comm_ring (closure (is_ideal.trivial α))) == quotient_ring.comm_ring (closure (is_ideal.trivial α))` I'm ready to believe this is a rightful punishment for an earlier sin, but I'd like to know whether there is any hope to escape, or I should go back and think about what I'm doing
 
@@ -155,3 +157,5 @@ I found a pretty good summary of all the different types of equality here: https
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 09 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/heq%20hell%20again/near/135492206):
 I have no idea what heq is. I can only tell you that when arguments of a term depend on other arguments then `rw` and `simp` often don't work. `convert` works but spawns `heq` goals. I understand nothing about Mario's explanations unfortunately
 
+
+{% endraw %}

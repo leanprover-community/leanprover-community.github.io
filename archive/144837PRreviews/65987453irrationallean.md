@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/65987453irrationallean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23453%20irrational.lean/near/136888753):
 @**Calle Sönne**  @**Abhimanyu Pallavi Sudhir**  and @**Jean Lo**  are all first year undergraduates at Imperial (who'd never used Lean 1 month ago) and this is joint work of theirs, subsequently tidied up by Chris and Kenny. The genesis of this project was some basic example sheet questions from my course, but it then it grew a bit. It feels to me like most of the things you'd ever want to know about irrational numbers, modulo theorems such as e or pi is irrational (the latter probably being hard to formalise).
 
@@ -23,3 +25,5 @@ Correction: it's not dense in the top half-plane, and its closure is probably ju
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23453%20irrational.lean/near/146797600):
 @**Kevin Buzzard** @**Abhimanyu Pallavi Sudhir** @**Jean Lo** @**Calle Sönne** It has been merged
 
+
+{% endraw %}

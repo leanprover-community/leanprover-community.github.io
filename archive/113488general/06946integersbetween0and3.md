@@ -9,6 +9,8 @@ permalink: archive/113488general/06946integersbetween0and3.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 20 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162002):
 `example : ∀ (r : ℤ), r ≥ 0 → r < 3 → r = 0 ∨ r = 1 ∨ r = 2 := dec_trivial` doesn't work for me. Is there any easy way of getting from $$0\leq r<3$$ (with `r : int`) to the three cases?
 
@@ -146,3 +148,5 @@ Merged @**Kevin Buzzard**
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 30 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136801131):
 (deleted)
 
+
+{% endraw %}

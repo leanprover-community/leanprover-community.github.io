@@ -9,6 +9,8 @@ permalink: archive/113488general/73584applyI.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 07 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/applyI/near/133495991):
 Is there a variant on apply or refine which turns `[...]` arguments which couldn't be solved into new goals?
 
@@ -76,3 +78,5 @@ maybe we should have 32768 names for our 15 boolean configurations of `simp`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 07 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/applyI/near/133503487):
 Indeed I would love to read more examples of using convert.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/70572vscodeextensioninstallsLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 17 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode%20extension%20installs%20Lean/near/134097115):
 I just sent a PR for the VS Code extension, that will offer to install Lean for you if it can't find a working copy. It uses elan, and just runs in the VS Code terminal.
 
@@ -349,3 +351,5 @@ after that, seeing if we can make `elan` more helpful when dependencies are miss
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 24 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode%20extension%20installs%20Lean/near/134516615):
 https://github.com/leanprover/vscode-lean/pull/91
 
+
+{% endraw %}

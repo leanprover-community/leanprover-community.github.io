@@ -9,6 +9,8 @@ permalink: archive/113488general/54483spawnnewprocess.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 02 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spawn%20new%20process/near/123202790):
 Would it be at all possible for a lean tactic to spawn a new process? For example call `coqtop`? If so, any recommendation as to what file to take a look at? (I don't suppose it's documented.)
 
@@ -33,3 +35,5 @@ Next thing you know we'll be querying google for proofs! ;)
 
 `tactic.unsafe_run_io` :) .  The unsafe part should vanish soon by basing `tactic` on `io`.
 
+
+{% endraw %}

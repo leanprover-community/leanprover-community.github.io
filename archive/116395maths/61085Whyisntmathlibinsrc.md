@@ -9,6 +9,8 @@ permalink: archive/116395maths/61085Whyisntmathlibinsrc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Why%20isn%27t%20mathlib%20in%20%60src%60%3F/near/137161687):
 I thought I'd try proving Hilbert Basis theorem again with the new module stuff (although it's been impossible because my nephews have been here all weekend) and I realised that building my version of community mathlib is really annoying because my scratch files don't compile (as they were all doing things with old versions of module). This  could all be fixed if mathlib lived in src like everything else does. Can we make this change at some point?
 
@@ -33,3 +35,5 @@ and you can make it compile by making it the first workspace of vscode
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 04 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Why%20isn%27t%20mathlib%20in%20%60src%60%3F/near/137172205):
 I've had the same problem; I like having a scratch directory sometimes.
 
+
+{% endraw %}

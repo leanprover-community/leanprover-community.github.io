@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/35710Windowsinstallation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) JDM (Sep 22 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Windows%20installation/near/134429178):
 Hi everyone! I'm trying to get Lean to work with Visual Studio, but I'm having trouble setting the installation path. Can anyone help? Much appreciated!
 
@@ -40,3 +42,5 @@ Many thanks for all the efforts!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 24 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Windows%20installation/near/134513162):
 One of the biggest mistakes I ever made on a Windows machine was creating a userid with spaces in
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/57914stringtactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 06 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string%20-%3E%20tactic%3F/near/124695173):
 Is there a good way to take a string (e.g. "simp, exact p") and return the tactic that executes it in interactive mode?
 
@@ -63,3 +65,5 @@ Alright then :)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 06 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string%20-%3E%20tactic%3F/near/124707373):
 What Mario said
 
+
+{% endraw %}

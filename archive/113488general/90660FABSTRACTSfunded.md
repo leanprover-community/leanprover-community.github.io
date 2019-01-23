@@ -9,6 +9,8 @@ permalink: archive/113488general/90660FABSTRACTSfunded.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 28 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/FABSTRACTS%20funded/near/124325364):
 https://jiggerwit.wordpress.com/2018/03/28/formal-abstracts-in-mathematics/
 
@@ -39,3 +41,5 @@ Failing that I'm pretty sure you can buy thousands of clicks easily nowadays. My
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/FABSTRACTS%20funded/near/124328940):
 Maybe Hales can use some of the money to do that.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/63153makinganequiv.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Sever (Sep 07 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20an%20equiv/near/133531588):
 I have `f : α → α → α → α → α → α → Prop` that says `a ≠ b ∧ c ≠ b ∧ d ≠ e ∧ f ≠ e ∧ blah`. I have shown `f`is reflexive, symmetric and transitive (i.e. an equiv on α × α × α), but only when `a ≠ b ∧ c ≠ b`. Now I want to make the equiv classes, I'm having trouble with deciding what to do.
  If I set `f` to take a random value for `a = b`, then working with `f`is going to be annoying. If I make the equiv on `α × α × α` such that `a ≠ b ∧ c ≠ b`, then any time I talk about the class `a b c` I have to give proofs of `a ≠ b`and `c ≠ b`. Is there different method? 
@@ -86,3 +88,5 @@ I guess I'll have to try a different approach
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 09 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20an%20equiv/near/133610654):
 I'm not saying that any approach doesn't work, but I am saying that I've learnt from experience that actually formalising my question precisely as `definition : blah := sorry` or `theorem : blah := sorry` really helps me to understand what I am asking before I ask it.
 
+
+{% endraw %}

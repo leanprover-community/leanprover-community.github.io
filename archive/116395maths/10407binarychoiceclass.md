@@ -9,6 +9,8 @@ permalink: archive/116395maths/10407binarychoiceclass.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 23 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/binary%20choice%20class/near/126968229):
 Any thoughts (e.g. name and possible location in mathlib) on this class and instances? It's useful for the `finset` `max`/`min` stuff.
 
@@ -29,3 +31,5 @@ instance max_choice {α : Sort*} [d : decidable_linear_order α] : has_choice (@
 ⟨λ a b, if h : a ≤ b then or.inr (max_eq_right h) else or.inl (max_eq_left_of_lt (lt_of_not_ge h))⟩
 ```
 
+
+{% endraw %}

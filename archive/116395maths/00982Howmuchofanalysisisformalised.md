@@ -9,6 +9,8 @@ permalink: archive/116395maths/00982Howmuchofanalysisisformalised.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 13 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20much%20of%20analysis%20is%20formalised%3F/near/135728233):
 How much of analysis is formalised right now? I'm guessing basic calculus -- limits, single-variable stuff, Riemann integrals -- are formalised. What about multivariable, complex analysis (e.g. the complex-analytic proof of the fundamental theorem of algebra), fractional calculus, variational calculus, etc.?
 
@@ -133,3 +135,5 @@ I think I suggested an identical definition on zulip a week or two ago. Haven't 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 14 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20much%20of%20analysis%20is%20formalised%3F/near/135792687):
 `compact_space` is surely helpful
 
+
+{% endraw %}

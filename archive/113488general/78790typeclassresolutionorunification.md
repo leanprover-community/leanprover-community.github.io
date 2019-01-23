@@ -9,6 +9,8 @@ permalink: archive/113488general/78790typeclassresolutionorunification.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 18 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20resolution%20or%20unification%3F/near/125265237):
 This question might be too vague to answer. I have a fixed type `X` and I am doing a lot of work with functions from `{U : set X // P U}` to `Type*` (for example, `X` might be a topological space and the functions might assign a type to each open set in `X`, but I also consider more general possibilities for `P`, e.g. `P` might say "`U` is in a fixed basis for the topological space"). I seem to have three different ways to set up such functions.
 
@@ -237,3 +239,5 @@ And afterwards, there might be theorems that say the statement is equivalent to 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 18 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20resolution%20or%20unification%3F/near/125270068):
 On the other hand, maybe my rant does not have much bearing on readability of *proofs*...
 
+
+{% endraw %}

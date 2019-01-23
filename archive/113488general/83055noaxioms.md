@@ -9,6 +9,8 @@ permalink: archive/113488general/83055noaxioms.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20axioms/near/125814400):
 ```lean
 inductive tower : set (set (set α))
@@ -80,3 +82,5 @@ I don't get your question. Do you mean constructing pops that only uses inductiv
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Apr 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20axioms/near/125846688):
 The technical answer is that the code for `#print axioms` does not traverse inductive declarations.  It only looks at the contents and types of definitions, and types of axioms.  This is probably not a problem since you presumably don't require choice if you never use `tower.succ`.
 
+
+{% endraw %}

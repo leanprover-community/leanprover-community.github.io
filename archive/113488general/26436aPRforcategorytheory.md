@@ -9,6 +9,8 @@ permalink: archive/113488general/26436aPRforcategorytheory.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 04 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20PR%20for%20category%20theory/near/127523861):
 Dear all, (@**Mario Carneiro** and @**Johannes Hölzl** in particular!)
 I'm finally about to create a mathlib branch for some category theory, and I would be happy to have some guidance about the scope of the initial PR.
@@ -53,3 +55,5 @@ Teaching git (as setting up remotes) is harder than thought...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 09 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20PR%20for%20category%20theory/near/129351495):
 What is the status of this PR? I would love to have basic category theory available in mathlib!
 
+
+{% endraw %}

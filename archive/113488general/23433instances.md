@@ -9,6 +9,8 @@ permalink: archive/113488general/23433instances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Oct 20 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances/near/136163177):
 Can someone explain this?
 ```lean
@@ -52,3 +54,5 @@ Leo changed this behaviour a few months ago. Nothing right of the colon goes in 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 20 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances/near/136167263):
 you should use `resetI` there instead of `letI`
 
+
+{% endraw %}

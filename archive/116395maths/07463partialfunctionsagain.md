@@ -9,6 +9,8 @@ permalink: archive/116395maths/07463partialfunctionsagain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 04 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/partial%20functions%20again/near/133331307):
 With the recent merges from my so-called differential topology repository to mathlib, the next target in this direction is the definition of derivatives (Fréchet derivative if you insist on this terminology). It is very easy to say that a function defined on a whole normed vector space is differentiable at some point a: https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/calculus.lean#L17 But of course we want derivatives of functions defined on a subset of a normed space, at least allowing an open set. I can clearly try to adapt the definition, but I'd be happy to read any advice.
 
@@ -252,3 +254,5 @@ With the big warning that the differential is not unique in general, if the tang
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 05 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/partial%20functions%20again/near/133359631):
 the good filter operation is infimum: `nhds_within a s := nhds a ⊓ principal s`
 
+
+{% endraw %}

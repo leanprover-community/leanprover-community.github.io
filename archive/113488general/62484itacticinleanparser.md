@@ -9,6 +9,8 @@ permalink: archive/113488general/62484itacticinleanparser.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 22 2018 at 05:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/itactic%20in%20lean.parser/near/148152572):
 Inside a `lean.parser` monad, I can for example read a `name` by
 ````
@@ -31,3 +33,5 @@ And Lean 4?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Nov 22 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/itactic%20in%20lean.parser/near/148179070):
 There *will* be some `itactic` parser in Lean 4 since all parsing will be done in Lean, and you should be able to reuse it to you heart's content
 
+
+{% endraw %}

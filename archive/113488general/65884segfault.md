@@ -9,6 +9,8 @@ permalink: archive/113488general/65884segfault.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Aug 10 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/segfault/near/131243767):
 I just managed to crash Lean, and realized it's been quite a while since the last time!
 ```lean
@@ -320,3 +322,5 @@ Oh! The example (and tactic) is actually broken, the test doesn't actually finis
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 06 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/segfault/near/133472124):
 It's sometimes baffling how much we can live with bugs in proof tactics
 
+
+{% endraw %}

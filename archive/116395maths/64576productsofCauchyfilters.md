@@ -9,6 +9,8 @@ permalink: archive/116395maths/64576productsofCauchyfilters.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 24 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130232215):
 I need that a product of Cauchy filters is Cauchy. I couldn't see it in mathlib, so I wrote a couple of lines on paper and decided I should be able to brute force Lean to swallow it. The result on https://gist.github.com/PatrickMassot/aca4545c10aa9d96bf37d9231fb3470c is not pretty (even if you cut in half the two redundant parts). Here brutality is to go all the way down to elements of our uniform spaces. I suspect I missed (or mathlib is missing) some support lemmas which would allow to operate at a higher level. @**Mario Carneiro** and @**Johannes Hölzl**, this is probably a good occasion to set a new golfing factor record.
 
@@ -215,3 +217,5 @@ I hope Lean-level is irrelevant... Career level clearly is, partly because it al
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130264062):
 Well, at my Lean-level, it does become relevant. You are several Lean-levels above me. Your career-level is infinitely beyond mine: tenure vs not
 
+
+{% endraw %}

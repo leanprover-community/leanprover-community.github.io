@@ -9,6 +9,8 @@ permalink: archive/113488general/57903inductionontwomultisets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 11 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20on%20two%20multisets/near/129456296):
 I am trying to define a function `multiset nat -> multiset nat -> nat`, by induction. If I have two multisets `C` and `L` and if I know the value of the function on all the pairs `(C-{x},L)`(with `x` in `C`)  and `(C,L-{y})` (with `y` in `L`) then I have a formula which will give me the value at `(C,L)`. The formula is not symmetric in `C` and `L`. The tool which the API gives me is
 
@@ -104,3 +106,5 @@ I didn't get the memo that this method was passe
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jul 11 2018 at 16:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20on%20two%20multisets/near/129473764):
 Probably I need to get with the times :)
 
+
+{% endraw %}

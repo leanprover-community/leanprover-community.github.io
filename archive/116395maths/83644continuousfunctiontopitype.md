@@ -9,6 +9,8 @@ permalink: archive/116395maths/83644continuousfunctiontopitype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969544):
 I have no clue how to prove this:
 ```lean
@@ -323,3 +325,5 @@ Anyway, this all is now in mathlib.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126985262):
 Thanks a lot! I will merge into my fork. Once I clean my stuff up, I think I will make a PR
 
+
+{% endraw %}

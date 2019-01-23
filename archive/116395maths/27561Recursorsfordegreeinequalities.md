@@ -9,6 +9,8 @@ permalink: archive/116395maths/27561Recursorsfordegreeinequalities.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 19 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147942053):
 Today I wrote two proofs of the following lemma, about nonconstant polynomials. They illustrate a use of recursive propositions. For the second proof, I defined `nonconstant` as a recursive Proposition, instead of `degree p > 0`, and it was a much easier proof that didn't have any of the faffing around with degree. Is this sort of stuff worth having in the library. I'm experimenting with finding a useful recursor for `degree p < degree q`.
 ```lean
@@ -131,3 +133,5 @@ I'm sure it would be good to have nicer recursors for polynomial but, for the pu
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 19 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147953617):
 Also the story about the projective line is a bit misleading here, since we don't need any structure on $$P^1$$ in this discussion, except maybe topological. We need filters stuff for sure, maybe also Alexandrov compactification if we want
 
+
+{% endraw %}

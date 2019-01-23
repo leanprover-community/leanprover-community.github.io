@@ -9,6 +9,8 @@ permalink: archive/113488general/91356primeinringtheoryassociatedlean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 23 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prime%20in%20%60ring_theory/associated.lean%60/near/148200980):
 `ring_theory/associated.lean` defines 
 ```
@@ -48,3 +50,5 @@ I'm okay with `ring.prime` if the kill nat.prime thing doesn't work
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 23 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prime%20in%20%60ring_theory/associated.lean%60/near/148209463):
 although I've already fixed some bugs caused by this in the library (adding `nat.prime` when `nat` was open), maybe they should be re-ambiguated if it lands?
 
+
+{% endraw %}

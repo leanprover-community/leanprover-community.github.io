@@ -9,6 +9,8 @@ permalink: archive/113488general/72982Installinglean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Guillermo Barajas Ayuso (Jul 02 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128979128):
 Hi guys I'm trying to install lean in my laptop and the following message was displayed when I tried to evaluate 1+1:
 
@@ -107,3 +109,5 @@ When you're using the command line you have a "current working directory", which
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 02 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128987757):
 The message seems to be from VS Code, not Lean or elan
 
+
+{% endraw %}

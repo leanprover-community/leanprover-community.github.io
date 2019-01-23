@@ -9,6 +9,8 @@ permalink: archive/113488general/78110matchhypothesis.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexander Bentkamp (Sep 12 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133796312):
 Hi, 
 
@@ -280,3 +282,5 @@ I learn something new every day
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexander Bentkamp (Sep 14 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133941546):
 cool! I went for Johannes's solution now.
 
+
+{% endraw %}

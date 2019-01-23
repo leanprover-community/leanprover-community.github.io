@@ -9,6 +9,8 @@ permalink: archive/113488general/88174HowmanyuniversesdidIuse.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 24 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127046011):
 I proved a theorem in Lean (that an affine scheme is a scheme). Along the way I understood a little more about universes. In particular, I realised that the ZFC proof I knew that an affine scheme was a scheme "took place entirely within Type", by which I mean that every term I used was "good" -- here "good" is defined thus: (1) Type is good; (2) If X is a term of type Y and Y is good then X is good; (3) that's it. Once I realised this I went through a lot of files in my project that had lines of the form "universes u v w" and replaced them with "universe u", I also replaced many "Type v" and "Type *" with "Type u".
 
@@ -72,3 +74,5 @@ There are parts of mathlib which really use more than one universe, right?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 25 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073948):
 All parts of mathlib are universe polymorphic, so it's often hard to say, the answer is "yes trivially" if you don't ask carefully
 
+
+{% endraw %}

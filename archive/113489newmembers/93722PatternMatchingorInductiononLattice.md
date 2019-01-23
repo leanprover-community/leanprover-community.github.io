@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/93722PatternMatchingorInductiononLattice.htm
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 29 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pattern%20Matching%20or%20Induction%20on%20Lattice%3F/near/148769128):
 If I have a type which is an instance of lattice, how can I pattern match or do induction on it?
 For example,
@@ -68,3 +70,5 @@ https://github.com/leanprover/mathlib/blob/master/docs/extras/well_founded_recur
 So I think the main problem here is, I have to prove that something will decrease....
 And I have no idea how to prove this.... lol
 
+
+{% endraw %}

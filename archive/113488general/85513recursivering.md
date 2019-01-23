@@ -9,6 +9,8 @@ permalink: archive/113488general/85513recursivering.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 29 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursive%20ring/near/127272896):
 Is that a bug?
 ```lean
@@ -42,3 +44,5 @@ It's because when `ring` fails, it tries to rewrite the expression into a "nice"
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 29 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursive%20ring/near/127274422):
 I really mean: I copy and paste the example in the github issue and it works here
 
+
+{% endraw %}

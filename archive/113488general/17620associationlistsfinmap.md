@@ -9,6 +9,8 @@ permalink: archive/113488general/17620associationlistsfinmap.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 20 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/association%20lists%2C%20finmap/near/134290992):
 As some people know, I've been working on association lists and finite maps for mathlib (https://github.com/spl/lean-finmap). Mario has decided he wants to get it into mathlib soon, so he has started rewriting it in his own fashion (https://github.com/leanprover-community/mathlib/tree/finmap). I wanted to open up the discussion to get feedback from anyone else who might be interested.
 
@@ -389,3 +391,5 @@ I'd prefer `nodupkeys` for both for consistency's sake. I think the name is clea
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Oct 08 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/association%20lists%2C%20finmap/near/135407709):
 Anyway, I have to go now. If you want to discuss any other issues, I'll pick it up tomorrow.
 
+
+{% endraw %}

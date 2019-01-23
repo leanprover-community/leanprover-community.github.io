@@ -9,6 +9,8 @@ permalink: archive/113488general/70055wellfoundedexists.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793419):
 Can I prove that a recursive definition `T → Prop` is well-founded if a clause wraps the recursive call with an exists (i.e. `f <pattern> := ∃ .., f <subpattern>`)? If so, how would I begin to do this?
 
@@ -159,3 +161,5 @@ I think so. You may also have to set the priority of `has_well_founded_of_has_si
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 13 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133887243):
 I did this for polynomials. I had to write `dec_tac := tactic.assumption ` everywhere, but other than that it worked.
 
+
+{% endraw %}

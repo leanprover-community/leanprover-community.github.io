@@ -9,6 +9,8 @@ permalink: archive/113488general/56578VScodeextension.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 25 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/130267754):
 @**Gabriel Ebner** could we get two variants of F12, one creating a new tab if a new file needs to be opened, and one replacing the content of the current tab, as it currently does? Also, could we get key bindings for "Go back" and "Restart Lean"? And maybe one for "Create a comment below the current line, containing what is currently in the Lean messages view"? About Lean messages, each time I press Ctrl+Shift+Enter to open this tab, it also opens a copy of the file I'm currently editing. It's annoying and I think it wasn't like this before.
 
@@ -1066,3 +1068,5 @@ Otherwise I could also just edit inside a comment block. But I would like to hav
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 15 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/147731970):
 Anyway, I have never worked with typescript before, and I have no idea where to start if I would want to modify the VScode extension. But I would certainly like to learn this. Has someone ever twitched work on the Lean-VScode extension?
 
+
+{% endraw %}

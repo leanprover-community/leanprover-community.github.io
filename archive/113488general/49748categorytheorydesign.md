@@ -9,6 +9,8 @@ permalink: archive/113488general/49748categorytheorydesign.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20design/near/131997040):
 I spent some time this afternoon trying out three different implementations of products/equalizers/pullbacks. If anyone has a moment to have a look at them, I'd very much appreciate it. It's all in <https://github.com/semorrison/lean-category-theory-pr/blob/limits/src/categories/universal/default.lean>.
 
@@ -355,3 +357,5 @@ And it's frustratingly close to being true--the proof is just this `cases 𝒞`.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 22 2018 at 17:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20design/near/132584633):
 If, instead of proving a theorem ("the pushout of a cofibration is a cofibration"), we were constructing a canonical isomorphism or something, I can imagine that the propositional equality (C^op)^op = C could get in the way of later reasoning about the thing we constructed
 
+
+{% endraw %}

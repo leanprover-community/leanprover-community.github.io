@@ -9,6 +9,8 @@ permalink: archive/113488general/16607Showingautomaticallyobtainedtypeclassinsta
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (May 29 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127225600):
 Is it possible to show which instance Lean is using when it successfully performs a typeclass inference? 
 
@@ -48,3 +50,5 @@ do I win?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 29 2018 at 03:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127228146):
 clever
 
+
+{% endraw %}

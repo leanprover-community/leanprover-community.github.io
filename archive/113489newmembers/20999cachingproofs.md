@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/20999cachingproofs.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 18 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/caching%20proofs/near/134149890):
 Re @**Keeley Hoek**'s dream. ( :warning: everything that follows should be taken with a fair amount of :four_leaf_clover:)
 We now have two crawlers that spit out dependency graphs of statements in mathlib. What I wish is that this would be integrated with Lean. I don't think it is unreasonable that Lean could have some `cache.sqlite` in the root of every project. It could store dependencies there (not per file, but per statement!) and also cache proofs that have been computed by hammer/big-gun tactics.
@@ -68,3 +70,5 @@ But that second pass has to go all over mathlib. Not just the 5 files that I hav
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 18 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/caching%20proofs/near/134151223):
 Discussion continued here: https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/caching.20proofs
 
+
+{% endraw %}

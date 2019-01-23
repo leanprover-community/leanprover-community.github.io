@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/53381sameoldtypeclassissueIalwayshave.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401453):
 I really should write these down at some point; I'm always having to ask. I still can't quite control `haveI` `exactI` etc.
 
@@ -93,3 +95,5 @@ The best questions on this forum are ones where people actually post MWEs -- com
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135402362):
 The biggest wins are when, in the process of formalising it, you remember that what you're stuck on is actually something you already asked about earlier :-) Then you go and search the forums and read what was said at the time.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/81153Leanpuzzle3.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 27 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20puzzle%20%233/near/148625272):
 Next up in my series of lean puzzles, consider the following code snippet:
 ````lean
@@ -70,3 +72,5 @@ scratch20181127.lean:18:0: information trace output
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Nov 27 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20puzzle%20%233/near/148626617):
 There really should be a linter for non-inferable instances :)
 
+
+{% endraw %}

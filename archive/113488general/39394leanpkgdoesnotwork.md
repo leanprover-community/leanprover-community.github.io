@@ -9,6 +9,8 @@ permalink: archive/113488general/39394leanpkgdoesnotwork.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 10 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20does%20not%20work/near/129424899):
 after git clone Xena-UROP-2018 from GitHub, I want to do `leanpkg upgrade` but it failed and post many error:
 
@@ -132,3 +134,5 @@ Blair -- I'll be at Imperial in about 10 minutes and will try and sort things ou
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 11 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20does%20not%20work/near/129466958):
 I find a solution to deal with this issue. I just put the `Xena-UROP-2018` to my `my_playground` which already set up `mathlib`. Now it works
 
+
+{% endraw %}

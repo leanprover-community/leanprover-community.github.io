@@ -9,6 +9,8 @@ permalink: archive/113488general/28663addtheoremby.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 24 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_theorem_by/near/124151486):
 Why does this fail?
 ```
@@ -40,3 +42,5 @@ Is there a resource for more beautiful fresh local names than `mk_fresh_name`?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 24 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_theorem_by/near/124151860):
 yes, I think it is called `get_unused_name`
 
+
+{% endraw %}

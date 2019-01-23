@@ -9,6 +9,8 @@ permalink: archive/113488general/69993pointingtheequationcompilerright.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) James Wood (May 13 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126495867):
 Hi, I'm new to Lean. I'm trying to write the following, but termination checking fails for `weaken_term` in the second recursive call for `app` and the recursive call for `lam`. Each time, the reported problem is that `m` does not decrease, but that should be irrelevant because the induction is on the term. How can I give Lean this hint? Or is the Lean termination checker not sufficiently Foetus-like, so I have to do something else?
 
@@ -203,3 +205,5 @@ Lean actually has holes in term mode, `{! !}`, but they are not well developed a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 13 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498354):
 for the most part you can use `begin end` or `_` where stuff is expected
 
+
+{% endraw %}

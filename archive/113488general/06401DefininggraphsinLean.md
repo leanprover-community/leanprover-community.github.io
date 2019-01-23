@@ -9,6 +9,8 @@ permalink: archive/113488general/06401DefininggraphsinLean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Hoang Le Truong (Jul 10 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20graphs%20in%20Lean/near/129399957):
 I definite a function on the certain domain as follow
 ```
@@ -555,3 +557,5 @@ So, that is the same thing as your first method, except Mario's suggestion is mo
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 10 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20graphs%20in%20Lean/near/129409133):
 Ok, so, afterwards you have to prove that the thing is undirected, and then you have to show us the formalisation of "Euler walk"
 
+
+{% endraw %}

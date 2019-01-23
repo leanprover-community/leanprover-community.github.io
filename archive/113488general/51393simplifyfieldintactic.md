@@ -9,6 +9,8 @@ permalink: archive/113488general/51393simplifyfieldintactic.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 10 2018 at 07:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify%20field%20in%20tactic/near/133639356):
 Trivial question: I've got an instance `s` of some structure which has a `nat`-valued field `f`. In tactic mode I have as a hypothesis `v : nat := s.f`. What can I do to replace v with with its actual `nat` value? Sorry for the noise
 
@@ -124,3 +126,5 @@ meta def dme : tactic unit := do
 ````
 might do what I want!
 
+
+{% endraw %}

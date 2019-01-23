@@ -9,6 +9,8 @@ permalink: archive/113488general/89769Structurefields.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 07 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structure%20fields/near/146965379):
 Is there a quick way to unfold something defined in a class? Let me be more specific. The product of metric spaces starts with
 ```lean
@@ -55,3 +57,5 @@ Oh nice trick Sebastian! I thought that the philosophy was to always prove these
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Nov 07 2018 at 17:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structure%20fields/near/146971122):
 I also didn't know this. This is very useful!
 
+
+{% endraw %}

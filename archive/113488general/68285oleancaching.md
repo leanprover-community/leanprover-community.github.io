@@ -9,6 +9,8 @@ permalink: archive/113488general/68285oleancaching.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 07 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean%20caching/near/135366355):
 I just created a PR to get `git` to preserve your `olean` files and restore them when you switch branches. I'd like to know if it works for people. Please let me know if you try it and if it helps.
 
@@ -911,3 +913,5 @@ When I try it with my Makefile though, it fails. There seems to be issue with th
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Dec 17 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean%20caching/near/152043832):
 If someone wants to try it for themselves, I can share the Makefile
 
+
+{% endraw %}

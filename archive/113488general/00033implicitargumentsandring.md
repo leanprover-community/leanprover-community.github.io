@@ -9,6 +9,8 @@ permalink: archive/113488general/00033implicitargumentsandring.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878744):
 Hi @**Mario Carneiro**, I noticed an unfortunate feature of `ring`.
 
@@ -171,3 +173,5 @@ but even better is to just ignore the pretty failure mode
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 29 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134879165):
 it's a feature!
 
+
+{% endraw %}

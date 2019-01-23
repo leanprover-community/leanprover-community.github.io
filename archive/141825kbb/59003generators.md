@@ -9,6 +9,8 @@ permalink: archive/141825kbb/59003generators.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 12 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/generators/near/133838138):
 I just saw Kenny's work on generating SL2Z. It looks impressive
 
@@ -824,3 +826,5 @@ I thought things would get harder.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/generators/near/133973178):
 I always do more work to ensure that the users do less work
 
+
+{% endraw %}

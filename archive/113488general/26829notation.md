@@ -9,6 +9,8 @@ permalink: archive/113488general/26829notation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Feb 28 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation/near/123093960):
 Does anyone have a suggestion for Lean-friendly notation corresponding to TeX $$f_*$$ and $$f^*$$?
 (Meaning whatever you want them to mean, but for example, post- and pre-composition with the morphism $$f$$.)
@@ -25,3 +27,5 @@ you could cheat and use ＿, which is not _
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Feb 28 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation/near/123097707):
 Or use one of the up/down arrows
 
+
+{% endraw %}

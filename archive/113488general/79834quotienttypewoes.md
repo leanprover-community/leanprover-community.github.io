@@ -9,6 +9,8 @@ permalink: archive/113488general/79834quotienttypewoes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 19 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20type%20woes/near/126772251):
 I find myself finally having to engage with the quotient type.
 
@@ -171,3 +173,5 @@ Right, so `\lam X` and then `X.U`, `X.BU` etc.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 19 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20type%20woes/near/126797210):
 I am a bit surprised that Lean won't do something this simple internally. Presumably what's going on is that the matching machinery is sophisticated and does not guarantee unravelling to something simple even if ultimately I am doing nothing more than a simple match on the components of a structure.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/99350rwfeature.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 23 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20feature/near/132628472):
 ```lean
 example (a b c : ℕ) (H : a = b) (H2 : (a = b) → (a = c)) : c = b :=
@@ -72,3 +74,5 @@ Yeah, I'm helping undergraduates to write code and today has been quite an annoy
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 23 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20feature/near/132640475):
 I think that happens a lot in any programming language: with time, you start instinctively avoiding the pain points and then the newcomers run right into them
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/58179thetypeofapitype.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Mar 15 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/the%20type%20of%20a%20pi%20type./near/123762898):
 After a few months break I am revisiting lean basics. I'm looking back at dependent types.
 
@@ -118,3 +120,5 @@ Thanks @**Reid Barton**, this will definitely come useful at some point.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 15 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/the%20type%20of%20a%20pi%20type./near/123764351):
 Do you mean that `nat -> Prop` example?
 
+
+{% endraw %}

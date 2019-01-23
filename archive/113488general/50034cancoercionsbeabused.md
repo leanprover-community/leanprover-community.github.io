@@ -9,6 +9,8 @@ permalink: archive/113488general/50034cancoercionsbeabused.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Sep 24 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514643):
 I've added some questionable coercions to a lean file I am working on:
 ```lean
@@ -65,3 +67,5 @@ However it is cool that the elaborator was able deal with my coercion abuse nice
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515882):
 source code?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/64678setsnottypesnatandintagain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 27 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sets%20not%20types%3F%20nat%20and%20int%20again/near/134728630):
 John Harrison suggests a return to set theory in this talk : http://aitp-conference.org/2018/slides/JH.pdf . Some of what he said rings very true. I told a bunch of beginners over the summer to go and formalise some number theory, but the constant battle with coercions from nat to int to rat made everything far harder than it should be. One thing which particularly should be stressed was that I found on more than one occasion that mathematicians were *really surprised* that `5 / 2 = 2` for nat or int. This is very counter to the approach of "normal" mathematical software (sage etc) which in 99% of cases just makes a rational even if the inputs were integers. 
 
@@ -98,3 +100,5 @@ What's the difference between operators and functions, which means operators ove
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sets%20not%20types%3F%20nat%20and%20int%20again/near/134807973):
 @**Chris Hughes** You can quantify over functions even if they are unapplied: they are objects. Operators aren't objects. You can't have sets of operators and you can't quantify over them. A bit like universes in Lean, they are a different beast from the rest.
 
+
+{% endraw %}

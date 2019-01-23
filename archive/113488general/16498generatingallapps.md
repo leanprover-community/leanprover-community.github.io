@@ -9,6 +9,8 @@ permalink: archive/113488general/16498generatingallapps.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 25 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125644011):
 Say I have an `e : expr`, which is probably some function type, and some other collection of `A : list expr`, and I would like to find all ways of plugging something from `A` into the next argument of `e`. Should I:
 1) Actually look at what type `e` is, in particular the type of its first argument, and then look through `A` checking if there is anything of that type?
@@ -172,3 +174,5 @@ Perfect.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 25 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125674504):
 (I changed `| e _ _ := return e` to `| e _ _ := failed`)
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/66274piinstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 12 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pi%20instances/near/123598593):
 @**Mario Carneiro** and @**Johannes Hölzl** could you have a look at the wonderful tactics that @**Simon Hudon** wrote for me in https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/indexed_product.lean and tell me whether this is suitable for mathlib? Remember the mathematical goals is to have instances of algebraic structures for Pi products of groups, rings, modules etc. and the Lean goal is to avoids writing tons of lines like https://github.com/PatrickMassot/lean-differential-topology/blob/f47348abf8515e23bd485683d8b351c7fd89c70f/src/indexed_product.lean#L92
 
@@ -87,3 +89,5 @@ I can have a look and see if the same tactics could apply
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 12 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pi%20instances/near/123602301):
 I'll have a look tomorrow. Time for bed now
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/74626statementofthefivelemma.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606612):
 I just wrote a statement of the five lemma: https://gist.github.com/jcommelin/d097eb8f2587d34e5c337450bca543db
 
@@ -592,3 +594,5 @@ you should keep a close eye on the number of goals
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613183):
 which is displayed at the top of the output
 
+
+{% endraw %}

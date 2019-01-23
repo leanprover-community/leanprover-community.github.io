@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/96301mutualinductivedefinition.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Shaun Steenkamp (Nov 16 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mutual%20inductive%20definition/near/147808981):
 can one of you explain why I cannot get this mutual inductive definition to work?
 ```lean
@@ -98,3 +100,5 @@ Ncatlab links:
 https://ncatlab.org/nlab/show/inductive-inductive+type
 https://ncatlab.org/nlab/show/inductive-recursive+type
 
+
+{% endraw %}

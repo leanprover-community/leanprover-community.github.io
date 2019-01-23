@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/59016leancomplexnumber.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) VeraZZ (Jul 10 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%23lean%20%23complex%20number/near/129414919):
 hey I intend to write a proof of an equation where the RHS is real and LHS is a sum of a pair of  complex conjugates but it keeps telling the error that the terms on RHS should have type \real . how am I supposed to fix it ? thanks
 
@@ -61,3 +63,5 @@ just write `( ... : ℂ)` around your real term and then it will be "cast" to co
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) VeraZZ (Jul 11 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%23lean%20%23complex%20number/near/129470001):
 aha thanks !
 
+
+{% endraw %}

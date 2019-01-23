@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/78641CantdefineChebyshevpolynomials.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 12 2019 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/154992565):
 Why doesn't this work?
 ```lean
@@ -90,3 +92,5 @@ also -- should have mentioned this before -- `chebyshev` there has an exponentia
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 12 2019 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/154993839):
 just like the naive fib algorithm
 
+
+{% endraw %}

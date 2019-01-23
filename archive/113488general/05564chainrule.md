@@ -9,6 +9,8 @@ permalink: archive/113488general/05564chainrule.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Feb 28 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/chain%20rule/near/123090490):
 I have this chain rule proof in https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/calculus.lean which 100 lines long. And @**Assia Mahboubi** tells me https://github.com/math-comp/analysis/blob/6b36593f4a6a612212163b25c6bad3522c7fa679/derive.v#L494
 
@@ -215,3 +217,5 @@ For a goal of the form `s \in f.sets` and terms for `h1 : t1 \in f.sets` ...  `h
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 05 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/chain%20rule/near/123318874):
 Ok, thanks. Do you think you'll try to adapt the full thing at some point? Or is it too much work for something which wouldn't be new (hence not publishable)?
 
+
+{% endraw %}

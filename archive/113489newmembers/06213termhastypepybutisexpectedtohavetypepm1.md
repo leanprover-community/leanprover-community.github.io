@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/06213termhastypepybutisexpectedtohavetypepm1
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 02 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150728969):
 Am I trying to do something impossible?
 ```lean
@@ -192,3 +194,5 @@ there's no way to unify `?m_1` with `y` because `y` doesn't even exist in the sc
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729543):
 [just to be clear -- Kenny's code doesn't run]
 
+
+{% endraw %}

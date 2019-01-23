@@ -9,6 +9,8 @@ permalink: archive/113488general/36764failingtousesearchinVSCode.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 03 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038688):
 I don't know how to search properly in VS Code. I am just doing something really stupid. I'm writing a new file, I have no imports at all, I type `[group G]` and it works, I type `[is_group_hom f]` and it doesn't. I know that `is_group_hom` is there somewhere. Here's my workflow:
 
@@ -219,3 +221,5 @@ I use emacs, but this is something I've wished for too: the ability to see at a 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 03 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126048677):
 I don't know if this can be implemented without extending lean
 
+
+{% endraw %}

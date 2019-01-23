@@ -9,6 +9,8 @@ permalink: archive/113488general/00230proofwithoutrsimp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 16 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20without%20rsimp/near/129752082):
 Any suggestion on how to prove this? `rsimp` works, but I'm guessing there's a better way.
 
@@ -201,3 +203,5 @@ reproduced
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 17 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20without%20rsimp/near/129798337):
 Okay, so the allocations aren't what I thought they might be.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/49805canyouhelpmemakeitclear.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Truong Nguyen (Sep 10 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133665638):
 I read the book about lean prover. There is some code like this:
 
@@ -127,3 +129,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133669697):
 you can write `dsimp [(∣)]` too
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/56604tacticunfreezelocalinstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 28 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.unfreeze_local_instances/near/136670895):
 ```lean
 import analysis.topology.topological_space
@@ -231,3 +233,5 @@ Because of the duality between open and closed sets, this appears as a reversal 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 29 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.unfreeze_local_instances/near/136715016):
 In algebraic geometry, a "generic point" of an irreducible algebraic variety is a rigorous notion of the intuitive idea of how a general point on the variety behaves. Historically this was done in a vague way -- we had the "actual points" and then "it's true for a generic point" just meant "most points satisfy this" with several, sometimes competing definitions of "most", but with Grothendieck's approach we have the luxury of the generic point actually being a point in the top space, whose topological closure is the entire variety. The idea is that a generic point can specialise to a random "actual point", which is then a specialisation of the generic point. Perhaps the simplest example of this is the two-point topological space with one closed and one open point. A fruitful mental model of this space in geometry is that the whole space is the open unit disc, the closed point is the origin, and the open point is all the other points --  a "general" point in the open disc. If $$\eta$$ is the generic point and $$s$$ the closed point then the sequence $$\eta,\eta,\eta,\ldots$$ converges to $$s$$ (as well as to $$\eta$$), which is the specialisation in action. One cna think of it as a bunch of points in the punctured disc tending to the origin.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/37131applydefortheorem.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Hoang Le Truong (Aug 07 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131070910):
 I have the following definitions 
 
@@ -98,3 +100,5 @@ Then you don't have to worry about proving things are finite.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Hoang Le Truong (Aug 08 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072422):
 Ok I will try it
 
+
+{% endraw %}

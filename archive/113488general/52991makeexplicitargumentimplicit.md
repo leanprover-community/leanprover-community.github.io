@@ -9,6 +9,8 @@ permalink: archive/113488general/52991makeexplicitargumentimplicit.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jul 30 2018 at 16:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/make%20explicit%20argument%20implicit/near/130584404):
 Hi, is it possible to temprorarily make an argument implicit? Say, instead of `id bool true`, I write something like `id _ true` and let the elaborator to infer the omitted argument for me. (id : \forall A, A -> A is completely explicit)
 
@@ -28,3 +30,5 @@ A useful trick with this is also to define a notation ``local notation `id'` := 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Jul 30 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/make%20explicit%20argument%20implicit/near/130585371):
 @**Reid Barton** good, thanks.
 
+
+{% endraw %}

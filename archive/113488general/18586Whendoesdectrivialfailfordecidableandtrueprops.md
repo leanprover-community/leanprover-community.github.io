@@ -9,6 +9,8 @@ permalink: archive/113488general/18586Whendoesdectrivialfailfordecidableandtruep
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Nov 11 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/When%20does%20dec_trivial%20fail%20for%20decidable%20and%20true%20props%3F/near/147484281):
 I'm encountering cases where I have a decidable prop `p` that is also true (which I know because the decidability proof term `t : decidable p` evaluates to `is_true ...` when checked with the vm) but `exact dec_trivial` fails to discharge the goal, with the message 
 ```
@@ -59,3 +61,5 @@ Oh I see what you mean. There was a non-structural recursion hiding in one of th
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Nov 13 2018 at 01:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/When%20does%20dec_trivial%20fail%20for%20decidable%20and%20true%20props%3F/near/147561483):
 Hunting these down isn't exactly fun though... a lot of time poring over the text output. Is there some option that displays all defs in a file/folder that use well-founded recursion?
 
+
+{% endraw %}

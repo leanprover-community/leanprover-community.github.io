@@ -9,6 +9,8 @@ permalink: archive/113488general/57712inductionwithgeneralize.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Nov 16 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851332):
 Hi, I want to do induction over the following predicate `types`:
 
@@ -158,3 +160,5 @@ in this case it doesn't matter that you have `empty_ctx` since it's unique anywa
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Nov 17 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147868864):
 Great, thanks!
 
+
+{% endraw %}

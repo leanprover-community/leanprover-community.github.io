@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/85298AndrewAshworth.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Feb 26 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Andrew%20Ashworth/near/123002176):
 Testing... is this thing on?
 
@@ -54,3 +56,5 @@ Yeah the split is the thing I am worried about as well.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Feb 26 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Andrew%20Ashworth/near/123002790):
 I don't sanitize the names that I learn. As long as your name doesn't include an end quote, I'll learn it :P
 
+
+{% endraw %}

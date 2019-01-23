@@ -9,6 +9,8 @@ permalink: archive/113488general/34165products.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 30 2018 at 01:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/products/near/130544059):
 If I have `(a b c : Type) (f : a → b) (g : a → c)`, do we have a name or notation for the function mapping `x` to `(f x, g x)`?
 
@@ -71,3 +73,5 @@ Is there actually any implementation anywhere apart from `Function` :sweat_smile
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Jul 30 2018 at 18:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/products/near/130589452):
 haha, we can go one step away from Function with Star :wink: https://github.com/purescript/purescript-profunctor/blob/v4.0.0/src/Data/Profunctor/Star.purs#L70 (actually that package has a variety of profunctors, a number of which implement Strong)
 
+
+{% endraw %}

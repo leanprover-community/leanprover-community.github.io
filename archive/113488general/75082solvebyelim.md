@@ -9,6 +9,8 @@ permalink: archive/113488general/75082solvebyelim.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 09 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468417):
 @**Simon Hudon**, the new solve_by_elim is really nice, and now I’d like it to do even more. I know that there is a mechanism to pass arbitrary assumptions, rather than using local context, and perhaps I should just use that.
 
@@ -321,3 +323,5 @@ Would you care to add a test case?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 23 2018 at 04:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504957):
 Sure!
 
+
+{% endraw %}

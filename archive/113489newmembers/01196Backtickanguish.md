@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/01196Backtickanguish.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 17 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Backtick%20anguish/near/132269318):
 What am I doing wrong here?
 ```lean
@@ -89,3 +91,5 @@ q : Prop
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 17 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Backtick%20anguish/near/132269770):
 Oh! I see why. Use ````(to_expr ```(q) >>= define_core `qq)````: `q` is not available in the scope of your tactic code. With three ticks, you're disabling scope checking when compiling that tactic. Equivalently, you can do ``(get_local `q >>= define_core `qq)``.
 
+
+{% endraw %}

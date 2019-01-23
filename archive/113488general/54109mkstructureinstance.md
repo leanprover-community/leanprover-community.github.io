@@ -9,6 +9,8 @@ permalink: archive/113488general/54109mkstructureinstance.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 08:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509507):
 What does the `sources` field of the `structure_instance_info` structure (for passing to `mk_structure_instance`) do?
 
@@ -21,3 +23,5 @@ Also, what does `pexpr.mk_field_macro` do?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509567):
 ah! duh thanks
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/14624Abunchoffinequivresults.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521488):
 ```lean
 import data.equiv data.fin
@@ -179,3 +181,5 @@ exactly
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522190):
 but `multiset.pi` should be generalized to `list.pi` and that is your digit calculator
 
+
+{% endraw %}

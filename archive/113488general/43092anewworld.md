@@ -9,6 +9,8 @@ permalink: archive/113488general/43092anewworld.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Mar 26 2018 at 02:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20new%20world/near/124205495):
 A student, to me earlier today: "I have been reading [some book], and to make sure I am really understanding it, I am implementing some of it in [a different interactive theorem prover]".
 
@@ -36,3 +38,5 @@ You teach enough people how to do it and eventually you'll find someone who deci
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 26 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20new%20world/near/124214355):
 They'll be hell in class -- constantly asking about edge cases :-)
 
+
+{% endraw %}

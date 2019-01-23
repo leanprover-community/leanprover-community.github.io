@@ -9,6 +9,8 @@ permalink: archive/113488general/50628LeaninBeamer.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 03 2019 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20Beamer/near/154244941):
 How do people put Lean snippets inside LaTeX Beamer slides? Is there a `listings` syntax highlighting somewhere?
 
@@ -165,7 +167,6 @@ Indeed it looks like activity resumed two weeks ago. They have only 83 PR to mer
 Would it be easy to fix?
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jan 03 2019 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20Beamer/near/154253727):
-{% raw %}
 I think you just need to add enough `\DeclareUnicodeCharacter`:
 ```latex
 \DeclareUnicodeCharacter{1D49E}{\ensuremath{\mathcal{C}}}
@@ -192,7 +193,7 @@ I think you just need to add enough `\DeclareUnicodeCharacter`:
 \DeclareUnicodeCharacter{2081}{\ensuremath{{}_1}}
 \DeclareUnicodeCharacter{2082}{\ensuremath{{}_2}}
 ```
-See https://gist.github.com/gebner/5f0026666e8758d00e87a2eb352f7a43  (This uses the `pygmentize -f latex` output directly).  The same trick probably works with minted as well.{% endraw %}
+See https://gist.github.com/gebner/5f0026666e8758d00e87a2eb352f7a43  (This uses the `pygmentize -f latex` output directly).  The same trick probably works with minted as well.
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 03 2019 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20Beamer/near/154255475):
 Sorry, I can't get anything to work with this method.
@@ -237,3 +238,5 @@ Ahh... I assumed those were due to using the upstream version
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 08 2019 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20Beamer/near/154676837):
 Look at the message where Gabriel pings me
 
+
+{% endraw %}

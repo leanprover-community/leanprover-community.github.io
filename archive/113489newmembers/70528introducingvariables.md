@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/70528introducingvariables.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Sever (Jul 19 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/introducing%20variables/near/129956826):
 If I have a Prop that says `∃ a b c, p`, whats the quickest way of introducing a b c and p? In tactic mode, I have to use `cases` three times to obtain all of them.
 
@@ -63,3 +65,5 @@ Yes, I looked around and I found out they were using the same book I was. I don'
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 21 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/introducing%20variables/near/130050695):
 But the message for Ali was rather more: beware that formalizing elementary geometry can be a lifetime project, especially because of the kind of symmetry issues that appeared in your question. See in particular https://hal.inria.fr/hal-00989781v2
 
+
+{% endraw %}

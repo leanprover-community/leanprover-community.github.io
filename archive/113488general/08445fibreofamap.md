@@ -9,6 +9,8 @@ permalink: archive/113488general/08445fibreofamap.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139016):
 I wish we have preimage of a point, whatever its use is
 
@@ -45,3 +47,5 @@ It is conceivable that we can change the definition there but it doesn't affect 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139724):
 ok, let's just change the definition of singleton then
 
+
+{% endraw %}

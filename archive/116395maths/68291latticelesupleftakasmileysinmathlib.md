@@ -9,6 +9,8 @@ permalink: archive/116395maths/68291latticelesupleftakasmileysinmathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 05 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice.le_sup_left%27%20a.k.a.%20smileys%20in%20mathlib/near/130925919):
 I thought it was time to learn about uniform spaces, and then I realised I had to learn about filters before that, and then I realised I had to learn about lattices before that.
 
@@ -166,3 +168,5 @@ Maybe the uniform space post could include a brief description of the separatedn
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 05 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice.le_sup_left%27%20a.k.a.%20smileys%20in%20mathlib/near/130930698):
 Another random comment: about uniform structure, it may be worth pointing out the analogy with distances coming from norms. A norm N measures distance to 0, and one get a distance d(x, y) = N(y-x). In a (commutative) topological group the topology gives a way to say "close to zero" and the same trick applies, giving a uniform structure. I think uniting this case with the metric space case was Weil's motivation.
 
+
+{% endraw %}

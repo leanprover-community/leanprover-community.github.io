@@ -9,6 +9,8 @@ permalink: archive/113488general/24101cardinalsoffinitesets.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 18 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cardinals%20of%20finite%20sets/near/132344762):
 People have mentioned that working with the size of finite sets is a bit complicated right now. We have two methods to talk about the cardinality of a type:
 
@@ -64,3 +66,5 @@ Making a `finite` predicate instead of `fintype` which is `Type`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Aug 31 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cardinals%20of%20finite%20sets/near/133108434):
 We have already `set.finite`. It was defined as inductive over empty and insert, currently it is defined by saying that the set coerced to a type is a `fintype`.
 
+
+{% endraw %}

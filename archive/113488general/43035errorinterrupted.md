@@ -9,6 +9,8 @@ permalink: archive/113488general/43035errorinterrupted.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 02 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20interrupted/near/127445373):
 Does anyone know why this often happens when using jump-to-definition? (I'm in emacs if it matters.)
 
@@ -127,3 +129,5 @@ Sure, thanks
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 03 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20interrupted/near/127515061):
 Done
 
+
+{% endraw %}

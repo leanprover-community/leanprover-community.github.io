@@ -9,6 +9,8 @@ permalink: archive/116395maths/64802provingsizeatleast3.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132037729):
 I would be interested in a relatively slick proof of either of the below examples:
 
@@ -181,3 +183,5 @@ It's just my lack of experience which made me do the 3 case explicitly. I could 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132331):
 even 2 is sometimes tricky, but certainly `2 < n < 3`
 
+
+{% endraw %}

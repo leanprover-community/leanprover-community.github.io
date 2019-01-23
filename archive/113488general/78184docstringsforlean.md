@@ -9,6 +9,8 @@ permalink: archive/113488general/78184docstringsforlean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Oct 27 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/docstrings%20for%20lean/near/136609124):
 It's not completed yet, but I am incrementally adding documentation to undocumented parts of the lean source code. Would there be any interest in PRing this into the Lean 3 source eventually? Obviously someone would have to go over my changes and make sure that the comments are not wrong/ misleading etc. https://github.com/EdAyers/lean/tree/docstrings
 
@@ -109,3 +111,5 @@ I'd need an afternoon to remember how to use the code I wrote which does this
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/docstrings%20for%20lean/near/147511031):
 Sure, but I'm going to have to do it early next week unless I'm lucky I think
 
+
+{% endraw %}

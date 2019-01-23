@@ -9,6 +9,8 @@ permalink: archive/113488general/88452changingfield.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 03 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/changing%20%60field%60/near/133230210):
 Before we get too involved in field theory, I would like to propose a change to `division_ring` and `field`. The problem is that these are defined in core, meaning that we would have to more or less completely ignore all the core definitions based on fields (which isn't much) and add primes or something to avoid name collision.
 
@@ -217,3 +219,5 @@ ZFC + omega inaccessibles. I haven't fully checked but I believe that "no axioms
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 06 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/changing%20%60field%60/near/133412620):
 the three big ones: choice, quot.ind and prop.ext?
 
+
+{% endraw %}

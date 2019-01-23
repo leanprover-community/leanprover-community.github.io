@@ -9,6 +9,8 @@ permalink: archive/113488general/22229tutorial.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 04 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tutorial/near/135155789):
 @**Patrick Massot** Would you mind pushing your demo to a new `tutorial` branch on community fork? Maybe as `docs/tutorial/demo.lean`.
 
@@ -471,7 +473,6 @@ If you use equivalence relations instead of partitions, this follows from the fa
 @**Bryan Gin-ge Chen** Consider adding an example to https://github.com/leanprover-community/mathlib/blob/tutorials/tutorials/partitions.lean#L193 where the issue is multiplicity > 1.
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Oct 06 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tutorial/near/135302186):
-{% raw %}
 ```quote
 @**Bryan Gin-ge Chen** https://github.com/leanprover-community/mathlib/blob/tutorials/tutorials/partitions.lean#L109 Couldn't you just compare the `multiset.join` to the `multiset` that underlies our `finset`?
 ```
@@ -480,7 +481,7 @@ Thanks for pointing this out. In fact, Simon has created a better solution for t
 I've added this example:
 ```lean
 #eval (is_partition ({{0}, {1}, {1,3}} : finset (finset (fin 4))) : bool) -- ff
-```{% endraw %}
+```
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 06 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tutorial/near/135302235):
 I think this file could stand to be generalized quite a bit. I would want to see partitions defined as equivalence relations, forget the finiteness constraint, and forget the finset representatives
@@ -1251,8 +1252,7 @@ I give you a set S of partitions of A
 how do you find the supremum of S?
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 08 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tutorial/near/135369902):
-{% raw %}
-let's say S is {{{0},{1}}} if Goldbach conjecture is true and and {} otherwise.{% endraw %}
+let's say S is {{{0},{1}}} if Goldbach conjecture is true and and {} otherwise.
 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Oct 08 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tutorial/near/135369979):
 OK, but for finite partitions I only care about finsets of partitions which can't be that gross, right?
@@ -1529,3 +1529,5 @@ Perhaps I'm off-topic here with my own definition of tutorial â€” I'm not sure â
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 09 2018 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tutorial/near/135482607):
 The Xena.zip file which I was going to use with my 1st years this year (until ICT delivered something much better) -- that was precisely what Mario was describing above. The way this seems to work is that once a year I am allowed to update what the Imperial College undergraduates see by default when they open up VS Code. This year they see a project with one file `test.lean` containing `import data.int.basic theorem 2+2=4:=rfl` and then all the lean and olean files for mathlib and lean (with mathlib as a dependency). This is what I would now call "the bare minimum for mathematicians who are interested". But it sounds like the community might be able to make a much better variant of this, which we could just generally advertise on GH. I think it's worth stressing that win10 users have no git and no command line, and I've met plenty of people who just want to get going. We make a better repo, and we replace Xena.zip with this repo and I document it on the installation page and people will be happier.
 
+
+{% endraw %}

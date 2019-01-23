@@ -9,6 +9,8 @@ permalink: archive/113488general/38732monadicmerge.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 20 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/monadic%20merge/near/123983991):
 The monad refactoring PR was merged! Congratulations @**Sebastian Ullrich** !
 
@@ -119,3 +121,5 @@ Looks like you do :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 22 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/monadic%20merge/near/124039009):
 `mathlib` should now be fixed, although I built against sebastian's commit which won't appear until tomorrow's nightly build
 
+
+{% endraw %}

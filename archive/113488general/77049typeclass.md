@@ -9,6 +9,8 @@ permalink: archive/113488general/77049typeclass.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 15 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761005):
 why does this have no problem:
 ```
@@ -181,3 +183,5 @@ well, that's a bit unfair, LSP is a bit jargon-ny, but the point is, it's easy t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 00:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123772124):
 I think that's one reason Eiffel got inheritance right. Have you ever used it?
 
+
+{% endraw %}

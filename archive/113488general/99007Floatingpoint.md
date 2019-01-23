@@ -9,6 +9,8 @@ permalink: archive/113488general/99007Floatingpoint.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Ben Sherman (May 21 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Floating%20point/near/126891715):
 Does Lean have any support for floating point? Just for computation, not necessarily reasoning?
 
@@ -50,3 +52,5 @@ By the way there's nothing in principle stopping us from having `log` available 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 22 2018 at 02:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Floating%20point/near/126900134):
 (Although I recall hearing that some IEEE functions are impossible to round correctly, i.e. the spec requires solving an undecidable problem.)
 
+
+{% endraw %}

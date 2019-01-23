@@ -9,6 +9,8 @@ permalink: archive/116395maths/61200ishomotopicto.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 09 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_homotopic_to/near/131163659):
 I just saw this in @**Luca Gerolla** 's code.
 
@@ -46,3 +48,5 @@ Consider the way `cardinal` is defined - it is a quotient over the relation `non
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Luca Gerolla (Aug 09 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_homotopic_to/near/131174279):
 I see.. thank you! I will stick to `nonempty`
 
+
+{% endraw %}

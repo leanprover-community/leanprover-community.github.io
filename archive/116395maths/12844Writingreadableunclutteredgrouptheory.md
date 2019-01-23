@@ -9,6 +9,8 @@ permalink: archive/116395maths/12844Writingreadableunclutteredgrouptheory.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808670):
 I noticed that the definition of a group in Lean was one more axiom than it could be
 
@@ -819,3 +821,5 @@ end gripe
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 02 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/126004737):
 Here's how it ended up. https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/
 
+
+{% endraw %}

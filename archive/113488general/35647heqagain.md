@@ -9,6 +9,8 @@ permalink: archive/113488general/35647heqagain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 10 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/heq%20again/near/133673026):
 Hmm, I wasn't expecting this to work.
 ```lean
@@ -392,3 +394,5 @@ but I guess those are not significantly harder with the Pi approach
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/heq%20again/near/133677396):
 I think `arrows := Σ X Y, X ⟶ Y` is a useful definition in a category though
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/39667UnicodeinZulip.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 11 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124944729):
 Quick question: how do I comfortably input unicode in Zulip? So far I have used copy-paste to write alphas and betas. In VS code these are magically replaced with unicode... in the rest of my life TeX does this for me. How do I get them here?
 
@@ -105,3 +107,5 @@ Lol, they have a type called `document`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 11 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946855):
 That's fantastic (^;
 
+
+{% endraw %}

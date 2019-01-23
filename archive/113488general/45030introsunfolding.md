@@ -9,6 +9,8 @@ permalink: archive/113488general/45030introsunfolding.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 27 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128723966):
 Is this normal?
 ```lean
@@ -38,3 +40,5 @@ Of course explicit unfolding works. But reducible is not enough.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 27 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128725144):
 you can also try `intros _`
 
+
+{% endraw %}

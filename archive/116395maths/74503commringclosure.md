@@ -9,6 +9,8 @@ permalink: archive/116395maths/74503commringclosure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 09 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135495590):
 @**Kenny Lau** Do you secretely have `comm_ring.closure` with a `subring` instance somewhere in your repositories?
 
@@ -387,3 +389,5 @@ https://github.com/leanprover/mathlib/pull/444
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 28 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136646444):
 done @**Patrick Massot**
 
+
+{% endraw %}

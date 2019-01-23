@@ -9,6 +9,8 @@ permalink: archive/113488general/44061rewriteLHSisamvar.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20LHS%20is%20a%20mvar/near/123653459):
 ```
 example (h : ∀ a : nat, a = 0) : 0 = 2 := by rw h
@@ -168,3 +170,5 @@ and here we really seem to have no option other than to leave the metavariable a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 13 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20LHS%20is%20a%20mvar/near/123654477):
 @**Mario Carneiro** It's using keyed matching, which uses structural equality for the head
 
+
+{% endraw %}

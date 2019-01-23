@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/60068Whatissome.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 14 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20%60some%60%3F/near/135790900):
 I'm learning non-constructive definitions from *[An Introduction to Lean](https://leanprover.github.io/introduction_to_lean/introduction_to_lean.pdf)* (p. 25) and the command `some h` is used -- what does it mean?
 
@@ -67,3 +69,5 @@ it could be worse (of course you need to understand the `{... // ...}` notation
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 14 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20%60some%60%3F/near/135791627):
 Yeah, I wouldn't say that's a particularly complicated definition. The complicated one is `epsilon`, which is surprisingly rarely used but is basically the same as `some` except you don't even need to prove existence first
 
+
+{% endraw %}

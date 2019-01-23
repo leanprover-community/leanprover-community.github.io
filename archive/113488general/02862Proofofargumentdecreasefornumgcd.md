@@ -9,6 +9,8 @@ permalink: archive/113488general/02862Proofofargumentdecreasefornumgcd.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jun 07 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20of%20argument%20decrease%20for%20num.gcd/near/127717897):
 I'm trying to define `gcd` for `num`. I've already defined `num.mod` and proved related lemmas (which you can check at https://github.com/skbaek/qelim/blob/master/src/common/num.lean), and here's my first attempt using those preliminary definitions :
 ```
@@ -38,3 +40,5 @@ That worked. Thank you!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jun 15 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20of%20argument%20decrease%20for%20num.gcd/near/128092239):
 @**Mario Carneiro** Thank you for the notice. This is very good news - I was only thinking about faster subtraction using binary representations.
 
+
+{% endraw %}

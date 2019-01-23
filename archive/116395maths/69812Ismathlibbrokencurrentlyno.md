@@ -9,6 +9,8 @@ permalink: archive/116395maths/69812Ismathlibbrokencurrentlyno.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 06 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133406331):
 ```lean
 import ring_theory.ideals
@@ -77,3 +79,5 @@ There is now no hurry on this (hopefully) but if at some point someone could exp
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 06 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133430208):
 PS I can confirm that the noetherian branch is now building again (and also that I am unsure whether I should be merging or rebasing when I update mathlib-community from mathlib master and then update the noetherian branch, or indeed whether it even matters).
 
+
+{% endraw %}

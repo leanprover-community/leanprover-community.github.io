@@ -9,6 +9,8 @@ permalink: archive/113488general/89414withinfty.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/with_infty/near/135383943):
 I am looking at Sebastien's PR for emetric spaces. And I'm wondering, we have `with_top`, `with_bot` and `with_zero`. Would it make sense to have `with_infty`, or is it not worth it?
 
@@ -60,3 +62,5 @@ fyi: `∞` is only a local notation for top. https://github.com/leanprover/mathl
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 10 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/with_infty/near/135555544):
 I don't think we currently have a case where we add a top and a bot. But we add top to structures which already have a bot, like ennreal, or enat.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/80390somethingisweird.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148117675):
 I've been looking at the `classical.lean` file, and `p_implies_uv` strikes me as a very odd theorem. You have a proposition `p`, and you have two propositions, `u` which is `some` proposition such that it is true or `p` is true, and `v` which is `some` proposition such that it is false or `p` is true.  
 
@@ -69,3 +71,5 @@ this is completely unrelated to `some`, it is just reflexivity of `=` in Lean (i
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 21 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148136060):
 A function always produces the same output when presented with the same input.
 
+
+{% endraw %}

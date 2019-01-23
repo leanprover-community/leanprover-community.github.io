@@ -9,6 +9,8 @@ permalink: archive/116395maths/88815simplicialcomplexesinlean.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/simplicial%20complexes%20in%20lean/near/127203178):
 Now we have simplicial complexes!
 
@@ -716,3 +718,5 @@ Ok, now I should really get back to sheaves
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 23 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/simplicial%20complexes%20in%20lean/near/148248476):
 But I'm a bit stuck there...
 
+
+{% endraw %}

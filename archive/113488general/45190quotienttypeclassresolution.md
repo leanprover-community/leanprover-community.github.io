@@ -9,6 +9,8 @@ permalink: archive/113488general/45190quotienttypeclassresolution.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182192):
 here is a working example:
 ```lean
@@ -98,3 +100,5 @@ quotient.induction_on L _
 ```
 but then it works
 
+
+{% endraw %}

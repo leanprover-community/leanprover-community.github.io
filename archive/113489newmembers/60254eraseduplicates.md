@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/60254eraseduplicates.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 24 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148267520):
 Does mathlib have a function which erases list duplicates?
 
@@ -73,3 +75,5 @@ Ah, yes, that works.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Nov 24 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148271040):
 https://github.com/leanprover/mathlib/pull/493
 
+
+{% endraw %}

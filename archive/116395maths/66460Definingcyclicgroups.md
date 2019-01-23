@@ -9,6 +9,8 @@ permalink: archive/116395maths/66460Definingcyclicgroups.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 29 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Defining%20cyclic%20groups/near/130522081):
 I have quite a bit of group theory waiting to be merged, Sylow's theorems and parity of permutation over a `fintype`. I cannot merge it because it all depends on some definition of $$C_n$$. Is it worth having both $$ \mathbb{Z}_n $$ and $$C_n$$? It would be nice to only have one, but then $$\mathbb{Z}_n$$ is an `add_group` which obviously causes problems.
 
@@ -111,3 +113,5 @@ That said, if you really need a concrete cyclic additive group `Zmod n` will do 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 29 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Defining%20cyclic%20groups/near/130524105):
 That's what I used for Sylow. It wasn't that pretty.
 
+
+{% endraw %}

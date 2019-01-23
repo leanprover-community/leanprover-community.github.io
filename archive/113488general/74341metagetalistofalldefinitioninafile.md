@@ -9,6 +9,8 @@ permalink: archive/113488general/74341metagetalistofalldefinitioninafile.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Zesen Qian (Aug 14 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28meta%29%20get%20a%20list%20of%20all%20definition%20in%20a%20file/near/132130403):
 Hi, is it possible in meta-programming to get a list of all (non-meta) definitions in a file?
 
@@ -27,3 +29,5 @@ that is very helpful. Thanks!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 14 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28meta%29%20get%20a%20list%20of%20all%20definition%20in%20a%20file/near/132131037):
 You're welcome!
 
+
+{% endraw %}

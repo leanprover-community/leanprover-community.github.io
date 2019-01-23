@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/49659Fixedpoint.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Nov 21 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Fixed%20point/near/148111493):
 I'd like to define a function E from ℝ^n to ℝ^n as the fixed point of a contraction mapping (or equivalently I think as the solution to a variational inequality). Is this easy to do? What files should I be looking at?
 
@@ -48,3 +50,5 @@ Refactoring the big proof is much more difficult
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 21 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Fixed%20point/near/148126734):
 Luca reminds me that it was in fact @**Rohan Mitta** who was doing the contraction mapping theorem.
 
+
+{% endraw %}

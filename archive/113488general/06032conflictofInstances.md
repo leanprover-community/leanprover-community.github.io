@@ -9,6 +9,8 @@ permalink: archive/113488general/06032conflictofInstances.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Dec 04 2018 at 04:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conflict%20of%20Instances/near/150822083):
 I wanted to prove the following function, but I've run into problems at the commented line
 Seems like lean interprets `≤ ` in `le_of_not_lt h₂` as the `le` defined in `linear_order` instead of `semilattice_sup_bot`, while `lattice.sup_of_le_left ` requires `le` defined by `semilattice_sup_bot`...
@@ -377,3 +379,5 @@ end
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Dec 04 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conflict%20of%20Instances/near/150836031):
 Oh I got it! Thanks a lot for the explanation!!
 
+
+{% endraw %}

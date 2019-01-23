@@ -9,6 +9,8 @@ permalink: archive/113488general/19500elaborator.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 01 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491100):
 Over the last few months I have been idly writing something called "from unicode to bytecode", which is some (still extremely incomplete) documentation as to how Lean turns a string of unicode characters (the input file) into bytecode. One reason it's incomplete currently is that I have no real idea what bytecode is. But when I started this project I had no idea what a scanner / parser / token / etc was either, so I'm definitely moving forwards.
 
@@ -439,3 +441,5 @@ but all this stuff like `get_local` and `to_expr`, all these functions return `t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 01 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498724):
 Do I have to use the tactic monad?
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/02618funkynotation.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 04 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135168245):
 Is this doomed to fail?
 ```lean
@@ -43,3 +45,5 @@ def is_adic (A₀ : set A) [is_subring A₀] : Prop := ∃ (J : set A₀) [hJ : 
 ```
 You can't use underscores, or you'll need to leave spaces...
 
+
+{% endraw %}

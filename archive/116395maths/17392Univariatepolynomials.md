@@ -9,6 +9,8 @@ permalink: archive/116395maths/17392Univariatepolynomials.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 03 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univariate%20polynomials/near/126058586):
 Here's another "canonical isomorphism" question. Johannes has implemented multivariate polynomials with variables in some index type sigma.
 
@@ -468,3 +470,5 @@ I'll fix it
 https://github.com/jcommelin/mathlib/commit/fa1710d88ff007cd947645136dd6c8986028430d
 Voila
 
+
+{% endraw %}

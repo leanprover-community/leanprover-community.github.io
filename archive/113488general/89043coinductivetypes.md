@@ -9,6 +9,8 @@ permalink: archive/113488general/89043coinductivetypes.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Feb 28 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coinductive%20types/near/123081684):
 Can someone (@**Simon Hudon** ?) explain what a coinductive type is and, more specifically, whether a mathematician would ever need them?
 
@@ -51,3 +53,5 @@ i'm struggling to think up examples from pure math where coinductives would be h
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Tim Carstens (Feb 28 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coinductive%20types/near/123103143):
 it's a big world out there though
 
+
+{% endraw %}

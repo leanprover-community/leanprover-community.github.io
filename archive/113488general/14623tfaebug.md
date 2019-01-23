@@ -9,6 +9,8 @@ permalink: archive/113488general/14623tfaebug.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 05 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tfae%20bug/near/135238104):
 Minimized from the open maps thread:
 ```lean
@@ -271,3 +273,5 @@ end
 ```
 doesn't work here
 
+
+{% endraw %}

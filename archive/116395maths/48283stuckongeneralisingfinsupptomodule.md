@@ -9,6 +9,8 @@ permalink: archive/116395maths/48283stuckongeneralisingfinsupptomodule.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127201824):
 I really don't see why I'm getting stuck here. See the two comment lines just after the first `sorry`.
 ```lean
@@ -49,3 +51,5 @@ not in algebra/module
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202473):
 Ok, I found it... thanks!
 
+
+{% endraw %}

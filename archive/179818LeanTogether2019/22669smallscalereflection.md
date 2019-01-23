@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/22669smallscalereflection.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 10 2019 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/small%20scale%20reflection/near/154824750):
 Assia is talking about small scale reflection. 
 
@@ -24,3 +26,5 @@ A really cool reflection would be between `Prop` and `bool`! `bool` is a nice ea
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 10 2019 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/small%20scale%20reflection/near/154825975):
 We actually have a conversion from Prop to bool for decidable Props
 
+
+{% endraw %}

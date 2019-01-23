@@ -9,6 +9,8 @@ permalink: archive/113488general/27671optionrecelim.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 21 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.rec.elim/near/130053317):
 I don't want to prove the goal here, I want to prove an intermediate lemma: `∀ x : γ, option.map f (k x) = j x`. 
 
@@ -225,3 +227,5 @@ it looks better in `generalize`, but in `cases` it doesn't make sense to have a 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.rec.elim/near/130062208):
 By the way, in tactic documentation `e` is often used as a placeholder for a term or `e`xpression, while `x` is a variable
 
+
+{% endraw %}

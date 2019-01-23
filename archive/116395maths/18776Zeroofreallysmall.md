@@ -9,6 +9,8 @@ permalink: archive/116395maths/18776Zeroofreallysmall.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 19 2019 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156453113):
 Where do we find `lemma zero_of_abs_lt_all (x : ℝ) (h : ∀ ε, ε > 0 → |x| < ε) : x = 0`?
 
@@ -58,3 +60,5 @@ does work
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 19 2019 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156454642):
 of course we could also prove them the other way around
 
+
+{% endraw %}

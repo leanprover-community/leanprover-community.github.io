@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/37530KevinSullivanUVaCS.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Aug 02 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kevin%20Sullivan%2C%20UVa%20CS/near/130789420):
 Hi everyone, Happy to find this forum. I'm Kevin Sullivan, University of Virginia CS. I've been using Coq, and now Lean, and also Dafny, in teach graduate and undergraduate students, for several years. I'm ramping up the role of Lean. I haven't been a Lean dev, and so am likely to have some questions, concerns, comments, etc. about aspects of Lean that impinge on pedagogy. Very best wishes and thanks to all. --Kevin
 
@@ -39,3 +41,5 @@ Yeah, there are quite a few people who have taught using Lean or who are plannin
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Aug 03 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kevin%20Sullivan%2C%20UVa%20CS/near/130832746):
 Just to advertise a bit :wink: I'm hoping to make this a topic of discussion at our January workshop: https://lean-forward.github.io/lean-together/2019/index.html
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/92357finsetofsubtypefromfilter.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 25 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20of%20subtype%20from%20filter/near/134577961):
 I don't have a good feeling for how to manipulate subtypes. How do I do this?
 ```lean
@@ -300,3 +302,5 @@ OK, point well-taken. I haven't had a chance to work more on this yet, but doubt
 
 Yes, part of the fun of matroids is the existence of so many distinct but equivalent axiomatizations, a phenomenon often referred to as [cryptomorphism](https://en.wikipedia.org/wiki/Cryptomorphism). I've been idly wondering whether something based on the "TFAE" PR might be able to treat this sort of thing, but in practice it's probably not hard just to compose the relevant maps by hand.
 
+
+{% endraw %}

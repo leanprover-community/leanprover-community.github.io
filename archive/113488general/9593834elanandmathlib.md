@@ -9,6 +9,8 @@ permalink: archive/113488general/9593834elanandmathlib.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 19 2018 at 10:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/3.4%2C%20elan%2C%20and%20mathlib/near/125295801):
 I just installed `elan`. Succesfully it seems. I then ran `mkdir ~/mess/leantest` and inside that directory, I ran `elan toolchain install nightly`. This provided me with a `leanpkg` command, and I ran `leanpkg add https://github.com/leanprover/mathlib`. After cloning from github, it complained `cannot find revision lean-3.4.0 in repository _target/deps/mathlib`. I guess this is somehow expected, because mathlib is not 3.4.0 ready. Right?
 
@@ -686,3 +688,5 @@ Can `leanpkg.path` specify the version of `lean` to launch when editing the file
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 21 2018 at 17:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/3.4%2C%20elan%2C%20and%20mathlib/near/125496876):
 Ah, you are right. I guess injecting a `leanpkg.toml` file could indeed be the best solution.
 
+
+{% endraw %}

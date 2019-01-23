@@ -9,6 +9,8 @@ permalink: archive/113488general/89764isringhominsteadofcastmul.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 24 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_ring_hom%20instead%20of%20cast_mul/near/125591171):
 What's the reason not to mark `coe` as a ring_hom instead of using `int.cast_mul` and stuff like that?
 
@@ -21,3 +23,5 @@ but `ring_hom.mul` is not applicable as a simp lemma for reasons that have been 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 24 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_ring_hom%20instead%20of%20cast_mul/near/125592850):
 But it's reasonable to prove that `coe` is a ring_hom given the existing theorems
 
+
+{% endraw %}

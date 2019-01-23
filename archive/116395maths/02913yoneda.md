@@ -9,6 +9,8 @@ permalink: archive/116395maths/02913yoneda.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/yoneda/near/136033284):
 @**Scott Morrison|110524** Is there a reason why `yoneda` takes the category as explicit argument? Now we have to write `yoneda C X` instead of just `yoneda X`.
 
@@ -861,3 +863,5 @@ Concretely, you had a definition of sheaves, and I have almost generalised it to
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 23 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/yoneda/near/136324809):
 @**Scott Morrison|110087** How general are you planning to set up comma categories? Only slices over an object, or the general thing where you start with two functors?
 
+
+{% endraw %}

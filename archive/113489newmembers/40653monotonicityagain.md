@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/40653monotonicityagain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 04 2018 at 05:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130874956):
 I just gave another shot to implementing `mono` and `ac_mono` (for reasoning with monotonicity with and without considerations for associativity / commutativity). For those who would like to use those, I'd love to hear if it's useful as it is. I have written a lot of examples, I hope it will be informative.
 
@@ -45,3 +47,5 @@ modulo by constants yes
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 04 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130887896):
 There is no modular arithmetic in my code. `fin` should just unpack to some inequalities, and `cooper` should be able to deal with those...
 
+
+{% endraw %}

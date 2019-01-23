@@ -9,6 +9,8 @@ permalink: archive/113488general/37772simpcc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Pablo Le Hénaff (Jun 06 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20cc/near/127657772):
 Hello everyone, I am an intern at VU Amsterdam, working under the supervision of Johannes (who is abroad now).
 I would like to know more about the status of the rsimp (?)/congruence closure implementation in Lean. Everything is not totally clear in my mind.
@@ -79,3 +81,5 @@ For lemmas, use E-matching.  That is, tag lemmas as `@[ematch]` and then use `be
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Pablo Le Hénaff (Jun 06 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20cc/near/127658300):
 i'll give it a try and tell you, thanks
 
+
+{% endraw %}

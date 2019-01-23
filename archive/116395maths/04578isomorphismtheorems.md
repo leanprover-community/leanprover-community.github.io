@@ -9,6 +9,8 @@ permalink: archive/116395maths/04578isomorphismtheorems.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 03 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/isomorphism%20theorems/near/133249273):
 I need what is apparently called the "fourth isomorphism theorem" for R-modules, R a commutative ring. Of course more generally we will need all the isomorphism theorems for groups and R-modules, plus various extra bits and bobs. I might do some of this today in a coding session with the undergraduates. I propose doing the thing I actually want, which is that if $$R$$ is a general ring (commutativity not necessary) and $$N$$ is a sub-$$R$$-module of the $$R$$-module $$M$$ then there's a canonical order-preserving bijection between submodules of $$M/N$$ and submodules of $$M$$ containing $$N$$. My proposal is that I write this code at about 2pm today UK time so before then perhaps I should have a clue about the best way to say this. Here are some dumb questions.
 
@@ -590,3 +592,5 @@ I guess it is pretty fast.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 05 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/isomorphism%20theorems/near/133396503):
 And the proof looks a lot more readable to me if it is just `tidy` (-;
 
+
+{% endraw %}

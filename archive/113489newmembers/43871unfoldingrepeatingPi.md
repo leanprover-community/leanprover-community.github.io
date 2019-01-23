@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/43871unfoldingrepeatingPi.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Jesse Michael Han (Sep 21 2018 at 17:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unfolding%20repeating%20Pi/near/134384020):
 hello everyone! i'm trying to define the following inductive datatype: 
 ```quote
@@ -70,3 +72,5 @@ inductive hewwo : nat → Type
 @**Jesse Michael Han** I would just use the uncurried `\Pi n, A n -> (fin n -> hewwo) -> hewwo` instead.
 I don't think you can do the thing you were trying to do.
 
+
+{% endraw %}

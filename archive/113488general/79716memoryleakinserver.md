@@ -9,6 +9,8 @@ permalink: archive/113488general/79716memoryleakinserver.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Feb 27 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/memory%20leak%20in%20server%3F/near/123017339):
 ```
 invalid import: data.set.basic
@@ -155,3 +157,5 @@ The humps should signify the edits
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 09 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/memory%20leak%20in%20server%3F/near/123485667):
 @**Gabriel Ebner** By the way, I found a "leak" in that we don't reset the memory pools of the main thread until the very end. But that should only contribute a few MB in the long run I suppose.
 
+
+{% endraw %}

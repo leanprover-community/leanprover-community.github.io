@@ -9,6 +9,8 @@ permalink: archive/113488general/53623metauniverses.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 14 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20%2B%20universes/near/133974969):
 Could/should :four_leaf_clover: allow `meta` to break "universe safety", e.g., stick a field of type `Type` inside a structure declared to have type `Type`?
 
@@ -57,3 +59,5 @@ nowhere, it's primitive
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 15 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20%2B%20universes/near/134003307):
 Basically, `unchecked_cast` works by casting across a sorried proof of type equality, which is erased by the VM so that the equality recursor just steps directly from one type to another, and hopefully the VM representations match up so this makes sense. But the equality can only go between two elements of the same universe, and similarly with heq. Indeed, if you look at the recursor of any inductive, it has a motive that lands in `Type l` for some fixed `l`, and you can only move from one place to another along this family, meaning you can never escape `Type l` by application of this recursor.
 
+
+{% endraw %}

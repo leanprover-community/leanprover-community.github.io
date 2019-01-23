@@ -9,6 +9,8 @@ permalink: archive/113488general/39364compiletimestatistics.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 24 2018 at 07:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compile%20time%20statistics/near/134506913):
 Can we get some data on how long it takes for *each* file to compile?
 
@@ -1545,3 +1547,5 @@ Maybe you are right, most of the theorems don't care that it's nonnegative so ha
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 12 2018 at 02:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compile%20time%20statistics/near/135646438):
 ok
 
+
+{% endraw %}

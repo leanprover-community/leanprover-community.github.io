@@ -9,6 +9,8 @@ permalink: archive/116395maths/42973moreintnatmoansandgolfplea.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 28 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20int%20nat%20moans%20and%20golf%20plea/near/134808309):
 ```lean
 example (x y : ℤ) (h1 : nat.coprime (int.nat_abs x) (int.nat_abs y)) (h2 : x ^ 2 + 3 * y ^ 2 = 4) : 
@@ -693,3 +695,5 @@ I understand how all this works much better now. But it's also a reason why I do
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 30 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20int%20nat%20moans%20and%20golf%20plea/near/134919521):
 Sorry, I was captured by my children. My votes are: module refactoring and Scott's PR
 
+
+{% endraw %}

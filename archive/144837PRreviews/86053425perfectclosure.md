@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/86053425perfectclosure.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23425%20perfect%20closure/near/136024821):
 Does this clash with your module refactoring?
 
@@ -21,3 +23,5 @@ do you have any comments on this PR?
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23425%20perfect%20closure/near/136025707):
 not today
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/32681LeanhomeworkinCoCalc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 29 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20homework%20in%20CoCalc/near/148778475):
 Here are my notes on setting Lean homework in CoCalc:
 
@@ -27,3 +29,5 @@ I bought 4 months of Standard Medium Course (70 people). I am running an unconve
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 29 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20homework%20in%20CoCalc/near/148819746):
 So today I used the "shared project" functionality of CoCalc and we had multiple people working on one lean file. I thought it would be chaos but it worked fine, and was very funny. What happened was that completely coincidentally I found two groups of people independently trying to define dihedral groups in Lean, and because I'd spent several hours earlier today thinking about CoCalc I suggested that we tried to do it together. This was slightly brave on my part because I had not thought at all about how imports worked for group projects, and initially there was some confusion about which version of mathlib we needed. I hacked together a solution though, and it worked really smoothly. I guess I should add a description of how it all worked to my notes.
 
+
+{% endraw %}

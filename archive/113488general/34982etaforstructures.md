@@ -9,6 +9,8 @@ permalink: archive/113488general/34982etaforstructures.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 01 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734097):
 Is definitional eta for structures something we are likely to get at some point?
 
@@ -66,3 +68,5 @@ ah, okay (I searched for "localization")
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 10 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/135568699):
 Should we replace those definitions with the better definitions?
 
+
+{% endraw %}

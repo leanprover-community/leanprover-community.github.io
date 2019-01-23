@@ -9,6 +9,8 @@ permalink: archive/116395maths/32443Leanbookformathematicians.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 30 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lean%20book%20for%20mathematicians/near/127307658):
 I'm writing a book for mathematicians who want to learn Lean.
 
@@ -54,3 +56,5 @@ I think in a chapter on tactics, you want exercises like the one you had on the 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 30 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lean%20book%20for%20mathematicians/near/127311192):
 That way, maybe we will recognise where to apply that tactic in the future. Because we will get stuck with our standard toolkit, and realise "oh, I remember this kind of stuckness from an exercise in LftWM. I need to use `change`!"
 
+
+{% endraw %}

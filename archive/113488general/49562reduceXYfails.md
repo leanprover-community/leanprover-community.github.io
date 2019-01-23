@@ -9,6 +9,8 @@ permalink: archive/113488general/49562reduceXYfails.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Sep 03 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264218):
 Evaluating this expression in Lean (VSCode is what I'm using) hangs for a while then reports deep recursion detected, increase stack space. Not very undergraduate-student-friendly. Bug or feature?
 
@@ -41,3 +43,5 @@ My simple rule is to choose `#eval`
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Sep 03 2018 at 17:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133266225):
 Thanks.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/83717subsetofquotient.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 01 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956599):
 For the perfectoid project we often need to work with subsets of quotient types. A mathematician would write
 ```lean
@@ -703,3 +705,5 @@ funext (assume a,
              ...    = a       :  inj feq)
 ```
 
+
+{% endraw %}

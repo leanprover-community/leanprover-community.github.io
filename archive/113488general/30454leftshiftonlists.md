@@ -9,6 +9,8 @@ permalink: archive/113488general/30454leftshiftonlists.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 01 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/left%20shift%20on%20lists/near/127424565):
 Is there a function on lists that rotates the elements of the list i.e [1, 2, 3, 4] -> [2, 3, 4, 1]?
 
@@ -21,3 +23,5 @@ you'd better remember what you dropped :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 01 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/left%20shift%20on%20lists/near/127430668):
 yep! That's what`take 1 xs` does
 
+
+{% endraw %}

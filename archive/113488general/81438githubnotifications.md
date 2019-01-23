@@ -9,6 +9,8 @@ permalink: archive/113488general/81438githubnotifications.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Feb 28 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20notifications/near/123077197):
 Does anyone (with the right repository permissions) want to create streams and bots for GitHub notifications from https://github.com/leanprover/lean and https://github.com/leanprover/mathlib ?
 
@@ -127,3 +129,5 @@ Lean and mathlib, please :-)
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Feb 28 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20notifications/near/123085938):
 Ah, you need a Python bot running somewhere for that. Yeah, no.
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/83805isgrouphomrangesubgroup.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 19 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_group_hom.range_subgroup/near/125304068):
 ```lean
 instance is_group_hom.range_subgroup : is_subgroup (set.range f) :=
@@ -16,3 +18,5 @@ instance is_group_hom.range_subgroup : is_subgroup (set.range f) :=
 ```
 Could you add this to mathlib? @**Mario Carneiro**
 
+
+{% endraw %}

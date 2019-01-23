@@ -9,6 +9,8 @@ permalink: archive/113488general/11835rewriteunderapi.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 27 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751362):
 ```lean
 import data.real.basic
@@ -111,3 +113,5 @@ Rather than trying to match the goal all in one go like `rw`, it recurses into t
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 27 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753580):
 rofl just noticed example is mathematically wrong ;-) [forall needs to go inside the brackets]
 
+
+{% endraw %}

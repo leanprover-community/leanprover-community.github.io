@@ -9,6 +9,8 @@ permalink: archive/113488general/46161coercionandtoosimp.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 07 2018 at 10:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercion%20and%20too%20simp/near/127703649):
 I keep running into the problem of `simp` reducing something to `p = ff` when I really want `¬↥p`. I then end up doing a `rw` explicitly, which is a pain. Is there any way to work around this issue with `simp`?
 
@@ -39,3 +41,5 @@ But I guess it makes sense due to this instance and defeq:
 @[reducible] instance coe_sort_bool : has_coe_to_sort bool := ⟨Prop, λ y, y = tt⟩
 ```
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/49404Unexpectedequationcompilerbehaviour.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 12 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20equation%20compiler%20behaviour/near/129536505):
 Is this a bug?
 ```lean
@@ -77,3 +79,5 @@ Lean is guaranteed to be correct, not to be non-confusing
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 12 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20equation%20compiler%20behaviour/near/129542540):
 oh!
 
+
+{% endraw %}

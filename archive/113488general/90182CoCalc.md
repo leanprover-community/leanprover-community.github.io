@@ -9,6 +9,8 @@ permalink: archive/113488general/90182CoCalc.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 03 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc/near/126061868):
 Someone sent me this link: https://twitter.com/cocalc_com/status/990971941308727296
 
@@ -905,3 +907,5 @@ Video chat:   After some investigation and back and forth with appear.in support
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 02 2018 at 16:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc/near/135039386):
 Thanks for the update!
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/70152universeshadowsalocaluniverse.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 17 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20shadows%20a%20local%20universe/near/126684147):
 In a file with only this:
 
@@ -178,3 +180,5 @@ Wow, I like the ideas in that issue! @**Patrick Massot** do you remember asking 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 17 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20shadows%20a%20local%20universe/near/126692094):
 Indeed I was thinking about this when I mentioned tikz-cd syntax
 
+
+{% endraw %}

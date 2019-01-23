@@ -9,6 +9,8 @@ permalink: archive/113488general/90138mysteriousdecidableofdecidableofiff.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Mar 01 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137155):
 This is also peculiar. I came upon the following which didn't resolve with `refl` or `simp`:
 ```lean
@@ -76,3 +78,5 @@ Then it should be able to close that goal together with if_congr
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 01 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137706):
 @**Gabriel Ebner** You're right, I was confused about the role of congr lemmas in simp
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/81964XofYofZnaming.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 12 2018 at 00:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954801):
 What theorem is called `X_of_Y_of_Z`? Is it `Y -> Z -> X` or `Z -> Y -> X` or even something else? Or are things more fluid than this?
 
@@ -259,3 +261,5 @@ Don't think too hard about currying these things, theorems are generally fully a
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Apr 12 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124973894):
 @**Andrew Ashworth** I 100% will.
 
+
+{% endraw %}

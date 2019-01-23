@@ -9,6 +9,8 @@ permalink: archive/113488general/47066Listofleanrepositories.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Neil Strickland (Jan 08 2019 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/List%20of%20lean%20repositories/near/154635935):
 At bim.shef.ac.uk/lean I have placed a list of the 293 github repositories using Lean, which may be of interest.  I have code to update it automatically using the github API, and at some point I will schedule that to run regularly.  By hand I have divided the repositories into crude categories: maths, computer science, teaching, infrastructure, obsolete and scratch space.  There are various extensions that one could think of:
 1. One could attach comments to the list.  I have a very basic framework for that but have not used it yet.
@@ -24,3 +26,5 @@ At bim.shef.ac.uk/lean I have placed a list of the 293 github repositories using
 ```
 Nice - perhaps a good idea to create a repo for people to contribute features like the 1-6 on your list?
 
+
+{% endraw %}

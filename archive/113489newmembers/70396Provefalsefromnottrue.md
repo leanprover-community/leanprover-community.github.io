@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/70396Provefalsefromnottrue.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 05 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Prove%20false%20from%20not%20true%3F/near/135283394):
 Hi, I have an elementary question -- I'm proving something, and am down to having the proved statement "¬true", and the goal is "false". Is there a quick way to finish this?
 
@@ -60,3 +62,5 @@ Feel free to ask in this chat! But we may want to use a different "thread".
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Charles Rezk (Oct 06 2018 at 02:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Prove%20false%20from%20not%20true%3F/near/135290937):
 OK how do I do that?
 
+
+{% endraw %}

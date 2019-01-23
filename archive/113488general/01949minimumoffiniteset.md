@@ -9,6 +9,8 @@ permalink: archive/113488general/01949minimumoffiniteset.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 06 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126161321):
 I have a `finset` of rationals which I know is nonempty. How do I find its minimum element?
 
@@ -290,3 +292,5 @@ I can't even find the lemma saying the image of `finset` is a `finset`
 Its already in the type of `finset.image`.
 To do what you want: `λx, (univ.image (λn, x n)).max.iget`
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/10725startupspeed.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895169):
 Is it normal for Lean to take several minutes to catch up when I freshly open my project in VSCode, even if I've completely precompiled the mathlib dependency to .olean files?
 
@@ -146,3 +148,5 @@ I gotta say it's rather convenient for me coming from Rust that `elan` is based 
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897501):
 @**Reid Barton** You're right, using `lean --make _target/deps/mathlib` is the simplest/safest way to make sure it builds the whole thing with your current project's Lean version
 
+
+{% endraw %}

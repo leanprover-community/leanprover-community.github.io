@@ -9,6 +9,8 @@ permalink: archive/113488general/35960VariousVMquestions.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Neil Strickland (Dec 06 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Various%20VM%20questions/near/150999916):
 I have been working on several different approaches to partitions of finite sets and other finite combinatorial structures.  I would like to do things in such a way that the VM can compute with examples that are moderately large.  For this I would like to understand better how the VM works and what it can do.  I have not managed to find any relevant documentation, but I have looked a little bit at the VM-related source code.
 * Is there any documentation that I have not found?
@@ -36,3 +38,5 @@ This doesn't address any of your questions about the VM, but regarding partition
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Dec 06 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Various%20VM%20questions/near/151041032):
 ... and perhaps in this context it's worth mentioning that everything will likely be different when Lean 4 arrives :four_leaf_clover: .
 
+
+{% endraw %}

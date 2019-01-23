@@ -9,6 +9,8 @@ permalink: archive/113488general/41672fullnames.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 17 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/full%20names/near/129832050):
 Is there a way to ask Lean to list all fully qualified names (I mean including namespaces) defined by a particular file? I'd like to check I didn't messed up with name spaces
 
@@ -1076,3 +1078,5 @@ Thanks. got it working now.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/full%20names/near/133620373):
 You can have a look at https://github.com/leanprover-community/leancrawler/blob/master/src/leancrawler/deps.lean for more stuff you can extract from Lean (and of course you can also use the python part)
 
+
+{% endraw %}

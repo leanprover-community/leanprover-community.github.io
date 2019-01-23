@@ -9,6 +9,8 @@ permalink: archive/113488general/76625simpcanonize.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 22 2019 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622369):
 I'm trying to get rid of some simp loops and I just realized that there is a part of it I don't understand and it seems to be getting into a loop. Here is the trace that Lean prints for it:
 
@@ -99,3 +101,5 @@ by { simp, }
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 23 2019 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649296):
 If you comment out `Cokleisli.comp_def`, the error disappears
 
+
+{% endraw %}

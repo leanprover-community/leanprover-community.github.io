@@ -9,6 +9,8 @@ permalink: archive/113488general/10826Newrecord.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 05 2019 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154473192):
 I think we have a new record:
 [50_PR.png](/user_uploads/3121/J7QL1y-Fi-LLiwjUiJbZUq5J/50_PR.png) 
@@ -56,3 +58,5 @@ Oops, we're down to 38...
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 05 2019 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154487497):
 But I still can't shuffle files because the metric namespace PR is not merged. @**Johannes Hölzl** ?
 
+
+{% endraw %}

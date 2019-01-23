@@ -9,6 +9,8 @@ permalink: archive/113488general/53465experimentonstudents.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 04 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/experiment%20on%20students/near/127550815):
 Like Kevin, I decided to jump the gun and teach students how to write crappy Lean code like professional mathematicians. This morning I showed Lean to the head of the Maths-CS double major program at Orsay. She was very excited and I will probably get about twenty first year undergraduate students to experiment on during the spring semester next year.
 
@@ -36,3 +38,5 @@ I think videos could be nice. We could also have semi-interactive web pages with
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 05 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/experiment%20on%20students/near/127585835):
 I'm actually making a video in a couple of weeks, it was going to be a general one on dependent type theory. We have a bunch of fancy video-making kit at my university and some people are keen for me to try it out.
 
+
+{% endraw %}

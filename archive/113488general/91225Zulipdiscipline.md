@@ -9,6 +9,8 @@ permalink: archive/113488general/91225Zulipdiscipline.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 01 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Zulip%20discipline/near/124482781):
 Although I have no time for doing Lean those days, I still try to roughly follow conversations here. I noticed that it becomes harder because we are returning to Gitter-like mess with interleaved conversations in one giant thread (mostly in "Fresh off the boat" for the last few days). I know I've also created some of this mess, but I think it would really help to try to be a tiny bit more disciplined.
 
@@ -36,3 +38,5 @@ that could do
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 01 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Zulip%20discipline/near/124482883):
 Not only you can vote, I think you can DO it
 
+
+{% endraw %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/54961reflectedalpha.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 21 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148091917):
 This probably counts as a newbie question, sorry:
 
@@ -120,3 +122,5 @@ I get a reflection error in only the first way, even though the type could be ar
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Nov 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148162400):
 In both versions, you need a reflected term of the type. In version 2, that is already part of `v2_def`(defs are stored as `expr`s after all). In version 1, you need an explicit `[reflected t]`. That is the difference.
 
+
+{% endraw %}

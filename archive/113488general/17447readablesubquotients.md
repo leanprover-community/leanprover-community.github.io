@@ -9,6 +9,8 @@ permalink: archive/113488general/17447readablesubquotients.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 01 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/readable%20subquotients/near/134968883):
 So, let me return to my original question.
 
@@ -40,3 +42,5 @@ I'm not sure if that would help. Or do you mean that you want to define `Spa` as
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 01 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/readable%20subquotients/near/134975061):
 Still feels like moving the problem around...
 
+
+{% endraw %}

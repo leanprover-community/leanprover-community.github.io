@@ -9,6 +9,8 @@ permalink: archive/113488general/04670obtain.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 09 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain/near/147351059):
 I just realised there is `obtain`:
 https://github.com/leanprover/mathlib/search?q=obtain&unscoped_q=obtain
@@ -31,3 +33,5 @@ Ok, thanks for explaining!
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Nov 09 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain/near/147352250):
 `obtain` used to work on all inductive types with a single constructor. It was the way to do `cases` in term mode.
 
+
+{% endraw %}

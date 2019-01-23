@@ -9,6 +9,8 @@ permalink: archive/179818LeanTogether2019/67846SoLongandThanksforAlltheFish.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 11 2019 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/So%20Long%2C%20and%20Thanks%20for%20All%20the%20Fish/near/154916334):
 Eventually my neighbourhood filter tends to that of Freiburg.
 Henceforth I will have very good memories of this workshop.
@@ -58,3 +60,5 @@ I would mention that the perfectoid slot on Thursday actually started with unifi
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 14 2019 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/So%20Long%2C%20and%20Thanks%20for%20All%20the%20Fish/near/155090030):
 Assia's Coq file and Cyril's Lean file are on the website.
 
+
+{% endraw %}

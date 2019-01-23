@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/24156483polarcoordinates.html
 
 ---
 
+
+{% raw %}
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 17 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147885598):
 I proved some basic stuff in my undergraduate course, e.g. using polar coordinates to prove that a non-zero complex number has exactly n n'th roots if n>=1 (I am still a bit confused as to why n>=1 comes up so often in maths and so rarely in computer science; maybe we count stuff more). Anyway, @**Abhimanyu Pallavi Sudhir** has written up some of this stuff in Lean, including polar coordinates, which I guess didn't seem to be there before.
 
@@ -364,3 +366,5 @@ I am trying to submit much smaller PRs, hopefully this is a better strategy.
 #### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Dec 27 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152592297):
 If you haven't started looking at #PR464 Bounded continuous functions, I can also split it into smaller chunks if you want. Tell me!
 
+
+{% endraw %}
