@@ -11,10 +11,10 @@ permalink: archive/113488general/53124imagebindernotation.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 07 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/image%20binder%20notation/near/146921016):
+#### [ Kenny Lau (Nov 07 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/image%20binder%20notation/near/146921016):
 Should we have binder notation for `set.image`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 07 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/image%20binder%20notation/near/146921252):
+#### [ Mario Carneiro (Nov 07 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/image%20binder%20notation/near/146921252):
 it's not so compositional
 
 

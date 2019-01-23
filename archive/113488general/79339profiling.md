@@ -11,7 +11,7 @@ permalink: archive/113488general/79339profiling.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 25 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124196289):
+#### [ Simon Hudon (Mar 25 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124196289):
 Am I correct to believe that `lean --make` and `lean --profile` are not meant to be used together? 
 
 When I use them together, I get this error:
@@ -22,46 +22,46 @@ libc++abi.dylib: terminating with uncaught exception of type std::length_error: 
 
 Do people use `--profile` one file at a time?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 25 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200802):
+#### [ Sebastian Ullrich (Mar 25 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200802):
 I constantly use both flags together. The error message sure sounds bad.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 25 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200863):
+#### [ Simon Hudon (Mar 25 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200863):
 I'm on Mac. What about you?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 25 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200866):
+#### [ Sebastian Ullrich (Mar 25 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200866):
 Linux. I was about to ask.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 25 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200916):
+#### [ Simon Hudon (Mar 25 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200916):
 I'm wondering if the C++ runtime on Mac allocates less memory than on Linux. Does that sound sensible?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 25 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200957):
+#### [ Simon Hudon (Mar 25 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200957):
 (now I'm getting around that limitation with a Makefile)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 25 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200959):
+#### [ Simon Hudon (Mar 25 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200959):
 (... which profiles one file at a time)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 25 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200966):
+#### [ Sebastian Ullrich (Mar 25 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124200966):
 You can also use `--profile --recursive`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 25 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201067):
+#### [ Simon Hudon (Mar 25 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201067):
 What's the difference with `--make`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 25 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201114):
+#### [ Sebastian Ullrich (Mar 25 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201114):
 It doesn't actually save .olean files, but I'll assume that's not that part you want to profile :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 25 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201118):
+#### [ Simon Hudon (Mar 25 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201118):
 I believe you're right :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 25 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201121):
+#### [ Simon Hudon (Mar 25 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201121):
 The bad news is that I get the same error
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 25 2018 at 23:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201331):
+#### [ Sebastian Ullrich (Mar 25 2018 at 23:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201331):
 Well that's not good
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 26 2018 at 00:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201382):
+#### [ Moses Schönfinkel (Mar 26 2018 at 00:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124201382):
 About as good as the broken link to Nightly Lean Windows build :P.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 29 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124348839):
+#### [ Simon Hudon (Mar 29 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124348839):
 I've been using `lean --profile` on Mac and Linux and they seem to produce different information. On Mac, I get information like:
 
 ```
@@ -93,25 +93,25 @@ num. allocated closures: 366
 
 while on Linux, I do not. Otherwise, the information looks the same
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 29 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124348841):
+#### [ Simon Hudon (Mar 29 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124348841):
 Is that normal?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 29 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124361454):
+#### [ Sebastian Ullrich (Mar 29 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124361454):
 @**Simon Hudon** No, it should work on Linux as well
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 29 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124361455):
+#### [ Sebastian Ullrich (Mar 29 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124361455):
 Btw, you can use `-D profiler.threshold=0.5` to suppress output < 0.5s for example
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 29 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124363084):
+#### [ Simon Hudon (Mar 29 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124363084):
 thanks! Thanks should be useful! I'll try that. Any list of those fun constants?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 29 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124363129):
+#### [ Sebastian Ullrich (Mar 29 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124363129):
 Same constants as after `set_option`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 29 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124363483):
+#### [ Simon Hudon (Mar 29 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124363483):
 thanks! What does `profiler.freq` do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 29 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124363782):
+#### [ Sebastian Ullrich (Mar 29 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124363782):
 The tactic execution profile as above is computed by sampling the top-most stack frame at that frequency
 
 

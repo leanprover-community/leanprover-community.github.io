@@ -11,13 +11,13 @@ permalink: archive/113488general/19645caseseliminatingintotype.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691805):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691805):
 I've just managed to internalise something Mario told me a couple of weeks ago.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691809):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691809):
 Here's the `cases` tactic in action.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691811):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691811):
 ```lean
 theorem T (γ : Type) (P : γ → Prop) (H : ∃ g : γ, P g) : 2 + 2 = 4 :=
 begin
@@ -30,10 +30,10 @@ admit,
 end 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691818):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691818):
 Now here's an example of it failing because we need to use the axiom of choice.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691829):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691829):
 ```lean
 definition D (γ : Type) (P : γ → Prop) (H : ∃ g : γ, P g) : Type :=
 begin
@@ -42,10 +42,10 @@ admit
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691862):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691862):
 But of course us classical people want to run cases anyway.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691880):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691880):
 ```lean
 definition D (γ : Type) (P : γ → Prop) (H : ∃ g : γ, P g) : Type :=
 begin
@@ -60,43 +60,43 @@ admit
 end 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691969):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691969):
 Using this trick (classical some and some_spec, *plus* the thing which I think Mario was trying to explain to me, which was that the moment you run `classical.some` you should make something _useful_ from `classical.some_spec` rather than just `have Pg := classical.some_spec H` which is a statement about `classical.some _` and hence harder to work with.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691997):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691997):
 I am going to use this idiom again and again
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692002):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692002):
 but surely this should just be a tactic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692011):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692011):
 `classical_cases H with g Pg`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692082):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692082):
 I have been fretting a bit over things like the fact that the "obvious in maths" statement that if there's a surjection `X -> Y` then there's an injection `Y -> X` looks so convoluted in Lean.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692096):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692096):
 But this tactic is probably trivial to write and just looks like an extension of `cases`, which the students learn very early on when learning Lean anyway
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692105):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692105):
 Is this there already?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692161):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692161):
 If not -- I _really_ think it should be! It is far more natural to write than all this classical.some_spec or indefinite_confusion or whatever it's called
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692256):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692256):
 Let me stress that the trick is that you force the type of `Pg` to be `P g`, the thing you want it to be, by explicitly making it of this type when you construct it. Just writing `have Pg := classical.some_spec H` doesn't work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 25 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692355):
+#### [ Reid Barton (Apr 25 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692355):
 Maybe `choose` for the tactic name?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 25 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692512):
+#### [ Simon Hudon (Apr 25 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692512):
 Have a look at https://github.com/unitb/lean-lib/blob/master/test/tactic/classical.lean . It is not quite behaving like `cases` but it does make `some` and `epsilon` easier to work with. (I linked to the test case so that you see how I use it rather than how it works).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693176):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693176):
 How do I use `apply_some_spec` Simon? I mean how do I get it running on my machine?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 25 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693242):
+#### [ Simon Hudon (Apr 25 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693242):
 ```
 leanpkg add unitb/lean-lib
 ```
@@ -107,7 +107,7 @@ and don't forget:
 import util.classical
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693530):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693530):
 ```lean
 open function
 theorem inj_of_surj (X Y : Type) (f : X → Y) (Hf : surjective f) : ∃ g : Y → X, f ∘ g = id :=
@@ -129,10 +129,10 @@ tactic.swap, -- ha ha, swap is now overloaded because I opened function!
 end 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693535):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693535):
 I think my way looks a bit less intimidating for the newbie
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 26 2018 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125695647):
+#### [ Simon Hudon (Apr 26 2018 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125695647):
 You can do it like this:
 
 ```lean
@@ -166,10 +166,10 @@ tactic.swap, -- ha ha, swap is now overloaded because I opened function!
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696083):
+#### [ Mario Carneiro (Apr 26 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696083):
 Lol @ indefinite_confusion. But the right way to do this is to do cases on the pair `some, some_spec`, which is indeed `classical.indefinite_description`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696468):
+#### [ Mario Carneiro (Apr 26 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696468):
 Here's an idea that might help:
 ```
 @[elab_as_eliminator]
@@ -179,93 +179,93 @@ noncomputable def classical.rec_on
 H (classical.some h) (classical.some_spec h)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696509):
+#### [ Mario Carneiro (Apr 26 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696509):
 You can `apply` that theorem to do cases on an exists without making `cases` complain
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 26 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696540):
+#### [ Kenny Lau (Apr 26 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696540):
 @**Kevin Buzzard** what if I told you “surjective functions have right inverse” is already in mathlib as `inv_fun`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696553):
+#### [ Mario Carneiro (Apr 26 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696553):
 But in the case of `inj_of_surj`, this is the wrong approach (same for `ccases` or cases on indefinite description), because you are doing the case twice, once to define the function and again to give its properties. That means that you will have to unfold whatever proof term you constructed in the first half, i.e. `classical.rec_on` or `subtype.rec_on` or something
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696594):
+#### [ Mario Carneiro (Apr 26 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696594):
 The right solution here is to use `axiom_of_choice`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696615):
+#### [ Mario Carneiro (Apr 26 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696615):
 ```
 theorem inj_of_surj (X Y : Type) (f : X → Y) (Hf : surjective f) : ∃ g : Y → X, f ∘ g = id :=
 let ⟨g, h⟩ := classical.axiom_of_choice Hf in ⟨g, funext h⟩
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696623):
+#### [ Mario Carneiro (Apr 26 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696623):
 (Also this theorem already exists in core IIRC)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125697084):
+#### [ Mario Carneiro (Apr 26 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125697084):
 For the golfers:
 ```
 (classical.axiom_of_choice Hf).imp $ λ g, funext
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711834):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711834):
 The inj of surj example was pedagogical -- I know it's there, but I want to teach students how to write it without pain. There are other times this comes up too. I suspect a lot of undergraduate mathematicians will be very confused by constructive maths so I want to hide it from them. Many thanks for the tactic Simon and for the comments everyone.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711847):
+#### [ Mario Carneiro (Apr 26 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711847):
 I think in particular that you should add `axiom_of_choice` to your toolkit
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711911):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711911):
 You are certainly right in that it's not currently in my toolkit.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711913):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711913):
 I remember really struggling with all of this the first time around.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711954):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711954):
 It's only revisiting it now I'm older and wiser that I understand it well enough to try and manipulate it into a form which I think beginners with no programming background might find more comprehensible.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711961):
+#### [ Mario Carneiro (Apr 26 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711961):
 I would think that `axiom_of_choice` is the version of choice people are most used to
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711965):
+#### [ Mario Carneiro (Apr 26 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711965):
 `classical.some` is more like global choice, which ZFC doesn't usually admit so most proofs aren't framed that way
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712014):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712014):
 The problem is that most mathematicians apply the axiom of choice without noticing, and those that are aware of it believe that it says that an infinite product of non-empty sets is non-empty.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712015):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712015):
 Mathematicians don't know the difference between the different kinds of non-empty
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712022):
+#### [ Mario Carneiro (Apr 26 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712022):
 I'm not talking about LEM here though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712027):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712027):
 right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712028):
+#### [ Mario Carneiro (Apr 26 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712028):
 all notions of nonempty are basically the same modulo LEM
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712031):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712031):
 they don't know what LEM is either
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712063):
+#### [ Mario Carneiro (Apr 26 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712063):
 I'm talking about how to use AC proper
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712073):
+#### [ Mario Carneiro (Apr 26 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712073):
 I think it is not a good thing that lean thinks LEM and AC are the same
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712074):
+#### [ Mario Carneiro (Apr 26 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712074):
 mathematicians certainly don't
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712081):
+#### [ Mario Carneiro (Apr 26 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712081):
 you can argue that mathematicians think both are true, but I think they admit LEM implicitly and don't see the need for AC until they reach a certain level
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712082):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712082):
 exactly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712084):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712084):
 LEM is part of the logic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 26 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712121):
+#### [ Kevin Buzzard (Apr 26 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712121):
 AC has some content
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 26 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712127):
+#### [ Mario Carneiro (Apr 26 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712127):
 Lean kind of gives you the ability to distinguish the two, since LEM is computable but AC is not
 
 

@@ -11,7 +11,7 @@ permalink: archive/113488general/64025multiplayerlean.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 29 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148818374):
+#### [ Kevin Buzzard (Nov 29 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148818374):
 At Xena today about six people collaborated in CoCalc using mathlib, and they made dihedral groups! @**Amelia Livingston** @**Kenny Lau** @**Jean Lo** @**Chris Hughes** @**Calle Sönne** @**Ken Lee** together wrote the below. It was *really funny* watching it happen, not least at the beginning when people kept changing the definition of multiplication and/or inverse because it wasn't quite right, whilst other people were trying to prove things about these functions at the same time. Once it stabilised things worked quite well. They also implemented https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/ . It's still going, although several of the contributors have left now; they're proving stuff like how dihedral groups aren't abelian etc.
 
 ```lean
@@ -113,16 +113,16 @@ instance {n : ℕ+} : decidable_eq (dihedral2 n) := prod.decidable_eq
 end dihedral2
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 29 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148819305):
+#### [ Kevin Buzzard (Nov 29 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148819305):
 It was the nerdiest thing I'd seen for quite some time. @**William Stein** we didn't use VS Code, we just worked together using the basic editor. It worked really well. Mathlib was really helpful -- without it we would have had to use `fin n` for a set with n elements, but with it we could use `zmod n` with its group structure.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 29 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148820730):
+#### [ Kevin Buzzard (Nov 29 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148820730):
 Looking at the code now, the comments were crucial. People tended not to use the chat, they talked using comments. It became clear very early on that we needed comments to explain the conventions we were using, and I see now that whilst people tidied up the chatty comments they left in the comments explaining the mathematics (more precisely the conventions and basic notation), so in some sense it has created more readable Lean code.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Nov 29 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148821796):
+#### [ Scott Morrison (Nov 29 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148821796):
 This sounds fantastic.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) William Stein (Nov 30 2018 at 07:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148844392):
+#### [ William Stein (Nov 30 2018 at 07:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148844392):
 Thanks for explaining how the first serious collaborative use of cocalc lean went!  
 
 >  People tended not to use the chat, they talked using comments.
@@ -134,7 +134,7 @@ This is something I've wondered about, since I've experienced this too.  It depe
 > [hsy] blah blah
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) William Stein (Nov 30 2018 at 07:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148844401):
+#### [ William Stein (Nov 30 2018 at 07:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148844401):
 @**Kevin Buzzard** I also implemented "run a bash command line in every student project" in case that helps you workaround the path issue more easily.
 
 

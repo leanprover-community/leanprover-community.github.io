@@ -11,7 +11,7 @@ permalink: archive/113488general/56418Tactichelp.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 02 2019 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154186308):
+#### [ Koundinya Vajjha (Jan 02 2019 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154186308):
 Hi, in order to get familiar with writing tactics, I am trying to write a simple tactic to count the number of occurrences of `∅` in a goal. Here is what I have so far:
 
 ```lean
@@ -37,22 +37,22 @@ end
 ```
 I only get `[∅]`. Can someone help me figure out what I am doing wrong? I'm guessing it's me not understanding how `fold` works for `expr`...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 02 2019 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187855):
+#### [ Mario Carneiro (Jan 02 2019 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187855):
 you used `insert` to accumulate the list, this removes duplicates
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 02 2019 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187873):
+#### [ Mario Carneiro (Jan 02 2019 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187873):
 and the only thing you ever put in the list is `∅` (twice)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 02 2019 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187929):
+#### [ Mario Carneiro (Jan 02 2019 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187929):
 use `::` instead
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 02 2019 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187975):
+#### [ Koundinya Vajjha (Jan 02 2019 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187975):
 Aha! that worked. Thanks @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 02 2019 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154188502):
+#### [ Kenny Lau (Jan 02 2019 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154188502):
 anticlimax...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 02 2019 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154191437):
+#### [ Johan Commelin (Jan 02 2019 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154191437):
 @**Koundinya Vajjha** Have you seen https://github.com/leanprover/mathlib/blob/master/docs/extras/tactic_writing.md? I have no idea about your level of experience with Lean or other programming languages. But for mathematicians who have never written anything in a functional programming language before, I think this is a very good introduction.
 
 

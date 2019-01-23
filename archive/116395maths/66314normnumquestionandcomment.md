@@ -11,7 +11,7 @@ permalink: archive/116395maths/66314normnumquestionandcomment.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_num%20question%20and%20comment/near/132069983):
+#### [ Kevin Buzzard (Aug 13 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_num%20question%20and%20comment/near/132069983):
 ```lean
 import data.real.basic 
 

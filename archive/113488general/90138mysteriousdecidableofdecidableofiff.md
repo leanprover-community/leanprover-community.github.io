@@ -11,7 +11,7 @@ permalink: archive/113488general/90138mysteriousdecidableofdecidableofiff.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Mar 01 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137155):
+#### [ Sean Leather (Mar 01 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137155):
 This is also peculiar. I came upon the following which didn't resolve with `refl` or `simp`:
 ```lean
 ⊢ ite (y = x) t₂ (varf y) = ite (y = x) t₂ (varf y)
@@ -51,31 +51,31 @@ simp [decidable_of_decidable_of_iff_refl _]
 ```
 but nothing changed, and `decidable_of_decidable_of_iff_refl` didn't show up with `set_option trace.simplify true`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Mar 01 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137356):
+#### [ Gabriel Ebner (Mar 01 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137356):
 simp only allows you to rewrite at positions that you can "reach" via congruence lemmas.  Since congruence lemmas typically skip subsingletons (such as decidability instances), you can't simp there.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Mar 01 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137363):
+#### [ Gabriel Ebner (Mar 01 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137363):
 `rw decidable_of_decidable_of_iff_refl` could work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Mar 01 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137364):
+#### [ Sean Leather (Mar 01 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137364):
 `rw decidable_of_decidable_of_iff_refl _, apply_instance` works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Mar 01 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137370):
+#### [ Gabriel Ebner (Mar 01 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137370):
 Have you tried `congr` on the original goal?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Mar 01 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137425):
+#### [ Sean Leather (Mar 01 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137425):
 Ah, that works.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 01 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137435):
+#### [ Sebastian Ullrich (Mar 01 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137435):
 I suppose this shows that simp should really use refl as a rule instead of just at the very end
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 01 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137448):
+#### [ Sebastian Ullrich (Mar 01 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137448):
 Then it should be able to close that goal together with if_congr
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Mar 01 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137511):
+#### [ Gabriel Ebner (Mar 01 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137511):
 @**Sebastian Ullrich** Can you elaborate on how refl would work here?  Neither side of the equation can be simplified, not even with refl.  AFAICT the only thing that would help is if simp applied the congruence lemmas to the equation (like backchaining).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 01 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137706):
+#### [ Sebastian Ullrich (Mar 01 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137706):
 @**Gabriel Ebner** You're right, I was confused about the role of congr lemmas in simp
 
 

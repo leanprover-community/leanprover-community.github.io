@@ -11,7 +11,7 @@ permalink: archive/179818LeanTogether2019/41996SlidesforLean4talk.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Joseph Corneli (Jan 07 2019 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Slides%20for%20Lean%204%20talk/near/154570976):
+#### [ Joseph Corneli (Jan 07 2019 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Slides%20for%20Lean%204%20talk/near/154570976):
 http://leanprover.github.io/talks/vu2019.pdf
 
 

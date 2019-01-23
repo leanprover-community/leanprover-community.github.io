@@ -11,7 +11,7 @@ permalink: archive/113488general/25467Figureouttherestbycc.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779658):
+#### [ Johan Commelin (Aug 02 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779658):
 Can I tell Lean to work out the rest `by cc`:
 ```lean
 import algebra.module
@@ -37,10 +37,10 @@ def zero_module : module R punit :=
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779703):
+#### [ Johan Commelin (Aug 02 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779703):
 I found that I was repeating myself, while trying to make a point to Lean.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779783):
+#### [ Scott Morrison (Aug 02 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779783):
 sure, something like: 
 ```
 begin
@@ -53,34 +53,34 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779915):
+#### [ Johan Commelin (Aug 02 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779915):
 Aaah, I need to understand `refine`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780063):
+#### [ Scott Morrison (Aug 02 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780063):
 Curiously that doesn't actually work...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780069):
+#### [ Scott Morrison (Aug 02 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780069):
 Of course, replacing `cc` with `obviously` does it. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780103):
+#### [ Scott Morrison (Aug 02 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780103):
 In fact just `by obviously` should work, except for some reason `split` doesn't work on modules, for some reason I can't see at the moment (type class inference throws an error?)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780108):
+#### [ Johan Commelin (Aug 02 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780108):
 `finish` works instead of `cc`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 02 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780164):
+#### [ Kenny Lau (Aug 02 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780164):
 what is `obviously`? is it in mathlib?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780199):
+#### [ Johan Commelin (Aug 02 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780199):
 No, it is Scott's Hammer.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780206):
+#### [ Johan Commelin (Aug 02 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780206):
 Well, maybe `tidy` is his hammer.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 02 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780270):
+#### [ Sean Leather (Aug 02 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780270):
 [`obviously`](https://github.com/semorrison/lean-tidy/blob/master/src/tidy/tidy.lean#L81)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780292):
+#### [ Johan Commelin (Aug 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780292):
 So, the current golf record is:
 ```lean
 def zero_module' : module R punit :=
@@ -92,22 +92,22 @@ by refine
   .. }; finish
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780309):
+#### [ Kenny Lau (Aug 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780309):
 gadvardammt finish
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780310):
+#### [ Johan Commelin (Aug 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780310):
 Let's assume we open `punit`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780403):
+#### [ Scott Morrison (Aug 02 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780403):
 If someone can explain to me why you can't `split` when the goal is a module, maybe I can golf the entire proof to `by tidy`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 02 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780415):
+#### [ Kenny Lau (Aug 02 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780415):
 isn't the right command `constructor`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 02 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780432):
+#### [ Kenny Lau (Aug 02 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780432):
 `split` is for inductive types I think
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780438):
+#### [ Johan Commelin (Aug 02 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780438):
 `constructor` also fails...
 
 

@@ -11,16 +11,16 @@ permalink: archive/116395maths/38567leakingconstruction.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622397):
+#### [ Patrick Massot (Sep 09 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622397):
 Sometimes I see things like: `quot.lift (λ (a₁ : cau_seq ℚ abs), quotient.lift (has_lt.lt a₁) _ ε) _` in my tactic state when playing with real numbers. It looks like internal details of the constructions are leaking. What does it mean? Can I avoid that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622571):
+#### [ Mario Carneiro (Sep 09 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622571):
 how are you "playing"?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622577):
+#### [ Mario Carneiro (Sep 09 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622577):
 if you unfold stuff you can see this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622621):
+#### [ Patrick Massot (Sep 09 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622621):
 More precisely, I have:
 ```lean
 α : Type u_2,
@@ -37,37 +37,37 @@ quot.lift (λ (a₁ : cau_seq ℚ abs), quotient.lift (has_lt.lt a₁) _ ε) _ �
 ```
 but I can do instead `have : {b | u b ∈ ball a ε} ∈ f.sets := mem_map.2 this,` and Lean won't unfold it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622685):
+#### [ Mario Carneiro (Sep 09 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622685):
 You are going the wrong way
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622686):
+#### [ Mario Carneiro (Sep 09 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622686):
 use `mem_map.1 this`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622735):
+#### [ Mario Carneiro (Sep 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622735):
 (it works because the two sides are defeq so it doesn't really matter if you apply it, but then the matching goes crazy)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622736):
+#### [ Patrick Massot (Sep 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622736):
 oh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622737):
+#### [ Patrick Massot (Sep 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622737):
 weird
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622751):
+#### [ Patrick Massot (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622751):
 That's biconditional in action: try one direction at random and, if Lean is willing to apply it, never look back
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622752):
+#### [ Mario Carneiro (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622752):
 notice that you have another `map` in the result
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622755):
+#### [ Mario Carneiro (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622755):
 `(map (λ (y : α), dist y a) (map u f)).sets`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622757):
+#### [ Patrick Massot (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622757):
 true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 22:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622809):
+#### [ Mario Carneiro (Sep 09 2018 at 22:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622809):
 so it tried to figure out how to read `ball a ε` as `{x | m x ∈ t}` for some `m, t` and chaos ensues
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622819):
+#### [ Patrick Massot (Sep 09 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622819):
 That's wonderful. In the proof I posted earlier:
 ```lean
 example (u : ℕ → α) (a : α) : tendsto u at_top (nhds a) ↔ 
@@ -79,13 +79,13 @@ example (u : ℕ → α) (a : α) : tendsto u at_top (nhds a) ↔
 ```
 There is a `$ mem_map.2 $ `. You can change 2 into 1, it still works. Then you can remove that bit entirely and it still works!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622825):
+#### [ Mario Carneiro (Sep 09 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622825):
 because the proof is `rfl`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 09 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622827):
+#### [ Patrick Massot (Sep 09 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622827):
 Yeah, I understand
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 10 2018 at 04:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133633334):
+#### [ Johannes Hölzl (Sep 10 2018 at 04:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133633334):
 `simp` can do this:
 ```lean
 lemma tendsto_at_top_nhds_metric [metric_space α] {f : ℕ → α} {a : α} :

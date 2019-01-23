@@ -11,20 +11,20 @@ permalink: archive/113488general/40322Rookiequestion.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Frank Mobler (May 22 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rookie%20question/near/126907865):
+#### [ Frank Mobler (May 22 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rookie%20question/near/126907865):
 I'm stumped proving `example {V : Type}{n : V} : n ∈ ({n} : set V)`. Please without tactics first. I want to see how to construct proof terms explicitly for types like this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 22 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rookie%20question/near/126908079):
+#### [ Mario Carneiro (May 22 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rookie%20question/near/126908079):
 `or.inl rfl` is a proof term for that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 22 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rookie%20question/near/126908090):
+#### [ Mario Carneiro (May 22 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rookie%20question/near/126908090):
 because the goal is defeq to `n = n \/ false`:
 ```
 example {V : Type} {n : V} : n ∈ ({n} : set V) :=
 show n = n ∨ false, from or.inl rfl
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Frank Mobler (May 22 2018 at 07:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rookie%20question/near/126908144):
+#### [ Frank Mobler (May 22 2018 at 07:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rookie%20question/near/126908144):
 Aha. This helps a lot. Light bulbs going on. Thanks.
 
 

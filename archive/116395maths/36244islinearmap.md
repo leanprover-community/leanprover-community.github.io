@@ -11,10 +11,10 @@ permalink: archive/116395maths/36244islinearmap.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148162896):
+#### [ Johan Commelin (Nov 22 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148162896):
 Is there a reason why `is_linear_map` does not extend `is_add_group_hom`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163165):
+#### [ Johan Commelin (Nov 22 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163165):
 Here is what I'm trying to do:
 ```lean
 import data.finset data.finsupp algebra.group
@@ -55,7 +55,7 @@ end linear_extension
 end finsupp
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163178):
+#### [ Johan Commelin (Nov 22 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163178):
 The error is:
 ```
 synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
@@ -64,58 +64,58 @@ inferred
   to_module Y M
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163749):
+#### [ Johan Commelin (Nov 22 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163749):
 @**Mario Carneiro** Somehow the `@is_linear_map _ _ _ _ _ _ _` all over the place give me the feeling that I don't quite understand how to use modules.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 22 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163772):
+#### [ Mario Carneiro (Nov 22 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163772):
 you shouldn't be using `is_linear_map` at all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163907):
+#### [ Johan Commelin (Nov 22 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163907):
 So what should I use?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 22 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163914):
+#### [ Mario Carneiro (Nov 22 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163914):
 `linear_map`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163971):
+#### [ Johan Commelin (Nov 22 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163971):
 Ok, is there value in the other two instances? for add monoids/groups?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 22 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163981):
+#### [ Mario Carneiro (Nov 22 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163981):
 but I understand that the reason you are getting these errors is because `finsupp.to_module` is not an instance
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 22 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163986):
+#### [ Mario Carneiro (Nov 22 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163986):
 you should try declaring it locally
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164159):
+#### [ Johan Commelin (Nov 22 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164159):
 Ok, that helps.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164169):
+#### [ Johan Commelin (Nov 22 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164169):
 But I would like to use `linear_extension` in a context with and without modules.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164172):
+#### [ Johan Commelin (Nov 22 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164172):
 Am I trying to be  too flexible?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 22 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164328):
+#### [ Mario Carneiro (Nov 22 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164328):
 no that's fine, you should just declare a wrapper for `linear_extension` making it into a linear map
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164410):
+#### [ Johan Commelin (Nov 22 2018 at 10:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164410):
 But that is already there, right. You made `is_linear_map.mk'`. Or do you mean something else?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 22 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164519):
+#### [ Mario Carneiro (Nov 22 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164519):
 I mean `linear_extension : linear_map A B`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164724):
+#### [ Johan Commelin (Nov 22 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164724):
 But then it is no longer a function that can be a group hom if I'm not working with modules...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 22 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164936):
+#### [ Mario Carneiro (Nov 22 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164936):
 you have another function for that; the function parts will be equal (even defeq)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148166197):
+#### [ Johan Commelin (Nov 22 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148166197):
 @**Mario Carneiro** Ok, I finally completed the proof. So what is your suggestion? I should have two different names? One for the unbundled, and one for the bundled linear map? Are there naming conventions for this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 22 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148182128):
+#### [ Kenny Lau (Nov 22 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148182128):
 @**Johan Commelin** add `l` (that's a small `L`) in front of the name for the bundled version
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 22 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148182132):
+#### [ Kenny Lau (Nov 22 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148182132):
 so e.g. the map is `mul` and the linear_map is `lmul`
 
 

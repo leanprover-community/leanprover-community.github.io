@@ -11,13 +11,13 @@ permalink: archive/113489newmembers/68895Provingsomethingisasubfield.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872747):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872747):
 I'm trying to prove that the intersection of two subfields is a subfield -- the problem with using `subfield.mk`, or just using `{...}` directly, is that `subfield` is defined using `extends`, so I need to prove that it's a subring -- and by extension that it is an additive subgroup and a submonoid. What's the notation for this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872763):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872763):
 This is what I have:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872773):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872773):
 ```lean
 import algebra.field 
 import field_theory.subfield
@@ -27,13 +27,13 @@ theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield 
 }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154874067):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154874067):
 Got it, it's `to_is_subring`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876299):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876299):
 Ok, I suppose one could do without that, too.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876309):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876309):
 ```lean
 theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield F2] : is_subfield (F1 ∩ F2) := {
     zero_mem := and.intro h1.zero_mem h2.zero_mem,
@@ -51,10 +51,10 @@ theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield 
 }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876361):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876361):
 I got confused because Lean doesn't point out which fields are to be provided when something extends something.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876596):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876596):
 On a related note, why doesn't this work?
 ```lean
 theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield F2] : is_subfield (F1 ∩ F2) := {
@@ -79,10 +79,10 @@ theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield 
 ```
 One has to do a `have` statement and then construct the statement with the local instance of `neg_mem`, etc. Why?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 10 2019 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876635):
+#### [ Reid Barton (Jan 10 2019 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876635):
 What exactly did you write the first time? with `to_is_subring`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876664):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876664):
 Oh, I just nested them all in:
 ```lean
 theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield F2] : is_subfield (F1 ∩ F2) := {
@@ -109,40 +109,40 @@ theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield 
 }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877108):
+#### [ Mario Carneiro (Jan 10 2019 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877108):
 `@h1.neg_mem` doesn't work because you can't mix field notation and `@` notation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877121):
+#### [ Mario Carneiro (Jan 10 2019 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877121):
 you have to write `@neg_mem h1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877252):
+#### [ Mario Carneiro (Jan 10 2019 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877252):
 also you shouldn't project out of a typeclass argument, because it's implicit
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877259):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877259):
 Re:(@,.) -- I thought so, but I tried that and it doesn't work either -- it just doesn't find `is_subfield.neg_mem`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877297):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877297):
 ```quote
 also you shouldn't project out of a typeclass argument, because it's implicit
 ```
  What do you mean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877317):
+#### [ Mario Carneiro (Jan 10 2019 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877317):
 what do you get when you try it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877398):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877398):
 `unknown identifier 'is_subfield.add_mem'`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877407):
+#### [ Mario Carneiro (Jan 10 2019 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877407):
 that means it's not called that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877424):
+#### [ Mario Carneiro (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877424):
 what is the def of `is_subfield`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877432):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877432):
 I tried with `is_add_submonoid` too.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877442):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877442):
 ```lean
 type mismatch at application
   is_add_submonoid.add_mem
@@ -154,13 +154,13 @@ but is expected to have type
   Type ? : Type (?+1)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877453):
+#### [ Mario Carneiro (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877453):
 you don't pass in `h1` at all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877513):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877513):
 I did.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877517):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877517):
 This is what I'm trying:
 ```lean
 theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield F2] : is_subfield (F1 ∩ F2) := {
@@ -173,52 +173,52 @@ theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield 
 }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877518):
+#### [ Mario Carneiro (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877518):
 i know, stop
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877523):
+#### [ Mario Carneiro (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877523):
 just call it without passing in `h1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877543):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877543):
 Ah.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877546):
+#### [ Mario Carneiro (Jan 10 2019 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877546):
 like `is_add_submonoid.add_mem ha1 hb1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877642):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877642):
 I see, yes this works.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877652):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877652):
 But why? What's wrong with trying to feed Lean the class?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877684):
+#### [ Mario Carneiro (Jan 10 2019 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877684):
 the class is implicit, you aren't supposed to give it, lean finds it by typeclass inference
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877696):
+#### [ Mario Carneiro (Jan 10 2019 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877696):
 you can give it if you use `@`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877758):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877758):
 Yes, why wasn't that working?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877771):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877771):
 Using `@` and feeding the class?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877782):
+#### [ Mario Carneiro (Jan 10 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877782):
 that should work, you just need a few more arguments that way, like the types
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877802):
+#### [ Mario Carneiro (Jan 10 2019 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877802):
 I guess it looks something like `@is_add_submonoid.add_mem F1 h1 a b ha1 hb1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877891):
+#### [ Mario Carneiro (Jan 10 2019 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877891):
 oh wait, no it should be something more complicated than just `h1` there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 10 2019 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877921):
+#### [ Mario Carneiro (Jan 10 2019 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877921):
 because `h1` is a `is_subfield` and it needs a `is_add_monoid`, it does some typeclass inference to fill the gap
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154878002):
+#### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154878002):
 Oh ok. I think I see why it's best to leave things to Lean's class inference.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 16 2019 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155280441):
+#### [ Abhimanyu Pallavi Sudhir (Jan 16 2019 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155280441):
 I'm proving a similar theorem and having the same problem again, except this time just leaving Lean to do its type class inference doesn't work (only `zero_mem` and `one_mem` work):
 
 ```lean
@@ -244,13 +244,13 @@ theorem field_intersect (Fi : ι → set K) [hi : ∀ i, is_subfield (Fi i)] : i
     inv_mem := by { simp, exact λ a h i, is_subfield.inv_mem (h i) } }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 16 2019 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155281908):
+#### [ Kevin Buzzard (Jan 16 2019 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155281908):
 Can you post working code so I can cut and paste?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 16 2019 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155281909):
+#### [ Kevin Buzzard (Jan 16 2019 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155281909):
 PS this "simp, ..." style is discouraged. There are always ways around it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 16 2019 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155282381):
+#### [ Abhimanyu Pallavi Sudhir (Jan 16 2019 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155282381):
 ```lean
 import algebra.field
 import field_theory.subfield
@@ -265,10 +265,10 @@ theorem field_intersect' (PL : set (set L)) [H : ∀ J ∈ PL, is_subfield J] : 
     inv_mem := by { simp, exact λ a h J HJ, is_subfield.inv_mem (h J HJ) } }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 16 2019 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155282401):
+#### [ Abhimanyu Pallavi Sudhir (Jan 16 2019 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155282401):
 Doesn't that work (for copy-pasting, I mean)?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 16 2019 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155283329):
+#### [ Kevin Buzzard (Jan 16 2019 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155283329):
 ```lean
 import field_theory.subfield
 
@@ -285,16 +285,16 @@ theorem field_intersect' (PL : set (set L)) [H : ∀ J ∈ PL, is_subfield J] : 
 
 You don't need `simp` for stuff like this, you can just spell it out. Although I struggled with `add_mem` and I don't know why, it's something to do with classes that I don't understand properly.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 16 2019 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155283540):
+#### [ Abhimanyu Pallavi Sudhir (Jan 16 2019 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155283540):
 Yeah, the `simp` was a legacy from my code for `field_intersect` with indexed subsets.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 16 2019 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155283598):
+#### [ Abhimanyu Pallavi Sudhir (Jan 16 2019 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155283598):
 Interesting that the `let ... in` thing works, though -- I did notice that going `have` the `add_mem` statement (without feeding it any parameters) in tactic mode worked.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 16 2019 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155285644):
+#### [ Patrick Massot (Jan 16 2019 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155285644):
 This is pretty weird. A more understandable solution would be `λ a b ha hb J HJ, by haveI := H J HJ ; exact is_add_submonoid.add_mem (ha J HJ) (hb J HJ),`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 16 2019 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155285877):
+#### [ Patrick Massot (Jan 16 2019 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155285877):
 Of course you can also use the ugly direct term `@is_add_submonoid.add_mem _ _ _ (H J HJ).to_is_add_submonoid _ _ (ha J HJ) (hb J HJ)`
 
 

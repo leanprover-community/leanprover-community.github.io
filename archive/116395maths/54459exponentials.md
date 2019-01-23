@@ -11,16 +11,16 @@ permalink: archive/116395maths/54459exponentials.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125775813):
+#### [ Kenny Lau (Apr 27 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125775813):
 @**Chris Hughes** what happened to your PR's about exp?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 27 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125779790):
+#### [ Chris Hughes (Apr 27 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125779790):
 I made this PR https://github.com/leanprover/mathlib/pull/61 in Feb, which is a necessary part of exp, and it hasn't been closed or accepted essentially because I didn't use filters, I used `cau_seq` as defined in `data.real.cau_seq`. I might have to rewrite it using filters over the summer.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125779805):
+#### [ Kenny Lau (Apr 27 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125779805):
 I'm also trying to learn how filters define limit :D
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125779817):
+#### [ Kenny Lau (Apr 27 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125779817):
 ```lean
 theorem const (x : X) (y : Y) : tendsto (λ _ : X, y) (nhds x) (nhds y) :=
 λ B HB FX HF1, HF1 _ ⟨set.univ, rfl⟩ $ univ_mem_sets' $

@@ -11,34 +11,34 @@ permalink: archive/116395maths/12504intcastisunique.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 21 2019 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541423):
+#### [ Johan Commelin (Jan 21 2019 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541423):
 Do we already know that `int.cast` is the unique ring hom `ℤ → R`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 21 2019 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541435):
+#### [ Kevin Buzzard (Jan 21 2019 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541435):
 I knew that, yes.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 21 2019 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541482):
+#### [ Johan Commelin (Jan 21 2019 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541482):
 Did your Lean also know it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 21 2019 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541503):
+#### [ Kevin Buzzard (Jan 21 2019 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541503):
 Eew, is it some pretty grim induction?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 21 2019 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541568):
+#### [ Johan Commelin (Jan 21 2019 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541568):
 I don't know, I just want to use it if it's in mathlib.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 21 2019 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541575):
+#### [ Kevin Buzzard (Jan 21 2019 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541575):
 Yes, I don't think I've seen my Lean know it...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 21 2019 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541579):
+#### [ Johan Commelin (Jan 21 2019 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541579):
 I can probably write a proof in a couple of minutes...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 21 2019 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541683):
+#### [ Kevin Buzzard (Jan 21 2019 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541683):
 If we have two ring homomorphisms from $$A$$ to $$B$$ then the subset of $$A$$ where they coincide is a subring. Do we know that $$\mathbb{Z}$$ has no subrings other than itself?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 21 2019 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156542839):
+#### [ Chris Hughes (Jan 21 2019 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156542839):
 `int.eq_cast`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 21 2019 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156543031):
+#### [ Johan Commelin (Jan 21 2019 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156543031):
 Aah... nice. Too bad it isn't stated in terms of ring homs.
 
 

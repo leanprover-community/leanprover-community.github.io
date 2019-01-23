@@ -11,18 +11,18 @@ permalink: archive/113488general/47957awholenewerror.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483415):
+#### [ Kenny Lau (Apr 21 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483415):
 ```lean
 invalid pattern, 'choice (frozen_name multiset.cons) (frozen_name list.cons)' is overloaded, and this kind of overloading is not currently supported in patterns
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483454):
+#### [ Mario Carneiro (Apr 21 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483454):
 use a local notation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483456):
+#### [ Mario Carneiro (Apr 21 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483456):
 what did you write to get that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 08:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483501):
+#### [ Kenny Lau (Apr 21 2018 at 08:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483501):
 ```lean
 theorem reduce.not : ∀ {L₁ L₂ L₃ : list (α × bool)} (x b), reduce L₁ = L₂ ++ (x, b) :: (x, bnot b) :: L₃ → false
 | [] [] L3 _ _ H := by injections
@@ -34,13 +34,13 @@ theorem reduce.not : ∀ {L₁ L₂ L₃ : list (α × bool)} (x b), reduce L₁
   end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483556):
+#### [ Mario Carneiro (Apr 21 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483556):
 does it help to use `((x2,b2)::hd2 : list _)` instead?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 08:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483605):
+#### [ Kenny Lau (Apr 21 2018 at 08:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483605):
 well, it doesn't, but list.cons worked
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484552):
+#### [ Mario Carneiro (Apr 21 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484552):
 ```
 theorem reduce.not : ∀ (L₁ L₂ L₃ : list (α × bool)) (x b), reduce L₁ ≠ L₂ ++ (x, b) :: (x, bnot b) :: L₃
 | [] L2 L3 _ _ := λ h, by simpa using (list.append_eq_nil.1 h.symm).2
@@ -66,16 +66,16 @@ end
 ```
 ah, I couldn't help myself
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484554):
+#### [ Kenny Lau (Apr 21 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484554):
 thanksssss
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484611):
+#### [ Kenny Lau (Apr 21 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484611):
 and I just realized that I only have two interface theorems
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484612):
+#### [ Kenny Lau (Apr 21 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484612):
 and I don't have to change the rest
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484613):
+#### [ Kenny Lau (Apr 21 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125484613):
 which is again a testimony of the theory of interface
 
 

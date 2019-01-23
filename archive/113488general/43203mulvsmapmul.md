@@ -11,14 +11,14 @@ permalink: archive/113488general/43203mulvsmapmul.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 05 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20vs%20map_mul/near/133366536):
+#### [ Johan Commelin (Sep 05 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20vs%20map_mul/near/133366536):
 I noticed that `is_group_hom` has a field called `mul`, whereas I would expect it to be called `map_mul`. Similarly, in that namespace there is a lemma called `one`, and I would expect `map_one`. Etc...
 Can/should these be renamed?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 05 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20vs%20map_mul/near/133366679):
+#### [ Chris Hughes (Sep 05 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20vs%20map_mul/near/133366679):
 I think yes. Same for linear map, group action etc.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 05 2018 at 12:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20vs%20map_mul/near/133366690):
+#### [ Johan Commelin (Sep 05 2018 at 12:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20vs%20map_mul/near/133366690):
 Or maybe I have wrong expectations...
 
 

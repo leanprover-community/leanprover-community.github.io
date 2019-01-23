@@ -11,7 +11,7 @@ permalink: archive/116395maths/59703ringhominducesringhombetweenmvpolynomials.ht
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130203646):
+#### [ Johan Commelin (Jul 24 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130203646):
 I am stuck.
 ```lean
 import linear_algebra.multivariate_polynomial
@@ -89,22 +89,22 @@ is_ring_hom (functorial i : mv_polynomial σ R → mv_polynomial σ S) :=
   end }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130203649):
+#### [ Johan Commelin (Jul 24 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130203649):
 There are two `sorry`s in that bit of code. I don't know how to get rid of them.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204295):
+#### [ Mario Carneiro (Jul 24 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204295):
 I think you are going about this the wrong way, at least if you want a clean proof at the end
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204348):
+#### [ Johan Commelin (Jul 24 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204348):
 Hmmm, so what is the right way?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204353):
+#### [ Mario Carneiro (Jul 24 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204353):
 You should break the proof into smaller and more useful parts rather than just attacking the whole thing at once
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204372):
+#### [ Johan Commelin (Jul 24 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204372):
 Ok, but I think I don't even really see the smaller useful parts...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204416):
+#### [ Mario Carneiro (Jul 24 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204416):
 here's the first thing I would prove:
 ```
 theorem map_monomial (f : α → β) [is_ring_hom f]
@@ -112,22 +112,22 @@ theorem map_monomial (f : α → β) [is_ring_hom f]
 sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204420):
+#### [ Mario Carneiro (Jul 24 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204420):
 (I renamed `functorial` to `map`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204431):
+#### [ Johan Commelin (Jul 24 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204431):
 It is still called `functorial` in mathlib right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204437):
+#### [ Mario Carneiro (Jul 24 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204437):
 not in my local copy as of a minute ago
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204440):
+#### [ Johan Commelin (Jul 24 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204440):
 Aaah...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204444):
+#### [ Mario Carneiro (Jul 24 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204444):
 you can use `functorial` if it's easier
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204565):
+#### [ Johan Commelin (Jul 24 2018 at 13:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204565):
 ```lean
 theorem map_monomial (i : R → S) [is_ring_hom i]
   (x : σ →₀ ℕ) (r : R) : functorial i (monomial x r) = monomial x (i r) :=
@@ -142,85 +142,85 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204574):
+#### [ Mario Carneiro (Jul 24 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204574):
 I am suspicious still
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204577):
+#### [ Mario Carneiro (Jul 24 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204577):
 that proof is too complicated
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204579):
+#### [ Johan Commelin (Jul 24 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204579):
 Hmmm, ok, I'll try to golf it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204583):
+#### [ Mario Carneiro (Jul 24 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204583):
 it should be a one liner about the composition of `map_range` with `single`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 24 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204641):
+#### [ Chris Hughes (Jul 24 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204641):
 Incidentally is @**Johannes Hölzl**  planning on removing the use of `monomial` for `mv_polynomial`s like he did for univariate polys?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204650):
+#### [ Mario Carneiro (Jul 24 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204650):
 I don't know anything about this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204658):
+#### [ Mario Carneiro (Jul 24 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204658):
 oh, I see he just uses `single`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 24 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204702):
+#### [ Chris Hughes (Jul 24 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204702):
 The idea is to use `C a * X^n` instead of `monomial`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204707):
+#### [ Mario Carneiro (Jul 24 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204707):
 For foundational stuff that's no good
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204716):
+#### [ Mario Carneiro (Jul 24 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204716):
 because the theorems about `C a` and `X` come from a theorem on `single`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 24 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204737):
+#### [ Chris Hughes (Jul 24 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204737):
 Yeah, but once the foundations are done, users are supposed to use `C a * X^n` I think.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204772):
+#### [ Mario Carneiro (Jul 24 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204772):
 sure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204773):
+#### [ Johan Commelin (Jul 24 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204773):
 /me seems to be a user who has to do some foundational stuff...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204777):
+#### [ Mario Carneiro (Jul 24 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204777):
 Johan Commelin has stumbled on a gap in mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204785):
+#### [ Johan Commelin (Jul 24 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204785):
 That's the same thing right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204789):
+#### [ Mario Carneiro (Jul 24 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204789):
 not always
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204793):
+#### [ Johan Commelin (Jul 24 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204793):
 fair enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204794):
+#### [ Mario Carneiro (Jul 24 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204794):
 well, I guess that depends on what qualifies as "foundational"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204803):
+#### [ Mario Carneiro (Jul 24 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204803):
 in this case the API is clearly lacking, and there is even an "unfinished" comment
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204843):
+#### [ Johan Commelin (Jul 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204843):
 Written by?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204847):
+#### [ Johan Commelin (Jul 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204847):
 Johan Commelin (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204851):
+#### [ Johan Commelin (Jul 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204851):
 So, I can only blame myself
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204856):
+#### [ Mario Carneiro (Jul 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204856):
 https://github.com/leanprover/mathlib/blob/master/linear_algebra/multivariate_polynomial.lean#L183
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204857):
+#### [ Johan Commelin (Jul 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204857):
 But you can guess why I wrote that comment... because back then I would have been even worse at proving this lemma.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204864):
+#### [ Johan Commelin (Jul 24 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204864):
 Yeah, the `git blame` is not accurate.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 24 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204865):
+#### [ Kenny Lau (Jul 24 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204865):
 I've removed 1 sorry (en hep nok 4 toegevoegt):
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 24 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204868):
+#### [ Kenny Lau (Jul 24 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204868):
 ```lean
 import linear_algebra.multivariate_polynomial
 
@@ -332,22 +332,22 @@ is_ring_hom (functorial i : mv_polynomial σ R → mv_polynomial σ S) :=
 end mv_polynomial
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204870):
+#### [ Johan Commelin (Jul 24 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204870):
 I wrote that stuff, but didn't actually know what I was doing. So Johannes took my stuff and transformed it into something mathlib-ready.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204912):
+#### [ Mario Carneiro (Jul 24 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204912):
 I didn't realize you were an author of the file, you aren't credited if so
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204920):
+#### [ Mario Carneiro (Jul 24 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130204920):
 I added you as an author
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205097):
+#### [ Johan Commelin (Jul 24 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205097):
 Does that bring responsibilities with it? Does that mean I should now be able to answer foundational questions about this file?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205103):
+#### [ Mario Carneiro (Jul 24 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205103):
 Not really
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205235):
+#### [ Johan Commelin (Jul 24 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205235):
 By the way... I already had:
 ```lean
 lemma functorial_ring_hom_X (i : R → S) [is_ring_hom i] (n : σ)
@@ -375,13 +375,13 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205239):
+#### [ Johan Commelin (Jul 24 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205239):
 But I didn't see how to use them.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205241):
+#### [ Johan Commelin (Jul 24 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205241):
 But maybe I'm learning, because I think it was pretty close to your suggestion about monomials.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205242):
+#### [ Mario Carneiro (Jul 24 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205242):
 almost there:
 ```
 -- `mv_polynomial σ` is a functor (incomplete)
@@ -406,56 +406,56 @@ theorem map_mul (f : α → β) [is_ring_hom f] (p q : mv_polynomial σ α) :
 sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205248):
+#### [ Johan Commelin (Jul 24 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205248):
 Ok, please add `map_X`. It will turn out to be really useful.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205296):
+#### [ Johan Commelin (Jul 24 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205296):
 /me wonders when he will ever approximate the overlord-powers of Mario... :thinking_face:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205297):
+#### [ Mario Carneiro (Jul 24 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205297):
 ```
 theorem map_X (f : α → β) [is_ring_hom f] (n : σ) : map f (X n : mv_polynomial σ α) = X n :=
 (map_monomial _ _ _).trans $ by simp [is_ring_hom.map_one f]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205313):
+#### [ Mario Carneiro (Jul 24 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205313):
 oh wait that doesn't work
 ```
 theorem map_X (f : α → β) [is_ring_hom f] (n : σ) : map f (X n : mv_polynomial σ α) = X n :=
 by simp [X, map_monomial, is_ring_hom.map_one f]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205321):
+#### [ Johan Commelin (Jul 24 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205321):
 You fixed it and made it shorter! Double win.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205398):
+#### [ Mario Carneiro (Jul 24 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205398):
 mul is probably the hard one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205402):
+#### [ Johan Commelin (Jul 24 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205402):
 Last man standing (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205492):
+#### [ Johan Commelin (Jul 24 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205492):
 @**Mario Carneiro** I wouldn't be surprised if you need the `section ring_hom_commutes_with_stuff`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205497):
+#### [ Johan Commelin (Jul 24 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205497):
 See Kenny's post a few lines up.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205500):
+#### [ Mario Carneiro (Jul 24 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205500):
 I was planning on using induction
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205508):
+#### [ Johan Commelin (Jul 24 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205508):
 Right, that's what we did in that section.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205509):
+#### [ Mario Carneiro (Jul 24 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205509):
 no I mean to prove `map_mul`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205570):
+#### [ Johan Commelin (Jul 24 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205570):
 Yes, but that might mean duplicating effort... I don't know.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205580):
+#### [ Mario Carneiro (Jul 24 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205580):
 well, commuting with `sum` still leaves commuting over `^`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205770):
+#### [ Johan Commelin (Jul 24 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205770):
 ```lean
 lemma ring_hom_powers (x : R) (n : ℕ) : i(x^n) = (i x)^n :=
 begin
@@ -465,31 +465,31 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205774):
+#### [ Johan Commelin (Jul 24 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205774):
 Was already in my file, but didn't copy it into the MWE.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205840):
+#### [ Mario Carneiro (Jul 24 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205840):
 I was hoping that `map` was defined using `eval`, but unfortunately it's a bit circular
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205866):
+#### [ Johan Commelin (Jul 24 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205866):
 How would you define it using `eval`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205923):
+#### [ Mario Carneiro (Jul 24 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205923):
 I was thinking something along the lines of "evaluate the constants using `C o f` and the variables using `X`"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205943):
+#### [ Mario Carneiro (Jul 24 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205943):
 but `eval` doesn't work like that; it maps everything into the coefficient ring rather than some other ring across a ring hom
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205993):
+#### [ Johan Commelin (Jul 24 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205993):
 True. So either you need a beefed up `eval`, or you need `map`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205995):
+#### [ Mario Carneiro (Jul 24 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130205995):
 exactly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206015):
+#### [ Johan Commelin (Jul 24 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206015):
 Oooh, while you are editing that file. I was also thinking that the `instance` that `eval` is a ring hom should get a name. Because `C` is also a useful ring hom in that context.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206033):
+#### [ Johan Commelin (Jul 24 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206033):
 ```lean
 instance C_is_ring_hom : is_ring_hom (C : R → mv_polynomial σ R) :=
 { map_one := C_1,
@@ -497,97 +497,97 @@ instance C_is_ring_hom : is_ring_hom (C : R → mv_polynomial σ R) :=
   map_mul := λ x y, eq.symm $ C_mul_monomial }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206077):
+#### [ Mario Carneiro (Jul 24 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206077):
 I saw that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206082):
+#### [ Mario Carneiro (Jul 24 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206082):
 I agree that it is useful
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206098):
+#### [ Johan Commelin (Jul 24 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206098):
 Yes, I'm currently using `map C` all over the place.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206125):
+#### [ Mario Carneiro (Jul 24 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206125):
 I think I will define beefed up `eval`, what should it be called?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206277):
+#### [ Johan Commelin (Jul 24 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206277):
 Hmm, I don't know a TLA...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206281):
+#### [ Mario Carneiro (Jul 24 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206281):
 oh dear, I need semiring homs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206285):
+#### [ Johan Commelin (Jul 24 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206285):
 You're kidding me (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206294):
+#### [ Johan Commelin (Jul 24 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206294):
 You don't *need* them. You only *want* them.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206301):
+#### [ Mario Carneiro (Jul 24 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206301):
 if I use beefed up eval to define eval, it won't work on semiring like it does now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206305):
+#### [ Johan Commelin (Jul 24 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206305):
 Mathematicians have survived over 3000 years without needing them.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206308):
+#### [ Mario Carneiro (Jul 24 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206308):
 I'm sorry, but they really do come up in lean, a lot
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206311):
+#### [ Mario Carneiro (Jul 24 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206311):
 `nat` is a semiring, `ennreal` is a semiring. These get lots of use
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206312):
+#### [ Johan Commelin (Jul 24 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206312):
 Only trolling (-;. I guess you stumbled on a gap in mathlib?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206360):
+#### [ Mario Carneiro (Jul 24 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206360):
 maybe because it was written by a bunch of blithe mathematicians ;)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206367):
+#### [ Mario Carneiro (Jul 24 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206367):
 who think semirings have no value
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206786):
+#### [ Johan Commelin (Jul 24 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206786):
 You mean the definition of `is_ring_hom`? Lol. We really need @**Scott Morrison** and you guys (Mario + @**Johannes Hölzl** ) to get categories into mathlib. You will be amazed at how many `is_X_hom` definitions will be added by a bunch of blithe mathematicians (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 24 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206793):
+#### [ Mario Carneiro (Jul 24 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206793):
 Well, category theory doesn't save you from having to define the homs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206947):
+#### [ Johan Commelin (Jul 24 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206947):
 No, I agree. But all of a sudden we will want to define a bunch of categories. And then we'll define the homs as well (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206988):
+#### [ Johan Commelin (Jul 24 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130206988):
 Although maybe we will forget about the category of semirings...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130207579):
+#### [ Johan Commelin (Jul 24 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130207579):
 Aaaahrg, now I need to make sure that `eval` of polynomials is associative...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 24 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130211457):
+#### [ Johan Commelin (Jul 24 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130211457):
 @**Mario Carneiro** How 's it going with `eval_on_steroids`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 24 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130220081):
+#### [ Kevin Buzzard (Jul 24 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130220081):
 ```quote
 `nat` is a semiring, `ennreal` is a semiring. These get lots of use
 ```
 @**Ali Sever** (the guy formalising Euclid/Tarski geometry in Lean) was saying that he wanted to be able to say "the distance from a to b is q times the distance from c to d" where q>=0 is rational. There is no formal definition of distance, we just have a predicate `eqd a b c d` interpreted as "dist(a,b)=dist(c,d)", but we defined distance anyway as point x point / equiv reln (formally these are "attainable distances") and they should indeed be a semi-vector space over the semi-ring of non-negative rationals.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 25 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130259206):
+#### [ Mario Carneiro (Jul 25 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130259206):
 I'm going to have to get back to you on `eval_on_steroids`, conferences tend to be a time sink so probably not until the weekend
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130259252):
+#### [ Johan Commelin (Jul 25 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130259252):
 Too bad. Have fun!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130263243):
+#### [ Kevin Buzzard (Jul 25 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130263243):
 William Stein reported that he'd met Mario, so Mario at conferences does have advantages :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 27 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130403696):
+#### [ Johan Commelin (Jul 27 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130403696):
 Mario, since you said you would take a stab at these problems, may I suggest you also consider https://gist.github.com/jcommelin/0e401d47ac3e0b7291c27d3313ea850f while you're going at it...?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 27 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130403711):
+#### [ Johan Commelin (Jul 27 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130403711):
 Oooh, and `s/functorial/map/`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 02 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130766236):
+#### [ Johan Commelin (Aug 02 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130766236):
 Hi Mario, any news here? Do you have a definition about which I could try to prove some lemmas?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 05 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130908402):
+#### [ Mario Carneiro (Aug 05 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130908402):
 @**Johan Commelin**  News is here. I didn't prove the assoc lemmas but all the assoc lemmas on `eval` and `map` follow from the obvious composition lemma for `map2`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130953117):
+#### [ Mario Carneiro (Aug 06 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130953117):
 @**Johan Commelin** I think the second associativity lemma is false:
 ```
 theorem eval_assoc₂_false
@@ -601,89 +601,89 @@ theorem eval_assoc₂_false
 by simpa using H (C (X a))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023083):
+#### [ Johan Commelin (Aug 07 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023083):
 @**Mario Carneiro** Cool! This is adding a lot of flexibility. Do you think it makes sense to add `map2_neg` and `map2_sub`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 07:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023091):
+#### [ Mario Carneiro (Aug 07 2018 at 07:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023091):
 Sure. They should be direct applications of the `is_ring_hom` instance
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023142):
+#### [ Johan Commelin (Aug 07 2018 at 07:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023142):
 Ok, do you want me to do that? Or have you already done it (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 07:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023151):
+#### [ Mario Carneiro (Aug 07 2018 at 07:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023151):
 I haven't done it, it's up to you
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023155):
+#### [ Johan Commelin (Aug 07 2018 at 07:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023155):
 Ok, I'll add them.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023374):
+#### [ Johan Commelin (Aug 07 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023374):
 @**Mario Carneiro** Is `rw` the "morally" correct way to prove such a thing?
 ```lean
 lemma map₂_sub : (p - q).map₂ f g = p.map₂ f g - q.map₂ f g :=
 by rw is_ring_hom.map_sub (map₂ f g)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 07:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023381):
+#### [ Mario Carneiro (Aug 07 2018 at 07:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023381):
 you should be able to just apply the theorem, right? Does `is_ring_hom.map_sub _` work as a proof?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023437):
+#### [ Johan Commelin (Aug 07 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023437):
 Yes, it does. Thanks! Do you want a 5 line PR?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023448):
+#### [ Mario Carneiro (Aug 07 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023448):
 sure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023451):
+#### [ Mario Carneiro (Aug 07 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023451):
 You should have the same theorems for `eval` and `map` too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 07:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023496):
+#### [ Mario Carneiro (Aug 07 2018 at 07:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023496):
 and `C`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023578):
+#### [ Johan Commelin (Aug 07 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023578):
 Ok, I'll add those too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023734):
+#### [ Johan Commelin (Aug 07 2018 at 07:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023734):
 `map_add` and `map_mul` are simp lemmas
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023735):
+#### [ Johan Commelin (Aug 07 2018 at 07:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023735):
 But the corresponding lemmas for `map2` are not.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023737):
+#### [ Johan Commelin (Aug 07 2018 at 07:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023737):
 Is there a reason for this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023962):
+#### [ Johan Commelin (Aug 07 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023962):
 @**Mario Carneiro** If you can tell me which ones should be simp lemmas, then I think I'm done.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023966):
+#### [ Mario Carneiro (Aug 07 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023966):
 I think there was, but I don't think it was a good reason. Just make them all simp lemmas
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023976):
+#### [ Mario Carneiro (Aug 07 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023976):
 `eval` too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023985):
+#### [ Johan Commelin (Aug 07 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023985):
 And `C` as well
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023991):
+#### [ Mario Carneiro (Aug 07 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131023991):
 There probably isn't any point in having the `_sub` theorems be simp lemmas, since the LHS is not in simp normal form
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131024076):
+#### [ Johan Commelin (Aug 07 2018 at 07:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131024076):
 Hmm, I don't think I know what that means. Nevertheless, it would be cool if `simp` would just do all those rewrites for me...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131024219):
+#### [ Johan Commelin (Aug 07 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131024219):
 PR'd
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131028888):
+#### [ Johan Commelin (Aug 07 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131028888):
 @**Mario Carneiro** Ok, so now there are some merge conflicts... The renaming is straightforward.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131028928):
+#### [ Johan Commelin (Aug 07 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131028928):
 Shall I make the `add` and `mul` lemmas into simp lemmas?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131028937):
+#### [ Mario Carneiro (Aug 07 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131028937):
 yeah, same as the last version of your PR
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131028949):
+#### [ Johan Commelin (Aug 07 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131028949):
 Ok!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131033604):
+#### [ Johan Commelin (Aug 07 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/131033604):
 Updated the PR
 
 

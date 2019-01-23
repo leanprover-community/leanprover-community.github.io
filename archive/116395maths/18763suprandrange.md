@@ -11,7 +11,7 @@ permalink: archive/116395maths/18763suprandrange.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 13 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147609120):
+#### [ Sebastien Gouezel (Nov 13 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147609120):
 There are the following definitions in mathlib:
 ```lean
 def supr (s : ι → α) : α := Sup {a : α | ∃i : ι, a = s i}
@@ -20,37 +20,37 @@ def range (f : ι → α) : set α := {x | ∃y, f y = x}
 ```
 You can see that the order after the existential quantifiers is swapped. Therefore, `supr f`and `Sup (range f)` are not defeq. Is this on purpose or by accident? More importantly, if I want to unify the two, which one should I choose? I would rather use the first one `∃i, a = s i`, which could help the simplifier to rewrite `a` if at some point we end up with an assumption of the form `a = s i`, but there might be some reason I am missing for the current definition of `range`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 13 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147609524):
+#### [ Sebastien Gouezel (Nov 13 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147609524):
 Additional data point:
 ```lean
 def image (f : α → β) (s : set α) : set β := {b | ∃ a, a ∈ s ∧ f a = b}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 13 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147609790):
+#### [ Johannes Hölzl (Nov 13 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147609790):
 oops, I never realized this. I would keep `range` (as it is similar to `image`), and change `supr`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 13 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147610281):
+#### [ Mario Carneiro (Nov 13 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147610281):
 the variable on the right thing is also consistent with the definition of `eq`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 13 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147611469):
+#### [ Sebastien Gouezel (Nov 13 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147611469):
 ```quote
 the variable on the right thing is also consistent with the definition of `eq`
 ```
  Not sure I get it (too many variables around :). Do you mean that you also think that the definition of `supr` and `image` is right, and that I should fix `range`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 13 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147612064):
+#### [ Johannes Hölzl (Nov 13 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147612064):
 `range` and `image` are the same (the function application is left, and the set-comprehension variable is right). For `supr` it is the other way round
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 13 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147612160):
+#### [ Johan Commelin (Nov 13 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147612160):
 Shouldn't `supr` be redefined to use `range` explicitly?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 13 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147612244):
+#### [ Johannes Hölzl (Nov 13 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147612244):
 Yes, `def supr (s : ι → α) : α := Sup (range s)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 13 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147612351):
+#### [ Johan Commelin (Nov 13 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147612351):
 Maybe then we should rename `infi` to `infr`, and then the `r` stands for `range` :upside_down: :see_no_evil:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 14 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147655093):
+#### [ Sebastien Gouezel (Nov 14 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147655093):
 ```quote
 Yes, `def supr (s : ι → α) : α := Sup (range s)`
 ```

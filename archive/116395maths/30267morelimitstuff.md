@@ -11,7 +11,7 @@ permalink: archive/116395maths/30267morelimitstuff.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 17 2018 at 05:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151910753):
+#### [ Johan Commelin (Dec 17 2018 at 05:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151910753):
 I've got the following lemmas
 ```lean
 lemma colimit.pre_map {K : Type v} [small_category K] [has_colimits_of_shape.{u v} K C]
@@ -44,19 +44,19 @@ end
 ```
 Should I put these (and their duals) into a new PR? Or should this be cast into some other form first?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 17 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151911327):
+#### [ Reid Barton (Dec 17 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151911327):
 Isn't the third one `colimit.pre_pre`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 17 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151911330):
+#### [ Reid Barton (Dec 17 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151911330):
 Oh I missed the actual second one.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 17 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151911339):
+#### [ Reid Barton (Dec 17 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151911339):
 The associator is a definitional equality, so you don't really need it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 17 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151911403):
+#### [ Reid Barton (Dec 17 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151911403):
 Though sometimes Lean tries to be too smart, and gets confused by the reassociation unless you spell things out for it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 17 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/152007178):
+#### [ Johan Commelin (Dec 17 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/152007178):
 Aah, I see. So the third one can go. That leaves the other 2.
 
 

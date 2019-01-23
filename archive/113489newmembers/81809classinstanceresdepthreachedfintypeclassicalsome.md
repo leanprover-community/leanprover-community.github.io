@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/81809classinstanceresdepthreachedfintypeclas
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871036):
+#### [ Tobias Grosser (Sep 29 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871036):
 Hi guys, I am trying to model ssreflects 'pick' method using classical.some. The code I came up with reads:
 
 ```lean
@@ -37,47 +37,47 @@ noncomputable def get_sample_or_zero (α : Type) [ordered_ring α] [decidable_eq
 
 but triggers a "maximum class-instance resolution depth has been reached". Any pointers what could go wrong here?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 29 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871101):
+#### [ Simon Hudon (Sep 29 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871101):
 Try removing `has_zero`. It should be implied by the ordered ring.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 29 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871141):
+#### [ Simon Hudon (Sep 29 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871141):
 This is the kind of problem that arises when your instances overlap in conflicting ways
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871197):
+#### [ Tobias Grosser (Sep 29 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871197):
 Thanks @**Simon Hudon** , unfortunately this does not help.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871251):
+#### [ Tobias Grosser (Sep 29 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871251):
 Still the same error
 Dropping the ordered_ring instead also does not help.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871252):
+#### [ Tobias Grosser (Sep 29 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871252):
 I can also drop the matrix import, this does not change anything either.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 29 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871307):
+#### [ Simon Hudon (Sep 29 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871307):
 I think you should need anything beside `has_zero` actually.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 29 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871347):
+#### [ Simon Hudon (Sep 29 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871347):
 Is it important that the default value be `0`? If not, you can replace the `if` with `classical.epsilon S`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871348):
+#### [ Mario Carneiro (Sep 29 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871348):
 ```
 local attribute classical.prop_decidable
 ```
 since when is this valid syntax?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871355):
+#### [ Mario Carneiro (Sep 29 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871355):
 oh wait, now I see... this doesn't do anything
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871395):
+#### [ Mario Carneiro (Sep 29 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871395):
 you want `local attribute [instance] classical.prop_decidable`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871454):
+#### [ Mario Carneiro (Sep 29 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871454):
 I don't think you need classical anything for this definition, if I read it correctly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 29 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871499):
+#### [ Simon Hudon (Sep 29 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871499):
 You can do without classical reasoning but you need to implement a search
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871527):
+#### [ Mario Carneiro (Sep 29 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871527):
 Also the `then` part is not type correct
 ```
 import data.set.finite data.equiv.encodable
@@ -86,16 +86,16 @@ def get_sample_or_zero (α : Type) [decidable_eq α] [has_zero α] : Π (m), vec
 | m V := if h : ∃ i, V i = 0 then V (encodable.choose h) else 0
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871530):
+#### [ Mario Carneiro (Sep 29 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871530):
 note the `V` in the middle
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871576):
+#### [ Mario Carneiro (Sep 29 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871576):
 then again, this function is always 0, so maybe that's not what you meant
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871588):
+#### [ Mario Carneiro (Sep 29 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871588):
 but if this returns a `fin m` then you have a problem since `0 : fin m` only holds if `m>0`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871701):
+#### [ Mario Carneiro (Sep 29 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871701):
 wasn't ssreflect's pick function something like this?
 ```
 noncomputable def pick (α : Type*) : option α :=
@@ -103,22 +103,22 @@ by haveI := classical.dec (nonempty α); exact
 if h : nonempty α then some (classical.choice h) else none
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871708):
+#### [ Tobias Grosser (Sep 29 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871708):
 SSReflects pick is: "[pick x in A] == Some x, with x \in A, or None if A is empty. "
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871709):
+#### [ Tobias Grosser (Sep 29 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871709):
 Here the definition: http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871756):
+#### [ Mario Carneiro (Sep 29 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871756):
 right, isn't that what I wrote?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871758):
+#### [ Tobias Grosser (Sep 29 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871758):
 Honestly, I need some more time to think about these solutions.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871804):
+#### [ Tobias Grosser (Sep 29 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871804):
 I mostly was concerned about the then path and therefore just returned zero in the else.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871810):
+#### [ Mario Carneiro (Sep 29 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871810):
 Maybe `A` is a subset of a type instead of just a type; in that case you have
 ```
 noncomputable def pick {α} (p : α → Prop) : option α :=
@@ -126,7 +126,7 @@ by haveI := classical.dec (∃ a, p a); exact
 if h : ∃ a, p a then some (classical.some h) else none
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871856):
+#### [ Tobias Grosser (Sep 29 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871856):
 To give some context, what I actually want to write is:
 ```coq
 Fixpoint Gaussian_elimination {m n} : 'M_(m, n) → 'M_m × 'M_n × nat :=
@@ -142,16 +142,16 @@ Fixpoint Gaussian_elimination {m n} : 'M_(m, n) → 'M_m × 'M_n × nat :=
   end.
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871864):
+#### [ Tobias Grosser (Sep 29 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871864):
 I am just taking baby steps, to learn these different things.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871874):
+#### [ Tobias Grosser (Sep 29 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871874):
 Will get back to try to play with your pick function and see how it can be used here.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871875):
+#### [ Tobias Grosser (Sep 29 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871875):
 Thanks for the pointers.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871976):
+#### [ Mario Carneiro (Sep 29 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871976):
 Maybe the nicest interface for that pick match is something like this:
 ```
 @[elab_as_eliminator]
@@ -159,91 +159,91 @@ noncomputable def {u} classical.exists_cases (p : α → Prop) {C : Sort u} (H0 
 if h : ∃ a, p a then H (classical.some h) (classical.some_spec h) else H0
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872035):
+#### [ Mario Carneiro (Sep 29 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872035):
 In your context it would be something like `classical.exists_cases (λ ij, A ij.1 ij.2 ≠ 0) (1, 1, 0) $ λ ⟨i, j⟩, ...`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872038):
+#### [ Tobias Grosser (Sep 29 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872038):
 OK. Even more things to try to integrate.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872058):
+#### [ Tobias Grosser (Sep 29 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872058):
 One last question. In the end I want a gaussian elimination which can compute solutions.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872104):
+#### [ Tobias Grosser (Sep 29 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872104):
 Am I on a wrong track here? Aka, can this evolve to something computable eventually?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 29 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872106):
+#### [ Simon Hudon (Sep 29 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872106):
 Then you're going to need to specialize that function so that you can implement it using a search function.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872108):
+#### [ Mario Carneiro (Sep 29 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872108):
 Not using the function I just gave you
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872120):
+#### [ Mario Carneiro (Sep 29 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872120):
 You want to use `encodable.choose` to do choicy stuff decidably
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872133):
+#### [ Tobias Grosser (Sep 29 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872133):
 What exactly is the difference.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872179):
+#### [ Mario Carneiro (Sep 29 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872179):
 Basically any function with `classical` in the name will not be computable, even if the inputs are
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872180):
+#### [ Tobias Grosser (Sep 29 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872180):
 ssreflect seems to be a hybrid of both.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872183):
+#### [ Tobias Grosser (Sep 29 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872183):
 That's what I know.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872187):
+#### [ Mario Carneiro (Sep 29 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872187):
 `ssreflect` essentially embeds `encodable.choose` very low in their algebraic hierarchy
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872194):
+#### [ Tobias Grosser (Sep 29 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872194):
 I see. So the counterpart in lean would be a "pick based on 'encodable.choose'?"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872195):
+#### [ Mario Carneiro (Sep 29 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872195):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872196):
+#### [ Tobias Grosser (Sep 29 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872196):
 I see.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872203):
+#### [ Tobias Grosser (Sep 29 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872203):
 Can I also get the nice { (i j) | ... } interface for such a pick?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872244):
+#### [ Mario Carneiro (Sep 29 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872244):
 You can pattern match on `i, j` in the then branch
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872247):
+#### [ Mario Carneiro (Sep 29 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872247):
 like at the end of my example `λ ⟨i, j⟩, ...`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872260):
+#### [ Tobias Grosser (Sep 29 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872260):
 OK.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872262):
+#### [ Mario Carneiro (Sep 29 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872262):
 I think `[pick ij | A ij.1 ij.2 != 0]` is some composite notation which is basically `pick (λ ij, A ij.1 ij.2 != 0)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872263):
+#### [ Tobias Grosser (Sep 29 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872263):
 But your example uses classical.choice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872270):
+#### [ Mario Carneiro (Sep 29 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872270):
 You can swap out `classical.some` with `encodable.choose` for great good
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872271):
+#### [ Tobias Grosser (Sep 29 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872271):
 I see.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872312):
+#### [ Tobias Grosser (Sep 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872312):
 I think that's all I need. I will put the things together myself!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872314):
+#### [ Tobias Grosser (Sep 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872314):
 Thanks a lot.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872321):
+#### [ Mario Carneiro (Sep 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872321):
 We don't have a "choice type" typeclass like ssreflect, so it's one or the other here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872332):
+#### [ Mario Carneiro (Sep 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872332):
 but fin n is encodable so it's all good
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872334):
+#### [ Tobias Grosser (Sep 29 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134872334):
 :D
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134896880):
+#### [ Tobias Grosser (Sep 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134896880):
 Just to report back. I use for now the function:
 
 ```lean
@@ -257,7 +257,7 @@ def pick_encodable (α : Type) (p : α → Prop) [decidable_pred p]:
       none 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134896882):
+#### [ Tobias Grosser (Sep 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134896882):
 This probably needs some more cleanup, but or now it does what I want.
 
 

@@ -11,7 +11,7 @@ permalink: archive/113488general/56515extensionandcoercion.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 13 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123660814):
+#### [ Patrick Massot (Mar 13 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123660814):
 A long time ago, I wrote:
 ```lean
 structure homeo (α β) [topological_space α] [topological_space β] extends equiv α β :=
@@ -22,19 +22,19 @@ instance : has_coe_to_fun (homeo α β) := ⟨_, λ f, f.to_fun⟩
 ```
 But now it seems I have trouble, probably because a homeo f and f.to_equiv don't have defeq coercion to function. I'm especially interested in direct images of subsets under homeomorphisms. For instance, I'd like to prove `(f : homeo X X) (s : set X) : f '' closure s = closure (f '' s)`, using `image_closure_subset_closure_image` from mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 13 2018 at 17:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123660819):
+#### [ Patrick Massot (Mar 13 2018 at 17:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123660819):
 How should I setup this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Mar 13 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123661281):
+#### [ Johannes Hölzl (Mar 13 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123661281):
 this works for me
 ```lean
 example (h : homeo α β) : (h : α → β) = h.to_equiv := rfl
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 13 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123661897):
+#### [ Patrick Massot (Mar 13 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123661897):
 hum. Maybe the problem is something else. Do you manage to prove my closure lemma using this coercion? In principle this a trivial lemma once you have `image_closure_subset_closure_image` (to be applied to both f and its inverse)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Mar 13 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123662202):
+#### [ Johannes Hölzl (Mar 13 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123662202):
 My solution looks like this now: 
 
 ```lean
@@ -61,10 +61,10 @@ subset.antisymm
 
 One problem is that `rw` and the simplifier can now see through the coercion. So when you want to apply `equiv` lemmas you need to apply `homeo_coe_to_equiv_coe` first. Another solution is to make a `calc` proof, which might be a little bit nicer and one has the opportunity to state the goal in the required form.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 13 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123662495):
+#### [ Patrick Massot (Mar 13 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123662495):
 Thanks you very much. I feared needing to invoke something like ` homeo_coe_to_equiv_coe` but it doesn't seem so bad in the end, especially if a calc proof works (I'll try).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 13 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123662522):
+#### [ Patrick Massot (Mar 13 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123662522):
 I see this is also a good opportunity for my poor man tactic (as Kevin would put it):
 ```lean
 meta def by_double_inclusion : tactic unit := do
@@ -72,7 +72,7 @@ meta def by_double_inclusion : tactic unit := do
 ```
 Obviously it's a bit ridiculous but the main point is readablity
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Mar 13 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123662958):
+#### [ Johannes Hölzl (Mar 13 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123662958):
 If you add some infrastructure for `homeo` it gets also nicer:
 ```lean
 import analysis.topology.continuity data.equiv
@@ -117,7 +117,7 @@ subset.antisymm
 
 I don't see the value in `by_double_inclusion`. You could just use `apply subset.antisymm`. I would prefer if people wrote term style proofs.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 14 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123695171):
+#### [ Patrick Massot (Mar 14 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123695171):
 Thank you very much @**Johannes Hölzl** I'm sorry my Lean time is very fragmented those days, so I suddenly stopped answering. I already had some infrastructure but it is only partially compatible with what you wrote. I'll need time to make the whole story consistent, including probably some more lemmas assuming only injectivity or surjectivity.
 
 

@@ -11,7 +11,7 @@ permalink: archive/113488general/64461unexpectedfunextreflbehaviour.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946494):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946494):
 ```lean
 set_option pp.universes true -- might help
 example : -- phenomenon won't occur if you replace this with theorem T!
@@ -29,67 +29,67 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946536):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946536):
 I am pleased to have confused tactic mode so much that `refl` won't work but `exact rfl` will.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946548):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946548):
 I am not sure if my goal is true, as the sorts may or may not be in different universes initially. However the funext tactic seems to buy it, although after pulling off the X it gets confused and won't pull off the `f`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946563):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946563):
 `apply f` won't do it but I seem to be able to explicitly do it with `refine funext _` although now Lean is in a funny state -- the refine tactic does appear to do something, but reports an error anyway.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946610):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946610):
 replacing `example` with `theorem T` makes all the problems go away, which is to me very surprising behaviour.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 11 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946682):
+#### [ Patrick Massot (Apr 11 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946682):
 This Lean 3 is all broken. Let's have Lean 4.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 11 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946695):
+#### [ Patrick Massot (Apr 11 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946695):
 (and hope Kevin stops trying to break everything)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 11 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946760):
+#### [ Chris Hughes (Apr 11 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946760):
 Isn't it just because your X's are in different universes. And then if you put them in the same universe, it fails because the funext tactic gets rid of both lambdas.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946857):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946857):
 I agree that if you put them in the same universe, all is well.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946864):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946864):
 But if you leave them in different universes, Lean ends up in a weird state.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946940):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946940):
 After the intro f, you have a goal `f = f` which refl won't close
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946953):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946953):
 but `exact rfl` will. However we are now passed a red squiggly line and I am not too sure how seriously to take Lean.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 11 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946954):
+#### [ Chris Hughes (Apr 11 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946954):
 I'm beginning to see the problem. Is it something to do with, it let's you do funext the first time, so if you can prove their equal, it will deduce the universes are the same. So your proposition is a bit like an heq?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946958):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946958):
 I was wondering if there was some implicit unification going on
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947005):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947005):
 Also it was very strange to see a line in tactic mode fail and yet see the goal change.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 11 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947019):
+#### [ Patrick Massot (Apr 11 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947019):
 Looks a bit in the same spirit as your most recent issue on Lean github
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 11 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947028):
+#### [ Chris Hughes (Apr 11 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947028):
 And it automatically lifts the functions to a different universe to be able to state that they're equal.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 11 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947033):
+#### [ Patrick Massot (Apr 11 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947033):
 Lean somehow fails to notice it's failing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 11 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947109):
+#### [ Chris Hughes (Apr 11 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947109):
 Haven't ever done anything that really tests the universe system so I don't really know.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 11 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947173):
+#### [ Kevin Buzzard (Apr 11 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947173):
 I just started playing with it recently. I'm just trying to get the hang of it :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162334):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162334):
 I know there's something strange going on here but I've not explained it very well. How about this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162336):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162336):
 ```lean
 example : 
   (λ (X : Sort*) (f : X → X) , f) = (λ (X : Sort*) (f : X → X), f) :=
@@ -101,13 +101,13 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162338):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162338):
 That works fine.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162340):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162340):
 But now let me change `example` to `theorem strange`:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162390):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162390):
 ```lean
 theorem strange : 
   (λ (X : Sort*) (f : X → X) , f) = (λ (X : Sort*) (f : X → X), f) :=
@@ -119,34 +119,34 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162393):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162393):
 The proof no longer typechecks if I name the theorem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162398):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162398):
 because the behaviour of `funext` changes now the theorem has a name
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162401):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162401):
 That's not right, is it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162462):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162462):
 I think this has something to do with screwy universes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Apr 16 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162620):
+#### [ Johannes Hölzl (Apr 16 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162620):
 Yes, it could be related to the fact that `example` (compared to `theorem`) does allow meta (universe) variables in its statement. So the type is not fully elaborated, it gets fully elaborated together with the value like `def`. So maybe `funext` has a problem with instantiating them.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162747):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162747):
 Oh yes! If I set `pp.universes true` then I see that in the `theorem` the goal has `(X : Sort u_1)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162780):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162780):
 but in the `example` it has `(X : Sort ?l_1)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125163009):
+#### [ Kevin Buzzard (Apr 16 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125163009):
 I see, so `definition strange` fixes the problem :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166006):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166006):
 here's some possibly related weird behaviour:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166023):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166023):
 ```lean
 example : 
   (λ (X : Sort*) (f : X → X) , f) = (λ (X : Sort*) (f : X → X), f) :=
@@ -159,43 +159,43 @@ end
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166031):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166031):
 the goal now is `f = f`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166037):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166037):
 (at the point where the proof is not finished)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166041):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166041):
 or with `pp.all` on
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166054):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166054):
 `⊢ @eq.{?l_2} (X → X) f f`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166066):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166066):
 and the red squiggle is under `end`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166073):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166073):
 because we wrote end before the proof was complete
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166079):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166079):
 However if we write `admit` to finish the proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166087):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166087):
 we get a new red squiggle
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166137):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166137):
 on the second funext :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166149):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166149):
 Maybe the universe unification or whatever only takes place after the admit, and then Lean decides something was wrong all along
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166164):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166164):
 I guess this is the price I pay for the silly `Sort*` choices I made earlier
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166182):
+#### [ Kevin Buzzard (Apr 16 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166182):
 changing `example` to `theorem T` gives me the red squiggle on the second funext immediately
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 16 2018 at 23:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125168260):
+#### [ Chris Hughes (Apr 16 2018 at 23:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125168260):
 I think it might be because the proof could give a clue about universes, but not if the proof is admit.
 
 

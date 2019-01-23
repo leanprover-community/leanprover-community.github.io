@@ -11,46 +11,46 @@ permalink: archive/113489newmembers/55857Typeequality.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 11 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478097):
+#### [ Keeley Hoek (Nov 11 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478097):
 Is it possible to decide whether two types are equal?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 11 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478161):
+#### [ Kenny Lau (Nov 11 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478161):
 no
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 11 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478266):
+#### [ Keeley Hoek (Nov 11 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478266):
 That makes me sad
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 11 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478309):
+#### [ Kenny Lau (Nov 11 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478309):
 `local attribute [instance] classical.dec`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 11 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478315):
+#### [ Keeley Hoek (Nov 11 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478315):
 Cheers, but I wanted to use it in a program
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 11 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478323):
+#### [ Keeley Hoek (Nov 11 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478323):
 Instead I think I'm going to have to concoct some `user_notation` trickery to get the same syntax
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 11 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147479490):
+#### [ Kevin Buzzard (Nov 11 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147479490):
 I've heard it said here that even `nat = int` is undecidable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 11 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147479581):
+#### [ Kenny Lau (Nov 11 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147479581):
 independent, even
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Nov 11 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147482478):
+#### [ Abhimanyu Pallavi Sudhir (Nov 11 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147482478):
 ```quote
 I've heard it said here that even `nat = int` is undecidable
 ```
 How exactly are we defining equality of types?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 11 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147482996):
+#### [ Chris Hughes (Nov 11 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147482996):
 As defined in Lean. If you separately define two inductive types of the same size, their equality will be independent.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147511856):
+#### [ Keeley Hoek (Nov 12 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147511856):
 I guess the lesson is to stay in `expr`-land if you're trying to do something programmatically like this (e.g. either its a ```expr.const `bool []``` or its not)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 12 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147511939):
+#### [ Mario Carneiro (Nov 12 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147511939):
 Well, it depends on what you mean. That will not get `id bool = bool`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147513299):
+#### [ Keeley Hoek (Nov 12 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147513299):
 sure yep
 
 

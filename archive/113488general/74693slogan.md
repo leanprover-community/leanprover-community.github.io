@@ -11,7 +11,7 @@ permalink: archive/113488general/74693slogan.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jeremy Avigad (Sep 25 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slogan/near/134625070):
+#### [ Jeremy Avigad (Sep 25 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slogan/near/134625070):
 I am writing from an AFOSR meeting on dynamical systems and control theory in Washington, DC. This morning, one of the speakers, Arthur Krener, used the following slogan:
 
 *Think mathematically, act computationally.*

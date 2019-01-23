@@ -11,16 +11,16 @@ permalink: archive/113488general/49562reduceXYfails.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Sep 03 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264218):
+#### [ Kevin Sullivan (Sep 03 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264218):
 Evaluating this expression in Lean (VSCode is what I'm using) hangs for a while then reports deep recursion detected, increase stack space. Not very undergraduate-student-friendly. Bug or feature?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 03 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264296):
+#### [ Patrick Massot (Sep 03 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264296):
 As usual, `#eval` succeeds here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Sep 03 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264323):
+#### [ Kevin Sullivan (Sep 03 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264323):
 Why this failure?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Sep 03 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133265394):
+#### [ Kevin Sullivan (Sep 03 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133265394):
 Also note that #eval also fails in ways guaranteed to be confusing to new students. Try this (posted previously).
 
 theorem t : true := true.intro
@@ -31,16 +31,16 @@ The real question then, I suppose, is by what simple rule should a new student c
 
 And for the curious student, why do they fail in cases where on the face of it, it looks like they might be expected to work?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Sep 03 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133265406):
+#### [ Rob Lewis (Sep 03 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133265406):
 Even just `#reduce 'X'` is asking the kernel to normalize a proof of `88 < 55296`. This normalizes to 55207 nested applications of `nat.less_than_or_equal.step`. And this is a subproblem of what you're asking.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Sep 03 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133265477):
+#### [ Rob Lewis (Sep 03 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133265477):
 `#eval` is useful for computing values, it will ignore `Prop`-valued terms.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 03 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133266004):
+#### [ Patrick Massot (Sep 03 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133266004):
 My simple rule is to choose `#eval`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Sep 03 2018 at 17:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133266225):
+#### [ Kevin Sullivan (Sep 03 2018 at 17:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133266225):
 Thanks.
 
 

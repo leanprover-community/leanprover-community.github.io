@@ -11,7 +11,7 @@ permalink: archive/113488general/57599errorexpectedtypeequalsgiventype.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 15 2019 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155160367):
+#### [ Johan Commelin (Jan 15 2019 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155160367):
 A mystery:
 ```lean
 type mismatch at application
@@ -44,16 +44,16 @@ but is expected to have type
     category_theory.types.{(max u v)}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jan 15 2019 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155162452):
+#### [ Sebastian Ullrich (Jan 15 2019 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155162452):
 If you have too much time and want to take a closer look, you could try turning on the various defeq traces. Not sure if the output will be of any help.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 15 2019 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155163901):
+#### [ Johan Commelin (Jan 15 2019 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155163901):
 @**Sebastian Ullrich** I have a bit of time. Do you have a guess about what's going on? Are you interested in those traces? How do I turn them on?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jan 15 2019 at 13:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164151):
+#### [ Sebastian Ullrich (Jan 15 2019 at 13:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164151):
 It should be `trace.type_context.is_def_eq` and `trace.type_context.is_def_eq_detail`. I can take a look, though I won't promise anything :) .
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 15 2019 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164241):
+#### [ Johan Commelin (Jan 15 2019 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164241):
 Output of `trace.type_context.is_def_eq`:
 ```lean
 [type_context.is_def_eq] Type ? =?= Type ? ... success  (approximate mode)
@@ -75,7 +75,7 @@ Output of `trace.type_context.is_def_eq`:
 [type_context.is_def_eq] ?x_0 =?= presheaf Xᵒᵖ ⥤ Type (max u v) ... success  (approximate mode)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 15 2019 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164317):
+#### [ Johan Commelin (Jan 15 2019 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164317):
 Output of `trace.type_context.is_def_eq_detail`:
 ```lean
 [type_context.is_def_eq_detail] [1]: ?m_1 ⥤ ?m_1ᵒᵖ ⥤ Type ? =?= ?m_3 ⥤ ?m_5
@@ -129,103 +129,103 @@ Output of `trace.type_context.is_def_eq_detail`:
 [type_context.is_def_eq_detail] assign: ?x_0 := presheaf Xᵒᵖ ⥤ Type (max u v)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164531):
+#### [ Mario Carneiro (Jan 15 2019 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164531):
 what does `convert yoneda F` give?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 15 2019 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164556):
+#### [ Johan Commelin (Jan 15 2019 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164556):
 The error is in a `have` statement...
 ```lean
 have := @functor.on_iso _ _ _ _ (yoneda.obj F),
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164575):
+#### [ Mario Carneiro (Jan 15 2019 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164575):
 can you fill in the underscores?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 15 2019 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164579):
+#### [ Johan Commelin (Jan 15 2019 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164579):
 I'll try. Give me a second.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164640):
+#### [ Mario Carneiro (Jan 15 2019 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164640):
 also your `op` has a really confusing precedence
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164651):
+#### [ Mario Carneiro (Jan 15 2019 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164651):
 there is no way lean can parse `presheaf Xᵒᵖ` means `(presheaf X)ᵒᵖ` but the printer seems to think so
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 15 2019 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164673):
+#### [ Johan Commelin (Jan 15 2019 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155164673):
 ```lean
 have := @functor.on_iso ((presheaf X)ᵒᵖ) _ _ _ (yoneda.obj F),
 ```
 Wow... this works...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 15 2019 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165054):
+#### [ Reid Barton (Jan 15 2019 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165054):
 ```quote
 there is no way lean can parse `presheaf Xᵒᵖ` means `(presheaf X)ᵒᵖ` but the printer seems to think so
 ```
  I thought this was actually possible by using a precedence above 1000?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 15 2019 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165061):
+#### [ Reid Barton (Jan 15 2019 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165061):
 I was wondering whether we should do that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165111):
+#### [ Mario Carneiro (Jan 15 2019 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165111):
 I think you want high precedence (above `max = 1024`) to get `presheaf Xᵒᵖ` = `presheaf (Xᵒᵖ)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 15 2019 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165174):
+#### [ Reid Barton (Jan 15 2019 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165174):
 Oh, I misread
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 15 2019 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165181):
+#### [ Reid Barton (Jan 15 2019 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165181):
 What you just wrote is what I want
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165245):
+#### [ Mario Carneiro (Jan 15 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165245):
 most postfix notations are at precedence `:max+1` for this reason
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 15 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165251):
+#### [ Kevin Buzzard (Jan 15 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165251):
 Has this fixed the error Johan?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 15 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165253):
+#### [ Reid Barton (Jan 15 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165253):
 I'm not really sure how it works now actually. But I know there are a lot of parentheses in `category_theory` that look like they ought to be unnecessary
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165266):
+#### [ Mario Carneiro (Jan 15 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165266):
 I doubt it addresses the error though, I'm still perplexed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165294):
+#### [ Mario Carneiro (Jan 15 2019 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165294):
 it seems like it's an elaboration order issue
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165388):
+#### [ Mario Carneiro (Jan 15 2019 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165388):
 what's up with this name? `category_theory.presheaf.category_theory.category`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165394):
+#### [ Mario Carneiro (Jan 15 2019 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165394):
 just in case you forgot it's about categories
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 15 2019 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165589):
+#### [ Reid Barton (Jan 15 2019 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165589):
 Just wait until we have the category of categories
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 15 2019 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165640):
+#### [ Reid Barton (Jan 15 2019 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165640):
 or the category of theories
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 15 2019 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165686):
+#### [ Chris Hughes (Jan 15 2019 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165686):
 ```quote
 or the category of theories
 ```
  Is that a thing?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 15 2019 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165751):
+#### [ Johan Commelin (Jan 15 2019 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165751):
 I still don't understand the error.
 But I no longer need a solution, because I proved it differently.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 15 2019 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165758):
+#### [ Johan Commelin (Jan 15 2019 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165758):
 It's just weird that this shows up. And like I said: Reid and I had a similar thing last week when we worked with over categories.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165860):
+#### [ Mario Carneiro (Jan 15 2019 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155165860):
 > is that a thing?
 
 Sure, you can use interpretations as morphisms between theories even with different languages
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 16 2019 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155247432):
+#### [ Reid Barton (Jan 16 2019 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155247432):
 ```quote
 I think you want high precedence (above `max = 1024`) to get `presheaf Xᵒᵖ` = `presheaf (Xᵒᵖ)`
 ```
  Implemented at https://github.com/leanprover/mathlib/pull/600 (@**Johan Commelin** FYI)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 16 2019 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155248248):
+#### [ Johan Commelin (Jan 16 2019 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155248248):
 @**Reid Barton** Thanks!
 
 

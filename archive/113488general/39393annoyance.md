@@ -11,7 +11,7 @@ permalink: archive/113488general/39393annoyance.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710552):
+#### [ Kevin Buzzard (May 17 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710552):
 ```lean
 import data.set 
 variables (α : Type) (p : set α → Prop)
@@ -26,101 +26,101 @@ partial_order {U : set α // p U} :=
 }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710573):
+#### [ Kevin Buzzard (May 17 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710573):
 I wanted to write a beautiful partial order on some subsets of a type.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710640):
+#### [ Kevin Buzzard (May 17 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710640):
 `le_refl` is a bit meh because I had to write `Us.1`, but I do understand that `set.subset.refl` needs to be told what it's refling in general
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710677):
+#### [ Kevin Buzzard (May 17 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710677):
 `le_trans` is perfect and I could probably even have written `\lam _ _ _`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710770):
+#### [ Kevin Buzzard (May 17 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710770):
 `le_antisymm` is a bit annoying though because in functional programming if you write `\lam x y, blah y` then you can normally remove the `y`s. But I can't remove `HUV` and `HVU` here because of my `$` trickery. Is this just some annoyance in functional programming that I have to put up with or is there some other idiom which means I can get rid of `HUV` and `HVU` somehow?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710780):
+#### [ Kevin Buzzard (May 17 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710780):
 `le_antisymm := λ Us Vs, subtype.eq ∘ set.subset.antisymm` doesn't work either
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710801):
+#### [ Kevin Buzzard (May 17 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710801):
 I can see why these things don't work, I just want something which looks a bit cooler if possible. Not for any particularly good reason, I'm just trying to write tidy code
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710885):
+#### [ Kevin Buzzard (May 17 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710885):
 Here's a succinct way of asking my question:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710887):
+#### [ Kevin Buzzard (May 17 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710887):
 ```lean
   le_refl := λ _, set.subset.refl _,
   le_trans := λ _ _ _, set.subset.trans,
   le_antisymm := λ _ _ HUV HVU, subtype.eq $ set.subset.antisymm HUV HVU
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710927):
+#### [ Kevin Buzzard (May 17 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710927):
 Can I get rid of those last two variables?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 17 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126711207):
+#### [ Chris Hughes (May 17 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126711207):
 `le_antisymm := λ Us Vs, subtype.eq ∘ set.subset.antisymm` doesn't work because there are two arguments, and `f ∘ g` is `λ x, f (g x)`not `λ x y, f (g x y)`The eta reduction doesn't work because the arguments are inside brackets.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 17 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126711306):
+#### [ Chris Hughes (May 17 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126711306):
 I think you just have to put up with it, but it doesn't look that annoying.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 17 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126711333):
+#### [ Chris Hughes (May 17 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126711333):
 This works `le_antisymm := λ Us Vs HUV, subtype.eq ∘ set.subset.antisymm HUV`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 17 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126711384):
+#### [ Chris Hughes (May 17 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126711384):
 If you want to be extra confusing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 17 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126716170):
+#### [ Chris Hughes (May 17 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126716170):
 ```quote
 I can see why these things don't work, I just want something which looks a bit cooler if possible. Not for any particularly good reason, I'm just trying to write tidy code
 ```
 I should have read the question
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (May 17 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718633):
+#### [ Sebastian Ullrich (May 17 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718633):
 `λ Us Vs, ((∘) ∘ (∘)) subtype.eq set.subset.antisymm`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 17 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718805):
+#### [ Reid Barton (May 17 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718805):
 At least you can't write the awful `(f .) . g` in lean.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 17 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718821):
+#### [ Reid Barton (May 17 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718821):
 I had to work out on paper whether that does what I remember it doing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 17 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718822):
+#### [ Patrick Massot (May 17 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718822):
 what would that mean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (May 17 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718828):
+#### [ Sebastian Ullrich (May 17 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718828):
 Yes, I'll definitely fix that for Lean 4
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 17 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718896):
+#### [ Reid Barton (May 17 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718896):
 Haskell `.` is Lean's `∘`, and `(f .)` means `λ h, f ∘ h`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 17 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718929):
+#### [ Patrick Massot (May 17 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718929):
 Aaaarg, I did that rookie mistake again! I called some variable `a`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 17 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718983):
+#### [ Patrick Massot (May 17 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126718983):
 Sebastian, will this mistake be forgiven in Lean 4?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (May 17 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126719304):
+#### [ Sebastian Ullrich (May 17 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126719304):
 absolutely
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 17 2018 at 23:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126720531):
+#### [ Kevin Buzzard (May 17 2018 at 23:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126720531):
 `#eval (+) 2 2 -- 4`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 18 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126720580):
+#### [ Kevin Buzzard (May 18 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126720580):
 I remember reading that one could do this in Haskell but I didn't know it was a Lean thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 18 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126720690):
+#### [ Kevin Buzzard (May 18 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126720690):
 `#check ((∘) ∘ (∘)) -- (?M_1 → ?M_2) → (?M_4 → ?M_3 → ?M_1) → ?M_4 → ?M_3 → ?M_2`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 18 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126720691):
+#### [ Kevin Buzzard (May 18 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126720691):
 I love Lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 18 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126720732):
+#### [ Kevin Buzzard (May 18 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126720732):
 who needs pencil and paper
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 18 2018 at 00:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126722090):
+#### [ Kevin Buzzard (May 18 2018 at 00:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126722090):
 Ok so I used pencil and paper
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 18 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126722151):
+#### [ Kevin Buzzard (May 18 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126722151):
 Recall that `(∘) f g x = (f ∘ g) x = f (g x)`. So
 
 ```
@@ -131,22 +131,22 @@ Recall that `(∘) f g x = (f ∘ g) x = f (g x)`. So
 =  a (b c d)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 18 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126722157):
+#### [ Kevin Buzzard (May 18 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126722157):
 which is indeed what we wanted to do
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 18 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126722175):
+#### [ Kevin Buzzard (May 18 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126722175):
 At the back of my mind I always feel like computer scientists learn this sort of stuff in their first year of undergrad whereas this is never taught to mathematicians at all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Brendan Zabarauskas (May 18 2018 at 05:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126729532):
+#### [ Brendan Zabarauskas (May 18 2018 at 05:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126729532):
 Depends on the computer science course :weary:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 18 2018 at 05:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126729645):
+#### [ Mario Carneiro (May 18 2018 at 05:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126729645):
 I don't think this is actually accurate, but I admit it as Kevin's warped view of what computer science is. I think it is accurate to say that you become comfortable with this when learning Haskell and not before
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 18 2018 at 05:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126729702):
+#### [ Mario Carneiro (May 18 2018 at 05:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126729702):
 I think that the demographics of this chat are disproportionately skewed towards functional programmers (for good reason), so it's easy to get that impression
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Brendan Zabarauskas (May 18 2018 at 05:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126729800):
+#### [ Brendan Zabarauskas (May 18 2018 at 05:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126729800):
 Correct. I'm one who had to learn FP and type theory/programming language stuff in my own time. But might be getting off topic here.
 
 

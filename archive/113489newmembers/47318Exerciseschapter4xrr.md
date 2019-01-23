@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/47318Exerciseschapter4xrr.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Carlesso Diego (Dec 04 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837580):
+#### [ Carlesso Diego (Dec 04 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837580):
 Hello! First time I write here! I'm trying to learn Lean step by step following the online tutorial "theorem proving in Lean" doing as many exercises as I can. 
 At the moment I'm having a problem (probably more on the logic part of the thing) on the first one of exercise 2 in chapter 4:
 α → (( ∀ x: α, r ) ↔ r)
@@ -44,10 +44,10 @@ r → α → r "
 And I understand why it returns that error, but, how am I supposed to show (∀ x: α , r) from r otherwise? It's probably something stupid I'm missing but as stupid as it is I can't see it. Looking at the others in ex2 I think it's probably something I'm getting wrong in bringing outside a universal quantifier.
 Also, I've never used Zulip or something like that, so let me know if I did something wrong.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 04 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837685):
+#### [ Kevin Buzzard (Dec 04 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837685):
 For Zulip -- if you write your code between triple backticks ` ``` ` then it gets formatted nicely. Even better, if you write ` ```lean ` for the top triple backtick then you get syntax highlighting as well.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 04 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837694):
+#### [ Kevin Buzzard (Dec 04 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837694):
 ```lean
 theorem e1: α → (( ∀ x: α, r ) ↔ r) :=
 assume y:α,
@@ -63,28 +63,28 @@ show (∀ x: α , r), from hyr
 )
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 04 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837731):
+#### [ Kevin Buzzard (Dec 04 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837731):
 But your code doesn't run for me -- can you post some fully working example so I can get it to compile without having to think?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 04 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837935):
+#### [ Patrick Massot (Dec 04 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837935):
 Carlesso, What Kevin means is you should include your `variables (α : Type) (r : Prop)` line as well, so that anyone can copy-paste your code right away
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 04 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837993):
+#### [ Patrick Massot (Dec 04 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837993):
 About the question itself, you are complicating things needlessly. It's probably because the question is a bit silly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 04 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150838017):
+#### [ Patrick Massot (Dec 04 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150838017):
 The proof of the second implication is simply `assume hr _, hr`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 04 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150838020):
+#### [ Patrick Massot (Dec 04 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150838020):
 The whole point is that `r` does not depend on anything
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 04 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150838222):
+#### [ Patrick Massot (Dec 04 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150838222):
 and the first one can be shortened to `assume h, h y`. If you really want to use term mode, you can go all the way down the obfuscation road until you reach `theorem e1 (α : Type) (r : Prop): α → (( ∀ x: α, r ) ↔ r) := λ y, ⟨λ h, h y, λ h _, h⟩`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 04 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150838259):
+#### [ Patrick Massot (Dec 04 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150838259):
 The opposite extreme is to load mathlib and replace the proof by `by tauto`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Carlesso Diego (Dec 04 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150842750):
+#### [ Carlesso Diego (Dec 04 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150842750):
 ```quote
 Carlesso, What Kevin means is you should include your `variables (α : Type) (r : Prop)` line as well, so that anyone can copy-paste your code right away
 ```
@@ -119,7 +119,7 @@ iff.intro
 It's a different exercise; I don't know if it could be solved with your method (right now it works), I have not reached that part on TPIL yet I think, or I'm not very practical to use it right now;  but it's just to show you what an exercise there looks like and what I was trying to get. 
 Thank you by the way, problem solved!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 04 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150843010):
+#### [ Mario Carneiro (Dec 04 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150843010):
 here's a compactified proof of that theorem:
 ```lean
 variables {α : Type} {p q : α → Prop}
@@ -127,7 +127,7 @@ theorem e2 : (∀x, p x ∧ q x) ↔ (∀ x, p x) ∧ (∀ x, q x) :=
 ⟨λ H, ⟨λ x, (H x).left, λ x, (H x).right⟩, λ ⟨H₁, H₂⟩ x, ⟨H₁ x, H₂ x⟩⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 04 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150843154):
+#### [ Mario Carneiro (Dec 04 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150843154):
 and a proof of the first theorem in that style:
 ```lean
 theorem e1 : α → ((∀ x : α, r) ↔ r) :=
@@ -140,16 +140,16 @@ iff.intro
     show r, from hr )
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Carlesso Diego (Dec 04 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150844606):
+#### [ Carlesso Diego (Dec 04 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150844606):
 Thank you!, that's perfect!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 04 2018 at 14:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150845046):
+#### [ Kevin Buzzard (Dec 04 2018 at 14:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150845046):
 ```quote
 Carlesso, What Kevin means is you should include your `variables (α : Type) (r : Prop)` line as well, so that anyone can copy-paste your code right away
 ```
  Yes -- sorry for the brevity! I just had 2 minutes before a lecture and I wanted to help but then the code didn't run so I had to give up :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Carlesso Diego (Dec 04 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150845940):
+#### [ Carlesso Diego (Dec 04 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150845940):
 ```quote
 ```quote
 Carlesso, What Kevin means is you should include your `variables (α : Type) (r : Prop)` line as well, so that anyone can copy-paste your code right away

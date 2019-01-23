@@ -11,7 +11,7 @@ permalink: archive/113488general/05051generalizeintermmode.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497304):
+#### [ Kenny Lau (Apr 21 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497304):
 ```lean
 @[elab_as_eliminator] def generalize
   {α : Sort*} {β : α → Sort*} (x : α) :
@@ -20,25 +20,25 @@ permalink: archive/113488general/05051generalizeintermmode.html
 ```
 I have made a `generalize` in term mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497307):
+#### [ Kenny Lau (Apr 21 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497307):
 let's say this is the goal:
 ```lean
 refl_trans red x z → (∃ (w : α), refl_trans (refl_trans red) y w ∧ refl_trans (refl_trans red) z w)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497313):
+#### [ Kenny Lau (Apr 21 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497313):
 doing `generalize z _` will give you this on the underscore:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497314):
+#### [ Kenny Lau (Apr 21 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497314):
 ```lean
 ⊢ ∀ (x_1 : α),
     refl_trans red x x_1 → (∃ (w : α), refl_trans (refl_trans red) y w ∧ refl_trans (refl_trans red) x_1 w)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497315):
+#### [ Kenny Lau (Apr 21 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497315):
 is this a good idea?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497412):
+#### [ Kenny Lau (Apr 21 2018 at 17:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497412):
 example:
 ```lean
 @[elab_as_eliminator] def generalize
@@ -58,67 +58,67 @@ generalize z $ refl_trans.rec_on H (λ x z H, H) $ λ x y z hxy hyz ih w hzw,
 refl_trans.step_trans hxy $ ih w hzw
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497413):
+#### [ Kenny Lau (Apr 21 2018 at 17:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497413):
 @**Simon Hudon** @**Patrick Massot** what do you guys think?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497453):
+#### [ Patrick Massot (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497453):
 I'm afraid I still have to learn what the tactic mode `generalize` is good for
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497454):
+#### [ Patrick Massot (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497454):
 I'm very curious because it came up a lot recently
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497455):
+#### [ Patrick Massot (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497455):
 But I can't learn everything at the same time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497456):
+#### [ Kenny Lau (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497456):
 well you know how `induction` works with `generalizing` right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497457):
+#### [ Patrick Massot (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497457):
 No I don't
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497462):
+#### [ Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497462):
 hmm
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497463):
+#### [ Patrick Massot (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497463):
 I only do induction on natural numbers
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497464):
+#### [ Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497464):
 so when you're proving that natural number addition is commutative
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497465):
+#### [ Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497465):
 you want to prove that x+y=y+x
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497466):
+#### [ Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497466):
 you induct on the proposition `\forall y, x+y=y+x` instead
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497467):
+#### [ Kenny Lau (Apr 21 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497467):
 (and you prove the base case and inductive step both by induction)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497504):
+#### [ Kenny Lau (Apr 21 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497504):
 (I call this "double induction')
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497509):
+#### [ Kenny Lau (Apr 21 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497509):
 the very action of moving the goalpost from `x+y=y+x` to `\forall y, x+y=y+x` is called generalizing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497518):
+#### [ Kenny Lau (Apr 21 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497518):
 https://math.stackexchange.com/a/2438135/328173
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497520):
+#### [ Kenny Lau (Apr 21 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497520):
 here is it in Fitch style (only part 1 is relevant)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 21 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497664):
+#### [ Simon Hudon (Apr 21 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497664):
 @**Kenny Lau** I'll have to get back to you a bit later. My nephew just arrived
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497665):
+#### [ Kenny Lau (Apr 21 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497665):
 ok
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497882):
+#### [ Patrick Massot (Apr 21 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497882):
 I can understand why you used your Kenny identity to post such an answer
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497883):
+#### [ Patrick Massot (Apr 21 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497883):
 Thanks for the explanation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497888):
+#### [ Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497888):
 ```lean
 @[elab_as_eliminator] def generalize
   {α : Sort*} {β : α → Sort*} (x : α) :
@@ -147,43 +147,43 @@ generalize y $ xnat.rec_on x
 end xnat
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497890):
+#### [ Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497890):
 @**Patrick Massot** somehow it took me a long time to prove this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497891):
+#### [ Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497891):
 but here you go
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497892):
+#### [ Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497892):
 why did I use my Kenny identity to post such an answer?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497894):
+#### [ Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497894):
 and you can see that `generalize` is necessary because I used `ih1` twice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497934):
+#### [ Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497934):
 I should make `show` a term-tactic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497935):
+#### [ Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497935):
 well that won't really be necessary, forget that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497936):
+#### [ Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497936):
 but I like my `generalize`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497937):
+#### [ Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497937):
 a tactic in term mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497938):
+#### [ Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497938):
 (a tactic, here, is one which converts your goal to something useful)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497945):
+#### [ Kenny Lau (Apr 21 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497945):
 @**Mario Carneiro** do you think it is a good idea? I have too many `aux` theorems in my `free_group.lean` that can be eliminated by my new invention :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497946):
+#### [ Kenny Lau (Apr 21 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497946):
 assuming that it is an invention
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497988):
+#### [ Kenny Lau (Apr 21 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497988):
 bonus points! `generalize` also works as `revert`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497993):
+#### [ Kenny Lau (Apr 21 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497993):
 ```lean
 @[elab_as_eliminator] def generalize
   {α : Sort*} {β : α → Sort*} (x : α) :
@@ -202,13 +202,13 @@ H : x = y
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499063):
+#### [ Kenny Lau (Apr 21 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499063):
 I think I made a mistake. What I have built is really `revert`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499065):
+#### [ Kenny Lau (Apr 21 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499065):
 Here's the real `generalize`:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499066):
+#### [ Kenny Lau (Apr 21 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499066):
 ```lean
 @[elab_as_eliminator] def generalize
   {α : Sort*} {β : α → Sort*} (x : α) :
@@ -226,13 +226,13 @@ m n : ℕ
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 21 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499110):
+#### [ Chris Hughes (Apr 21 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499110):
 I always wondered how to revert in term mode, however not sure I've ever had to do it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499111):
+#### [ Kenny Lau (Apr 21 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499111):
 thanks for your appreciation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499112):
+#### [ Kenny Lau (Apr 21 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499112):
 so, for the sake of completeness:
 ```lean
 @[elab_as_eliminator] def revert
@@ -246,10 +246,10 @@ so, for the sake of completeness:
 λ H, H x rfl
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499155):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499155):
 in the old days when we didn't have a tactic mode you'd revert using clever `heq` tricks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499158):
+#### [ Chris Hughes (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499158):
 Usually I just do this.
 ```lean
 theorem add_comm {x : xnat} : ∀ {y}, add x y = add y x :=
@@ -262,22 +262,22 @@ xnat.rec_on x
        (show succ _ = succ _, from congr_arg succ (@ih1 z).symm) (@ih1 $ succ z)))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499159):
+#### [ Kenny Lau (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499159):
 right, that's what I did in my free group file
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499160):
+#### [ Kenny Lau (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499160):
 until I realized that I can build tactics in term mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499199):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499199):
 does your generalize use `heq` under the hood?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499200):
+#### [ Chris Hughes (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499200):
 Are there any examples where you can't just do that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499201):
+#### [ Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499201):
 @**Chris Hughes** so my file has a lot of auxiliary theorems
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499202):
+#### [ Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499202):
 ```lean
 theorem red.trans.aux (H12 : red L₁ L₂) : ∀ {L₃}, red L₂ L₃ → red L₁ L₃ :=
 red.rec_on H12 (λ _ _, id) $ λ _ _ _ H1 H2 ih L₃ H23,
@@ -287,10 +287,10 @@ red.step_trans H1 $ ih H23
 red.trans.aux H12 H23
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499203):
+#### [ Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499203):
 now I can do it in one go:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499204):
+#### [ Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499204):
 ```lean
 @[trans] theorem red.trans (H12 : red L₁ L₂) (H23 : red L₂ L₃) : red L₁ L₃ :=
 revert H23 $ revert L₃ $
@@ -298,19 +298,19 @@ red.rec_on H12 (λ _ _, id) $ λ _ _ _ H1 H2 ih L₃ H23,
 red.step_trans H1 $ ih _ H23
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499210):
+#### [ Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499210):
 @**Andrew Ashworth** are we talking about the same `heq`, i.e. the `heq` as in Lean? I don't know Coq at all. I showed you my code above though.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499211):
+#### [ Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499211):
 @**Chris Hughes** not that I'm aware of
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499212):
+#### [ Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499212):
 I just built that an hour ago, I don't know everything about it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499213):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499213):
 yeah, because in Coq it'd be `JMeq`, heh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499214):
+#### [ Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499214):
 ```lean
 @[elab_as_eliminator] def revert
   {α : Sort*} {β : α → Sort*} (x : α) :
@@ -323,30 +323,30 @@ yeah, because in Coq it'd be `JMeq`, heh
 λ H, H x rfl
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499237):
+#### [ Kenny Lau (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499237):
 I don't see any `heq` here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499254):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499254):
 when you print an example that uses generalize
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499255):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499255):
 do you get a `heq` term
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499257):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499257):
 it may or may not, i'm just curious
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499259):
+#### [ Chris Hughes (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499259):
 You can just do some extra lambdas. i.e
 `theorem red.trans.aux  : ∀ {L₃}, red L₁ L₂ → red L₂ L₃ → red L₁ L₃`
 What's wrong with that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499262):
+#### [ Kenny Lau (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499262):
 I need to rec on the first red
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499269):
+#### [ Chris Hughes (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499269):
 I see. Makes a lot of sense then.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499270):
+#### [ Kenny Lau (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499270):
 ```lean
 @[elab_as_eliminator] def revert
   {α : Sort*} {β : α → Sort*} (x : α) :
@@ -373,13 +373,13 @@ theorem test : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m 
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499271):
+#### [ Kenny Lau (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499271):
 @**Andrew Ashworth** is this what you're talking about?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 21 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499317):
+#### [ Chris Hughes (Apr 21 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499317):
 @**Andrew Ashworth** Are you talking about Kenny's generalize or tactics mode generalize?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499320):
+#### [ Kenny Lau (Apr 21 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499320):
 in that case:
 ```lean
 @[elab_as_eliminator] def revert
@@ -423,40 +423,40 @@ theorem test' : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499409):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499409):
 hm, interesting, i'd have to dig further when I have time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499416):
+#### [ Kenny Lau (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499416):
 thanks for your appreciation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499417):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499417):
 `heq` is important when doing dependent case analysis, which is why i was expecting heq to show up in the term there somewhere
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499418):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499418):
 it's probably buried in there somewhere... maybe... underneath one of the definitions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499419):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499419):
 it's quite a low-level idea
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499421):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499421):
 or i could be really wrong about how lean works, and that also wouldn't surprise me
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499422):
+#### [ Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499422):
 so, eh, which one?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499463):
+#### [ Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499463):
 `eq` is already an inductive type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499464):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499464):
 i can't say because i'm a lean scrub
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499465):
+#### [ Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499465):
 it doesn't depend on `heq`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499467):
+#### [ Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499467):
 I don't think it uses `heq` anywhere
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 21 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499522):
+#### [ Chris Hughes (Apr 21 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499522):
 Here's an alternative method
 ```lean
 theorem add_comm {x y : xnat} : add x y = add y x :=
@@ -470,55 +470,55 @@ xnat.rec_on x
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499524):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499524):
 sure, and why that might be is interesting to me, most other tactics in coq that do this sort of thing use `heq`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Apr 21 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499525):
+#### [ Andrew Ashworth (Apr 21 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499525):
 https://coq.inria.fr/refman/proof-engine/detailed-tactic-examples.html
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499568):
+#### [ Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499568):
 @**Chris Hughes** interesting. usually it fails if I put `y` at the end
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499571):
+#### [ Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499571):
 I still like my method more :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499572):
+#### [ Chris Hughes (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499572):
 I was expecting it not to work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499574):
+#### [ Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499574):
 did you do anything more than my eyes could see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499575):
+#### [ Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499575):
 I can't really tell if you changed anything in the middle
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499576):
+#### [ Chris Hughes (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499576):
 No.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499579):
+#### [ Kenny Lau (Apr 21 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499579):
 very curious indeed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500272):
+#### [ Kenny Lau (Apr 21 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500272):
 more examples: https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500481):
+#### [ Patrick Massot (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500481):
 Congratulations!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500485):
+#### [ Patrick Massot (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500485):
 Two docstrings is a very good start!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500486):
+#### [ Kenny Lau (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500486):
 :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500488):
+#### [ Kenny Lau (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500488):
 I was making docstrings
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500490):
+#### [ Kenny Lau (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500490):
 and then I got carried away by `revert` and `generalize`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521584):
+#### [ Kenny Lau (Apr 22 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521584):
 @**Mario Carneiro** do you like this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521591):
+#### [ Kenny Lau (Apr 22 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521591):
 recap:
 ```lean
 @[elab_as_eliminator] def revert
@@ -532,67 +532,67 @@ recap:
 λ H, H x rfl
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521631):
+#### [ Mario Carneiro (Apr 22 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521631):
 I'm not sure I buy the particular applications you've used it for, but this seems okay for `logic.basic`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521632):
+#### [ Mario Carneiro (Apr 22 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521632):
 probably should be `reducible`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521633):
+#### [ Kenny Lau (Apr 22 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521633):
 woohoo, tactics in term mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521638):
+#### [ Mario Carneiro (Apr 22 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521638):
 I mean, you can use `match` to the same effect
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521640):
+#### [ Mario Carneiro (Apr 22 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521640):
 but I usually just set up my intros in the right order so this isn't needed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521641):
+#### [ Kenny Lau (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521641):
 right, but setting up them make for a bunch of auxiliary theorems
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521682):
+#### [ Mario Carneiro (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521682):
 not in my experience
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521683):
+#### [ Kenny Lau (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521683):
 https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521684):
+#### [ Kenny Lau (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521684):
 here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521691):
+#### [ Mario Carneiro (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521691):
 why don't you use the equation compiler?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521693):
+#### [ Kenny Lau (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521693):
 that also needs to be auxiliary
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521694):
+#### [ Mario Carneiro (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521694):
 for `red.trans`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521695):
+#### [ Kenny Lau (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521695):
 because `rec_on` is shorter
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521739):
+#### [ Mario Carneiro (Apr 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521739):
 eww
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521740):
+#### [ Kenny Lau (Apr 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521740):
 I thought someone likes short proofs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521742):
+#### [ Mario Carneiro (Apr 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521742):
 I like straightforward proofs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521749):
+#### [ Mario Carneiro (Apr 22 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521749):
 the equation compiler makes it really clear how an induction proceeds, and what is the IH
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521751):
+#### [ Mario Carneiro (Apr 22 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521751):
 plus, I very much doubt you recouped the loss of having to state an auxiliary
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521794):
+#### [ Mario Carneiro (Apr 22 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521794):
 We haven't talked about it much since they appear to be going extinct, but it's possible to write brittle term proofs too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521797):
+#### [ Mario Carneiro (Apr 22 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521797):
 this was a big problem in lean 2
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521838):
+#### [ Mario Carneiro (Apr 22 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521838):
 when you do a proof with lots of omitted type information relying on lean to pick up the pieces, if something changes in the unification algorithm or something it can be very difficult to understand the broken proof
 
 

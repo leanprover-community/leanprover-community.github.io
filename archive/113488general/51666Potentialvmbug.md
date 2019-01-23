@@ -11,7 +11,7 @@ permalink: archive/113488general/51666Potentialvmbug.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Aug 11 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950146):
+#### [ Keeley Hoek (Aug 11 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950146):
 The following code typechecks:
 ````
 meta def oopsie : list string → tactic (option string)
@@ -22,34 +22,34 @@ meta def oopsie : list string → tactic (option string)
 ````
 I don't understand why it should. If I inspect the output of the `#eval`, I see the output "failed". Have I found a bug in the VM?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 11 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950892):
+#### [ Edward Ayers (Aug 11 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950892):
 There is a coercion from `option ` to `tactic` in `tactic.lean`:
 ```lean
 meta instance opt_to_tac : has_coe (option α) (tactic α) :=
 ⟨returnopt⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 11 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950909):
+#### [ Edward Ayers (Aug 11 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950909):
 So your tactic will throw if you give it an empty list
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Aug 11 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951022):
+#### [ Keeley Hoek (Aug 11 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951022):
 Ah, cheers!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 11 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951093):
+#### [ Edward Ayers (Aug 11 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951093):
 I only spotted this because I happen to be reading `tactic.lean` currently. Does anyone know if there is a way to discover what coercions are occurring in a given expression? Or a `#command` which will tell me coercions to a particular type?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 11 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951679):
+#### [ Edward Ayers (Aug 11 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951679):
 I can't figure out how to use
 `set_option pp.coercions true`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 11 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131960579):
+#### [ Simon Hudon (Aug 11 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131960579):
 ```quote
 I only spotted this because I happen to be reading tactic.lean currently.
 ```
 
 Good read! Don't spoil the ending though!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 11 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131960581):
+#### [ Simon Hudon (Aug 11 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131960581):
 ```quote
 Does anyone know if there is a way to discover what coercions are occurring in a given expression?
 ```

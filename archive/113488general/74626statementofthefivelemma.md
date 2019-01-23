@@ -11,418 +11,418 @@ permalink: archive/113488general/74626statementofthefivelemma.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606612):
+#### [ Johan Commelin (Apr 24 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606612):
 I just wrote a statement of the five lemma: https://gist.github.com/jcommelin/d097eb8f2587d34e5c337450bca543db
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606625):
+#### [ Johan Commelin (Apr 24 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606625):
 It seems extremely verbose to me. (And no, removing line breaks is not the solution :wink: ...)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606670):
+#### [ Johan Commelin (Apr 24 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606670):
 If we ignore the facts that I am (i) not using lowercase greek for types, (ii) write types and conditions in the wrong order, and (iii) write lots of linebreaks; are there ways to improve this statement?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 24 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606677):
+#### [ Reid Barton (Apr 24 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606677):
 Not nearly as verbose as the proof, I'm sure :simple_smile:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 24 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606729):
+#### [ Reid Barton (Apr 24 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606729):
 One thing you could do is package up the underlying set function and `is_group_hom` instance of each map into a single type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606737):
+#### [ Johan Commelin (Apr 24 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606737):
 I would love to just say: "Hey Lean, all these types are groups, and by the way, all my functions are homomorphisms"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606923):
+#### [ Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606923):
 sancta mater dei
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606929):
+#### [ Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606929):
 you formalized five lemma
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606933):
+#### [ Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606933):
 @**Kevin Buzzard** this is dank
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606936):
+#### [ Johan Commelin (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606936):
 no I did not
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606938):
+#### [ Johan Commelin (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606938):
 Only the statement
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606942):
+#### [ Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606942):
 that’s what i mean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606945):
+#### [ Johan Commelin (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606945):
 Which is not so hard to formalise, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606946):
+#### [ Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606946):
 formalize [sth] = formalize the statement of sth
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606953):
+#### [ Kenny Lau (Apr 24 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606953):
 well I never got my hands dirty
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606965):
+#### [ Johan Commelin (Apr 24 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606965):
 It's just a lot of repetitive strain injury inducing introductory blabla typing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606967):
+#### [ Johan Commelin (Apr 24 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606967):
 I'm scared of the proof atm
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606972):
+#### [ Johan Commelin (Apr 24 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606972):
 But I hope that `cc` will do a lot of diagram chasing for me
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607023):
+#### [ Johan Commelin (Apr 24 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607023):
 Currently my proof starts with `split, apply is_group_hom.inj_of_trivial_ker n`. And then I'm stuck, because I don't know how to prove that two subsets are equal...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607026):
+#### [ Johan Commelin (Apr 24 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607026):
 I really need a lot of handholding with Lean :confounded:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607236):
+#### [ Johan Commelin (Apr 24 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607236):
 How do you split the goal `subset_1 = subset_2` into proving `x \in subset_1 \to x \in subset_2` and its converse?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 24 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607243):
+#### [ Reid Barton (Apr 24 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607243):
 You can apply `set.ext`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 24 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607246):
+#### [ Reid Barton (Apr 24 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607246):
 (I was just about to write something longer, but you said just what it does.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607252):
+#### [ Johan Commelin (Apr 24 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607252):
 Thanks, that helps. Now I get an `\iff`. How do I split it into two implications?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607258):
+#### [ Johan Commelin (Apr 24 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607258):
 (And more meta: what is the best way to discover the answer to these questions without spamming Zulip?)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Apr 24 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607355):
+#### [ Johannes Hölzl (Apr 24 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607355):
 Either you use `iff.intro` or the anonymous constructor written as `\< ... ,  ... \>` where the VS Code plugin replaces the `\<` and `\>` .
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607358):
+#### [ Johan Commelin (Apr 24 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607358):
 Ok, cool
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607360):
+#### [ Johan Commelin (Apr 24 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607360):
 thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Apr 24 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607363):
+#### [ Johannes Hölzl (Apr 24 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607363):
 Alternatively: use `subset.antisymm` then you have it in the right form (the subset relation is defintional equal to forall x `subset_1 implies subset2`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607504):
+#### [ Johan Commelin (Apr 24 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607504):
 What are the advantages of `subset.antisymm` over the other method?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607506):
+#### [ Kenny Lau (Apr 24 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607506):
 @**Johan Commelin** use split
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607543):
+#### [ Kenny Lau (Apr 24 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607543):
 to break down an iff
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 24 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607552):
+#### [ Reid Barton (Apr 24 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607552):
 In this specific case, I imagine there's probably a lemma that says that it suffices to show that `f x = 0 \to x = 0`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607684):
+#### [ Johan Commelin (Apr 24 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607684):
 Yeah, I've got the trivial part now. If `x \in trivial subgroup \to x \in ker`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607720):
+#### [ Johan Commelin (Apr 24 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607720):
 that's paraphrasing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607928):
+#### [ Johan Commelin (Apr 24 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607928):
 Can I easily rewrite the hypothesis `(com₁ : m ∘ f = r ∘ l)` into `com₁' : \fo x, (m (f x) = r (l x))` ?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607939):
+#### [ Sean Leather (Apr 24 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607939):
 Here's [my attempt](https://gist.github.com/jcommelin/d097eb8f2587d34e5c337450bca543db#gistcomment-2568165) to syntactically follow the lemma.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607997):
+#### [ Sean Leather (Apr 24 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125607997):
 It probably won't help you prove anything, of course. :simple_smile:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608015):
+#### [ Kenny Lau (Apr 24 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608015):
 I mean, shouldn’t one prove the weak four lemmas first?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608057):
+#### [ Johan Commelin (Apr 24 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608057):
 One could, of course... but they are basically the two subgoals after the first split
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608062):
+#### [ Johan Commelin (Apr 24 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608062):
 There is a good reason to do that though... because then you only have to prove one of them
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608063):
+#### [ Johan Commelin (Apr 24 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608063):
 the other follows by duality
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608077):
+#### [ Johan Commelin (Apr 24 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608077):
 Still, the proof is a very straightforward diagram chase... so I hope I can convince Lean that it is easy as well
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608120):
+#### [ Johan Commelin (Apr 24 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608120):
 I want to tell lean "For every group_hom \phi that you can see, do this... `have := is_group_hom.one \phi`"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608121):
+#### [ Johan Commelin (Apr 24 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608121):
 And things like that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608129):
+#### [ Johan Commelin (Apr 24 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608129):
 And one it has figured out all these basic things, then `cc` might actually deduce the result
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608176):
+#### [ Johan Commelin (Apr 24 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608176):
 But then `cc` needs to know how to deal with `\circ`, hence my previous question about rewriting `com\1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608213):
+#### [ Johan Commelin (Apr 24 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608213):
 @**Sean Leather** Thanks for the refactoring. It is more readable now (except that I most I would give the arrows names like f_1, g_1 and f_2, g_2 etc...)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608215):
+#### [ Johan Commelin (Apr 24 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608215):
 But it is still a bit verbose, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 24 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608216):
+#### [ Reid Barton (Apr 24 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608216):
 I added a comment with an "artistic" layout
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 24 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608218):
+#### [ Reid Barton (Apr 24 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608218):
 (warning: long lines)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608263):
+#### [ Johan Commelin (Apr 24 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608263):
 Ha! I like that one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608269):
+#### [ Johan Commelin (Apr 24 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608269):
 It really explains the diagram. Cool!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608285):
+#### [ Johan Commelin (Apr 24 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608285):
 It would be great of you could tell lean `[is_group_hom f g h i j k l]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608332):
+#### [ Johan Commelin (Apr 24 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608332):
 something like that, and it just understands that all of them are group homs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608358):
+#### [ Sean Leather (Apr 24 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608358):
 ```quote
 It would be great of you could tell lean `[is_group_hom f g h i j k l]`
 ```
 Something like that would be useful in your case, but you wouldn't want to remove the ability to use multiple-parameter type classes, which it looks like `is_group_hom` is there.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608362):
+#### [ Johan Commelin (Apr 24 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608362):
 Hmmz, I see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608415):
+#### [ Johan Commelin (Apr 24 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608415):
 Also: `↪` and `↠` for injective respectively surjective functions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608421):
+#### [ Johan Commelin (Apr 24 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608421):
 But I guess that might be a bit hard
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608431):
+#### [ Johan Commelin (Apr 24 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608431):
 So `{f: A ↪ B}` means `{f: A → B} [function.injective f]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608550):
+#### [ Sean Leather (Apr 24 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608550):
 At the very least, you can `open function` to avoid having to prepend `function.`. :simple_smile:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608553):
+#### [ Johan Commelin (Apr 24 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608553):
 Aaah, ok. TIL :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608559):
+#### [ Johan Commelin (Apr 24 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125608559):
 Hmmz TIL is confusing in this context. I meant "Today I Learned"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609111):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609111):
 ```quote
 (And more meta: what is the best way to discover the answer to these questions without spamming Zulip?)
 ```
 Spam Zulip. I was in just this situation last September and spamming Zulip was by far the most efficient method. Mario often answered very quickly, and several others too. Now there are more people who can help, and the sooner you're up to speed the sooner you can help others. It's really important that mathematicians learn how to use this software as quickly as possible.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609118):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609118):
 PS I hope you're going to implement the abstract abelian category proof rather than all the diagram-chasing ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609134):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609134):
 [not serious]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609181):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609181):
 although, in this crazy, world, who's to say that the abstract universal property proof won't be easier!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609187):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609187):
 I find myself in a similar situation right now, as it happens.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609191):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609191):
 I would like to prove R[1/f][1/g] = R[1/fg] (unique isomorphism of R-algebras)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609202):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609202):
 and I have set up all these universal properties and I know I can deduce it from those, and it will be really nice to do
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609215):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609215):
 but I suspect that if I were to ask Kenny he would just write down a proof with lots of quotient.mk's in which just did everything directly.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609269):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609269):
 i.e. we have an interface (i.e. a bunch of universal properties) which will enable me to prove my result, but now I realise that someone who knows the underlying implementation can just prove the result directly anyway.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609271):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609271):
 It might be the same here; you can deduce the 5 lemma from the axioms of an ab cat
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609272):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609272):
 or from the diagram chase
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609277):
+#### [ Kevin Buzzard (Apr 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609277):
 and the proofs will be very different
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609403):
+#### [ Johan Commelin (Apr 24 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609403):
 Yes, I see. I think it should be possible to have a diagram_chase tactic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609416):
+#### [ Johan Commelin (Apr 24 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609416):
 And my gut feeling is that `cc` is almost it. But you need to spam the context with a lot of information about group homomorphisms and kernels etc...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609488):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609488):
 `diagram_chase` tactic: I wonder if that's possible!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609491):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609491):
 As far as I know these CS people don't really do this kind of maths
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609530):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609530):
 so you might find that this is actually a possibility once you formalise what you want
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609541):
+#### [ Patrick Massot (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609541):
 That would be sooo nice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609542):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609542):
 When drawing that snake map from ker(map3) to coker(map1) I always feel I'm making the unique move each time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609545):
+#### [ Patrick Massot (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609545):
 Is the new parser going to accept `tikz-cd` input?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609546):
+#### [ Sean Leather (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609546):
 ```quote
 As far as I know these CS people don't really do this kind of maths
 ```
 :astonished: Diagrams are pretty core to PLT.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609547):
+#### [ Patrick Massot (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609547):
 PLT?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609548):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609548):
 diagram-chasing in abelian groups is perhaps a bit different
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609549):
+#### [ Sean Leather (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609549):
 Programming language theory.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609550):
+#### [ Patrick Massot (Apr 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609550):
 thks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609591):
+#### [ Sean Leather (Apr 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609591):
 ```quote
 diagram-chasing in abelian groups is perhaps a bit different
 ```
 Okay. I'm not familiar with it, so that may be.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609593):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609593):
 Is the theory of abelian categories "complete" in some way?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609595):
+#### [ Johan Commelin (Apr 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609595):
 Yes, I was thinking about tikz-cd as well (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609598):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609598):
 i.e. "the five lemma is true, so there should be a proof which an algorithm can construct"?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609608):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609608):
 Just think, we could pester Mario to spend weeks developing such an algorithm, and then use it to prove the five lemma and then say "actually, the five lemma is pretty much the only thing we ever use"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609609):
+#### [ Johan Commelin (Apr 24 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609609):
 @**Patrick Massot** Did you see how @**Reid Barton** rewrote the statement? https://gist.github.com/jcommelin/d097eb8f2587d34e5c337450bca543db
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609610):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609610):
 "but thanks anyway"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609611):
+#### [ Johan Commelin (Apr 24 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609611):
 Ouch
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609653):
+#### [ Johan Commelin (Apr 24 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609653):
 And the snake lemma, and the rest of homological algebra
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609656):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609656):
 That PR will be rejected because the groups aren't all called alpha
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609660):
+#### [ Johan Commelin (Apr 24 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609660):
 Yeah, I will relabel everything to be alpha_1 alpha_2 etc...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609661):
+#### [ Johan Commelin (Apr 24 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609661):
 who needs betas
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609716):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609716):
 I concur with Kenny's "dank" comment
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609717):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609717):
 This is absolutely great
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609720):
+#### [ Patrick Massot (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609720):
 No, you should keep groups G. Mario and Johannes will end up understanding.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609721):
+#### [ Patrick Massot (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609721):
 Don't release pressure on this important issue
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609724):
+#### [ Johan Commelin (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609724):
 Sure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609725):
+#### [ Johan Commelin (Apr 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609725):
 Was just kidding
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609736):
+#### [ Johan Commelin (Apr 24 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125609736):
 @**Kevin Buzzard** Well, thanks. I thought it was a good test case
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 24 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125610505):
+#### [ Reid Barton (Apr 24 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125610505):
 ```quote
 Is the theory of abelian categories "complete" in some way?
 ```
 No, https://mathoverflow.net/a/12799
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 24 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125610563):
+#### [ Reid Barton (Apr 24 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125610563):
 Most similar theories will admit embeddings of the word problem like this, I think. But in diagrams where there are only finitely many ways to compose morphisms (basically, "without loops"), maybe there is hope.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125611247):
+#### [ Kevin Buzzard (Apr 24 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125611247):
 Thanks @**Reid Barton** . I wondered if the abelian-ness of the situation saved our bacon but somehow this automorphism trick gets you back into a non-abelian situation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612399):
+#### [ Johan Commelin (Apr 24 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612399):
 I put an update in the comments of the gist: https://gist.github.com/jcommelin/d097eb8f2587d34e5c337450bca543db
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612404):
+#### [ Johan Commelin (Apr 24 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612404):
 The first half of the proof is almost done
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612413):
+#### [ Johan Commelin (Apr 24 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612413):
 There is one stupid `admit`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612421):
+#### [ Johan Commelin (Apr 24 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612421):
 And I don't get why `apply_assumption` fails, because 2 lines above, there is `f_1 w = y`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612476):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612476):
 Your definition of im is not great
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612486):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612486):
 You defined `definition im (f : A → B) [is_group_hom f] := f '' (@set.univ A)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612488):
+#### [ Johan Commelin (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612488):
 No, no longer
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612489):
+#### [ Johan Commelin (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612489):
 See the update
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612490):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612490):
 Oh OK
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612493):
+#### [ Johan Commelin (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612493):
 It is now `set.range f`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612498):
+#### [ Johan Commelin (Apr 24 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612498):
 I dunno if that is better (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612548):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612548):
 That's definitely better
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612560):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612560):
 The problem with the old one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612564):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612564):
 `definition im (f : A → B) [is_group_hom f] := f '' (@set.univ A)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612569):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612569):
 was that you can write `#print notation ''` to find out what `''` expands to
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612577):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612577):
 and see it expands to `set.image`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612581):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612581):
 and then `#print set.image` to find what that unfolds to
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612584):
+#### [ Johan Commelin (Apr 24 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612584):
 I see...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612586):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612586):
 and you see it becomes `\ex a, a \in set.univ and f a = b`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612625):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612625):
 in particular we have some clause which is always true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612626):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612626):
 and in the way
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612628):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612628):
 With your new definition we can do stuff like this:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612632):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612632):
 ```lean
 import group_theory.subgroup
 
@@ -443,155 +443,155 @@ exact Hker2
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612635):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612635):
 because after the rewrite, `Hker2` is definitionally equivalent to what you want
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612647):
+#### [ Kenny Lau (Apr 24 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612647):
 I still think you should prove the weak four lemmas first
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612690):
+#### [ Johan Commelin (Apr 24 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612690):
 @**Kenny Lau** I am almost done with the first one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612693):
+#### [ Johan Commelin (Apr 24 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612693):
 Just need to get rid of one stupid `admit`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612818):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612818):
 It's really hard to follow the argument without working hard
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612820):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612820):
 what is the problem which you're admitting defeat on?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612823):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612823):
 I see you want to prove y in im f1
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612825):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612825):
 and I see 100 assumptions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612827):
+#### [ Johan Commelin (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612827):
 Ok, so a minor change. I now have `local notation im := set.range`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612830):
+#### [ Johan Commelin (Apr 24 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612830):
 with backticks around `im`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612838):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612838):
 if you open set you can just use range
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612839):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612839):
 but I think im is better
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612841):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612841):
 what is your maths proof of the thing you;re admitting?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612842):
+#### [ Johan Commelin (Apr 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612842):
 So, I want to prove `y ∈ im f`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612845):
+#### [ Johan Commelin (Apr 24 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612845):
 and it should follow immediately from the two lines above it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612888):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612888):
 I see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612889):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612889):
 so name one of them and use rw?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612894):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612894):
 Although I am not an expert
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612895):
+#### [ Johan Commelin (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612895):
 aha, I thought apply_assumption would just kill it off
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612899):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612899):
 I am skeptical about not naming any assumptions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612900):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612900):
 I have never heard of apply_assumption
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612901):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612901):
 What does it do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612915):
+#### [ Johan Commelin (Apr 24 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612915):
 It is like `apply foo`, where `foo` is an assumption
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612950):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612950):
 but you need 2 assumptions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612955):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612955):
 to deduce what you want
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612958):
+#### [ Johan Commelin (Apr 24 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612958):
 yeah, that's true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612969):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125612969):
 I don't think it's the end of the world to start calling useful hypotheses H1 H2 H3...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613012):
+#### [ Johan Commelin (Apr 24 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613012):
 But `rw` doesn't work either... I named one of the assumptions:
 `have foo : f₁ w = y`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613017):
+#### [ Johan Commelin (Apr 24 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613017):
 And then I try `rw foo`, but it doesn't work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613018):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613018):
 rw \l foo
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613022):
+#### [ Johan Commelin (Apr 24 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613022):
 unknown identifier 'foo'
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613036):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613036):
 I think that you are not proving what you think you are proving
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613081):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613081):
 `have foo : f₁ w = y, apply_assumption,`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613083):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613083):
 That's what you have now, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613085):
+#### [ Johan Commelin (Apr 24 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613085):
 Yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613091):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613091):
 so put your cursor just after the comma after the y
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613096):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613096):
 and you see that the first goal is f1 w = y
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613103):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613103):
 and there are two goals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613104):
+#### [ Johan Commelin (Apr 24 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613104):
 Yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613106):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613106):
 and now click after the comma after apply_assumption
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613110):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613110):
 and there are still 2 goals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613152):
+#### [ Johan Commelin (Apr 24 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613152):
 aaah
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613154):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613154):
 so your "proof" didn't prove it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613164):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613164):
 this is nothing to do with the naming of the assumption
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613167):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613167):
 it was just never added to the local context
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613172):
+#### [ Johan Commelin (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613172):
 ok, thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613175):
+#### [ Johan Commelin (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613175):
 let me try again
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613178):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613178):
 Because your context is gigantic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613180):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613180):
 you should keep a close eye on the number of goals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613183):
+#### [ Kevin Buzzard (Apr 24 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125613183):
 which is displayed at the top of the output
 
 

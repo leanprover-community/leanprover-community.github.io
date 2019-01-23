@@ -11,18 +11,18 @@ permalink: archive/113488general/04385Ismathlibtoobig.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 02 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461008):
+#### [ Chris Hughes (Jun 02 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461008):
 https://travis-ci.org/leanprover/mathlib/builds/386048419
 https://travis-ci.org/leanprover/mathlib/builds/386808487
 `The job exceeded the maximum time limit for jobs, and has been terminated.`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jun 02 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461053):
+#### [ Gabriel Ebner (Jun 02 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461053):
 See discussion in the travis caching thread: https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/travis.20caching/near/127367872
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jun 02 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461055):
+#### [ Gabriel Ebner (Jun 02 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461055):
 And yes, unfortunately mathlib is too successful.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 02 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461093):
+#### [ Kenny Lau (Jun 02 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461093):
 curious
 
 

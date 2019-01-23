@@ -11,7 +11,7 @@ permalink: archive/113488general/65380Avoidingexplicitsetoidinstances.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 04 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558107):
+#### [ Chris Hughes (Jun 04 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558107):
 Below is my proof that quotient by a normal subgroup is a group. I can't do it without giving explicit setoid instances everywhere. Using `haveI` at the beginning of the proof just gives me the error that inferred and synthesized instances are not definitionally equal. Also, in my `begin` `end` tactics blocks, I have to use `assume` within tactics blocks, otherwise my goal is just a metavariable. Is there a way of doing this nicely?
 ```lean
 import group_theory.coset
@@ -62,15 +62,15 @@ instance (H : set G) [normal_subgroup H] : group (left_cosets H) :=
     end }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 04 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558202):
+#### [ Kenny Lau (Jun 04 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558202):
 ```lean
 local attribute [instance] left_rel
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 04 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558269):
+#### [ Johan Commelin (Jun 04 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558269):
 Chris, did you check how they did quotient modules? It is probably hard to make it nicer than that...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 04 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558431):
+#### [ Chris Hughes (Jun 04 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558431):
 ```quote
 ```lean
 local attribute [instance] left_rel
@@ -78,11 +78,11 @@ local attribute [instance] left_rel
 ```
 I did try that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 04 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558723):
+#### [ Chris Hughes (Jun 04 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558723):
 All fixed. adding this line solved everything `
 instance normal_to_subgroup (H : set G) [normal_subgroup H] : is_subgroup H := by apply_instance`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 04 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127559187):
+#### [ Chris Hughes (Jun 04 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127559187):
 Much nicer proof below. Weirdly, marking `normal_subgroup.to_is_subgroup` as an instance solved the problem, even though it already is an instance. Not sure why this would happen.
 
 ```lean

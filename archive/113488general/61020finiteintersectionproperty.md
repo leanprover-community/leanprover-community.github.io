@@ -11,16 +11,16 @@ permalink: archive/113488general/61020finiteintersectionproperty.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 27 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148672762):
+#### [ Kenny Lau (Nov 27 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148672762):
 Does Lean know that a space is compact iff it has the finite intersection property?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 27 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148673442):
+#### [ Johannes Hölzl (Nov 27 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148673442):
 No this is missing, but I think it is related to the ultrafilter property?!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 27 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148673666):
+#### [ Johannes Hölzl (Nov 27 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148673666):
 Sorry it was the other way round. But I guess FIP and `compact_iff_finite_subcover` are easy to relate
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 28 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148682619):
+#### [ Kenny Lau (Nov 28 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148682619):
 ```lean
 import analysis.topology.topological_space
 
@@ -59,7 +59,7 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 28 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148682623):
+#### [ Kenny Lau (Nov 28 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148682623):
 that was easier than I thought
 
 

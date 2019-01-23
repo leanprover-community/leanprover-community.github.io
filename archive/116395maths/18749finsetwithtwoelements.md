@@ -11,7 +11,7 @@ permalink: archive/116395maths/18749finsetwithtwoelements.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131097823):
+#### [ Kevin Buzzard (Aug 08 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131097823):
 @**Morenikeji Neri** has proved `det(AB)=det(A)det(B)` modulo some lemma about switching two rows of a matrix making the sign change, which became a lemma about summing over a set of size 2, which has now been reduced to this:
 
 ```lean
@@ -29,7 +29,7 @@ I used to rant a lot about "easy in maths, hard in lean" stuff when I found it v
 
 This is about the third post I've written about this problem; the first two I've written, thought "actually I can make progress", and then deleted. But this one still looks scary. Can anyone suggest a way to progress on this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 08 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131097900):
+#### [ Kenny Lau (Aug 08 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131097900):
 ```lean
 import data.fintype
 
@@ -40,7 +40,7 @@ example (α : Type*) [fintype α] [decidable_eq α] (s t : α) (Hdiff : s ≠ t)
 ext.2 $ by simp
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 08 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131097931):
+#### [ Kenny Lau (Aug 08 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131097931):
 ```lean
 import data.fintype
 
@@ -51,34 +51,34 @@ example (α : Type*) [fintype α] [decidable_eq α] (s t : α) (Hdiff : s ≠ t)
 by ext; simp
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098109):
+#### [ Kevin Buzzard (Aug 08 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098109):
 :o
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098117):
+#### [ Kevin Buzzard (Aug 08 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098117):
 I didn't even think to try simp, because "this was obviously much too complicated for a stupid thing like simp"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098122):
+#### [ Kevin Buzzard (Aug 08 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098122):
 Thanks Kenny!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098128):
+#### [ Kevin Buzzard (Aug 08 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098128):
 My simp-fu is still very weak.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Aug 08 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098132):
+#### [ Rob Lewis (Aug 08 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098132):
 I think you don't even need the `Hdiff` argument!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098177):
+#### [ Kevin Buzzard (Aug 08 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098177):
 You might be right -- I didn't check to see what insert did when it was already in.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098193):
+#### [ Kevin Buzzard (Aug 08 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098193):
 multiset insert adds another one, I guess that was what scared me off.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098908):
+#### [ Mario Carneiro (Aug 08 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131098908):
 I would say the moral of the story here is the power of finset extensionality. Finsets are complicatedly defined, but it is not hard to show equalities between finsets because you can just reason about the set that they define
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131099150):
+#### [ Kevin Buzzard (Aug 08 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131099150):
 Yes -- it wasn't the `simp` that was the insight, it was the `ext`. The proof (of det AB = det A det B) is apparently complete now. Of course it's not remotely mathlib-ready...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 08 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131099565):
+#### [ Kevin Buzzard (Aug 08 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131099565):
 By the way, the proof featured:
 
 ```lean

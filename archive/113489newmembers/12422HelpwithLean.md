@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/12422HelpwithLean.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 10 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411503):
+#### [ Ken Roe (Jul 10 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411503):
 I just started using Lean.  Can someone help me by telling me what I need to replace "sorry" with to prove this theorem:
 
 def beq_nat : ℕ → ℕ → bool
@@ -21,10 +21,10 @@ def beq_nat : ℕ → ℕ → bool
 
 example : beq_nat 3 3=tt := by sorry.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 10 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411598):
+#### [ Kenny Lau (Jul 10 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411598):
 your definition does not compile
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 10 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411605):
+#### [ Patrick Massot (Jul 10 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411605):
 ```lean
 def beq_nat : ℕ → ℕ → bool
 | 0 0 := tt
@@ -34,19 +34,19 @@ def beq_nat : ℕ → ℕ → bool
 example : beq_nat 3 3=tt := rfl
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 10 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411633):
+#### [ Patrick Massot (Jul 10 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411633):
 strange definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 10 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411644):
+#### [ Kenny Lau (Jul 10 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411644):
 I don't think it's strange
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 10 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411649):
+#### [ Kenny Lau (Jul 10 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411649):
 it's a viable way to prove that equality is decidable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 10 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411658):
+#### [ Patrick Massot (Jul 10 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411658):
 it's less efficient than using the maths preamble
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 10 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411729):
+#### [ Ken Roe (Jul 10 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411729):
 I get the following using "rfl":
 
 impHeap.lean:35:28: error
@@ -57,22 +57,22 @@ has type
 but is expected to have type
   beq_nat 3 3 = tt
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 10 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411741):
+#### [ Kenny Lau (Jul 10 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411741):
 we changed the definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 10 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411747):
+#### [ Kenny Lau (Jul 10 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411747):
 your original definition does not compile
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 10 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411943):
+#### [ Ken Roe (Jul 10 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411943):
 How do I fix the definition?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 10 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411945):
+#### [ Patrick Massot (Jul 10 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411945):
 see my message
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 10 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411946):
+#### [ Kenny Lau (Jul 10 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411946):
 we already gave you the new definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 10 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411966):
+#### [ Kenny Lau (Jul 10 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411966):
 ```quote
 ```lean
 def beq_nat : ℕ → ℕ → bool
@@ -85,7 +85,7 @@ example : beq_nat 3 3=tt := rfl
 ```
 :point_up: https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/subject/Help.20with.20Lean/near/129411605
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 10 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129412219):
+#### [ Ken Roe (Jul 10 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129412219):
 Thanks--didn't notice they were different.  It appears the syntax for recursive definitions changed from Lean 2.0.  This definition (copied from the Lean 2.0 tutorial) also fails:
 
 definition fib : nat → nat
@@ -93,13 +93,13 @@ definition fib : nat → nat
 | fib 1     := 1
 | fib (a+2) := fib (a+1) + fib a
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 10 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129412223):
+#### [ Kenny Lau (Jul 10 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129412223):
 how old is Lean 2.0 lol
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 10 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129412266):
+#### [ Kenny Lau (Jul 10 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129412266):
 I don't think I ever used Lean 2.0
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 10 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129412274):
+#### [ Kenny Lau (Jul 10 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129412274):
 ```lean
 definition fib : nat → nat
 | 0 := 1
@@ -107,7 +107,7 @@ definition fib : nat → nat
 | (a+2) := fib (a+1) + fib a
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 10 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129416618):
+#### [ Patrick Massot (Jul 10 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129416618):
 You shouldn't be reading anything written for Lean 2. This is all difficult enough without adding this layer of confusion. Reading https://leanprover.github.io/theorem_proving_in_lean/ will already bring you a long way
 
 

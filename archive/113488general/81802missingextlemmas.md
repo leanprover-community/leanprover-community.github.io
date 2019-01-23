@@ -11,7 +11,7 @@ permalink: archive/113488general/81802missingextlemmas.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135088491):
+#### [ Johan Commelin (Oct 03 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135088491):
 How many of the following should be marked with `@[extensionality]`?
 ```lean
 data/buffer/basic.lean:lemma ext : ∀ {b₁ b₂ : buffer α}, to_list b₁ = to_list b₂ → b₁ = b₂
@@ -59,151 +59,151 @@ set_theory/zfc.lean:theorem mem.ext : Π {x y : pSet.{u}}, (∀w:pSet.{u}, w ∈
 set_theory/zfc.lean:theorem ext {x y : Set.{u}} : (∀z:Set.{u}, z ∈ x ↔ z ∈ y) → x = y :=
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135088502):
+#### [ Johan Commelin (Oct 03 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135088502):
 Is it worth going through this list. Or have people done that before, and decided that this should not get the `extensionality` attribute?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 03 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089015):
+#### [ Kenny Lau (Oct 03 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089015):
 thanks for bringing this up
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 03 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089062):
+#### [ Patrick Massot (Oct 03 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089062):
 I think it's worth going through the list
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089070):
+#### [ Simon Hudon (Oct 03 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089070):
 I, for one, have not done it and I was working on the basis of "let's add them when we need them" after I added the most obvious ones.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089396):
+#### [ Johan Commelin (Oct 03 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089396):
 Can someone give an entry on the list that should *not* be tagged with the `extensionality` attribute? If I understand the reason, then I might be able to go through the list myself.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089575):
+#### [ Simon Hudon (Oct 03 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089575):
 `set_theory/zfc.lean:theorem equiv.ext`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 03 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089902):
+#### [ Scott Morrison (Oct 03 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089902):
 You missed `yoneda.ext` :-). (Perhaps because it's a `def`?)  Anyway, it probably shouldn't have `@[extensionality]`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089964):
+#### [ Simon Hudon (Oct 03 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089964):
 Also, I wouldn't tag `semilattice_sup.ext_sup`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090054):
+#### [ Johan Commelin (Oct 03 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090054):
 Can you explain why?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090064):
+#### [ Johan Commelin (Oct 03 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090064):
 @**Scott Morrison|110087** Indeed, I only looked for lemmas and theorems
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090608):
+#### [ Simon Hudon (Oct 03 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090608):
 It's a comparison of class instances rather than the objects themselves. It seems like it could produce surprising results
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090806):
+#### [ Johan Commelin (Oct 03 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090806):
 Ok, I see. @**Johannes Hölzl** Does it make sense to create an `extensionality` PR that adds about 40 `extensionality` attributes?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 03 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090874):
+#### [ Johannes Hölzl (Oct 03 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090874):
 Do we have 40 types? Are sensible? Also be careful that they don't overlap.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090907):
+#### [ Johan Commelin (Oct 03 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090907):
 See the list I posted above.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090923):
+#### [ Johan Commelin (Oct 03 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090923):
 Simon mentioned a couple that shouldn't be tagged, but I think a lot of them could reasonably be tagged.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135091116):
+#### [ Simon Hudon (Oct 03 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135091116):
 Some of them are equivalences while `ext` uses implications. When I encounter such lemma, I rename them `ext_iff` so that I can add a `ext` lemma as an implication
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 03 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097606):
+#### [ Johannes Hölzl (Oct 03 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097606):
 also before you add the extensionality lemmas we should change the semantics of `ext`. Instead of applying all possible extensionality lemmas it should only work along the names given by the user, or accept `*` to apply all.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097698):
+#### [ Johan Commelin (Oct 03 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097698):
 Hmm, ok. Do you mean you want people to write `ext set` or `ext subtype` etc...?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097745):
+#### [ Simon Hudon (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097745):
 Right now, `ext` detects the type of the arguments (e.g. set) and only tries relevant extensionality lemmas
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097758):
+#### [ Simon Hudon (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097758):
 It used to be that functional extensionality might be selected for the equality of two sets. It's no longer the case.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097764):
+#### [ Patrick Massot (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097764):
 Johannes, that would be very sad
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097769):
+#### [ Patrick Massot (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097769):
 I like to type `ext` and Lean figures out what I mean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097780):
+#### [ Johannes Hölzl (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097780):
 and I hate it to add an attribute and half of mathlib breaks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097781):
+#### [ Mario Carneiro (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097781):
 Johannes this was implemented recently, like simon says
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097790):
+#### [ Johannes Hölzl (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097790):
 okay, thats good!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097800):
+#### [ Mario Carneiro (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097800):
 You don't need to say `ext set`, it looks at the type of the objects in the equality in the goal
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097851):
+#### [ Simon Hudon (Oct 03 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097851):
 It's also tolerant on the kind of relation you can prove but I think sticking close to `=` is a good idea.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097866):
+#### [ Mario Carneiro (Oct 03 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097866):
 But this also means that you essentially want one extensionality lemma for each type, so no multiples, and no equalities over generic types
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097868):
+#### [ Johan Commelin (Oct 03 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097868):
 Right, but `functor.ext` seems like a good exception
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097939):
+#### [ Mario Carneiro (Oct 03 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097939):
 If there are multiple candidates for extensionality, e.g. `roption.ext` vs `roption.ext'` then you have to think about which one is better general-purpose and pick one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097970):
+#### [ Simon Hudon (Oct 03 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097970):
 @**Johan Commelin** I'm tempted to agree with you but technically, there's no reason why `functor.ext` wouldn't work as an extensionality lemma
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097992):
+#### [ Johan Commelin (Oct 03 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097992):
 @**Simon Hudon** I meant that it is an exception to sticking to `=`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097994):
+#### [ Mario Carneiro (Oct 03 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097994):
 Also keep in mind that `ext` will apply all extensionality lemmas it can all the way down so you don't want loopable hypotheses
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098052):
+#### [ Simon Hudon (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098052):
 @**Mario Carneiro** You can also give the most general one a lower priority
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098057):
+#### [ Johan Commelin (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098057):
 Or we want `ext` to take an optional `small_nat` argument like `congr`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098062):
+#### [ Johan Commelin (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098062):
 Or `congr'`, whatever
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098066):
+#### [ Simon Hudon (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098066):
 It already does: `ext : 3`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098081):
+#### [ Mario Carneiro (Oct 03 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098081):
 AFAIK competing extensionality lemmas always apply in the same generality, they just have different hypotheses, so giving priority wouldn't help
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098082):
+#### [ Simon Hudon (Oct 03 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098082):
 But I think Mario is right. There has to be a sense that something decreases as we keep applying `ext`, for instance the complexity of the objects being compared
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098144):
+#### [ Simon Hudon (Oct 03 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098144):
 @**Mario Carneiro** I don't understand what you mean by "in the same generality"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098185):
+#### [ Mario Carneiro (Oct 03 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098185):
 Most theorems that could qualify as `@[extensionality]` have a conclusion `(a : T) = b`, so if this is the goal then all extensionalities for T will apply
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098270):
+#### [ Mario Carneiro (Oct 03 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098270):
 With other kinds of theorems there might be a difference in generality like if one theorem only has say `F a = G b` in the conclusion, but with extensionality lemmas it's always `a = b` where `a` and `b` match anything in the type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 03 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098278):
+#### [ Simon Hudon (Oct 03 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098278):
 You could see one lemma being `(a : set α) = b` and another be `(a : set (list α)) = b`. The first one is the most general one although both would be attempted
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098339):
+#### [ Mario Carneiro (Oct 03 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098339):
 I suppose that is a possibility, but so far I don't think we have any such "composite extensionality lemmas"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098348):
+#### [ Mario Carneiro (Oct 03 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098348):
 it's always a constant or type constructor applied to variables
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098445):
+#### [ Mario Carneiro (Oct 03 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098445):
 Looking at the list, I see `free_abelian_group.ext` and `to_module.ext` have composite types, and `dioph` has something that isn't an extensionality at all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 03 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098492):
+#### [ Mario Carneiro (Oct 03 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098492):
 I don't think `free_abelian_group.ext` qualifies as an extensionality, this is some kind of yoneda thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 03 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135133090):
+#### [ Patrick Massot (Oct 03 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135133090):
 what about `topological_space_eq`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 03 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135133135):
+#### [ Patrick Massot (Oct 03 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135133135):
 yes
 
 

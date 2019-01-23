@@ -11,7 +11,7 @@ permalink: archive/116395maths/56373everypartialordercanbeorderembeddedintoapowe
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781096):
+#### [ Kenny Lau (Apr 27 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781096):
 ```lean
 section
 
@@ -32,13 +32,13 @@ theorem partial_order.embed.ord (H : x ≤ y) : partial_order.embed x ⊆ partia
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781102):
+#### [ Kenny Lau (Apr 27 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781102):
 is there a more compact version of the title using category language?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781113):
+#### [ Kenny Lau (Apr 27 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781113):
 and I used all three properties of a partial order
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781335):
+#### [ Kenny Lau (Apr 27 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781335):
 ```lean
 def converse (r : α → α → Prop) (H : r ≼o ((⊆) : set β → set β → Prop)) : partial_order α :=
 { le := inv_image (⊆) H,
@@ -47,19 +47,19 @@ def converse (r : α → α → Prop) (H : r ≼o ((⊆) : set β → set β →
   le_antisymm := λ _ _ H1 H2, H.1.2 $ set.subset.antisymm H1 H2 }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781342):
+#### [ Kenny Lau (Apr 27 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781342):
 and the converse :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781353):
+#### [ Kenny Lau (Apr 27 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781353):
 wait, that's the wrong converse
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 27 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125783616):
+#### [ Reid Barton (Apr 27 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125783616):
 It's the enriched Yoneda lemma where the enriching category is the poset of truth values {false -> true}
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 27 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125783685):
+#### [ Reid Barton (Apr 27 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125783685):
 `{ z | z ≤ x }` is the characteristic feature of Yoneda things.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 27 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125783948):
+#### [ Reid Barton (Apr 27 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125783948):
 I guess there's slightly more going on here because you said "embedded into a powerset" = all functions from \a to V = {false -> true}, while the Yoneda embedding lands in order-reversing maps \a to V, i.e., lower sets of \a.
 
 

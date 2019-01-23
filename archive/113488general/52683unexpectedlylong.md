@@ -11,7 +11,7 @@ permalink: archive/113488general/52683unexpectedlylong.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 28 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134828020):
+#### [ Kenny Lau (Sep 28 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134828020):
 ```lean
 import data.finset
 
@@ -27,92 +27,92 @@ finset.induction_on s (λ _, bot_le) (by simp {contextual := tt})
 -- why so long?
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 28 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134828031):
+#### [ Kenny Lau (Sep 28 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134828031):
 takes somewhere between 5s and 30s to compile
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134829320):
+#### [ Simon Hudon (Sep 28 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134829320):
 Is the time spent on `simp`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 28 2018 at 16:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134829840):
+#### [ Kenny Lau (Sep 28 2018 at 16:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134829840):
 I think so
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 28 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134829940):
+#### [ Kenny Lau (Sep 28 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134829940):
 btw that's `finset.sup_le`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 28 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134829952):
+#### [ Kenny Lau (Sep 28 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134829952):
 that's right, a 10s-lemma is inside mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134839187):
+#### [ Simon Hudon (Sep 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134839187):
 I'm planning on writing a tactic today `squeeze_simp` that will call `simp` and print a minimized `simp only` version. That might help in your endeavor
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134839219):
+#### [ Simon Hudon (Sep 28 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134839219):
 I can automate the application of the suggestion in emacs but I don't know how to do the same with VS code
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134839421):
+#### [ Johan Commelin (Sep 28 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134839421):
 Register it as a hole command, like `tidy` does.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134839603):
+#### [ Simon Hudon (Sep 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134839603):
 Is that a mechanism of VS Code?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840062):
+#### [ Johan Commelin (Sep 28 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840062):
 No, it's a Lean thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840104):
+#### [ Johan Commelin (Sep 28 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840104):
 I think it is a type class
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840132):
+#### [ Johan Commelin (Sep 28 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840132):
 But I guess IDE's also have to hook into it. But this is a one time thing that has been done already
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840140):
+#### [ Simon Hudon (Sep 28 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840140):
 Thanks! I'm looking at the `tidy` code, it's actually an attribute
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840156):
+#### [ Simon Hudon (Sep 28 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840156):
 Cool
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840173):
+#### [ Reid Barton (Sep 28 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840173):
 Simon have you determined yet whether the emacs mode already supports hole commands? I haven't looked
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840284):
+#### [ Johan Commelin (Sep 28 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840284):
 I thought emacs always supported the supremum of the features of all other IDE's
 By definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840326):
+#### [ Simon Hudon (Sep 28 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840326):
 It is indeed emacs definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840382):
+#### [ Simon Hudon (Sep 28 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840382):
 It does support hole commands, at least three that I have seen
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840401):
+#### [ Johan Commelin (Sep 28 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840401):
 Since `tidy` there should be 4
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840430):
+#### [ Simon Hudon (Sep 28 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840430):
 I confirm that I can now see tidy in that list too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840456):
+#### [ Simon Hudon (Sep 28 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840456):
 I like the idea of the type hole but it has a down side: if you're replacing `simp` in a file, you have to do it one at a time.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840547):
+#### [ Reid Barton (Sep 28 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840547):
 Aha I see, I have to be inside the hole and then invoke `lean-hole`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840568):
+#### [ Reid Barton (Sep 28 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840568):
 I misunderstood the docstring "Ask Lean for a list of holes, then ask the user which to use."
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 19:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840701):
+#### [ Johan Commelin (Sep 28 2018 at 19:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840701):
 @**Simon Hudon** Agreed. Still it could be nice for the future. Because then one can use it during the golfing phase of a proof that one just finished.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 19:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840725):
+#### [ Johan Commelin (Sep 28 2018 at 19:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840725):
 For squeezing entire files you might not even want to focus on editor integration.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840941):
+#### [ Simon Hudon (Sep 28 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134840941):
 I agree with your first point Johan. For the second point, the reason I'm thinking about editor integration is out of laziness. The slow files are really big and applications of `simp` vary a lot so search and replace alone doesn't cut it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134841018):
+#### [ Johan Commelin (Sep 28 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134841018):
 Ok, fair enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134841064):
+#### [ Simon Hudon (Sep 28 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134841064):
 What I want to do is search and replace `simp` (not preceded by a square bracket) with `squeeze_simp` which will output all the required substitutions with line numbers and then emacs can do a very targeted replacement of all the `squeeze_simp`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 28 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134841212):
+#### [ Simon Hudon (Sep 28 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134841212):
 But now that I know about `hole_command` attributes, I think I might start with that to test out my idea
 
 

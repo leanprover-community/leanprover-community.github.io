@@ -11,12 +11,12 @@ permalink: archive/113488general/25609Whatisthelatestworkingleanmathlibpair.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ching-Tsun Chou (Mar 26 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203602):
+#### [ Ching-Tsun Chou (Mar 26 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203602):
 A pair of git commit ids would suffice.
 
 Thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 26 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203737):
+#### [ Simon Hudon (Mar 26 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203737):
 I haven't had much success updating in the last couple of days so I'm using:
 
 ```
@@ -26,48 +26,48 @@ mathlib: f7977ff5a6bcf7e5c54eec908364ceb40dafc795
 
 It's from about 10 days ago and it doesn't include the latest monad changes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ching-Tsun Chou (Mar 26 2018 at 01:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203882):
+#### [ Ching-Tsun Chou (Mar 26 2018 at 01:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203882):
 Thanks!  I'll give them a try.
 
 I wonder if the maintainer of mathlib (Mario?) can keep a record of which mathlib git commit matches which lean commit.  All that is needed is a lean commit id in the mathlib commit messages.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 26 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203900):
+#### [ Mario Carneiro (Mar 26 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203900):
 I'm checking out the last nightly (28f414) and I'll revert mathlib to work with it instead of HEAD, at least until the issues on lean repo are fixed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 26 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203943):
+#### [ Simon Hudon (Mar 26 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203943):
 It's a bit unusual for Lean and mathlib to be broken for this long. Normally, Mario keeps it working with the nightly build
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ching-Tsun Chou (Mar 26 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203987):
+#### [ Ching-Tsun Chou (Mar 26 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203987):
 It doesn't really matter how long they are broken.  All we need is a record of which lean commit works with which mathlib commit.  The user can compile lean him/herself.  Thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 26 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203991):
+#### [ Mario Carneiro (Mar 26 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203991):
 I usually keep it working with HEAD, and it doesn't make a big difference from nightly after a day
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 26 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203993):
+#### [ Mario Carneiro (Mar 26 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203993):
 Usually leo is careful not to push a broken build, and certainly not leave it for several days like that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 26 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204003):
+#### [ Simon Hudon (Mar 26 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204003):
 I think they might be preparing for Lean 4
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ching-Tsun Chou (Mar 26 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204046):
+#### [ Ching-Tsun Chou (Mar 26 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204046):
 Well, you guys would not have needed to spend the time to answer my questions if there is a record which I can look up myself.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 26 2018 at 01:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204054):
+#### [ Mario Carneiro (Mar 26 2018 at 01:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204054):
 The record is the relative commit times
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ching-Tsun Chou (Mar 26 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204367):
+#### [ Ching-Tsun Chou (Mar 26 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204367):
 How do I find out what is the commit id of the latest lean nightly build?  The lean-nightly at https://leanprover.github.io/download/ currently points to something that is 3 weeks old (d6d44a19947e ).  The lean commit history does not say which commits are used in nightly builds.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 26 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204414):
+#### [ Mario Carneiro (Mar 26 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204414):
 The nightly build process is soon to change, with a better record of all this, but currently you can go to https://github.com/leanprover/lean-nightly/tree/gh-pages and look at the commit that "bot botson" says in the commit message
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 26 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204420):
+#### [ Mario Carneiro (Mar 26 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204420):
 I pushed a version of mathlib that works with it, so hopefully we will see the travis :thumbs_up: soon
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 26 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204513):
+#### [ Simon Hudon (Mar 26 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204513):
 That latest commit is about making it work with the latest nightly instead of HEAD, is that correct?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 26 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204564):
+#### [ Mario Carneiro (Mar 26 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124204564):
 yes
 
 

@@ -11,13 +11,13 @@ permalink: archive/116395maths/79853annoyingproofchallenge.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 01 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698181):
+#### [ Chris Hughes (Dec 01 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698181):
 Is there a nice way to prove this?
 ```lean
 example {a b : with_bot ℕ} (h : a + b = 1) : a = 0 ∨ b = 0
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 01 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698441):
+#### [ Kenny Lau (Dec 01 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698441):
 ```lean
 
 import algebra.ordered_group data.nat.basic
@@ -27,19 +27,19 @@ example : ∀ {a b : with_bot ℕ}, a + b = 1 → a = 0 ∨ b = 0
 | (some a) (some (b+1)) H := or.inl $ (add_eq_zero_iff.1 (nat.succ_inj $ option.some.inj H)).1.symm ▸ 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 01 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698444):
+#### [ Kenny Lau (Dec 01 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698444):
 @**Chris Hughes**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 01 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698524):
+#### [ Kevin Buzzard (Dec 01 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698524):
 Didn't your mother tell you never to end a sentence with a `▸`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 01 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698586):
+#### [ Chris Hughes (Dec 01 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698586):
 Maybe it's some super duper eta reduction.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 01 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698638):
+#### [ Kenny Lau (Dec 01 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698638):
 oops it's supposed to end in `rfl`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 01 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698639):
+#### [ Kenny Lau (Dec 01 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698639):
 ```lean
 import algebra.ordered_group data.nat.basic
 
@@ -48,13 +48,13 @@ example : ∀ {a b : with_bot ℕ}, a + b = 1 → a = 0 ∨ b = 0
 | (some a) (some (b+1)) H := or.inl $ (add_eq_zero_iff.1 (nat.succ_inj $ option.some.inj H)).1.symm ▸ rfl
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 01 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698647):
+#### [ Kevin Buzzard (Dec 01 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698647):
 oh that works better :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 01 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698701):
+#### [ Kevin Buzzard (Dec 01 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698701):
 What does the equation compiler actually *do* to decide that it can ignore the `none` cases? I mean, what does it try?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 01 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698712):
+#### [ Kenny Lau (Dec 01 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698712):
 ```lean
 import algebra.ordered_group data.nat.basic
 
@@ -89,10 +89,10 @@ theorem test : ∀ {a b : with_bot ℕ}, a + b = 1 → a = 0 ∨ b = 0 :=
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 01 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698713):
+#### [ Kenny Lau (Dec 01 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698713):
 it does `option.no_confusion`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 01 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698763):
+#### [ Kevin Buzzard (Dec 01 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698763):
 `option.no_confusion` is such a great name for a function. I might get it on a t-shirt.
 
 

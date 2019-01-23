@@ -11,13 +11,13 @@ permalink: archive/113488general/84049parsingtechnology.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Assia Mahboubi (Jun 08 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20technology/near/127768347):
+#### [ Assia Mahboubi (Jun 08 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20technology/near/127768347):
 Hi there, can someone help me finding the code of Lean's parser and/or its documentation?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jun 08 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20technology/near/127769028):
+#### [ Sebastian Ullrich (Jun 08 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20technology/near/127769028):
 Hi Assia. There is basically no documentation - this should certainly change for Lean 4 where the parser will be rewritten in Lean to be user-accessible. The current one is implemented in C++ as a recursive-descent LL(1) Pratt parser - https://github.com/leanprover/lean/blob/master/src/frontends/lean/parser.h
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Assia Mahboubi (Jun 08 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20technology/near/127769336):
+#### [ Assia Mahboubi (Jun 08 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20technology/near/127769336):
 Thanks a lot @**Sebastian Ullrich** !
 
 

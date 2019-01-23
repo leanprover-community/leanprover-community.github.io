@@ -11,7 +11,7 @@ permalink: archive/116395maths/85433toadditivemultiplicative.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 09 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/to_additive%20multiplicative/near/135470227):
+#### [ Patrick Massot (Oct 09 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/to_additive%20multiplicative/near/135470227):
 This is again a question about the machinery allowing to transfer stuff from multiplicative monoids/groups to additive. I'm trying to get a version of https://github.com/leanprover/mathlib/blob/master/group_theory/submonoid.lean#L112-L142 for groups. I tried:
 ```lean
 import group_theory.subgroup
@@ -57,7 +57,7 @@ theorem exists_list_of_mem_closure {s : set α} {a : α} (h : a ∈ closure s) :
 end add_group
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 09 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/to_additive%20multiplicative/near/135470239):
+#### [ Patrick Massot (Oct 09 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/to_additive%20multiplicative/near/135470239):
 But Lean doesn't accept the second statement
 
 

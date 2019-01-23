@@ -11,7 +11,7 @@ permalink: archive/113488general/22304notationthatdoesnothing.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 21 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148107367):
+#### [ Johan Commelin (Nov 21 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148107367):
 I want something like this:
 ```lean
 local notation ` [`n`] ` := (((id : ℕ → simplex_category) (n)) : simplex_category)
@@ -21,16 +21,16 @@ In other words, it should take whatever is between `[` and `]`, interpret that a
 In this way, I can talk about `[n+1]` without defining addition or one for `simplex_category`. In this way I can also coerce `[n]` to `fin (n+1)` without defining that coercion for all naturals.
 In other words, I would like to make sure that `i : [n+1]` typechecks.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 21 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135059):
+#### [ Simon Hudon (Nov 21 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135059):
 Your snippet doesn't work?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 21 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135146):
+#### [ Chris Hughes (Nov 21 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135146):
 Isn't this overloaded from `list`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 21 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135157):
+#### [ Chris Hughes (Nov 21 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135157):
 Use a different type of brackets?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 21 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135163):
+#### [ Simon Hudon (Nov 21 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135163):
 Instead of using `id`, try using:
 
 ```lean
@@ -38,13 +38,13 @@ def my_brackets (n : nat) : simplex_category := n
 local notation ` [`n`] ` := my_brackets n
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 21 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135203):
+#### [ Simon Hudon (Nov 21 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135203):
 Yes, that's also true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 21 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135220):
+#### [ Simon Hudon (Nov 21 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135220):
 A lot of brackets are already taken
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 21 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135866):
+#### [ Johan Commelin (Nov 21 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135866):
 I now have
 ```lean
 inductive simplex_category
@@ -67,10 +67,10 @@ instance : category_theory.category simplex_category :=
 ```
 It seems to work as intended. It seems like a bit of a trick to define and inductive type that is equivalent to `nat`, but whatever.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 21 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135918):
+#### [ Johan Commelin (Nov 21 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148135918):
 And I definitely want `[n]` notation. It's just silly that the notation for lists isn't local.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 21 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148136538):
+#### [ Kevin Buzzard (Nov 21 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148136538):
 Making copies of inductive types is not uncommon. If you want to do congruence mod n on the integers, you run into problems because equivalence relations are a class but you want more than one equivalence relation on the integers. You can fix it by making these fake copies.
 
 

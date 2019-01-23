@@ -11,7 +11,7 @@ permalink: archive/113488general/94038equalityoffunctionswithboundedfinitedecide
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 20 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148032872):
+#### [ Gavid Liebnich (Nov 20 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148032872):
 Is `eq_of_yield` provable? Do I need to lose computability with functional extensionality? 
 ```lean
 import data.vector data.list utils
@@ -35,7 +35,7 @@ def yield (m : α) :=
 theorem eq_of_yield {m₁ m₂ : α} (h : yield m₁ = yield m₂) : m₁ = m₂ := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 20 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033325):
+#### [ Kenny Lau (Nov 20 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033325):
 ```lean
 import data.vector data.list data.set.intervals
 
@@ -53,16 +53,16 @@ theorem not_yield_inj :
 λ H, absurd (@H bool ⟨λ _, 1, λ _, dec_trivial, λ _ _, 0⟩ ff tt rfl) dec_trivial
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 20 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033328):
+#### [ Kenny Lau (Nov 20 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033328):
 @**Gavid Liebnich** it's false
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 20 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033795):
+#### [ Mario Carneiro (Nov 20 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033795):
 also function extensionality doesn't affect computability because it's a prop
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 20 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033820):
+#### [ Mario Carneiro (Nov 20 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033820):
 unlike some other constructive systems we have a proof irrelevant universe of propositions which are not used in computation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 20 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148035327):
+#### [ Gavid Liebnich (Nov 20 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148035327):
 Oh, thanks! I think It's starting to make sense now - of course it's not an injection, the `Πm, between 0 (n m) → ℕ` can be whatever mapping I want.
 
 So, if I were to define one such concrete mapping, for example:
@@ -82,7 +82,7 @@ theorem eq_of_yield {m₁ m₂ : mapper} (h : yield m₁ = yield m₂) : m₁ = 
 ```
 because the `data` of `c_mapper` would be the function `vector.data.nth`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 20 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148035891):
+#### [ Gavid Liebnich (Nov 20 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148035891):
 So the theorem is true if I give it two extensionally equivalent functions as `data`? For example, if I were to define a mapper that completely mirrors the `class`, that would make the theorem true by virtue of the functions used as `data` in `m1` and `m2` being equivalent? As such:
 
 ```lean
@@ -99,7 +99,7 @@ theorem eq_of_yield {m₁ m₂ : mapper₂} (h : yield m₁ = yield m₂) : m₁
 ```
 Now the theorem is true?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 20 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148036999):
+#### [ Kenny Lau (Nov 20 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148036999):
 just because it typechecks doesn't mean it's correct... I've corrected your code:
 ```lean
 instance c_mapper_mapper₂ : c_mapper mapper₂ :=
@@ -108,13 +108,13 @@ instance c_mapper_mapper₂ : c_mapper mapper₂ :=
   data := λ m x, m.data x }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 20 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037009):
+#### [ Kenny Lau (Nov 20 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037009):
 it's `m.data x` not `x.1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 20 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037037):
+#### [ Kenny Lau (Nov 20 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037037):
 I think we would appreciate it if you check your questions before asking them
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 20 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037055):
+#### [ Kenny Lau (Nov 20 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037055):
 I've proved both theorems:
 ```lean
 import data.vector data.list data.set.intervals
@@ -194,10 +194,10 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 20 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037125):
+#### [ Kenny Lau (Nov 20 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037125):
 @**Gavid Liebnich**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 20 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037550):
+#### [ Gavid Liebnich (Nov 20 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037550):
 Thank you, @**Kenny Lau** . I appreciate your help. The transition from nondependent `range` to the bounded mapping is a step I'm having difficulties with. There's a bit of magic in `convert` it would appear, I'll have to take a closer look. Thanks again, I'm going to step over the proofs.
 
 

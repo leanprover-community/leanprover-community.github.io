@@ -11,7 +11,7 @@ permalink: archive/113488general/31665namingconventions.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 14 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/133965549):
+#### [ Johan Commelin (Sep 14 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/133965549):
 For elements `m : M` in a `[monoid M]` we have the predicate `irreducible m`. Why is this not called `is_irreducible m`? It is a `Prop` after all...
 
 

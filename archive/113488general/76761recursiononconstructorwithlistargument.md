@@ -11,7 +11,7 @@ permalink: archive/113488general/76761recursiononconstructorwithlistargument.htm
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jun 09 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127832469):
+#### [ Seul Baek (Jun 09 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127832469):
 I'm experimenting with embedding first-order logic in Lean, and I'm using the following definition of terms : 
 ``` 
 inductive trm : Type 
@@ -54,13 +54,13 @@ list.head_nonempty
 ```
 ...but this does not feel quite right. I wonder if there's a better solution?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 09 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127832568):
+#### [ Simon Hudon (Jun 09 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127832568):
 I haven't tried it recently but you may be able to get an improvement by writing two mutually recursive functions: one on the list of terms and one on individual terms. This is the kind of feature that has improved quickly in the last year so I'm not sure at what point it is now.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 10 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127850700):
+#### [ Mario Carneiro (Jun 10 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127850700):
 This is a known issue with nested inductives. Like Simon suggests, you should use mutual recursion to define functions on the type.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jun 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127867644):
+#### [ Seul Baek (Jun 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127867644):
 Thank you. It looks a lot better with mutual recursion now.
 
 

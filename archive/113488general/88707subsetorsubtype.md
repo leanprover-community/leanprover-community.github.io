@@ -11,62 +11,62 @@ permalink: archive/113488general/88707subsetorsubtype.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268484):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268484):
 I wrote presheaves of types twice in my life and I see now that my definitions differ.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268485):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268485):
 First is
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268528):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268528):
 `(F : Π U : set α, T.is_open U → Type*) `
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268536):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268536):
 Second is
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268537):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268537):
 `(F : {U // topological_space.is_open T U} → Type*)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268539):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268539):
 Which is "better"?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268544):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268544):
 I seem to be able to work with either
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268647):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268647):
 Is the only difference that with the first I have two different names U and HU, and with the second I have V.val and V.property?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Mar 04 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268652):
+#### [ Gabriel Ebner (Mar 04 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268652):
 Yes, it is analogous to the difference between `A → B → C` and `A ∧ B → C`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268694):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268694):
 But with those two choices, functional program people prefer the first, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 04 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268696):
+#### [ Patrick Massot (Mar 04 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268696):
 Proof assistant people seem to always prefer `A → B → C`, so which is better for presheaves?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268697):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268697):
 which is which ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268698):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268698):
 Presumably H.1 and H.2 is V.val and V.property so this is the one I should perhaps avoid
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Mar 04 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268699):
+#### [ Reid Barton (Mar 04 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268699):
 The second one also gives you the name "V", which for doing abstract sheaf theory things (that don't care about the particular site) seems like it would be more convenient.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268704):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268704):
 oh but here's a difference: A and B is a type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268705):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268705):
 so it can be used more easily as a target
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 04 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268797):
+#### [ Kevin Buzzard (Mar 04 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268797):
 This doesn't seem to matter in practice. I am going for set because it seems to be analogous to the "more functional" `A -> B -> C`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Mar 04 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123269074):
+#### [ Reid Barton (Mar 04 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123269074):
 If you imagine defining a sheaf of sets on a general site, then the first way seems really unnatural (what would be the analogue of `is_open`?) So from a "math" perspective, the second way looks better.
 I don't know what the practical implications are, though.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Mar 04 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123269187):
+#### [ Reid Barton (Mar 04 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123269187):
 (I would also set it up so that I can write `U : T.open_set`, and use $$\cap$$ and $$\cup$$ and $$\subset$$ directly on open sets, etc.)
 
 

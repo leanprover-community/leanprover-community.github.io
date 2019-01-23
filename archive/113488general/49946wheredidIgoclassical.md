@@ -11,7 +11,7 @@ permalink: archive/113488general/49946wheredidIgoclassical.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368857):
+#### [ Kenny Lau (Mar 29 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368857):
 ```
 theorem aux3 (n : nat) (H1 : ¬n < 3) (H2 : even n) : aux (n - 2) < aux n :=
 begin
@@ -37,44 +37,44 @@ begin
   exact dec_trivial
 end
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368864):
+#### [ Kenny Lau (Mar 29 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368864):
 this isn't MWE. I would understand if you can't read it off the lines
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368909):
+#### [ Kenny Lau (Mar 29 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368909):
 (it matters in this context, not because I'm a constructivist, it has nothing to do with my constructivism, I really need this to be constructive)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368916):
+#### [ Kenny Lau (Mar 29 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368916):
 I suspect it's the `dec_trivial`, but natural inequality should be decidable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368998):
+#### [ Kenny Lau (Mar 29 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368998):
 update: I removed every `dec_trivial` and proved the inequalities using `constructor`, it's still classical
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Mar 29 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369007):
+#### [ Gabriel Ebner (Mar 29 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369007):
 It's `le_of_not_gt`, of course.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369050):
+#### [ Kenny Lau (Mar 29 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369050):
 oh, how do I fix it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Mar 29 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369100):
+#### [ Gabriel Ebner (Mar 29 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369100):
 If you really, really don't want classical logic, then you should probably prove a specialized version of `le_of_not_gt` for decidable linear orders.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369109):
+#### [ Kenny Lau (Mar 29 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369109):
 is there no simple fix for naturals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Mar 29 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369153):
+#### [ Johannes Hölzl (Mar 29 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369153):
 Why do you need this as a constructive proof? There is no computable content.
 You can constructively prove `le_of_not_gt` for `nat` using the decidability of `lt` on natural numbers.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369161):
+#### [ Kenny Lau (Mar 29 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369161):
 because the content is outside
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369163):
+#### [ Kenny Lau (Mar 29 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369163):
 this is just a part
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Mar 29 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369331):
+#### [ Johannes Hölzl (Mar 29 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124369331):
 But rewriting ` ¬n < 3 ` to `n <= 3` is not a problem for decidability in Lean. You are fine as long as only your proofs are classical.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 29 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124380166):
+#### [ Kenny Lau (Mar 29 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124380166):
 oh and for the sake of completeness, the final product is here https://github.com/kckennylau/Lean/blob/master/recursion.lean
 
 

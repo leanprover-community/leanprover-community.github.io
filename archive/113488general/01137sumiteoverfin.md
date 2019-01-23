@@ -11,20 +11,20 @@ permalink: archive/113488general/01137sumiteoverfin.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 07 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512435):
+#### [ Johan Commelin (Sep 07 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512435):
 How do I kill off this one?
 ```lean
 lemma MWE (R : Type v) [ring R] (n : ℕ) :
 finset.univ.sum (λ (k : fin (n + 2)), (-1) ^ k.val * ite (0 = k) (1 : R) (0 : R)) = 1 := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 07 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512763):
+#### [ Chris Hughes (Sep 07 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512763):
 `finset.sum_eq_single`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 07 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512793):
+#### [ Kenny Lau (Sep 07 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512793):
 not found
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 07 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512872):
+#### [ Kenny Lau (Sep 07 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512872):
 ```lean
 import data.fintype
 
@@ -42,16 +42,16 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 07 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512883):
+#### [ Chris Hughes (Sep 07 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512883):
 It's actually `sum_eq_single` due to a naming error.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 07 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512895):
+#### [ Kenny Lau (Sep 07 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512895):
 that's the same thing, and still not found
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 07 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512898):
+#### [ Johan Commelin (Sep 07 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512898):
 @**Chris Hughes** My Lean still doesn't find it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 07 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133513251):
+#### [ Chris Hughes (Sep 07 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133513251):
 I think it might be new.
 
 

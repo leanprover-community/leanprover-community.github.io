@@ -11,25 +11,25 @@ permalink: archive/113488general/18151whatisthepurposeofissubgroup.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124464518):
+#### [ Kenny Lau (Mar 31 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124464518):
 what is the purpose of is_subgroup if you don't prove that they are groups?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124465041):
+#### [ Kenny Lau (Mar 31 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124465041):
 @**Kevin Buzzard**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 01 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124494254):
+#### [ Kevin Buzzard (Apr 01 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124494254):
 I give up.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 03 2018 at 05:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124558889):
+#### [ Kenny Lau (Apr 03 2018 at 05:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124558889):
 @**Mario Carneiro** should I prove it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 03 2018 at 05:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124558891):
+#### [ Mario Carneiro (Apr 03 2018 at 05:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124558891):
 sure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 03 2018 at 05:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124558931):
+#### [ Kenny Lau (Apr 03 2018 at 05:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124558931):
 I guess we will wait until mathlib builds?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 03 2018 at 06:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124559255):
+#### [ Mario Carneiro (Apr 03 2018 at 06:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124559255):
 WIP
 
 

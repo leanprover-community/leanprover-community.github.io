@@ -11,7 +11,7 @@ permalink: archive/113488general/39478ProgrammingLanguageFoundationsinAgda.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 20 2018 at 08:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129979672):
+#### [ Sean Leather (Jul 20 2018 at 08:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129979672):
 I got an email that [Phil Wadler](http://homepages.inf.ed.ac.uk/wadler/) is giving a talk at Utrecht University. Here's the introduction:
 
 ```quote
@@ -22,16 +22,16 @@ What did I learn from writing PLFA? First, that it is possible. One might expect
 
 Considering the interest some people have shown in Software Foundations, I thought people might also find this interesting.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 20 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129980285):
+#### [ Johan Commelin (Jul 20 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129980285):
 Too bad I just moved away from Utrecht!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Jul 20 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129985490):
+#### [ Johannes Hölzl (Jul 20 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129985490):
 @**Sean Leather**  Do you now where I can find more about his talk in Utrecht?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 20 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129985545):
+#### [ Sean Leather (Jul 20 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129985545):
 @**Johannes Hölzl** http://www.cs.uu.nl/docs/vakken/mccs/
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Jul 20 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129985553):
+#### [ Johannes Hölzl (Jul 20 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129985553):
 Argh, I'm still in Munich then...
 
 

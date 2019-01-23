@@ -11,28 +11,28 @@ permalink: archive/113488general/57153mathlibnightly.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 07:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444305):
+#### [ Kenny Lau (Mar 31 2018 at 07:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444305):
 Is this possible? @**Mario Carneiro** (or maybe I could host it myself?)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 31 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444435):
+#### [ Mario Carneiro (Mar 31 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444435):
 I'm not seeing the gain. Mathlib doesn't change that fast
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 08:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444959):
+#### [ Kenny Lau (Mar 31 2018 at 08:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444959):
 But there are no built versions of mathlib @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 31 2018 at 08:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444960):
+#### [ Mario Carneiro (Mar 31 2018 at 08:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444960):
 What is there to build? There are no mathlib build artifacts unless you mean `olean`s
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 31 2018 at 08:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444966):
+#### [ Mario Carneiro (Mar 31 2018 at 08:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444966):
 and I'm not sure how portable those files are
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124445237):
+#### [ Kenny Lau (Mar 31 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124445237):
 actually, what does o stand for
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124445259):
+#### [ Andrew Ashworth (Mar 31 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124445259):
 probably object
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124445261):
+#### [ Andrew Ashworth (Mar 31 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124445261):
 https://en.wikipedia.org/wiki/Object_file
 
 

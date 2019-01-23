@@ -11,10 +11,10 @@ permalink: archive/113488general/00033implicitargumentsandring.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878744):
+#### [ Scott Morrison (Sep 29 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878744):
 Hi @**Mario Carneiro**, I noticed an unfortunate feature of `ring`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878745):
+#### [ Scott Morrison (Sep 29 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878745):
 I'd got stuck doing this:
 ```
 example (x y : ℕ) (h : x ^ 2 + 3 * y ^ 2 = 4) : false :=
@@ -27,10 +27,10 @@ simp at h,
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878784):
+#### [ Scott Morrison (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878784):
 where it looks like the goal isn't changing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878788):
+#### [ Scott Morrison (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878788):
 It just says 
 ```
 x y : ℕ,
@@ -38,49 +38,49 @@ h : x ^ 2 + 3 * y ^ 2 = 4
 ⊢ false
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878791):
+#### [ Scott Morrison (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878791):
 but with pp.all true, you can see if flipping back and forth:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878803):
+#### [ Mario Carneiro (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878803):
 You shouldn't use `ring` nonterminally
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878808):
+#### [ Mario Carneiro (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878808):
 at least not automatically (i.e. in `tidy`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878815):
+#### [ Mario Carneiro (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878815):
 if it doesn't close the goal, assume it failed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878817):
+#### [ Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878817):
 Yes, I know, but I want to for a moment anyway. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878818):
+#### [ Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878818):
 Ah, okay. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878821):
+#### [ Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878821):
 But that takes all the fun out of it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878823):
+#### [ Mario Carneiro (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878823):
 `ring` rewrites the goal into sum-of-products form for ease of reading when it fails
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878827):
+#### [ Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878827):
 Because sometimes `ring at *, exfalso, linarith` can get stuff done.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878829):
+#### [ Mario Carneiro (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878829):
 this form disagrees with simp normal form in some places
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878870):
+#### [ Scott Morrison (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878870):
 The problem I was having here is actually just in the implicit arguments flipping back and forth.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878874):
+#### [ Scott Morrison (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878874):
 The expression "itself" is not being changed by either `simp` or `ring`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878881):
+#### [ Mario Carneiro (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878881):
 wait, maybe I don't understand then
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878882):
+#### [ Mario Carneiro (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878882):
 what is changing?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878894):
+#### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878894):
 With usual pretty printing, neither `simp` nor `ring` do anything, and the goal just looks like
 ```
 x y : ℕ,
@@ -88,10 +88,10 @@ h : x ^ 2 + 3 * y ^ 2 = 4
 ⊢ false
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878896):
+#### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878896):
 but with pp.all we get:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878898):
+#### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878898):
 ```
 x y : nat,
 h :
@@ -110,16 +110,16 @@ h :
 ⊢ false
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878899):
+#### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878899):
 after the `simp`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878900):
+#### [ Mario Carneiro (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878900):
 oh, it's nat.pow isn't it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878901):
+#### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878901):
 and then
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878905):
+#### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878905):
 ```
 x y : nat,
 h :
@@ -152,25 +152,25 @@ h :
 ⊢ false
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878906):
+#### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878906):
 after the `ring`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878947):
+#### [ Mario Carneiro (Sep 29 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878947):
 right, `ring` prefers monoid powers but that's not simp normal form
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878950):
+#### [ Scott Morrison (Sep 29 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878950):
 Okay, I see.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 29 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878951):
+#### [ Scott Morrison (Sep 29 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878951):
 Nothing to be done, then!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878962):
+#### [ Mario Carneiro (Sep 29 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878962):
 `ring ` doesn't make any attempt to be in simp normal form; if you need that you should just call `ring, simp`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878965):
+#### [ Mario Carneiro (Sep 29 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878965):
 but even better is to just ignore the pretty failure mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 29 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134879165):
+#### [ Kenny Lau (Sep 29 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134879165):
 it's a feature!
 
 

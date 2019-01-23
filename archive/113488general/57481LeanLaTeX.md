@@ -11,7 +11,7 @@ permalink: archive/113488general/57481LeanLaTeX.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 23 2019 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156681378):
+#### [ Kevin Buzzard (Jan 23 2019 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156681378):
 I've been reading work of Lamport about structured proofs.  Here's an extract from https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean :
 
 ```lean
@@ -55,13 +55,13 @@ I have no doubt that this sort of thing is possible. I've learnt sphinx but I am
 
 When it comes to writing Lean code I am 100% convinced that I could write code in the above style which could become "online notes" for a beginning analysis course (such as, let's say, the beginning analysis course in Imperial's new curriculum which starts in October). The notes would have the advantage that they are formally verified. But I do not understand enough about how to build the app I envisage and I would dearly like to hear some suggestions!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 23 2019 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156682310):
+#### [ Johan Commelin (Jan 23 2019 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156682310):
 Do you remember Neil Stricklands demo? That might be a first approximation of what you want.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 23 2019 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156682399):
+#### [ Johan Commelin (Jan 23 2019 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156682399):
 I meant this one: http://neil-strickland.staff.shef.ac.uk/dagstuhl/Systems/Lean_mathlib/Tasks/primes/
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 23 2019 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156683049):
+#### [ Kevin Buzzard (Jan 23 2019 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156683049):
 Ooh -- thanks for digging that up! @**Neil Strickland** how did you make this? My plan would be to hide the Lean completely and just have standard maths proof prose visible initially, but one can somehow open up the Lean to see it if one wants to.
 
 

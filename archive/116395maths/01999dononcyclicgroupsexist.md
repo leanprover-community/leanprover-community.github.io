@@ -11,7 +11,7 @@ permalink: archive/116395maths/01999dononcyclicgroupsexist.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811479):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811479):
 ```lean
 import group_theory.order_of_element
 
@@ -66,310 +66,310 @@ This is my attempt to prove that non-cyclic groups exist in Lean. I had perhaps 
 
 This is motivated by a second year problem sheet question: "True or false? If $$G$$ is abelian then $$G$$ is cyclic". [$$G$$ a group]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811568):
+#### [ Mario Carneiro (Nov 05 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811568):
 Why not use C_2^2?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811605):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811605):
 I did...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811625):
+#### [ Kenny Lau (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811625):
 oh right, and then there (should) be some lemmas about orders of elements in product
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811629):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811629):
 The issue is that proving something isn't cyclic involves checking that infinitely many calculations don't work out
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811631):
+#### [ Mario Carneiro (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811631):
 no, I mean `zmod 2 x zmod 2`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811637):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811637):
 the problem is still there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811641):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811641):
 I mean the problem I highlight is still there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811648):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811648):
 It's just that there's less set-up ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811654):
+#### [ Reid Barton (Nov 05 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811654):
 if you want to do it by dec_trivial, maybe prove that it suffices to consider n < |G| by Lagrange
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811661):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811661):
 or even $$0\leq n<|G|$$. Is this already in Lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811662):
+#### [ Mario Carneiro (Nov 05 2018 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811662):
 You just check that for every element of the group there is a proper subgroup that contains it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 05 2018 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811669):
+#### [ Reid Barton (Nov 05 2018 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811669):
 or maybe you could even do some pigeonhole argument
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811730):
+#### [ Mario Carneiro (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811730):
 or you could prove that `is_cyclic` is decidable and then decide it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811737):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811737):
 If I do the Lagrange thing then it becomes `dec_trivial` again because @**Kenny Lau** recently PR'd a decidability instance for $$0\leq n<m$$ I believe
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811744):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811744):
 Is `is_cyclic` decidable?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811751):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811751):
 For infinite groups it sounds scary
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811757):
+#### [ Mario Carneiro (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811757):
 for finite groups everything is decidable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811758):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811758):
 for finite groups I guess I believe you
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811759):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811759):
 right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811789):
+#### [ Mario Carneiro (Nov 05 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811789):
 It's easy to write a program to calculate the order of an element in a finite group, maybe Chris has already done it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811829):
+#### [ Mario Carneiro (Nov 05 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811829):
 so you just run that on everything and it comes up less than |G| each time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811834):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811834):
 @**Chris Hughes** what do you recommend -- I suspect you know well what is there.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811846):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811846):
 Definition of `is_cyclic` is not "there's an element of order equal to the order of the group" as this would not work for Z
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811858):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811858):
 I see. So for finite groups one wants "is_cyclic iff exists element of order |G|"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811865):
+#### [ Mario Carneiro (Nov 05 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811865):
 by the pigeonhole principle it works for finite groups though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811943):
+#### [ Mario Carneiro (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811943):
 technically, it does work for Z since it is cyclic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811947):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811947):
 rofl
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811950):
+#### [ Mario Carneiro (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811950):
 but it doesn't work for Z^2
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811953):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811953):
 indeed :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811957):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811957):
 Wait
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811966):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811966):
 what is order of an element of infinite order?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811969):
+#### [ Mario Carneiro (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811969):
 infinite
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811970):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811970):
 I'm surprised it's not 37
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811975):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811975):
 oh Ok
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811981):
+#### [ Mario Carneiro (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811981):
 oh you mean in lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811982):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811982):
 right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811987):
+#### [ Mario Carneiro (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811987):
 maybe 0?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811994):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811994):
 exactly!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812004):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812004):
 That's what i said
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812013):
+#### [ Mario Carneiro (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812013):
 no, like actually 0
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812016):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812016):
 right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812019):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812019):
 "the canonical junk value"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812022):
+#### [ Mario Carneiro (Nov 05 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812022):
 like characteristic 0
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812072):
+#### [ Mario Carneiro (Nov 05 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812072):
 like not junk 0
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812091):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812091):
 oh, you're right: there is an argument which says the order really is zero
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812111):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812111):
 the order of an element should really be the ideal of Z consisting of n such that g^n=id
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812114):
+#### [ Mario Carneiro (Nov 05 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812114):
 exactly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812120):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812120):
 and if you really want a number, then choose the generator which is in nat
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812131):
+#### [ Kevin Buzzard (Nov 05 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812131):
 fortunately, the order of an infinite group in Lean is probably 0 ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812186):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812186):
 I guess there are two order functions, one for cardinals and one for finite cardinals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812188):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812188):
 so it's really not 0 here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812332):
+#### [ Mario Carneiro (Nov 05 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812332):
 I think you should stop worrying about infinite groups here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812346):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812346):
 :-) Yeah, especially given that I proved that G was a fintype
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812370):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812370):
 Here's a challenge -- prove that permutations of a type are cyclic iff the type has at most 2 terms.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812421):
+#### [ Mario Carneiro (Nov 05 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812421):
 i.e. S3 is not cyclic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812422):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812422):
 Could also say perms are abelian iff type has at most 2 terms.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812428):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812428):
 Well, do we know that subgroups of a cyclic group are cyclic?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812432):
+#### [ Mario Carneiro (Nov 05 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812432):
 oh yeah, that's even easier
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812456):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812456):
 and subgroups of an abelian group are abelian
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812459):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812459):
 If only my minions had started on group theory!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812469):
+#### [ Mario Carneiro (Nov 05 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812469):
 do we have the fundamental theorem of cyclic groups?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812508):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812508):
 is there really a fundamental theorem of cyclic groups?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812519):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812519):
 Is there a fundamental theorem for an arbitrary subject?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812525):
+#### [ Mario Carneiro (Nov 05 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812525):
 the classification of finite cyclic groups also sounds pretty cool
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812527):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812527):
 I just had a rant in a lecture about how the fundamental theorem of algebra had a really terrible name
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812534):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812534):
 it was named when "algebra" meant the same as "equations", according to Wikipedia
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812555):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812555):
 or possibly "polynomial equations", my memory fails me
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812559):
+#### [ Mario Carneiro (Nov 05 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812559):
 and now "geometry" means "equations"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812563):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812563):
 only algebraic geometry
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812578):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812578):
 what's the fundamental theorem of geometry?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812621):
+#### [ Chris Hughes (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812621):
 What is the fundamental theorem of cyclic groups?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812625):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812625):
 Do we have that in Lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812637):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812637):
 I don't know what the FTCG is
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812644):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812644):
 It will either be the classification
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812648):
+#### [ Mario Carneiro (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812648):
 every cyclic group is isomorphic to Z/nZ for some n, or Z
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812649):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812649):
 or the universal property
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812667):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812667):
 apparently it's the classification
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812685):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812685):
 what's the fundamental theorem of cyclic semimodules?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812695):
+#### [ Mario Carneiro (Nov 05 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812695):
 I'm pretty sure no one calls it a fundamental theorem except me
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812710):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812710):
 a semimodule is cyclic if it has a generator
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812796):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812796):
 People certainly talk about cyclic modules, and the fundamental theorem for them is that a module is cyclic iff it's isomorphic to $$R/I$$ for some ideal $$I$$ of the commutative ring $$R$$
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812813):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812813):
 (and I guess there's an easy generalisation to the non-commutative case)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812841):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812841):
 but I don't know enough about semirings to know how this generalises
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812849):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812849):
 e.g I don't know the definition of a semiring
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812863):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812863):
 or any examples other than $$\mathbb{N}$$
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812937):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812937):
 Can you have a semimodule for nat whose underlying set is {0,1,2,3} and if you keep adding 1 you get the sequence 0,1,2,3,2,3,2,3,2,3,...?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 05 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812965):
+#### [ Reid Barton (Nov 05 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146812965):
 Yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813012):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813012):
 so the fundamental theorem has to deal with both the "tail" and the "loop"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813027):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813027):
 eew and if the semiring is non-semiNoetherian then this might be pretty ghastly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813031):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813031):
 I can see why they didn't catch on in the maths community
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 05 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813034):
+#### [ Reid Barton (Nov 05 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813034):
 even if it's, like, $$\mathbb{N}^2$$ I think things will get complicated
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813042):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813042):
 Maybe the toric variety guys think about that case
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813052):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813052):
 don't they do submonoids of N^2 etc?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813140):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813140):
 For N^2 you can imagine a wildly complicated module where the two generators ("up" and "right") get you through some maze and if you deviate beyond some perimeter then you have to go back to the start
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813150):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813150):
 no it can't be that crazy
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 05 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813152):
+#### [ Reid Barton (Nov 05 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813152):
 The difficulty is that a congruence (an equivalence relation "~" such that a ~ a' and b ~ b' implies a + a' ~ b + b') is no longer uniquely determined by the set of a for which a ~ 0
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813155):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813155):
 I would need some sort of free semiring for that sort of fun
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 05 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813249):
+#### [ Reid Barton (Nov 05 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813249):
 when forming the quotient of some algebraic object, you're really quotienting out by a congruence
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 05 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813326):
+#### [ Reid Barton (Nov 05 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813326):
 it's just that the ability to subtract lets us identify congruences with (for example) submodules, so now submodules are also the things you can quotient by
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813330):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813330):
 wait -- I thought we were trying to prove that C_2 x C_2 wasn't cyclic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813334):
+#### [ Kevin Buzzard (Nov 05 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146813334):
 we seem to have wandered a bit
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 08 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/147329052):
+#### [ Kevin Buzzard (Nov 08 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/147329052):
 I still can't prove that Z/2 x Z/2 is not cyclic using dec_trivial. Here's an even easier instance of things failing:
 
 ```lean
@@ -413,7 +413,7 @@ instance : group G :=
 end G
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 08 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/147329238):
+#### [ Kevin Buzzard (Nov 08 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/147329238):
 Note also
 ```lean
 #check @decidable_gpowers

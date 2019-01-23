@@ -11,25 +11,25 @@ permalink: archive/116395maths/52882Proofdependingonnmod2.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129743513):
+#### [ Johan Commelin (Jul 16 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129743513):
 I need to prove a fact about `(-a)^n`, with `n : nat`. I would like to split into two cases, depending on whether `n` is odd or even. What is the best way to do this in mathlib?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744299):
+#### [ Kenny Lau (Jul 16 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744299):
 what is it that you want to prove?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744303):
+#### [ Kenny Lau (Jul 16 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744303):
 you might be able to rewrite `n` into `(n/2)*2 + (n%2)` if you use the division algorithm
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 16 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744396):
+#### [ Chris Hughes (Jul 16 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744396):
 `nat.mod_two_eq_zero_or_one` I believe
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744408):
+#### [ Kenny Lau (Jul 16 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744408):
 my point is, sometimes you don't need to split into two cases
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744766):
+#### [ Johan Commelin (Jul 16 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744766):
 Ok, I'll try that.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744770):
+#### [ Johan Commelin (Jul 16 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744770):
 So, here is another substep that I currently have:
 ```lean
 rw show v * (-a)^n = ((-1)^n * v) * a^n,
@@ -38,67 +38,67 @@ rw show v * (-a)^n = ((-1)^n * v) * a^n,
     end,
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744815):
+#### [ Kenny Lau (Jul 16 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744815):
 could you include the types of `v` and `a`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744818):
+#### [ Johan Commelin (Jul 16 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744818):
 Should `ring` be able to do those rewrites itself? I think it would make sense to me to teach `ring` about negatives...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744829):
+#### [ Johan Commelin (Jul 16 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744829):
 `v` and `a` live in some comm ring.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744918):
+#### [ Kenny Lau (Jul 16 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744918):
 it isn't about negatives
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744920):
+#### [ Kenny Lau (Jul 16 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744920):
 it's about powers
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744924):
+#### [ Kenny Lau (Jul 16 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129744924):
 `ring` can't prove this:
 ```lean
 example : x^n * y^n = (x * y)^n := by ring
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745010):
+#### [ Johan Commelin (Jul 16 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745010):
 Should ring be able to prove it, by `rw mul_pow` whenever possible?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745014):
+#### [ Kenny Lau (Jul 16 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745014):
 I don't know what `ring` knows
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745076):
+#### [ Johan Commelin (Jul 16 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745076):
 My "Should" was a *moral* should. As in, does it make sense to give `ring` these extra powers?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 16 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745230):
+#### [ Mario Carneiro (Jul 16 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745230):
 No. It is not a rewrite system, it is a decision procedure for polynomial equalities. `x^n` is not a polynomial (of two variables `x`, `n`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745235):
+#### [ Kenny Lau (Jul 16 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745235):
 fair enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745425):
+#### [ Johan Commelin (Jul 16 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745425):
 Mario, so would it make sense to rename `ring` into `semiring`, and have a `ring` tactic that is `semiring` + some other superpowers?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 16 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745483):
+#### [ Mario Carneiro (Jul 16 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745483):
 `ring` deals with commutative rings and commutative semirings
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 16 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745495):
+#### [ Mario Carneiro (Jul 16 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129745495):
 Negatives are supported
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129746954):
+#### [ Johan Commelin (Jul 16 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129746954):
 Ok, so what is the fastest way to prove `H : ∀ {n : ℕ}, ((-1 : R)^n = 1) ∨ ((-1 : R)^n = -1)`, where `R` is a `comm_ring`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 16 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747046):
+#### [ Mario Carneiro (Jul 16 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747046):
 that could probably go in `group_power.lean`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 16 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747062):
+#### [ Patrick Massot (Jul 16 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747062):
 That's the fastest way: have Mario write it in mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 16 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747072):
+#### [ Mario Carneiro (Jul 16 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747072):
 but you can prove it either by induction or by quotient remainder theorem like kenny suggested
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747095):
+#### [ Johan Commelin (Jul 16 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747095):
 I'm halfway a proof by induction, but everytime I need a stupid little fact from mathlib it costs me 15 minutes to find it...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747269):
+#### [ Kenny Lau (Jul 16 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747269):
 ```lean
 import tactic.ring
 
@@ -113,10 +113,10 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747273):
+#### [ Kenny Lau (Jul 16 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747273):
 that's 7 minutes :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747459):
+#### [ Kenny Lau (Jul 16 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747459):
 ```lean
 import tactic.ring
 
@@ -132,7 +132,7 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747482):
+#### [ Kenny Lau (Jul 16 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747482):
 ```lean
 import tactic.ring
 
@@ -147,19 +147,19 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 16 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747491):
+#### [ Johan Commelin (Jul 16 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747491):
 You win (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 16 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747550):
+#### [ Mario Carneiro (Jul 16 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747550):
 Now you are just showing off :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 16 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747557):
+#### [ Mario Carneiro (Jul 16 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747557):
 What's it look like using the equation compiler for the induction?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747574):
+#### [ Kenny Lau (Jul 16 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747574):
 not much difference, I think
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 16 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747711):
+#### [ Mario Carneiro (Jul 16 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747711):
 I think it's a bit neater
 ```
 theorem neg_one_pow_eq_or {R} [comm_ring R] : ∀ n : ℕ, ((-1 : R)^n = 1) ∨ ((-1 : R)^n = -1)
@@ -168,10 +168,10 @@ theorem neg_one_pow_eq_or {R} [comm_ring R] : ∀ n : ℕ, ((-1 : R)^n = 1) ∨ 
 ```
 also `left` and `right` are unnecessary
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747723):
+#### [ Kenny Lau (Jul 16 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747723):
 I see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 16 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747746):
+#### [ Kenny Lau (Jul 16 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129747746):
 ```lean
 import tactic.ring
 

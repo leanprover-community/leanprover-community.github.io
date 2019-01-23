@@ -11,10 +11,10 @@ permalink: archive/113488general/03459convexample.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651407):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651407):
 I was trying to write an example to illustrate the power of `conv`, by finding an example where the entire goal was difficult to work with because it contained implicit proofs. I realised that there were two things I didn't understand properly. Here's some code.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651409):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651409):
 ```
 @[elab_simple] def subtypeadd {m : ℕ} {n : ℕ} (A : fin m) (B : fin n) : fin (m+n) :=
   ⟨A.val+B.val,add_lt_add A.is_lt B.is_lt⟩
@@ -30,19 +30,19 @@ begin
 end 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651451):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651451):
 I wanted to make the example hard for one reason, but it somehow turned out to be hard for another reason :-/
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651460):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651460):
 My first question is why does the `show` command succeed? I assumed that what `show X` did was that it first checked that `X` made sense, and then checked that it was defeq to the goal.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651464):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651464):
 But I thought I had explicitly rigged it here so that `X` wouldn't be able to be elaborated, because of the missing proofs.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651506):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651506):
 My second question is why does `rw` fail. I have heard rumours that `rw` will not work inside a lambda (although I don't really understand why -- why is this?) but this is not a lambda and I think the reason for failure is something else.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651512):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651512):
 The error message is
 ```
 rewrite tactic failed, motive is not type correct
@@ -56,10 +56,10 @@ H : A.val + B.val = B.val + A.val
 ⊢ phi ⟨A.val + B.val, _⟩ = ⟨B.val + A.val, _⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651515):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651515):
 and if I `set_option trace.check true` then I get an exciting helpful extra hint:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651516):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651516):
 ```
 [check] application type mismatch at
   ⟨_a, _⟩
@@ -69,22 +69,22 @@ expected type
   _a < m + n
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651557):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651557):
 which makes no sense to me...oh! Is it rewriting too many A.val + B.val's?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651559):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651559):
 I am still a bit bewildered about why this is a type mismatch I guess.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651565):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651565):
 (deleted)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651618):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651618):
 (deleted)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651680):
+#### [ Kevin Buzzard (Mar 13 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651680):
 For the first question I guess an underlying question is "which option do you switch on so you can see how Lean is filling in `_`s?"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123652795):
+#### [ Mario Carneiro (Mar 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123652795):
 > My first question is why does the show command succeed? I assumed that what show X did was that it first checked that X made sense, and then checked that it was defeq to the goal.
 
 I was going to mention this before with your `X = Y` into `X' = Y` problem - you could have just written `show X' = _`. The reason this works is because the checking is done in a weak mode that tolerates metavariable generation, and the second defeq step is not just checking defeq, it is unifying with the target. This means that the first stage will create metavariables and the second stage will unfold stuff as needed to figure out the metavariables. If it can't completely solve the metavariables, you will get new goals instead of an error.
@@ -105,10 +105,10 @@ end
 ```
 As you can see, `show` differs slightly in that it doesn't change the number of goals while `change` will add all those unsolved metavariables as new goals, just like `refine` would.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123652855):
+#### [ Mario Carneiro (Mar 13 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123652855):
 By the way, goals that look like your `phi ⟨A.val + B.val, _⟩ = ⟨B.val + A.val, _⟩` often don't work (they fail in the first stage of parsing), because the anonymous constructor can't be solved outright. In this case it works because `phi` is sufficient to deduce that both constructors are `fin`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653214):
+#### [ Mario Carneiro (Mar 13 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653214):
 > My second question is why does rw fail. I have heard rumours that rw will not work inside a lambda (although I don't really understand why -- why is this?) but this is not a lambda and I think the reason for failure is something else.
 
 `rw` is very sensitive to dependencies. (Or more accurately, it is sufficiently *insensitive* to dependencies that it will generally fail in their presence.) Both `rw` and `generalize` are built on the same basic underlying internal tactic `kabstract`, which is supposed to take a term `P[T]` containing a subterm `T`, and replace it with a variable `x`. This is needed to construct the motive of the `eq.rec` application that goes in the proof term when using `rw`, and it's what you see directly if you use `generalize`.
@@ -119,44 +119,44 @@ As it pertains to your example, the error message is fairly clear, although it w
 
 The other major rewrite engine in lean is `simp`, which does not use `kabstract`. It operates by using congruence lemmas to recurse into subterms, and this strategy makes it much more reliably type-correct when it comes to rewriting under dependencies. If you try to use `simp` to rewrite here, it will work, and the proof argument will change to a cast of some sort to accommodate the new type.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653217):
+#### [ Kevin Buzzard (Mar 13 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653217):
 Is it possible for me to watch all this unification taking place explicitly? i.e. some set_option?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653282):
+#### [ Kevin Buzzard (Mar 13 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653282):
 [that was about the show / change stuff]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653325):
+#### [ Mario Carneiro (Mar 13 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653325):
 I think `set_option trace.type_context.is_def_eq true` is what you want
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653332):
+#### [ Kevin Buzzard (Mar 13 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653332):
 Earlier on I realised that I didn't really know what rw did, so I've just spent 20 minutes doing edge cases and now I can understand the rw issue. I found that `rw` doesn't commute with `eq.symm` in general :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 13 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653334):
+#### [ Sebastian Ullrich (Mar 13 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653334):
 Plus `...is_def_eq_detail`, probably
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653381):
+#### [ Kevin Buzzard (Mar 13 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653381):
 ```
 example (a b: ℕ) : b + a = b + a + a + b := begin
 rw add_comm, -- a + b = a + b + a + b
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653455):
+#### [ Kevin Buzzard (Mar 13 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653455):
 Are the `set_option` options documented anywhere?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653753):
+#### [ Mario Carneiro (Mar 13 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123653753):
 `#help options` seems to do the trick. (I had to search the code to find that gem. `#help` is such a rarely used command for me, I'm not even really sure what's there...)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123654932):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123654932):
 I am not even sure if I knew `#help` existed. I thought the help command in Lean was `#print`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123654973):
+#### [ Mario Carneiro (Mar 13 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123654973):
 it certainly does seem to be a large overlap of duties
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123654990):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123654990):
 I can use conv to rewrite `A.val + B.val` in that earlier example.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123654994):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123654994):
 ```
 @[elab_simple] def subtypeadd {m : ℕ} {n : ℕ} (A : fin m) (B : fin n) : fin (m+n) :=
   ⟨A.val+B.val,add_lt_add A.is_lt B.is_lt⟩
@@ -179,121 +179,121 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123654999):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123654999):
 conv is doing all sorts of funny things here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655000):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655000):
 It seems to forget some terms
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655002):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655002):
 and I managed to do a rewrite which earlier on was impossible for a good reason
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655052):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655052):
 or was it impossible for a bad reason?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655114):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655114):
 Oh maybe conv doesn't care about the terms it forgets.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655119):
+#### [ Mario Carneiro (Mar 13 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655119):
 I would be in support of moving all "auxiliary" `#print` stuff to `#help`; it is a little confusing to have namespace overlapping between `#print options` (which prints lean cmdline options), `#print option` (which prints the `option` type) and `#print pp.all` (which prints info on the `pp.all` option)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655120):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655120):
 Does conv not bother with subsingletons?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655126):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655126):
 I lost a proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655197):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655197):
 I see. So `fin` is a structure so I can build things of type `fin n` and they will be of the form `<value,proof that this value is less than n>`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655205):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655205):
 but there's nothing stopping me from deviously changing the value without changing the proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655213):
+#### [ Mario Carneiro (Mar 13 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655213):
 By the way, if you are actually interested in this theorem, a short proof is `fin.eq_of_veq (add_comm _ _)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655278):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655278):
 I don't need the theorem, I was experimenting with trying to build goals which the prettyprinter wouldn't let me use show with ("show <what the pretty printer says the goal is>" failing)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655280):
+#### [ Mario Carneiro (Mar 13 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655280):
 `conv` uses congrence lemmas, like `simp`, to traverse the term, certainly if you are using the `congr` tactic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655286):
+#### [ Mario Carneiro (Mar 13 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655286):
 so it will succeed for the same reason that simp does
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655290):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655290):
 conv is really useful for a learner like me.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655342):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655342):
 It enables to you really zoom in to parts of complicated things which beginners have trouble manipulating
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655343):
+#### [ Mario Carneiro (Mar 13 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655343):
 You should turn on `pp.proofs` while working with this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655346):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655346):
 oh that's a cool option
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655358):
+#### [ Mario Carneiro (Mar 13 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655358):
 lol I remember the days when it was the only option. It's like 80% a good idea to hide proofs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655359):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655359):
 is there a command which just changes the state of every option that is available?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655364):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655364):
 then I could easily see all the other things I'm missing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655365):
+#### [ Mario Carneiro (Mar 13 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655365):
 lol that would be bedlam
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655368):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655368):
 Imagine how much I'd learn
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655417):
+#### [ Mario Carneiro (Mar 13 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655417):
 If you care about printing, look at completions for `set_option pp.`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655428):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655428):
 I remember getting really confused early on because of those `_`s in goals which I'd completely forgotten what they stood for
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655438):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655438):
 It would be even better if it said what they were a proof of
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655455):
+#### [ Mario Carneiro (Mar 13 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655455):
 That was proposed; but it would make things even harder for the copy-pasters
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655497):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655497):
 why not make it an option?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655502):
+#### [ Mario Carneiro (Mar 13 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655502):
 I don't want to have to edit all those types out
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655505):
+#### [ Mario Carneiro (Mar 13 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655505):
 to make it compile
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655512):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655512):
 Oh wooah if I set proofs on, then does "show (goal)" always succeed?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655514):
+#### [ Mario Carneiro (Mar 13 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655514):
 no, silly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655515):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655515):
 :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655524):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655524):
 does that solve the halting problem or something?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655526):
+#### [ Mario Carneiro (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655526):
 there are a thousand and one edge cases that cause bad printing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655528):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655528):
 Oh OK.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655529):
+#### [ Mario Carneiro (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655529):
 even `pp.all` sometimes fails
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655530):
+#### [ Kevin Buzzard (Mar 13 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655530):
 o_O
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655728):
+#### [ Mario Carneiro (Mar 13 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655728):
 Here's an example:
 ```
 theorem T : nat.zero = nat.zero :=
@@ -305,10 +305,10 @@ theorem T' : @eq.{1} nat nat.zero nat.zero :=
 @(λ {x : nat}, @eq.refl.{1} nat x) nat.zero --parse error
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655807):
+#### [ Kevin Buzzard (Mar 13 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655807):
 Oh maybe we're talking at cross purposes.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655814):
+#### [ Kevin Buzzard (Mar 13 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655814):
 ```
 theorem T' : @eq.{1} nat nat.zero nat.zero :=
 begin
@@ -316,13 +316,13 @@ show @eq.{1} nat nat.zero nat.zero -- succeeds
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655864):
+#### [ Kevin Buzzard (Mar 13 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655864):
 I was wondering if one could be in tactic mode in a situation where the goal is represented by some string S, and then `show S` fails
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655937):
+#### [ Kevin Buzzard (Mar 13 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123655937):
 I am pretty sure I've done that before, but I am less sure about having done it with pp.all true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 13 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123656284):
+#### [ Mario Carneiro (Mar 13 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123656284):
 It's easiest to demonstrate by using `#print` to view proof terms, but this affects all printing, and you can make it work with target printing as well by a similar mechanism.
 ```
 --set_option pp.all true
@@ -334,31 +334,31 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 15:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123656605):
+#### [ Kevin Buzzard (Mar 13 2018 at 15:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123656605):
 Are these bugs in the prettyprinter? Or just interesting features?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 15:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123656620):
+#### [ Kevin Buzzard (Mar 13 2018 at 15:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123656620):
 Or should `@(lam {x},...)` actually work?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 13 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123656672):
+#### [ Sebastian Ullrich (Mar 13 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123656672):
 It's the pretty printer wishing for a feature the parser hasn't implemented yet
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 13 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123656731):
+#### [ Sebastian Ullrich (Mar 13 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123656731):
 Slightly passive-agressive behavior
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123657305):
+#### [ Kevin Buzzard (Mar 13 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123657305):
 I see. The pretty printer is somehow the anti-parser isn't it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123657312):
+#### [ Kevin Buzzard (Mar 13 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123657312):
 in fact it's a one-sided inverse, in a perfect world.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Mar 13 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123657314):
+#### [ Patrick Massot (Mar 13 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123657314):
 See #1900
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123661013):
+#### [ Kevin Buzzard (Mar 13 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123661013):
 I am still unclear about one thing in this thread.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123661014):
+#### [ Kevin Buzzard (Mar 13 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123661014):
 ```
 example (a b c N : ℕ) (H1 : a = b) (H2 : a < N) (H3 : b < N) :
  (⟨a,H2⟩:fin N) = ⟨b,H3⟩ :=
@@ -371,119 +371,119 @@ conv begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123661095):
+#### [ Kevin Buzzard (Mar 13 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123661095):
 The first rw fails and my understanding is that it fails because it gives rise to a term which is malformed (copying from Mario's comments above). However it seems to be only as malformed as the term I successfully construct using the conv trick.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123723050):
+#### [ Kevin Buzzard (Mar 14 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123723050):
 I am still none the wiser about this. One conclusion which I've not yet ruled out is simply that whoever wrote `rw` could have done better, and made that first `rw H1` above succeed, because there is nothing in type theory stopping it from succeeding, as we see from the conv approach. Is the reason that `rw H1` fails simply that the `rw` code just doesn't cover this use case?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123723190):
+#### [ Mario Carneiro (Mar 14 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123723190):
 I think you are missing that the `conv` version isn't using just `rw`, it's using `rw` + `congr`, and it is applying `congr` in the place where dependency matters. Once the goal is `| a`, there is no longer a dependency to worry about, and `rw` has no problems.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123723911):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123723911):
 But there is nothing stopping someone from beefing up rw so that it works without using conv? It's just some tactic, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724107):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724107):
 Initially when I heard that rw couldn't rewrite in certain circumstances I thought that this was because of some theoretical type theory issue which was beyond me, but now I am more inclined to believe that it's just beyond rw.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724117):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724117):
 This typechecks:
 ```
 example (a b c N : ℕ) (H1 : a = b) (H2 : a < N) (H3 : b < N) :
  (⟨a,H2⟩:fin N) = ⟨b,H3⟩ := sorry 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724133):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724133):
 but if I replace `sorry` with `eq.subst H1 _` then all of a sudden I get a type mismatch in the statement (not the proof) of the example.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724136):
+#### [ Mario Carneiro (Mar 14 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724136):
 Yes and no. `rw` does exactly what we want it to, which is to produce an `eq.rec` term with a well chosen motive. `congr` applies an appropriate congruence lemma. There are theoretical limitations on what you can prove using `eq.rec`, and this is why one wouldn't want to change `rw` for this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724181):
+#### [ Mario Carneiro (Mar 14 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724181):
 I opened an issue on dependent `rw` a while ago, I think it was closed by "use `simp` instead"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724194):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724194):
 I now know from experience that this is not a satisfactory response
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724201):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724201):
 The reason I got interested in this use of conv was that I had a situation where simp simplified too much
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724245):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724245):
 so I had to be super-accurate with my rw
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724246):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724246):
 conv saved me
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724250):
+#### [ Mario Carneiro (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724250):
 I mean the `simp` engine, not necessarily `simp` on its own
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724253):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724253):
 How do you use the simp engine??
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724256):
+#### [ Simon Hudon (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724256):
 Did it simplify too much even when you called `simp only [your rules here]`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724259):
+#### [ Mario Carneiro (Mar 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724259):
 You know that `simp` has a bazillion options, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724265):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724265):
 Oh that's a good point Simon, I didn't try this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724279):
+#### [ Mario Carneiro (Mar 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724279):
 Remember when you discovered that `unfold` is really `simp`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724280):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724280):
 Are those bazillion options documented? If not, then no I don't know and I don't know how to find out.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724289):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724289):
 other than random looking through changelogs and source code
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724290):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724290):
 which I find about as pleasant as looking through trash cans
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 14 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724327):
+#### [ Simon Hudon (Mar 14 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724327):
 That would deserve a good amount of documentation, that's true.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724335):
+#### [ Mario Carneiro (Mar 14 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724335):
 `simp only [h] {single_pass := tt}` is pretty close to `rw`-like rewriting
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724349):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724349):
 I did know about simp only from TPIL but somehow it's one of those options which I would never use in practice because my initial reaction when I read TPIL was "whyever would you want to use simp only?"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724352):
+#### [ Simon Hudon (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724352):
 And if you identify the lemmas that cause trouble you can disable it specifically with `simp [my_rule, - naughty]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724358):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724358):
 and it's only more recently as I have become more experienced that I realise I need it, by which time I have forgotten about it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724366):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724366):
 and the simp docs which I PR'ed have explanations of how to find out which lemmas are causing trouble
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724367):
+#### [ Mario Carneiro (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724367):
 And to identify naughty lemmas you can use `set_option trace.simplify.rewrite true`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724370):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724370):
 yeah, I read that in the docs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724371):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724371):
 which I wrote
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724376):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724376):
 because I cannot manage without docs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724383):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724383):
 because I am an old man
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724420):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724420):
 so no I don't know about the bazillion simp options
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724424):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724424):
 if you just rattled a few off now I might add them to the docs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724426):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724426):
 I am in my late 40s :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724430):
+#### [ Mario Carneiro (Mar 14 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724430):
 ```
 
 structure simp_config :=
@@ -505,40 +505,40 @@ structure simp_config :=
 (memoize                   := tt)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724441):
+#### [ Mario Carneiro (Mar 14 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724441):
 as you can see, leo is hard at work with those docstrings :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724688):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724688):
 two out of 16 ain't bad, as Meat Loaf once said
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724692):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724692):
 I am now going to have to rewrite some of my updated simp docs which I was editing as this post arrived.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724735):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724735):
 About to be deleted: `It is well-known that there are a bazillion simp options, although most are known only to the Lean Inner Circle. Examples which mere mortals know about are those documented in the reference manual and Theorem Proving In Lean.`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724966):
+#### [ Mario Carneiro (Mar 14 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123724966):
 That's not even all of it - there is also the underlying command `ext_simplify_core` with lots of space for configurability. And `dsimp` has its own variants on all of this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725306):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725306):
 There are more options somehow:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725311):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725311):
 `simp tactics in interactive mode have a new configuration parameter (discharger : tactic unit) a tactic for discharging subgoals created by the simplifier. If the tactic fails, the simplifier tries to discharge the subgoal by reducing it to true. Example: simp {discharger := assumption}.`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725317):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725317):
 from the changelog
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725379):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725379):
 I can't get this to work though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 14 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725587):
+#### [ Kevin Buzzard (Mar 14 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725587):
 OK I added some stuff about simp config options and added it to my PR
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725662):
+#### [ Mario Carneiro (Mar 14 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725662):
 the `discharger`is a `tactic unit`, so you have to write it in non-interactive mode (or else have `tactic` open, which is I think what Leo did in that quote). ``simp {discharger := `[assumption]}`` should work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 14 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725719):
+#### [ Mario Carneiro (Mar 14 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123725719):
 but it's not that useful compared to `simp *`
 
 

@@ -11,56 +11,56 @@ permalink: archive/116395maths/57510Henselslemma.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133747941):
+#### [ Johan Commelin (Sep 11 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133747941):
 @**Rob Lewis** has PR'd Hensel's lemma for the p-adics! :tada: :octopus: :muscle:
 https://github.com/leanprover/mathlib/pull/337/files?w=1
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133747982):
+#### [ Johan Commelin (Sep 11 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133747982):
 Rob, would you mind sharing a bit of your long term plans? It seems like you project and the perfectoid project could strengthen each other.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133748063):
+#### [ Johan Commelin (Sep 11 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133748063):
 I'm really excited to see all this stuff materialising.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 11 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133748199):
+#### [ Kevin Buzzard (Sep 11 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133748199):
 In terms of what is needed to do modern mathematics I guess one has to plough through Serre's book on local fields
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Sep 11 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750674):
+#### [ Rob Lewis (Sep 11 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750674):
 There's not so much of a long term plan right now. I've just been talking to Sander Dahmen about what we'll need to start formalizing his work, like we promised in the Lean Forward project. This seemed like a good place to start.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750700):
+#### [ Johan Commelin (Sep 11 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750700):
 It definitely is.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Sep 11 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750750):
+#### [ Rob Lewis (Sep 11 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750750):
 Short term, I want to see what I can do about cleaning up some of the annoying inequality proofs in that PR.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750776):
+#### [ Johan Commelin (Sep 11 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750776):
 I am not intimately familiar with Sanders work, but I do worry a tiny little bit that in the near future you might need to do a lot of this again for completions of number fields.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Sep 11 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750781):
+#### [ Rob Lewis (Sep 11 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750781):
 I'm sure there's plenty of overlap between Lean Forward and the perfectoid project, maybe we could get everyone together and chat sometime.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750813):
+#### [ Johan Commelin (Sep 11 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750813):
 I think starting from a slightly more general perspective might pay off in the long run.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750841):
+#### [ Johan Commelin (Sep 11 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750841):
 Let me put it like this: I would be very surprised if the only local rings in Sanders work are p-adics. I would expect to also find finite extensions of those.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750853):
+#### [ Johan Commelin (Sep 11 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750853):
 And usually the proofs are almost the same difficulty.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750906):
+#### [ Johan Commelin (Sep 11 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133750906):
 This is absolutely not meant as criticism.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 11 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133757316):
+#### [ Patrick Massot (Sep 11 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133757316):
 ```quote
 Short term, I want to see what I can do about cleaning up some of the annoying inequality proofs in that PR.
 ```
 Did you have a look at Simon's mono tactic? It's not yet merged but it's in the nursery
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 11 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133757562):
+#### [ Patrick Massot (Sep 11 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133757562):
 @**Rob Lewis** would you mind documenting your p-adic work somewhere in https://github.com/leanprover/mathlib/tree/master/docs/theories?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133786975):
+#### [ Johan Commelin (Sep 12 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133786975):
 @**Rob Lewis** Thanks for the documentation!
 
 

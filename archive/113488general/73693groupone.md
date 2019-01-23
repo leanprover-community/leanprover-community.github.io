@@ -11,7 +11,7 @@ permalink: archive/113488general/73693groupone.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 02 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group.one%3F/near/133204605):
+#### [ Kenny Lau (Sep 02 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group.one%3F/near/133204605):
 This is the definition of `group`:
 ```lean
 class group (α : Type u) extends monoid α, has_inv α :=
@@ -19,10 +19,10 @@ class group (α : Type u) extends monoid α, has_inv α :=
 ```
 then how does this produce `group.one`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 02 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group.one%3F/near/133205871):
+#### [ Reid Barton (Sep 02 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group.one%3F/near/133205871):
 Probably `monoid` extends `has_one`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 02 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group.one%3F/near/133205875):
+#### [ Simon Hudon (Sep 02 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group.one%3F/near/133205875):
 Yes it does and `group` is an `old_structure`
 
 

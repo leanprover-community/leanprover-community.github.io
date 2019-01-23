@@ -11,16 +11,16 @@ permalink: archive/113489newmembers/24978leanunresponsive.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Jan 07 2019 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154576468):
+#### [ Sarah Mameche (Jan 07 2019 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154576468):
 Hi, when I use 3.4.1, there are problems with displaying the goal if proofs get longer. In both Emacs and vscode, the goal is not displayed anymore and the message box just says 'updating'. If the proof is deleted and I restart it, it always happens again in some subcase as soon as the proof gets longer (it is not really that huge though, 20 lines maybe). Lean does not respond if something is typed  (if I type "end" I get the synthesize-placeholder error). Has anyone had this before?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Jan 07 2019 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154577042):
+#### [ Bryan Gin-ge Chen (Jan 07 2019 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154577042):
 In VS code, are you seeing any indications that lean is still working (e.g. orange bars on the sides)? It might help if you post a minimum example, since slowness could be caused by a variety of things...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Uranus Testing (Jan 07 2019 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154577401):
+#### [ Uranus Testing (Jan 07 2019 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154577401):
 There are orange bars on the sides and indicator in status bar (“Lean [indicator] (checking visible lines)”).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Jan 08 2019 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154630892):
+#### [ Sarah Mameche (Jan 08 2019 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154630892):
 The orange bars are there for a moment but disappear directly.
 
 The proof uses two other files of definitions, here are the types if that helps: 
@@ -44,13 +44,13 @@ theorem CR₁₃x {n} (Γ) (A : type) (s:tm n) : (R Γ A s → SNe s) ∧
 
 I do an induction on the type A, but the proof always crashes somewhere in the tarrow-case ...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 08 2019 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154631244):
+#### [ Kenny Lau (Jan 08 2019 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154631244):
 more code would help
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Uranus Testing (Jan 08 2019 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154631733):
+#### [ Uranus Testing (Jan 08 2019 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154631733):
 What if run file from command line ($ lean /path/to/proof.lean)?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Jan 08 2019 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154631799):
+#### [ Sarah Mameche (Jan 08 2019 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154631799):
 ```lean
 
 open nat
@@ -152,25 +152,25 @@ begin
 ```
 There are some more definitions about properties of tm n, though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Jan 08 2019 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154631854):
+#### [ Sarah Mameche (Jan 08 2019 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154631854):
 It compiles if I run it from the command line but I can't finish the proof in interactive mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 08 2019 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154631855):
+#### [ Kenny Lau (Jan 08 2019 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154631855):
 you still aren't showing us the exact part of your code that crashes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Uranus Testing (Jan 08 2019 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154632041):
+#### [ Uranus Testing (Jan 08 2019 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154632041):
 Look at “Lean: Server Errors” log in Visual Studio Code, it may be useful.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Jan 08 2019 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154632221):
+#### [ Sarah Mameche (Jan 08 2019 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154632221):
 It added the induction where it crashed, but right now I can't even edit something at the beginning of the proof...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 08 2019 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154632274):
+#### [ Kenny Lau (Jan 08 2019 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154632274):
 you are advised to put `end` immediately after you put `begin` (and then add stuff between), etc
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Jan 08 2019 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154632415):
+#### [ Sarah Mameche (Jan 08 2019 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154632415):
 Oh that solved it! Thanks a lot
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 08 2019 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154632772):
+#### [ Patrick Massot (Jan 08 2019 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20unresponsive/near/154632772):
 This may be a good time to start using VScode code snippets. In menu File/Preferences/User code snippet (or slight variation on this, I'm making up translation from French) and select `lean.json`. Then put in:
 ```json
 {

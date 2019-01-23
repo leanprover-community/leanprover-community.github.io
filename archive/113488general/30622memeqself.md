@@ -11,23 +11,23 @@ permalink: archive/113488general/30622memeqself.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731070):
+#### [ Kevin Buzzard (Dec 02 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731070):
 Harder than I expected!
 
 ```lean
 theorem mem_eq_self {α : Type*} (a : α) : a ∈ {x : α | x = a} := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731071):
+#### [ Kevin Buzzard (Dec 02 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731071):
 Took me three attempts!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 02 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731079):
+#### [ Kenny Lau (Dec 02 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731079):
 ok too me two attempts
 ```lean
 theorem mem_eq_self {α : Type*} (a : α) : a ∈ {x : α | x = a} := eq.refl a
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731132):
+#### [ Kevin Buzzard (Dec 02 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731132):
 ```lean
 @[refl] theorem mem_eq_self {α : Type*} (a : α) : a ∈ {x : α | x = a} := eq.refl a
 
@@ -37,10 +37,10 @@ example : 3 ∈ {x : ℕ | x = 3} := by refl
 
 @**Reid Barton** is this your suggestion? To those that didn't follow the other thread, the point is that without tagging `mem_eq_self` as `refl`, `by refl` doesn't work for the example.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731148):
+#### [ Kevin Buzzard (Dec 02 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731148):
 `example : 3 ∈ {x : ℕ | 3 = x} := by refl` now works too. I don't really understand what is going on here.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 02 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731199):
+#### [ Kenny Lau (Dec 02 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731199):
 ```lean
 -- all fail
 example : 3 ∈ {x : ℕ | x = 3} := by refl
@@ -57,16 +57,16 @@ example : 3 ∈ {x : ℕ | 3 = 3} := by refl
 example : 3 ∈ {x : ℕ | 3 = x} := by refl
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731247):
+#### [ Kevin Buzzard (Dec 02 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731247):
 `example : 3 ∈ {x : ℕ | 3 = 3} := by refl` -- Doesn't that say `3 \in set.univ`? Why is that `by refl`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 02 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731256):
+#### [ Kenny Lau (Dec 02 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731256):
 no, set.univ is true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731261):
+#### [ Kevin Buzzard (Dec 02 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731261):
 We're evaluating `lam x, 3 = 3` at `x=3` :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731300):
+#### [ Kevin Buzzard (Dec 02 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731300):
 so indeed it's refl
 
 

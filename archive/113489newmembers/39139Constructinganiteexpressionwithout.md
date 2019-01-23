@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/39139Constructinganiteexpressionwithout.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 24 2018 at 03:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Constructing%20an%20ite%20expression%20without%20%25%25/near/130183355):
+#### [ Ken Roe (Jul 24 2018 at 03:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Constructing%20an%20ite%20expression%20without%20%25%25/near/130183355):
 I entered the following code to construct an ite expression in a meta def:
 ```lean
 def xeval (a : ℕ) (b : ℕ) := if a=0 then 0 else b.
@@ -41,7 +41,7 @@ x y : expr
 ```
 How do I fix this error?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 25 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Constructing%20an%20ite%20expression%20without%20%25%25/near/130244278):
+#### [ Sebastian Ullrich (Jul 25 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Constructing%20an%20ite%20expression%20without%20%25%25/near/130244278):
 The error is because the universe parameter of `ite` could not be inferred. If you use the full quotation
 ```
 `(if beq_nat %%x 0 then (0 : nat) else %%y)

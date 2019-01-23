@@ -11,7 +11,7 @@ permalink: archive/144837PRreviews/26165vscodeaddunicodecompletiontomarkdownfile
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Oct 17 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/vscode%20-%20add%20unicode%20completion%20to%20markdown%20files/near/135975564):
+#### [ Edward Ayers (Oct 17 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/vscode%20-%20add%20unicode%20completion%20to%20markdown%20files/near/135975564):
 https://github.com/leanprover/vscode-lean/pull/96
 
 

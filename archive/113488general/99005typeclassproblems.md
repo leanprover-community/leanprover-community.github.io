@@ -11,7 +11,7 @@ permalink: archive/113488general/99005typeclassproblems.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143681):
+#### [ Kenny Lau (Jun 16 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143681):
 This loop is breaking everything
 ```lean
 [class_instances] (25) ?x_99 : out_param (field ?x_97) := @field_extension.to_field ?x_101 ?x_102 ?x_103 ?x_104
@@ -19,7 +19,7 @@ This loop is breaking everything
 [class_instances] (27) ?x_108 : @algebraic_field_extension ?x_105 ?x_106 ?x_107 := @algebraic_closure.to_algebraic_field_extension ?x_109 ?x_110 ?x_111 ?x_112
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143694):
+#### [ Kenny Lau (Jun 16 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143694):
 ```lean
 class alg_closed_field (α : Type*) extends field α :=
 (alg_closed : ∀ f : polynomial α, f.deg > 1 → ∃ x, f.eval α α x = 0)
@@ -48,10 +48,10 @@ class algebraic_closure (α : out_param $ Type*) (β : Type*)
 set_option old_structure_cmd false
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143821):
+#### [ Kenny Lau (Jun 16 2018 at 00:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143821):
 I'm not very good at dealing with typeclasses
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144488):
+#### [ Kenny Lau (Jun 16 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144488):
 somehow the same setting with `ring` instead of `field` doesn't cause this problem:
 ```lean
 class algebra (R : out_param Type*) (A : Type*)
@@ -60,7 +60,7 @@ class algebra (R : out_param Type*) (A : Type*)
 ```
 This doesn't cause any loops
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144728):
+#### [ Kenny Lau (Jun 16 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144728):
 solution:
 ```lean
 class is_alg_closed_field (α : Type*) [field α] : Prop :=
@@ -87,39 +87,39 @@ class is_algebraic_closure (α : out_param $ Type*) (β : Type*)
   extends is_alg_closed_field β, is_algebraic_field_extension α β : Prop
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144742):
+#### [ Kenny Lau (Jun 16 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144742):
 TLDR: change `algebraic_field_extension` (not `Prop`) to `is_algebraic_field_extension` (`Prop`) etc
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144825):
+#### [ Kenny Lau (Jun 16 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144825):
 update: it is not true that the `algebra` causes no problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 16 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144857):
+#### [ Mario Carneiro (Jun 16 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144857):
 > `out_param (field ?x_97)`
 
 not the first time I've seen this today
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144919):
+#### [ Kenny Lau (Jun 16 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144919):
 but `module` seems to be doing fine
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 16 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144929):
+#### [ Mario Carneiro (Jun 16 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144929):
 What caused this typeclass search? You never want to find arbitrary fields
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144937):
+#### [ Kenny Lau (Jun 16 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144937):
 what stops `ring.to_module` and `class module ... [ring _]` from forming a loop?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145013):
+#### [ Kenny Lau (Jun 16 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145013):
 ```quote
 What caused this typeclass search? You never want to find arbitrary fields
 ```
 I have something involving rings and no fields at all. The searcher wants to know that it has addition. Somehow it got to fields, and then it started the loop
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 16 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145033):
+#### [ Mario Carneiro (Jun 16 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145033):
 I don't mean just `field ?`, but also `ring ?` and other such things
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 16 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145047):
+#### [ Mario Carneiro (Jun 16 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145047):
 the bad sign is a class on a metavar
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145075):
+#### [ Kenny Lau (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145075):
 ```lean
 [class_instances]  class-instance resolution trace
 [class_instances] (0) ?x_0 : has_zero α := @pi.has_zero ?x_1 ?x_2 ?x_3
@@ -162,30 +162,30 @@ failed is_def_eq
 [class_instances] (10) ?x_39 : field ?x_37 := @field_extension.to_field ?x_41 ?x_42 ?x_43 ?x_44
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145120):
+#### [ Kenny Lau (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145120):
 loop the last 3 lines
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145133):
+#### [ Mario Carneiro (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145133):
 `field_extension.to_field`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145134):
+#### [ Mario Carneiro (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145134):
 kill it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145145):
+#### [ Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145145):
 ```lean
 class field_extension (α : out_param $ Type*) (β : Type*)
   [out_param $ field α] extends field β :=
 (f : α → β) [hom : is_ring_hom f]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145161):
+#### [ Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145161):
 ```lean
 class algebra (R : out_param Type*) (A : Type*)
   [out_param $ comm_ring R] extends comm_ring A :=
 (f : R → A) [hom : is_ring_hom f]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145162):
+#### [ Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145162):
 ```lean
 class module (α : out_param $ Type u) (β : Type v) [out_param $ ring α]
   extends has_scalar α β, add_comm_group β :=
@@ -195,19 +195,19 @@ class module (α : out_param $ Type u) (β : Type v) [out_param $ ring α]
 (one_smul : ∀x : β, (1 : α) • x = x)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145165):
+#### [ Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145165):
 (not that `algebra` is not causing problem)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145204):
+#### [ Kenny Lau (Jun 16 2018 at 00:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145204):
 why does `module` have no problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145313):
+#### [ Kenny Lau (Jun 16 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145313):
 @**Mario Carneiro** what should I replace it with?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145315):
+#### [ Kenny Lau (Jun 16 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145315):
 I see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128147101):
+#### [ Kenny Lau (Jun 16 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128147101):
 ```lean
 class subring (α : Type*) [comm_ring α] (S : set α) : Prop :=
 (add_mem : ∀ {x y}, x ∈ S → y ∈ S → x + y ∈ S)
@@ -236,68 +236,68 @@ instance subring.to_comm_ring (α : Type*) [comm_ring α] (S : set α) [subring 
   mul_comm       := λ ⟨x, hx⟩ ⟨y, hy⟩, subtype.eq $ mul_comm x y }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128147109):
+#### [ Kenny Lau (Jun 16 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128147109):
 will this `instance` cause problems?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128147157):
+#### [ Kenny Lau (Jun 16 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128147157):
 if so, what should I replace it with?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128150369):
+#### [ Kenny Lau (Jun 16 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128150369):
 adding `by letI := subring.to_comm_ring _ S` to every definition and theorem is not very feasible
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128150378):
+#### [ Kenny Lau (Jun 16 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128150378):
 and is wasting me a lot of time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128150382):
+#### [ Kenny Lau (Jun 16 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128150382):
 but as soon as I make it an instance, everything crashes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162502):
+#### [ Kenny Lau (Jun 16 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162502):
 what is this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162503):
+#### [ Kenny Lau (Jun 16 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162503):
 ```lean
 def Hausdorff_abelianization (G : Type*) [t : topological_group G] : Type* :=
 @left_cosets (abelianization G) _ (closure {1})
   (by apply_instance)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162544):
+#### [ Kenny Lau (Jun 16 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162544):
 ```lean
 [class_instances] (0) ?x_60 : topological_group G := t
 failed is_def_eq
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162755):
+#### [ Kenny Lau (Jun 16 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162755):
 Lean, they *are* the same
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128165992):
+#### [ Kenny Lau (Jun 16 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128165992):
 if `subring.to_comm_ring` causes problems then why doesn't `subtype.group` cause problems?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168992):
+#### [ Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168992):
 ```quote
 @**Patrick Massot** @**Sebastian Ullrich** @**Mario Carneiro** it can be avoided by using universes instead of `Type*`
 ```
 https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/unfolding.20notation.20in.20theorem.20vs.20def.2Finstance/near/128167978
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168993):
+#### [ Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168993):
 oh and of ***course*** the same trick applies to this case
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168994):
+#### [ Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168994):
 there's no loop any more
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168995):
+#### [ Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168995):
 once I use `Type u` instead of `Type*`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128169044):
+#### [ Kenny Lau (Jun 16 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128169044):
 ```quote
 Lean, they *are* the same
 ```
 https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/typeclass.20problems/near/128162755
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128169046):
+#### [ Kenny Lau (Jun 16 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128169046):
 ditto
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174540):
+#### [ Kenny Lau (Jun 16 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174540):
 Is this a good instance?
 ```lean
 def Hausdorff_abelianization.setoid (G : Type u)
@@ -305,219 +305,219 @@ def Hausdorff_abelianization.setoid (G : Type u)
 left_rel (closure (commutator_subgroup G set.univ))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174678):
+#### [ Mario Carneiro (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174678):
 A local instance maybe
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174679):
+#### [ Mario Carneiro (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174679):
 it looks a bit domain specific
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174680):
+#### [ Kenny Lau (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174680):
 domain specific?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174681):
+#### [ Mario Carneiro (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174681):
 is there a reason that should be the canonical equivalence on any top group?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174686):
+#### [ Kenny Lau (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174686):
 it's the functor from TopGrp to AbelianHasudorffTopGrp
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174688):
+#### [ Johan Commelin (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174688):
 Kenny, for every topological group G, there should be at most 1 instance of `setoid G`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174689):
+#### [ Kenny Lau (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174689):
 I see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174690):
+#### [ Kenny Lau (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174690):
 ok this isn't canonical then
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 16 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174737):
+#### [ Johan Commelin (Jun 16 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174737):
 So you should probably not make this an instance. But possibly define AbHausTopGrp, and make it an instance of that...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174743):
+#### [ Kenny Lau (Jun 16 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174743):
 I'm glad I didn't switch the first two words of the name of the category... :D
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 16 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174782):
+#### [ Johan Commelin (Jun 16 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174782):
 I don't get what would be wrong with that? ... Am I overly naive, and missing a joke?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174789):
+#### [ Kenny Lau (Jun 16 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174789):
 it sounds similar to a rude word in german
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 16 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174830):
+#### [ Johan Commelin (Jun 16 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174830):
 Ach so, ich muss noch viel Deutsch üben. Und ich kenn kein unhöfliche Worten.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 16 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174838):
+#### [ Kenny Lau (Jun 16 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174838):
 "Hau ab" means "piss off"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 16 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174879):
+#### [ Johan Commelin (Jun 16 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174879):
 Wunderbar
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218541):
+#### [ Kenny Lau (Jun 18 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218541):
 [2018-06-17-2.png](/user_uploads/3121/THVijpQP7DblIbSyWC9G2hGx/2018-06-17-2.png)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218546):
+#### [ Kenny Lau (Jun 18 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218546):
 when I turn `trace.class_instances` on, there's nothing peculiar, except the `has_sizeof` thing getting pretty long
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218550):
+#### [ Kenny Lau (Jun 18 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218550):
 that option is not really helpful in my experience
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218552):
+#### [ Kenny Lau (Jun 18 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218552):
 @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219542):
+#### [ Kenny Lau (Jun 18 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219542):
 oh and the depth of the class instance search never went to 6
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219604):
+#### [ Kenny Lau (Jun 18 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219604):
 and I don't think `cogroup.base_change_left` is the problem, after looking at the trace
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219700):
+#### [ Kenny Lau (Jun 18 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219700):
 it's here: https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean#L136
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219741):
+#### [ Simon Hudon (Jun 18 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219741):
 Why does it need an instance of `has_sizeof`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219742):
+#### [ Kenny Lau (Jun 18 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219742):
 no idea
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219743):
+#### [ Kenny Lau (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219743):
 to build a structure, I think?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219748):
+#### [ Kenny Lau (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219748):
 Please help me, my deadline is in like 12 hours
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219751):
+#### [ Simon Hudon (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219751):
 Your screenshot is not telling me much. If you comment one field declaration at a time, when does it stop failing?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219752):
+#### [ Kenny Lau (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219752):
 as soon as I remove the last field
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219907):
+#### [ Kenny Lau (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219907):
 @**Simon Hudon** is there other information I can provide?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219909):
+#### [ Simon Hudon (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219909):
 I think your project needs mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219910):
+#### [ Simon Hudon (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219910):
 I'm building it on my machine to have a closer look
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219911):
+#### [ Kenny Lau (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219911):
 thank you very much
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219912):
+#### [ Kenny Lau (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219912):
 yes, it does require mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219951):
+#### [ Simon Hudon (Jun 18 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219951):
 Is it possible you did not commit the latest version of `leanpkg.toml`? (I don't need it, I can fix it but in general, that makes things smoother for people trying your project)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219960):
+#### [ Kenny Lau (Jun 18 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219960):
 oh I didn't really set it up
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219961):
+#### [ Simon Hudon (Jun 18 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219961):
 Ah ok. Just to be sure, do you use Lean 3.4.1 and the latest mathlib?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219999):
+#### [ Kenny Lau (Jun 18 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219999):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220051):
+#### [ Kenny Lau (Jun 18 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220051):
 ok not exactly the latest
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220052):
+#### [ Kenny Lau (Jun 18 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220052):
 i'm on mathlib commit fe590ca272a41bb321a13be505964e78cad1e731
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220055):
+#### [ Kenny Lau (Jun 18 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220055):
 third from latest
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220966):
+#### [ Simon Hudon (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220966):
 In this expression `(tensor_a F split.S T)` you get into trouble because `split.S` is a set but a type is expected. If you replace it with `subtype split.S`, type is required to have a `comm_ring` instance which you only have for `T`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220967):
+#### [ Kenny Lau (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220967):
 :o
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220968):
+#### [ Kenny Lau (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220968):
 thanks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220970):
+#### [ Kenny Lau (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220970):
 do you have a fix?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221062):
+#### [ Simon Hudon (Jun 18 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221062):
 No, it really depends on what you're trying to do. If you actually want `subtype split.S`, you'd need to add `[comm_ring (subtype split.S)]` to the local instances which would get hairy because `split` is a field. Maybe replacing `split.S` with `T` would suit your purpose, in which case, the fit is perfect because you already have a `comm_ring T` instance
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221064):
+#### [ Kenny Lau (Jun 18 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221064):
 I can't just change my deifnition like that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221065):
+#### [ Simon Hudon (Jun 18 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221065):
 Which one?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221070):
+#### [ Kenny Lau (Jun 18 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221070):
 replacing `split.S` with `T`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221072):
+#### [ Simon Hudon (Jun 18 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221072):
 That might work. I haven't tried it but that would fix that particular problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221074):
+#### [ Kenny Lau (Jun 18 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221074):
 I mean, it would be a wrong definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221116):
+#### [ Simon Hudon (Jun 18 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221116):
 What would be the right definition?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221117):
+#### [ Kenny Lau (Jun 18 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221117):
 `split.S` as it is
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221121):
+#### [ Simon Hudon (Jun 18 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221121):
 That would be nonsense: that's not type correct.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221129):
+#### [ Simon Hudon (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221129):
 Unless your `tensor_a` definition is wrong and it should take a set there, not a type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221130):
+#### [ Kenny Lau (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221130):
 I'm coercing a set to a type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221134):
+#### [ Kenny Lau (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221134):
 it's done automatically
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221135):
+#### [ Kenny Lau (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221135):
 I do it every time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221186):
+#### [ Simon Hudon (Jun 18 2018 at 01:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221186):
 Right but that type is then expected to be a commutative ring. I'm not sure how that can be proved automatically
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221190):
+#### [ Kenny Lau (Jun 18 2018 at 01:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221190):
 I have a working version above it, one can trace class instance
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221228):
+#### [ Kenny Lau (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221228):
 I think it will go through subfield -> field -> comm_ring
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221235):
+#### [ Simon Hudon (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221235):
 How do you prove that it's a subfield?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221237):
+#### [ Kenny Lau (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221237):
 ```lean
 instance finite_Galois_intermediate_extension.to_subfield
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221239):
+#### [ Kenny Lau (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221239):
 L132 of field_extensions.lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221248):
+#### [ Kenny Lau (Jun 18 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221248):
 right, I just realized, there should be no problem, because there's a working version right above it!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221291):
+#### [ Simon Hudon (Jun 18 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221291):
 Which line?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221292):
+#### [ Kenny Lau (Jun 18 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221292):
 The `#check` one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221293):
+#### [ Kenny Lau (Jun 18 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221293):
 L139
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221301):
+#### [ Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221301):
 oops
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221302):
+#### [ Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221302):
 L123
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221303):
+#### [ Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221303):
 https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean#L123
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221304):
+#### [ Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221304):
 ```lean
 #check λ (F : Type u) [field F]
   (AC : Type v) [field AC] [is_alg_closed_field AC]
@@ -533,7 +533,7 @@ https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean
   (GL₁ⁿ.cogroup _ _)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221344):
+#### [ Simon Hudon (Jun 18 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221344):
 If I change that `check` into a `def`:
 
 ```lean
@@ -551,25 +551,25 @@ def foo := λ (F : Type u) [field F]
   (GL₁ⁿ.cogroup _ _)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221345):
+#### [ Simon Hudon (Jun 18 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221345):
 I get I lot of errors
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221352):
+#### [ Kenny Lau (Jun 18 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221352):
 curious
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221354):
+#### [ Simon Hudon (Jun 18 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221354):
 [Screen-Shot-2018-06-17-at-7.57.01-PM.png](/user_uploads/3121/K4n0zheF40urE2YaifViOPKA/Screen-Shot-2018-06-17-at-7.57.01-PM.png)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221356):
+#### [ Simon Hudon (Jun 18 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221356):
 I think you're asking a lot of type class inference
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221395):
+#### [ Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221395):
 heh...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221397):
+#### [ Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221397):
 how about I move them before the colon
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221398):
+#### [ Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221398):
 ```lean
 def foo (F : Type u) [field F]
   (AC : Type v) [field AC] [is_alg_closed_field AC]
@@ -585,25 +585,25 @@ def foo (F : Type u) [field F]
   (GL₁ⁿ.cogroup _ _)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221399):
+#### [ Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221399):
 no errors!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221404):
+#### [ Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221404):
 also I looked at the trace as I said before
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221407):
+#### [ Simon Hudon (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221407):
 You're right, I didn't do it well
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221408):
+#### [ Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221408):
 there is no issue with the typeclass inferences
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221409):
+#### [ Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221409):
 and the max depth is 5
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221412):
+#### [ Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221412):
 there should not be any error
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221463):
+#### [ Simon Hudon (Jun 18 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221463):
 Try:
 
 ```lean
@@ -616,25 +616,25 @@ structure torus (F : Type u) [field F]
 (splits : foo F AC T split rank)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221471):
+#### [ Kenny Lau (Jun 18 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221471):
 what the actual
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221475):
+#### [ Kenny Lau (Jun 18 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221475):
 @**Mario Carneiro** you need to see this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221518):
+#### [ Kenny Lau (Jun 18 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221518):
 @**Simon Hudon** what do you think
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221525):
+#### [ Simon Hudon (Jun 18 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221525):
 I'm not actually sure why the other one wouldn't work. In general, there's nothing wrong with breaking down your definitions into smaller pieces though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221567):
+#### [ Kenny Lau (Jun 18 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221567):
 I see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221763):
+#### [ Kenny Lau (Jun 18 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221763):
 @**Simon Hudon** how should I break this loop?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221764):
+#### [ Kenny Lau (Jun 18 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221764):
 ```lean
 [class_instances] (5) ?x_31 : field AC := _inst_6
 failed is_def_eq
@@ -674,67 +674,67 @@ failed is_def_eq
 failed is_def_eq
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221823):
+#### [ Simon Hudon (Jun 18 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221823):
 There seems to be a circular dependency between your instances. You should try to guarantee that something decreases (syntactically) whenever you apply an instance. For example, `instance [decidable_eq a] : decidable_eq (list a) := ... ` is such an instance. It is about `list a` and all the instances it relies on involve simpler expressions.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221863):
+#### [ Kenny Lau (Jun 18 2018 at 02:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221863):
 sorry but could you explain what you mean by decreasing?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221918):
+#### [ Simon Hudon (Jun 18 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221918):
 If you compare `a` and `list a` (one is a type in an assumed instance, the other, in the head of the instance) `list a` is a more complex expression than `a`. That means that if I look for an instance of `decidable_eq (list a)` and I apply the above instance, I'm decreasing the size of my problem so I'm getting closer to a solution. If every instance decreases the size of the problem, you can't search forever. (just like with structural recursion)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221973):
+#### [ Kenny Lau (Jun 18 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221973):
 hmm... but there are times at which I would need to infer simpler instances from complex instances?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221980):
+#### [ Simon Hudon (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221980):
 like `field` from `discrete_linear_ordered_field`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221981):
+#### [ Kenny Lau (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221981):
 sure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221982):
+#### [ Kenny Lau (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221982):
 or sometimes I need to infer a single instance from like 10 instances
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221984):
+#### [ Kenny Lau (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221984):
 do you have general workarounds?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222030):
+#### [ Simon Hudon (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222030):
 A single instance from 10 instances is not a problem as long as each instance is smaller than the initial one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222031):
+#### [ Kenny Lau (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222031):
 hmm I still don't know how to judge whether two instances are smaller
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222032):
+#### [ Simon Hudon (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222032):
 In the case of `discrete_linear_ordered_field`, does it not `extend` `field`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222034):
+#### [ Kenny Lau (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222034):
 I mean, your examples are quite obvious
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222036):
+#### [ Kenny Lau (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222036):
 yes it does
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222077):
+#### [ Kenny Lau (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222077):
 I think
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222081):
+#### [ Simon Hudon (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222081):
 That should be enough, no? You don't need an instance on top of that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222082):
+#### [ Kenny Lau (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222082):
 this is a bad instance then?
 ```lean
 instance subring.to_comm_ring (α : Type u) [comm_ring α] (S : set α) [subring α S] : comm_ring S :=
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222085):
+#### [ Simon Hudon (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222085):
 You can compare by counting the number of symbols and operators in each types.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222096):
+#### [ Kenny Lau (Jun 18 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222096):
 that instance doesn't seem to be causing much problem though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222098):
+#### [ Kenny Lau (Jun 18 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222098):
 I guess it's because it requires `subring`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222143):
+#### [ Kenny Lau (Jun 18 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222143):
 This seems to be the problem:
 ```lean
 instance finite_Galois_intermediate_extension.to_subfield
@@ -746,37 +746,37 @@ instance finite_Galois_intermediate_extension.to_subfield
 by apply_instance
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222144):
+#### [ Simon Hudon (Jun 18 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222144):
 `subring` is actually what I find problematic in it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222148):
+#### [ Kenny Lau (Jun 18 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222148):
 because I have an instance from subfield to field
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222151):
+#### [ Kenny Lau (Jun 18 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222151):
 ```quote
 `subring` is actually what I find problematic in it
 ```
 how so?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222192):
+#### [ Simon Hudon (Jun 18 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222192):
 there are invisible operators: `comm_ring S` is actually `comm_ring (subtype S)` which is more complex than `comm_ring a`. However `subring a (subtype S)` is more complex than `comm_ring (subtype S)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222193):
+#### [ Kenny Lau (Jun 18 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222193):
 nah it's `subring a S`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222194):
+#### [ Kenny Lau (Jun 18 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222194):
 there is no coercion there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222199):
+#### [ Simon Hudon (Jun 18 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222199):
 It might actually fly then
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222201):
+#### [ Simon Hudon (Jun 18 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222201):
 Lean is actually more tolerant than what I'm used to and I'm not sure if that's a good thing or if it's just handing you enough rope to hang yourself with
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222258):
+#### [ Kenny Lau (Jun 18 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222258):
 this should be the problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222259):
+#### [ Kenny Lau (Jun 18 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222259):
 ```lean
 [class_instances] (5) ?x_30 : field ?x_28 := @subfield.to_field ?x_34 ?x_35 ?x_36 ?x_37
 [class_instances] (6) ?x_35 : field ?x_34 := _inst_7
@@ -787,49 +787,49 @@ this should be the problem
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222298):
+#### [ Kenny Lau (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222298):
 right, subfield.to_field is the problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222299):
+#### [ Simon Hudon (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222299):
 You can try commenting one instance at a time until the problem disappears
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222302):
+#### [ Simon Hudon (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222302):
 cool
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222303):
+#### [ Kenny Lau (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222303):
 that isn't how it works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222306):
+#### [ Kenny Lau (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222306):
 if I comment one instance out, a million lines of code will break
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222355):
+#### [ Kenny Lau (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222355):
 @**Simon Hudon** a million things depend on `subfield.to_field` though...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222357):
+#### [ Kenny Lau (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222357):
 this is a huge abyss
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222358):
+#### [ Simon Hudon (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222358):
 does `subfield` extend `field`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222360):
+#### [ Kenny Lau (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222360):
 no
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222361):
+#### [ Simon Hudon (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222361):
 Why not?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222364):
+#### [ Kenny Lau (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222364):
 just as `is_subgroup` does not extend `group`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222368):
+#### [ Kenny Lau (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222368):
 and as I say this sentence
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222370):
+#### [ Kenny Lau (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222370):
 why doesn't that cause problems?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222373):
+#### [ Simon Hudon (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222373):
 I'm not intimate enough with the algebraic hierarchy to know
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222415):
+#### [ Kenny Lau (Jun 18 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222415):
 ```lean
 #check @subtype.group
 /-
@@ -837,22 +837,22 @@ subtype.group : Π {α : Type u_1} [_inst_1 : group α] {s : set α} [_inst_2 : 
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222425):
+#### [ Simon Hudon (Jun 18 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222425):
 Actually, because there's no coercion, that's not that big of a deal. A different instance must be worse
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222427):
+#### [ Kenny Lau (Jun 18 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222427):
 hmm
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222428):
+#### [ Kenny Lau (Jun 18 2018 at 02:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222428):
 this is a huge mess
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 18 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222472):
+#### [ Simon Hudon (Jun 18 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222472):
 Yeah, that's a problem with this way of doing type classes. You can't understand each instance in isolation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 18 2018 at 02:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222566):
+#### [ Kenny Lau (Jun 18 2018 at 02:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222566):
 I think depth first search is not very good
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 18 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128234704):
+#### [ Kevin Buzzard (Jun 18 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128234704):
 Kenny remember as a last resort you can just override the type class system and give it the instances yourself. I used to do this all the time when I got stuck on (much easier) stuff.
 
 

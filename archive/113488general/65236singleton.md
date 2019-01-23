@@ -11,40 +11,40 @@ permalink: archive/113488general/65236singleton.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976871):
+#### [ Scott Morrison (Aug 12 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976871):
 Am I just missing a `singleton` class, the pushout of `inhabited` and `subsingleton`? Am I meant to define my own?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976914):
+#### [ Mario Carneiro (Aug 12 2018 at 04:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976914):
 do you need one?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976922):
+#### [ Mario Carneiro (Aug 12 2018 at 04:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976922):
 You can just assume both classes if you need
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976965):
+#### [ Scott Morrison (Aug 12 2018 at 04:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976965):
 just seems wordy: I was about to use this a whole bunch of times
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976966):
+#### [ Mario Carneiro (Aug 12 2018 at 04:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976966):
 for what?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976967):
+#### [ Scott Morrison (Aug 12 2018 at 04:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976967):
 universal properties
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976975):
+#### [ Scott Morrison (Aug 12 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976975):
 I wanted to try out a design for equalizers/products/pushouts based on a class `is_equalizer`, which would have a `singleton ...` field that expresses that there's a map with some property, and that map is unique.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977017):
+#### [ Mario Carneiro (Aug 12 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977017):
 hm, I would say that's a bit too clever
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977020):
+#### [ Mario Carneiro (Aug 12 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977020):
 just state the map and state a separate field asserting it is unique
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977021):
+#### [ Scott Morrison (Aug 12 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977021):
 my current design just says these things separately
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977027):
+#### [ Mario Carneiro (Aug 12 2018 at 04:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977027):
 You will have to unpack it all the time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977028):
+#### [ Scott Morrison (Aug 12 2018 at 04:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977028):
 ```
 structure Equalizer (f g : X ⟶ Y) :=
 (equalizer     : C)
@@ -55,88 +55,88 @@ structure Equalizer (f g : X ⟶ Y) :=
 (uniqueness    : ∀ {Z : C} (a b : Z ⟶ equalizer) (witness : a ≫ inclusion = b ≫ inclusion), a = b . obviously)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977072):
+#### [ Scott Morrison (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977072):
 the alternative would be to pack `map`, `witness`, `factorisation`, and `uniqueness` all into one `singleton` instance, with an appropriate subtype
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977073):
+#### [ Mario Carneiro (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977073):
 uniqueness can be stated with one fewer pi btw
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977075):
+#### [ Scott Morrison (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977075):
 you mean don't name `witness`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977076):
+#### [ Mario Carneiro (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977076):
 just say `a = witness` at the end
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977077):
+#### [ Scott Morrison (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977077):
 sure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977078):
+#### [ Mario Carneiro (Aug 12 2018 at 04:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977078):
 the other `witness`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977083):
+#### [ Scott Morrison (Aug 12 2018 at 04:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977083):
 oh, I see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977084):
+#### [ Scott Morrison (Aug 12 2018 at 04:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977084):
 yeah, I've gone back and forth on that a few times
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977085):
+#### [ Mario Carneiro (Aug 12 2018 at 04:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977085):
 er, I mean `a = map something something`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977125):
+#### [ Mario Carneiro (Aug 12 2018 at 04:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977125):
 Also, you can pack `witness` and `factorisation` and `uniqueness` into one field with an iff
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977133):
+#### [ Scott Morrison (Aug 12 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977133):
 that was Reid's design
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977136):
+#### [ Scott Morrison (Aug 12 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977136):
 I feel like that has the same objection to using `singleton`, but the unpacking and packing required is even less intuitive
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977141):
+#### [ Mario Carneiro (Aug 12 2018 at 04:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977141):
 I just want to avoid packing the data in too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977181):
+#### [ Scott Morrison (Aug 12 2018 at 04:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977181):
 I see.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977190):
+#### [ Mario Carneiro (Aug 12 2018 at 04:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977190):
 Would you like a way to quickly say `{a | p a} = {x}`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977238):
+#### [ Scott Morrison (Aug 12 2018 at 04:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977238):
 (a = x) iff p a
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977245):
+#### [ Mario Carneiro (Aug 12 2018 at 04:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977245):
 right, with `a` abstracted
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977257):
+#### [ Scott Morrison (Aug 12 2018 at 04:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977257):
 Ok. This is exactly how Reid did things in the category theory he has in his homotopy library. At first I didn't like it much, but I'm coming around. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977315):
+#### [ Mario Carneiro (Aug 12 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977315):
 like `def is_the {α} (p : α → Prop) (x : α) := ∀ a, x = a ↔ p a`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977316):
+#### [ Scott Morrison (Aug 12 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977316):
 I will see if I can do something that feels uniform across product/equalizer/pullback, and makes things sufficiently obvious.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977326):
+#### [ Mario Carneiro (Aug 12 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977326):
 the definition might be gratuitous
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977330):
+#### [ Scott Morrison (Aug 12 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977330):
 perhaps something like `universal_property` instead of `is_the`? Longer, but friendlier to the mathematicians.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977332):
+#### [ Scott Morrison (Aug 12 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977332):
 I'll try with and without. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977336):
+#### [ Mario Carneiro (Aug 12 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977336):
 the name is based on the `the` sometimes used for definite description
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977379):
+#### [ Mario Carneiro (Aug 12 2018 at 04:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977379):
 it's `∃!` with the witness free
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977385):
+#### [ Scott Morrison (Aug 12 2018 at 04:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977385):
 Yeah; just a note that this is how you talk about universal properties will be good enough for the mathematicians.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 12 2018 at 04:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977390):
+#### [ Scott Morrison (Aug 12 2018 at 04:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977390):
 okay, kids need lunch!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 04:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977396):
+#### [ Mario Carneiro (Aug 12 2018 at 04:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131977396):
 I'm open to slick binder notations for that
 
 

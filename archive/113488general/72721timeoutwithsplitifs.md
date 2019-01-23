@@ -11,7 +11,7 @@ permalink: archive/113488general/72721timeoutwithsplitifs.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130454443):
+#### [ Kenny Lau (Jul 28 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130454443):
 ```lean
 import data.fin
 
@@ -39,10 +39,10 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130454446):
+#### [ Kenny Lau (Jul 28 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130454446):
 I've used `split_ifs` quite a lot but it just happens to timeout here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455338):
+#### [ Kevin Buzzard (Jul 28 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455338):
 ```lean
 begin
   unfold fin.descend fin.ascend,
@@ -52,34 +52,34 @@ begin
 
 Is `P` decidable? It looks decidable to me.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455339):
+#### [ Kenny Lau (Jul 28 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455339):
 it should be decidable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455342):
+#### [ Kenny Lau (Jul 28 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455342):
 but Lean is not very intelligent
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455351):
+#### [ Kevin Buzzard (Jul 28 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455351):
 Is there some missing instance `decidable.dite`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455871):
+#### [ Kevin Buzzard (Jul 28 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455871):
 ```quote
 Is there some missing instance `decidable.dite`?
 ```
  `P` is just the statement that some nat is less than some other nat, right? But `example (a b : ℕ) : decidable (a < b) := by apply_instance ` works fine
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456027):
+#### [ Kevin Buzzard (Jul 28 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456027):
 Oh I'm being an idiot. I've used `have` instead of `let` again.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jul 28 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456430):
+#### [ Gabriel Ebner (Jul 28 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456430):
 https://github.com/leanprover/mathlib/pull/224
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456434):
+#### [ Kevin Buzzard (Jul 28 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456434):
 Nice one Gabriel.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jul 28 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456474):
+#### [ Gabriel Ebner (Jul 28 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456474):
 Apparently `simp` cannot simplify the second ite.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456480):
+#### [ Kenny Lau (Jul 28 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456480):
 thanks
 
 

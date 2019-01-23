@@ -11,34 +11,34 @@ permalink: archive/113488general/74975definingadependentfunctionoutoffin2.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038733):
+#### [ Scott Morrison (Sep 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038733):
 I'm stuck on something basic to do with `fin n`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038734):
+#### [ Scott Morrison (Sep 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038734):
 Suppose I have `T : fin 2 → Type`, and I happen to have `X : T ⟨ 0, by tidy ⟩` and a `Y : T ⟨ 1, by tidy ⟩`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038736):
+#### [ Scott Morrison (Sep 16 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038736):
 How do I construct the dependent function `Π n : fin 2, T n` which sends 0 to `X` and 1 to `Y`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038784):
+#### [ Simon Hudon (Sep 16 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038784):
 What about using an `if _ then _ else _`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038797):
+#### [ Scott Morrison (Sep 16 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038797):
 How would that work?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038812):
+#### [ Scott Morrison (Sep 16 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038812):
 I remember someone showing me a trick to do `match` on `fin n`, but I can't find it anywhere now. :-(
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038819):
+#### [ Simon Hudon (Sep 16 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038819):
 ```lean
 def T : fin 2 → Type | x :=
 if x = 0 then X else Y
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038867):
+#### [ Simon Hudon (Sep 16 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038867):
 If you find it again, please show me.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038944):
+#### [ Scott Morrison (Sep 16 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038944):
 I don't see how your suggestion helps, @**Simon Hudon**:
 ```
 import tactic.tidy
@@ -51,7 +51,7 @@ def S : Π n : fin 2, T n
 | x := if x = 0 then X else Y
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038950):
+#### [ Scott Morrison (Sep 16 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038950):
 errors with 
 ```
 type mismatch at application
@@ -64,10 +64,10 @@ but is expected to have type
   T x
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038961):
+#### [ Simon Hudon (Sep 16 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038961):
 Ah ok, I misunderstood your problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039161):
+#### [ Scott Morrison (Sep 16 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039161):
 Here's a example of my problem:
 ```
 import tactic.tidy
@@ -82,13 +82,13 @@ def S : Π n : fin 2, T n
 | _ := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039167):
+#### [ Scott Morrison (Sep 16 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039167):
 The question is to define `S`, following the intention shown, but without a `sorry`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039171):
+#### [ Scott Morrison (Sep 16 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039171):
 (Side questions include better ways to write `T` in the first place.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039173):
+#### [ Simon Hudon (Sep 16 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039173):
 One thing you can do is:
 
 ```lean
@@ -98,55 +98,55 @@ def S : Π n : fin 2, T n
 | ⟨succ (succ n),h⟩ := false.elim $ by { admit, }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039233):
+#### [ Scott Morrison (Sep 16 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039233):
 Excellent! That works, now the question becomes --- is my distant memory that there's an even better solution, correct? :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039281):
+#### [ Simon Hudon (Sep 16 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039281):
 My brain times out looking for one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039283):
+#### [ Scott Morrison (Sep 16 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039283):
 And what is the canonical way to fill in that admit, these days?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039291):
+#### [ Scott Morrison (Sep 16 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039291):
 I'd hoped that `linarith` was up to proving discharging `n+2 < 2` implies `false`, but apparently not.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039293):
+#### [ Simon Hudon (Sep 16 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039293):
 There's a `linarith` tactic coming down the pipes. Maybe it can handle `nat` now? We'd have to check
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039294):
+#### [ Simon Hudon (Sep 16 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039294):
 Oh, that's too bad
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039334):
+#### [ Scott Morrison (Sep 16 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039334):
 There was a recent addition saying it could do nat.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039335):
+#### [ Scott Morrison (Sep 16 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039335):
 Oh, maybe I haven't pulled that one yet...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039342):
+#### [ Simon Hudon (Sep 16 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039342):
 It feels like the kind of proposition that you should be able to prove in two steps. All I can think of takes more
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039389):
+#### [ Simon Hudon (Sep 16 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039389):
 ```lean
 | ⟨succ (succ n),h⟩ := false.elim $ by { apply not_lt_of_ge _ h, repeat { apply succ_le_succ <|> apply zero_le } }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 06:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039444):
+#### [ Scott Morrison (Sep 16 2018 at 06:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039444):
 (deleted)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 16 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039503):
+#### [ Simon Hudon (Sep 16 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039503):
 Ah! This is even shorter:
 
 ```lean
   by { repeat { have h := lt_of_succ_lt_succ h }, cases h }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 16 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039568):
+#### [ Mario Carneiro (Sep 16 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039568):
 that should be false by matching
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039570):
+#### [ Scott Morrison (Sep 16 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039570):
 hmm, that doesn't work for me?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039575):
+#### [ Scott Morrison (Sep 16 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039575):
 but Kenny just showed me:
 ```
 import tactic.tidy
@@ -162,13 +162,13 @@ def S : Π n : fin 2, T n
 | ⟨ nat.succ (nat.succ n), H ⟩ := false.elim $ by cases H with H H; cases H with H H; cases H
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039620):
+#### [ Mario Carneiro (Sep 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039620):
 You can also use `fin.succ_rec_on` to get the right induction principle
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039621):
+#### [ Scott Morrison (Sep 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039621):
 ah, and the new `linarith` really does it!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039622):
+#### [ Kenny Lau (Sep 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039622):
 how about
 ```lean
 @[elab_as_eliminator]
@@ -178,7 +178,7 @@ def fin2.rec_on {C : fin 2 → Sort*} : ∀ (n : fin 2), C 0 → C 1 → C n
 | ⟨n+2, H⟩ _ _ := false.elim $ not_le_of_gt H $ nat.le_add_left _ _
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 07:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039668):
+#### [ Scott Morrison (Sep 16 2018 at 07:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039668):
 ```
 import tactic.tidy
 import tactic.linarith
@@ -193,7 +193,7 @@ def S : Π n : fin 2, T n
 | ⟨ n + 2, H ⟩ := by exfalso; linarith
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 16 2018 at 07:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039891):
+#### [ Mario Carneiro (Sep 16 2018 at 07:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134039891):
 ```
 import data.fin data.list.basic
 
@@ -205,13 +205,13 @@ def S : Π n : fin 2, T n :=
 fin.cases X (λ i, fin.cases Y (λ i, i.elim0) i)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134043762):
+#### [ Scott Morrison (Sep 16 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134043762):
 Thanks, Mario. I think I might use the `match` version, even if it depends on linarith, for decipherability.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134043805):
+#### [ Scott Morrison (Sep 16 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134043805):
 I think I'll also write a `fin_cases` tactic, that works with a `fin n` hypothesis with `n` a numeral.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 16 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134043808):
+#### [ Scott Morrison (Sep 16 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134043808):
 (and actually gives you all the cases)
 
 

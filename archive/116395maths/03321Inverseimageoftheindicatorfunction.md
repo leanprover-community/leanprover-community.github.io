@@ -11,7 +11,7 @@ permalink: archive/116395maths/03321Inverseimageoftheindicatorfunction.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825505):
+#### [ Koundinya Vajjha (Jan 10 2019 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825505):
 I'm struggling to get a hold of the inverse image of the indicator function:
 ```lean 
 s : Type u
@@ -22,37 +22,37 @@ def indicator (a : set s) [decidable_pred (λ (x:s), x ∈ a)]
 I want to say that if  $$X = \mathbf{1}_A$$ then $$X^{-1}(B)$$ is one of $$A$$ ,$$ A^c$$, $$\emptyset$$ or $$\emptyset^c$$. 
 Any help would be appreciated.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825541):
+#### [ Koundinya Vajjha (Jan 10 2019 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825541):
 Also, how do I LaTeX?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 10 2019 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825620):
+#### [ Johan Commelin (Jan 10 2019 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825620):
 LaTeX with double dollars: `$$ blah $$`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Joey van Langen (Jan 10 2019 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825689):
+#### [ Joey van Langen (Jan 10 2019 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825689):
 You can get the inverse image with the symbol ``` ⁻¹' ```, which is \inv ' in lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Joey van Langen (Jan 10 2019 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825717):
+#### [ Joey van Langen (Jan 10 2019 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825717):
 It is in mathlib/data/set/basic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825808):
+#### [ Koundinya Vajjha (Jan 10 2019 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825808):
 Yes I saw that, but I'm not able to state what I want to prove...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 10 2019 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825867):
+#### [ Johan Commelin (Jan 10 2019 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825867):
 What have you tried? Can you give your attempt (+ error?)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826020):
+#### [ Koundinya Vajjha (Jan 10 2019 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826020):
 ```lean
 def indicator_inv (a: set s) (b : set ℝ) [decidable_pred (λ (x:s), x ∈ a)] : 
 indicator s a ⁻¹'  (b) = { -- what goes here ? }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 10 2019 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826164):
+#### [ Johan Commelin (Jan 10 2019 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826164):
 I see. I think you want 4 lemmas
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 10 2019 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826179):
+#### [ Johan Commelin (Jan 10 2019 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826179):
 But maybe it depends on why you want this, and how you want to use this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Joey van Langen (Jan 10 2019 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826285):
+#### [ Joey van Langen (Jan 10 2019 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826285):
 How about this:
 ```lean
 import data.set.basic
@@ -71,7 +71,7 @@ lemma preimage_indicator (a : set s) [decidable_pred (λ (x:s), x ∈ a)] (b : s
 sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826344):
+#### [ Koundinya Vajjha (Jan 10 2019 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826344):
 I'm trying to prove that the indicator function of an event is a random variable.
 
 ``` lean
@@ -88,7 +88,7 @@ sorry
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826454):
+#### [ Koundinya Vajjha (Jan 10 2019 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826454):
 I'm stuck at 
 
 ```lean 
@@ -102,10 +102,10 @@ h : measurable_space.is_measurable (measure_theory.borel ℝ) b
 ⊢ measurable_space.is_measurable _inst_1 {x : s | indicator s a x ∈ b}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826480):
+#### [ Koundinya Vajjha (Jan 10 2019 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826480):
 I want to prove a lemma which would possibly rewrite the `{x : s | indicator s a x ∈ b}` maybe...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Koundinya Vajjha (Jan 10 2019 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826609):
+#### [ Koundinya Vajjha (Jan 10 2019 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154826609):
 @**Joey van Langen**  thanks I'll try that.
 
 

@@ -11,13 +11,13 @@ permalink: archive/113488general/96545pdividespCkfor0kp.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 14 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135785763):
+#### [ Kenny Lau (Oct 14 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135785763):
 Do we have this already?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 14 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135785907):
+#### [ Kevin Buzzard (Oct 14 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135785907):
 I don't know, but we have p-adic valuations and all the lemmas that go with them, and the easiest proof nowadays might be to compute the p-adic valuation of all the factorials. Another proof is to give a free action of Z/pZ on the set of subsets of Z/pZ of size k (addition) but no doubt this would be much more painful in Lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 14 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135787440):
+#### [ Chris Hughes (Oct 14 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135787440):
 ```lean
 import data.nat.choose data.nat.prime
 open nat
@@ -46,13 +46,13 @@ example {p k : ℕ} (hk : 0 < k) (hkp : k < p) (hp : prime p) : p ∣ choose p k
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 14 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135787707):
+#### [ Chris Hughes (Oct 14 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135787707):
 The annoying thing about this proof, is that nothing in mathlib imports `data.nat.choose` and `data.nat.prime` at the moment.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 14 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135787893):
+#### [ Kenny Lau (Oct 14 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135787893):
 thank you @**Chris Hughes**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 14 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135788049):
+#### [ Chris Hughes (Oct 14 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135788049):
 PRed
 
 

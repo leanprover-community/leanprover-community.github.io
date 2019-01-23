@@ -11,7 +11,7 @@ permalink: archive/116395maths/05189letinstatements.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 19 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207819):
+#### [ Patrick Massot (Dec 19 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207819):
 How does mathlib like using `let` in order to unclutter a statement, as in:
 ```lean
 lemma uniform_continuous₂_iff [uniform_space α] [uniform_space β] [uniform_space γ]
@@ -23,13 +23,13 @@ uniform_continuous₂ f ↔ map F (comap π_α uniformity ⊓ comap π_β unifor
 by simp [uniform_continuous,uniformity_prod, tendsto]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 19 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207833):
+#### [ Patrick Massot (Dec 19 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207833):
 Of course this is done in a file having `set_option eqn_compiler.zeta true`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 19 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207931):
+#### [ Patrick Massot (Dec 19 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207931):
 Note that the above snippet also use full type ascriptions in lets in order to clarify what are those functions without reading their obscure definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Dec 19 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152212620):
+#### [ Scott Morrison (Dec 19 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152212620):
 Seems like a good idea.
 
 

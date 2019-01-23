@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/15802functionextensionalityandtransports.htm
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/function%20extensionality%20and%20transports/near/131125621):
+#### [ Edward Ayers (Aug 08 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/function%20extensionality%20and%20transports/near/131125621):
 ```lean
 lemma my_ext 
     : ∀ (α :Type) 
@@ -28,10 +28,10 @@ Some questions:
 2. How do I prove it?
 3. Is it crazy to want to do this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 08 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/function%20extensionality%20and%20transports/near/131125836):
+#### [ Chris Hughes (Aug 08 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/function%20extensionality%20and%20transports/near/131125836):
 The triangles are for `eq.subst` which can only make proofs, not data. You have to use `eq.rec` I think. You could also use heq `==`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/function%20extensionality%20and%20transports/near/131126052):
+#### [ Mario Carneiro (Aug 08 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/function%20extensionality%20and%20transports/near/131126052):
 ```lean
 lemma my_ext (α :Type)
   (P Q : α -> Type)

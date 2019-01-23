@@ -11,7 +11,7 @@ permalink: archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 14 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132127153):
+#### [ Edward Ayers (Aug 14 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132127153):
 Hi everyone. I would really appreciate any comments on how to improve this proof. Also, is this result in the library?
 ```lean
 import .topological_space
@@ -49,7 +49,7 @@ lemma compact_subset_of_t2space_is_closed
     end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 14 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132129134):
+#### [ Edward Ayers (Aug 14 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132129134):
 Version 2:
 ```lean
 lemma compact_subset_of_t2space_is_closed_2
@@ -67,28 +67,28 @@ lemma compact_subset_of_t2space_is_closed_2
 )
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 14 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132133848):
+#### [ Edward Ayers (Aug 14 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132133848):
 Found it in library: `closed_of_compact`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 14 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132133886):
+#### [ Edward Ayers (Aug 14 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132133886):
 Although I proved it with filters
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132134882):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132134882):
 First line of proof could be `is_closed_iff_nhds.2 (λ y H1,` (`iff` is a structure and you can access its elements with `.1`, `.2`). There's a mathlib style guide and you're not conforming to it (I don't think they like the one-bracket-on-a-line thing, and I know they like 2 spaces indent rather than 4).  `by rw this; assumption,` could be `by rwa this` (`rwa` = `rw ; assumption`, similarly `simpa`).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132134906):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132134906):
 but it's certainly a darn sight better than I could have done :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132134941):
+#### [ Patrick Massot (Aug 14 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132134941):
 `simpa` is more than `simp ... ; assumption`, see https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#simpa
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135482):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135482):
 Instead of `λ a H2, exists.elim H2 ...` I wonder if you could have done `λ a ⟨H,H2⟩,` and then you can maybe avoid the `exists.elim`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135502):
+#### [ Patrick Massot (Aug 14 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135502):
 Everybody dreams that could be possible, but no.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135570):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135570):
 ```lean
 (λ a ⟨H3,H4⟩,
         (
@@ -96,22 +96,22 @@ Everybody dreams that could be possible, but no.
 ```
 ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135580):
+#### [ Patrick Massot (Aug 14 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135580):
 Latest discussion is probably https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta.20for.20structures
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135586):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135586):
 I got lucky because he assumes `H3` and `H4`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 14 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135629):
+#### [ Edward Ayers (Aug 14 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135629):
 ```quote
 There's a mathlib style guide 
 ```
 I should read that.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135806):
+#### [ Patrick Massot (Aug 14 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135806):
 Kevin, I don't understand what you wrote? Do you have something that compiles?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135863):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135863):
 ```lean
 lemma compact_subset_of_t2space_is_closed_2
   [t2_space α] (Y : set α) (sc : compact Y) : (is_closed Y) :=
@@ -125,46 +125,46 @@ is_closed_iff_nhds.2 (λ y H1,
 
 My attempt to conform to mathlib style guide but I'm not sure I am -- I don't normally do term mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135967):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135967):
 https://github.com/leanprover/mathlib/blob/master/docs/style.md
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135972):
+#### [ Patrick Massot (Aug 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135972):
 `from by` is redundant
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135979):
+#### [ Patrick Massot (Aug 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135979):
 `by` is enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135997):
+#### [ Patrick Massot (Aug 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135997):
 how is it possible that `λ a ⟨_,_⟩,`? Someone lied to me!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136008):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136008):
 There's a problem with that idiom
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136024):
+#### [ Mario Carneiro (Aug 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136024):
 use `$` to drop the parentheses and indents
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136027):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136027):
 It doesn't unfold *at all* well
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136044):
+#### [ Mario Carneiro (Aug 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136044):
 it unfolds exactly as well as `exists.elim`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136071):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136071):
 https://github.com/leanprover/mathlib/blob/master/docs/naming.md explains why this lemma is called `closed_of_compact`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136230):
+#### [ Kevin Buzzard (Aug 14 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136230):
 I should also say that I don't know if any of my suggested changes are _better_, I'm just observing that they exist :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136347):
+#### [ Mario Carneiro (Aug 14 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136347):
 there is worth in separating stylistic improvements from proof improvements
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136428):
+#### [ Mario Carneiro (Aug 14 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136428):
 space after comma ` ⟨_, _⟩,`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136501):
+#### [ Mario Carneiro (Aug 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136501):
 you can use `let` match in place of `exists.elim`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 14 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137333):
+#### [ Edward Ayers (Aug 14 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137333):
 ```lean
 lemma compact_subset_of_t2space_is_closed_2
   [t2_space α] (Y : set α) (sc : compact Y) : is_closed Y := 
@@ -176,41 +176,41 @@ is_closed_iff_nhds.2 $ assume y h₁,
   by cc
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137444):
+#### [ Mario Carneiro (Aug 14 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137444):
 I think you got everything
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137466):
+#### [ Edward Ayers (Aug 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137466):
 Fabulous thanks so much for your help everyone.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137479):
+#### [ Mario Carneiro (Aug 14 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137479):
 oh, the name needs work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137536):
+#### [ Mario Carneiro (Aug 14 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137536):
 then again `closed_of_compact` is already taken, I hear
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 14 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137637):
+#### [ Edward Ayers (Aug 14 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137637):
 Yes I found it in `continuity.lean`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 14 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137712):
+#### [ Edward Ayers (Aug 14 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137712):
 My big problem with proving this was not knowing what lemmas were available. I would use vscodes find window with regex to find candidate lemmas. Are there any search tools in Lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137720):
+#### [ Patrick Massot (Aug 14 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137720):
 tactic.find in mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137729):
+#### [ Patrick Massot (Aug 14 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137729):
 https://github.com/leanprover/mathlib/blob/master/docs/tactics.md
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137739):
+#### [ Patrick Massot (Aug 14 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137739):
 Reading mathlib doc would probably be a good idea
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 14 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137748):
+#### [ Patrick Massot (Aug 14 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137748):
 That find tactic is from Sebastian btw
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 15 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132142686):
+#### [ Patrick Massot (Aug 15 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132142686):
 Let me try something more constructive than OS recommendations. Since you like term mode, why isn't the first lemma:
 `lemma not_bot_left (f g : filter α) (H1 : f ⊓ g ≠ ⊥) : f ≠ ⊥ := neq_bot_of_le_neq_bot H1 inf_le_left`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 15 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132142828):
+#### [ Patrick Massot (Aug 15 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132142828):
 and mathlib name would probably be closer to `neq_bot_of_inf_neq_bot_left`
 
 

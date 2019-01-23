@@ -11,22 +11,22 @@ permalink: archive/113488general/16519instanceused.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 18 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922878):
+#### [ petercommand (Nov 18 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922878):
 is there some way to show which instance (of a class) is actually used in a definition? If I use ```set_option trace.class_instances true```, it lists lots of possible instances, but I only want the actual instance used
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922929):
+#### [ Mario Carneiro (Nov 18 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922929):
 I sometimes grep the output to remove lines immediately followed with `failed defeq`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922937):
+#### [ Mario Carneiro (Nov 18 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922937):
 but of course you can always just look at the term
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 18 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922940):
+#### [ petercommand (Nov 18 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922940):
 just look at the term?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 18 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922941):
+#### [ petercommand (Nov 18 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922941):
 yeah, I can grep the output
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922984):
+#### [ Mario Carneiro (Nov 18 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922984):
 Just trigger the instance search manually. For example:
 ```lean
 set_option pp.implicit true
@@ -41,10 +41,10 @@ set_option pp.implicit true
 --   preorder ℤ
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 18 2018 at 17:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922996):
+#### [ petercommand (Nov 18 2018 at 17:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922996):
 Ah..that works great! Thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 18 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147923628):
+#### [ Kenny Lau (Nov 18 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147923628):
 alternatively:
 ```lean
 set_option pp.implicit true

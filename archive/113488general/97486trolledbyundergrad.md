@@ -11,7 +11,7 @@ permalink: archive/113488general/97486trolledbyundergrad.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 20 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130014811):
+#### [ Kevin Buzzard (Jul 20 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130014811):
 It took me 20 minutes to diagnose this deterministic time-out:
 
 ```lean
@@ -23,83 +23,83 @@ theorem infinite_cover {a b : ℝ} {c : set (set ℝ)} (n : ℕ) :
 
 In my defence, the code was far longer to begin with, and probably about 15 were spent reducing it to this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 20 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015487):
+#### [ Kevin Buzzard (Jul 20 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015487):
 I'm about to set off for home and I'll spill the beans if nobody has spotted it by the time I get in
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 20 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015541):
+#### [ Patrick Massot (Jul 20 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015541):
 I don't understand what you are asking for
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 20 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015604):
+#### [ Kevin Buzzard (Jul 20 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015604):
 Cut and paste that code -- it times out
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 20 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015613):
+#### [ Kevin Buzzard (Jul 20 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015613):
 deterministic time-out
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 20 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015615):
+#### [ Chris Hughes (Jul 20 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015615):
 `1 ≤ k ≤ n`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 20 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015618):
+#### [ Kevin Buzzard (Jul 20 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015618):
 :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 20 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015625):
+#### [ Kevin Buzzard (Jul 20 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015625):
 I spotted it when I changed `n` to `1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 20 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015658):
+#### [ Kevin Buzzard (Jul 20 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015658):
 I was quite surprised that the statement managed to parse
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 20 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015659):
+#### [ Kevin Buzzard (Jul 20 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015659):
 in retrospect
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 20 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015677):
+#### [ Mario Carneiro (Jul 20 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015677):
 because obviously `k ≤ n` is also a nat
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 20 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015719):
+#### [ Mario Carneiro (Jul 20 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015719):
 bigger than one no less
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 20 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015737):
+#### [ Chris Hughes (Jul 20 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130015737):
 is `≤` left or right associative?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 20 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016247):
+#### [ Mario Carneiro (Jul 20 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016247):
 left assoc, my bad
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 20 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016271):
+#### [ Mario Carneiro (Jul 20 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016271):
 ```
 infix ≤        := has_le.le
 ```
 `infix` means `infixl`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 20 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016335):
+#### [ Mario Carneiro (Jul 20 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016335):
 oh I see so it tried to find a Prop coercion for `n`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 20 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016351):
+#### [ Mario Carneiro (Jul 20 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016351):
 and then it means "if `1 <= k` then `n`"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 20 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016440):
+#### [ Mario Carneiro (Jul 20 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016440):
 `1 ≤ k ≤ (n ≤ 1)` parses just fine
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 20 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016450):
+#### [ Chris Hughes (Jul 20 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016450):
 Because Prop has an order structure for some reason.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 20 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016464):
+#### [ Mario Carneiro (Jul 20 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016464):
 because Prop has a natural order structure...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 20 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016479):
+#### [ Mario Carneiro (Jul 20 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016479):
 which we use funky notation for
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 20 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016545):
+#### [ Mario Carneiro (Jul 20 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130016545):
 In fact I'm pretty sure boolean algebras are basically generalized Prop
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 04:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130035267):
+#### [ Mario Carneiro (Jul 21 2018 at 04:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130035267):
 @**Sebastian Ullrich** I just noticed that this error is a bit subtler than expected. It doesn't give a instance overflow error, it times out and produces no output in the trace. Do you know how the typeclass instance mechanism could run out of time without overflowing?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 04:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130035317):
+#### [ Mario Carneiro (Jul 21 2018 at 04:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130035317):
 example without trolling:
 ```
 import analysis.real
 example (n : ℕ) : Prop := n
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130036027):
+#### [ Mario Carneiro (Jul 21 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130036027):
 Ah, I finally got an instance trace, and it does something I didn't think the typeclass inference engine does: it repeatedly does the same search, at the same depth level, which is why it timeouts from iteration rather than recursion. Here's the beginning, with the depth shown using indentation:
 ```
 (0) ?x_3 : has_coe_to_sort ℕ := @coe_sort_trans ?x_5 ?x_6 ?x_7 ?x_8
@@ -142,10 +142,10 @@ Ah, I finally got an instance trace, and it does something I didn't think the ty
         (8) ?x_66 : domain ℝ := real.domain
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130036032):
+#### [ Mario Carneiro (Jul 21 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130036032):
 notice that `(2) ?x_25 : has_coe_to_sort ℝ` keeps coming up; this continues for all 38000 lines of output before it times out
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130037002):
+#### [ Mario Carneiro (Jul 21 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130037002):
 Oh whoa I just figured out why this is happening, and why it's called a "prolog-like search" - nota bene @**Kevin Buzzard**  :)
 
 Whenever it tries something which doesn't work, it reverts all the metavariable assignments up to that point and then tries again. Like here around the newline:
@@ -166,19 +166,19 @@ Whenever it tries something which doesn't work, it reverts all the metavariable 
 ```
 The line `(5) ?x_56 : add_group ℝ := real.add_group` is a failure, but it assigns a value to `?x_56` from the (2) line. So it rolls all the way back to the (2) line and replays the same assignments until it gets to the bad choice `real.add_group`, and tries something different, in this case `@add_comm_group.to_add_group ?x_59 ?x_60`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130037108):
+#### [ Mario Carneiro (Jul 21 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130037108):
 I wonder if typeclass search will change in lean 4. This seems like such a poor strategy I'm surprised it works as well as it does in mathlib. I know Leo thinks many things about lean 3 are fundamentally broken, and I wouldn't be surprised if this was on the list
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 21 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130044916):
+#### [ Sebastian Ullrich (Jul 21 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130044916):
 @**Mario Carneiro** This is not how class inference should work, nor have I seen such a trace before. Class inference uses temporary mvars that can be unassigned individually. https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/src/library/type_context.cpp#L1405
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130044978):
+#### [ Mario Carneiro (Jul 21 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130044978):
 If you like I can make a mathlib-free example
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 21 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130045083):
+#### [ Sebastian Ullrich (Jul 21 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130045083):
 That would be great, thanks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130045431):
+#### [ Mario Carneiro (Jul 21 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130045431):
 I think this should do the trick (WARNING: this brings VSCode to its knees due to quantity of output)
 ```
 @[priority 0] instance cast_coe {α} [has_zero α] [has_one α] [has_add α] : has_coe ℕ α := ⟨λ _, 0⟩
@@ -190,7 +190,7 @@ example (n : ℕ) : Prop := n
 ```
 The `constant R` is optional but gives the typeclass system something to fixate on rather than whatever random thing it finds first (usually `unsigned` for me on the init library and `real` when it is imported)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 21 2018 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130045547):
+#### [ Sebastian Ullrich (Jul 21 2018 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130045547):
 hmm
 ```
 $ lean +3.4.1 scratch.lean |& wc -l
@@ -200,58 +200,58 @@ $ lean +3.4.1 scratch.lean |& wc -l
 ```
 I guess Leo fixed it already :D
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 10:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130045637):
+#### [ Mario Carneiro (Jul 21 2018 at 10:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130045637):
 well... I'm glad it was fixed, although I'm still puzzled over the cause...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046079):
+#### [ Mario Carneiro (Jul 21 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046079):
 Oh, looking at the trace from that version, I noticed that it searches for `(1) ?x_7 : has_coe_to_sort ℤ` 2826 times (with 26000 lines in between, not counting failures) before finally getting to `(1) ?x_7 : has_coe_to_sort ℕ`, which is the same typeclass search it started with. So I think if I let it run long enough it *would* hit the recursion limit, it would just take an extremely long time to do so.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 21 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046129):
+#### [ Patrick Massot (Jul 21 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046129):
 Maybe it would be worth checking that it was not fixed by accident (since another modification could reinstate the bug), or at least add it to the test suite?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 21 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046199):
+#### [ Patrick Massot (Jul 21 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046199):
 Do you think the type class search could become more programmable for users? For instance we already saw that it would be nice to be able to tell it: whenever you're looking for `ring ?x_i` then you should give up on that branch.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046200):
+#### [ Mario Carneiro (Jul 21 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046200):
 I'm not sure how much I should care about this bug, since it has to do with lean performance on an unsuccessful typeclass search anyway
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046222):
+#### [ Mario Carneiro (Jul 21 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046222):
 I think "negative instances" would be great, they could probably speed up the search a lot. I.e. `unsigned` is not a field, stop looking there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 21 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046225):
+#### [ Patrick Massot (Jul 21 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046225):
 Obviously I don't know either, this is far above my competences. My reaction is only triggered by Sebastian not knowing something has been fixed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046264):
+#### [ Mario Carneiro (Jul 21 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046264):
 but there is a lot of planning necessary to get a feature like that right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046266):
+#### [ Mario Carneiro (Jul 21 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046266):
 and obviously it's up to Sebastian and Leo to make that happen
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046275):
+#### [ Mario Carneiro (Jul 21 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046275):
 so I will just let them ponder and figure out whatever works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 21 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046291):
+#### [ Patrick Massot (Jul 21 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046291):
 and soon Gabriel, according to Leo's talk
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 21 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046296):
+#### [ Sebastian Ullrich (Jul 21 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046296):
 The type context will remain in C++, so it will not be arbitrarily configurable like other parts (hopefully will)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 21 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046340):
+#### [ Mario Carneiro (Jul 21 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046340):
 is typeclass search done in the type context?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 21 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046344):
+#### [ Patrick Massot (Jul 21 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130046344):
 You could still let users pass options to the C++ code, couldn't you?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 22 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130103015):
+#### [ Sebastian Ullrich (Jul 22 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130103015):
 @**Mario Carneiro** Yes, it uses many type context internals. Still, reimplementing it on top of the new type context monad may be an interesting idea, now that I think about it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 22 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130103045):
+#### [ Sebastian Ullrich (Jul 22 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130103045):
 @**Patrick Massot** Sure, that's what I meant by "not arbitrarily". For the parts reimplemented in Lean, I'd like users to be able to completely replace the default implementations if they want to.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 22 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130103086):
+#### [ Mario Carneiro (Jul 22 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130103086):
 it would certainly be good if at least potential writing of the typeclass search could guide what of the type context gets exposed to lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 22 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130103093):
+#### [ Sebastian Ullrich (Jul 22 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130103093):
 Yes, exactly
 
 

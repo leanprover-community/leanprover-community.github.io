@@ -11,10 +11,10 @@ permalink: archive/116395maths/03937cardinalsandordinals.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132580778):
+#### [ Kenny Lau (Aug 22 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132580778):
 In lean they are not sets? i.e. `set_theory/zfc.lean` and `set_theory/cardinal.lean` are independent?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132583263):
+#### [ Kenny Lau (Aug 22 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132583263):
 so I've written my embedding:
 ```lean
 import set_theory.zfc set_theory.ordinal
@@ -26,10 +26,10 @@ quotient.mk $ ordinal.limit_rec_on o ∅ (λ _ s, insert s s) $ λ L _ ih,
 pSet.Union $ pSet.mk { o // o < L } $ λ o', ih o'.1 o'.2
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132583279):
+#### [ Kenny Lau (Aug 22 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132583279):
 and I wonder if I can do it in `pSet.{u}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132599529):
+#### [ Kenny Lau (Aug 22 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132599529):
 ```lean
 import set_theory.zfc set_theory.ordinal
 
@@ -60,16 +60,16 @@ quotient.lift_on o (λ w, ⟦Well_order.to_pSet w⟧) $ λ ⟨v1, v2, v3⟩ ⟨w
 λ x, ⟨e.symm x, by simpa using ordinal.to_Set.aux ⟨v1, v2, v3⟩ ⟨w1, w2, w3⟩ e (e.symm x)⟩⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132599537):
+#### [ Kenny Lau (Aug 22 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132599537):
 and I did it in the same universe @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132599597):
+#### [ Kenny Lau (Aug 22 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132599597):
 and I still don't think it's a good idea to destruct the `Well_order` in the definition of the setoid of ordinal
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132601476):
+#### [ Kenny Lau (Aug 22 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132601476):
 and after 38 minutes, the other direction:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132601478):
+#### [ Kenny Lau (Aug 22 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132601478):
 ```lean
 def pSet.type.setoid (p : pSet.{u}) : setoid p.type :=
 ⟨λ i j, ⟦p.func i⟧ = ⟦p.func j⟧, λ i, rfl, λ i j, eq.symm, λ i j k, eq.trans⟩
@@ -101,10 +101,10 @@ quotient.lift_on s (λ p, cardinal.mk $ quotient $ pSet.type.setoid p) $
     ... = ⟦q2 i⟧ : quotient.sound (classical.some_spec (H.2 i)) }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132602524):
+#### [ Kenny Lau (Aug 22 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132602524):
 @**Mario Carneiro** should I develop on this and then PR?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 23 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132605696):
+#### [ Kenny Lau (Aug 23 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132605696):
 ```lean
 theorem Well_order.to_pSet.exact (w : Well_order.{u}) (x : w.1) :
   ∀ y, ⟦w.to_pSet.func x⟧ = ⟦w.to_pSet.func y⟧ → x = y :=
@@ -151,7 +151,7 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 23 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132605703):
+#### [ Kenny Lau (Aug 23 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132605703):
 that's the round trip in one direction
 
 

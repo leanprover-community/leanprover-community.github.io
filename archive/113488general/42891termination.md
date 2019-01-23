@@ -11,44 +11,44 @@ permalink: archive/113488general/42891termination.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 23 2018 at 03:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148203856):
+#### [ petercommand (Nov 23 2018 at 03:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148203856):
 https://gist.github.com/petercommand/91e72613af95bde16baadf484abd1368
 lean fails to prove that this code terminates, but this code is structurally recursive
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 23 2018 at 03:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204024):
+#### [ petercommand (Nov 23 2018 at 03:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204024):
 and if I change ```Prop``` to ```Type```, termination check succeeds
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 23 2018 at 03:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204028):
+#### [ petercommand (Nov 23 2018 at 03:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204028):
 looks like a bug
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204092):
+#### [ Kenny Lau (Nov 23 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204092):
 well if you change `Prop` to `Type` then I suspect Lean is doing induction on `tup_order`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204093):
+#### [ Kenny Lau (Nov 23 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204093):
 which is not what you want
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 23 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204141):
+#### [ petercommand (Nov 23 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204141):
 wasn't I doing induction on ```tup_order``` when I use ```Prop```?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204162):
+#### [ Kenny Lau (Nov 23 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204162):
 when you use `Prop`, the `tup_order` has no size, so there's no well-founded relation on it that Lean is using
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204165):
+#### [ Kenny Lau (Nov 23 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204165):
 if you see the error, you can see `⊢ prod.lex has_lt.lt has_lt.lt (p, q) (p, q)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204168):
+#### [ Kenny Lau (Nov 23 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204168):
 Lean is trying to decrease the arguments of `tup_order` instead of the constructors of `tup_order`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 23 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204221):
+#### [ Chris Hughes (Nov 23 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204221):
 I'm still surprised it doesn't work. Shouldn't it be using `tup_order.rec` instead?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 23 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204333):
+#### [ petercommand (Nov 23 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204333):
 ```quote
 if you see the error, you can see ```⊢ prod.lex has_lt.lt has_lt.lt (p, q) (p, q)```
 ```
 what you do mean? the prod.lex in wf.lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204344):
+#### [ Kenny Lau (Nov 23 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204344):
 I'm surprised this still doesn't work:
 ```lean
 inductive tup_order : (ℕ × ℕ) → (ℕ × ℕ) → Prop
@@ -69,7 +69,7 @@ protected theorem trans : ∀ {p : (ℕ × ℕ) × (ℕ × ℕ) × (ℕ × ℕ)}
 end tup_order
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204346):
+#### [ Kenny Lau (Nov 23 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204346):
 ```lean
 ⊢ prod.lex (prod.lex has_lt.lt has_lt.lt) (prod.lex (prod.lex has_lt.lt has_lt.lt) (prod.lex has_lt.lt has_lt.lt))
     ((p, q), (a, b), c, d)
@@ -80,7 +80,7 @@ end tup_order
     ((p, q), (a, b), c, nat.succ d)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 03:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204433):
+#### [ Kenny Lau (Nov 23 2018 at 03:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204433):
 and I'm astonished that this doesn't work (swapping the order):
 ```lean
 inductive tup_order : (ℕ × ℕ) → (ℕ × ℕ) → Prop
@@ -103,7 +103,7 @@ protected theorem trans : ∀ {c a b : ℕ × ℕ},
 end tup_order
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 03:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204488):
+#### [ Kenny Lau (Nov 23 2018 at 03:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148204488):
 and what is it with this:
 ```lean
 inductive tup_order : (ℕ × ℕ) → (ℕ × ℕ) → Prop
@@ -129,7 +129,7 @@ protected theorem trans : ∀ {c a b : ℕ × ℕ},
 end tup_order
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Nov 23 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148217775):
+#### [ Gabriel Ebner (Nov 23 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148217775):
 If you want to do induction on recursively-defined propositions, you should use `induction`:
 ```lean
 lemma tup_order_trans {a b c} : tup_order a b → tup_order b c → tup_order a c :=
@@ -140,14 +140,14 @@ case base_snd { cases a, apply succ_snd, assumption },
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Nov 23 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148217895):
+#### [ Gabriel Ebner (Nov 23 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148217895):
 The equation compiler does not use `rec`: https://github.com/leanprover/lean/issues/1611
 In this case, it tries to do well-founded induction on the size of the tuples `a`, `b`, and `c`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Nov 23 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148218019):
+#### [ Gabriel Ebner (Nov 23 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148218019):
 This strategy does not allow you to do recursion on proofs (since they have a constant size).  Another gotcha is that you can't recursion on propositions defined via nested induction.  One possible workaround is to change the universe of `tup_order` to `Type`, then there is a more sensible `sizeof`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148247683):
+#### [ Kenny Lau (Nov 23 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148247683):
 ```lean
 inductive tup_order : (ℕ × ℕ) → (ℕ × ℕ) → Prop
 | base_snd : ∀ {a b}, tup_order (a, b) (a, nat.succ b)
@@ -170,22 +170,22 @@ end
 end tup_order
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 23 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148247827):
+#### [ Reid Barton (Nov 23 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148247827):
 So can you never use the equation compiler to consume an inductive Prop?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148247840):
+#### [ Kenny Lau (Nov 23 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148247840):
 you're asking the wrong person...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 23 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148247915):
+#### [ Reid Barton (Nov 23 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148247915):
 Can Mario never use the equation compiler to consume an inductive Prop?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148248002):
+#### [ Kevin Buzzard (Nov 23 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148248002):
 @**Mario Carneiro** Reid wants to know if Kenny can never use the equation compiler to consume an inductive Prop.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 23 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148248022):
+#### [ Kenny Lau (Nov 23 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148248022):
 great
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Nov 23 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148250530):
+#### [ Gabriel Ebner (Nov 23 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148250530):
 > So can you never use the equation compiler to consume an inductive Prop?
 
 It works just fine as long as you don't need recursion; pattern-matching is no problem.

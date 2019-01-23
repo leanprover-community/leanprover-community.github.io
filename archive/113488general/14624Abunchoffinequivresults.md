@@ -11,7 +11,7 @@ permalink: archive/113488general/14624Abunchoffinequivresults.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521488):
+#### [ Kenny Lau (Apr 22 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521488):
 ```lean
 import data.equiv data.fin
 
@@ -101,7 +101,7 @@ nat.rec_on n (fin_zero_pi m) $ λ n ih, calc
 
 Are these already in mathlib?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521581):
+#### [ Kenny Lau (Apr 22 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521581):
 I just built myself a digit converter accidentally
 ```lean
 #eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 0 --0
@@ -113,52 +113,52 @@ I just built myself a digit converter accidentally
 #eval nat.to_digits 5 300 --[0,0,2,2]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521582):
+#### [ Mario Carneiro (Apr 22 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521582):
 Not exactly, but `fintype.card_sum` seems really similar, and not nearly as complicated of a proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521927):
+#### [ Kenny Lau (Apr 22 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521927):
 ```quote
 Not exactly, but `fintype.card_sum` seems really similar, and not nearly as complicated of a proof
 ```
 well, that depends on a lot of lemmas (and I still can't trace where the main proof is), whereas this one builds everything from "scratch"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521931):
+#### [ Kenny Lau (Apr 22 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521931):
 (ignoring lemmas about natural numbers)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521988):
+#### [ Mario Carneiro (Apr 22 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521988):
 that's what I mean by not nearly as complicated
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521989):
+#### [ Mario Carneiro (Apr 22 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521989):
 them giants have shoulders, use them
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522030):
+#### [ Kenny Lau (Apr 22 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522030):
 hmm
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522077):
+#### [ Mario Carneiro (Apr 22 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522077):
 It's possible that a refactoring is necessary, but this is clearly repeating work that already exists and I would want there to be only one proof from which both facts follow
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522078):
+#### [ Mario Carneiro (Apr 22 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522078):
 Also there are some similar statements in `cardinal`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522084):
+#### [ Kenny Lau (Apr 22 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522084):
 right but that's cardinals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522086):
+#### [ Mario Carneiro (Apr 22 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522086):
 I'm pretty sure `nat_cast_pow` unfolds to exactly `fin_pi`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522126):
+#### [ Mario Carneiro (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522126):
 it's talking about cardinality of finite sets in terms of `fin`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522134):
+#### [ Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522134):
 interesting
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522135):
+#### [ Mario Carneiro (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522135):
 and relating it to the cardinal power which is the function space
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522136):
+#### [ Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522136):
 I wonder how my digit extraction will work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522137):
+#### [ Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522137):
 ```lean
 #eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 0 --0
 #eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 1 --0
@@ -169,16 +169,16 @@ I wonder how my digit extraction will work
 #eval nat.to_digits 5 300 --[0,0,2,2]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522138):
+#### [ Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522138):
 will this code run?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522188):
+#### [ Mario Carneiro (Apr 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522188):
 Neither the cardinal version nor the finset version gives you this explicitly, since the finset is unordered and the cardinal is nonconstructive (the proof is probably constructive but it's buried in a nonconstructive statement)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522189):
+#### [ Kenny Lau (Apr 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522189):
 exactly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522190):
+#### [ Mario Carneiro (Apr 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522190):
 but `multiset.pi` should be generalized to `list.pi` and that is your digit calculator
 
 

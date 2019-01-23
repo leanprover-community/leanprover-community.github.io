@@ -11,7 +11,7 @@ permalink: archive/113488general/08701simplifybrickswithfunctioninjective.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 10 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify%20bricks%20with%20function.injective/near/133641530):
+#### [ Kenny Lau (Sep 10 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify%20bricks%20with%20function.injective/near/133641530):
 ```lean
 example (α β) (f : α → β) (H : function.injective f) : false :=
 by simp [function.injective] at H

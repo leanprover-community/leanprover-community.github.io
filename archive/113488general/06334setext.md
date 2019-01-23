@@ -11,229 +11,229 @@ permalink: archive/113488general/06334setext.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155122):
+#### [ Patrick Massot (Apr 16 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155122):
 Core lib has a `funext` tactic which allows to replace `apply funext, intro x` by `funext x`. Would it be a good idea to copy the definition of this tactic to get a `setext` tactic?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155142):
+#### [ Kenny Lau (Apr 16 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155142):
 the `funext` tactic is really `repeat {apply funext, intro x}` though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155159):
+#### [ Kenny Lau (Apr 16 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155159):
 but right, `set.ext` can only be used once
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155166):
+#### [ Kenny Lau (Apr 16 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155166):
 well you can just set `setext` to be `apply set.ext; intro x`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155173):
+#### [ Patrick Massot (Apr 16 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155173):
 I want `x` to be an argument of the tactic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155215):
+#### [ Kenny Lau (Apr 16 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155215):
 sure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155220):
+#### [ Patrick Massot (Apr 16 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155220):
 It's mostly a cosmetic question, but also about consistency
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155225):
+#### [ Patrick Massot (Apr 16 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155225):
 Because I keep trying `setext x` before remembering it doesn't work yet
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 16 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125158190):
+#### [ Mario Carneiro (Apr 16 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125158190):
 @**Simon Hudon** I recall discussing a generic `ext` tactic as a complement to the `monotonicity` tactic, perhaps it would help here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125158338):
+#### [ Simon Hudon (Apr 16 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125158338):
 Yes, I have it in `lean-lib`. I can create a pull request. I have a `extensionality` attribute that I used to tag extentionality on sets, stream and maybe other things too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125164007):
+#### [ Patrick Massot (Apr 16 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125164007):
 nice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166265):
+#### [ Simon Hudon (Apr 16 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166265):
 I just submitted a pull request: https://github.com/leanprover/mathlib/pull/104
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166322):
+#### [ Simon Hudon (Apr 16 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166322):
 In tests/examples.lean you should see a bunch of situations where `ext` is useful.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166324):
+#### [ Simon Hudon (Apr 16 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166324):
 Let me know if you think there should be more extensionality lemmas
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166339):
+#### [ Patrick Massot (Apr 16 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166339):
 Thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166347):
+#### [ Patrick Massot (Apr 16 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166347):
 Can you give it names like with funext?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166423):
+#### [ Patrick Massot (Apr 16 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166423):
 Oh, you put sorries in tests again :disappointed:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166431):
+#### [ Simon Hudon (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166431):
 Yes. `ext` will apply all extensionality lemmas that make sense while `ext a b c` will only apply three (not necessarily the same) and name the introduced locals `a`,`b`, `c`,
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166439):
+#### [ Patrick Massot (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166439):
 What is this `ext1` I see in tests? Apply it only once?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166442):
+#### [ Patrick Massot (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166442):
 like `congr_n 1`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166443):
+#### [ Simon Hudon (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166443):
 It shouldn't affect the built because the final proof is just `trivial`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166448):
+#### [ Patrick Massot (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166448):
 Ahah
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166506):
+#### [ Simon Hudon (Apr 16 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166506):
 I don't know of `congr_n 1` but it sounds like you got the right idea
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166536):
+#### [ Simon Hudon (Apr 16 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166536):
 (I'm so glad `congr_n` exists! I'll be able to use that now!)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166606):
+#### [ Patrick Massot (Apr 16 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166606):
 I was looking to my mathlib tactics docs to point to and, shame on me, I didn't include congr_n! :disappointed:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166620):
+#### [ Simon Hudon (Apr 16 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166620):
 *shake head in  disapproval*
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166733):
+#### [ Simon Hudon (Apr 16 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166733):
 Would it be useful to have a `monoid` and `add_monoid` instance for `fin n` in `mathlib`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166871):
+#### [ Patrick Massot (Apr 16 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166871):
 What would be the law? Again some truncation thing?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166894):
+#### [ Simon Hudon (Apr 16 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166894):
 Yes. It would be modulo arithmetic with the modulo baked into the type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166943):
+#### [ Patrick Massot (Apr 16 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166943):
 Oh, modulo
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166948):
+#### [ Patrick Massot (Apr 16 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166948):
 That's a bit sneaky
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166951):
+#### [ Patrick Massot (Apr 16 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166951):
 https://github.com/leanprover/mathlib/pull/105
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166987):
+#### [ Simon Hudon (Apr 16 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166987):
 What kind of sneaky? Evil-sneaky or just effective-sneaky?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167052):
+#### [ Patrick Massot (Apr 16 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167052):
 I don't know. People could be taken off guard. But who would want to add elements of `fin n` anyway?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167066):
+#### [ Simon Hudon (Apr 16 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167066):
 After a quick survey, there's me
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167146):
+#### [ Simon Hudon (Apr 16 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167146):
 The other alternative I see is the `p ≡ q [MOD k]` notation but that looks more restricted. `fin n` is usable in other contexts that congruences or equalities.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167210):
+#### [ Patrick Massot (Apr 16 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167210):
 I notice your ext PR doesn't include documentation :unamused:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167238):
+#### [ Simon Hudon (Apr 16 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167238):
 What's this `documentation` thing?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167272):
+#### [ Simon Hudon (Apr 16 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167272):
 Alright, I'll add a comment :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167274):
+#### [ Simon Hudon (Apr 16 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167274):
 Is that better?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167328):
+#### [ Patrick Massot (Apr 16 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167328):
 By the way, you told me we found a bug in `wlog` when I asked questions about it. Did you manage to fix it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167358):
+#### [ Simon Hudon (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167358):
 That's true! I forgot about it. It was pretty tricky. I'll get back to it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167362):
+#### [ Simon Hudon (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167362):
 Sorry for the delay
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167372):
+#### [ Patrick Massot (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167372):
 Adding a docstring to `tactic/interactive.lean` would be good enough. Then I can copy it to tactic.md
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167378):
+#### [ Patrick Massot (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167378):
 But in this case I could also write the docstring I guess
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167422):
+#### [ Patrick Massot (Apr 16 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167422):
 The problem is I could write nonsense
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167447):
+#### [ Patrick Massot (Apr 16 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167447):
 There is no delay problem with wlog, I was only asking so you don't forget
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167472):
+#### [ Simon Hudon (Apr 16 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167472):
 Thanks for reminding me
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167513):
+#### [ Patrick Massot (Apr 16 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167513):
 Speaking of documentation, I wonder if @**Sebastian Ullrich**  of @**Gabriel Ebner**  could answer Kevin's questions in https://github.com/leanprover/mathlib/blob/master/docs/extras/calc.md (you only need to search for "Kevin" in this file)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167526):
+#### [ Simon Hudon (Apr 16 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167526):
 I'll write both no worries. I was joking.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167620):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167620):
 I'm not at a computer right now, but IIRC I think `fin n` already has an `+` but it is not very well behaved!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167632):
+#### [ Simon Hudon (Apr 16 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167632):
 Actually, I think `-` is more problematic. And we don't have laws for them
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167676):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167676):
 My memory is that these structures on `fin n` are defined in core and didn't make it into a sensible mathematical object
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167682):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167682):
 I think 2+2 wasn't 2-2 in fin 4 for example
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167702):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167702):
 Docs -- yes I'd forgotten I'd left those in!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167708):
+#### [ Patrick Massot (Apr 16 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167708):
 `#reduce (2 : fin 4) - (2 : fin 4)  -- ⟨0, _⟩`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167749):
+#### [ Patrick Massot (Apr 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167749):
 `#reduce (2 : fin 4) + (2 : fin 4)  -- ⟨0, _⟩`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167753):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167753):
 Try 1+2 and 1-2
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167755):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167755):
 Maybe that was it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167764):
+#### [ Patrick Massot (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167764):
 1+2 is 3 and 1 - 2 is 0
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167765):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167765):
 2+2=0 so adding 2 and subtracting 2 should be the same
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167772):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167772):
 Thanks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167773):
+#### [ Patrick Massot (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167773):
 hard to tell what is the rule here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167779):
+#### [ Patrick Massot (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167779):
 it seems substration is truncated at zero
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167781):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167781):
 Subtracting is just subtraction on nat I think
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167782):
+#### [ Patrick Massot (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167782):
 and addition wraps
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167821):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167821):
 Right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167829):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167829):
 Does that make it a monoid?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167831):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167831):
 🙂
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167835):
+#### [ Patrick Massot (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167835):
 I think I remember reading this discussion in the past
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167837):
+#### [ Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167837):
 Right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 16 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167845):
+#### [ Simon Hudon (Apr 16 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167845):
 What was the conclusion?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 16 2018 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167896):
+#### [ Patrick Massot (Apr 16 2018 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167896):
 Current definitions are... odd
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 20 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125341724):
+#### [ Kenny Lau (Apr 20 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125341724):
 https://github.com/leanprover/mathlib/pull/109/commits
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 20 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125341725):
+#### [ Kenny Lau (Apr 20 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125341725):
 ext is in PR
 
 

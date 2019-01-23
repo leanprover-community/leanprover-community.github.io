@@ -11,15 +11,15 @@ permalink: archive/113488general/47560trueinhabited.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Victor Porton (Jul 07 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/true_inhabited/near/129261476):
+#### [ Victor Porton (Jul 07 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/true_inhabited/near/129261476):
 How to prove:
 
 instance true_inhabited : inhabited true := sorry
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 07 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/true_inhabited/near/129261488):
+#### [ Kenny Lau (Jul 07 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/true_inhabited/near/129261488):
 inhabited.intro trivial
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 07 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/true_inhabited/near/129261496):
+#### [ Kenny Lau (Jul 07 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/true_inhabited/near/129261496):
 \< trivial \>
 
 

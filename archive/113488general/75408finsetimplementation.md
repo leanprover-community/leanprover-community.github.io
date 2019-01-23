@@ -11,77 +11,77 @@ permalink: archive/113488general/75408finsetimplementation.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 08 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133565775):
+#### [ Kenny Lau (Sep 08 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133565775):
 What is the advantage of implementing `finset` as it is now, over implementing it as `multiset` quotient by extensionality?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 08 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133566086):
+#### [ Chris Hughes (Sep 08 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133566086):
 I'm guessing efficiency of computation, but also perhaps some of the proofs are easier, since the functions are more or less identical to the multiset versions. Something like `finset.sum` is harder to implement with finsets as a quotient.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 08 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133575013):
+#### [ Kenny Lau (Sep 08 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133575013):
 But if we implement it as a quotient, then we can have `finset.union`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 08 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133575019):
+#### [ Chris Hughes (Sep 08 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133575019):
 Without `decidable_eq` you mean? Hooray. On the downside we'll need `decidable_eq` for `finset.sum` and `finset.card`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586038):
+#### [ Simon Hudon (Sep 09 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586038):
 @**Kenny Lau** I think both implementations can be valuable. Find a different name and then you can provide that new implementation.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 09 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586041):
+#### [ Kenny Lau (Sep 09 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586041):
 great
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 09 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586043):
+#### [ Kenny Lau (Sep 09 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586043):
 could you help me think of a name?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586089):
+#### [ Simon Hudon (Sep 09 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586089):
 One benefit of `finset`'s current implementation is in writing programs that are meant to be executed. Keeping the list minimal is more economical on memory.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586181):
+#### [ Simon Hudon (Sep 09 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586181):
 The most obvious candidate would be `finset'` but I'm not sure that it's good. We could go with variations on `finset` (like `finite_set`) but I think that's more confusing than anything else. How about `no_eq.finset`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586195):
+#### [ Simon Hudon (Sep 09 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586195):
 The other alternative would be to change the name of the current implementation to `compact.finset` or `minimal.finset` or `efficient.finset`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586247):
+#### [ Simon Hudon (Sep 09 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586247):
 I like your idea. Your kind of implementation makes a set that is easier to use as a monad and as a traversable collection.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586291):
+#### [ Mario Carneiro (Sep 09 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586291):
 I would suggest something like `qfinset` or `stacked_finset`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586293):
+#### [ Mario Carneiro (Sep 09 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586293):
 I'm not seeing where the gains are though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 09 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586299):
+#### [ Kevin Buzzard (Sep 09 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586299):
 you can have union without decidable equality :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586300):
+#### [ Mario Carneiro (Sep 09 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586300):
 gain*s* plural
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 09 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586301):
+#### [ Kevin Buzzard (Sep 09 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586301):
 :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 09 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586340):
+#### [ Kevin Buzzard (Sep 09 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586340):
 Presumably this means that the two definitions can't be proved to be equal without decidable equality?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586342):
+#### [ Mario Carneiro (Sep 09 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586342):
 For the most part anything you can do with a stacked finset you can also do with a multiset
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586354):
+#### [ Mario Carneiro (Sep 09 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586354):
 There is a computable function `finset -> qfinset` but the reverse is `erase_dup` which requires decidable eq
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 09 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586356):
+#### [ Kevin Buzzard (Sep 09 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586356):
 gotcha
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586398):
+#### [ Mario Carneiro (Sep 09 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586398):
 But all these functions already exist, between `finset` and `multiset`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586470):
+#### [ Simon Hudon (Sep 09 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586470):
 I can see three reasons for using stacked sets. 
 
 1. you mean it to form a monad (or a similar kind of functor)
 2. you need it to be traversable
 3. you want to work with finite sets while using set equality directly without translating back and forth between set and multiset.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586519):
+#### [ Simon Hudon (Sep 09 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586519):
 `qfinset` is then like `set`+ finiteness invariant, similarly to `multiset`
 
 

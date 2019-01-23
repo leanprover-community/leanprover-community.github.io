@@ -11,7 +11,7 @@ permalink: archive/113488general/01104proofusinginductivevsdef.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936109):
+#### [ Sean Leather (Sep 14 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936109):
 This is quite an esoteric problem, so I'm not sure if anybody would be interested in looking into it. Nonetheless, I thought I'd try to see if anybody had any ideas.
 
 So I thought I would change a inductive `Prop` to a definition. The original inductive:
@@ -70,91 +70,91 @@ Notice the difference in `rb`. In the old proof, I have an auxiliary proof that 
 
 The full thing is at https://github.com/spl/tts/tree/lc-def .
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936608):
+#### [ Kenny Lau (Sep 14 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936608):
 does `rec_on` solve the problem?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936659):
+#### [ Sean Leather (Sep 14 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936659):
 `rec_on` what?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936828):
+#### [ Kenny Lau (Sep 14 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936828):
 exp
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936836):
+#### [ Sean Leather (Sep 14 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936836):
 Do you mean use `rec_on` instead of `induction`? I'm not sure, but I don't see how it could.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 14 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937291):
+#### [ Mario Carneiro (Sep 14 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937291):
 which case are you in? what is the induction proof?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 14 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937349):
+#### [ Mario Carneiro (Sep 14 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937349):
 none of the variables in the state match things in the inductive definitions you gave
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937489):
+#### [ Sean Leather (Sep 14 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937489):
 The `lam` case. See https://github.com/spl/tts/commit/04e4229c0fccec935b7f615a4aefe18d14982f2b#diff-94a57c5df4a0ba5ba897bada2c897d1aR73
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937510):
+#### [ Sean Leather (Sep 14 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937510):
 Just above that is the old proof (line 49).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 14 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937539):
+#### [ Mario Carneiro (Sep 14 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937539):
 you are doing induction on `k`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937593):
+#### [ Sean Leather (Sep 14 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937593):
 In the old proof, induction was on `l : lc e₁`. In the new proof, induction is on `e₁ : exp V`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937630):
+#### [ Sean Leather (Sep 14 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937630):
 The focus is here: https://github.com/spl/tts/blob/04e4229c0fccec935b7f615a4aefe18d14982f2b/src/exp/open.lean#L41-L77 (if that helps).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 14 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937634):
+#### [ Mario Carneiro (Sep 14 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937634):
 induction on `e1` isn't good enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 14 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937674):
+#### [ Mario Carneiro (Sep 14 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937674):
 you have to do induction on the same well founded measure you used to define `lc'` in the first place
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937678):
+#### [ Sean Leather (Sep 14 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937678):
 You mean induction on `depth`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 14 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937679):
+#### [ Mario Carneiro (Sep 14 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937679):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937683):
+#### [ Sean Leather (Sep 14 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937683):
 Oh....
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 14 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937690):
+#### [ Mario Carneiro (Sep 14 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937690):
 because presumably these `open_var` things don't increase depth
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937696):
+#### [ Sean Leather (Sep 14 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937696):
 Correct.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 14 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937708):
+#### [ Mario Carneiro (Sep 14 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937708):
 it's a general rule that you have to prove properties about a recursive definition using the same recursion strategy as the definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937791):
+#### [ Sean Leather (Sep 14 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937791):
 Ah, okay. The well-founded stuff still confuses me.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937807):
+#### [ Sean Leather (Sep 14 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937807):
 So, it seems that the `inductive` is already doing a lot for me that I would otherwise have to do with more work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937849):
+#### [ Sean Leather (Sep 14 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937849):
 Would it be better just to keep using it instead of the definition version?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937854):
+#### [ Sean Leather (Sep 14 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937854):
 I thought a definition would make things easier, but it's not.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937859):
+#### [ Kenny Lau (Sep 14 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937859):
 I mean, you can always use `well_founded.fix`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937920):
+#### [ Sean Leather (Sep 14 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937920):
 I've never used `well_founded.fix`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 14 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937952):
+#### [ Mario Carneiro (Sep 14 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937952):
 it is not easier
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 14 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937961):
+#### [ Mario Carneiro (Sep 14 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937961):
 it is used behind the scenes by `using_well_founded`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 14 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133938025):
+#### [ Sean Leather (Sep 14 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133938025):
 Okay. So I'll stick with the inductive. Lesson learned!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 15 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133995045):
+#### [ Simon Hudon (Sep 15 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133995045):
 Inductive propositions are quite handy in those situations. You can do induction on them when they are in your assumptions and it will automatically unify the variables that should be equal and you want have to handle cases where your definition would say `false`
 
 

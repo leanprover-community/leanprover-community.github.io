@@ -11,19 +11,19 @@ permalink: archive/113488general/00919moretypeclassinferenceissues.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320059):
+#### [ Kevin Buzzard (Apr 19 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320059):
 It seems to me that for classes like `ring`defined in core lean or mathlib, you are kind of supposed to use type class inference to make them work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320070):
+#### [ Kevin Buzzard (Apr 19 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320070):
 For example, `class is_ring_hom {α : Type u} {β : Type v} [ring α] [ring β] (f : α → β) : Prop := ...` is now in mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320128):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320128):
 now I don't actually know how to make type class inference work in all cases, so I spend some of my time working around it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320162):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320162):
 Here's an example. I have the following structure in my code:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320181):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320181):
 ```lean
 structure presheaf_of_rings (α : Type*) [T : topological_space α] extends presheaf_of_types α :=
 (Fring : ∀ {U} (OU : T.is_open U), comm_ring (F OU))
@@ -31,40 +31,40 @@ structure presheaf_of_rings (α : Type*) [T : topological_space α] extends pres
   is_ring_hom (res U V OU OV H))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320267):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320267):
 Yesterday, `is_ring_hom` was about `comm_ring`, and I used it in my code via `@is_ring_hom _ _ (FPR.Fring HU) (GPR.Fring HU) ...`, explicitly giving the proof that something was a comm_ring.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320275):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320275):
 But now it's changed to ring and so either I figure out a way of explicitly turning a comm_ring into a ring
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320318):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320318):
 or I ask here about how I should be doing this properly.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320334):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320334):
 In short, Lean / mathlib seems to want me, by default, to prove that things are rings by type class inference.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320369):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320369):
 How do I ensure that every time I access a `presheaf_of_rings` as defined above, `presheaf_of_rings.Fring` is added to the type class inference system?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320463):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320463):
 Is there some clever trick involving an `instance` statement directly after the definition of `presheaf_of_rings`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320625):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320625):
 Oh yeah :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320629):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320629):
 ```lean
 instance presheaf_of_rings_Fring (α : Type*) [T : topological_space α] {U : set α} (FPR : presheaf_of_rings α) (OU : T.is_open U) : comm_ring (FPR.F OU) :=
 FPR.Fring OU
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320631):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320631):
 As you were :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322233):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322233):
 What does this mean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322237):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322237):
 ```lean
 structure presheaf_of_rings (α : Type*) [T : topological_space α] extends presheaf_of_types α :=
 [Fring : ∀ {U} (OU : T.is_open U), comm_ring (F OU)]
@@ -72,43 +72,43 @@ structure presheaf_of_rings (α : Type*) [T : topological_space α] extends pres
   is_ring_hom (res U V OU OV H))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322241):
+#### [ Kevin Buzzard (Apr 19 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322241):
 Is that a thing? It doesn't seem to be a thing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 19 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322275):
+#### [ Chris Hughes (Apr 19 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322275):
 `comm_ring.to_ring` might help
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 19 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322379):
+#### [ Chris Hughes (Apr 19 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322379):
 `attribute [instance] presheaf_of_rings.Fring` might also help
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 19 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322454):
+#### [ Chris Hughes (Apr 19 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125322454):
 Just add that ^ line after the definition of `presheaf_of_rings`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125323095):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125323095):
 Oh that's a better way :-) Thanks Chris, I'm glad I asked now.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125323244):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125323244):
 I specifically wanted to avoid `comm_ring.to_ring` as I am pretty sure that the whole point of type class inference is that the end user shouldn't have to use such functions.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324599):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324599):
 Actually, is the following a potential problem with the type class system:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324670):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324670):
 My understanding (incomplete) of something Johannes was saying a few days ago to Patrick, was that the reason `topological_space` is defined as a `structure` with the `class` attribute added later, rather than a `class` directly, was that there were occasions when you might want to consider more than one topological space structure on a given type.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324680):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324680):
 but ring is defined as a class in core lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324721):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324721):
 so what about the person who wants to prove theorems about putting different ring structures on a type?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324728):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324728):
 Are they forced to abandon the type class system, and then they really would have to learn the names of all the theorems mapping a ring to an additive group etc?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324903):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324903):
 And here's another question: what if the ring instance is in the same structure?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324906):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324906):
 ```lean
 structure presheaf_of_rings_on_basis {X : Type u} [TX : topological_space X] 
   {B : set (set X)} (HB : topological_space.is_topological_basis B) extends presheaf_of_types_on_basis HB :=
@@ -117,10 +117,10 @@ structure presheaf_of_rings_on_basis {X : Type u} [TX : topological_space X]
   @is_ring_hom _ _ (@Fring U BU) (Fring BV) (@res U V BU BV H))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324987):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125324987):
 Here a `presheaf_of_rings_on_basis` has `Fring` saying something is a commutative ring, and then `res_is_ring_morphism` which immediately wants to use type class inference to deduce that `Fring U BU` is a ring. Now do I really have to use `comm_ring.to_ring`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325099):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325099):
 ```lean
 structure presheaf_of_rings_on_basis {X : Type u} [TX : topological_space X] 
   {B : set (set X)} (HB : topological_space.is_topological_basis B) extends presheaf_of_types_on_basis HB :=
@@ -129,22 +129,22 @@ structure presheaf_of_rings_on_basis {X : Type u} [TX : topological_space X]
   @is_ring_hom _ _ (@comm_ring.to_ring _ (Fring BU)) (@comm_ring.to_ring _ (Fring BV)) (@res U V BU BV H))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325160):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325160):
 Type class inference is failing me badly here. Sorry for no MWE, hopefully people can see the problem; Lean wants me to use type class inference to prove that commutative rings are rings but I don't know how to make this happen in this situation.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 19 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325164):
+#### [ Mario Carneiro (Apr 19 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325164):
 that's what the brackets inside the structure are for
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325231):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325231):
 ?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325233):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325233):
 Oh!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325247):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325247):
 :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325251):
+#### [ Kevin Buzzard (Apr 19 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325251):
 ```lean
 structure presheaf_of_rings_on_basis {X : Type u} [TX : topological_space X] 
   {B : set (set X)} (HB : topological_space.is_topological_basis B) extends presheaf_of_types_on_basis HB :=
@@ -153,73 +153,73 @@ structure presheaf_of_rings_on_basis {X : Type u} [TX : topological_space X]
   is_ring_hom (@res U V BU BV H))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325270):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325270):
 So just to be clear -- the square brackets inside the structure trigger type class inference only within the structure definitions?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 19 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325325):
+#### [ Mario Carneiro (Apr 19 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325325):
 I think they also mark it as an instance, but you should `#print` to be sure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325334):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325334):
 I don't think they do
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325344):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325344):
 because that was what prompted the question about why the square brackets within the structure definition was even a thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325345):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325345):
 earlier
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 19 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325421):
+#### [ Mario Carneiro (Apr 19 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325421):
 you shouldn't need `@res` either
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325481):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325481):
 yes, that's gone now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325517):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325517):
 But your change of is_ring_hom from [comm_ring] to [ring] has thrown up one final type class inference issue which I can't solve
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325520):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325520):
 possibly because it's not solvable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325528):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325528):
 I think I do need an MWE for this one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325814):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325814):
 Oh no it's Ok, indeed I am now pretty convinced that the square brackets in the structure definition do not insert anything into the type class inference system globally
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325890):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325890):
 because my final problem was solved by Chris' instance trick.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325902):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325902):
 Oh this is great. I got stuck on these problems before and blamed it on the type class inference system not being smart enough.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325907):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325907):
 I should have asked for help earlier.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325924):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325924):
 Patrick said the same thing -- I told him to give up on coercions because they weren't smart enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325932):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125325932):
 and he pointed out that whenever he'd got stuck before, you (Mario) had had a trick which got him through.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326155):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326155):
 Here's a weird question. It feels to me like `comm_ring.to_ring` should not be the kind of function which end users have to worry about, because when the devs made `ring` a typeclass they are somehow declaring that Lean will automatically take care of inferences of this nature.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326166):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326166):
 Am I right in thinking that an end user should only have to invoke `comm_ring.to_ring` in exceptional circumstances?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326183):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326183):
 (says the person who just managed to avoid all uses of it when his code broke in lots of places)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326192):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326192):
 (when a comm_ring changed to a ring)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326297):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326297):
 Aah, more generally should an end user never have to explicitly invoke any theorem tagged with the `instance` attribute?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 19 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326358):
+#### [ Kevin Buzzard (Apr 19 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125326358):
 (unless they are putting more than one structure of a typeclass onto one type, say)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 20 2018 at 00:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125328614):
+#### [ Chris Hughes (Apr 20 2018 at 00:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125328614):
 Sorry to hijack your thread, but I have a typeclass issue of my own
 ```lean
 import data.int.modeq
@@ -235,14 +235,14 @@ quotient.lift_on₂ a b (λ a b, ⟦a + b⟧) sorry
 ```
 It cannot infer the `setoid` instance, probably because it requires an argument. Not sure of a good solution to this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 20 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125328872):
+#### [ Mario Carneiro (Apr 20 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125328872):
 This is a common problem; I think the `lift_on` recursor does not correctly deliver the expected type to the lambda. The usual solution is to add an ascription at the lambda:
 ```
 private def add_aux {n : ℤ} (a b : Zmod n) : Zmod n :=
 quotient.lift_on₂ a b (λ a b, (⟦a + b⟧ : Zmod n)) sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 20 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125328985):
+#### [ Chris Hughes (Apr 20 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125328985):
 Still not working I'm getting this message
 ```
 synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
@@ -251,7 +251,7 @@ inferred
   Zmod_setoid n
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331043):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331043):
 ```lean
 import data.int.modeq
 
@@ -262,10 +262,10 @@ instance Zmod_setoid {n : ℤ} : setoid ℤ :=
 example : setoid ℤ := by apply_instance -- fails
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331049):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331049):
 I'm not sure that I understand how parametrized instances work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331179):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331179):
 ```lean
 import data.int.modeq
 
@@ -278,19 +278,19 @@ def Zmod (n : ℤ) : Type := quotient (@Zmod_setoid n)
 #check (⟦3⟧ : Zmod 5) -- failed to synthesize type class instance for setoid ℤ
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331180):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331180):
 I'm even less sure now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331268):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331268):
 `#check (⟦(3 : ℤ)⟧ : Zmod 5` gives
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331299):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331299):
 `⁇ : Zmod 5` for information check result (in green)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331303):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331303):
 and fails to synthesize the instance
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331410):
+#### [ Simon Hudon (Apr 20 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331410):
 Try:
 
 ```
@@ -308,10 +308,10 @@ example {n : ℤ} : setoid (Zmod n) := by apply_instance
 #check ⟦ (3 : Zmod 5) ⟧ 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331465):
+#### [ Simon Hudon (Apr 20 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331465):
 The problem is that instance inference is only working with `ℤ` (in your example) to find a setoid instance. It's not enough information to infer the `n` parameter. Now, I added a synonym for `ℤ` which provides that information.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331928):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331928):
 ```lean
 import data.int.modeq
 
@@ -332,43 +332,43 @@ private def add_aux {n : ℤ} (a b : Zmod n) : Zmod n :=
 quotient.lift_on₂ a b (λ a b, (⟦a + b⟧ : Zmod n)) sorry -- no error yet
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331934):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331934):
 As a mathematician I'm a bit uneasy about having a thing which is Z but which is called Zmod n
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331935):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331935):
 so I renamed it Z_aux, but your trick is excellent all the same :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331939):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125331939):
 I was worried the check would fail because Lean wouldn't push 3 into Z_aux 5
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332001):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332001):
 `setoid` is a class and this is in core lean.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332004):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332004):
 I think this means that it's quite hard to have more than one instance of a setoid structure on a given type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332006):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332006):
 Simon's trick shows how to get around this, by making lots of types, one for each structure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332009):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332009):
 it's evil :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332056):
+#### [ Simon Hudon (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332056):
 In general, if you need more than one instance of a class for a given type, it should make you suspicious
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332058):
+#### [ Mario Carneiro (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332058):
 it's also a good way to handle the multiple rings problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332059):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332059):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332060):
+#### [ Kevin Buzzard (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332060):
 I don't think I'd seen it before
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332061):
+#### [ Simon Hudon (Apr 20 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332061):
 But you can also name the quotient instead of `Z`:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332069):
+#### [ Simon Hudon (Apr 20 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332069):
 ```lean
 instance Zmod_setoid (n : ℤ) : setoid (Zmod n) :=
 { r := int.modeq n,
@@ -379,28 +379,28 @@ def Zmod' (n : ℤ) : Type := quotient (Zmod_setoid n)
 #check (⟦ 3 ⟧ : Zmod' 5)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332072):
+#### [ Simon Hudon (Apr 20 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332072):
 And if you equip `Zmod' 5` with `has_one`, `has_zero` and `has_add`, `#check (3 : Zmod' 5)` should work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332189):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332189):
 ```lean
 variables (Y : Type) [has_add Y] [has_one Y]
 #check (3 : Y)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332191):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332191):
 no need for zero ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332193):
+#### [ Simon Hudon (Apr 20 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332193):
 Even better!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332195):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332195):
 sort of...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332198):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332198):
 :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332241):
+#### [ Simon Hudon (Apr 20 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332241):
 ```quote
 Simon's trick shows how to get around this, by making lots of types, one for each structure
 
@@ -409,98 +409,98 @@ it's evil :-)
 
 I disagree. If you want the structure to be inferred implicitly, the information must be somewhere. The alternative is to have a different `+` / `*` operator for each one of those structures: `+_mod_5` / `*_mod_5`. That would be ugly and evil!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332255):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332255):
 If setoid were a structure rather than a class, do you think Chris' code would be OK?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332260):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332260):
 The quotient knows the equivalence relation, and the information distinguishing the quotient types is in the equivalence relation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332359):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332359):
 `variables (Y : Type) [has_add Y] [has_one Y]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332360):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332360):
 I think I just defined the positive integers :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332361):
+#### [ Simon Hudon (Apr 20 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332361):
 Yeah I think that would be good. Maybe rather than making `setoid` a structure, just make `Zmod_setoid` into a definition because it is not unique
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332379):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332379):
 then you'll lose access to the \[[ notation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332381):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332381):
 this goes back to the thing I was talking about earlier
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332382):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332382):
 once setoid is deemed to be a class
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332385):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332385):
 then pretty much whenever it's mentioned in a definition or theorem, it's in a square bracket
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332386):
+#### [ Simon Hudon (Apr 20 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332386):
 ```quote
 I think I just defined the positive integers :-)
 ```
 That looks like the Church numerals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332428):
+#### [ Simon Hudon (Apr 20 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332428):
 Sorry, I kind of jumped in the middle your conversation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332434):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332434):
 so it's a pain to work with if you decide not to use the type class inference system
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332443):
+#### [ Simon Hudon (Apr 20 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332443):
 Yes, I see now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332444):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332444):
 As Mario points out, it's the same sort of thing as the (hypothetical but not completely impossible) possibility of having more than one ring structure on a type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332445):
+#### [ Simon Hudon (Apr 20 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332445):
 Is it ever necessary to have it inferred?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332492):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332492):
 it's just inconvenient not to have it inferred, if Lean wants it to be inferred.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332499):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332499):
 That was what I discovered when I had a commutative ring earlier -- if you use the type class inference system then you also automatically have a ring, an additive group, and a whole bunch of other things
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332504):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332504):
 and if you don't then you're stuck making all of these yourself
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332521):
+#### [ Simon Hudon (Apr 20 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332521):
 What if you skip `\[[` and instead rely on `coe` to convert integers to `Zmod` and `has_one` / `has_add` to use numerals?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332584):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332584):
 I guess the proof of the pudding would be in the eating
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332628):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332628):
 I was fine explictly writing my proofs that various types were commutative rings up to a point
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332632):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332632):
 and then it got inconvenient and then I figured out how to use type class inference.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332637):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332637):
 Those things aren't quite church numerals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332638):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332638):
 as far as I can see at least
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332647):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332647):
 but they do have a similar flavour
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332757):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332757):
 ```lean
 def hudon_numeral := Π (Y : Type), (Y → Y → Y) → Y → Y
 def one : hudon_numeral := λ Y h_add h_one, h_one 
 def two : hudon_numeral := λ Y h_add h_one, h_add h_one h_one 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332760):
+#### [ Kevin Buzzard (Apr 20 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332760):
 etc
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332812):
+#### [ Simon Hudon (Apr 20 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125332812):
 Ah yes I see! 0 is missing and Church encodes `succ` rather than `add`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 20 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125443745):
+#### [ Chris Hughes (Apr 20 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125443745):
 Any advice about how to deal with this issue? 
 ```lean
 def Zmod_fintype {n : ℤ} (hn : n ≠ 0) : fintype (Zmod n) :=
@@ -508,94 +508,94 @@ fintype.of_equiv _ (equiv_fin hn).symm
 ```
 I can't make this an instance, because it's only true if `n ≠ 0`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125444830):
+#### [ Kevin Buzzard (Apr 20 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125444830):
 Why not let n be in pnat (positive integers) instead of Z?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 20 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125444960):
+#### [ Chris Hughes (Apr 20 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125444960):
 Probably the best thing. Alternative is to define the equivalence relation differently in the case `n = 0`, so `Zmod 0` is a fintype.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 20 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125445223):
+#### [ Chris Hughes (Apr 20 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125445223):
 Then there's also the issue of proving it's a field in the case `prime p`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 20 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125445230):
+#### [ Kenny Lau (Apr 20 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125445230):
 `fintype (Zmod $ nat.succ m)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 20 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125445289):
+#### [ Chris Hughes (Apr 20 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125445289):
 `n` is an int currently
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125458960):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125458960):
 I have another type class inference issue and this one is rather frustrating.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125458969):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125458969):
 I am making a definition, so I really want to stay in term mode.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125458971):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125458971):
 I wrote down something which should work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125458983):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125458983):
 and Lean complained that it could not prove that a certain composition of two maps was a ring homomorphism.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125458987):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125458987):
 So I tried again in tactic mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459006):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459006):
 (each map is a ring hom, with an instance, and the composite of two ring homs is a ring hom, and this is an instance too, so it should work)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459058):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459058):
 and in tactic mode I have managed to get Lean into a state where the goal is to show that the map is a ring hom (I did this using `refine`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459059):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459059):
 and `apply_instance` fails
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459063):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459063):
 but `show ([cut and paste the goal])`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459066):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459066):
 followed by `apply_instance` succeeds.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459079):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459079):
 In term mode, the proof should look like this:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459080):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459080):
 `to_fun := away.extend_map_of_im_unit ((of_comm_ring (away f) _) ∘ (of_comm_ring R (powers f))) H,`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459087):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459087):
 (it's some part of a structure I'm defining)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459144):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459144):
 but `away.extend_map_of_im_unit` requires that the map (a composite of two ring homs) is a ring hom
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459165):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459165):
 So here it feels to me like Lean is not working as well as it could be.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459169):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459169):
 But I don't have any feeling as to why not
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459242):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459242):
 If I set `pp.all true` I can see that the `show` command is doing something
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459251):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459251):
 but unfortunately these are complex maps defined between complex rings
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459257):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459257):
 and so I am having trouble figuring out what I have done wrong
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459260):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459260):
 and whether it's Lean's fault or mine
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459438):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459438):
 Here are the two (rather lengthy) goals.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459440):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459440):
 https://gist.github.com/kbuzzard/a09dc87e290c0497db65c4c702b37c2f
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459524):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459524):
 Just to be clear: my problem is that I need to prove something in term mode because it's part of a definition. Type class inference fails me and I don't know why. In tactic mode I can make type class inference succeed.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459544):
+#### [ Kevin Buzzard (Apr 20 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459544):
 I could go down the awful route of adding `@`s and explicitly chasing up the proof, but I would rather let type class inference do its job properly and just add hints.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459604):
+#### [ Simon Hudon (Apr 20 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459604):
 if it's a proof (i.e. it's type is a `Prop`) I think you can use a tactic:
 
 ```
@@ -604,37 +604,37 @@ have local_proof : something, by ...,
 definition_using_local_proof,
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459924):
+#### [ Simon Hudon (Apr 20 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125459924):
 To my memory, `local_proof` gets compiled to an auxiliary definition / lemma and you'll have `to_fun := definition_using_local_proof` with a reference to that auxiliary definition (which will not be displayed because of proof erasure).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460308):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460308):
 Unfortunately this fails, because my local proof is not a proof of the correct thing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460313):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460313):
 My local proof is a proof of the second monstrous expression in the gist, which can be proved by type class inference.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460320):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460320):
 I have two maps phi and psi
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460361):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460361):
 and I can prove `is_ring_hom (phi comp psi)` with `apply_instance`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460370):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460370):
 but when I write `foo (phi comp psi)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460372):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460372):
 for some function foo which needs (phi comp psi) to be a ring hom
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460374):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460374):
 then type class inference fails
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460384):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460384):
 well, this is my understanding of the situation.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460405):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460405):
 I tried to create a MWE but I could not reproduce the problem in a controlled environment
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460490):
+#### [ Simon Hudon (Apr 20 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460490):
 What do you know about `phi comp psi` that makes it a `is_ring_hom`? Could you create:
 
 ```
@@ -643,16 +643,16 @@ instance [... some context about (phi comp psi) ...] : is_ring_hom (phi comp psi
 
 right before the structure you're trying to define?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 20 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460538):
+#### [ Johan Commelin (Apr 20 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460538):
 `phi` and `psi` are both ring homs themselves, if I understand Kevin correctly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460635):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460635):
 Type class inference will make it a ring hom
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460684):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460684):
 Here is a very clear explanation of the situation I find myself in:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460694):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460694):
 ```lean
   to_fun := have XXX : is_ring_hom 
     (of_comm_ring (away f) (powers (of_comm_ring R (powers f) g)) ∘ (of_comm_ring R (powers f)) )
@@ -662,19 +662,19 @@ Here is a very clear explanation of the situation I find myself in:
               sorry, 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460701):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460701):
 (the sorry at the end is just to save you from having to look at another term)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460708):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460708):
 So this definition fails
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460711):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460711):
 there's a red squiggle under `away`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460715):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460715):
 and the error is
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460727):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460727):
 ```lean
 failed to synthesize type class instance for
 R : Type u,
@@ -685,94 +685,94 @@ XXX : is_ring_hom (of_comm_ring (away f) (powers (of_comm_ring R (powers f) g)) 
 ⊢ is_ring_hom (of_comm_ring (away f) (powers (of_comm_ring R (powers f) g)) ∘ of_comm_ring R (powers f))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460736):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460736):
 Note that the goal looks exactly like `XXX`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460745):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460745):
 and what is even more frustrating is that the goal and `XXX` were both created in the same way
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460790):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460790):
 by typing the same string twice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460794):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460794):
 namely the string which appears in the goal
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460800):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460800):
 however if I set pp.all true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460808):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460808):
 then XXX and the goal expand into the two distinct, but defeq, monsters
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460830):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460830):
 and note that XXX was proved by type class inference
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460885):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460885):
 What I need to understand to proceed, I think, is that I'd like to understand how Lean can unfold the same string in two different ways in these two situations.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460896):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460896):
 I am scared to use a let to define the function, because I am scared it will cause me problems further down the line
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460917):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460917):
 I am trying to prove that a map is a bijection and if I do something screwy when defining the map then I'm worried I won't be able to use it later
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460977):
+#### [ Simon Hudon (Apr 20 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460977):
 The problem might be in the two terms that are defeq but not identical. Cosmetic differences in the syntax can take the instance inference process in a different direction. Do you think you can make them exactly identical?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460979):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460979):
 this is exactly what I cannot do
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460982):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460982):
 because as you can see from my term
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460989):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460989):
 I created `XXX` and the input to `away.extend_map_of_im_unit ` by typing exactly the same string of characters.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460992):
+#### [ Simon Hudon (Apr 20 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125460992):
 including the `@`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461035):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461035):
 aah I see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461038):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461038):
 I can try to be more persuasive
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461051):
+#### [ Simon Hudon (Apr 20 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461051):
 It will probably not be concise but we can work on that once we know it works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461063):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461063):
 by the way, am I right in thinking that I should not be using `let` in a defintion of a map?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461117):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461117):
 Many thanks Simon
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461123):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461123):
 Explicitly telling Lean what the type of the composition was has solved the problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461141):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461141):
 Thanks a *lot* for persevering with this very awkward problem which was completely blocking me.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 20 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461152):
+#### [ Kevin Buzzard (Apr 20 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461152):
 Many thanks indeed.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461200):
+#### [ Simon Hudon (Apr 20 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461200):
 You're very welcome :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 20 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461268):
+#### [ Simon Hudon (Apr 20 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125461268):
 ```quote
 by the way, am I right in thinking that I should not be using `let` in a defintion of a map?
 ```
 I would avoid it especially if you're going to prove stuff about it. Maybe you're asking about the ùmathlibù style though. I haven't seen that mentioned anywhere but facilitating proofs using your definitions is likely to make you popular with the `mathlib` team.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125472229):
+#### [ Mario Carneiro (Apr 21 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125472229):
 Have you tried using `by exact` in your definition? There is nothing wrong with using tactics in the definition of a term, although you may need to be more conscientious about junk added to your term by lean (or use `by clean`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125472249):
+#### [ Mario Carneiro (Apr 21 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125472249):
 there is not a problem with using `let` or other techniques in defining a complicated function, although you will probably want to write simp lemmas providing your interface so you don't need to rely on definitional expansion
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504684):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504684):
 Gaargh I have another one. Here's a MWE.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504686):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504686):
 ```lean
 import algebra.ring
 universes u v w uu 
@@ -790,13 +790,13 @@ lemma comp_unique {R : Type u} {α : Type v} {β : Type w} {γ : Type uu}
 λ Uf Ug Uh, Uh.is_unique (g ∘ f : α → γ) (by apply_instance) (by simp [Uf.R_alg_hom,Ug.R_alg_hom])
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504689):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504689):
 Note the `by apply_instance` on the last line!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504698):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504698):
 If I replace that with `_` then I get
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504699):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504699):
 ```
 don't know how to synthesize placeholder
 context:
@@ -826,58 +826,58 @@ Uh : is_unique_R_alg_hom sα sγ h
 ⊢ is_ring_hom (g ∘ f)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504701):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504701):
 How does type class inference work? Is `_` something other than `by apply_instance`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504758):
+#### [ Mario Carneiro (Apr 21 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504758):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504796):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504796):
 I guess I just proved that :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504799):
+#### [ Mario Carneiro (Apr 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504799):
 `_` only does unification
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504804):
+#### [ Mario Carneiro (Apr 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504804):
 when it is omitted and the binder type is `[tc A]` it uses typeclass inference
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504805):
+#### [ Patrick Massot (Apr 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504805):
 You need `is_unique_R_alg_hom.is_unique` to take a square bracket argument
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504807):
+#### [ Mario Carneiro (Apr 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504807):
 `by apply_instance` does the same thing but manually
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504815):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504815):
 So "don't know how to synthesize placeholder" -- what did it try??
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504817):
+#### [ Mario Carneiro (Apr 21 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504817):
 unification
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504820):
+#### [ Mario Carneiro (Apr 21 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504820):
 and nothing else
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504822):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504822):
 I don't know what unification means
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504860):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504860):
 isn't that something to do with finding something of the right type?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504865):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504865):
 Oh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504866):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504866):
 I remember
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504869):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504869):
 it means "I will call this ?m_6"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504871):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504871):
 "and sort it out later"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504884):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504884):
 Thanks Patrick:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504885):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504885):
 ```lean
 structure is_unique_R_alg_hom {R : Type u} {α : Type v} {β : Type w} [comm_ring R] [comm_ring α] [comm_ring β] 
 (sα : R → α) (sβ : R → β) (f : α → β) [is_ring_hom sα] [is_ring_hom sβ] [is_ring_hom f] :=
@@ -892,22 +892,22 @@ lemma comp_unique {R : Type u} {α : Type v} {β : Type w} {γ : Type uu}
 λ Uf Ug Uh, Uh.is_unique (g ∘ f : α → γ) (by simp [Uf.R_alg_hom,Ug.R_alg_hom])
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504929):
+#### [ Patrick Massot (Apr 21 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504929):
 You're welcome
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504934):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504934):
 I have abstracted a standard trick :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 21 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504986):
+#### [ Kevin Buzzard (Apr 21 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504986):
 I see, I was not even asking type class inference to do its job here. So this one is my bad.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 21 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504987):
+#### [ Patrick Massot (Apr 21 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125504987):
 Indeed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125508966):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125508966):
 How do I do this one:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125508967):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125508967):
 ```lean
 structure foo :=
 (bar : ∀ (α : Type) [group α] (a b c : α), Prop)
@@ -916,16 +916,16 @@ definition X : foo :=
 {bar := λ α Hα a b c, (mul_assoc a b c)}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509119):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509119):
 Can I use type class inference here?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509132):
+#### [ Kenny Lau (Apr 22 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509132):
 you need a prop
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509133):
+#### [ Kenny Lau (Apr 22 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509133):
 that isn't a prop
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509135):
+#### [ Kenny Lau (Apr 22 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509135):
 ```lean
 structure foo :=
 (bar : ∀ (α : Type) [group α] (a b c : α), Prop)
@@ -934,7 +934,7 @@ definition X : foo :=
 {bar := λ g Hg a b c, by letI := Hg; from mul_assoc a b c}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509173):
+#### [ Kenny Lau (Apr 22 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509173):
 ```lean
 invalid type ascription, term has type
   a * b * c = a * (b * c) : Prop
@@ -948,13 +948,13 @@ _inst : group g := Hg
 ⊢ Prop
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509187):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509187):
 I have some type mismatch error, I think I have more than one problem here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509237):
+#### [ Kenny Lau (Apr 22 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509237):
 which is?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509242):
+#### [ Kenny Lau (Apr 22 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509242):
 ```lean
 structure foo :=
 (bar : ∀ (α : Type) [group α] (a b c : α), Prop)
@@ -964,16 +964,16 @@ definition X : foo :=
     (@monoid.to_semigroup g $ @group.to_monoid g Hg) a b c }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509394):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509394):
 `mul_assoc a b c` isn't a prop, it's a proof.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509395):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509395):
 I know I can do it using @, I want to do it using type class inference
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509397):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509397):
 I want to understand how to make type class inference work, not to understand how to work around it (which I already know)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509405):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509405):
 ```lean
 structure foo :=
 (bar : ∀ (α : Type) [group α] (a : α), 1 * a = a)
@@ -982,7 +982,7 @@ definition X : foo :=
 {bar := λ α Hα a, group.one_mul a}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509406):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509406):
 ```
 failed to synthesize type class instance for
 α : Type,
@@ -991,52 +991,52 @@ a : α
 ⊢ group α
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509408):
+#### [ Kenny Lau (Apr 22 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509408):
 then just letI
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509445):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509445):
 Where do I put the letI?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509448):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509448):
 I am in the middle of a structure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509449):
+#### [ Kenny Lau (Apr 22 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509449):
 `by letI := H\a; from group.one_mul a`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509450):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509450):
 What if I don't want to go into tactic mode because I am actually defining something?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509455):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509455):
 What exactly are yuo suggesting?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509461):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509461):
 ```lean
 definition X : foo :=
 {bar := λ α Hα a, by letI := Hα; from group.one_mul a}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509493):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509493):
 ?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509494):
+#### [ Kenny Lau (Apr 22 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509494):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509499):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509499):
 7 errors
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509502):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509502):
 including "unknown identifier `letI`"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509506):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509506):
 But even if we can get this to work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509509):
+#### [ Kenny Lau (Apr 22 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509509):
 import anything from mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509512):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509512):
 I would rather just make type class inference work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509514):
+#### [ Kenny Lau (Apr 22 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509514):
 ```lean
 import algebra.group
 
@@ -1054,120 +1054,120 @@ theorem X._proof_1 : ∀ (α : Type) (Hα : group α) (a : α), 1 * a = a :=
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509518):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509518):
 ?!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509520):
+#### [ Kenny Lau (Apr 22 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509520):
 !?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509561):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509561):
 which version of Lean are you using?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509562):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509562):
 aah
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509563):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509563):
 I have no import
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509568):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509568):
 `letI` is some mathlib magic I guess
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509569):
+#### [ Kenny Lau (Apr 22 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509569):
 it is.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509571):
+#### [ Kenny Lau (Apr 22 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509571):
 it is Mario's workaround of Leo's changes.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509572):
+#### [ Kenny Lau (Apr 22 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509572):
 So it's in mathlib.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509573):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509573):
 Well thank you for your answer, which kind of stinks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509612):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509612):
 Your answer seems to indicate that `[group \a]` is useless in my structure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509614):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509614):
 i.e. it didn't insert H\a into the type class inference system anyway
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509622):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509622):
 but wait a minute, isn't this what Patrick told me to do earlier?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509623):
+#### [ Kenny Lau (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509623):
 only typeclasses before the colon are inserted
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509624):
+#### [ Kenny Lau (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509624):
 that is Leo's changes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509626):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509626):
 I am writing another localization interface by the way
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509627):
+#### [ Kevin Buzzard (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509627):
 rewriting your universal properties
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509628):
+#### [ Kenny Lau (Apr 22 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509628):
 heh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509979):
+#### [ Mario Carneiro (Apr 22 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125509979):
 you don't need to use `letI`, `by exactI` is the right solution for this application
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 22 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510034):
+#### [ Kenny Lau (Apr 22 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510034):
 aha
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510848):
+#### [ Kevin Buzzard (Apr 22 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510848):
 https://github.com/kbuzzard/lean-stacks-project/blob/master/src/localization_UMP.lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510887):
+#### [ Kevin Buzzard (Apr 22 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510887):
 I have finally battled through all my typeclass inference issues.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510888):
+#### [ Kevin Buzzard (Apr 22 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510888):
 Kenny, I wrote an even better interface for localization
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510889):
+#### [ Kevin Buzzard (Apr 22 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510889):
 I put all the stuff which makes up the universal properties into one structure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510892):
+#### [ Kevin Buzzard (Apr 22 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510892):
 `is_unique_R_alg_hom`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510895):
+#### [ Kevin Buzzard (Apr 22 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510895):
 Mario, it's not quite mathlib-ready, but one day this should probably be in mathlib in some form if localization is in
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510897):
+#### [ Kevin Buzzard (Apr 22 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510897):
 because this file makes the localization stuff usable without ever having to touch the quotient type itself
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510936):
+#### [ Kevin Buzzard (Apr 22 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510936):
 I know because I'm using localization all the time in my schemes work and this work is what led me to the formalisation and the instances in the file I just linked to
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510937):
+#### [ Kevin Buzzard (Apr 22 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125510937):
 There's one more instance of the structure which is commonly used which we still have to fill in
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125511151):
+#### [ Mario Carneiro (Apr 22 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125511151):
 Shouldn't `comp_unique` read something like `is_unique_R_alg_hom sα sβ f → is_unique_R_alg_hom sβ sγ g → is_unique_R_alg_hom sα sγ (g ∘ f)`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 22 2018 at 02:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125511244):
+#### [ Mario Carneiro (Apr 22 2018 at 02:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125511244):
 > `by rw ←HR.symm`
 
 what?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 22 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125523403):
+#### [ Patrick Massot (Apr 22 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125523403):
 Nice one!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 22 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125523409):
+#### [ Patrick Massot (Apr 22 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125523409):
 Kevin, is there is reason why your file doesn't have `open classical` towards the top? You write `classical.` quite a lot
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125523921):
+#### [ Kevin Buzzard (Apr 22 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125523921):
 ```quote
 Shouldn't `comp_unique` read something like `is_unique_R_alg_hom sα sβ f → is_unique_R_alg_hom sβ sγ g → is_unique_R_alg_hom sα sγ (g ∘ f)`?
 ```
 No. That's not even true in general. The standard use of the universal property to prove that certain maps are isomorphisms is via the following argument: "We are given maps X-> Y and Y -> X. The given map from X to Y is the only map X -> Y with a certain property (e.g. being an R-algebra map). The map given Y -> X is the only map Y -> X with a certain property. Composition of two maps with the property has the property. The identity map X -> X is the only map X -> X with the property. Hence X -> Y -> X is the identity map by comp_unique. Furthermore the identity map Y -> Y is the only map Y -> Y with the property. Hence Y -> X -> Y is also the identity. So X isomorphic to Y".
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125523973):
+#### [ Kevin Buzzard (Apr 22 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125523973):
 The reason your suggestion is not true is that there could be plenty of maps from A to C which don't factor through B.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125524012):
+#### [ Kevin Buzzard (Apr 22 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125524012):
 I don't open classical because I typically don't open anything. I am very bad at namespaces in general. A whole bunch of my code is incorrectly sitting in the root namespace. The whole thing needs a clear-up.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 22 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125524203):
+#### [ Kevin Buzzard (Apr 22 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125524203):
 ```quote
 > `by rw ←HR.symm`
 
@@ -1175,13 +1175,13 @@ what?
 ```
 ha ha. I think it was getting late at that point. This was kind of stupid. I had that composition of f and g was h, but needed to show `forall x, f (g x) = h x`and I felt that this should just be an application of a standard lemma but I couldn't find it. So I just wrote "lambda x, by rw (proof that f circ g = h)" a few times, but then something was the other way round so I switched it and then something else was the other way around so I had to switch it back
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125628730):
+#### [ Kevin Buzzard (Apr 24 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125628730):
 ```quote
 Shouldn't `comp_unique` read something like `is_unique_R_alg_hom sα sβ f → is_unique_R_alg_hom sβ sγ g → is_unique_R_alg_hom sα sγ (g ∘ f)`?
 ```
 Maybe you'll like this one:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125628734):
+#### [ Kevin Buzzard (Apr 24 2018 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125628734):
 ```lean
 theorem unique_R_of_unique_R_of_unique_Rloc {R : Type u} {α : Type v} {β : Type w} {γ : Type uu} 
 [comm_ring R] [comm_ring α] [comm_ring β] [comm_ring γ] 
@@ -1191,61 +1191,61 @@ is_unique_R_alg_hom sα (fβγ ∘ fαβ ∘ sα) (fβγ ∘ fαβ)
 → is_unique_R_alg_hom (fαβ ∘ sα) (fβγ  ∘ fαβ ∘ sα) (fβγ) :=
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125628799):
+#### [ Kevin Buzzard (Apr 24 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125628799):
 If there's a unique R-alg hom from alpha to gamma and a unique alpha-alg hom from beta to gamma then there's a unique R-alg hom from beta to gamma (and it's the same map)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125628813):
+#### [ Kevin Buzzard (Apr 24 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125628813):
 (oh, the R-alg hom from alpha to gamma must be the composite of a given map alpha -> beta and our given alpha-alg map from beta to gamma)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125629917):
+#### [ Johan Commelin (Apr 24 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125629917):
 This feels like you want to hit it with Yoneda and reduce it to some basic set-theoretic fact... But that is only instinct
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125629948):
+#### [ Johan Commelin (Apr 24 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125629948):
 You're looking at both R-alg-homs and alpha-alg-homs... so maybe it is not that straightforward actually
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125629956):
+#### [ Kenny Lau (Apr 24 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125629956):
 don't get him started on alpha
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125629960):
+#### [ Johan Commelin (Apr 24 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125629960):
 What do you mean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125629968):
+#### [ Johan Commelin (Apr 24 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125629968):
 There is alpha's everywhere in his code
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630009):
+#### [ Johan Commelin (Apr 24 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630009):
 I was actually surprised when I saw that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630023):
+#### [ Kenny Lau (Apr 24 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630023):
 don't say "alpha" and any mathematical object in the same sentence in front of kevin buzzard
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630032):
+#### [ Johan Commelin (Apr 24 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630032):
 But he just did that himself!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 24 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630039):
+#### [ Kenny Lau (Apr 24 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630039):
 it doesn't matter
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630634):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630634):
 Did you notice that when we were doing groups earlier I used alpha to be a group homomorphism just to wind up the CS folk?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630639):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630639):
 alpha : G to H
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630684):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630684):
 The reason I am using alpha for a ring
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630687):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630687):
 is that the most important ring is called R
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630689):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630689):
 and then I needed three more
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630693):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630693):
 but I couldn't face S T U
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630696):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630696):
 so I thought alpha beta gamma was OK
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630729):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630729):
 ```lean
 begin
   intros Hαβ Hβγ,
@@ -1257,31 +1257,31 @@ begin
 end 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630733):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125630733):
 That was the proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 24 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631047):
+#### [ Reid Barton (Apr 24 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631047):
 Haha, I seriously thought up to now that an "alpha-alg-hom" was a map of rings equipped with some fancy extra additional structure, like $$\lambda$$-rings or divided power rings or something.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631446):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631446):
 no, it's an alpha-algebra hom :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631453):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631453):
 YOU SEE YOU CS PEOPLE
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631456):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631456):
 THE MOMENT YOU CALL RINGS ALPHA
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 24 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631461):
+#### [ Kevin Buzzard (Apr 24 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631461):
 WE GET THINGS LIKE THIS HAPPENING
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 24 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631555):
+#### [ Johan Commelin (Apr 24 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125631555):
 wow, that was pretty `α`-male
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747509):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747509):
 Here's today's type class inference issue:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747511):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747511):
 ```lean
 theorem canonical_iso_is_canonical_hom {R : Type u} [comm_ring R] {f g : R} (H : Spec.D' g ⊆ Spec.D' f) :
 let gbar := of_comm_ring R (powers f) g in
@@ -1292,46 +1292,46 @@ let H2 := (canonical_iso H).is_ring_hom in
 is_unique_R_alg_hom sγ sα (canonical_iso H).to_fun := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747515):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747515):
 that won't run
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747523):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747523):
 but hopefully I can explain the issue
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747533):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747533):
 I am trying to prove `is_unique_R_alg_hom sγ sα (canonical_iso H).to_fun`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747592):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747592):
 but the definition of `is_unique_R_alg_hom` expects H2 to be deduced from type class inference
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747595):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747595):
 and I've only managed to prove it the line before
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747597):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747597):
 so I can solve this with @
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747612):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747612):
 but given that it would then look like
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747672):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747672):
 ...erm
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747674):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747674):
 even that didn't work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747690):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747690):
 `@is_unique_R_alg_hom _ _ _ _ _ _ sγ sα (canonical_iso H).to_fun _ _ H2 `
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747691):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747691):
 actually it did work, I now have an unrelated problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747701):
+#### [ Kevin Buzzard (Apr 27 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125747701):
 So can I insert H2 into the type class inference system before I have even started my proof, because I need it to make my term typecheck?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748084):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748084):
 I have got it working with `@`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748085):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748085):
 ```lean
 theorem canonical_iso_is_canonical_hom {R : Type u} [comm_ring R] {f g : R} (H : Spec.D' g ⊆ Spec.D' f) :
 let gbar := of_comm_ring R (powers f) g in
@@ -1344,46 +1344,46 @@ let H4 : is_ring_hom sγ := by apply_instance in
 @is_unique_R_alg_hom _ _ _ _ _ _ sγ sα (canonical_iso H).to_fun H4 H3 H2 := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748090):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748090):
 The first three lets are simply there to make the statement look clearer
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748098):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748098):
 the last three are there because type class inference asked for them all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 27 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748163):
+#### [ Reid Barton (Apr 27 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748163):
 Change those last three `let`s to `letI` I think
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748209):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748209):
 `letI` doesn't work there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748210):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748210):
 well, it doesn't work for me
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748212):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748212):
 It works in a proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748213):
+#### [ Reid Barton (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748213):
 Sorry, I just noticed this was in term mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748214):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748214):
 but this is before the proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748215):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748215):
 the issue is that we're before the colon
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748216):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748216):
 I think
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748217):
+#### [ Reid Barton (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748217):
 But I think `by letI ...; exact` is fine
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748219):
+#### [ Kevin Buzzard (Apr 27 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748219):
 I have only seen letI after the colon
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 27 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748230):
+#### [ Reid Barton (Apr 27 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748230):
 Though, it does make me vaguely uneasy to put it in the theorem statement.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 27 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748310):
+#### [ Reid Barton (Apr 27 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125748310):
 ```lean
 theorem canonical_iso_is_canonical_hom {R : Type u} [comm_ring R] {f g : R} (H : Spec.D' g ⊆ Spec.D' f) :
 let gbar := of_comm_ring R (powers f) g in
@@ -1395,37 +1395,37 @@ is_unique_R_alg_hom sγ sα (canonical_iso H).to_fun := sorry
 ```
 (untested, hopefully I deleted the right amount of stuff)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125751156):
+#### [ Mario Carneiro (Apr 27 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125751156):
 Using `letI` in theorem types is fine, and `by letI ...; exact` or `by exactI` is the recommended way to introduce a typeclass thing from the context in term mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 27 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761174):
+#### [ Chris Hughes (Apr 27 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761174):
 Don't use let in the statement of a theorem.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761407):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761407):
 ```quote
 Don't use let in the statement of a theorem.
 ```
 This is easy to fix -- the let is in some sense for my own sanity.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761455):
+#### [ Mario Carneiro (Apr 27 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761455):
 Note that `haveI` when used in a tactic doesn't actually produce a `have` term, the result is just like you would get if it were actually inferred by regular tc inference
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761462):
+#### [ Mario Carneiro (Apr 27 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761462):
 If in doubt, just `#print` the statement to make sure it doesn't look weird
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761464):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761464):
 I can't get the syntax right for this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761465):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761465):
 having tried for 10 seconds
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761507):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761507):
 I need to insert three hypotheses into the type class inference box
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761511):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761511):
 and I don't understand the syntax of this by thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761521):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761521):
 ```lean
 theorem canonical_iso_is_canonical_hom {R : Type u} [comm_ring R] {f g : R} (H : Spec.D' g ⊆ Spec.D' f) :
 let gbar := of_comm_ring R (powers f) g in
@@ -1438,13 +1438,13 @@ let H4 : is_ring_hom sγ := by apply_instance in
 @is_unique_R_alg_hom _ _ _ _ _ _ sγ sα (canonical_iso H).to_fun H4 H3 H2 := 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761522):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761522):
 This works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761524):
+#### [ Kenny Lau (Apr 27 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761524):
 good luck proving that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761562):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761562):
 ```lean
 begin
 letI := (canonical_iso H).is_ring_hom,
@@ -1455,34 +1455,34 @@ exact H5,
 end 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761565):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761565):
 done
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761566):
+#### [ Kenny Lau (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761566):
 ok you win
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761569):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761569):
 Now I have good interface
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761570):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761570):
 so all the proofs are "this canonical thing is canonical"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761571):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761571):
 or "this canonical thing is unique"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761573):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761573):
 or "this unique thing is canonical"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761635):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761635):
 I was trying to put all three hypotheses into one "by"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761638):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761638):
 but I don't understand the syntax
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761644):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761644):
 but I've got it working
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761645):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761645):
 ```lean
 theorem canonical_iso_is_canonical_hom {R : Type u} [comm_ring R] {f g : R} (H : Spec.D' g ⊆ Spec.D' f) :
 let gbar := of_comm_ring R (powers f) g in
@@ -1495,31 +1495,31 @@ by letI H4 : is_ring_hom sγ := by apply_instance; exact
 @is_unique_R_alg_hom _ _ _ _ _ _ sγ sα (canonical_iso H).to_fun H4 H3 H2 := 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761646):
+#### [ Kevin Buzzard (Apr 27 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761646):
 I can't even parse that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761649):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761649):
 and now the moment of truth...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761698):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761698):
 wooah
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761699):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761699):
 stop everything
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761701):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761701):
 lean has silently crashed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761761):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761761):
 OK great, when I restart Lean it just quietly exits
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761771):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761771):
 Restarting VS Code and I am back up and running
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761814):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761814):
 and it doesn't work after all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761869):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761869):
 ```lean
 theorem canonical_iso_is_canonical_hom {R : Type u} [comm_ring R] {f g : R} (H : Spec.D' g ⊆ Spec.D' f) :
 let gbar := of_comm_ring R (powers f) g in
@@ -1534,73 +1534,73 @@ letI H4 : is_ring_hom sγ := by apply_instance; exact
 
 doesn't work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761871):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761871):
 It's not a problem because my multi-let `@` solution works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761872):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125761872):
 I'll construct a MWE. I think this is just a syntax thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762346):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762346):
 gaargh it's not a syntax thing, my MWE is too minimal and strings of `by letI ...; exact` work fine
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762486):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762486):
 My `by apply_instance` proofs seem to be failing when wrapped up in the outer `by`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762657):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762657):
 I am torn between giving up and constructing a MWE
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762659):
+#### [ Kenny Lau (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762659):
 lemme help you
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762660):
+#### [ Kenny Lau (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762660):
 give up.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762661):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762661):
 OK
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762662):
+#### [ Kevin Buzzard (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762662):
 thanks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762663):
+#### [ Kenny Lau (Apr 27 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125762663):
 no probs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125763632):
+#### [ Mario Carneiro (Apr 27 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125763632):
 Your `letI : ... := by apply_instance` lines are redundant. If the typeclass system can already find it, there's no reason to add it to the typeclass system. Unless you are trying to limit search depth?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125763651):
+#### [ Mario Carneiro (Apr 27 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125763651):
 Also I recommend `haveI` over `letI` when possible. The only time you need `letI` is if you are unfolding the exact definition of the inferred ring or whatever later on in the same proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 27 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764739):
+#### [ Patrick Massot (Apr 27 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764739):
 About type classes, let me quickly share https://gist.github.com/PatrickMassot/0d28b74be6f7bc9c0814a87393c91663 It's a draft of documentation of something that took me an embarrassingly long time to understand (I don't say it's directly related to your issues, it's only general knowledge about type class magic)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764855):
+#### [ Mario Carneiro (Apr 27 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764855):
 I think the `..prod.has_op` on the last instance is unnecessary
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764861):
+#### [ Mario Carneiro (Apr 27 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764861):
 it is inferred if you don't specify
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 27 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764904):
+#### [ Patrick Massot (Apr 27 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764904):
 oooh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 27 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764906):
+#### [ Patrick Massot (Apr 27 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764906):
 that's even better
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 27 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764909):
+#### [ Patrick Massot (Apr 27 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764909):
 How does this new magic trick work?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 27 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764911):
+#### [ Patrick Massot (Apr 27 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764911):
 This file is all about understanding more magic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764989):
+#### [ Mario Carneiro (Apr 27 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125764989):
 The `comm_magma.mk` structure constructor has the `to_has_op` parent field as instance implicit, and in structure notation that translates to an optional field
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 27 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125765037):
+#### [ Mario Carneiro (Apr 27 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125765037):
 same with anonymous constructor notation, you could write it as just `⟨proof of commutativity⟩` instead of `{op_comm := proof of commutativity}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125801928):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125801928):
 Today's typeclass tale of woe:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125801930):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125801930):
 ```lean
 import data.equiv 
 universes u v w u' v' w'
@@ -1612,7 +1612,7 @@ structure canonically_isomorphic_add_group_homs (Cα : equiv α α') (Cβ : equi
 := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125801936):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125801936):
 ```
 failed to synthesize type class instance for
 α : Type u,
@@ -1631,10 +1631,10 @@ _inst_5 : is_group_hom f
 ⊢ group β'
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802086):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802086):
 dammit
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802087):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802087):
 ```lean
 import data.equiv 
 universes u v w u' v' w'
@@ -1646,7 +1646,7 @@ structure canonically_isomorphic_add_group_homs (Cα : equiv α α') (Cβ : equi
 := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802128):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802128):
 ```
 type mismatch at application
   is_group_hom
@@ -1658,49 +1658,49 @@ but is expected to have type
   group α
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802133):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802133):
 Damn you Lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802135):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802135):
 finding out how to turn an `add_group` to a `group` is *exactly* the kind of question which you should be good at.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802141):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802141):
 thus saving me from having to remember the details about names of instances.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802181):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802181):
 Why am I constantly running into type class inference issues @**Sebastian Ullrich** ? Is this sort of thing going to change in Lean 4, do you think?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802182):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802182):
 I find the whole `letI` stuff both essential and extremely confusing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802185):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802185):
 I probably need to write some `letI` docs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802192):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802192):
 but am I right in thinking that `letI` is just a hack which we will be doing away with in Lean 4 as the amazing new type class inference system / syntax comes in?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802231):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802231):
 I know that Mario has work hard to keep up with Leo's changes in the type class inference system
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802232):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802232):
 but that means that it's currently really confusing for end users
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802234):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802234):
 I believe in Lean so much
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802239):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802239):
 and I am really hoping for a beautiful solution.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802279):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802279):
 Type class inference issues are stopping me from working right now.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802460):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802460):
 ```lean
 variable (α : Type)
 lemma to_group [H : add_group α] : group α := by apply_instance
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802462):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125802462):
 ```
 tactic.mk_instance failed to generate instance for
   group α
@@ -1710,52 +1710,52 @@ H : add_group α
 ⊢ group α
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 28 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125814582):
+#### [ Sebastian Ullrich (Apr 28 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125814582):
 There are no plans to change class inference for Lean 4. On the other hand, lifting the distinction between `group` and `add_group` is the primary motivation behind refactoring the algebraic hierarchy.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125814583):
+#### [ Kenny Lau (Apr 28 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125814583):
 but the algebraic hierarchy also has its own problems, right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125814601):
+#### [ Kenny Lau (Apr 28 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125814601):
 ```quote
 Today's typeclass tale of woe:
 ```
 look, I already wrote you an `is_add_group_hom`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820595):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820595):
 Oh, I see, I am an idiot. Lean regards the `add_group` hierarchy as completely different to, the `group` hierarchy. I have mixed my hierarchies without noticing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820600):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820600):
 The reason I have made this mistake
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820603):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820603):
 is that the two heirarchies are canonically isomorphic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820604):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820604):
 and indeed there is a unique canonical isomorphism in each direction
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820609):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820609):
 however the type class inference procedure might not use these canonical isomorphisms
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820610):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820610):
 because neither of the hierarchies is "better" than the other one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820611):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820611):
 so it would be asymmetric to let type class inference move from one to the other
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820653):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820653):
 and there is a risk of diamonds if we let it move between them freely
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820654):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820654):
 On the other hand, to a mathematician, they are the same object
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820655):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820655):
 canonical isomorphism is different to type class resolution
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820656):
+#### [ Kevin Buzzard (Apr 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125820656):
 and I was applying canonical isomorphism
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128108229):
+#### [ Johan Commelin (Jun 15 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128108229):
 Does this mean I introduced a diamond:
 ```quote
 synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
@@ -1764,7 +1764,7 @@ inferred
   lie_algebra.to_module ↥𝔥
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128112522):
+#### [ Johan Commelin (Jun 15 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128112522):
 So the context is as follows:
 ```lean
 instance subset.lie_algebra {𝔥 : set 𝔤} [H : @is_lie_subalgebra R ri 𝔤 la 𝔥] :
@@ -1790,16 +1790,16 @@ lie_algebra R 𝔥 :=
 }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128112567):
+#### [ Johan Commelin (Jun 15 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128112567):
 How do I tell Lean that it should infer `subset.submodule 𝔥`, instead of `lie_algebra.to_module ↥𝔥`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128112594):
+#### [ Johan Commelin (Jun 15 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128112594):
 I really don't get why the type class system is tripping up in this case. After all, the first instance unifies completely. The second instance has one meta-variable in it (and rightly so, because it can't infer that `𝔥` is a `lie_algebra` since that is exactly what I'm trying to prove.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128112638):
+#### [ Johan Commelin (Jun 15 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128112638):
 So it seems to me like the type class inference went down a wrong path, but still got convinced that it did a good job. (While the correct path is actually there in Lean.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114320):
+#### [ Johan Commelin (Jun 15 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114320):
 Aaaahhrg.....
 ```lean
 [class_instances]  class-instance resolution trace
@@ -1817,49 +1817,49 @@ Aaaahhrg.....
 ```
 [the list goes on and on...]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114327):
+#### [ Johan Commelin (Jun 15 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114327):
 No stupid! It's a Lie algebra!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114337):
+#### [ Johan Commelin (Jun 15 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114337):
 Everywhere in this file it has realised immediately that `𝔤` is a Lie algebra, and therefore has a bracket.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114338):
+#### [ Johan Commelin (Jun 15 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114338):
 But somehow, here it messes up completely.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 15 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114684):
+#### [ Andrew Ashworth (Jun 15 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114684):
 I notice type class inference issues are quite common in this chat. Maybe in the future a visualization aide would be helpful for people trying to debug  the process
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 15 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114691):
+#### [ Andrew Ashworth (Jun 15 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114691):
 Actually for myself I don't know any better method to debug it than to write out the expression in full, and then in order work forwards as if I was doing the search by hand...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114731):
+#### [ Johan Commelin (Jun 15 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128114731):
 Right... which is not really what you would expect in this "computer-era"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 15 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115009):
+#### [ Andrew Ashworth (Jun 15 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115009):
 you'd be disappointed in how much paper I go through while using a computerized theorem prover... or programming in general
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115071):
+#### [ Mario Carneiro (Jun 15 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115071):
 I have mentioned this in previous instance issues, but `comm_ring ?x_1` is a bad sign in an instance trace, that will usually run away
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115074):
+#### [ Mario Carneiro (Jun 15 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115074):
 what is the type of `commutator_bracket`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115592):
+#### [ Johan Commelin (Jun 15 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115592):
 ```lean
 variables {S : Type*} [ring S]
 instance commutator_bracket : has_bracket S := ⟨λ x y, x*y - y*x⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115668):
+#### [ Mario Carneiro (Jun 15 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115668):
 That can't be right, the printout has six variables not two
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115709):
+#### [ Mario Carneiro (Jun 15 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115709):
 what does `#print commutator_bracket` show?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115711):
+#### [ Johan Commelin (Jun 15 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115711):
 Anyway, my point is that `𝔤` is a Lie algebra, and by definition that means it `extends has_bracket`. So I would hope that Lean could figure this one out.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115718):
+#### [ Johan Commelin (Jun 15 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115718):
 ```lean
 @[instance]
 protected def commutator_bracket : Π {R : Type u_1} [ri : comm_ring R] {𝔤 : Type u_2} [la : lie_algebra R 𝔤] {S : Type u_3} [_inst_1 : ring S],
@@ -1868,28 +1868,28 @@ protected def commutator_bracket : Π {R : Type u_1} [ri : comm_ring R] {𝔤 : 
   {bracket := λ (x y : S), x * y - y * x}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115721):
+#### [ Mario Carneiro (Jun 15 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115721):
 there's your problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115722):
+#### [ Johan Commelin (Jun 15 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115722):
 Which is crazy...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115728):
+#### [ Johan Commelin (Jun 15 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115728):
 It pulls in way too much stuff.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115732):
+#### [ Mario Carneiro (Jun 15 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115732):
 did you `include` stuff at the top maybe?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115807):
+#### [ Mario Carneiro (Jun 15 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115807):
 try defining it outside the section, this instance has nothing to do with lie algebras
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115819):
+#### [ Johan Commelin (Jun 15 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115819):
 Yes... thanks for catching that!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115879):
+#### [ Johan Commelin (Jun 15 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115879):
 Hmm, I need to run. In fact, I should try to get rid of those `include ri la`, but that seems to be non-trivial.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 15 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115887):
+#### [ Johan Commelin (Jun 15 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115887):
 Anyway, I'll be back later. AFK
 
 

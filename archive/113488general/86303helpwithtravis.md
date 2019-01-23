@@ -11,7 +11,7 @@ permalink: archive/113488general/86303helpwithtravis.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 14 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790347):
+#### [ Scott Morrison (Oct 14 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790347):
 Hmm, a strange error:
 
 ```
@@ -21,16 +21,16 @@ Hmm, a strange error:
 <unknown>:1:1: error: invalid object declaration, environment already has an object named 'category_theory.limits.category_theory.limits.has_limits._proof_1'
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 14 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790352):
+#### [ Scott Morrison (Oct 14 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790352):
 How come it doesn't complain with `lean --make`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 14 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790362):
+#### [ Scott Morrison (Oct 14 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790362):
 Is this that two files, which are never imported in the same place, have the same named definition? And this isn't detected until the last run of lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 14 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790418):
+#### [ Scott Morrison (Oct 14 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790418):
 (Doesn't matter too much, there was an instance that should have been a def anyway, that should solve this.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 14 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790980):
+#### [ Simon Hudon (Oct 14 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790980):
 ```quote
 Is this that two files, which are never imported in the same place, have the same named definition? And this isn't detected until the last run of lean?
 ```

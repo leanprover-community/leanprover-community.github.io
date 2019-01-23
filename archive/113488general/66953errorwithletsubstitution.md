@@ -11,7 +11,7 @@ permalink: archive/113488general/66953errorwithletsubstitution.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mohammed Eyad Kurd-Misto (Jun 04 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127518930):
+#### [ Mohammed Eyad Kurd-Misto (Jun 04 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127518930):
 Hello, I'm not sure if this is the correct place to post this. I am Mohammed Eyad Kurd-Misto, a PhD student at Chapman university. I am having an issue with a proof where the let construct does not seem to be working the way I would think. For two steps of the proof, I am simply substituting portions of the current statement from the let, and in one instance there is no issue but in another I am getting an error. The main relevant code is:
 
 `lemma flat_sharp {B : Type} : Π {n : ℕ}, ∀ (ps: @datum_or_data B ff n), (♭ (♯ ps)) = ps
@@ -91,22 +91,22 @@ let ⟨as, h⟩ := ♯ ps, a := ♮⁻¹ p in  --let (⟨as, h⟩ : vector B n) 
     ...                 = datum_or_data.cons p (♭ (♯ ps)) : congr_arg (λ x, datum_or_data.cons x (♭ (♯ ps))) (natural' p)
     ...                 = datum_or_data.cons p ps : congr_arg (λ x, datum_or_data.cons p x) (flat_sharp ps)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 04 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519048):
+#### [ Simon Hudon (Jun 04 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519048):
 The way you use the let is more like a match statement than a local definition. It works but it makes definitional equality a bit weird.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 04 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519100):
+#### [ Simon Hudon (Jun 04 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519100):
 You might need to use an actual match statement an include an equality lemma in the match expression. I'll just try something and get back to you.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 04 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519118):
+#### [ Simon Hudon (Jun 04 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519118):
 Btw, you might like to know that it's possible to have nice formatting of Lean code by enclosing it in backticks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mohammed Eyad Kurd-Misto (Jun 04 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519350):
+#### [ Mohammed Eyad Kurd-Misto (Jun 04 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519350):
 Thank you, I reformatted the initial post (though the notation portions actually contain backticks in the lean code so I left them as is).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 04 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519412):
+#### [ Simon Hudon (Jun 04 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519412):
 If you put three ticks before the first line and three after the last, you don't need to format it line by line. Even better: if you put three ticks followed by `lean`, you get syntax highlighting
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 04 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519472):
+#### [ Simon Hudon (Jun 04 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127519472):
 What I think you should do is:
 
 ```lean
@@ -122,7 +122,7 @@ by cases h' : ♯ ps with as h ;
     ...
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mohammed Eyad Kurd-Misto (Jun 04 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127520031):
+#### [ Mohammed Eyad Kurd-Misto (Jun 04 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127520031):
 Thank you, I'll look at continuing the proof using cases/rw instead.
 
 

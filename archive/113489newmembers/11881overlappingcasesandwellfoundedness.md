@@ -11,10 +11,10 @@ permalink: archive/113489newmembers/11881overlappingcasesandwellfoundedness.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mark Dickinson (Oct 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136220983):
+#### [ Mark Dickinson (Oct 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136220983):
 I'm trying to define a simple `ℕ → ℕ → ℕ` function using well-founded recursion. At top-level, I'm splitting on cases, and those cases overlap:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mark Dickinson (Oct 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136221041):
+#### [ Mark Dickinson (Oct 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136221041):
 ```lean
 def isqrt_inner : ℕ → ℕ → ℕ
 | 0 _ := 0
@@ -28,7 +28,7 @@ def isqrt_inner : ℕ → ℕ → ℕ
 
 Question: how would I go about replacing the `sorry` here? I need to be able to use the hypotheses that `b` is neither `0` nor `1`, but I'm not sure how to get at those.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 21 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136221179):
+#### [ Kenny Lau (Oct 21 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136221179):
 ```lean
 def isqrt_inner : ℕ → ℕ → ℕ
 | 0 _ := 0
@@ -40,7 +40,7 @@ def isqrt_inner : ℕ → ℕ → ℕ
     shiftl a (k - 1) + (shiftr n (k + 1)) / a
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mark Dickinson (Oct 21 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136221244):
+#### [ Mark Dickinson (Oct 21 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136221244):
 Beautiful! Thank you.
 
 

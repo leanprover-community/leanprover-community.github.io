@@ -11,10 +11,10 @@ permalink: archive/113488general/02748Idontunderstandheq.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071940):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071940):
 Here's a self-contained extract from `analysis/topology/topological.space_lean`:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071981):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071981):
 ```lean
 import analysis.topology.topological_space
 open topological_space
@@ -38,46 +38,46 @@ lemma is_open_Union'' {f : ι → set α} (h : ∀i, is_open (f i)) : is_open (�
 is_open_sUnion $ assume t ⟨i, (rfl : t = f i)⟩, eq.symm ▸ h i -- doesn't compile
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071983):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071983):
 well, the first lemma is the extract -- it's called `is_open_Union` in the actual file.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071988):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071988):
 I should perhaps say `lemma is_open_sUnion {s : set (set α)} (h : ∀t ∈ s, is_open t) : is_open (⋃₀ s)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071992):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071992):
 So I realised I didn't really understand the mathlib proof of `is_open_Union_orig` (which is the proof given in the extract above, with its `heq`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072033):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072033):
 so I proved the lemma "in the same way", in tactic mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072034):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072034):
 and that's `is_open_Union'`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072035):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072035):
 and everything works fine with eq
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072043):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072043):
 Oh -- got it:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072045):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072045):
 ```lean
 lemma is_open_Union'' {f : ι → set α} (h : ∀i, is_open (f i)) : is_open (⋃i, f i) :=
 is_open_sUnion $ assume t ⟨i, (eq : t = f i)⟩, eq.symm ▸ h i
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072085):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072085):
 What's with this `heq` in the mathlib version?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072130):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072130):
 Oh!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072131):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072131):
 Got it :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072132):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072132):
 `heq` has nothing to do with `heq`, it's just a variable name :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 14 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072138):
+#### [ Kevin Buzzard (Apr 14 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125072138):
 Oh OK, so I do understand this particular use of heq, we're calling a variable by the same name as a Lean function :-)
 
 

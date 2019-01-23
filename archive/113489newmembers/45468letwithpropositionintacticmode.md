@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/45468letwithpropositionintacticmode.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 13 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151616438):
+#### [ Kenny Lau (Dec 13 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151616438):
 ```lean
 import tactic.interactive
 
@@ -36,13 +36,13 @@ in Exists.dcases_on H_1 (λ (D : X) (e : f D = {x : X | x ∉ f x}), ?m_1[H, H_1
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 13 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151616481):
+#### [ Kenny Lau (Dec 13 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151616481):
 somehow there's a strange goal if we use `let` instead of `have` with a proposition in tactic mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 13 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151616542):
+#### [ Kenny Lau (Dec 13 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151616542):
 compare this:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 13 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151616547):
+#### [ Kenny Lau (Dec 13 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151616547):
 ```lean
 import tactic.interactive
 
@@ -66,10 +66,10 @@ Exists.dcases_on (Hf {x : X | x ∉ f x})
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151618247):
+#### [ Kevin Buzzard (Dec 13 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151618247):
 Moral: don't use `let` with propositions?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151618280):
+#### [ Kevin Buzzard (Dec 13 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151618280):
 Background: Kenny just watched me giving a live Lean talk and I used `let` with a proposition :P
 
 

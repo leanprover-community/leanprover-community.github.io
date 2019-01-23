@@ -11,7 +11,7 @@ permalink: archive/116395maths/72538LongStoneCech.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 22 2019 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598228):
+#### [ Patrick Massot (Jan 22 2019 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598228):
 @**Reid Barton** https://github.com/leanprover/mathlib/blob/master/src/topology/stone_cech.lean#L253 takes forever to elaborate. Do you care if I change it to:
 ```lean
 instance stone_cech.t2_space : t2_space (stone_cech α) :=
@@ -31,22 +31,22 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 22 2019 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598235):
+#### [ Patrick Massot (Jan 22 2019 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598235):
 which I think is also easier to read by the way
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 22 2019 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598456):
+#### [ Reid Barton (Jan 22 2019 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598456):
 If it's faster go for it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 22 2019 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598640):
+#### [ Patrick Massot (Jan 22 2019 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598640):
 Thanks. I'm asking because this change will be hidden in a large reorganization PR (the second phase of the topology reorganization decided in Amsterdam).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 22 2019 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598653):
+#### [ Reid Barton (Jan 22 2019 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598653):
 Oh great, are you already working on that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 22 2019 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598677):
+#### [ Patrick Massot (Jan 22 2019 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598677):
 Yes. I'm splitting `topology.basic` and `topology.continuity`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 22 2019 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156599697):
+#### [ Patrick Massot (Jan 22 2019 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156599697):
 And guess what I learned? Non-finishing calls to `simp` are evil
 
 

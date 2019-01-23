@@ -11,7 +11,7 @@ permalink: archive/113488general/86899constructingaclassforih.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 17 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147882679):
+#### [ Gavid Liebnich (Nov 17 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147882679):
 Could anyone point me in a right direction in this proof?
 ```lean
 import data.vector data.list
@@ -58,7 +58,7 @@ end
 ```
 I don't suppose there is at all a way to construct a new `α` here for the `ih` in `yield_len`  - it's a `class`. Do I need to reformulate the entire statement? Or do I need to do induction over something different there?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 17 2018 at 17:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147883055):
+#### [ Kenny Lau (Nov 17 2018 at 17:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147883055):
 ```lean
 import data.vector data.list
 
@@ -94,13 +94,13 @@ lemma yield_len (m : α) : list.length (yield m) = c_mapper.n m :=
 (list.length_map _ _).trans $ (list.length_attach _).trans $ list.length_range _
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 17 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147884558):
+#### [ Gavid Liebnich (Nov 17 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147884558):
 Alright this works in this particular case, however, what if I actually need to do induction on something that will require a value of some class type - such as occurs in this case if I do happen to do induction and I get to a state with ih `∀ (m : α), yield m = xs → list.length xs = c_mapper.n m`. Providing this `m` doesn't seem possible to me, because it's just some `α` that's known to be `[c_mapper α]`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 17 2018 at 18:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147884574):
+#### [ Kenny Lau (Nov 17 2018 at 18:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147884574):
 I don't think induction on `yield m` is a good idea in this case anyway
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 17 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147884616):
+#### [ Gavid Liebnich (Nov 17 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147884616):
 What would one do induction on then?
 
 

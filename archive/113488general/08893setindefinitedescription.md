@@ -11,7 +11,7 @@ permalink: archive/113488general/08893setindefinitedescription.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 04 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150884816):
+#### [ Kenny Lau (Dec 04 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150884816):
 Is it possible to fill in this sorry?
 ```lean
 universes u
@@ -19,10 +19,10 @@ protected def set.indefinite_description {α : Type u}
   {p : set α → Prop} (h : ∃ s, p s) : { s : set α // p s} := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 04 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150885388):
+#### [ Reid Barton (Dec 04 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150885388):
 I guess you mean without adding `noncomputable`? Interesting question
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 05 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890461):
+#### [ Mario Carneiro (Dec 05 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890461):
 yes
 ```lean
 universes u
@@ -31,16 +31,16 @@ protected def set.indefinite_description {α : Type u}
 ⟨{x : α | x ∈ classical.some h}, classical.some_spec h⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 05 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890503):
+#### [ Mario Carneiro (Dec 05 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890503):
 I've mentioned before about "trivially computable" types, which includes subtypes of functions returning Prop
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 05 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890525):
+#### [ Mario Carneiro (Dec 05 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890525):
 Any term of such a type can be made computable with appropriate wrapping
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 05 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890612):
+#### [ Mario Carneiro (Dec 05 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890612):
 If you meant "without axioms", then no it's not possible, it would imply the axiom of choice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 05 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890927):
+#### [ Mario Carneiro (Dec 05 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890927):
 However there is an interesting construction here for *definite* description with no axioms (well extensionality)
 ```lean
 import data.set.basic
@@ -56,13 +56,13 @@ from set.ext $ λ x, ⟨λ xs, ⟨_, xs, ps, al⟩,
 this ▸ ps⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 05 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150891656):
+#### [ Kenny Lau (Dec 05 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150891656):
 @**Mario Carneiro** so... we can have a "computable" basis?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 05 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150891676):
+#### [ Mario Carneiro (Dec 05 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150891676):
 "computable" but not computable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 05 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150891740):
+#### [ Mario Carneiro (Dec 05 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150891740):
 when I revisited bases recently, we discussed changing the definition of a basis from a set to a family over a type. In that case it wouldn't be computationally irrelevant
 
 

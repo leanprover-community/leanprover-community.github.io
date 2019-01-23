@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/28653dontknowhowto.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Etienne Laurin (Aug 04 2018 at 00:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130864937):
+#### [ Etienne Laurin (Aug 04 2018 at 00:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130864937):
 Hi! I'm a C++ developer in Dublin. I'm trying to learn Lean by doing some exercises.
 ```lean
 variables {T : Type} {A B : T → Prop}
@@ -21,62 +21,62 @@ lemma t₂ : (∃ x, A x) ∨ (∃ x, B x) → ∃ x, (A x ∨ B x) :=
 ```
 t₁ works but t₂ fails with "don't know how to synthesize placeholder". How can I get Lean to tell me what/where this placeholder is? Is there something better than or.cases_on that I could be using?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865206):
+#### [ Mario Carneiro (Aug 04 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865206):
 There is a known issue with using projection notation in conjunction with `@[elab_as_eliminator]` definitions like `or.cases_on`. You can fix the proof by either not using projection notation, i.e. `or.cases_on h` instead of `h.cases_on`, or by using `h.elim` instead (which is basically the same as `or.cases_on` without the weird elaborator marking)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Etienne Laurin (Aug 04 2018 at 00:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865584):
+#### [ Etienne Laurin (Aug 04 2018 at 00:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865584):
 Thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865651):
+#### [ Kevin Buzzard (Aug 04 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865651):
 How can you tell `or.cases_on` is tagged `@[elab_as_eliminator]`? `#print or.cases_on` only tells me it's `@[reducible]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 00:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865788):
+#### [ Mario Carneiro (Aug 04 2018 at 00:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865788):
 Hm, that's interesting. `T.rec`, `T.rec_on`, and `T.cases_on` are automatically generated for every inductive type and are always treated as if they have `elab_as_eliminator` enabled, although you are right that there is no explicit indication of such. You can test it by making a copy of `or.cases_on` with exactly the definition `#print` says, and the lemma will typecheck; then if you add `elab_as_eliminator` you get exactly the same errors
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865850):
+#### [ Kevin Buzzard (Aug 04 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865850):
 `example : @or.cases_on = @or.elim := rfl`, and they're both there, so they must be different somehow ;-) It's how the elaborator elaborates them.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865947):
+#### [ Mario Carneiro (Aug 04 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865947):
 you should be aware that that's not the best way to check that two definitions are the same according to lean, that is only up to defeq which ignores annotations and bindings, as well as unifying universes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 00:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130866021):
+#### [ Mario Carneiro (Aug 04 2018 at 00:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130866021):
 Also, strange as it may sound I'm pretty sure there are duplicate definitions (completely identical) in lean. Often this has to do with renaming
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118119):
+#### [ Edward Ayers (Aug 08 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118119):
 I got this to work with 
 `λ h, or.cases_on h (λ ⟨x, p⟩, ⟨x, or.inl p⟩) (λ ⟨x, p⟩, ⟨x, or.inr p⟩)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118228):
+#### [ Edward Ayers (Aug 08 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118228):
 Can someone explain what the "synthesize placeholder" error actually means? It is by far the most common error I get and I currently get rid of it by making random transformations to the source until it goes away
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118304):
+#### [ Mario Carneiro (Aug 08 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118304):
 it means the proof is unfinished
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118316):
+#### [ Edward Ayers (Aug 08 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118316):
 proof that the term typechecks?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118320):
+#### [ Mario Carneiro (Aug 08 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118320):
 lean is saying "there is a missing part of the proof and I don't know how to fill it in"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118344):
+#### [ Mario Carneiro (Aug 08 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118344):
 No, the term itself is the proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118347):
+#### [ Edward Ayers (Aug 08 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118347):
 I often get it where the goal that it is trying to prove is `Type ?`. What should I do then?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118365):
+#### [ Mario Carneiro (Aug 08 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118365):
 That means there is a missing type somewhere
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118414):
+#### [ Mario Carneiro (Aug 08 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118414):
 for example, looking at the term you just gave without any other context, I can't figure out the type of `h`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118422):
+#### [ Mario Carneiro (Aug 08 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118422):
 I know it is an `or` of something but I don't know what
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118427):
+#### [ Mario Carneiro (Aug 08 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118427):
 so if I were lean I would say "couldn't synth placeholder `|- Type ?`"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119049):
+#### [ Edward Ayers (Aug 08 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119049):
 Ok let me paste some code where I can't figure out what it wants
 I put this file in `mathlib/category_theory/scratch.lean`
 ```
@@ -98,40 +98,40 @@ end category_theory
 ```
 And I get a synth `Type ?` error for `t` in `t2` but I can't figure out which type I am missing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119269):
+#### [ Reid Barton (Aug 08 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119269):
 Just looking at this (haven't built recent mathlib yet), I think the problem is that `t` "depends on" `C`, because of `include 𝒞`, but there's nothing in the type of `t` which can ever determine what `C` has to be.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119333):
+#### [ Edward Ayers (Aug 08 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119333):
 Ah, so if you are in a section and write `variables`, then all definitions in that section implicitly depend on these variables, even if they are not used in the definition?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119335):
+#### [ Reid Barton (Aug 08 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119335):
 And so there's no reason that `t`'s `C` in the use of `t` in `t2`needs to be the same as the `C` in `t2`, so Lean can't figure out how to assign it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119347):
+#### [ Reid Barton (Aug 08 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119347):
 Not in general, but using `include` forces the `variable` to be included as a parameter to every subsequent definition.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119364):
+#### [ Edward Ayers (Aug 08 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119364):
 Where can I find some docs on `include`? I find it cryptic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119365):
+#### [ Reid Barton (Aug 08 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119365):
 So if you show the full inferred type of `t`, it should begin `t : \Pi {C : Type u1} [𝒞 : category.{u1 v1} C] ...`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119421):
+#### [ Reid Barton (Aug 08 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119421):
 `𝒞`was included because of the `include`, and `C` was included because `𝒞` depends on it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119458):
+#### [ Edward Ayers (Aug 08 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119458):
 If I comment out `include`, then the `\hom` arrows become errors. How would I get rid of those errors without using `include`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119525):
+#### [ Edward Ayers (Aug 08 2018 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119525):
 It can't find evidence for `category D`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119547):
+#### [ Reid Barton (Aug 08 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119547):
 https://leanprover.github.io/theorem_proving_in_lean/tactics.html mentions `include`/`omit` in the first section. I don't remember whether it is also explained elsewhere in TPIL
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119558):
+#### [ Reid Barton (Aug 08 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119558):
 In this case, you could put `include 𝒟` between the definitions of `t` and `t2`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119625):
+#### [ Edward Ayers (Aug 08 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119625):
 Fixed code:
 ```lean
 import .category
@@ -152,10 +152,10 @@ namespace category_theory
 end category_theory
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119700):
+#### [ Reid Barton (Aug 08 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119700):
 Normally you could just omit the names `𝒞 : ` and `𝒟 : ` and the include statements and Lean would figure out where it needs the instance variables. The fact that that doesn't work here is some combination of there being extra universe parameters involved and a bug in Lean, I think.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119729):
+#### [ Edward Ayers (Aug 08 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119729):
 Ok but this then errors for me:
 ```lean
 import .category
@@ -176,50 +176,50 @@ namespace category_theory
 end category_theory
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119748):
+#### [ Edward Ayers (Aug 08 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119748):
 `kernel failed to type check declaration 't' this is usually due to a buggy tactic or a bug in the builtin elaborator`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119757):
+#### [ Edward Ayers (Aug 08 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119757):
 cool
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119821):
+#### [ Edward Ayers (Aug 08 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119821):
 which must be why it had `𝒞 : ` in to start with, to avoid the lean bug
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119827):
+#### [ Reid Barton (Aug 08 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119827):
 Yes. The reason is either that Lean doesn't know what universe parameters to specialize `⟶` to, or that there's a bug where including the instance variable doesn't cause `C` to also get included.  I don't remember the exact details any more.
 When you get that "kernel failed to type check declaration" error, it means it failed to include `C`, I think.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119926):
+#### [ Reid Barton (Aug 08 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119926):
 Right, the workaround is that when you manually tell it to include the `category` instance, then it can correctly infer that it needs `C` too. The downside is that now you are responsible for making sure the right variables are `include`d--if you have too many then you end up with your original issue.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119929):
+#### [ Edward Ayers (Aug 08 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119929):
 thanks so much for your help
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119952):
+#### [ Reid Barton (Aug 08 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119952):
 In general, this class of error can be tough to figure out. I don't know of a better way than thinking really hard about what Lean is trying to do and figuring out where it might be getting stuck.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119954):
+#### [ Reid Barton (Aug 08 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119954):
 No problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120046):
+#### [ Edward Ayers (Aug 08 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120046):
 It seems like solving these errors requires intimately knowing what the elaborator is doing.  And from what I know, the elaborator is very elaborate
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 08 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120215):
+#### [ Patrick Massot (Aug 08 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120215):
 ```quote
 Normally you could just omit the names `𝒞 : ` and `𝒟 : ` and the include statements and Lean would figure out where it needs the instance variables.
 ```
 I think this is not true. To me it seems Lean will always include these statements. That explains why we sometimes see unneeded or duplicate instance arguments, even in mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 08 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120241):
+#### [ Patrick Massot (Aug 08 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120241):
 ```quote
 It seems like solving these errors requires intimately knowing what the elaborator is doing.  And from what I know, the elaborator is very elaborate
 ```
 Unfortunately and fortunately, this is all very true.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 08 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120395):
+#### [ Edward Ayers (Aug 08 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120395):
 It would be great if when there was an elaborator error, a textbox appeared that you could enter the missing type or proof into.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120407):
+#### [ Mario Carneiro (Aug 08 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120407):
 Lean will include an unnamed typeclass variable when all of its dependencies are included (usually because they are mentioned directly in the statement or are dependencies of something mentioned). Like so:
 ```
 variables (A : Type) [group A]
@@ -227,13 +227,13 @@ example (x : A) : true := ... -- group A is included
 example : true := ... -- group A is not included
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 08 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120439):
+#### [ Patrick Massot (Aug 08 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120439):
 yes, this matches what I saw
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 08 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120443):
+#### [ Reid Barton (Aug 08 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120443):
 Yes, good point @**Patrick Massot**.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 08 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120505):
+#### [ Mario Carneiro (Aug 08 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120505):
 Lean will never include a named typeclass variable unless it is mentioned:
 ```
 variables (A : Type) [G : group A]
@@ -248,7 +248,7 @@ example (x : A) : true := ... -- group A is included
 example : true := ... -- group A is included
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 09 2018 at 00:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131137096):
+#### [ Scott Morrison (Aug 09 2018 at 00:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131137096):
 I will add some documentation about `include` right in the `category_theory` files, specialised to the use case there.
 
 Unfortunately `category C` has an unbound universe level, because we need to know the universe level of the morphisms, and this is not determined by the universe level of `C` itself. (This design decision is constrained by the desire to be able to write uniform code for small categories and large categories.)

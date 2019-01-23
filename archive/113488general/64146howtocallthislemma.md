@@ -11,7 +11,7 @@ permalink: archive/113488general/64146howtocallthislemma.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131039906):
+#### [ Johan Commelin (Aug 07 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131039906):
 ```lean
 lemma quux {A : Type*} [add_comm_group A] {n : ℕ} (f : fin (n+1) → A) : sum univ f = f n + sum univ (λ i : fin n, f i.raise) :=
 begin
@@ -19,25 +19,25 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131040023):
+#### [ Johan Commelin (Aug 07 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131040023):
 Ooh, and if you don't know a name, but you know a *proof*... that's fine too.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 07 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131040821):
+#### [ Kevin Buzzard (Aug 07 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131040821):
 Johan, I think Kenny might have generated a proof of this once, when I was trying to figure out induction.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 07 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131040877):
+#### [ Kevin Buzzard (Aug 07 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131040877):
 https://xenaproject.wordpress.com/2018/03/30/proofs-by-induction/
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 07 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131040889):
+#### [ Kevin Buzzard (Aug 07 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131040889):
 check out def4 in https://github.com/kckennylau/Lean/blob/master/proofs_by_induction.lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 07 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131040899):
+#### [ Kevin Buzzard (Aug 07 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131040899):
 Apparently it uses a lemma called `chris`. I'm not sure if this is the official mathlib-sanctioned name.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131041195):
+#### [ Johan Commelin (Aug 07 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131041195):
 Ok, thanks. I'll take a look in a minute!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 07 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042444):
+#### [ Chris Hughes (Aug 07 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042444):
 I proved a slightly weaker version
 ```lean
 lemma quux {A : Type*} [add_comm_group A] {n : ℕ} (f : fin (n+1) → A) :
@@ -51,41 +51,41 @@ sum_bij (λ a ha, ⟨a, lt_of_le_of_ne (nat.le_of_lt_succ a.2)
     by cases b; refl⟩)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042466):
+#### [ Johan Commelin (Aug 07 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042466):
 Why is it weaker?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042478):
+#### [ Johan Commelin (Aug 07 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042478):
 Also, apparently I ought to be using `finset.range`...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 07 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042484):
+#### [ Chris Hughes (Aug 07 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042484):
 I used `⟨n, nat.lt_succ_self _⟩` instead of `\u n`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042536):
+#### [ Johan Commelin (Aug 07 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042536):
 Aaah, but that is better.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042543):
+#### [ Johan Commelin (Aug 07 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042543):
 Silly me didn't understand that `\u n` is difficult.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042561):
+#### [ Johan Commelin (Aug 07 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042561):
 I think you can use `nat.le_refl _` for some golfing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042583):
+#### [ Johan Commelin (Aug 07 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131042583):
 But I will first think about the `finset.range` version. Maybe it becomes a whole lot easier.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131046567):
+#### [ Johan Commelin (Aug 07 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131046567):
 ```lean
 lemma quux {A : Type*} [add_comm_group A] (n : ℕ) (f : ℕ → A)
 : (finset.range (n+1)).sum f = f n + (finset.range n).sum f := by simp
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131046594):
+#### [ Johan Commelin (Aug 07 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131046594):
 So, that might not be even worth stating as a lemma.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 07 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131046619):
+#### [ Kenny Lau (Aug 07 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131046619):
 what's the use of this lemma if you could just `simp`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131046678):
+#### [ Johan Commelin (Aug 07 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131046678):
 That's exactly my point.
 
 

@@ -11,7 +11,7 @@ permalink: archive/113488general/99733Leanlovestactics.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 26 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128672482):
+#### [ Patrick Massot (Jun 26 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128672482):
 Why?
 ```clean
 
@@ -29,7 +29,7 @@ class bar' (X : Type) :=
 (prop : ∀ f ∈ foos, set.range f.map = univ) -- invalid field notation, type is not of the form (C ...) where C is a constant  f has type  ?m_1
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 26 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128672828):
+#### [ Simon Hudon (Jun 26 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128672828):
 I think that's because the type of `f` is not fully elaborated by the time `f.map` is parsed. If you wrote:
 
 ```lean
@@ -38,37 +38,37 @@ I think that's because the type of `f` is not fully elaborated by the time `f.ma
 
 I think that should work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 26 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128672972):
+#### [ Patrick Massot (Jun 26 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128672972):
 I guessed the issue comes from elaboration but couldn't see the fix
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 26 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128672977):
+#### [ Patrick Massot (Jun 26 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128672977):
 This fix indeed works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 26 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673023):
+#### [ Patrick Massot (Jun 26 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673023):
 In the mean time I also realize that defining an auxiliary function from `foo X` to `Prop` also works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 26 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673026):
+#### [ Patrick Massot (Jun 26 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673026):
 Thanks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 26 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673104):
+#### [ Simon Hudon (Jun 26 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673104):
 Also `has_mem` has two type parameters so the type of `∈` is not enough to impose a type on `f` until type class resolution
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 26 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673109):
+#### [ Simon Hudon (Jun 26 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673109):
 :+1:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 26 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673162):
+#### [ Patrick Massot (Jun 26 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673162):
 hum
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 26 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673304):
+#### [ Simon Hudon (Jun 26 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673304):
 Can I clarify something?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 26 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673320):
+#### [ Patrick Massot (Jun 26 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673320):
 I think I sort of see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 26 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673587):
+#### [ Chris Hughes (Jun 26 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673587):
 Does elaboration always happen before type class resolution?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 26 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673704):
+#### [ Simon Hudon (Jun 26 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128673704):
 I'm unsure whether elaboration is completed before type class resolution begins but most of it is done before type class resolution
 
 

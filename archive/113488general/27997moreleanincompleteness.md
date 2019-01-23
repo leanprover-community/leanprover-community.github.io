@@ -11,7 +11,7 @@ permalink: archive/113488general/27997moreleanincompleteness.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 04 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20lean%20incompleteness/near/124609074):
+#### [ Mario Carneiro (Apr 04 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20lean%20incompleteness/near/124609074):
 @**Gabriel Ebner** I found another place where I lie in the paper compared to lean's actual behavior:
 ```
 universe u

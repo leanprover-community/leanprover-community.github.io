@@ -11,7 +11,7 @@ permalink: archive/113488general/92086computevalueoffunction.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) jmc (Mar 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932056):
+#### [ jmc (Mar 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932056):
 Hi. Lean-newbie here. I've got a function f : \N \to \Z with a pretty involved definition. I would like to see what Lean thinks that the value of f is on 0,1,2,3 for example.
 My current approach has been:
 ```lean
@@ -21,7 +21,7 @@ and then just trying different values of n, until I am lucky. But there should b
 
 (Ok, I just saw there is a "new members" stream. If someone can move this topic overthere, please feel free to do so.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 19 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932203):
+#### [ Simon Hudon (Mar 19 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932203):
 Try:
 
 ```lean
@@ -31,52 +31,52 @@ Try:
 #eval f 3
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932204):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932204):
 You can just `#eval f x`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) jmc (Mar 19 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932212):
+#### [ jmc (Mar 19 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932212):
 Aah, thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 19 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932223):
+#### [ Simon Hudon (Mar 19 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932223):
 It uses the virtual machine so if `f` is computation intensive, this will ensure swift execution
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932268):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932268):
 If you want slow execution, you can try `#reduce f x` ;).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932273):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932273):
 (Also your `refl` trick made me giggle so you're awarded a pointless internet point.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 19 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932327):
+#### [ Simon Hudon (Mar 19 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932327):
 (I think we can use octopuses to award those internet points)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932332):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932332):
 What an excellent idea.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) jmc (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932348):
+#### [ jmc (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932348):
 Thanks for the point!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932349):
+#### [ Simon Hudon (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932349):
 thanks)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932352):
+#### [ Andrew Ashworth (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932352):
 the `rfl` thing is considered good style if you go by "Software Foundations"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932357):
+#### [ Andrew Ashworth (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932357):
 it's basically inline unit testing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932360):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932360):
 I have no recollection of that in SF o_O?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932361):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932361):
 Aaah right.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932362):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932362):
 You mean his auto-tests.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932423):
+#### [ Andrew Ashworth (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932423):
 yeah, for ex
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932425):
+#### [ Andrew Ashworth (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932425):
 ```coq
 Definition hd (default:nat) (l:natlist) : nat :=
   match l with
@@ -96,28 +96,28 @@ Example test_tl: tl [1;2;3] = [2;3].
 Proof. reflexivity. Qed.
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932428):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932428):
 Yeah absolutely.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932431):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932431):
 Oh boy that book is such an excellent introduction to these things.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932446):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932446):
 Compare that to CPDT... :-\.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Mar 19 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932448):
+#### [ Moses Schönfinkel (Mar 19 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932448):
 (Sorry Adam...)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932498):
+#### [ Andrew Ashworth (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932498):
 yeah, if you do 2 semesters of software foundations
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932500):
+#### [ Andrew Ashworth (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932500):
 first
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932503):
+#### [ Andrew Ashworth (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932503):
 maybe you can understand cpdt, except you still won't
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) jmc (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932504):
+#### [ jmc (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932504):
 Anyway, the function in question is the Ramanujan tau function (https://en.wikipedia.org/wiki/Ramanujan%27s_tau_function)
 Already `#reduce \tau 2` is extremely slow for my implementation.
 But `#eval \tau 4` is pretty fast. And the first 5 values are correct (^;

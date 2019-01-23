@@ -11,25 +11,25 @@ permalink: archive/113489newmembers/19171builtintactics.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 15 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134011488):
+#### [ Olli (Sep 15 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134011488):
 is there an even simpler way to write `{ left, assumption} <|> { right, assumption }` ?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 15 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134011636):
+#### [ Kenny Lau (Sep 15 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134011636):
 `simp*`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 15 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134011708):
+#### [ Olli (Sep 15 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134011708):
 thanks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 15 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134012389):
+#### [ Olli (Sep 15 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134012389):
 is there a way to do pattern matching in tactic mode?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 15 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134012448):
+#### [ Olli (Sep 15 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134012448):
 if there was I would think it'd be with the `let` tactic, but I can't seem to get it to work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 15 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134012572):
+#### [ Chris Hughes (Sep 15 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134012572):
 rcases
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 15 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134023310):
+#### [ Olli (Sep 15 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134023310):
 how come I can't just repeat `constructor` here:
 ```lean
 example {p q} : ¬(p ∨ q) → ¬p ∧ ¬q := 
@@ -61,21 +61,21 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 15 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134023364):
+#### [ Kenny Lau (Sep 15 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134023364):
 Lean can't possibly know which constructor to use
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 15 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134023405):
+#### [ Olli (Sep 15 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134023405):
 hmm I see, I was originally trying to write it as `repeat { constructor, assumption }`, but yeah I think I understand how this is ambigious
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 15 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134025252):
+#### [ Kevin Buzzard (Sep 15 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134025252):
 Some symmetries in maths are lost in computer science. Or and And are different types of things. And only has one constructor (to prove `and p q` you have to supply both a proof of `p` and a proof of `q` all in one go) but Or has two (to prove `or p q` you have two choices). If you look at the definitions as inductive types by right clicking on `and` or `or` in a working Lean session and peeking at the definition you will see this. For inductive types with one constructor like `and` or `subtype` or `group` the `constructor` tactic does a predictable thing. For types like `or` with more than one constructor the tactic just, I think, chooses the first one, so for `or` I think `constructor` does the same as `left`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 15 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134025625):
+#### [ Olli (Sep 15 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134025625):
 yeah it's probably a good idea to avoid using `constructor` with types having more than one constructor then?
 
 so far my strategy for solving these exercises has been just staring at the tactic state while trying to make progress and not giving too much thought to what is happening in the bigger picture, and this is working surprisingly well, but there are some traps like this that lead to dead-ends
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 15 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134025763):
+#### [ Mario Carneiro (Sep 15 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134025763):
 you can use constructor as long as only one of the constructors is applicable
 
 

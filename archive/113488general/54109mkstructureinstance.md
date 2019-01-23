@@ -11,16 +11,16 @@ permalink: archive/113488general/54109mkstructureinstance.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 08:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509507):
+#### [ Keeley Hoek (Nov 12 2018 at 08:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509507):
 What does the `sources` field of the `structure_instance_info` structure (for passing to `mk_structure_instance`) do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 08:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509520):
+#### [ Keeley Hoek (Nov 12 2018 at 08:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509520):
 Also, what does `pexpr.mk_field_macro` do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Nov 12 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509563):
+#### [ Sebastian Ullrich (Nov 12 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509563):
 `{..source1, ..source2}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 12 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509567):
+#### [ Keeley Hoek (Nov 12 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509567):
 ah! duh thanks
 
 

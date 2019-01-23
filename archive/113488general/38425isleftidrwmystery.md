@@ -11,7 +11,7 @@ permalink: archive/113488general/38425isleftidrwmystery.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570810):
+#### [ Patrick Massot (Apr 23 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570810):
 ```lean
 example (R : Type) (op nil a) [is_left_id R op nil] : op nil a = a := by rw is_left_id.left_id
 ```
@@ -28,45 +28,45 @@ _inst_2 : is_left_id.{0} R op nil
 ⊢ @eq.{1} R (op nil a) a
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570848):
+#### [ Patrick Massot (Apr 23 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570848):
 I know I could use `is_left_id.left_id _ _` in place of the rw
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570853):
+#### [ Patrick Massot (Apr 23 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570853):
 But in my real use case I want to rewrite
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570855):
+#### [ Patrick Massot (Apr 23 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570855):
 (or simp would be even better)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 23 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570941):
+#### [ Kenny Lau (Apr 23 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570941):
 ```lean
 example (R : Type) (op nil a) [is_left_id R op nil] : op nil a = a := by rw is_left_id.left_id op a
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571019):
+#### [ Patrick Massot (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571019):
 interesting
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571036):
+#### [ Patrick Massot (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571036):
 doesn't explain why unification fails though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571042):
+#### [ Kenny Lau (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571042):
 probably because that is a higher-order unification
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571047):
+#### [ Kenny Lau (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571047):
 https://en.wikipedia.org/wiki/Unification_(computer_science)#Higher-order_unification
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571048):
+#### [ Kenny Lau (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571048):
 it is undecidable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571051):
+#### [ Patrick Massot (Apr 23 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571051):
 Oh I think you're right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 16:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571140):
+#### [ Patrick Massot (Apr 23 2018 at 16:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125571140):
 @**Mario Carneiro** is this part of why you don't believe in the new algebraic hierarchy? Or is it possible to recover a working simp lemma here?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 23 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125575939):
+#### [ Mario Carneiro (Apr 23 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125575939):
 Yes, this is the main problem with the new alg hierarchy. To be fair to Leo, he's been aware of this problem since the start, and the `algebra` attribute is part of a plan to fix it, but it requires more lean support than it currently gets. It should be a part of lean 4
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Apr 23 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125576476):
+#### [ Patrick Massot (Apr 23 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125576476):
 Ok, it makes sense. Do you agree that the new hierarchy seems more suitable if we want a big_op library that is really operator centric as in mathcomp?
 
 

@@ -11,22 +11,22 @@ permalink: archive/113488general/26591palindromes.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591860):
+#### [ Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591860):
 For recreational reasons I was interested in working with lists which were palindromes, i.e. lists `G` satisfying `G = list.reverse G`. I wanted to prove a bunch of stuff about these things but I couldn't prove anything by induction because lists don't decompose like that. I wanted to write a general `G` of length 2 or more as `G=[head G] ++ middle G ++ [head G]` and have a recursor of the form `C [] -> C [x] -> forall palindromes H, C H -> C ([a] ++ H ++ [a]) -> forall palindromes G, C G`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591884):
+#### [ Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591884):
 What is the idiomatic way to do this in Lean? I am at the stage now where I could probably get several methods to go through
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591886):
+#### [ Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591886):
 but I would like to choose the one with the least pain.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591890):
+#### [ Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591890):
 Should I actually make a new inductive type?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 03 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593010):
+#### [ Mario Carneiro (Apr 03 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593010):
 You should look at `list.reverse_rec_on` for a similar eliminator. You could encode it as an inductive predicate, and then prove that it is equivalent to `g = list.reverse g`, or you could prove the eliminator you wrote with `palindromes` defined using reverse
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 03 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593011):
+#### [ Chris Hughes (Apr 03 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593011):
 I stopped as soon as it got hard
 ```lean
 inductive  palindrome : list α →  Prop
@@ -44,82 +44,82 @@ end), list.rec_on l (λ h, palindrome.nil)
 (λ a l h, begin apply list.reverse_rec_on l, end)⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 03 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593343):
+#### [ Mario Carneiro (Apr 03 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593343):
 In the cons case you have `a::l = list.reverse (a::l) = l.reverse ++ [a]`. By cases on `l.reverse`, if `l.reverse = []` then `a::l = [a]` is a palindrome, and if `l.reverse = b::l'` then `a::l = b::l'++[a]` so `a = b` and `l = l' ++ [a]`, so `a :: l'.reverse = l.reverse = a::l'` and hence `l' = l'.reverse`, so `l'` is a palindrome by IH and hence `a::l` is a palindrome
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 03 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594253):
+#### [ Chris Hughes (Apr 03 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594253):
 Is there a lemma saying `a :: l = b :: m -> a = b`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594260):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594260):
 no_confusion
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594271):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594271):
 or cons_inj or whatever
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 03 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594377):
+#### [ Chris Hughes (Apr 03 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594377):
 cons_inj tells me about the lists being equal.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 03 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594398):
+#### [ Sebastian Ullrich (Apr 03 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594398):
 or the `injection` tactic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 03 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594462):
+#### [ Chris Hughes (Apr 03 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594462):
 Thanks @**Sebastian Ullrich** I'd never used injection successfully before.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595081):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595081):
 `example {β : Type*} (a b : β) (l m : list β) : a :: l = b :: m -> a = b :=  λ H, (list.cons.inj H).1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595142):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595142):
 I feel confident with this sort of stuff now I've seen how it all works.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595241):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595241):
 `example {β : Type*} (a b : β) (l m : list β) : a :: l = b :: m -> a = b := λ H, @list.no_confusion _ _ (a::l) (b::m) H (λ x y,x)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595265):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595265):
 Chris, it was your questioning a week last Thurs which pushed me to learn this stuff. We didn't quite go as far as we should have done. We looked at no_confusion for bool and nat, but if you look at it for list you see how all the terms involved in the constructors are used.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595342):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595342):
 ``` 
 variables {a b : β} {L M : list β} {P : Type}
 #reduce list.no_confusion_type P (a::L) (b::M) -- (a = b → L = M → P) → P
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595391):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595391):
 You use no_confusion to make an instance of that type.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595732):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595732):
 ```quote
 In the cons case you have `a::l = list.reverse (a::l) = l.reverse ++ [a]`. By cases on `l.reverse`, if `l.reverse = []` then `a::l = [a]` is a palindrome, and if `l.reverse = b::l'` then `a::l = b::l'++[a]` so `a = b` and `l = l' ++ [a]`, so `a :: l'.reverse = l.reverse = a::l'` and hence `l' = l'.reverse`, so `l'` is a palindrome by IH and hence `a::l` is a palindrome
 ```
 For me, I can prove l' = l'.reverse but the inductive hypothesis doesn't let me conclude l' is a palindrome, the inductive hypothesis the way I've set it up says at this point that if (a::l') is its own reverse then (a::l') is a palindrome.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595764):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595764):
 Somehow this is exactly the issue I keep running into: list has the wrong recursor for me.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 03 2018 at 23:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595820):
+#### [ Kevin Buzzard (Apr 03 2018 at 23:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595820):
 I can see that because I have `list.rec_on` and `list.reverse_rec_on` I should have all I need, but I don't know what `C` should be in some sense (what is `C` called? The motive?)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 04 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124596524):
+#### [ Chris Hughes (Apr 04 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124596524):
 I've been struggling with this too. I think the best would be some sort of strong induction on the list.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 04 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597147):
+#### [ Mario Carneiro (Apr 04 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597147):
 You should do strong induction on the length of the list
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 04 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597485):
+#### [ Kenny Lau (Apr 04 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597485):
 @**Kevin Buzzard** you could use a custom recursor
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 04 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597486):
+#### [ Kenny Lau (Apr 04 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597486):
 see https://github.com/kckennylau/Lean/blob/master/recursion.lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 04 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597487):
+#### [ Kenny Lau (Apr 04 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597487):
 for an example
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ching-Tsun Chou (Apr 04 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124599343):
+#### [ Ching-Tsun Chou (Apr 04 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124599343):
 The trick to prove the lemma Chris wants to prove is to consider the two cases (a) length l = 2*n and (b) length l = 2*n + 1 separately and then use induction on n in each case.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 04 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124599350):
+#### [ Kenny Lau (Apr 04 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124599350):
 omg someone from hong kong
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 04 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638255):
+#### [ Chris Hughes (Apr 04 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638255):
 Finally did it. 
 ```lean
 inductive palindrome : list α → Prop
@@ -161,13 +161,13 @@ end
 using_well_founded {rel_tac := λ _ _, `[exact ⟨_, measure_wf length⟩]}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 04 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638434):
+#### [ Kevin Buzzard (Apr 04 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638434):
 Yes, I did it too. Here's the reason I was asking: Q1(c) of http://www.olympiad.org.uk/papers/2015/bio/round_one.html
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 04 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638445):
+#### [ Kevin Buzzard (Apr 04 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638445):
 My son wrote code to do Q1(a) so I thought I'd write code to do Q1(c) because I thought that the idea of writing code to do 1c would be interesting to him.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 04 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639841):
+#### [ Kevin Buzzard (Apr 04 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639841):
 FWIW:
 ```lean
 import data.list
@@ -245,19 +245,19 @@ end
 end palindrome
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 04 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639896):
+#### [ Kevin Buzzard (Apr 04 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639896):
 My code didn't get highlighted. Possibly because the FWIW was in the same post.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 04 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639900):
+#### [ Kevin Buzzard (Apr 04 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639900):
 No wait Chris also didn't post a pure code post
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 04 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639914):
+#### [ Kevin Buzzard (Apr 04 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639914):
 Aah got it, you have to write `lean` after the three backticks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 04 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124640132):
+#### [ Kevin Buzzard (Apr 04 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124640132):
 Oh Chris you didn't use strong induction for the main theorem! (`palindrome_of_eq_reverse`). I made an aux lemma saying "forall n, if list length is n then blah" and applied strong induction to n, and then deduced the statement we wanted as a trivial corollary.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 04 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124640484):
+#### [ Chris Hughes (Apr 04 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124640484):
 I did use strong induction, note ` using_well_founded {rel_tac := λ _ _, ``[exact ⟨_, measure_wf length⟩]} `
 
 I also did question 1a, although in 2^(2^n) time, so I might lose some points for that.
@@ -269,74 +269,74 @@ def  block_palindromes (l : list α) [decidable_eq α] := (sublists (sublists l)
 (λ m : list (list α), palindrome m ∧ m.foldl (++) nil = l)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 04 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124641990):
+#### [ Mario Carneiro (Apr 04 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124641990):
 haha that solution
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 04 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124642031):
+#### [ Mario Carneiro (Apr 04 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124642031):
 You should write the deterministic bogosort, which enumerates permutations until it finds the sorted one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 04 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124642035):
+#### [ Kevin Buzzard (Apr 04 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124642035):
 The mark scheme is just a bunch of tests, and you have to pass each one in under a second to get the marks.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644819):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644819):
 So I finished the proof that the word has to have an even number of letters.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644823):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644823):
 My proof was 240 lines, longer than my son's program to do 1(a).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644873):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644873):
 But I had to develop some concepts from scratch; in a parallel universe they would have already been in some library.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644889):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644889):
 It was quite an interesting task. The question is about the following definition:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644891):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644891):
 ```lean
 definition  listunfold : list (list α) → list α
 | [] := []
 | (a :: L) := a ++ (listunfold L)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644939):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644939):
 but then I had to write `listunfold_append : listunfold (G1 ++ G2) = listunfold G1 ++ listunfold G2` and `listunfold_singleton`and so on
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644960):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644960):
 And similarly for `palindrome` (the inductive prop) I had to prove palindrome iff L = reverse L
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 05 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644967):
+#### [ Chris Hughes (Apr 05 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644967):
 Listunfold could also be defined as a fold. Then those two lemmas are probably there already because of associativity
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645013):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645013):
 Is that right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645022):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645022):
 I feel like if I defined it as a fold then I would then have to prove the two things I've used for my definition immediately afterwards
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645024):
+#### [ Chris Hughes (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645024):
 Not in that exact form, but they'd be quite easy.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645025):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645025):
 and then the same proof for my append and singleton :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645031):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645031):
 Oh everything was easy, but of course because this was recreational I did it all in tactic mode so my proofs go on for ages :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645032):
+#### [ Chris Hughes (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645032):
 Those two things are lemmas about fold probably
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645079):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645079):
 You might well be right. I feel like I know enough Lean to write the definitions and basic properties of these new concepts like listunfold or palindrome
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645080):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645080):
 but
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645084):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645084):
 I feel like if I really knew everything that was already there, properly, then I would write things far more efficiently.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 05 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645097):
+#### [ Chris Hughes (Apr 05 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645097):
 It's not about knowing what's there, it's knowing what's probably there.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 05 2018 at 03:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124650234):
+#### [ Mario Carneiro (Apr 05 2018 at 03:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124650234):
 Your `listunfold` is defined in core and proven in mathlib, by the name `list.join`. It is the monad "flattening" operation for lists
 
 

@@ -11,10 +11,10 @@ permalink: archive/113488general/19351localattributeinstanceclassicalpropdecidab
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 04 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20attribute%20%5Binstance%5D%20classical.prop_decidable/near/135138169):
+#### [ Kenny Lau (Oct 04 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20attribute%20%5Binstance%5D%20classical.prop_decidable/near/135138169):
 I think it's just `local attribute [instance] classical.dec` now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 04 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20attribute%20%5Binstance%5D%20classical.prop_decidable/near/135138174):
+#### [ Kenny Lau (Oct 04 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20attribute%20%5Binstance%5D%20classical.prop_decidable/near/135138174):
 just an announcement to the classical people here
 
 

@@ -11,7 +11,7 @@ permalink: archive/113488general/86354simpconfigplaceholder.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Oct 01 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp_config%20placeholder/near/134955856):
+#### [ Sean Leather (Oct 01 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp_config%20placeholder/near/134955856):
 I just discovered this by accident:
 
 ```lean
@@ -41,7 +41,7 @@ context:
      discharger := tactic.failed unit}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 01 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp_config%20placeholder/near/134961539):
+#### [ Reid Barton (Oct 01 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp_config%20placeholder/near/134961539):
 Nice! `rw [] _` also works to see `rw` options.
 
 

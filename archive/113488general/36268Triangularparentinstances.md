@@ -11,7 +11,7 @@ permalink: archive/113488general/36268Triangularparentinstances.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Dec 16 2018 at 05:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864665):
+#### [ Nicholas Scheel (Dec 16 2018 at 05:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864665):
 Is there any way to work around this error?
 ```
 synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
@@ -21,25 +21,25 @@ inferred
 ```
 (I have two classes, `steppable` and `mergeable` that both extend `functor`, and I'm using them both as assumptions for some generic code I am writing)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 16 2018 at 05:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864720):
+#### [ Chris Hughes (Dec 16 2018 at 05:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864720):
 I think you more or less have to create a new class `steppable_and_mergeable`. I don't think there's another way.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Dec 16 2018 at 05:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864731):
+#### [ Nicholas Scheel (Dec 16 2018 at 05:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864731):
 Okay, that's what I figured ...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 16 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864777):
+#### [ Chris Hughes (Dec 16 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864777):
 There is actually another way. Change the definition of `mergeable` and `steppable` to take `[functor]` as an argument instead of extending `functor`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Dec 16 2018 at 05:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864894):
+#### [ Nicholas Scheel (Dec 16 2018 at 05:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864894):
 I see; that could work, but it seems it doesn't play nicely with `out_param` then
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 16 2018 at 05:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864940):
+#### [ Chris Hughes (Dec 16 2018 at 05:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864940):
 I know nothing about `out_param`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Dec 16 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151888684):
+#### [ Simon Hudon (Dec 16 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151888684):
 What's your worry about out_param?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Dec 16 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151888986):
+#### [ Nicholas Scheel (Dec 16 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151888986):
 Oh hm. I was getting this error, but also marking the instance as `out_param` seemed to fix it:
 ```
 don't know how to synthesize placeholder
@@ -61,7 +61,7 @@ class steppable (t : Type u) (f : out_param $ Type u → Type u) [out_param $ fu
 (step : t ≃ f t)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Dec 16 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151892913):
+#### [ Sebastian Ullrich (Dec 16 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151892913):
 There shouldn't be any need for that instance param if it's not used in the class body
 
 

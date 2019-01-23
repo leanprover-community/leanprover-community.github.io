@@ -11,7 +11,7 @@ permalink: archive/113488general/26345leofltofle.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 25 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693526):
+#### [ Chris Hughes (Apr 25 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693526):
 Should we prove `le_of_lt_of_le` so this stuff works?
 ```lean
 example {a b c : ℕ} (h : a < b) (h₁ : b ≤ c) : a ≤ c :=
@@ -25,22 +25,22 @@ calc a < b : h
    ... ≤ c : h₁ 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693595):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693595):
 I've run into that before
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693597):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693597):
 You have to remember to apply le_of_lt before starting the calc :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693605):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693605):
 I like the idea.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693695):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693695):
 dammit I want the proof to be `le_of_lt $ lt_of_lt_of_le`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693696):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693696):
 :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 25 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693709):
+#### [ Kevin Buzzard (Apr 25 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693709):
 `λ x y, le_of_lt $ lt_of_lt_of_le x y` looks like you're missing a trick
 
 

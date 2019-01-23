@@ -11,31 +11,31 @@ permalink: archive/113488general/21691simpinsideexpressionswithcoetofunsometimes
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948850):
+#### [ Scott Morrison (Aug 06 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948850):
 I've been trying to implement @**Johannes Hölzl** request that in my baby PR for category theory I use coercions to allow applying a functor to an object, as `F X`, rather than having to either write explicitly `F.onObjects X`, or introduce some awkward notation, such as `F +> X`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948858):
+#### [ Scott Morrison (Aug 06 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948858):
 I would very much like to do this, but I also want to be confident that this doesn't mess up the nice and easy automation I have throughout my category theory library.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948897):
+#### [ Scott Morrison (Aug 06 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948897):
 Unfortunately, I seem to have run into a problem, which is a strange interaction between coercions and the simplifier.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948901):
+#### [ Scott Morrison (Aug 06 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948901):
 Hopefully someone here will explain how to get around this! I fear that the fix would require tweaking the simplifier, which is out of bounds at the moment.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948911):
+#### [ Scott Morrison (Aug 06 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948911):
 In any case, here is a self-contained piece of code, containing some very cut down definitions from the category theory library, that demonstrates the problem.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948964):
+#### [ Scott Morrison (Aug 06 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948964):
 Essentially, it is that `simp` sometimes can't rewrite under a coercion, because it can't build the proof terms (in particular, it can't build some `congr_arg` terms, because of a type checking subtlety).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948985):
+#### [ Scott Morrison (Aug 06 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948985):
 This has the result that in order to be able to use `simp` successfully, I'll have to provide two versions of many lemmas: one for use by humans, that refer to the coercions, and one for use by `simp` (after applying `unfold_coes` to unfold all the coercions), that don't refer to the coercions.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948986):
+#### [ Scott Morrison (Aug 06 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948986):
 In my mind, that's worse than not having the coercions available in the first place.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949027):
+#### [ Scott Morrison (Aug 06 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949027):
 ````
 import tactic.interactive
 
@@ -127,73 +127,73 @@ begin
 end
 ````
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949286):
+#### [ Mario Carneiro (Aug 06 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949286):
 I've seen this issue before. Unfortunately `simp` does not rewrite inside coercions because they are apparently dependent functions (the nondependency is only visible after you unfold the definition)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949293):
+#### [ Scott Morrison (Aug 06 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949293):
 Exactly!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949304):
+#### [ Scott Morrison (Aug 06 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949304):
 This is related to why I was writing a `mk_congr_arg_using_dsimp` tactic [above](https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/congr_arg.20and.20superficially.20dependent.20functions/near/130827909). (The idea being that if you `dsimp` the function first, sometimes you see that it's not actually a dependent function.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949367):
+#### [ Mario Carneiro (Aug 06 2018 at 02:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949367):
 I would look into fixing the congr lemma generation to use this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949411):
+#### [ Scott Morrison (Aug 06 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949411):
 Is that something which is fixable? Or is it frozen waiting for Lean 4?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949414):
+#### [ Mario Carneiro (Aug 06 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949414):
 there is always the option of making `simp'`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949419):
+#### [ Scott Morrison (Aug 06 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949419):
 I see. But isn't much of `simp` written in C++?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949428):
+#### [ Scott Morrison (Aug 06 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949428):
 Could we make a patched `simp'` that had similar performance?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949435):
+#### [ Mario Carneiro (Aug 06 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949435):
 probably not, but if you use it only when necessary it should be palatable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949483):
+#### [ Mario Carneiro (Aug 06 2018 at 02:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949483):
 I think you can use `ext_simplify_core` to hook into the traversal part without messing with the core of `simp`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949485):
+#### [ Scott Morrison (Aug 06 2018 at 02:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949485):
 eek... but my automation really relies on `simp` just doing its thing. As things are, I don't think there's any way to distinguish between the situations "simp failed to do anything" and "simp would have worked, but broke trying to construct a `congr_arg`"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949493):
+#### [ Scott Morrison (Aug 06 2018 at 02:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949493):
 So it's not like I could just write a tactic that says "do `simp`, unless that breaks, in which case retry with `simp'`".
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949495):
+#### [ Scott Morrison (Aug 06 2018 at 02:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949495):
 Okay, I will investigate `ext_simplify_core` again. I once knew how that worked, but have forgotten.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949551):
+#### [ Mario Carneiro (Aug 06 2018 at 02:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949551):
 By the way, `dsimp` works under dependent functions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949557):
+#### [ Mario Carneiro (Aug 06 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949557):
 so in particular it works in `test`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Aug 06 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949606):
+#### [ Sebastian Ullrich (Aug 06 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949606):
 Without having thought about it too hard, could a custom congr lemma for non-dependent coercions work?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949607):
+#### [ Mario Carneiro (Aug 06 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949607):
 Does `simp` use `@[congr]` lemmas?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949628):
+#### [ Scott Morrison (Aug 06 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949628):
 While I've got your attention on this, would you mind having a look at my [`mk_congr_arg_using_dsimp`](https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/congr_arg.20and.20superficially.20dependent.20functions/near/130827909) and see if there is a way to avoid polluting the goal with extra hypotheses as a side effect? I'm pretty unhappy about that hack.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949672):
+#### [ Scott Morrison (Aug 06 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949672):
 Yes; I know `dsimp` works fine, and indeed in my automation I always attempt `dsimp` before `simp`; sorry if this minimised example is too minimised, but I certainly have cases where `simp` is failing because of this effect.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949675):
+#### [ Scott Morrison (Aug 06 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949675):
 @**Mario Carneiro**, sorry, I don't know what you mean by "Does `simp` use `@[congr]` lemmas?".
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949740):
+#### [ Mario Carneiro (Aug 06 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949740):
 Simp works by using congruence lemmas generated by `mk_congr_lemma` for traversal. If it also accepts user lemmas marked `@{congr]`, then this would solve all our problems, because we could craft congr lemmas for looking through apparently dependent functions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949748):
+#### [ Scott Morrison (Aug 06 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949748):
 Ah, I see!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949806):
+#### [ Mario Carneiro (Aug 06 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949806):
 Also, looking at the coercion in your example, it is in fact a dependent function:
 ```
 instance {F G : C ↝ D} : has_coe_to_fun (F ⟹ G) :=
@@ -202,33 +202,33 @@ instance {F G : C ↝ D} : has_coe_to_fun (F ⟹ G) :=
 ```
 so why is this legitimate in this case?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Aug 06 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949818):
+#### [ Sebastian Ullrich (Aug 06 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949818):
 @**Mario Carneiro** I think so? https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/src/library/tactic/simplify.cpp#L739-L740 `simp` is the reason `[congr]` was introduced, afaik
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949820):
+#### [ Scott Morrison (Aug 06 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949820):
 The problem is that for particular values of `α`, that dependent function might `dsimp` to a non-dependent function.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949862):
+#### [ Mario Carneiro (Aug 06 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130949862):
 I thought `[congr]` was used for `calc`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Aug 06 2018 at 02:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130950017):
+#### [ Sebastian Ullrich (Aug 06 2018 at 02:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130950017):
 I'm not aware of `calc` using anything other than `[trans]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130950538):
+#### [ Scott Morrison (Aug 06 2018 at 02:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130950538):
 Are there any places I can look to find `@[congr]` used in conjunction with `simp`? I'm finding the C++ code pretty hard going.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130950675):
+#### [ Scott Morrison (Aug 06 2018 at 02:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130950675):
 I guess I just found @**Gabriel Ebner**'s example at https://github.com/leanprover/lean/commit/6bd3fe24493c1748c8cfd778f63a3b832c6e6ba7#diff-db6c06d0649a66f8bbfc76e59b15cef2, but I'm still not sure what's going on. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130951668):
+#### [ Scott Morrison (Aug 06 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130951668):
 Okay, I am for now failing to work out how to use @[congr] to help `simp` work better, or to write my own `simp'` that uses `ext_simplify_core`. I'm happy to continue investigating both options, and very happy if someone else does this. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130951718):
+#### [ Scott Morrison (Aug 06 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130951718):
 In the meantime, could I propose, @**Johannes Hölzl** and @**Mario Carneiro**, that in my category theory PR we defer the issue of adding coercions for functors acting on objects, and not consider that an obstacle for merging this PR?
 
 If we can solve the issue here, of course I would love to add these coercions. In the meantime, it is not very expensive to write out the coercions, or have notations for them. I would really like to get this PR done, without breaking the possibility of good automation.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130951764):
+#### [ Mario Carneiro (Aug 06 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130951764):
 Damn! I figured out what congr lemma to use, but lean doesn't accept it :/
 ```
 
@@ -244,10 +244,10 @@ congr_fun (congr_arg coe_fn h) _
 -- resulting type must be of the form (coe_fn x_1 ... x_n), where each x_i is a distinct variable or a sort
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130951827):
+#### [ Mario Carneiro (Aug 06 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130951827):
 even worse, the error is garbage because it didn't parse the statement correctly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130951879):
+#### [ Mario Carneiro (Aug 06 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130951879):
 notice that `congr` fails on this proof for completely the wrong reason:
 ```
 theorem NaturalTransformation.coe_congr
@@ -265,10 +265,10 @@ by do {
 --   ⇑?m_2 = ⇑?m_2
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 03:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130952264):
+#### [ Mario Carneiro (Aug 06 2018 at 03:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130952264):
 For the purpose of this PR, how about adding the coercions, but add a simp lemma that unfolds the coercions and make simp lemmas that don't use the coercions. That way users can use the coercions but they won't interfere with `simp`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 03:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130952475):
+#### [ Mario Carneiro (Aug 06 2018 at 03:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130952475):
 @**Sebastian Ullrich** I think the coe_fn typeclass needs to be fixed so that lean knows it's a pi type:
 ```
 class has_coe_to_fun (a : Sort u) : Sort (max u (v+1) (w+1)) :=
@@ -281,34 +281,34 @@ class has_coe_to_sort (a : Sort u) : Type (max u v) :=
 ```
 Any chance of at least getting these into lean 4?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130952782):
+#### [ Scott Morrison (Aug 06 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130952782):
 Okay, I will try out that approach. You're right that it will probably work. The only downside is that `simp` will produce 'ugly' output that looks different from what the humans are used to.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 04:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130952921):
+#### [ Mario Carneiro (Aug 06 2018 at 04:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130952921):
 of course it already does this enough that we have techniques like "use `simp` terminally" and "use `simpa`" to mitigate this problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 04:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953261):
+#### [ Scott Morrison (Aug 06 2018 at 04:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953261):
 Okay. So now I'm left with the question of how much _I_ should use the coercion in the library development.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 04:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953269):
+#### [ Scott Morrison (Aug 06 2018 at 04:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953269):
 I'm inclined to barely use it! That is, provide the coercion, and a simp lemma that unfolds it, but otherwise ignore it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 04:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953275):
+#### [ Scott Morrison (Aug 06 2018 at 04:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953275):
 Is that okay? Or is that making life unpleasant for a user?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953318):
+#### [ Scott Morrison (Aug 06 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953318):
 The alternative is to carefully go through, introducing use of the coercion everywhere except in simp lemmas, I guess.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 04:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953809):
+#### [ Mario Carneiro (Aug 06 2018 at 04:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953809):
 I think you should handle it like `sub`. Write lemmas using it, but also add simp lemma versions of the theorems when applicable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 04:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953855):
+#### [ Mario Carneiro (Aug 06 2018 at 04:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953855):
 these should be one liners or restatements
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 04:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953858):
+#### [ Mario Carneiro (Aug 06 2018 at 04:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953858):
 the user will want to use coercions whenever possible, so there should be lemmas supporting this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953864):
+#### [ Mario Carneiro (Aug 06 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130953864):
 besides, I haven't lost hope of an automation solution to this, we're talking about a workaround here
 
 

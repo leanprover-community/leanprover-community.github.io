@@ -11,7 +11,7 @@ permalink: archive/116395maths/66636complexformsuniformspace.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222007):
+#### [ Kenny Lau (Oct 05 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222007):
 ```lean
 import analysis.real analysis.complex
 
@@ -54,10 +54,10 @@ hxi : filter.map complex.im f ≤ nhds xi
 ```
 half-completed proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 01:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222089):
+#### [ Kenny Lau (Oct 05 2018 at 01:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222089):
 @**Andreas Swerdlow**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222945):
+#### [ Kenny Lau (Oct 05 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222945):
 ```lean
 import analysis.real analysis.complex
 
@@ -102,28 +102,28 @@ have filter.tendsto (λ z:ℂ, (z.re + z.im * complex.I:ℂ)) f (nhds _),
 ⟨(xr+xi*complex.I), by rw [funext complex.re_add_im] at this; rw [← (filter.map_id : _ = f)]; exact this⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222946):
+#### [ Kenny Lau (Oct 05 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222946):
 complete proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andreas Swerdlow (Oct 05 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224448):
+#### [ Andreas Swerdlow (Oct 05 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224448):
 Wow thank you!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andreas Swerdlow (Oct 05 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224468):
+#### [ Andreas Swerdlow (Oct 05 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224468):
 @**Joseph Corneli** look what Kenny did
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224585):
+#### [ Kenny Lau (Oct 05 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224585):
 I should probably extract a lemma
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224597):
+#### [ Mario Carneiro (Oct 05 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224597):
 that proof looks like a good advertisement for bundling continuous functions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224662):
+#### [ Mario Carneiro (Oct 05 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224662):
 For a while I was thinking that maybe we want to work with continuous functions as a predicate, but compositional proofs of continuity really suck from a readability standpoint
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224685):
+#### [ Kenny Lau (Oct 05 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135224685):
 another thing to refactor :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225113):
+#### [ Kenny Lau (Oct 05 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225113):
 ```lean
 import analysis.real analysis.complex
 
@@ -188,121 +188,121 @@ let ⟨xi, hxi⟩ := complete_space.complete
 ⟨⟨xr,xi⟩, (complex.filter_le_iff _ _).2 ⟨hxr, hxi⟩⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225115):
+#### [ Kenny Lau (Oct 05 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225115):
 @**Andreas Swerdlow**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 02:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225373):
+#### [ Mario Carneiro (Oct 05 2018 at 02:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225373):
 I think there should be another way to say this in terms of the product topology
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225386):
+#### [ Mario Carneiro (Oct 05 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225386):
 That is, this should follow from the fact that C is homeomorphic to R x R with `re` and `im` as the projections
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225448):
+#### [ Kenny Lau (Oct 05 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225448):
 is this a fact yet? and will that be easier to use?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225459):
+#### [ Mario Carneiro (Oct 05 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225459):
 that remains to be seen
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225466):
+#### [ Mario Carneiro (Oct 05 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225466):
 I don't think we have homeos yet (@**Patrick Massot** ? @**Johannes Hölzl** ?)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225526):
+#### [ Mario Carneiro (Oct 05 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225526):
 But I think you can prove `filter_le_iff` pretty easily if you do it on a product space with fst and snd
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225593):
+#### [ Mario Carneiro (Oct 05 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225593):
 And in any case what you really need is just plain continuity of the relevant functions and I think you already have that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225605):
+#### [ Kenny Lau (Oct 05 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225605):
 I see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225695):
+#### [ Mario Carneiro (Oct 05 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135225695):
 wait, does C have the metric topology or the product topology by definition?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238089):
+#### [ Kenny Lau (Oct 05 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238089):
 metric
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 05 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238108):
+#### [ Patrick Massot (Oct 05 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238108):
 Those are meant to be defeq
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238160):
+#### [ Kenny Lau (Oct 05 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238160):
 C isn't even defined to be a product
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 05 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238183):
+#### [ Patrick Massot (Oct 05 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238183):
 I meant that product topology and metric topology on a product of metric spaces are defeq, I don't really know how C is constructed in Lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238252):
+#### [ Mario Carneiro (Oct 05 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238252):
 It is possible to state this theorem using `(co)map` on topologies. You want to say that the topology on C is induced by the map `\lam z, (z.re, z.im)`, or coinduced by `\lam p, p.1 + I p.2`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238944):
+#### [ Kenny Lau (Oct 05 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238944):
 ```quote
 I meant that product topology and metric topology on a product of metric spaces are defeq, I don't really know how C is constructed in Lean
 ```
 are they?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238945):
+#### [ Kenny Lau (Oct 05 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238945):
 isn't it a theorem?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238948):
+#### [ Kenny Lau (Oct 05 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238948):
 that involves drawing a cirlce inside a square inside a circle inside a square?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 05 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238959):
+#### [ Johan Commelin (Oct 05 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238959):
 ```quote
 that involves drawing a cirlce inside a square inside a circle inside a square?
 ```
 Can Lean do that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 05 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238974):
+#### [ Patrick Massot (Oct 05 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135238974):
 there is no circle in Lean. The product metric is defined as the max metric
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239022):
+#### [ Kenny Lau (Oct 05 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239022):
 oh well then it isn't defeq to the metric in C then
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239023):
+#### [ Kenny Lau (Oct 05 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239023):
 the metric in C is the circle metric
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239046):
+#### [ Mario Carneiro (Oct 05 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239046):
 the balls in C are circles because it uses the metric topology
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 05 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239110):
+#### [ Johan Commelin (Oct 05 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239110):
 Right, but not the product metric...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239123):
+#### [ Mario Carneiro (Oct 05 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239123):
 if we wanted, we could define the topology on C as the product topology (or rather a mapping thereof), and then the typeclass would force us to prove this theorem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239177):
+#### [ Mario Carneiro (Oct 05 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239177):
 but given that C has no pre-existing topology on it, it seems okay to just use the metric topology as the definition; but this means that we don't get any help with the homeo proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239231):
+#### [ Kenny Lau (Oct 05 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239231):
 I mean, my filter lemma *is* the homeomorphism
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 05 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239236):
+#### [ Patrick Massot (Oct 05 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239236):
 ```quote
 I don't think we have homeos yet (Patrick Massot** ? Johannes Hölzl ?)
 ```
 This is not in mathlib, mostly because I don't know whether it should use the category theory stuff or be as in https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/homeos.lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239319):
+#### [ Mario Carneiro (Oct 05 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239319):
 no categories in the definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239323):
+#### [ Mario Carneiro (Oct 05 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239323):
 it should be 100% topology
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 05 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239329):
+#### [ Patrick Massot (Oct 05 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239329):
 do you want me to PR that file then?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239379):
+#### [ Mario Carneiro (Oct 05 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239379):
 I don't see why not... I will leave the merging to Johannes though since he's been involved more
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239463):
+#### [ Kenny Lau (Oct 05 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239463):
 I really think the circle metric is the right one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 05 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239471):
+#### [ Kenny Lau (Oct 05 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239471):
 hmm, never mind
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239608):
+#### [ Mario Carneiro (Oct 05 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239608):
 The circle *metric* is certainly the right one, but I wonder if the *topology* should be defined using something like `comap re \sqcap comap im`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239681):
+#### [ Mario Carneiro (Oct 05 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135239681):
 which will make your filter theorem essentially by definition, and the bulk of that proof will be transferred to the construction of the metric_space instance
 
 

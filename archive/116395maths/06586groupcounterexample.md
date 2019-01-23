@@ -11,7 +11,7 @@ permalink: archive/116395maths/06586groupcounterexample.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214352):
+#### [ Kevin Buzzard (Nov 23 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214352):
 Q1 part (i) on the 2nd year group theory sheet at Imperial (where $$G$$ is a group throughout) is "True or false : If we can find elements $$g$$, $$h$$ in $$G$$ such that $$gh = hg$$ then $$G$$ is abelian."
 
 So this is false, and @**Amelia Livingston** and I were thinking about this question at Xena today. I wanted to formalise the question as closely as possible to the example sheet, so I wanted to write something like
@@ -50,34 +50,34 @@ but is expected to have type
 
 I guess I understand that we can't do much about the `by exactI` stuff, but why can't Lean resolve my universe metavariable? Am I accidentally claiming that there are counterexamples in every universe?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 23 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214469):
+#### [ Johan Commelin (Nov 23 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214469):
 Yes you are
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 23 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214477):
+#### [ Johan Commelin (Nov 23 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214477):
 Take `G : Type` instead of `Type*`. I think that will help
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216373):
+#### [ Kevin Buzzard (Nov 23 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216373):
 But isn't that cheating?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216392):
+#### [ Kevin Buzzard (Nov 23 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216392):
 How do I formalise the statement that it is not true that for all groups in all universes, some stupid thing holds
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216435):
+#### [ Kevin Buzzard (Nov 23 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216435):
 I want the quantifier in the not
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216437):
+#### [ Kevin Buzzard (Nov 23 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216437):
 The universe quantifier
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 23 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217061):
+#### [ Mario Carneiro (Nov 23 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217061):
 impossible
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 23 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217069):
+#### [ Mario Carneiro (Nov 23 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217069):
 that's existential quantification over universes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 23 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217081):
+#### [ Mario Carneiro (Nov 23 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217081):
 What you can do instead is show a counterexample in a particular universe, which of course implies the existential that you can't write
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 23 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217369):
+#### [ Kevin Buzzard (Nov 23 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217369):
 So do I have to use `ulift` to get `replace H := H (perm (fin 3))` working? I've never used `ulift` before.
 
 

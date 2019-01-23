@@ -11,7 +11,7 @@ permalink: archive/113488general/26779transparency.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 21 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transparency/near/132514588):
+#### [ Edward Ayers (Aug 21 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transparency/near/132514588):
 In `tactic.meta` there is a definition called `transparency`:
 ```lean
 inductive transparency
@@ -21,10 +21,10 @@ inductive transparency
 
 So an example might be that you want `ℝ` to be irreducible because you rarely prove things about reals in terms of equivalence classes of cauchy sequences.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Oct 10 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transparency/near/135536162):
+#### [ Edward Ayers (Oct 10 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transparency/near/135536162):
 bump
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transparency/near/135537299):
+#### [ Scott Morrison (Oct 10 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transparency/near/135537299):
 Sorry, probably such documentation doesn't exists. Gabriel and Sebastian are probably the people to hope can point you to right parts of the C++ code.
 
 

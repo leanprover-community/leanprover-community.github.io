@@ -11,7 +11,7 @@ permalink: archive/113488general/02618funkynotation.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 04 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135168245):
+#### [ Johan Commelin (Oct 04 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135168245):
 Is this doomed to fail?
 ```lean
 def is_ideal_adic (J : set A) [is_ideal J] : Prop :=
@@ -20,22 +20,22 @@ def is_ideal_adic (J : set A) [is_ideal J] : Prop :=
 notation : `is_`J`_adic` := is_ideal_adic J
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 04 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135168274):
+#### [ Johannes Hölzl (Oct 04 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135168274):
 its doomed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 04 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135168386):
+#### [ Johan Commelin (Oct 04 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135168386):
 That's too bad
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 04 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135193028):
+#### [ Mario Carneiro (Oct 04 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135193028):
 they are just funny looking brackets...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 04 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135193856):
+#### [ Johan Commelin (Oct 04 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135193856):
 Still it doesn't work )-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 04 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135194568):
+#### [ Reid Barton (Oct 04 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135194568):
 Shouldn't have the colon after `notation`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 04 2018 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135194768):
+#### [ Johan Commelin (Oct 04 2018 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135194768):
 Thanks @**Reid Barton** it works!
 ```lean
 notation `is-`J`-adic` := is_ideal_adic J

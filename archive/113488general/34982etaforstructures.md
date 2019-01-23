@@ -11,61 +11,61 @@ permalink: archive/113488general/34982etaforstructures.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 01 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734097):
+#### [ Reid Barton (Aug 01 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734097):
 Is definitional eta for structures something we are likely to get at some point?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Aug 01 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734176):
+#### [ Gabriel Ebner (Aug 01 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734176):
 I'd be surprised.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 01 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734254):
+#### [ Reid Barton (Aug 01 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734254):
 In the absence of eta, another feature request would be "lazy matching" in lambdas and lets
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 01 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734272):
+#### [ Reid Barton (Aug 01 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734272):
 analogous to ~ patterns in Haskell
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Aug 01 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734477):
+#### [ Gabriel Ebner (Aug 01 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734477):
 For everyone else, this means `λ \<x,y\>, x + y` gets desugared to `λ p, p.1 + p.2`.  I don't think it is planned, but you might be able to do the desugaring yourself.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 01 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734478):
+#### [ Reid Barton (Aug 01 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734478):
 There are some definitions in data.equiv for example which I can't use conveniently, because they match on the input equivalence before producing a constructor.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 01 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734545):
+#### [ Reid Barton (Aug 01 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734545):
 But rewriting them with the constructor outermost becomes quite ugly.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 01 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734638):
+#### [ Reid Barton (Aug 01 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734638):
 (not at computer, and don't remember the specific names)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 01 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734813):
+#### [ Reid Barton (Aug 01 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734813):
 Was imagining including a ~ in the syntax for lazy patterns, not changing the current semantics.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 01 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130735589):
+#### [ Reid Barton (Aug 01 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130735589):
 Though I wonder when you would ever want the "strict" version, figuratively speaking.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 01 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130742044):
+#### [ Patrick Massot (Aug 01 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130742044):
 ```quote
 For everyone else, this means `λ \<x,y\>, x + y` gets desugared to `λ p, p.1 + p.2`.  I don't think it is planned, but you might be able to do the desugaring yourself.
 ```
 +1 I keep trying to type that and being disappointed.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130879441):
+#### [ Mario Carneiro (Aug 04 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130879441):
 Someone recently pointed out a mathlib definition that uses case analysis like this that was causing problems, but now I can't find it. Can anyone else find it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 04 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130880063):
+#### [ Chris Hughes (Aug 04 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130880063):
 `+` and `*` in localization.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130880926):
+#### [ Mario Carneiro (Aug 04 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130880926):
 are you sure? I don't see that when I search in the chat
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 04 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130881181):
+#### [ Chris Hughes (Aug 04 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130881181):
 I definitely made a comment about it, but there's probably something else as well.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 04 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130881189):
+#### [ Chris Hughes (Aug 04 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130881189):
 https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/match.20in.20defs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130881304):
+#### [ Mario Carneiro (Aug 04 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130881304):
 ah, okay (I searched for "localization")
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 10 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/135568699):
+#### [ Kenny Lau (Oct 10 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/135568699):
 Should we replace those definitions with the better definitions?
 
 

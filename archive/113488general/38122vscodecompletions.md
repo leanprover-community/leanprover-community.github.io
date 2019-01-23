@@ -11,100 +11,100 @@ permalink: archive/113488general/38122vscodecompletions.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991476):
+#### [ Edward Ayers (Aug 12 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991476):
 Sometimes I will type `\langle` or whatever and vscode won't underline it and I will have to delete it all and keep typing `\` until eventually the underline appears. Then when I click space it will complete. This is extremely annoying and happens every other time seemingly randomly. Are there some settings that will prevent this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991542):
+#### [ Edward Ayers (Aug 12 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991542):
 Also is there a way to increase the delay when the completion underline dissappears? I just spent about a minute trying to get `\McC` to complete.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991550):
+#### [ Edward Ayers (Aug 12 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991550):
 Also is there a way to get the list of available completions to appear?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991557):
+#### [ Edward Ayers (Aug 12 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991557):
 Also is there a way of making tab complete the symbols?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991606):
+#### [ Edward Ayers (Aug 12 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991606):
 Is there a way of turning off the Lean inbuilt completions so I can just maintain my own snippets file?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991669):
+#### [ Mario Carneiro (Aug 12 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991669):
 VSCode will not underline the `\` if you had a selection immediately before you started typing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991681):
+#### [ Edward Ayers (Aug 12 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991681):
 I'm not observing this behavior
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991685):
+#### [ Mario Carneiro (Aug 12 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991685):
 there is no delay for the completion underline - it is not time-based
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991743):
+#### [ Mario Carneiro (Aug 12 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991743):
 The answer to all of your questions is "no" without hacking the extension itself
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991752):
+#### [ Mario Carneiro (Aug 12 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991752):
 which might not be a bad idea, if you have a concrete plan for how to improve the situation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991753):
+#### [ Edward Ayers (Aug 12 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991753):
 [completions.mov](/user_uploads/3121/oP99rwB3Qg2dbE2Lkg6Cu6e-/completions.mov)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991812):
+#### [ Mario Carneiro (Aug 12 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991812):
 I can't replicate those behaviors
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991864):
+#### [ Edward Ayers (Aug 12 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991864):
 ok I wiped my settings.json and the behaviour went away
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991868):
+#### [ Mario Carneiro (Aug 12 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991868):
 what was in there?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991872):
+#### [ Mario Carneiro (Aug 12 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991872):
 do you have any other extensions?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991875):
+#### [ Edward Ayers (Aug 12 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991875):
 so something's interfering... let me slowly add the settings back in and see what the issue is
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991888):
+#### [ Mario Carneiro (Aug 12 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991888):
 particularly one that messes with editor interaction like a vim mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992164):
+#### [ Edward Ayers (Aug 12 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992164):
 `"editor.wordBasedSuggestions": false,` causes it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992216):
+#### [ Edward Ayers (Aug 12 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992216):
 `"editor.wordBasedSuggestions": true,    ` also causes it!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992231):
+#### [ Edward Ayers (Aug 12 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992231):
 So does `"editor.acceptSuggestionOnEnter": "smart",` set to any value
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992263):
+#### [ Edward Ayers (Aug 12 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992263):
 setting these in `settings.json` is clobbering something that the extension needs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992450):
+#### [ Edward Ayers (Aug 12 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992450):
 Shall I open a github issue?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992581):
+#### [ Mario Carneiro (Aug 12 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992581):
 I can't replicate any effect of `editor.wordBasedSuggestions`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992705):
+#### [ Mario Carneiro (Aug 12 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992705):
 nor `editor.acceptSuggestionOnEnter`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992714):
+#### [ Edward Ayers (Aug 12 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992714):
 I figured it out. `files.autoSaveDelay : x` also needs to be set. The delay for the underline to dissappear is the same as the autosave delay
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992781):
+#### [ Mario Carneiro (Aug 12 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992781):
 yeah, I'm getting that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992786):
+#### [ Edward Ayers (Aug 12 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992786):
 weird. Sorry it seemed correlated with `editor.wordBasedSuggestions` but it was just my mind playing tricks.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992988):
+#### [ Edward Ayers (Aug 12 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131992988):
 I made a github issue: https://github.com/leanprover/vscode-lean/issues/80
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131993069):
+#### [ Edward Ayers (Aug 12 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131993069):
 I thought the 500ms delay was put in intentionally and you were just supposed to type really fast!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 12 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131993242):
+#### [ Mario Carneiro (Aug 12 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131993242):
 I usually don't need to save so aggressively, since vscode can quit and restart without losing unsaved data
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Aug 12 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131993551):
+#### [ Edward Ayers (Aug 12 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131993551):
 Ok I've wopped a zero to the end of the delay time and it's utterly fabulous.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Aug 12 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/132004573):
+#### [ Gabriel Ebner (Aug 12 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/132004573):
 Fixed in vscode-lean 0.11.14, coming to a vscode installation near you any moment now.
 BTW, the vim plugin is officially supported and tested since the main extension developer uses it exclusively.
 

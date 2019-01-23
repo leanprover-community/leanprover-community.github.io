@@ -11,7 +11,7 @@ permalink: archive/113488general/72982Installinglean.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Guillermo Barajas Ayuso (Jul 02 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128979128):
+#### [ Guillermo Barajas Ayuso (Jul 02 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128979128):
 Hi guys I'm trying to install lean in my laptop and the following message was displayed when I tried to evaluate 1+1:
 
 Looking for git in: C:\Program Files\Git\cmd\git.exe
@@ -22,16 +22,16 @@ fatal: not a git repository (or any of the parent directories): .git
 
 Anyone knows what's going on?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 02 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128979306):
+#### [ Simon Hudon (Jul 02 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128979306):
 I would guess that you installed `elan` first and `elan` is trying make sure you have the right version of Lean (and maybe `mathlib`) using `git`. Do you have `git`? Is it in your `PATH`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Guillermo Barajas Ayuso (Jul 02 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128979365):
+#### [ Guillermo Barajas Ayuso (Jul 02 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128979365):
 A message was displayed before saying that git wasn't found, so I installed it. It should be in my path
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 02 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128979510):
+#### [ Simon Hudon (Jul 02 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128979510):
 If you type `git` in your terminal, what do you get?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Guillermo Barajas Ayuso (Jul 02 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128980408):
+#### [ Guillermo Barajas Ayuso (Jul 02 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128980408):
 usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
            [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
            [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
@@ -75,29 +75,29 @@ collaborate (see also: git help workflows)
 concept guides. See 'git help <command>' or 'git help <concept>'
 to read about a specific subcommand or concept.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 02 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128980520):
+#### [ Simon Hudon (Jul 02 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128980520):
 That's curious. At the root of your project, can you call `git init`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 02 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128980572):
+#### [ Reid Barton (Jul 02 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128980572):
 I think that there is no project, and/or we don't know what "evaluate 1+1" means
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Guillermo Barajas Ayuso (Jul 02 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128981476):
+#### [ Guillermo Barajas Ayuso (Jul 02 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128981476):
 What do you mean by the root of my project? Actually the message didn't depend on me typing anything, I just realized. If I write git init in the terminal the message 
 
 Initialized empty Git repository in C:/Users/guill/.git/
 
 is showed.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 02 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128981592):
+#### [ Simon Hudon (Jul 02 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128981592):
 What did you do to evaluate `1+1`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 02 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128981957):
+#### [ Kevin Buzzard (Jul 02 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128981957):
 ```quote
 What do you mean by the root of my project?
 ```
 So one way of using Lean is to make a "project". What happens if you type `lean` or `leanpkg` on the command line?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 02 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128982119):
+#### [ Kevin Buzzard (Jul 02 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128982119):
 If `leanpkg` works then you can change to a nice new folder on the command line and follow the instructions at 
 
 https://leanprover.github.io/reference/using_lean.html#creating-new-packages
@@ -106,7 +106,7 @@ to make a new package. Then you can open this folder with VS Code and it might a
 
 When you're using the command line you have a "current working directory", which you might be able to see with a command like `pwd` (whether this works or not depends on exactly which Windows command line tool you're using). You can move between directories with command line commands, you can make new directories and so on. If you can make a new directory called something like `C:\Users\Guillermo\Lean_stuff\my_project` and change into that directory on the command line, and if `leanpkg` is on your path, then all of this might work fine.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jul 02 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128987757):
+#### [ Sebastian Ullrich (Jul 02 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128987757):
 The message seems to be from VS Code, not Lean or elan
 
 

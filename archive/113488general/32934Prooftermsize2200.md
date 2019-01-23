@@ -11,7 +11,7 @@ permalink: archive/113488general/32934Prooftermsize2200.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jan 10 2019 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154864164):
+#### [ Seul Baek (Jan 10 2019 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154864164):
 I became curious how sizes of proof terms affect speed, so I ran a quick experiment: 
 
 ```
@@ -45,13 +45,13 @@ by show_foo
 
 To my surprise Lean handles it with ease, in roughly 50ms. I don' t think Lean is constructing and checking a gigantic proof term that has 2^200 occurrences of `trivial`. What's going on here?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jan 10 2019 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154868623):
+#### [ Gabriel Ebner (Jan 10 2019 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154868623):
 To a certain degree, Lean can handle terms with dag-like sharing (your term is very small when viewed as a dag).  This happens e.g. because type inference and whnf and unifiability are cached, i.e., only evaluated once for every subterm (there are only few subterms).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Jan 10 2019 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154868637):
+#### [ Gabriel Ebner (Jan 10 2019 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154868637):
 See also https://github.com/leanprover/tc/issues/8
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Jan 10 2019 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154876865):
+#### [ Seul Baek (Jan 10 2019 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154876865):
 I see. Thanks!
 
 

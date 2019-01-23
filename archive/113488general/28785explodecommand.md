@@ -11,7 +11,7 @@ permalink: archive/113488general/28785explodecommand.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133093714):
+#### [ Mario Carneiro (Aug 31 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133093714):
 While on the flight home, I decided to actually write the wishlist tactic I've mentioned to a few people, which displays lean proofs in a line by line style heavily annotated with type ascriptions so it looks more like a Fitch style proof. I'm still tweaking the display options, but here's what it looks like right now:
 ```lean
 import tactic.explode
@@ -29,97 +29,97 @@ iff_true : ∀ (a : Prop), a ↔ true ↔ a
 6│4,5│ iff.intro      │ a ↔ true ↔ a
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103016):
+#### [ Johan Commelin (Aug 31 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103016):
 Ok, I can parse this, and it looks really helpful... but why is line `0` at the top, instead of the bottom?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103024):
+#### [ Mario Carneiro (Aug 31 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103024):
 it's numbered like lines of proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103025):
+#### [ Johan Commelin (Aug 31 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103025):
 It seems to me that `0` follows from `6`, but maybe I misunderstand `0`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103034):
+#### [ Johan Commelin (Aug 31 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103034):
 Also, I'd rather read them upside down.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103036):
+#### [ Mario Carneiro (Aug 31 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103036):
 lambdas are introduced with the intro variable on top of the bracket
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103037):
+#### [ Johan Commelin (Aug 31 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103037):
 First split the goal, then you get two subtrees... etc..
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103078):
+#### [ Mario Carneiro (Aug 31 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103078):
 Yes, I usually read metamath proofs bottom up as well
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103081):
+#### [ Johan Commelin (Aug 31 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103081):
 Aaah, that is what `0` is doing, of course!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103084):
+#### [ Johan Commelin (Aug 31 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103084):
 Well... there is a solution to that: have `#explode` reverse the order...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103085):
+#### [ Johan Commelin (Aug 31 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103085):
 But now I see that `0` should remain at the top.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103087):
+#### [ Johan Commelin (Aug 31 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103087):
 So it's not that easy...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103088):
+#### [ Mario Carneiro (Aug 31 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103088):
 I suppose, but that will get confusing to explain to people
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103099):
+#### [ Mario Carneiro (Aug 31 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103099):
 I would prefer a forward proof ordering on the page
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103103):
+#### [ Mario Carneiro (Aug 31 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103103):
 even if your interest is drawn from the bottom up
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103114):
+#### [ Johan Commelin (Aug 31 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103114):
 How far is this representation from writing a `begin end` proof?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103115):
+#### [ Johan Commelin (Aug 31 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103115):
 Could you generate that as well?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103152):
+#### [ Mario Carneiro (Aug 31 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103152):
 what do you mean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103157):
+#### [ Mario Carneiro (Aug 31 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103157):
 like you want the lines to correspond to `apply` and `intro`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103162):
+#### [ Johan Commelin (Aug 31 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103162):
 Right.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103166):
+#### [ Johan Commelin (Aug 31 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103166):
 `#deobfuscate`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103181):
+#### [ Mario Carneiro (Aug 31 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103181):
 it's pretty close, there are some edge cases where you see explicit `∀E` and `∀I` steps
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103233):
+#### [ Johan Commelin (Aug 31 2018 at 06:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103233):
 Even if it isn't perfect, I'dd really like it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103257):
+#### [ Mario Carneiro (Aug 31 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103257):
 can you mockup?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103303):
+#### [ Johan Commelin (Aug 31 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103303):
 What do you mean? This example? Or more general?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103369):
+#### [ Mario Carneiro (Aug 31 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103369):
 either, something that shows off what you would like to see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103381):
+#### [ Johan Commelin (Aug 31 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103381):
 Rob has this interface with mathematica... with certain terms corresponding to certain mathematica terms
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103392):
+#### [ Johan Commelin (Aug 31 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103392):
 So we could also have a dictionary `\lam <-> intros` etc...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103394):
+#### [ Johan Commelin (Aug 31 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103394):
 But I don't have a clear picture how to actually implement this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103440):
+#### [ Mario Carneiro (Aug 31 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103440):
 oh, there is a potential problem with making a real runnable proof script, as opposed to just a display like this... it has to parse as valid lean, and sometimes `pp` doesn't give good results
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103451):
+#### [ Mario Carneiro (Aug 31 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103451):
 I am currently hiding non proof terms in `#explode`, but probably this won't work in a proof script
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103511):
+#### [ Johan Commelin (Aug 31 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103511):
 ```
 iff_true : ∀ (a : Prop), a ↔ true ↔ a
 0│   │ a              ├ Prop            | intro (intros?)
@@ -131,22 +131,22 @@ iff_true : ∀ (a : Prop), a ↔ true ↔ a
 6│4,5│ iff.intro      │ a ↔ true ↔ a    | apply iff.intro (split?)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103558):
+#### [ Johan Commelin (Aug 31 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103558):
 I just added an extra column, and it totally wouldn't run.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103567):
+#### [ Mario Carneiro (Aug 31 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103567):
 I guess part of the problem with line for line translating this display into a proof script is that forward proving is less natural
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103572):
+#### [ Mario Carneiro (Aug 31 2018 at 06:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103572):
 you have to use lots of `have`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 31 2018 at 06:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103577):
+#### [ Johan Commelin (Aug 31 2018 at 06:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103577):
 Right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103584):
+#### [ Mario Carneiro (Aug 31 2018 at 06:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103584):
 and the positioning of the `intro` is weird
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103676):
+#### [ Mario Carneiro (Aug 31 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133103676):
 The hard stuff is when dealing with `eq.rec` though
 ```
 iff_not_comm : ∀ {a b : Prop} [_inst_1 : decidable a] [_inst_2 : decidable b], a ↔ ¬b ↔ (b ↔ ¬a)
@@ -171,16 +171,16 @@ iff_not_comm : ∀ {a b : Prop} [_inst_1 : decidable a] [_inst_2 : decidable b],
 18│8,17 │ eq.mpr       │ a ↔ ¬b ↔ (b ↔ ¬a)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 31 2018 at 08:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133105985):
+#### [ Reid Barton (Aug 31 2018 at 08:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133105985):
 You should make a version which outputs those judgment tree things and outputs LaTeX
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 31 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133108796):
+#### [ Patrick Massot (Aug 31 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133108796):
 Noooo! We triggered Mario's immune defenses. He spent three days with people who want Lean to prove everything by itself, he merged tidy and then, flying back, he wrote the Lean2metamath tactic!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 31 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133121291):
+#### [ Kevin Buzzard (Aug 31 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133121291):
 "On the flight home, I wrote an explode command" = "I just risked getting the plane diverted because the guy next to me panicked"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133121314):
+#### [ Mario Carneiro (Aug 31 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133121314):
 I originally called it `mmshow` but I decided against metamath branding it
 
 

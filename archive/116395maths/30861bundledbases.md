@@ -11,60 +11,60 @@ permalink: archive/116395maths/30861bundledbases.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 17 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135955551):
+#### [ Johan Commelin (Oct 17 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135955551):
 I pushed the results of yesterdays painful efforts to https://github.com/leanprover-community/mathlib/blob/open_set/category_theory/examples/topological_spaces.lean. This wouldn't have been possible without the great help of @**Johannes Hölzl** 
 I guess that some of the proofs need to be minimised. I obfuscated them as much as possible, and don't see how to squeeze out more. If someone wants to take a look, please go ahead.
 The motivation for these changes is that we want to be able to talk about "sheaves on a basis".
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135990528):
+#### [ Mario Carneiro (Oct 17 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135990528):
 I think `open_set` should be unbundled in the topology argument
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 17 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135991087):
+#### [ Johan Commelin (Oct 17 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135991087):
 @**Mario Carneiro**  What do you mean with that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 17 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135991108):
+#### [ Johan Commelin (Oct 17 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135991108):
 You want an unbundled version in `analysis/topology/blah.lean`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 17 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135991165):
+#### [ Johan Commelin (Oct 17 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135991165):
 I think we also want the bundled version. But maybe I should first prove things with it, to show that it is useful.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994508):
+#### [ Mario Carneiro (Oct 17 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994508):
 I mean that for a fixed topological space, `@open_set X top_X` is a category
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994589):
+#### [ Mario Carneiro (Oct 17 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994589):
 On top of that there is an `open_set` *functor*  from `Top` to `Type`, but that needs its own definition anyway
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994650):
+#### [ Mario Carneiro (Oct 17 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994650):
 er, I think I mean lattice not category, I see you haven't given it a category structure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994706):
+#### [ Mario Carneiro (Oct 17 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994706):
 so in that case it could indeed move to `analysis/topology`. I would suggest the name `opens` for this lattice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 17 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994710):
+#### [ Johan Commelin (Oct 17 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994710):
 It is... every preorder is a category (in mathlib)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994724):
+#### [ Mario Carneiro (Oct 17 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994724):
 right, but you haven't made any explicit reference to categories in the definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 17 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994811):
+#### [ Johan Commelin (Oct 17 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994811):
 Hmmm... I don't follow exactly. Do you want to change the definition of `open_set`? Or do you want to define `opens` and if so, what should it be?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 17 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994954):
+#### [ Johan Commelin (Oct 17 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135994954):
 Also, should we change the definition of `open_set X` to `open_set X := X.str`? That is equivalent, and might simplify a lot of the stuff that follows...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135997479):
+#### [ Mario Carneiro (Oct 17 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135997479):
 `def opens (X : Type*) [topological_space X] : Type* := {s // is_open s}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135997602):
+#### [ Mario Carneiro (Oct 17 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135997602):
 I don't understand the idea behind the `X.str` definition. The point is that `open_set X` is a type, not a structure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135997659):
+#### [ Mario Carneiro (Oct 17 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135997659):
 my proposal is `opens` as above, and `category.opens : Top ⥤ Cat` (or some other prefix?) has that as its object part
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135997756):
+#### [ Mario Carneiro (Oct 17 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135997756):
 although maybe we need more functors than just that because it's properly a 2-functor
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 05:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136018803):
+#### [ Johan Commelin (Oct 18 2018 at 05:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136018803):
 @**Mario Carneiro** So `open_set` should go asway, and be replaced by `opens`?
 What is wrong with:
 ```lean
@@ -72,28 +72,28 @@ def opens (X : Type*) [t : topological_space X] : Type* := subtype t.is_open
 ```
 That is what I meant with the `X.str` definition.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136018818):
+#### [ Mario Carneiro (Oct 18 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136018818):
 That doesn't typecheck?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136018953):
+#### [ Johan Commelin (Oct 18 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136018953):
 Ok, fair enough. I meant `subtype t.is_open`. I fixed this above.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136018996):
+#### [ Mario Carneiro (Oct 18 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136018996):
 that's the same as I wrote modulo eta expansion
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136018999):
+#### [ Johan Commelin (Oct 18 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136018999):
 Right. So it doesn't matter.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136019003):
+#### [ Mario Carneiro (Oct 18 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136019003):
 well, you are also using a different `is_open`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136019018):
+#### [ Johan Commelin (Oct 18 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136019018):
 Aah, and maybe mine is more painful?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136019025):
+#### [ Mario Carneiro (Oct 18 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136019025):
 there are fewer lemmas about it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023764):
+#### [ Johan Commelin (Oct 18 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023764):
 @**Mario Carneiro** Do you mean you would like to see something like this in `analysis/topology/topological_space.lean`?
 ```lean
 section opens
@@ -120,64 +120,64 @@ end opens
 ```
 Note that I am using `tidy` in the last line. I don't know if this is too early in the mathlib-tree?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023792):
+#### [ Johan Commelin (Oct 18 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023792):
 If this is the direction you had in mind, I can continue moving stuff from the category folder into this file; and then PR it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023793):
+#### [ Mario Carneiro (Oct 18 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023793):
 We have functions for transfering a partial order
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023837):
+#### [ Mario Carneiro (Oct 18 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023837):
 `partial_order.lift`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023849):
+#### [ Mario Carneiro (Oct 18 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023849):
 I hope you aren't so attached to using blasty tactics that you are reproving theorems that we already have
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023856):
+#### [ Mario Carneiro (Oct 18 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023856):
 in fact, `subtype.partial_order` is just what you need
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023905):
+#### [ Mario Carneiro (Oct 18 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023905):
 `ext` is `subtype.eq`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023910):
+#### [ Johan Commelin (Oct 18 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023910):
 Ok, that's fine with me. But about the general direction? Is this what you want?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023918):
+#### [ Mario Carneiro (Oct 18 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023918):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023966):
+#### [ Johan Commelin (Oct 18 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023966):
 But `subtype.ext` is not an ext-lemma
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023971):
+#### [ Johan Commelin (Oct 18 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136023971):
 Should I phrase mine as an ext-lemma, or as an iff?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024115):
+#### [ Mario Carneiro (Oct 18 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024115):
 I'm not saying you shouldn't state it, but it is a proof by reference to subtype.eq
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024117):
+#### [ Johan Commelin (Oct 18 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024117):
 Right. But which version should I state? Or both?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024159):
+#### [ Mario Carneiro (Oct 18 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024159):
 `extensionality` requires the one-directional form
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024162):
+#### [ Mario Carneiro (Oct 18 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024162):
 I don't know if it would be better to use set extensionality as well though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024168):
+#### [ Mario Carneiro (Oct 18 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024168):
 so it says `forall a, a \in U \lr a \in V`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024230):
+#### [ Johan Commelin (Oct 18 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136024230):
 `ext` can chain those together. So I think I'll only do the first step.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136025567):
+#### [ Johan Commelin (Oct 18 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136025567):
 Done. See #427.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 18 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136047222):
+#### [ Scott Morrison (Oct 18 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136047222):
 ```quote
 But `subtype.ext` is not an ext-lemma
 ```
 I've been wondering about this one --- can we make `attribute [extensionality] subtype.eq`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136047463):
+#### [ Mario Carneiro (Oct 18 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/136047463):
 ext can chain them, but you will get `x \in U.val` instead of `x \in U`
 
 

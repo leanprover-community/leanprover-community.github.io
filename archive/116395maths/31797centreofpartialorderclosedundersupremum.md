@@ -11,19 +11,19 @@ permalink: archive/116395maths/31797centreofpartialorderclosedundersupremum.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823474):
+#### [ Kenny Lau (Apr 28 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823474):
 Let (P, <=) be a partially ordered set.
 
 Say an element x in P is in the "centre" of P if for every y in P we have x <= y or y <= x.
 Is the supremum of a collection of elements in the centre of P also necessarily in the centre of P, assuming that the supremum exists?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823514):
+#### [ Kenny Lau (Apr 28 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823514):
 And is this equivalent to LEM?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823516):
+#### [ Kenny Lau (Apr 28 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823516):
 it seems true to me but I have no idea how to prove it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 28 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125830606):
+#### [ Mario Carneiro (Apr 28 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125830606):
 Here's a proof assuming LEM:
 ```
 import logic.basic

@@ -11,22 +11,22 @@ permalink: archive/113488general/70055wellfoundedexists.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793419):
+#### [ Sean Leather (Sep 12 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793419):
 Can I prove that a recursive definition `T → Prop` is well-founded if a clause wraps the recursive call with an exists (i.e. `f <pattern> := ∃ .., f <subpattern>`)? If so, how would I begin to do this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793458):
+#### [ Sean Leather (Sep 12 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793458):
 Oh, actually, it's not a strict subpattern, it's a function that uses a subpattern. Maybe that's my issue, not the exists.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793554):
+#### [ Sean Leather (Sep 12 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793554):
 So, should I have something like `have sizeof (function-calling-subpattern) < sizeof pattern` here?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793805):
+#### [ Sean Leather (Sep 12 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793805):
 Okay, never mind, I think I figured out what I need to solve.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793811):
+#### [ Sean Leather (Sep 12 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793811):
 I always get confused with these well-founded proofs.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133803135):
+#### [ Sean Leather (Sep 12 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133803135):
 So I finally figured out how to prove that my recursion is well-founded. But I think it could be better.
 
 ```lean
@@ -53,7 +53,7 @@ def lc' : exp V → Prop
 
 It would be nice if I could, say, use `simp` for the well-founded condition instead of all of those `have ... := simp`s. Also, I tried `instance : has_sizeof (exp V) := ⟨depth⟩` so that I wouldn't need to specify ```rel_tac := λ_ _, `[exact ⟨_, measure_wf depth⟩]```, but that didn't seem to work. Any suggestions?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 12 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133803664):
+#### [ Simon Hudon (Sep 12 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133803664):
 For the `have`, what if you had:
 
 ```lean
@@ -62,25 +62,25 @@ For the `have`, what if you had:
 
 in your `  using_well_founded` clause?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133812958):
+#### [ Sean Leather (Sep 12 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133812958):
 @**Simon Hudon** Good idea, but, unfortunately, that doesn't work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815702):
+#### [ Sean Leather (Sep 12 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815702):
 @**Mario Carneiro** Do you have any thoughts on the above in this thread? Basically, I want to write `lc'` without `have`ing to redeclare all of these theorems locally. Ideally, I would like to avoid `using_well_founded` at all, but that's secondary.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 12 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815806):
+#### [ Mario Carneiro (Sep 12 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815806):
 did Simon's suggestion work?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815820):
+#### [ Sean Leather (Sep 12 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815820):
 No.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 12 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815841):
+#### [ Kenny Lau (Sep 12 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815841):
 what is `exp`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 12 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815845):
+#### [ Mario Carneiro (Sep 12 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815845):
 Why not? If all your proofs are `by simp` then it should work as a discharger
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815909):
+#### [ Sean Leather (Sep 12 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815909):
 ```lean
 assumption tactic failed
 state:
@@ -93,16 +93,16 @@ _F : Π (_y : exp V), has_well_founded.r _y (app ef ea) → Prop
 ⊢ measure depth ef (app ef ea)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 12 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815914):
+#### [ Mario Carneiro (Sep 12 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815914):
 actually you should just use `` `[simp]`` as the discharger
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815924):
+#### [ Sean Leather (Sep 12 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815924):
 That was what I initially tried, too. No luck.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 12 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815936):
+#### [ Mario Carneiro (Sep 12 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815936):
 make that `simp [measure, inv_image]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815950):
+#### [ Sean Leather (Sep 12 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133815950):
 ```lean
 assumption tactic failed
 state:
@@ -115,13 +115,13 @@ _F : Π (_y : exp V), has_well_founded.r _y (app ef ea) → Prop
 ⊢ inv_image has_lt.lt depth ef (app ef ea)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 12 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816009):
+#### [ Kenny Lau (Sep 12 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816009):
 I searched `inductive.*exp` but nothing came up
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 12 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816016):
+#### [ Mario Carneiro (Sep 12 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816016):
 it's in sean's repo
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816032):
+#### [ Sean Leather (Sep 12 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816032):
 ```lean
 `[simp [measure, inv_image]] >> tactic.assumption,
 ```
@@ -132,19 +132,19 @@ state:
 no goals
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 12 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816043):
+#### [ Mario Carneiro (Sep 12 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816043):
 and drop the `asssumption`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816047):
+#### [ Sean Leather (Sep 12 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816047):
 Kenny, it's an inductive. But it's not relevant to the issue.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816056):
+#### [ Sean Leather (Sep 12 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816056):
 Ah ha!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816138):
+#### [ Sean Leather (Sep 12 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816138):
 That works. Thanks! Any way to simplify away the `using_well_founded`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816244):
+#### [ Sean Leather (Sep 12 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816244):
 Can I define my own instance of...?
 
 ```lean
@@ -152,13 +152,13 @@ class has_well_founded (α : Sort u) : Type u :=
 (r : α → α → Prop) (wf : well_founded r)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816270):
+#### [ Sean Leather (Sep 12 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133816270):
 I mean, will defining an instance of `has_well_founded` allow me to remove `using_well_founded`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 13 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133886977):
+#### [ Simon Hudon (Sep 13 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133886977):
 I think so. You may also have to set the priority of `has_well_founded_of_has_sizeof` to 0
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 13 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133887243):
+#### [ Chris Hughes (Sep 13 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133887243):
 I did this for polynomials. I had to write `dec_tac := tactic.assumption ` everywhere, but other than that it worked.
 
 

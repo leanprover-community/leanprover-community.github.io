@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/14826computingsubmatrixforringtheorymatrix.h
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134897036):
+#### [ Tobias Grosser (Sep 29 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134897036):
 On another lean saturday afternoon, I continued looked forther into formalizing another basic lean maths. This time I want to compute sub-matrixes for ring_theory.matrix.
 
 This is what I came up with:
@@ -29,46 +29,46 @@ It compiles without flaws, but looks very messy. Two things I feel should still 
 1) It would be nice if the function would not require m, n_right, n_left to be passed explicitly, but would instead automatically derive the relevant offsets.
 2) I keep getting type errors due to a fin(x + y) being not equal to fin(y + x) when using it. It would be great if one could automatically convert between the two.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 29 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134897038):
+#### [ Tobias Grosser (Sep 29 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134897038):
 Feedback very much appreciated.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 29 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134897446):
+#### [ Kevin Buzzard (Sep 29 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134897446):
 I think that I would have been tempted to move away from just adding an offset and would instead consider any increasing maps `fin m' -> fin m` and `fin n' -> fin n`. Isn't that what people usually look at -- all the m' x n' minors or something?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898201):
+#### [ Tobias Grosser (Sep 30 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898201):
 I am not sure I understand what interface you have in mind.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 30 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898247):
+#### [ Bryan Gin-ge Chen (Sep 30 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898247):
 For example, suppose I have a 5x5 matrix and want to extract the 3x3 matrix consisting of rows 1,2,4 and columns 1,3,4.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898256):
+#### [ Tobias Grosser (Sep 30 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898256):
 Right.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898258):
+#### [ Tobias Grosser (Sep 30 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898258):
 I mean, it makes sense to have a more generic interface that computes a minor.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 00:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898297):
+#### [ Tobias Grosser (Sep 30 2018 at 00:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898297):
 Such a functionality could even be the basis for this function, I assume.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898355):
+#### [ Tobias Grosser (Sep 30 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898355):
 Still, I feel that it would not completely replace this function as the interface for the special case I propose could be simpler, as it could just derive the sizes from the types.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898446):
+#### [ Tobias Grosser (Sep 30 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898446):
 More from a practical perspective, I am not sure how a general minorification interface should look like. Would I ask for two more parameters fin m -> Prop and fin n -> Prop, which evaluate to true if the specific column should be included?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898452):
+#### [ Tobias Grosser (Sep 30 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898452):
 Computing the necessary offsets seems a little involved. Not sure how this will effect performance.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 30 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898699):
+#### [ Bryan Gin-ge Chen (Sep 30 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134898699):
 I think the interface Kevin suggests is the following: to specify a general $$m' \times n'$$ submatrix of an $$m \times n$$ matrix, it is sufficient to provide two increasing maps, one of type `fin m' → fin m` and one of type `fin n' → fin n`. No need to compute any offsets, so far as I can tell; simply pull out the specified matrix entries using the two maps to grab the row and column indices.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 30 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134899303):
+#### [ Kevin Buzzard (Sep 30 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134899303):
 And then the function you've already implemented could be a special case of this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134910891):
+#### [ Tobias Grosser (Sep 30 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134910891):
 Right.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134910897):
+#### [ Tobias Grosser (Sep 30 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134910897):
 Here what I came up with:
 
 ```lean
@@ -84,13 +84,13 @@ def rsubmx {m n_left n_right: nat} :
   matrix (fin m) (fin (n_right + n_left)) α → matrix (fin m) (fin (n_right)) α 
 | A := minormx A (λ i, i) (λ j, fin.add_nat j _)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134910905):
+#### [ Tobias Grosser (Sep 30 2018 at 08:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134910905):
 (deleted)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134910948):
+#### [ Tobias Grosser (Sep 30 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134910948):
 (deleted)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911004):
+#### [ Tobias Grosser (Sep 30 2018 at 08:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911004):
 I created a bunch of tests:
 
 ```lean
@@ -152,16 +152,16 @@ but is expected to have type
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911323):
+#### [ Tobias Grosser (Sep 30 2018 at 08:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911323):
 @**Mario Carneiro** , any idea how to make my tests independent of the order of fin? This seems to require lean foo I am not yet capable of.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911423):
+#### [ Mario Carneiro (Sep 30 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911423):
 Use Kevin's suggestion
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911425):
+#### [ Mario Carneiro (Sep 30 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911425):
 You should avoid algebra inside types like the plague
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911524):
+#### [ Tobias Grosser (Sep 30 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911524):
 With
 ```lean
 def minormx : matrix m n α → (m' → m) → (n' → n) → matrix m' n' α :=
@@ -170,7 +170,7 @@ def minormx : matrix m n α → (m' → m) → (n' → n) → matrix m' n' α :=
 
 I tried to implement Kevin's suggestion.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911533):
+#### [ Tobias Grosser (Sep 30 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911533):
 I now try to implement ssreflects
 ```coq
    [l|r]submx A == the left/right submatrices of a row block matrix A.      
@@ -179,24 +179,24 @@ I now try to implement ssreflects
 ```
 on top of it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911571):
+#### [ Tobias Grosser (Sep 30 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911571):
 It seems a nice feature that they can split just based on the type sizes.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911578):
+#### [ Tobias Grosser (Sep 30 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911578):
 Are you saying the interface they use in coq is not a good interface for lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911625):
+#### [ Mario Carneiro (Sep 30 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911625):
 That will only work when `n1` and `n2` are explicitly given, and they also have to be numerals not variables for it to be useful
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911629):
+#### [ Mario Carneiro (Sep 30 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911629):
 Do you have any examples of use of this notation in Coq?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911682):
+#### [ Mario Carneiro (Sep 30 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911682):
 > Note that the type of A, 'M_(m, n1 + n2) indicates how A should be decomposed.
 
 This sounds to me like lean's behavior is consistent with coq's: You have to give an input of a matrix `matrix 5 (3 + 2)` rather than `matrix 5 5` to get the function to figure out `n1` and `n2`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911732):
+#### [ Tobias Grosser (Sep 30 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911732):
 Sure, my guaussien elimination code:
 
 ```coq
@@ -250,7 +250,7 @@ Definition lshift m n (i : 'I_m) := Ordinal (lshift_subproof n i).
 Definition rshift m n (i : 'I_n) := Ordinal (rshift_subproof m i).
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911822):
+#### [ Tobias Grosser (Sep 30 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911822):
  
 ```quote
 > Note that the type of A, 'M_(m, n1 + n2) indicates how A should be decomposed.
@@ -259,34 +259,34 @@ This sounds to me like lean's behavior is consistent with coq's: You have to giv
 ```
 If that's as good as it gets that's fine. I just had hoped lean would be able to figure out that 5 can be split into 3 + 2. If this not the case, I need to do this manually. Is there a function that does this type splitting for me?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911829):
+#### [ Mario Carneiro (Sep 30 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911829):
 what is the type of `A1`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911831):
+#### [ Mario Carneiro (Sep 30 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911831):
 or `xrow` and `xcol`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911835):
+#### [ Mario Carneiro (Sep 30 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911835):
 Lean can figure out that `5` is `3 + 2`, but it is ambiguous what to split it into
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911888):
+#### [ Tobias Grosser (Sep 30 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911888):
 I see.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911942):
+#### [ Tobias Grosser (Sep 30 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911942):
 In my implementation in lean it is ```A1 : matrix (fin (x + 1)) (fin (y + 1)) α```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911944):
+#### [ Tobias Grosser (Sep 30 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911944):
 So what I have today might already be enough.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911946):
+#### [ Tobias Grosser (Sep 30 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911946):
 I learn that generalizing this further is not a good idea.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911948):
+#### [ Tobias Grosser (Sep 30 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134911948):
 Thanks! I leave it at this generality.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912144):
+#### [ Tobias Grosser (Sep 30 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912144):
 Now I am only left with the problem of casting. I need the matrix to be of type  matrix (fin (1 + x)) (fin (1 + y)))
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912154):
+#### [ Tobias Grosser (Sep 30 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912154):
 I tried to type-cast using:
 
 ```lean
@@ -305,34 +305,34 @@ but is expected to have type
   matrix (fin (x + 1)) (fin (y + 1)) α
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912155):
+#### [ Tobias Grosser (Sep 30 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912155):
 You said lean should be able to understand this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912158):
+#### [ Tobias Grosser (Sep 30 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912158):
 This is no ambiguity
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912207):
+#### [ Tobias Grosser (Sep 30 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912207):
 I just need to show that these two are equivalent types.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912270):
+#### [ Mario Carneiro (Sep 30 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912270):
 this is not ambiguous, but since `x` is not a numeral these aren't defeq
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912321):
+#### [ Mario Carneiro (Sep 30 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912321):
 How do the `xrow i 0 (xcol j 0 A)` functions work?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912324):
+#### [ Mario Carneiro (Sep 30 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912324):
 are you building a new row on `A` or taking a minor?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912386):
+#### [ Tobias Grosser (Sep 30 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912386):
 They just interchange rows. AFAIU they don;t thange the type.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912393):
+#### [ Mario Carneiro (Sep 30 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912393):
 The fact that in coq `1+x = succ x` is definitional makes this translation more complicated, unless you reverse the `+` arguments in the minors function, or work from the bottom rather than the top of the matrix
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912434):
+#### [ Mario Carneiro (Sep 30 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912434):
 In lean `x+1 = succ x` is definitional
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912435):
+#### [ Tobias Grosser (Sep 30 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912435):
 My lean implementation is:
 ```lean
 def xrow [decidable_eq m] (row1: m) (row2: m) (A: matrix m n α) : matrix m n α :=
@@ -347,111 +347,111 @@ def xrow [decidable_eq m] (row1: m) (row2: m) (A: matrix m n α) : matrix m n α
                A x y
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912437):
+#### [ Mario Carneiro (Sep 30 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912437):
 right, I see, that shouldn't be a problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912448):
+#### [ Mario Carneiro (Sep 30 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912448):
 you are still using the code you posted above for `rsubmx`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912449):
+#### [ Mario Carneiro (Sep 30 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912449):
 with `n_right + n_left` in the type I mean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912451):
+#### [ Tobias Grosser (Sep 30 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912451):
 Yes.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912494):
+#### [ Tobias Grosser (Sep 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912494):
 I could move the zero columns/rows to position x+1 / y +1, then the types would work out.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912497):
+#### [ Tobias Grosser (Sep 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912497):
 But then the result matrices are layed out in a non-standard way.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912499):
+#### [ Mario Carneiro (Sep 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912499):
 so since `A` has type `(n+1) (n+1)` you can naturally strip off the left/top end
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912500):
+#### [ Tobias Grosser (Sep 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912500):
 Right.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912509):
+#### [ Tobias Grosser (Sep 30 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912509):
 That's easy. Just that most textbook implementations of gaussian elimination build upper triangular matrices.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912510):
+#### [ Tobias Grosser (Sep 30 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912510):
 So the zeros should be at the lower left corner.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912551):
+#### [ Mario Carneiro (Sep 30 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912551):
 I think you can still build upper triangular if you also transpose the rows and columns
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912554):
+#### [ Tobias Grosser (Sep 30 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912554):
 Sure, I could probably hack my way though this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912559):
+#### [ Tobias Grosser (Sep 30 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912559):
 Just don't feel this is nice.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912560):
+#### [ Mario Carneiro (Sep 30 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912560):
 But I think that having reversed arguments to the minors function is also fine
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912562):
+#### [ Tobias Grosser (Sep 30 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912562):
 Why again does this work in coq?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912568):
+#### [ Mario Carneiro (Sep 30 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912568):
 because they defined addition by recursion on the first argument rather than the second
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912573):
+#### [ Mario Carneiro (Sep 30 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912573):
 Personally I prefer lean's definition (i.e. `x + succ y = succ (x + y)`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912575):
+#### [ Tobias Grosser (Sep 30 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912575):
 They do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912607):
+#### [ Tobias Grosser (Sep 30 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912607):
 I feel they also have this cast in their code.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912616):
+#### [ Tobias Grosser (Sep 30 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912616):
 ```coq
  | _.+1, _.+1 ⇒ fun A : 'M_(1 + _, 1 + _) ⇒
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912619):
+#### [ Mario Carneiro (Sep 30 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912619):
 That's why in the induction you notice the type is `1+_` instead of `_ +1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912630):
+#### [ Mario Carneiro (Sep 30 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912630):
 The `.+` is suspicious
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912633):
+#### [ Mario Carneiro (Sep 30 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912633):
 do you know what it means?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912635):
+#### [ Tobias Grosser (Sep 30 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912635):
 ```coq
 Notation "n .+1" := (succn n) (at level 2, left associativity,
   format "n .+1") : nat_scope.
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912674):
+#### [ Mario Carneiro (Sep 30 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912674):
 heh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912678):
+#### [ Tobias Grosser (Sep 30 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912678):
 So they define notation to allow RHS addition of +1?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912679):
+#### [ Mario Carneiro (Sep 30 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912679):
 so `1+n = n .+1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912682):
+#### [ Mario Carneiro (Sep 30 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912682):
 looks like it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912683):
+#### [ Tobias Grosser (Sep 30 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912683):
 This stuff is all crazy!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912686):
+#### [ Tobias Grosser (Sep 30 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912686):
 Now based on the way nat is defined I cannot write my algorithm the way I want it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912692):
+#### [ Tobias Grosser (Sep 30 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912692):
 :(
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912693):
+#### [ Mario Carneiro (Sep 30 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912693):
 You can also write `fin.add_nat` with an appropriate type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912743):
+#### [ Mario Carneiro (Sep 30 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912743):
 You can also `cast` to get `A1'` the way you were attempting, but this will cause more problems later on
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912799):
+#### [ Tobias Grosser (Sep 30 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912799):
 OK, I will try to write add_nat after breakfast.
 
 There is already
@@ -460,32 +460,32 @@ def add_nat {n} (i : fin n) (k) : fin (n + k) :=
 ⟨i.1 + k, nat.add_lt_add_right i.2 _⟩  
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912800):
+#### [ Tobias Grosser (Sep 30 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912800):
 Seems trivial to write (assuming one knows what to write)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912806):
+#### [ Tobias Grosser (Sep 30 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912806):
 Now, I am not sure what I actually want here.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912807):
+#### [ Tobias Grosser (Sep 30 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912807):
 In some way I just want to cast from n + 1 to 1 + n.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912809):
+#### [ Tobias Grosser (Sep 30 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912809):
 Or pattern match based on 1 + n.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912811):
+#### [ Tobias Grosser (Sep 30 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912811):
 Would add_nat help me with the pattern matching?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912854):
+#### [ Mario Carneiro (Sep 30 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912854):
 just swap the arguments, like this
 ```
 def nat_add {n} (k) (i : fin n) : fin (k + n) :=
 ⟨k + i.1, nat.add_lt_add_left i.2 _⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912857):
+#### [ Mario Carneiro (Sep 30 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912857):
 then use it in your minors function
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912972):
+#### [ Tobias Grosser (Sep 30 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134912972):
 Are you suggeting to change the signature of my functions.
 
 ```lean
@@ -498,120 +498,120 @@ def ursubmx2 {m_bottom m_top n_left n_right: nat} : Π (m_bottom m_top n_left n_
 := sorry 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913014):
+#### [ Mario Carneiro (Sep 30 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913014):
 yes... although I think this will make a cast required
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913015):
+#### [ Tobias Grosser (Sep 30 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913015):
 I feel I have enough ideas to make things work. I can then later try to make the code nice.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913018):
+#### [ Tobias Grosser (Sep 30 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913018):
 This just screems ugly all over the place.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913022):
+#### [ Tobias Grosser (Sep 30 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913022):
 Need to get used to this more to see a beautiful solution.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913024):
+#### [ Tobias Grosser (Sep 30 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913024):
 Need to have breakfast now. Thanks a lot for the helpful discussion. I learned a lot!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913071):
+#### [ Mario Carneiro (Sep 30 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913071):
 Here's a trick: You can use Kevin's minors function as a cast
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913073):
+#### [ Mario Carneiro (Sep 30 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134913073):
 the identity function `fin (m+n) -> fin (n+m)` is monotonic :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 30 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134914237):
+#### [ Kevin Buzzard (Sep 30 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134914237):
 Is there an argument for not even using `fin n` at all and having a general class indexed over a pair of finite types?
 
 Here's a result I'd like to see in Lean one day: if f(X) is the char poly of the n x n matrix M then the coefficient of X^(n-i) in f(X) is the sum of the (appropriately signed?) determinants of the i x i principal minors.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134914299):
+#### [ Mario Carneiro (Sep 30 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134914299):
 We already have that; Tobias is explicitly avoiding that because he wants to do induction on fin n
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 30 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134914352):
+#### [ Kevin Buzzard (Sep 30 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134914352):
 Oh -- I'm behind the times :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134914394):
+#### [ Mario Carneiro (Sep 30 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134914394):
 If this is to be computationally efficient, it should probably use list representation though (a.k.a `fast_matrix`), and it might be possible to just ignore the dependent types and work with `list (list A)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134915836):
+#### [ Tobias Grosser (Sep 30 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134915836):
 I see.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134915876):
+#### [ Tobias Grosser (Sep 30 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134915876):
 I would certainly like this to be computationally efficient, but will take this a step at a time. I feel I am close to sth that could work. I will finish this up and polish it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134915879):
+#### [ Tobias Grosser (Sep 30 2018 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134915879):
 Then we have a first baseline implementation. I am then happy to take feedback on how to improve interface / performance / ...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 30 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134916119):
+#### [ Mario Carneiro (Sep 30 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134916119):
 I think that's a good idea
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921308):
+#### [ Tobias Grosser (Sep 30 2018 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921308):
 OK, I think I got a first implementation: https://gist.github.com/tobig/376e9a394c674474b8c1f6ecf9555478
 It compiles and gives expected results. Still a couple of sorry, but seems to work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921349):
+#### [ Tobias Grosser (Sep 30 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921349):
 Need to clean up everything at some point.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921353):
+#### [ Tobias Grosser (Sep 30 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921353):
 But no today any more.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921355):
+#### [ Tobias Grosser (Sep 30 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921355):
 Also I learned it is indeed _very_ slow.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921356):
+#### [ Tobias Grosser (Sep 30 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921356):
 I need to wait 10s of seconds for results on a 3x3 matrix.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921362):
+#### [ Tobias Grosser (Sep 30 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134921362):
 Oh dear, seems there is optimization potential.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 30 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134922425):
+#### [ Kevin Buzzard (Sep 30 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134922425):
 I think for your test matrix I would have been tempted to send x and y to `C[3*x+y]` with C a vector of the nine entries (`def C := [3,3,3,3,2,3,2,1,1]`)...hmm...one might then have to prove 3*x+y<=8...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Sep 30 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134924823):
+#### [ Andrew Ashworth (Sep 30 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134924823):
 hmm, are you aiming for speed? I believe `vector` has special support in the VM, so you might try defining matrix using that instead of an arbitrary `fintype`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Sep 30 2018 at 16:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134924884):
+#### [ Andrew Ashworth (Sep 30 2018 at 16:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134924884):
 iirc, and you would be more familiar than me on this topic, but doesn't SSReflect also define matrix as a vector of vectors?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134926152):
+#### [ Tobias Grosser (Sep 30 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134926152):
 I am not aiming for speed atm. I just want to get things working / defined and improve my lean-knowledge.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134926161):
+#### [ Tobias Grosser (Sep 30 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134926161):
 Eventually, I would like this to be fast and maybe even support exporting code to C++.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Sep 30 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134926164):
+#### [ Tobias Grosser (Sep 30 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134926164):
 However, this is a medium term only.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 05 2018 at 07:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135234645):
+#### [ Tobias Grosser (Oct 05 2018 at 07:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135234645):
 My first pull request: https://github.com/leanprover/mathlib/pull/387
 
 Still very small, but gets things rolling.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 05 2018 at 08:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236714):
+#### [ Tobias Grosser (Oct 05 2018 at 08:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236714):
 I got an amazing review from @**Simon Hudon** and @**Sean Leather**. Thanks a lot!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 05 2018 at 08:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236765):
+#### [ Simon Hudon (Oct 05 2018 at 08:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236765):
 The PR has my stamp of approval and, I think, that of @**Sean Leather**, now we just need @**Mario Carneiro** or @**Johannes Hölzl** to merge it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Oct 05 2018 at 08:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236826):
+#### [ Sean Leather (Oct 05 2018 at 08:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236826):
 Agreed.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 05 2018 at 08:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236830):
+#### [ Mario Carneiro (Oct 05 2018 at 08:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236830):
 yeah okay
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 05 2018 at 08:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236836):
+#### [ Simon Hudon (Oct 05 2018 at 08:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236836):
 This must be some sort of record :D
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 05 2018 at 08:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236911):
+#### [ Tobias Grosser (Oct 05 2018 at 08:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135236911):
 Impressive!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 05 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135242622):
+#### [ Tobias Grosser (Oct 05 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135242622):
 I pushed anther pull request for fin in (https://github.com/leanprover/mathlib/pull/388) as well as the submatrix definitions this thread was originally about in: https://github.com/leanprover/mathlib/pull/389. The last PR uses @**Kevin Buzzard**'s idea of using a general function minormx to implement this functionality.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 05 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135242713):
+#### [ Tobias Grosser (Oct 05 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135242713):
 Especially the last one is more a RFC, as I am not sure if limiting these functionality to (fin n) makes sense.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 05 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135242722):
+#### [ Tobias Grosser (Oct 05 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/135242722):
 My lean time is over for today. Will look at potential feedback later tonight. Thanks everyone again!
 
 

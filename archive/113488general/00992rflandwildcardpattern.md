@@ -11,7 +11,7 @@ permalink: archive/113488general/00992rflandwildcardpattern.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127771996):
+#### [ Patrick Massot (Jun 08 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127771996):
 Have a look at https://github.com/kbuzzard/lean-perfectoid-spaces/blob/b1e6489145be504e64a009226c6811bfd84a5070/src/valuations.lean#L143-L151:
 ```lean
 theorem mul_assoc : ∀ (x y z : option α), mul (mul x y) z = mul x (mul y z)
@@ -26,7 +26,7 @@ theorem mul_assoc : ∀ (x y z : option α), mul (mul x y) z = mul x (mul y z)
 ```
 What would be a way to compress this down to three lines?  Replacing lines 3 to N by `|_ _ _ := rfl` doesn' work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127772157):
+#### [ Simon Hudon (Jun 08 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127772157):
 I would try something like:
 
 ```lean
@@ -34,7 +34,7 @@ theorem mul_assoc : ∀ (x y z : option α), mul (mul x y) z = mul x (mul y z) :
 by { intros, casesm* option _ ; (apply congr_arg some (_root_.mul_assoc x y z) <|> refl)) }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127772285):
+#### [ Simon Hudon (Jun 08 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127772285):
 Maybe this would be clearer and faster:
 
 ```lean
@@ -44,71 +44,71 @@ by { intros, casesm* option _,
      all_goals { exact rfl } }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127774966):
+#### [ Patrick Massot (Jun 08 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127774966):
 Thanks. You need to try `rfl` first or replace names by wildcards since `x`, `y`, `z` are defined only in one case
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127774970):
+#### [ Patrick Massot (Jun 08 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127774970):
 ```lean
 theorem mul_assoc : ∀ (x y z : option α), mul (mul x y) z = mul x (mul y z) :=
 by { intros, casesm* option _,
      all_goals { exact congr_arg some (_root_.mul_assoc _ _ _) <|>  exact rfl } }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 08 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775025):
+#### [ Johan Commelin (Jun 08 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775025):
 Isn't the correct answer to your initial question `obviously`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775053):
+#### [ Patrick Massot (Jun 08 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775053):
 Ok, it's time for some tactic lecture. How to you get Lean to see the name of the theorem we are proving is `mul_assoc` and there are three variables in order to use this information instead of explicitly writing `_root_.mul_assoc _ _ _`? Then you can do a bunch of other proofs with the same tactic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775095):
+#### [ Patrick Massot (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775095):
 I don't think we have `obviously` yet. But indeed it would be the correct answer
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775102):
+#### [ Patrick Massot (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775102):
 Maybe we can add Scott's repo as a dependency
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775105):
+#### [ Johan Commelin (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775105):
 Exactly.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775112):
+#### [ Johan Commelin (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775112):
 But I think it requires adding lots of attribute through mathlib.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775113):
+#### [ Johan Commelin (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775113):
 So it might not go as smoothly as we hope.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 08 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775144):
+#### [ Johan Commelin (Jun 08 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775144):
 His library is not orthogonal to mathlib, so it won't be an easy PR, I guess.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775194):
+#### [ Patrick Massot (Jun 08 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775194):
 I don't think it's true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775202):
+#### [ Simon Hudon (Jun 08 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775202):
 My pull request has not been merged yet but if you want to use my branch the code would end up very similar to your indexed product.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 08 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775278):
+#### [ Johan Commelin (Jun 08 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775278):
 @**Patrick Massot** I would love to be proved wrong. But what I've seen so far, is that you need to put a lot of attributes at a lot of definitions. And then afterwards life becomes easy.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775330):
+#### [ Patrick Massot (Jun 08 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775330):
 At least you can add lean-tidy to the project and then `import tidy.tidy` and get access to `obviously`. Then it doesn't prove this lemma
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775340):
+#### [ Patrick Massot (Jun 08 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775340):
 Simon I don't understand what you wrote
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 08 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775402):
+#### [ Johan Commelin (Jun 08 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775402):
 ```quote
 At least you can add lean-tidy to the project and then `import tidy.tidy` and get access to `obviously`. Then it doesn't prove this lemma
 ```
 Right... but your point is that it might still prove other lemma's?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775419):
+#### [ Patrick Massot (Jun 08 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775419):
 I hope so
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775434):
+#### [ Patrick Massot (Jun 08 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775434):
 Let's see what time is it in Australia.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775439):
+#### [ Simon Hudon (Jun 08 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775439):
 I made a pull request with `refine_struct` that would be useful here. It hasn't been merged yet but you can still use it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775487):
+#### [ Patrick Massot (Jun 08 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775487):
 @**Scott Morrison** We currently have this proof:
 ```lean
 theorem mul_assoc : ∀ (x y z : option α), mul (mul x y) z = mul x (mul y z) :=
@@ -117,82 +117,82 @@ by { intros, casesm* option _,
 ```
 Question: should this be killed by one of your magic tactics?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775493):
+#### [ Patrick Massot (Jun 08 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775493):
 Simon: But the question at hand has no structure to refine
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775587):
+#### [ Simon Hudon (Jun 08 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775587):
 Aren't you building up to a monoid or semigroup?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775601):
+#### [ Patrick Massot (Jun 08 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775601):
 True
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775607):
+#### [ Patrick Massot (Jun 08 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775607):
 I don't know what I was thinking
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775614):
+#### [ Simon Hudon (Jun 08 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775614):
 You may be able to have only one proof for the whole instance
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775662):
+#### [ Patrick Massot (Jun 08 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775662):
 I was carelessly browsing code in lean-perfectoid and saw this lemma with seven stupid lines and focussed on it. But of course its only use is in an instance later.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 16:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775784):
+#### [ Simon Hudon (Jun 08 2018 at 16:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775784):
 That's a pretty common mindset for me. That's actually a fun part of doing engineering: some days I don't feel smart so I can do some mindless tasks until I feel inspired again. The downside is that I don't consider much contexts while doing that so I end up improving the minutia of solutions that should just scrapped altogether
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775861):
+#### [ Patrick Massot (Jun 08 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775861):
 It's a bit annoying that this PR is not merged because it's content is scattered among several files, so it's not immediate to incorporate it into another project
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775950):
+#### [ Simon Hudon (Jun 08 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775950):
 What you can do is link to my repo in your toml file
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775976):
+#### [ Simon Hudon (Jun 08 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775976):
 I may have to update that branch first but I can do that right now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127776127):
+#### [ Patrick Massot (Jun 08 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127776127):
 That may be a good solution if @**Mario Carneiro** and @**Johannes Hölzl** need more time to review your PR, because the Perfectoid project will need a lot of instances of algebraic objects.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127777679):
+#### [ Simon Hudon (Jun 08 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127777679):
 It's ready when you are.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779269):
+#### [ Patrick Massot (Jun 08 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779269):
 After doing `field ← get_current_field,` how would you replace `whatever.something` with `_root_.something` inside `field` so that I can later use it in the relevant version of `derive_field`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779369):
+#### [ Simon Hudon (Jun 08 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779369):
 Is `whatever` something like `semigroup`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779372):
+#### [ Patrick Massot (Jun 08 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779372):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779429):
+#### [ Simon Hudon (Jun 08 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779429):
 Why do you need to strip it away?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779454):
+#### [ Patrick Massot (Jun 08 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779454):
 because it doesn't work otherwise
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779456):
+#### [ Patrick Massot (Jun 08 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779456):
 see the handcrafted proof above
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779538):
+#### [ Simon Hudon (Jun 08 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779538):
 Do you have an instance of `semigroup` for `α`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779562):
+#### [ Patrick Massot (Jun 08 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779562):
 `linear_ordered_comm_group` actually
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779564):
+#### [ Patrick Massot (Jun 08 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779564):
 and the goal is to build `linear_ordered_comm_monoid (option α)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779611):
+#### [ Patrick Massot (Jun 08 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779611):
 but `to_string field` turns out to be `comm_monoid.mul_assoc` here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779616):
+#### [ Patrick Massot (Jun 08 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779616):
 but the proof then needs `_root_.mul_assoc`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779821):
+#### [ Simon Hudon (Jun 08 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779821):
 I find it odd: the types are very similar. Can you give me the error you get when your proof fails?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779827):
+#### [ Simon Hudon (Jun 08 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779827):
 (It is possible to do what you ask but I think we're better off taking a different approach)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780142):
+#### [ Patrick Massot (Jun 08 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780142):
 I minimized to 
 ```lean
 import algebra.pi_instances
@@ -224,19 +224,19 @@ by refine_struct { mul := mul, one := one, le := le, .. }; { tactic.derive_field
 ```
 The game is to add `derive_field_option` to `algebra.pi_instances` (from your branch of course) to make it work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780175):
+#### [ Patrick Massot (Jun 08 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780175):
 Again, this is not crucial, Kenny did it by hand, I'm only trying to slowly learn tactic writing for specialized automation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780177):
+#### [ Simon Hudon (Jun 08 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780177):
 Nice :) I'm going to play a bit :D
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780228):
+#### [ Patrick Massot (Jun 08 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780228):
 I should go and take care of my family (I'm not even talking about the work I should have been doing)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 08 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780239):
+#### [ Simon Hudon (Jun 08 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780239):
 Ah family! They keep interrupting math, don't they? :D
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 08 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780314):
+#### [ Patrick Massot (Jun 08 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780314):
 The version which doesn't work is:
 ```lean
 meta def derive_field_option : tactic unit :=
@@ -250,7 +250,7 @@ do b ← target >>= is_prop,
   else do skip
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 11 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127888806):
+#### [ Scott Morrison (Jun 11 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127888806):
 Just arrived back from underwater. I've starred the proof you asked about, @Patrick, and will try out `obviously`. I suspect it requires more case bashing (on `option`) than obviously is by default willing to do.
 
 

@@ -11,40 +11,40 @@ permalink: archive/113489newmembers/40653monotonicityagain.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 04 2018 at 05:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130874956):
+#### [ Simon Hudon (Aug 04 2018 at 05:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130874956):
 I just gave another shot to implementing `mono` and `ac_mono` (for reasoning with monotonicity with and without considerations for associativity / commutativity). For those who would like to use those, I'd love to hear if it's useful as it is. I have written a lot of examples, I hope it will be informative.
 
 https://github.com/cipher1024/mathlib/blob/monotonicity/tests/monotonicity.lean
 https://github.com/cipher1024/mathlib/tree/monotonicity/docs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 04 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130876196):
+#### [ Johan Commelin (Aug 04 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130876196):
 This seems quite useful! I wonder if it would help with proving some of my stuff on simplicial sets: https://github.com/jcommelin/mathlib/blob/ece70f307edc5fdebe7aed154ab8aaa3a12bb5a3/algebraic_topology/simplex_category.lean#L33 or https://github.com/jcommelin/mathlib/blob/ece70f307edc5fdebe7aed154ab8aaa3a12bb5a3/algebraic_topology/simplex_category.lean#L67
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 04 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130876208):
+#### [ Johan Commelin (Aug 04 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130876208):
 (Also, wrong stream? Or do you propose `mono` and `ac_mono` as "new members" of the community?)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 04 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130876506):
+#### [ Simon Hudon (Aug 04 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130876506):
 *cough cough* of course they would be! They're just such awesome tactics :D
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 04 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130876631):
+#### [ Simon Hudon (Aug 04 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130876631):
 I'm not sure how they would help for those proofs though. I'm really targeting goals of the shape `x + y ≤ w + z` for some relation `≤`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 04 2018 at 07:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130877226):
+#### [ Johan Commelin (Aug 04 2018 at 07:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130877226):
 Ok, I see. Well, maybe at some point `cooper` will turn my proofs into a 1-liner.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 04 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130877412):
+#### [ Simon Hudon (Aug 04 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130877412):
 Isn't `cooper` mostly about integer arithmetic?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 04 2018 at 07:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130877614):
+#### [ Johan Commelin (Aug 04 2018 at 07:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130877614):
 It is, but I think so are my proofs.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 04 2018 at 07:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130877706):
+#### [ Simon Hudon (Aug 04 2018 at 07:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130877706):
 Ok, I squinted at them and started to see integers. I wonder if `fin` will make it harder. Does Presburger arithmetic include modulo?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 07:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130877768):
+#### [ Mario Carneiro (Aug 04 2018 at 07:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130877768):
 modulo by constants yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 04 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130887896):
+#### [ Johan Commelin (Aug 04 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130887896):
 There is no modular arithmetic in my code. `fin` should just unpack to some inequalities, and `cooper` should be able to deal with those...
 
 

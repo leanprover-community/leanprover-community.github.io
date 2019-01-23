@@ -11,20 +11,20 @@ permalink: archive/113488general/85479leminofmem.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_min_of_mem/near/130485616):
+#### [ Kenny Lau (Jul 28 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_min_of_mem/near/130485616):
 ```lean
 theorem le_min_of_mem {s : finset α} {a b : α} (h₁ : b ∈ s) (h₂ : a ∈ s.min) : a ≤ b :=
 by rcases @inf_le (with_top α) _ _ _ _ _ _ _ h₁ _ rfl with ⟨b', hb, ab⟩;
    cases h₂.symm.trans hb; assumption
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_min_of_mem/near/130485617):
+#### [ Kenny Lau (Jul 28 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_min_of_mem/near/130485617):
 looks like `min_le_of_mem` to me
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 28 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_min_of_mem/near/130485669):
+#### [ Chris Hughes (Jul 28 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_min_of_mem/near/130485669):
 PR it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 28 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_min_of_mem/near/130485715):
+#### [ Chris Hughes (Jul 28 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_min_of_mem/near/130485715):
 my guess is someone copied the name `le_max_of_mem` and didn't notice the word order needed changing
 
 

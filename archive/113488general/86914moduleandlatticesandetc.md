@@ -11,7 +11,7 @@ permalink: archive/113488general/86914moduleandlatticesandetc.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 06 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20and%20lattices%20and%20etc/near/146859692):
+#### [ Kenny Lau (Nov 06 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20and%20lattices%20and%20etc/near/146859692):
 ```lean
 def module_of_module_of_ring_hom {R : Type u} [ring R]
   {S : Type v} [ring S] (f : R → S) [is_ring_hom f]
@@ -29,10 +29,10 @@ module.of_core {
 ```
 @**Mario Carneiro** how should we call this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 06 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20and%20lattices%20and%20etc/near/146892841):
+#### [ Kenny Lau (Nov 06 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20and%20lattices%20and%20etc/near/146892841):
 @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 06 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20and%20lattices%20and%20etc/near/146894746):
+#### [ Mario Carneiro (Nov 06 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20and%20lattices%20and%20etc/near/146894746):
 module.of_ring_hom maybe?
 
 

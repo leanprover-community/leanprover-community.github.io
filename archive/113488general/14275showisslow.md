@@ -11,7 +11,7 @@ permalink: archive/113488general/14275showisslow.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888169):
+#### [ Kevin Buzzard (Aug 04 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888169):
 ```lean
 import data.real.basic 
 
@@ -41,7 +41,7 @@ end
 
 Note one elaboration time is in seconds not milliseconds. What have I done wrong here? I have somehow misused `show`, it seems.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888235):
+#### [ Kevin Buzzard (Aug 04 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888235):
 ```lean
 theorem very_slow (n : ℤ) (x : ℝ) (H1 : x = ↑n) (H2 : n < (3 : ℤ)) : x < (3 : ℝ) :=
 begin
@@ -54,10 +54,10 @@ end
 
 doesn't fix it. I can't imagine what `show` is doing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888627):
+#### [ Mario Carneiro (Aug 04 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888627):
 does `change` do any better?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888631):
+#### [ Kevin Buzzard (Aug 04 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888631):
 Progress:
 
 ```lean
@@ -76,10 +76,10 @@ end
 -- elaboration of very_slow2 took 5.83s
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888638):
+#### [ Kevin Buzzard (Aug 04 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888638):
 (progress in the sense that the problem is now simpler and even more confusing)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 04 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888802):
+#### [ Chris Hughes (Aug 04 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888802):
 Don't use definitional reduction for reals is probably the best solution.
 ```lean
 theorem very_slow (n : ℤ) (x : ℝ) (H1 : x = ↑n) (H2 : n < (3 : ℤ)) : x < (3 : ℝ) :=
@@ -89,10 +89,10 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888858):
+#### [ Kevin Buzzard (Aug 04 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888858):
 Sure there are workarounds, but what is surprising is that Lean is *sometimes* proving the result by `rfl` quickly and sometimes not
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888874):
+#### [ Kevin Buzzard (Aug 04 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888874):
 ```lean
 
 theorem very_slow3 : (3 : ℝ) = ((3 : ℤ) : ℝ) :=
@@ -110,7 +110,7 @@ end
 
 same problem with change
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889010):
+#### [ Kevin Buzzard (Aug 04 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889010):
 ```lean
 theorem very_slow : (3 : ℝ) = ((3 : ℤ) : ℝ) :=
 begin
@@ -128,7 +128,7 @@ end
 ```
 Way beyond my pay grade
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889117):
+#### [ Mario Carneiro (Aug 04 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889117):
 I have narrowed it down to
 ```
 run_cmd assertv_core `h `((3 : ℝ) = ((3 : ℤ) : ℝ)) `(eq.refl (3 : ℝ))
@@ -140,85 +140,85 @@ run_cmd assertv_core `h `((3 : ℝ) = ((3 : ℤ) : ℝ))
 ```
 is fast
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889181):
+#### [ Kenny Lau (Aug 04 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889181):
 how do I use `run_cmd`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889191):
+#### [ Mario Carneiro (Aug 04 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889191):
 it accepts a `tactic A` and runs it in a dummy state
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889195):
+#### [ Kenny Lau (Aug 04 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889195):
 ```lean
 import data.real.basic
 
 run_cmd assertv_core `h `((3 : ℝ) = ((3 : ℤ) : ℝ)) `(eq.refl (3 : ℝ))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889196):
+#### [ Kenny Lau (Aug 04 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889196):
 this doesn't work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889199):
+#### [ Mario Carneiro (Aug 04 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889199):
 it's basically the same as `example : true := by tac`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889239):
+#### [ Mario Carneiro (Aug 04 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889239):
 `open tactic`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889243):
+#### [ Kenny Lau (Aug 04 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889243):
 lol
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889311):
+#### [ Kenny Lau (Aug 04 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889311):
 ```lean
 run_cmd assertv_core `h `((2 : ℝ) = ((3 : ℤ) : ℝ))
   `(show (3 : ℝ) = ((3 : ℤ) : ℝ), from eq.refl (3 : ℝ))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889312):
+#### [ Kenny Lau (Aug 04 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889312):
 this is slow
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889315):
+#### [ Kenny Lau (Aug 04 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889315):
 this timed out
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889317):
+#### [ Kenny Lau (Aug 04 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889317):
 (it's 2 instead of 3 in the beginning)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889333):
+#### [ Kenny Lau (Aug 04 2018 at 14:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889333):
 while this is fast (I changed the last 3 to 2 instead):
 ```lean
 run_cmd assertv_core `h `((3 : ℝ) = ((3 : ℤ) : ℝ))
   `(show (3 : ℝ) = ((3 : ℤ) : ℝ), from eq.refl (2 : ℝ))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889340):
+#### [ Kenny Lau (Aug 04 2018 at 14:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889340):
 so the `show` is slow
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889463):
+#### [ Mario Carneiro (Aug 04 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889463):
 it's not a fair comparison when the statement isn't true though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889470):
+#### [ Mario Carneiro (Aug 04 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889470):
 because then lean does completely different things with regard to error reporting and stuff
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889473):
+#### [ Kenny Lau (Aug 04 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889473):
 ```lean
 run_cmd assertv_core `h `((3 : ℝ) = ((3 : ℤ) : ℝ))
   `(show (2 : ℝ) = ((2 : ℤ) : ℝ), from eq.refl (2 : ℝ))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889474):
+#### [ Kenny Lau (Aug 04 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889474):
 the statement is true, and it is slow
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889477):
+#### [ Kenny Lau (Aug 04 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889477):
 oh wait, this is fast:
 ```lean
 run_cmd assertv_core `h `((3 : ℝ) = ((3 : ℤ) : ℝ))
   `(show (2 : ℝ) = ((2 : ℤ) : ℝ), from eq.refl (3 : ℝ))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889481):
+#### [ Mario Carneiro (Aug 04 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889481):
 In both cases it's going to fail because the types don't match
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889520):
+#### [ Kenny Lau (Aug 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889520):
 but they expect `2` instead of `3`!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889526):
+#### [ Kenny Lau (Aug 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889526):
 ```
 type mismatch at application
   (λ (this : 2 = ↑2), this) (eq.refl 3)
@@ -230,7 +230,7 @@ but is expected to have type
   2 = ↑2
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889527):
+#### [ Kenny Lau (Aug 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889527):
 ```
 unexpected argument at application
   eq.refl 3
@@ -240,16 +240,16 @@ expected argument
   2
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889530):
+#### [ Mario Carneiro (Aug 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889530):
 `assertv_core` checks that the type of the last argument is the same as the second argument
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889535):
+#### [ Mario Carneiro (Aug 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889535):
 so all of the numbers have to match
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889593):
+#### [ Mario Carneiro (Aug 04 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889593):
 I think there is a bug in `assertv_core`. If I use `assert_core` instead, it works fine, which you can achieve by using the proof-omitted form of tactic `have`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889595):
+#### [ Mario Carneiro (Aug 04 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889595):
 ```lean
 theorem not_slow : (3 : ℝ) = ((3 : ℤ) : ℝ) :=
 begin
@@ -258,10 +258,10 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889641):
+#### [ Mario Carneiro (Aug 04 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889641):
 note that `definev_core` is also slow, which is linked in to the `let` tactic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 04 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889707):
+#### [ Kenny Lau (Aug 04 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889707):
 ```cpp
 vm_obj assert_define_core(bool is_assert, name const & n, expr const & t, tactic_state const & s) {
     optional<metavar_decl> g = s.get_main_goal_decl();
@@ -333,13 +333,13 @@ vm_obj tactic_assertv_core(vm_obj const & n, vm_obj const & e, vm_obj const & pr
 }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889756):
+#### [ Mario Carneiro (Aug 04 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889756):
 the issue is somewhere in `assertv_definev_core`, but I don't see anything wrong
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889764):
+#### [ Mario Carneiro (Aug 04 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130889764):
 the `ctx.is_def_eq` call is potentially expensive, but you can test that in lean and it's not
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130890110):
+#### [ Mario Carneiro (Aug 04 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130890110):
 The mystery continues. As far as I can tell, the following lean code should do the same as `assertv_definev_core` in this case:
 ```
 run_cmd do
@@ -356,7 +356,7 @@ run_cmd do
 ```
 yet it runs without any problems
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130891358):
+#### [ Mario Carneiro (Aug 04 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130891358):
 @**Sebastian Ullrich** Could you debug this for me? Here's a mathlib free version of the test:
 ```lean
 structure Q := (num : ℕ)
@@ -374,25 +374,25 @@ run_cmd tactic.try_for 10000 (assertv_core `h
   `(eq.refl (4 : Q)) >> admit) --timeout
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 04 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130891933):
+#### [ Johan Commelin (Aug 04 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130891933):
 The `--works` version has `1000`, whereas the `--timeout` version has `10000`. I don't know if that matters...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 16:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130892761):
+#### [ Mario Carneiro (Aug 04 2018 at 16:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130892761):
 That's probably not needed, but it is saying that the first completes in <1000 ms and the second does not complete with <10000 ms so it is much worse
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 04 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130897379):
+#### [ Simon Hudon (Aug 04 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130897379):
 Is this something `norm_num` would help with?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 04 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130897429):
+#### [ Simon Hudon (Aug 04 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130897429):
 If I understand correctly, `refl` is slow because it's unfolding the numerals.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130897479):
+#### [ Kevin Buzzard (Aug 04 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130897479):
 refl isn't always slow. It's just slow if you invoke it the wrong way :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 04 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130897489):
+#### [ Kevin Buzzard (Aug 04 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130897489):
 You can prove that the real 3 is the coercion of the integer 3 using simp as well, which is quick (but not as quick as when you use refl, if you use refl the right way)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 04 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130898142):
+#### [ Mario Carneiro (Aug 04 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130898142):
 I don't think `rfl` wins over `simp` here even in the "good" case, at least not if your numbers are moderately large. Calculating `4 : real` directly requires a number of gcd calculations, which are slow
 
 

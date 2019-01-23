@@ -11,35 +11,35 @@ permalink: archive/113488general/48009leangolf.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Feb 28 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123089630):
+#### [ Sean Leather (Feb 28 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123089630):
 Shortest proof of this?
 
 ```lean
 a ∧ b ∧ c ∧ d ∧ e ↔ a ∧ b ∧ c ∧ c ∧ d ∧ e
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Feb 28 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123089805):
+#### [ Sebastian Ullrich (Feb 28 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123089805):
 Let's start with the basics
 ```lean
 by split;intro;simp*
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Feb 28 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090043):
+#### [ Sean Leather (Feb 28 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090043):
 That's like a sledgehammer using sledgehammers to hit small nails. For some reason, I never think to try `simp *`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Feb 28 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090128):
+#### [ Sebastian Ullrich (Feb 28 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090128):
 Well, I don't really need `*` here, but naming the hypothesis obviously is a golf no-go :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Feb 28 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090420):
+#### [ Sean Leather (Feb 28 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090420):
 Is it? If the proof is short, I don't see why. :simple_smile:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Feb 28 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090434):
+#### [ Scott Morrison (Feb 28 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090434):
 I was happy to see `by tidy` works too. Maybe one day I'll get up the courage to PR it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Feb 28 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123109866):
+#### [ Kevin Buzzard (Feb 28 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123109866):
 I wondered whether `by cc` would work -- but it doesn't. I still don't really know what to expect with cc but I think I've seen it prove other goals of this nature.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Mar 01 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123129844):
+#### [ Sean Leather (Mar 01 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123129844):
 I'm slowly learning how to use `simp *`:
 ```lean
 namespace list
@@ -52,22 +52,22 @@ by induction l generalizing n; [skip, cases n]; simp [*, option.get_or_else]
 end list
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Mar 02 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123179941):
+#### [ Johannes Hölzl (Mar 02 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123179941):
 I guess `cc` doesn't work as it currently doesn't handle idempotent laws (i.e. `c ∧ c`).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658195):
+#### [ Kevin Buzzard (Mar 13 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658195):
 Curry:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658197):
+#### [ Kevin Buzzard (Mar 13 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658197):
 `example (P Q R : Prop) : (P ∧ Q → R) ↔ (P → (Q → R)) := sorry`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658245):
+#### [ Kevin Buzzard (Mar 13 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658245):
 Doing this one taught me something, although it was arguably not very useful
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 13 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658252):
+#### [ Kevin Buzzard (Mar 13 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658252):
 Actually it taught me 2 things, one being that bash shell is not very good at counting unicode characters
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 24 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127015438):
+#### [ Sean Leather (May 24 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127015438):
 I'm sure I've asked this before, but I don't remember the answer. Better/shorter way to do this?
 
 ```lean
@@ -76,70 +76,70 @@ intro h, simp at h, simp [h]
 
 Note that `simp` by itself doesn't work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 24 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127016063):
+#### [ Johannes Hölzl (May 24 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127016063):
 `simp {contextual:=tt}` should do it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 24 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127016150):
+#### [ Sean Leather (May 24 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127016150):
 Yep, that did it. Thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 24 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017262):
+#### [ Sean Leather (May 24 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017262):
 `simp` doesn't solve this. Is there a theorem I can use with `simp` to solve it?
 
 ```lean
 ⟨a, b⟩ ∈ l ↔ a = a₁ ∧ b == b₁ ∨ ⟨a, b⟩ ∈ l
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 24 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017535):
+#### [ Johannes Hölzl (May 24 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017535):
 I guess you have `⟨a₁, b₁⟩ ∈ l`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 24 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017583):
+#### [ Johannes Hölzl (May 24 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017583):
 But I also don't see how to solve it with the simplifier.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 24 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017645):
+#### [ Sean Leather (May 24 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017645):
 Oh wait, I'm stupid. Let me actually think. :simple_smile:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 24 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017653):
+#### [ Kevin Buzzard (May 24 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017653):
 Do you CS people know how to parse that sort of statement?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 24 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017685):
+#### [ Kevin Buzzard (May 24 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017685):
 I look at it (away from Lean) and have no idea about the relative priorities of and, or and iff. Is this just all some standard convention that you CS people know and we maths people just avoid by adding brackets?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 24 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017716):
+#### [ Kevin Buzzard (May 24 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017716):
 I mean -- I know I can go and check them -- my question is whether there are uniform standards or whether Lean made some random choice and you find different choices in other systems.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 24 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017741):
+#### [ Kevin Buzzard (May 24 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017741):
 obviously I can guess the answer in this situation from the context, but in the past I have written statements without brackets and then later on gone "oh crap, that doesn't mean what I wanted it to mean at all"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (May 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017785):
+#### [ Gabriel Ebner (May 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017785):
 The precedence is pretty standard.  In most (all?) programming languages as well as logic, and binds more tightly than or.  C doesn't have iff, so its hard to compare.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 24 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017792):
+#### [ Sean Leather (May 24 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017792):
 The “usual conventions:” https://groups.google.com/d/msg/lean-user/lbFwVL21Az4/1erXpLqBAwAJ
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (May 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017838):
+#### [ Gabriel Ebner (May 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017838):
 Excerpt from a proof theory textbook lying around here (Troelstra & Schwichtenberg):
 
 > Notation (Saving on parentheses) In writing formulas we save on parentheses by assuming that ∀, ∃,  ¬ bind more strongly than ∧, ∨, and that in turn ∨, ∧ bind more strongly than →, ↔. [...]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (May 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017848):
+#### [ Gabriel Ebner (May 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017848):
 I guess you will find similar boilerplate in most texts that deal with logical formulas.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017854):
+#### [ Sean Leather (May 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017854):
 One that I struggled with was `=` vs. `↔`, but now I'm used to it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018118):
+#### [ Kevin Buzzard (May 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018118):
 ```quote
 I guess you will find similar boilerplate in most texts that deal with logical formulas.
 ```
 I follow a text which deals with logical formulas in my introduction to proof class and I can find no mention of binding preferences anywhere!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018119):
+#### [ Kevin Buzzard (May 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018119):
 But I do see a lot of brackets :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018159):
+#### [ Kevin Buzzard (May 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018159):
 I conclude that the guy who wrote it (who is in the office a few doors down from me) was also a mathematician who had no idea of standard CS conventions :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (May 24 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018330):
+#### [ Gabriel Ebner (May 24 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018330):
 There is one confusing difference between proof theory and CS though: the precedence of ∀, ∃ is different.
 ```
   ∃x P(x) → Q     means:
@@ -148,19 +148,19 @@ There is one confusing difference between proof theory and CS though: the preced
   ∃x (P(x) → Q)       in Lean, Coq, etc.
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 24 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018489):
+#### [ Chris Hughes (May 24 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018489):
 `(∃x P(x)) → Q` seems like really stupid precedence, since you would usually write `∀ x , P x → Q` instead of that.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 24 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018550):
+#### [ Sean Leather (May 24 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018550):
 Interesting. Pierce (Types and Programming Languages) uses explicit bracketing : `{∃x, P(x)}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (May 24 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018815):
+#### [ Gabriel Ebner (May 24 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018815):
 @**Chris Hughes** The same precedence is also used for ∀: `(∀x P(x)) → Q` vs. `∀x (P(x) → Q)`, which is just as confusing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 24 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127019269):
+#### [ Kevin Buzzard (May 24 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127019269):
 In fact it was exactly this forall point which I was referring to in my earlier "that doesn't mean what I wanted it to mean" comment
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 20 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132455368):
+#### [ Sean Leather (Aug 20 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132455368):
 Shortest proof of this?
 
 ```lean
@@ -171,23 +171,23 @@ q : a ≠ b
 ⊢ a < b
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 20 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132455921):
+#### [ Sean Leather (Aug 20 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132455921):
 This is what I came up with:
 
 ```lean
 nat.lt_of_le_and_ne (nat.le_of_lt_succ p) q
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 20 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132456748):
+#### [ Kenny Lau (Aug 20 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132456748):
 ```lean
 example (a b : ℕ) (p : a < b + 1) (q : a ≠ b) : a < b :=
 by cases p; [cc, assumption]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 20 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132457185):
+#### [ Johan Commelin (Aug 20 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132457185):
 I'm not on a Lean machine atm, but could `cooper` or `tidy` kill this one?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 21 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132529548):
+#### [ Kenny Lau (Aug 21 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132529548):
 ```lean
 import data.fintype
 
@@ -210,31 +210,31 @@ have H8 : T ⊆ S, from finset.subset_iff.2 $ λ x H,
 finset.subset.antisymm H1 H8
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 21 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132529552):
+#### [ Kenny Lau (Aug 21 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132529552):
 is there a shorter proof?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 21 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531216):
+#### [ Mario Carneiro (Aug 21 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531216):
 ```
 example (H1 : S ⊆ T) (H2 : T.card ≤ S.card) : S = T :=
 finset.eq_of_veq $ multiset.eq_of_le_of_card_le (finset.val_le_iff.2 H1) H2
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 21 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531244):
+#### [ Mario Carneiro (Aug 21 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531244):
 this should be in mathlib though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 21 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531591):
+#### [ Kenny Lau (Aug 21 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531591):
 ah it's in multiset lol
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 21 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531934):
+#### [ Chris Hughes (Aug 21 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531934):
 Pretty sure it's there for finsets. I remember seeing it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 21 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132532050):
+#### [ Chris Hughes (Aug 21 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132532050):
 `finset.eq_of_subset_of_card_le`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 21 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132532088):
+#### [ Kenny Lau (Aug 21 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132532088):
 genius
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 21 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132533414):
+#### [ Kenny Lau (Aug 21 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132533414):
 ```lean
 import data.fintype
 
@@ -248,13 +248,13 @@ have H : _ := finset.eq_univ_iff_forall.1 $ finset.eq_of_subset_of_card_le (fins
 λ y, let ⟨x, _, H2⟩ := finset.mem_image.1 (H y) in ⟨x, H2⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 21 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132533415):
+#### [ Kenny Lau (Aug 21 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132533415):
 how about this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 21 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132533791):
+#### [ Chris Hughes (Aug 21 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132533791):
 Already in mathlib. `fintype.injective_iff_surjective` Your proof  is shorter though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 21 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534113):
+#### [ Kenny Lau (Aug 21 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534113):
 ```lean
 import data.fintype
 
@@ -279,44 +279,44 @@ noncomputable instance field_of_fintype_of_integral_domain [integral_domain α] 
   .. (by apply_instance : integral_domain α) }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 21 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534118):
+#### [ Kenny Lau (Aug 21 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534118):
 ```quote
 Already in mathlib. `fintype.injective_iff_surjective` Your proof  is shorter though
 ```
 well I didn't prove the other direction
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 21 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534147):
+#### [ Chris Hughes (Aug 21 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534147):
 Don't make that an instance or we have a cycle.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 21 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534161):
+#### [ Kenny Lau (Aug 21 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534161):
 also I can't find `injective_iff_surjective`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 21 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534228):
+#### [ Chris Hughes (Aug 21 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534228):
 It's quite new. Last month or so.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 22 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601084):
+#### [ Kevin Buzzard (Aug 22 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601084):
 ```lean
 example (α : Type) (a b : α) : a = b = (b = a) := sorry
 ```
 
 Too embarrassed to post my effort. @**Chris Hughes** this came up with that countp v count thing. The proof isn't refl even though the predicates are whatever they call it -- eta equivalent or something.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 22 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601170):
+#### [ Patrick Massot (Aug 22 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601170):
 `by cc`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 22 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601195):
+#### [ Mario Carneiro (Aug 22 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601195):
 `propext eq_comm`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 22 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601255):
+#### [ Patrick Massot (Aug 22 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601255):
 Mine is shorter! :trophy:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 22 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601261):
+#### [ Patrick Massot (Aug 22 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601261):
 I know, yours is probably faster
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 22 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601274):
+#### [ Mario Carneiro (Aug 22 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601274):
 Mine is smaller with `pp.all` :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 22 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132603490):
+#### [ Kevin Buzzard (Aug 22 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132603490):
 Here's the context this came up in:
 
 ```lean
@@ -336,7 +336,7 @@ end
 
 I was surprised this wasn't there, but perhaps the issue is that you can filter on `λ b, b = a` or `λ b, a = b`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132603835):
+#### [ Kenny Lau (Aug 22 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132603835):
 ```lean
 import data.multiset
 
@@ -350,27 +350,27 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 22 2018 at 23:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132603896):
+#### [ Mario Carneiro (Aug 22 2018 at 23:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132603896):
 `by simp [count, countp_eq_card_filter, eq_comm]; congr`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132604013):
+#### [ Kenny Lau (Aug 22 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132604013):
 `by convert countp_eq_card_filter s; simp [eq_comm]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 23 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132604473):
+#### [ Kevin Buzzard (Aug 23 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132604473):
 If I hover over `convert` in VS Code I get "convert <- expr <error while executing interactive.param_desc: don't know how to pretty print lean.parser.small_nat>  Similar to `refine` but generates equality proof obligations for every discrepancy between the goal and the type of the rule"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 23 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132604528):
+#### [ Mario Carneiro (Aug 23 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132604528):
 that's because `small_nat` doesn't have a description - compare with `congr'`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/133795530):
+#### [ Sean Leather (Sep 12 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/133795530):
 ```lean
 example (m n : ℕ) : m < 1 + max m n := _
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 12 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/133796099):
+#### [ Reid Barton (Sep 12 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/133796099):
 not very creative, but `by rw [add_comm, nat.lt_succ_iff]; apply le_max_left`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136055689):
+#### [ Kenny Lau (Oct 18 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136055689):
 ```lean
 import analysis.topology.topological_space
 
@@ -382,10 +382,10 @@ by letI := classical.dec_pred (λ x, x ∈ -s); exact
   (λ _ _, is_closed_singleton))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136059466):
+#### [ Mario Carneiro (Oct 18 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136059466):
 I think this theorem could also be stated as `t = \top`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136060001):
+#### [ Mario Carneiro (Oct 18 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136060001):
 ```lean
 class t2_space' (α : Type u) [topological_space α] :=
 (t2 : ∀x y, (∀ u v : set α, is_open u → is_open v →
@@ -423,13 +423,13 @@ instance Hausdorffification.t2_space' :
     end }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 18 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136060806):
+#### [ Johannes Hölzl (Oct 18 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136060806):
 By the way: this T2 space definition is equal to `not (disjoint (nhds x) (nhds y)) -> x = y`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136061226):
+#### [ Mario Carneiro (Oct 18 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136061226):
 not constructively
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136061506):
+#### [ Mario Carneiro (Oct 18 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136061506):
 (oops, wrong thread, this should be in [Hausdorffification](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/Hausdorffification/near/136026443))
 
 

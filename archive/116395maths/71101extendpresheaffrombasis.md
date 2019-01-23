@@ -11,7 +11,7 @@ permalink: archive/116395maths/71101extendpresheaffrombasis.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135529957):
+#### [ Johan Commelin (Oct 10 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135529957):
 @**Scott Morrison|110087** Somehow this is not doing what I hoped:
 ```lean
 import category_theory.presheaves
@@ -35,68 +35,68 @@ presheaf (open_set X) V :=
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530007):
+#### [ Johan Commelin (Oct 10 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530007):
 The embedding is complaining about universes. I don't get why.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530180):
+#### [ Scott Morrison (Oct 10 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530180):
 @**Johan Commelin**, I'm just guessing here, but there are universe constraints in taking limits.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 10 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530263):
+#### [ Kevin Buzzard (Oct 10 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530263):
 I don't know anything about your errors but even seeing that you're daring to write this sort of code -- "extending a presheaf from a basis might be possible" -- makes me quite excited for the future.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530292):
+#### [ Scott Morrison (Oct 10 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530292):
 In particular, the index category is meant to be a category.{v v}, and the target category is meant to be a category.{u v}.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530306):
+#### [ Scott Morrison (Oct 10 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530306):
 If you don't satisfy those constraints to begin with, you're going to have to ulift.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530319):
+#### [ Scott Morrison (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530319):
 Me too, by the way --- I'm very excited to see things like this work!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530322):
+#### [ Johan Commelin (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530322):
 But it is looking for some `Type w`. I really don't know where it is getting that from?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530326):
+#### [ Johan Commelin (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530326):
 Do you have comma categories somewhere?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530327):
+#### [ Kevin Buzzard (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530327):
 One thing which might be obvious to everyone already is that of course when you extend, you don't literally "extend", you define a new object on all open sets, and its values on basic open sets are isomorphic to, but not defeq to, the values taken by the old object.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530330):
+#### [ Johan Commelin (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530330):
 I just want the category of opens contained in `U`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530334):
+#### [ Johan Commelin (Oct 10 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530334):
 Maybe you already have this somewhere...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530386):
+#### [ Johan Commelin (Oct 10 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530386):
 @**Kevin Buzzard** Do you want me to include the scare-quotes in the definition :lol: ?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 10 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530402):
+#### [ Kevin Buzzard (Oct 10 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135530402):
 I am just being reminded of the nightmares I had when doing sheaves by hand in the schemes project.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135531230):
+#### [ Scott Morrison (Oct 10 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135531230):
 Sorry, I will try to look at this soon. I'm working on installation instructions, still. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135531457):
+#### [ Scott Morrison (Oct 10 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135531457):
 @**Johan Commelin** , is that code available somewhere? I'd like to look at the universe issue.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135531508):
+#### [ Scott Morrison (Oct 10 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135531508):
 (universes scare the bejeebus out of me, and I'm perpetually terrified that someone is going to discover I've still got them wrong in the category theory library)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135531525):
+#### [ Reid Barton (Oct 10 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135531525):
 You have made V a category.{v w} which means you can only form limits of size w
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135531577):
+#### [ Scott Morrison (Oct 10 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135531577):
 (phew, that's Reid agreeing with me... my heart rate is dropping again. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135532719):
+#### [ Johan Commelin (Oct 10 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135532719):
 Hmmm, let me take another look.
 @**Scott Morrison|110087** All the code I have is what I posted above.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533061):
+#### [ Johan Commelin (Oct 10 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533061):
 @**Reid Barton** I still don't get what is wrong with my code.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533127):
+#### [ Johan Commelin (Oct 10 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533127):
 @**Scott Morrison|110087** Here is a snippet that is probably useful for `over.lean`:
 ```lean
 section over
@@ -110,77 +110,77 @@ def over.forget (Z : C) : over Z ⥤ C :=
 end over
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533245):
+#### [ Scott Morrison (Oct 10 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533245):
 Thanks, I added `over.forget`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533671):
+#### [ Johan Commelin (Oct 10 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533671):
 @**Scott Morrison|110087** Ok, so I should take `X : Top.{w}`. It is important that I don't take `Top.{u}`. Can you explain why?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533722):
+#### [ Scott Morrison (Oct 10 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533722):
 > Reid Barton: You have made V a category.{v w} which means you can only form limits of size w
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533800):
+#### [ Johan Commelin (Oct 10 2018 at 13:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135533800):
 Ok... I don't think I care too much. It is a bit tricky to get right. I wouldn't mind if Lean just scaled everything into the right universe. But I guess that brings some tradeoff in foundations that I don't understand.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534835):
+#### [ Johan Commelin (Oct 10 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534835):
 @**Scott Morrison|110087** May we *please* have presheaves be contravariant. My head is breaking without the `op`s.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534843):
+#### [ Scott Morrison (Oct 10 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534843):
 no problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534855):
+#### [ Scott Morrison (Oct 10 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534855):
 We need to make a PR to mathlib to fix this, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534862):
+#### [ Johan Commelin (Oct 10 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534862):
 No, presheaves aren't in mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534868):
+#### [ Johan Commelin (Oct 10 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534868):
 Or did you break the definition of `open_set`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534920):
+#### [ Scott Morrison (Oct 10 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534920):
 Yes :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534931):
+#### [ Johan Commelin (Oct 10 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534931):
 Aaah, ok. Hmmz.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534940):
+#### [ Johan Commelin (Oct 10 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534940):
 Well... yes. Then we need a PR.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534954):
+#### [ Scott Morrison (Oct 10 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534954):
 Regarding automating the copy-and-paste: I really doubt this can work in most of my cases here, where the rewrites are occurring in auto_params for structure fields.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534963):
+#### [ Scott Morrison (Oct 10 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135534963):
 The tactic `obviously` doesn't even appear.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535588):
+#### [ Johan Commelin (Oct 10 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535588):
 @**Scott Morrison|110087** I'm stuck on
 ```lean
 ⊢ (U₁ ⟶ U₂) → U₂.s ⊆ U₁.s
 ```
 After that we have extended presheaves.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535607):
+#### [ Johan Commelin (Oct 10 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535607):
 That goal looks like very trivial. But I don't know how to extract the inclusion from the hom.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535652):
+#### [ Scott Morrison (Oct 10 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535652):
 try `intro`, then `cases`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535661):
+#### [ Johan Commelin (Oct 10 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535661):
 Aah `cases`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535664):
+#### [ Scott Morrison (Oct 10 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535664):
 or commit something I can poke at
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535697):
+#### [ Scott Morrison (Oct 10 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535697):
 remember that hom there is probably some ulift plift gadget
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535704):
+#### [ Scott Morrison (Oct 10 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535704):
 to turn a Prop into a Type at whatever universe you're living in
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535763):
+#### [ Johan Commelin (Oct 10 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535763):
 Right, it's working now. Except that it couldn't figure out `comp'` on its own :sad:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535779):
+#### [ Johan Commelin (Oct 10 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135535779):
 ```lean
 import category_theory.presheaves
 import category_theory.sheaves
@@ -214,16 +214,16 @@ presheaf (open_set X) V :=
 end extend
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135537106):
+#### [ Scott Morrison (Oct 10 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135537106):
 Perhaps giving a name to `full_subcategory_embedding ...` will make this look nicer.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135537134):
+#### [ Scott Morrison (Oct 10 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135537134):
 I'd be curious to see that goals after `tidy` on `comp'`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 10 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135537207):
+#### [ Scott Morrison (Oct 10 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135537207):
 I wonder if we need some extra help for posets here.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135537749):
+#### [ Johan Commelin (Oct 10 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135537749):
 @**Scott Morrison|110087** Here is what I have now:
 ```lean
 import category_theory.presheaves
@@ -275,7 +275,7 @@ presheaf (open_set X) V :=
 end extend
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135537756):
+#### [ Johan Commelin (Oct 10 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135537756):
 Goal is:
 ```lean
 tactic failed, there are unsolved goals
@@ -300,7 +300,7 @@ f : j_val_val ≤ j'_val_val
     limit.π (under_set.embedding B U₁ ⋙ F) ⟨⟨j'_val_val, j'_val_property⟩, _⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135542499):
+#### [ Johan Commelin (Oct 10 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135542499):
 Here is a version where the auto_param gets the job done:
 ```lean
 def extend (F : presheaf B V) : presheaf (open_set X) V :=
@@ -313,16 +313,16 @@ def extend (F : presheaf B V) : presheaf (open_set X) V :=
     end }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135542532):
+#### [ Johan Commelin (Oct 10 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135542532):
 I still don't like the `rw show`, but I don't know how to get rid of it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 10 2018 at 15:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135542709):
+#### [ Patrick Massot (Oct 10 2018 at 15:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135542709):
 Don't we have a gentleman agreement that any use of Scott's category theory must begin with a local notation reintroducing the proper composition symbol everywhere?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135543280):
+#### [ Johan Commelin (Oct 10 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135543280):
 :lol: I didn't think about it. Sorry...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135546628):
+#### [ Johan Commelin (Oct 10 2018 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135546628):
 And we now have:
 ```lean
 def Γ {C : Type w₁} [category.{w₁ w₂} C] (U : C) (F : presheaf C V) : V := F.obj U
@@ -337,13 +337,13 @@ by rw extend_val; exact
     π := λ U', F.map (ulift.up (plift.up U'.2)) } }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135546669):
+#### [ Johan Commelin (Oct 10 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135546669):
 That latter thing is really slow )-; But I don't see how to speed it up.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 10 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135546721):
+#### [ Patrick Massot (Oct 10 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135546721):
 Lots of proofs are provided in the background
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135546842):
+#### [ Johan Commelin (Oct 10 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135546842):
 ```quote
 elaboration: tactic execution took 16.8s
 num. allocated objects:  146
@@ -374,169 +374,169 @@ num. allocated closures: 146
     1ms     0.0%   tactic.mk_eq_mpr
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135558576):
+#### [ Johan Commelin (Oct 10 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135558576):
 The next step would be to define sheaves on a basis, and show that their extensions are sheaves on the space.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135558620):
+#### [ Johan Commelin (Oct 10 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135558620):
 I have the vague feeling that maybe we just want a general statement about sites.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135558749):
+#### [ Johan Commelin (Oct 10 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135558749):
 @**Reid Barton** Do you know if the inclusion of a basis `B` into `open_set X` is some sort of geometric morphism?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135558814):
+#### [ Johan Commelin (Oct 10 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135558814):
 If so, then I'dd rather just start attacking the general case...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559318):
+#### [ Reid Barton (Oct 10 2018 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559318):
 I've never learned these topos theory words
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559476):
+#### [ Johan Commelin (Oct 10 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559476):
 It seems that the answer might be yes... so now we want topos theory in mathlib :lol:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559723):
+#### [ Johan Commelin (Oct 10 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559723):
 @**Reid Barton** Did you ever do things with Kan extensions in your library?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559838):
+#### [ Reid Barton (Oct 10 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559838):
 Nope, near the top of my list for post-colimits.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559851):
+#### [ Johan Commelin (Oct 10 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559851):
 Ok... cool. How close do you think this is to being mathlib-ready?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559913):
+#### [ Reid Barton (Oct 10 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559913):
 Which?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559924):
+#### [ Johan Commelin (Oct 10 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559924):
 Kan extensions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559937):
+#### [ Reid Barton (Oct 10 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559937):
 Oh, I haven't actually started on them at all yet.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559940):
+#### [ Johan Commelin (Oct 10 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135559940):
 If Scott's limit and colimit stuff is in mathlib. Would that be a follow-up PR? Or would you need other stuff before that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560032):
+#### [ Reid Barton (Oct 10 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560032):
 Are you going to need general Kan extensions? Or just extending a functor on C to presheaves on C
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560067):
+#### [ Johan Commelin (Oct 10 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560067):
 The latter is good enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560069):
+#### [ Reid Barton (Oct 10 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560069):
 I see. We may want adjunctions, too.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560073):
+#### [ Johan Commelin (Oct 10 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560073):
 We do
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560089):
+#### [ Johan Commelin (Oct 10 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560089):
 But I guess that will be the third PR that Scott has on his list (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560110):
+#### [ Reid Barton (Oct 10 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560110):
 In order to state the characterization of Kan extension as left adjoint to restriction
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560152):
+#### [ Reid Barton (Oct 10 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560152):
 I guess we can define them without that though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560168):
+#### [ Reid Barton (Oct 10 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560168):
 :plane: but should be back online in not too long
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560185):
+#### [ Johan Commelin (Oct 10 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135560185):
 Good luck!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 10 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135561537):
+#### [ Patrick Massot (Oct 10 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135561537):
 ```quote
 Nope, near the top of my list for post-colimits.
 ```
 What about formalizing what you told us about reflective subcategory?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 10 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135561999):
+#### [ Johan Commelin (Oct 10 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135561999):
 @**Reid Barton** Hmmm, a topological basis doesn't give a site. You don't have intersections = products. So the generalisation doesn't apply. Too bad.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 10 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135562984):
+#### [ Reid Barton (Oct 10 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135562984):
 Reflective subcategories are in the same bulleted list in my notes. I forget which one is listed first :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 10 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135563212):
+#### [ Patrick Massot (Oct 10 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135563212):
 Perfectoid spaces vote for reflexive subcategories first
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 10 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135567536):
+#### [ Kevin Buzzard (Oct 10 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135567536):
 ```quote
 Aah `cases`.
 ```
 You needed that for that `option` question yesterday too. It works for any inductive type.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 11 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135572559):
+#### [ Scott Morrison (Oct 11 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135572559):
 Hmm, your profiling output is not very helpful, because everything is hidden behind the `to_expr` that `exact` is calling.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 11 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135572563):
+#### [ Scott Morrison (Oct 11 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135572563):
 Is it possible to make another lemma for the `exact`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 11 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135572602):
+#### [ Scott Morrison (Oct 11 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135572602):
 (Also, this is fabulous.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 11 2018 at 00:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135572927):
+#### [ Kevin Buzzard (Oct 11 2018 at 00:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135572927):
 I've been really busy over the last couple of days -- but have you (@**Johan Commelin** ) just extended a presheaf from a basis and then shown that the restriction back to the basis is isomorphic to the original presheaf, in about 10 lines? Heh, I guess you should really have shown that the restriction was isomorphic as a presheaf on the basis to F ;-) But still -- who cares if it's slow, it's a small number of lines and that feels right to a mathematician.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 11 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135583396):
+#### [ Reid Barton (Oct 11 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135583396):
 @**Johan Commelin** I finally looked at your actual code (too many missing Unicode characters on my phone to be practical) and I think you can use something called `limit.pre` or similar to simplify your `extend` even further.
 If you have a diagram `X : J -> C` and a functor `F : I -> J` then you get an induced map `lim_I X -> lim_J (X \o F)` and this map is called `limit.pre`.
 If you have a map `a -> b` in `C` then you get a functor `C/a -> C/b` and I think your `extend` is `limit.pre` of this functor.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 11 2018 at 06:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584496):
+#### [ Johan Commelin (Oct 11 2018 at 06:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584496):
 @**Reid Barton** I'm sorry, I think you have been looking at old code. The new code already uses `limit.pre`: https://github.com/jcommelin/lean-perfectoid-spaces/blob/huber_tate/src/for_mathlib/presheaves.lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 11 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584509):
+#### [ Johan Commelin (Oct 11 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584509):
 It isn't as nice as I wish. I would like to get rid of the ugly `rw, congr, exact`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 11 2018 at 06:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584558):
+#### [ Reid Barton (Oct 11 2018 at 06:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584558):
 Ah, I see. I think maybe I missed the `limit.pre` in there, indeed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 11 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584570):
+#### [ Reid Barton (Oct 11 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584570):
 I guess `convert` might be slightly better?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 11 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584573):
+#### [ Reid Barton (Oct 11 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584573):
 change `exact` to `convert` and move it first, then see what happens?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 11 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584578):
+#### [ Reid Barton (Oct 11 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584578):
 I'm a little confused how `congr` proved something without producing any new goals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 11 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584579):
+#### [ Johan Commelin (Oct 11 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584579):
 @**Kevin Buzzard** Yes, I did. Isn't it delightful? But proving that the extension of a sheaf is a sheaf will be a lot harder.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 11 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584624):
+#### [ Johan Commelin (Oct 11 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584624):
 ```quote
 change `exact` to `convert` and move it first, then see what happens?
 ```
 I think that didn't work: deterministic timeout or something.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 11 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584627):
+#### [ Johan Commelin (Oct 11 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584627):
 In some sense it was really brittle.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 11 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584637):
+#### [ Reid Barton (Oct 11 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584637):
 Odd
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 11 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584645):
+#### [ Johan Commelin (Oct 11 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584645):
 That file doens't need anything from the perfectoid project. So if you want to hack on it, you can just copy-paste it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 11 2018 at 06:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584814):
+#### [ Johan Commelin (Oct 11 2018 at 06:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135584814):
 Of course you need Scott's libs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 11 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135619434):
+#### [ Reid Barton (Oct 11 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135619434):
 @**Johan Commelin** I was able to replace the whole `map'` field by
 ```lean
 map' := λ U₁ U₂ ι, limit.pre ((under_set.embedding B U₁) ⋙ F) (under_set.map B ι)
 ```
 Everything is quite slow in the editor, I believe because there are errors in the imports (stuff under `category_theory.limits`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 11 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135629183):
+#### [ Johan Commelin (Oct 11 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135629183):
 Cool! Thanks a lot. Somehow I think I got deterministic timeouts when I tried that. Maybe it is related to the errors in the imports that you mentioned.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 11 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135629306):
+#### [ Reid Barton (Oct 11 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135629306):
 My understanding is that `lean --make` doesn't write out `.olean` files when the build was unsuccessful, which means if your imports have errors then lean in the editor will be much slower.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 11 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135629362):
+#### [ Reid Barton (Oct 11 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135629362):
 It looks like the errors are rather trivial in this case (some tactics failed because there were no goals remaining) but I didn't try to just fix them because they are in lean-category-theory
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 12 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135659126):
+#### [ Johan Commelin (Oct 12 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135659126):
 Ok, now it worked for me as well.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135813243):
+#### [ Johan Commelin (Oct 15 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135813243):
 I think the following is pretty ugly:
 ```lean
 variables {B : set (open_set X)}
@@ -544,79 +544,79 @@ variables (h : topological_space.is_topological_basis ((λ U : open_set X, U.s) 
 ```
 Does this mean that I should define `is_basis` for `B` directly? It feels like duplicating a lot of stuff. Is this the curse of bundling?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135813787):
+#### [ Mario Carneiro (Oct 15 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135813787):
 I don't understand what you are trying to do
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135813797):
+#### [ Johan Commelin (Oct 15 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135813797):
 I'm trying to say that a collection of open sets is a basis. But the open sets are bundled.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135813997):
+#### [ Mario Carneiro (Oct 15 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135813997):
 I guess you can write `open_set.s` instead of the lambda
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814020):
+#### [ Johan Commelin (Oct 15 2018 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814020):
 Ok, and would that be the *morally correct* way? Or should I "develop the theory of a basis of bundled open sets"?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814069):
+#### [ Mario Carneiro (Oct 15 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814069):
 I'm not sure if you want the forward image or preimage yet, but I think this is what you want
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814235):
+#### [ Johan Commelin (Oct 15 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814235):
 Well, you could redefine `is_basis` for a set of opens, right? Something like
 ```lean
 \forall U : open_set X, x : X, x ∈ U → ∃ U' ∈ B, x ∈ U' ∧ U' ⊆ U
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814375):
+#### [ Mario Carneiro (Oct 15 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814375):
 I would define `open_set.is_basis` using the image formulation, and then prove that version as a theorem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814380):
+#### [ Johan Commelin (Oct 15 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814380):
 Ok, thanks.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814394):
+#### [ Mario Carneiro (Oct 15 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814394):
 also that's not the right condition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814398):
+#### [ Mario Carneiro (Oct 15 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814398):
 the exists is satisfied by `U`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814450):
+#### [ Johan Commelin (Oct 15 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814450):
 No, `U` is not `∈ B`. (In general.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814452):
+#### [ Mario Carneiro (Oct 15 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814452):
 oh... but what about intersections?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814458):
+#### [ Johan Commelin (Oct 15 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814458):
 What's with them?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814475):
+#### [ Mario Carneiro (Oct 15 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814475):
 a basis should be closed under intersection (ish)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814486):
+#### [ Johan Commelin (Oct 15 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814486):
 Oooo... maybe. I'll see when I start proving things (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814491):
+#### [ Mario Carneiro (Oct 15 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814491):
 This just says B covers the space
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814542):
+#### [ Johan Commelin (Oct 15 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814542):
 It says that `B` covers every open.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814567):
+#### [ Mario Carneiro (Oct 15 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814567):
 oh, actually I think you have the intersection property then
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814672):
+#### [ Mario Carneiro (Oct 15 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814672):
 if $$U, V \in B$$ and $$x \in U \cap V$$, then $$U\cap V$$ is open so you can find $$x\in W\in B$$ with $$W\subseteq U\cap V$$
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814712):
+#### [ Johan Commelin (Oct 15 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135814712):
 That looks good, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135815120):
+#### [ Mario Carneiro (Oct 15 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135815120):
 yeah
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135815128):
+#### [ Mario Carneiro (Oct 15 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135815128):
 actually now I recall Kevin saying that this was the obvious definition and he was confused by mathlib's
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135826125):
+#### [ Johan Commelin (Oct 15 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135826125):
 @**Mario Carneiro** Proving that the two definitions are equivalent is a major headache. I feel like we are missing an induction principle for generated topologies. But maybe it is *me* who is missing it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135826813):
+#### [ Johan Commelin (Oct 15 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135826813):
 ```lean
 -- set.lean
 @[reducible]
@@ -625,16 +625,16 @@ prefix `⋃₀`:110 := sUnion
 ```
 Does this mean that we can't use `⋃₀` to take the union of `Us : set (open_set X)`? Or can/should I overload notation?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135827571):
+#### [ Johan Commelin (Oct 15 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135827571):
 I would expect that this notation is meaningful for every type that has a union-operator.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 15 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828259):
+#### [ Kenny Lau (Oct 15 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828259):
 try it wthout 0?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828350):
+#### [ Johan Commelin (Oct 15 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828350):
 That gives a weird error: `invalid expression starting at 27:51`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828554):
+#### [ Johan Commelin (Oct 15 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828554):
 @**Kenny Lau** How is this supposed to work? I tried
 ```lean
 lemma is_basis_iff₁ {B : set (open_set X)} :
@@ -642,16 +642,16 @@ is_basis B ↔ ∀ {U : open_set X}, ∃ Us ⊆ set B, U = ⋃ U' ∈ Us, U' := 
 ```
 Clearly this is not what Lean wants to see...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 15 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828610):
+#### [ Kenny Lau (Oct 15 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828610):
 you need : not \in
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 15 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828619):
+#### [ Kenny Lau (Oct 15 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828619):
 and it’s called bUnion
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828914):
+#### [ Johan Commelin (Oct 15 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135828914):
 Right, so for this we need a lattice structure on `open_set`. Which we will need at some point anyway.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135837316):
+#### [ Johan Commelin (Oct 15 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135837316):
 @**Scott Morrison|110087** I know you are busy. Just posting this in case you have a couple of minutes where you are bored :stuck_out_tongue_wink: 
 ```lean
 import category_theory.examples.topological_spaces
@@ -693,25 +693,25 @@ by refine {
 ```
 What incantations do I need to get `tidy` up to speed?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 15 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135837545):
+#### [ Johannes Hölzl (Oct 15 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135837545):
 I guess you need the rules how `union` and `intersection` behave under `subset`, like `set.subset_union_left`. So try add this as `back`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 15 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135839090):
+#### [ Mario Carneiro (Oct 15 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135839090):
 hey @**Kenny Lau**, I see a galois insertion...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 15 2018 at 17:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135839344):
+#### [ Reid Barton (Oct 15 2018 at 17:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135839344):
 Do we have an emoji for galois insertion
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 15 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135839838):
+#### [ Johan Commelin (Oct 15 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135839838):
 Thanks, I'll try that tomorrow.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 15 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135842162):
+#### [ Kevin Buzzard (Oct 15 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135842162):
 ```quote
 Do we have an emoji for galois insertion
 ```
 So we need to choose one, right? People should vote on Reid's question.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881584):
+#### [ Johan Commelin (Oct 16 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881584):
 @**Scott Morrison|110087** I implemented Johannes suggestion. Now I have the following bunch of code:
 ```lean
 import category_theory.examples.topological_spaces
@@ -759,7 +759,7 @@ by refine {
   ..open_set.preorder }; tidy
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881631):
+#### [ Johan Commelin (Oct 16 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881631):
 The `tidy` in the proof of `le_sup_left` leaves me with the following goal:
 ```lean
 X : Top,
@@ -769,224 +769,224 @@ a_2 : a_1 ∈ a.s
 ⊢ a_1 ∈ a.s ∨ a_1 ∈ b.s
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881644):
+#### [ Johan Commelin (Oct 16 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881644):
 Ooh wait! Does this mean that I have to mark `or.inl` with `[back!]` or something like that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881646):
+#### [ Kevin Buzzard (Oct 16 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881646):
 Does `@[simp] instance : has_union (open_set X)` do the same as `attribute [simp] open_set.has_union.equations._eqn_1`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881700):
+#### [ Mario Carneiro (Oct 16 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881700):
 or.inl is not a good `back!` lemma
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881711):
+#### [ Johan Commelin (Oct 16 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881711):
 Hmmm, why not?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881757):
+#### [ Mario Carneiro (Oct 16 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881757):
 because it will try to prove everything by the left disjunct
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881760):
+#### [ Johan Commelin (Oct 16 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881760):
 Only if the assumptions are satisfied, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881761):
+#### [ Mario Carneiro (Oct 16 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881761):
 not with the `!`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881768):
+#### [ Mario Carneiro (Oct 16 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881768):
 I think `simp` should work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881773):
+#### [ Mario Carneiro (Oct 16 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881773):
 because it will turn the goal into `true \/ ...` and then `true`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881774):
+#### [ Johan Commelin (Oct 16 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881774):
 Well, it doesn't. Because `tidy` would try that.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881775):
+#### [ Mario Carneiro (Oct 16 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881775):
 did you see if `simp * at *` works by hand?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881777):
+#### [ Mario Carneiro (Oct 16 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881777):
 what about `simp *`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881838):
+#### [ Johan Commelin (Oct 16 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881838):
 Ok, that works. Is that a bug in `tidy`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881911):
+#### [ Mario Carneiro (Oct 16 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881911):
 or a bug in `simp * at *`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881952):
+#### [ Mario Carneiro (Oct 16 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881952):
 wait, which is "that"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881966):
+#### [ Kevin Buzzard (Oct 16 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881966):
 I have a very unclear idea about what all these things like `tidy` and `obviously` and `backwards_reasoning` do. It seems to me that they "all do the same thing" -- they just "try a bunch of stuff like simp and split and stuff". Does `tidy` have a sufficiently formal specification that one can ask if there is a "bug" in it? Do you actually mean "let's make `tidy` try more stuff"?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881994):
+#### [ Mario Carneiro (Oct 16 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135881994):
 `back` has a "spec", but you are right about the others
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882015):
+#### [ Mario Carneiro (Oct 16 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882015):
 `obviously` is `tidy` + `rewrite_search`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882019):
+#### [ Mario Carneiro (Oct 16 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882019):
 which is that graph thing that Keeley Hoek did
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882029):
+#### [ Johan Commelin (Oct 16 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882029):
 `simp *` worked. I would imagine that `tidy` should try that as well. Of course it is not a bug in the strict sense; but I meant a "bug" in the sense that it would be a nice feature to add to `tidy`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882030):
+#### [ Mario Carneiro (Oct 16 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882030):
 `tidy` is just a kitchen sink tactic right now, although I understand it is loosely based on the Gowers-Ganesalingam prover
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882245):
+#### [ Johan Commelin (Oct 16 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882245):
 I'm struggling with finding  a statement that type checks. I just proved that `open_set X` has a lattice structure. Now I want to take a union of a bunch of opens. What should I tell Lean to make sense of this?
 ```lean
 lemma is_basis_iff₁ {B : set (open_set X)} :
 is_basis B ↔ ∀ {U : open_set X}, ∃ Us ⊆ set B, U = ⋃ U' : Us, U' := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882253):
+#### [ Johan Commelin (Oct 16 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882253):
 Currently it doesn't like the `⋃` symbol.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882319):
+#### [ Mario Carneiro (Oct 16 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882319):
 use the sup symbol
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882321):
+#### [ Kevin Buzzard (Oct 16 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882321):
 Isn't there `union` and `Union` and `bUnion` and `sUnion` or something? Usage depends on whether you're taking a union of two things, or a set of things, or a type of things etc. One of them is that big union symbol -- aren't there other notations too though? I can never remember which is which here.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882324):
+#### [ Mario Carneiro (Oct 16 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882324):
 most of the union/inter notation is specific to `set`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882364):
+#### [ Mario Carneiro (Oct 16 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882364):
 the generic version is `Sup` and `Inf`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882367):
+#### [ Johan Commelin (Oct 16 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882367):
 Ok, I see. So for everything else we want to use lattice notation?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882369):
+#### [ Mario Carneiro (Oct 16 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882369):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882385):
+#### [ Johan Commelin (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882385):
 And turning something into a lattice doesn't automatically give you a `has_Sup`. Is that on purpose?
 I don't know anything about lattices.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882386):
+#### [ Mario Carneiro (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882386):
 > ` ∃ Us ⊆ set B, `
 
 what should this mean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882393):
+#### [ Mario Carneiro (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882393):
 a complete lattice, not a lattice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882394):
+#### [ Johan Commelin (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882394):
 That there is a bunch of basic opens such that...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882398):
+#### [ Mario Carneiro (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882398):
 lattice just gives you binary sup
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882399):
+#### [ Johan Commelin (Oct 16 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882399):
 Ok, so I should prove that `open_set` is a complete lattice.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882437):
+#### [ Mario Carneiro (Oct 16 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882437):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882443):
+#### [ Mario Carneiro (Oct 16 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882443):
 again, galois insertion should make it easy
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882525):
+#### [ Johan Commelin (Oct 16 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882525):
 I propose :return: for galois connections and adjunctions. I don't understand the :basketball: symbol. Maybe it's because I'm Dutch :lol:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882544):
+#### [ Johan Commelin (Oct 16 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882544):
 Ok, I have no idea what boilerplate I should write for that Galois insertion. What is the best way to find this out?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882677):
+#### [ Mario Carneiro (Oct 16 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882677):
 you need a pair of functions with a galois connection, from the complete lattice to the type you want a complete lattice structure on, and one round trip should be the identity
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882881):
+#### [ Kevin Buzzard (Oct 16 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882881):
 The basketball was the only emoji I found which looked like anything being inserted into anything, that's all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882927):
+#### [ Kevin Buzzard (Oct 16 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882927):
 I didn't even look for an emoji of something being connected to something
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882938):
+#### [ Johan Commelin (Oct 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882938):
 Ok, so one of the maps is `open_set.s` and the other is ?? the interior? Or the smallest open containing some set `S`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882948):
+#### [ Mario Carneiro (Oct 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882948):
 interior, certainly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882949):
+#### [ Johan Commelin (Oct 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135882949):
 Brainfart, that doesn't even make sense. So it should be the interior.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135883011):
+#### [ Mario Carneiro (Oct 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135883011):
 actually I'm a bit worried you will end up the wrong way around, i.e. you will get the `u` function being injective instead of the `l` function
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135883021):
+#### [ Mario Carneiro (Oct 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135883021):
 @**Johannes Hölzl** How do you want to do galois coinsertions?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135883518):
+#### [ Johan Commelin (Oct 16 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135883518):
 Ok, so `l = interior` and `u = open_set.s`. Is this good or bad news for our complete_lattice?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135883614):
+#### [ Mario Carneiro (Oct 16 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135883614):
 try to prove galois insertion?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135883814):
+#### [ Johan Commelin (Oct 16 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135883814):
 Oops, I switched `l` and `u`. I still find those names confusing... Ok, so it is going to be a `coinsertion`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884099):
+#### [ Johan Commelin (Oct 16 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884099):
 @**Mario Carneiro** Is the Galois connection enough to get the complete lattice structure? Or do I need to work out `galois_coinsertion` first? I really don't know the maths here.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884124):
+#### [ Mario Carneiro (Oct 16 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884124):
 the insertion is important
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884128):
+#### [ Mario Carneiro (Oct 16 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884128):
 it is basically making an order embedding
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884134):
+#### [ Mario Carneiro (Oct 16 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884134):
 and you pull the relation back along that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884143):
+#### [ Johan Commelin (Oct 16 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884143):
 You mean coinsertion?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884151):
+#### [ Mario Carneiro (Oct 16 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884151):
 that too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884171):
+#### [ Johan Commelin (Oct 16 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884171):
 Hmmm, I will try to dualize all the stuff about `insertion`s.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884173):
+#### [ Mario Carneiro (Oct 16 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884173):
 it should work just as well, it will just pull a lattice from left to right instead of right to left
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884175):
+#### [ Mario Carneiro (Oct 16 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884175):
 or vice versa
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884179):
+#### [ Mario Carneiro (Oct 16 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884179):
 you know, just put co everywhere
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884238):
+#### [ Johannes Hölzl (Oct 16 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884238):
 look into how it is done for `filter`. Here I use `dual_order` to get the other way round
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884245):
+#### [ Mario Carneiro (Oct 16 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884245):
 I was just about to suggest that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884258):
+#### [ Johannes Hölzl (Oct 16 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884258):
 ```lean
 def gi_generate (α : Type*) :
 @galois_insertion (set (set α)) (order_dual (filter α)) _ _ filter.generate filter.sets
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884260):
+#### [ Mario Carneiro (Oct 16 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884260):
 but filter is dualized on only one side
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884275):
+#### [ Mario Carneiro (Oct 16 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884275):
 I guess a coinsertion is dualized on both sides
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884308):
+#### [ Johannes Hölzl (Oct 16 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884308):
 is it enough to add `order_dual` on both sides?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884341):
+#### [ Mario Carneiro (Oct 16 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884341):
 I wonder whether we want a separate definition though since otherwise the names will be even more confusing than they already are
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884361):
+#### [ Mario Carneiro (Oct 16 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884361):
 plus `galois_coinsertion` should extend `galois_connection` with no duals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884413):
+#### [ Mario Carneiro (Oct 16 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884413):
 do we know that `galois_connection` is self-dual?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884424):
+#### [ Johannes Hölzl (Oct 16 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884424):
 to its symmetric form:
 ```lean
 protected lemma dual [pα : preorder α] [pβ : preorder β]
@@ -995,29 +995,29 @@ protected lemma dual [pα : preorder α] [pβ : preorder β]
 assume a b, (gc _ _).symm
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884427):
+#### [ Johannes Hölzl (Oct 16 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884427):
 in https://github.com/leanprover/mathlib/blob/master/order/galois_connection.lean#L160
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884663):
+#### [ Kevin Buzzard (Oct 16 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884663):
 then it should just be called `galois_nnection`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884719):
+#### [ Kevin Buzzard (Oct 16 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884719):
 it's shorter
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884777):
+#### [ Johan Commelin (Oct 16 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884777):
 Aaahrg, all those design decisions. Is there a choice procedure for such design decisions?
 I think we should make the same choice as for the `limit` vs `colimit` story in category theory.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884833):
+#### [ Johan Commelin (Oct 16 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884833):
 So we just copy-paste all the code and dualize it. Right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884837):
+#### [ Kevin Buzzard (Oct 16 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884837):
 [or write a tactic which generates the code for you...]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884873):
+#### [ Johannes Hölzl (Oct 16 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135884873):
 usually you copy all statements from the Galois insertion anyway. I don't see a problem to use a Galois insertion and `dual_order` twice. You only want to use it to get the complete lattice, afterwards you don't care anymore.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135887809):
+#### [ Johan Commelin (Oct 16 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135887809):
 Ok, now I've got
 ```lean
 def interior (s : set X) : open_set X :=
@@ -1045,7 +1045,7 @@ def univ : open_set X :=
 ```
 I guess that this definition of `univ` is not correct? Should it be a theorem about `⊤` somehow?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135894415):
+#### [ Johan Commelin (Oct 16 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135894415):
 @**Johannes Hölzl** Those `order_dual`s are completely blowing up my brain. Does this look good or am I missing something?
 ```lean
 def interior (s : set X) : open_set X :=
@@ -1069,29 +1069,29 @@ instance : complete_lattice (open_set X) :=
 @galois_insertion.lift_complete_lattice (order_dual _) (order_dual _) _ interior (@open_set.s X) _ gi
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135894662):
+#### [ Johannes Hölzl (Oct 16 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135894662):
 looks good to me. Is there something wrong?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135894967):
+#### [ Johan Commelin (Oct 16 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135894967):
 Yes, I'm getting the dual order.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135894982):
+#### [ Johan Commelin (Oct 16 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135894982):
 So now I need a function that takes an order, and flips it around.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895221):
+#### [ Johan Commelin (Oct 16 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895221):
 @**Johannes Hölzl** Is there a way to unfold something only once?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895354):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895354):
 hm, `rw [h] {occs := occurrences.pos [1]}` is the only thing I know
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895452):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895452):
 for the dual, lets take a look at filters again:
 ```lean
 private def original_complete_lattice : complete_lattice (filter α) :=
 @order_dual.lattice.complete_lattice _ (gi_generate α).lift_complete_lattice
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895460):
+#### [ Johan Commelin (Oct 16 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895460):
 I hacked around it like this:
 ```lean
 instance open_set.lattice.complete_lattice.order_dual : complete_lattice (order_dual (open_set X)) :=
@@ -1109,26 +1109,26 @@ end
 ```
 @**Johannes Hölzl** I am not so sure that the coinsertions are useless. This is causing me quite some pain...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895503):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895503):
 `order_dual.lattice.complete_lattice` does what you want
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895514):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895514):
 and it doesn't have the `rw` problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895594):
+#### [ Johan Commelin (Oct 16 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895594):
 @**Johannes Hölzl** I don't see how to apply it. It can only put orders on `order_dual _`, it can't go the other way.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895688):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895688):
 you are sure it doesn't work? `preorder (order_dual (order_dual A)) = preorder A` should be (in your case) by definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895698):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135895698):
 can you put your theory on a gist?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896091):
+#### [ Johan Commelin (Oct 16 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896091):
 @**Johannes Hölzl** Voila: https://gist.github.com/jcommelin/c9d04b7770f89a0fadc11aae5ca90d87
 This is what I have so far.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896557):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896557):
 ```lean
 instance : partial_order (open_set X) :=
 { le_antisymm := λ U₁ U₂ _ _, by cases U₁; cases U₂; tidy,
@@ -1140,29 +1140,29 @@ instance : complete_lattice (open_set X) :=
 ```
 now you have the dual
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896558):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896558):
 is this what you want?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896566):
+#### [ Johan Commelin (Oct 16 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896566):
 I think it is. Let me try.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896627):
+#### [ Johan Commelin (Oct 16 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896627):
 But this still isn't proved by `rfl`:
 ```lean
 @[simp] lemma Lub_s {Us : set (open_set X)} : (⨆ U ∈ Us, U).s = ⋃₀ (open_set.s '' Us) :=
 ```
 And I think that with coinsertions it could have been `rfl`, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896694):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896694):
 only if you setup `choice` correctly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896728):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896728):
 and this is also with insertion a `rfl`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896788):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896788):
 so, no `coinsertion` doesn't give you a rfl by default. It will only be a `rfl` when you use the proof in `choice` to construct `rfl` data. And since `insertion` and `coinsertion` are just dual, it works also with insertion.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896817):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896817):
 So what you need to do:
 ```lean
 def gi : @galois_insertion (order_dual (set X)) (order_dual (open_set X)) _ _ interior (@open_set.s X) :=
@@ -1174,34 +1174,34 @@ def gi : @galois_insertion (order_dual (set X)) (order_dual (open_set X)) _ _ in
 Instead of `choice := λ s _, interior s,` you need to write something like:
 `choice := λ s _, (s, proof that s is open),`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896890):
+#### [ Johan Commelin (Oct 16 2018 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896890):
 Huuh, but `s` isn't open.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896917):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896917):
 yes it is, the `_` is actually a proof from which you can show that it is open
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896964):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896964):
 it says: `interior s = s`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896994):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135896994):
 then you also need to adapt your `choice_eq` proof accordingly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135897076):
+#### [ Johan Commelin (Oct 16 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135897076):
 Ok, I see. I'll try to do this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135897497):
+#### [ Johan Commelin (Oct 16 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135897497):
 @**Johannes Hölzl** Sorry, but the following still doesn't work:
 ```lean
 have foo : (Sup Us).s = Sup (open_set.s '' Us) := rfl
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135898099):
+#### [ Johannes Hölzl (Oct 16 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135898099):
 you should get:
 ```lean
 have foo : (Sup Us).s = (⨆a∈Us, a.s) := rfl
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135898427):
+#### [ Johan Commelin (Oct 16 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135898427):
 @**Johannes Hölzl** That gives me
 ```lean
 invalid field notation, type is not of the form (C ...) where C is a constant
@@ -1215,10 +1215,10 @@ I now have the following ugly proof myself:
 by rw [@galois_connection.l_Sup _ _ _ _ (@open_set.s X) interior (gc) Us, set.sUnion_image]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135898448):
+#### [ Johannes Hölzl (Oct 16 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135898448):
 what about `have foo : (Sup Us).s = (⨆a∈Us, open_set.s a) := rfl`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135898745):
+#### [ Johan Commelin (Oct 16 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135898745):
 Still fails:
 ```lean
 invalid type ascription, term has type
@@ -1227,10 +1227,10 @@ but is expected to have type
   (Sup Us).s = ⨆ (a : open_set X) (H : a ∈ Us), a.s
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135898976):
+#### [ Johannes Hölzl (Oct 16 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135898976):
 how does your `gi` look like?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135899032):
+#### [ Johan Commelin (Oct 16 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135899032):
 ```lean
 def gi : @galois_insertion (order_dual (set X)) (order_dual (open_set X)) _ _ interior (@open_set.s X) :=
 { choice := λ s hs, { s := s, is_open := interior_eq_iff_open.mp $ le_antisymm interior_subset hs },
@@ -1239,7 +1239,7 @@ def gi : @galois_insertion (order_dual (set X)) (order_dual (open_set X)) _ _ in
   choice_eq := λ s hs, le_antisymm interior_subset hs }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900200):
+#### [ Johannes Hölzl (Oct 16 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900200):
 hm
 ```lean
 set_option pp.all true
@@ -1247,13 +1247,13 @@ set_option pp.all true
 ```
 somewhere `set` gets unfolded and the `pi` instance is used. Then we get different `Sup` and `Inf`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 16 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900203):
+#### [ Reid Barton (Oct 16 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900203):
 Kudos to the individual who came up with :gun: for Galois insertion btw
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900316):
+#### [ Johan Commelin (Oct 16 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900316):
 @**Johannes Hölzl** Hmmm... I think I'm giving up on debugging this. It is too annoying. If you feel like debugging it, I haven't made much progress since my gist.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900464):
+#### [ Johannes Hölzl (Oct 16 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900464):
 ```lean
 instance : complete_lattice (open_set X) :=
 @order_dual.lattice.complete_lattice _
@@ -1265,16 +1265,16 @@ rfl
 ```
 this works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 16 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900784):
+#### [ Johannes Hölzl (Oct 16 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900784):
 `(order_dual (set _))` is already enough. Then the elaborator finds the right instance, instead of the instance for `X -> Prop`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 16 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900908):
+#### [ Johan Commelin (Oct 16 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135900908):
 Ok, so my instance is wrong... hmmzzz. Thanks for finding this bug!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alex J. Best (Oct 16 2018 at 17:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135907294):
+#### [ Alex J. Best (Oct 16 2018 at 17:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135907294):
 @**Reid Barton**  Thanks, after trying to teach myself some lean on the side and lurking here a lot without doing anything I'm glad someone found my first "contribution" as funny as I did
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) David Michael Roberts (Oct 17 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135958522):
+#### [ David Michael Roberts (Oct 17 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135958522):
 ```quote
 then it should just be called `galois_nnection`
 ```

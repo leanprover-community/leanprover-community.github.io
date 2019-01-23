@@ -11,73 +11,73 @@ permalink: archive/113488general/24772randommathquestion.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462875):
+#### [ Andrew Ashworth (Mar 31 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462875):
 so, seeing as how there are many mathematicians here, can anyone recommend a textbook on algebraic topology? I'd like to be able to read https://arxiv.org/pdf/1802.04443.pdf
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462876):
+#### [ Kenny Lau (Mar 31 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462876):
 Hatcher, of course
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462913):
+#### [ Kenny Lau (Mar 31 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462913):
 (your pdf is still loading, wait)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462966):
+#### [ Kenny Lau (Mar 31 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462966):
 @**Andrew Ashworth** Hatcher Chapter 2
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463014):
+#### [ Andrew Ashworth (Mar 31 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463014):
 thanks, i'll check it out
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463060):
+#### [ Simon Hudon (Mar 31 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463060):
 @**Andrew Ashworth** Are you taking on Machine Learning as a hobby? I've been contemplating getting literate in the domain. There seems to be a lot to be done there. I'm curious about proving security / safety properties in those systems but I still don't know where to start
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463160):
+#### [ Andrew Ashworth (Mar 31 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463160):
 hopefully more than a hobby once i learn more about it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463162):
+#### [ Andrew Ashworth (Mar 31 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463162):
 i work in imaging and radar
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463168):
+#### [ Andrew Ashworth (Mar 31 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463168):
 are you looking for textbook recommendations? that's where i started off
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463174):
+#### [ Simon Hudon (Mar 31 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463174):
 Interesting. ML must be useful but tricky thing to use there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463176):
+#### [ Simon Hudon (Mar 31 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463176):
 Yes, thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463216):
+#### [ Kenny Lau (Mar 31 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463216):
 how would you name the groups that can be generated by a set that injects to S?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463217):
+#### [ Kenny Lau (Mar 31 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463217):
 as in, name them in Lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463225):
+#### [ Simon Hudon (Mar 31 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463225):
 What is S?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463226):
+#### [ Kenny Lau (Mar 31 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463226):
 a random set
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463268):
+#### [ Andrew Ashworth (Mar 31 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463268):
 i'd start off with the elements of statistical learning
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463269):
+#### [ Kenny Lau (Mar 31 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463269):
 @**Simon Hudon** I just need a short name
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463270):
+#### [ Kenny Lau (Mar 31 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463270):
 you know
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463275):
+#### [ Simon Hudon (Mar 31 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463275):
 So when you say "injects" I assume you have an injective function from S to S?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463276):
+#### [ Simon Hudon (Mar 31 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463276):
 Actually, if you show me the construction, that would help me find a name for it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463278):
+#### [ Kenny Lau (Mar 31 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463278):
 I mean, a group G is inside my structure if it is generated by a set T with an injection from T to S
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463328):
+#### [ Simon Hudon (Mar 31 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463328):
 Ok, that's clearer. Is that group interesting because of your choice of `S` and then the group basically says that the set `T` exists and is the set underlying `G`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463372):
+#### [ Kenny Lau (Mar 31 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463372):
 ```
 structure to_be_named (G : Type u) [group G] :=
 ( gen : set G )
@@ -85,19 +85,19 @@ structure to_be_named (G : Type u) [group G] :=
 ( func : gen → S )
 ( inj : function.injective func )
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 31 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463373):
+#### [ Simon Hudon (Mar 31 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463373):
 ```quote
 i'd start off with the elements of statistical learning
 ```
 Thanks! Do you plan on doing some ML in Lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 31 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463515):
+#### [ Kenny Lau (Mar 31 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463515):
 @**Simon Hudon** do you have any suggestions?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463516):
+#### [ Andrew Ashworth (Mar 31 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463516):
 that would be really hard without a good way of handling algebra and probability
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 31 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463520):
+#### [ Andrew Ashworth (Mar 31 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124463520):
 er, by algebra i mean matrices
 
 

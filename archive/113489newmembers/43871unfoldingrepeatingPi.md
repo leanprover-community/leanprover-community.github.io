@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/43871unfoldingrepeatingPi.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jesse Michael Han (Sep 21 2018 at 17:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unfolding%20repeating%20Pi/near/134384020):
+#### [ Jesse Michael Han (Sep 21 2018 at 17:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unfolding%20repeating%20Pi/near/134384020):
 hello everyone! i'm trying to define the following inductive datatype: 
 ```quote
 ```lean
@@ -47,7 +47,7 @@ Is there a way to get Lean to treat `repeat_Pi k A` as being equal to `A -> ... 
 
 (edit: got rid of `punit` and shifted indexing down by 1)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 21 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unfolding%20repeating%20Pi/near/134400061):
+#### [ Simon Hudon (Sep 21 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unfolding%20repeating%20Pi/near/134400061):
 Is it intended that in:
 
 ```lean
@@ -57,7 +57,7 @@ Is it intended that in:
 
 you ignore `A` that you get as a parameter?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 21 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unfolding%20repeating%20Pi/near/134400214):
+#### [ Simon Hudon (Sep 21 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unfolding%20repeating%20Pi/near/134400214):
 Sorry, that doesn't fix the issue. 
 
 You may need to reflect the repetition into the definition of `hewwo`:
@@ -68,7 +68,7 @@ inductive hewwo : nat → Type
   | apply (n) : A n → hewwo n → hewwo (succ n)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 21 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unfolding%20repeating%20Pi/near/134403199):
+#### [ Reid Barton (Sep 21 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unfolding%20repeating%20Pi/near/134403199):
 @**Jesse Michael Han** I would just use the uncurried `\Pi n, A n -> (fin n -> hewwo) -> hewwo` instead.
 I don't think you can do the thing you were trying to do.
 

@@ -11,37 +11,37 @@ permalink: archive/113488general/42489metaprogrammingandstructureinheritance.htm
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 11 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123582486):
+#### [ Simon Hudon (Mar 11 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123582486):
 I'm trying to write a tactic that explores the inheritance structure. Given the name of a structure type, can I discover what are its ancestors?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 11 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583537):
+#### [ Sebastian Ullrich (Mar 11 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583537):
 Only for the new structure command. You need to reimplement [get_parent_structures](https://github.com/leanprover/lean/blob/bdea7d420dbcdb7cce700eb62c129387707016fc/src/frontends/lean/structure_cmd.cpp#L139), but that shouldn't be too hard.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 11 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583547):
+#### [ Sebastian Ullrich (Mar 11 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583547):
 tl;dr: subobject fields start with "_"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 11 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583803):
+#### [ Simon Hudon (Mar 11 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583803):
 How does one use the new structure command? Also, is `get_parent_structures` exposed to Lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 11 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583950):
+#### [ Andrew Ashworth (Mar 11 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583950):
 you're using the new structure command by default, I think
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 11 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583951):
+#### [ Andrew Ashworth (Mar 11 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583951):
 as opposed to the old structure command which is accessed with `set option`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 11 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583953):
+#### [ Sebastian Ullrich (Mar 11 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123583953):
 yep
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 11 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123584118):
+#### [ Simon Hudon (Mar 11 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123584118):
 Thanks! And is it possible that `structure_fields` by default does not list those symbols starting with `_`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 11 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123584218):
+#### [ Sebastian Ullrich (Mar 11 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123584218):
 Sorry, that was ambiguous. It's only in the inductive constructor parameters that they are encoded with `_`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Mar 11 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123584227):
+#### [ Sebastian Ullrich (Mar 11 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123584227):
 All `structure_fields` does is get the parameter names and strip any leading `_`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 11 2018 at 23:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123584544):
+#### [ Simon Hudon (Mar 11 2018 at 23:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123584544):
 Let's say that I'm constructing an instance of `group` (but I don't know in the tactic that it is specifically group). I'd like to know that `monoid` is a direct parent so that I can use `mk_instance` and use the result as a source in `pexpr.mk_structure_instance`. How would you do it?
 
 

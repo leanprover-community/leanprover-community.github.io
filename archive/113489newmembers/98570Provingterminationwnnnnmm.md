@@ -11,14 +11,14 @@ permalink: archive/113489newmembers/98570Provingterminationwnnnnmm.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) cbailey (Jan 10 2019 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154824198):
+#### [ cbailey (Jan 10 2019 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154824198):
 Is there any way to convince Lean that a function  f (n : nat, m : nat) -> T, where each recursive call satisfies ( n' < n \/ ( n' = n /\ m' < m ) ) is indeed terminating without explicitly adding a third parameter to represent (n + m) or gas?
 Thank you!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 10 2019 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154824668):
+#### [ Kenny Lau (Jan 10 2019 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154824668):
 1. give us an example 2. custom well-founded tactic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jeremy Avigad (Jan 10 2019 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154824899):
+#### [ Jeremy Avigad (Jan 10 2019 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154824899):
 You can do arbitrary well-founded recursion in Lean, though it doesn't always work as smoothly as one would like. 
 
 https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#well-founded-recursion-and-induction
@@ -27,17 +27,17 @@ In your case, I think the equation compiler (the system that compiles your funct
 
 Generally speaking, though, life will be easier if you can find a structural recursion that will do the job.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 10 2019 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154826761):
+#### [ Kevin Buzzard (Jan 10 2019 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154826761):
 https://github.com/leanprover/mathlib/blob/master/docs/extras/well_founded_recursion.md
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) cbailey (Jan 10 2019 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154827110):
+#### [ cbailey (Jan 10 2019 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/154827110):
 Thank you for the links @**Jeremy Avigad**  and @**Kevin Buzzard** ,  this looks like exactly what I need.
 
 @**Kenny Lau**  I'm just using Euclid's algorithm. I'll try and put together a tactic with the reading material you guys referenced
 
 Thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Wojciech Nawrocki (Jan 13 2019 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/155045083):
+#### [ Wojciech Nawrocki (Jan 13 2019 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20termination%20w/%20%28n%27%20%3C%20n%20%5C/%20%28n%27%20%3D%20n%20/%5C%20m%27%20%3C%20m%29%29/near/155045083):
 I found that definining the entire recursive function as an equation-compiler-expression and then ignoring some of the match variables in cases where they don't matter works best, e.g.:
 ```lean
 def rec_fn: ℕ → ℕ → (ℕ → ℕ) → ℕ → ℕ

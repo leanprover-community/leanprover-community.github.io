@@ -11,16 +11,16 @@ permalink: archive/113488general/50212rfllemmas.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 05 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20lemmas/near/133394916):
+#### [ Kenny Lau (Sep 05 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20lemmas/near/133394916):
 how important are rfl-simp-lemmas being rfl?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 05 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20lemmas/near/133395794):
+#### [ Chris Hughes (Sep 05 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20lemmas/near/133395794):
 I don't understand the question. You mean how important is it that they're proved using rfl, or that they can be proved using rfl or something completely different?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 05 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20lemmas/near/133395945):
+#### [ Kenny Lau (Sep 05 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20lemmas/near/133395945):
 should we depend on rfl lemmas being rfl (so that we can use dsimp instead of simp)?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 06 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20lemmas/near/133421379):
+#### [ Scott Morrison (Sep 06 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20lemmas/near/133421379):
 Yes, it's important... I think the point is that `dsimp` just `change`s the goal, while `simp` has to actually construct the proof, and sometimes that goes wrong. I should be able to be more specific (as someone explaining to me this difference actually made a big difference in the behaviour of `tidy`), but I'm having trouble thinking of an example now.
 
 

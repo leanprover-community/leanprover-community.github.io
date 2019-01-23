@@ -11,95 +11,95 @@ permalink: archive/116395maths/54381inducedcoinduced.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116033):
+#### [ Kenny Lau (Jun 15 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116033):
 If I have a function f:A->B with a topology on B, are the following two topologies on A x A the same?
 1. equip A with the induced topology, and then do the product topology
 2. build fxf:AxA->BxB and then use the induced topology, where BxB has the product topology
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116036):
+#### [ Kenny Lau (Jun 15 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116036):
 @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116082):
+#### [ Mario Carneiro (Jun 15 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116082):
 They are equal but not defeq
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116170):
+#### [ Kenny Lau (Jun 15 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116170):
 @**Mario Carneiro** how do you suggest I prove it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116227):
+#### [ Mario Carneiro (Jun 15 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116227):
 you should be able to use some nonsense in the lattice of top spaces to prove it relatively easily
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116242):
+#### [ Kenny Lau (Jun 15 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116242):
 we have `induced_le` but not `le_induced`, so...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116294):
+#### [ Mario Carneiro (Jun 15 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116294):
 isn't `induced` defined as some kind of supremum? That gives you a proof approach
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116297):
+#### [ Kenny Lau (Jun 15 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116297):
 i'll try
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116302):
+#### [ Kenny Lau (Jun 15 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116302):
 (no, prod is supremum, induced isn't)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116321):
+#### [ Kenny Lau (Jun 15 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116321):
 oh and is there an idiom to obtain the categorical product of two functions?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116410):
+#### [ Mario Carneiro (Jun 15 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116410):
 not particularly, `embedding_prod_mk` just uses `(λx:α×γ, (f x.1, g x.2))`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116416):
+#### [ Kenny Lau (Jun 15 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116416):
 is that an idiom?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116420):
+#### [ Mario Carneiro (Jun 15 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116420):
 I suppose
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116471):
+#### [ Mario Carneiro (Jun 15 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116471):
 I think `induced_sup` will help
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116474):
+#### [ Mario Carneiro (Jun 15 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116474):
 and `induced_compose`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116482):
+#### [ Kenny Lau (Jun 15 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116482):
 why are they in `continuity` @_@
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116486):
+#### [ Mario Carneiro (Jun 15 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116486):
 because `induced` is really talking about continuous functions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116491):
+#### [ Mario Carneiro (Jun 15 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116491):
 consider `continuous_iff_induced_le`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116539):
+#### [ Mario Carneiro (Jun 15 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116539):
 also the proofs use continuity arguments
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116668):
+#### [ Kenny Lau (Jun 15 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116668):
 @**Mario Carneiro** oh my god I just realized I have been asking the wrong question
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116683):
+#### [ Kenny Lau (Jun 15 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116683):
 f:A->B be a set-theoretic function, and a topology on A. Are the following two topologies on BxB the same?
 1. equip B with coinduced, and then product
 2. coinduced from fxf:AxA->BxB, where AxA has the product topology
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116684):
+#### [ Kenny Lau (Jun 15 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116684):
 let's say f is surjective
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128117009):
+#### [ Mario Carneiro (Jun 15 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128117009):
 I expect so, try to prove it and find out
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 15 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118668):
+#### [ Reid Barton (Jun 15 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118668):
 I'm almost certain they are not the same in general.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 15 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118746):
+#### [ Reid Barton (Jun 15 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118746):
 If A->B is a quotient map, then XxA->XxB need not be a quotient map. But I don't know the counterexample off-hand.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118753):
+#### [ Kenny Lau (Jun 15 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118753):
 I just proved it with one extra assumption
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 15 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118770):
+#### [ Reid Barton (Jun 15 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118770):
 It's true if X is locally compact, or in your original question if A and B are
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 15 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118814):
+#### [ Reid Barton (Jun 15 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118814):
 what was your extra assumption?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118818):
+#### [ Kenny Lau (Jun 15 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118818):
 ```lean
 example (α : Type*) (β : Type*)
   [t : topological_space α] (f : α → β)
@@ -131,7 +131,7 @@ from le_antisymm
     by simp at hp2 hq2; rw [← hp2, ← hq2]; from @H (P, Q) ⟨hp1, hq1⟩⟩)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118820):
+#### [ Kenny Lau (Jun 15 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128118820):
 that the map be open
 
 

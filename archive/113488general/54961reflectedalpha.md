@@ -11,22 +11,22 @@ permalink: archive/113488general/54961reflectedalpha.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 21 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148091917):
+#### [ Keeley Hoek (Nov 21 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148091917):
 This probably counts as a newbie question, sorry:
 
 What is the purpose of the typeclass instance `[reflected \alpha]` which `eval_expr` takes? Why can the typeclass system work out what it is most of the time, but sometimes when you pass a custom structure withh few boring nested structures it freaks out?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 21 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148092166):
+#### [ Mario Carneiro (Nov 21 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148092166):
 it needs to know how to produce expressions from a VM value
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 21 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148092175):
+#### [ Mario Carneiro (Nov 21 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148092175):
 I don't know what the freakout problem is
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 21 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148093813):
+#### [ Keeley Hoek (Nov 21 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148093813):
 Ok
 I will try to concoct
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 21 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148097478):
+#### [ Keeley Hoek (Nov 21 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148097478):
 Consider this little snippet:
 ````
 structure a_struct (α : Type) :=
@@ -43,10 +43,10 @@ meta def go (tv : Type) : tactic unit := do
 
 ````
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Nov 21 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148097603):
+#### [ Sebastian Ullrich (Nov 21 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148097603):
 `reflected` can only be synthesized for closed (parts of) expressions, so `go` needs a `[reflected tv]` parameter
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 21 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148106110):
+#### [ Keeley Hoek (Nov 21 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148106110):
 In principle, is there any way to make something like this:
 ````
 set_option trace.app_builder true
@@ -73,13 +73,13 @@ work? I'd really like to be able to persuade lean to be able to solve that const
 
 (Please mind the `tactic.up` and `tactic.down`s, which are just dealing with the fact that `container_struct` is `Type 1`.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Nov 21 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148106771):
+#### [ Sebastian Ullrich (Nov 21 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148106771):
 That might be an issue with `tactic.mk_app`, can you try with the full `tactic.to_expr`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 21 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148107099):
+#### [ Keeley Hoek (Nov 21 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148107099):
 @**Sebastian Ullrich** Brilliant! Thanks so much, lots of time of potentially lost work saved
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Nov 22 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148159497):
+#### [ Keeley Hoek (Nov 22 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148159497):
 Here's another mini-problem. I'm just going to store a variable `a` of arbitrary type `α` in a structure in two different ways:
 ````
 structure struct_v1 (α : Type) :=
@@ -119,7 +119,7 @@ run_cmd go_2
 ````
 I get a reflection error in only the first way, even though the type could be arbitrary in either case. What's the difference between these constructions?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Nov 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148162400):
+#### [ Sebastian Ullrich (Nov 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148162400):
 In both versions, you need a reflected term of the type. In version 2, that is already part of `v2_def`(defs are stored as `expr`s after all). In version 1, you need an explicit `[reflected t]`. That is the difference.
 
 

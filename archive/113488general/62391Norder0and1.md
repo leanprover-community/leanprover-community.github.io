@@ -11,7 +11,7 @@ permalink: archive/113488general/62391Norder0and1.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ned Summers (Aug 18 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369398):
+#### [ Ned Summers (Aug 18 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369398):
 Hey, I'm trying to prove the seemingly very simple
 ```
 example (n : ℕ) (h : n < 1) : n = 0 := sorry
@@ -20,28 +20,28 @@ It's revealing a lot about what I don't know in lean (like getting stuck getting
 
 (Also, I'm using this to show that if you take any `(a : fin 1)` then `a = 0`. I suspect too that this is probably much simpler than what I'm doing.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 18 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369562):
+#### [ Mario Carneiro (Aug 18 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369562):
 you should be able to do it by cases
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 18 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369628):
+#### [ Mario Carneiro (Aug 18 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369628):
 not my favorite proof:
 ```
 example (n : ℕ) (h : n < 1) : n = 0 :=
 by cases h with _ h; [refl, cases h]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 18 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369681):
+#### [ Mario Carneiro (Aug 18 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369681):
 ```
 example (n : fin 1) : n = 0 :=
 fin.cases rfl (λ i, i.elim0) n
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 18 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132370212):
+#### [ Mario Carneiro (Aug 18 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132370212):
 ```
 example : ∀ (n : fin 1), n = 0 := dec_trivial
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 18 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132371079):
+#### [ Patrick Massot (Aug 18 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132371079):
 ```quote
 It's revealing a lot about what I don't know in lean (like getting stuck getting 1>n from n<1) and would welcome any advice/solutions. 
 ```
@@ -56,10 +56,10 @@ assumption
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 18 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132371124):
+#### [ Patrick Massot (Aug 18 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132371124):
 Note that the `change` is here so you see it in the interative message window, but it's useless
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 18 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132376851):
+#### [ Kenny Lau (Aug 18 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132376851):
 ```lean
 import data.nat.basic
 
@@ -67,7 +67,7 @@ example : ∀ (n : ℕ), n < 1 → n = 0 :=
 dec_trivial
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ned Summers (Aug 20 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132445610):
+#### [ Ned Summers (Aug 20 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132445610):
 Thanks everyone, dec_trivial is a nice thing to know about. Will be using this to ponder where my break in understanding was.
 
 

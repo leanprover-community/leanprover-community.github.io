@@ -11,7 +11,7 @@ permalink: archive/116395maths/83644continuousfunctiontopitype.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969544):
+#### [ Johan Commelin (May 23 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969544):
 I have no clue how to prove this:
 ```lean
 lemma continuous.pi_mk {X I : Type*} {Y : I → Type*}
@@ -19,89 +19,89 @@ lemma continuous.pi_mk {X I : Type*} {Y : I → Type*}
 : continuous (λ x i, f i x) := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 23 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969599):
+#### [ Kevin Buzzard (May 23 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969599):
 Can you prove it in maths?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 23 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969600):
+#### [ Kevin Buzzard (May 23 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969600):
 :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 23 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969604):
+#### [ Kevin Buzzard (May 23 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969604):
 i.e. "is it true"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969606):
+#### [ Johan Commelin (May 23 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969606):
 Unless I made a stupid mistake: yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969651):
+#### [ Mario Carneiro (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969651):
 how is the pi topology defined?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969652):
+#### [ Johan Commelin (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969652):
 It just says that Pi is some sort of categorical product on steroids
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969654):
+#### [ Kevin Buzzard (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969654):
 what Mario said
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969657):
+#### [ Johan Commelin (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969657):
 If I have continuous maps to all the factors, I get a continuous map to the Pi
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969658):
+#### [ Kevin Buzzard (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969658):
 (in Lean)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969660):
+#### [ Johan Commelin (May 23 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969660):
 ```lean
 instance Pi.topological_space {β : α → Type v} [t₂ : Πa, topological_space (β a)]
  : topological_space (Πa, β a) :=
 ⨆a, topological_space.induced (λf, f a) (t₂ a)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969668):
+#### [ Mario Carneiro (May 23 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969668):
 so look for theorems about continuity on induced
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969677):
+#### [ Johan Commelin (May 23 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969677):
 There are loads of those... but how do I deal with the `⨆a,` that is in front?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969678):
+#### [ Mario Carneiro (May 23 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969678):
 look for continuity on a Sup
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969728):
+#### [ Johan Commelin (May 23 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969728):
 there is only continuity for `sup`, not `Sup`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969736):
+#### [ Mario Carneiro (May 23 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969736):
 I think it's called that... serach for the bigcup
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969740):
+#### [ Johan Commelin (May 23 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969740):
 I'm already down 5 rabbit holes, I really hope I don't need to go down this one as well...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969744):
+#### [ Johan Commelin (May 23 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969744):
 Search for `⨆` gives `No results` in `continuity.lean`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969801):
+#### [ Mario Carneiro (May 23 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969801):
 hm, looks like it is missing from the list at `continuity.lean`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969827):
+#### [ Johan Commelin (May 23 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969827):
 Right, there is constructors for products of two topological spaces, and continous maps towards them, etc... but for Pi types this seems missing. And I don't know exactly how to prove this stuff...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969872):
+#### [ Johan Commelin (May 23 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969872):
 /me doesn't know anything about `Sup` and friends
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969877):
+#### [ Mario Carneiro (May 23 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969877):
 okay, so use the existing theorems as guides and write your own version for continuity on supr
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969887):
+#### [ Johan Commelin (May 23 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969887):
 \me goes down rabbit hole # 6
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969888):
+#### [ Mario Carneiro (May 23 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969888):
 (or I can, if this is going too far afield)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969895):
+#### [ Mario Carneiro (May 23 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969895):
 I'm just showing you what I would do
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969908):
+#### [ Johan Commelin (May 23 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969908):
 Well, I'm trying to prove that the face map between two standard simplices is continuous...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969975):
+#### [ Johan Commelin (May 23 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969975):
 @**Mario Carneiro** At the moment, I don't even know how to write the statement for `Sup`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126970325):
+#### [ Mario Carneiro (May 23 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126970325):
 here you go:
 ```
 lemma continuous_Sup_dom {t₁ : set (tspace α)} {t₂ : tspace β}
@@ -123,16 +123,16 @@ lemma continuous_supr_rng {t₁ : tspace α} {t₂ : ι → tspace β}
 continuous_Sup_rng $ assume t ⟨i, (t_eq : t = t₂ i)⟩, t_eq.symm ▸ h i
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126970334):
+#### [ Mario Carneiro (May 23 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126970334):
 I just copied the Inf stuff and dualized everything
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126970571):
+#### [ Johan Commelin (May 23 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126970571):
 Ok, thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126970576):
+#### [ Johan Commelin (May 23 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126970576):
 Let me see if I can continue with rabbit hole # 5 (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126971289):
+#### [ Johan Commelin (May 23 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126971289):
 Hurray!
 ```lean
 lemma continuous.pi_mk {X I : Type*} {Y : I → Type*}
@@ -151,49 +151,49 @@ exact H i,
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972217):
+#### [ Johan Commelin (May 23 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972217):
 Ok, so now I'm stuck with this MWE:
 ```lean
 lemma continuous_sums {n : ℕ} : continuous (λ x : ((fin n) → ℝ), univ.sum x) := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972240):
+#### [ Johan Commelin (May 23 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972240):
 Whatever I try, I'm pulled hard into all sorts of `foldr` stuff. And I'm completely out of my comfort zone.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972265):
+#### [ Mario Carneiro (May 23 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972265):
 that's not a trivial theorem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972267):
+#### [ Johan Commelin (May 23 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972267):
 I would like to mumble some think like... well, addition is continuous... if you repeatedly add, you get continuity by induction
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972274):
+#### [ Johan Commelin (May 23 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972274):
 Can I `foldr` the continuity proof off `add`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972276):
+#### [ Mario Carneiro (May 23 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972276):
 I guess you can prove it by induction on `n`, you will need to show that `fin (succ n) -> R` is homeomorphic to `R x (fin n -> R)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972319):
+#### [ Johan Commelin (May 23 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972319):
 To link back to the discussion with Kevin, from about an hour ago... do you think this could be made into a trivial theorem?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972322):
+#### [ Mario Carneiro (May 23 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972322):
 no
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972365):
+#### [ Mario Carneiro (May 23 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972365):
 okay, maybe that's too strong, you might be able to prove it by induction on the set instead
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972371):
+#### [ Johan Commelin (May 23 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972371):
 that sounds closer to what I wanted to mumble
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972379):
+#### [ Mario Carneiro (May 23 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972379):
 in that case you want to use `finset.induction_on`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972424):
+#### [ Mario Carneiro (May 23 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972424):
 and the IH says that a sum of continuous functions over set s is continuous
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972492):
+#### [ Johan Commelin (May 23 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126972492):
 Ok, I'm going to try this. Thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 23 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126974780):
+#### [ Patrick Massot (May 23 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126974780):
 Johan, you may already know, but just in case: there very easy clean up steps you can run on such proofs. `YY` is never used. `unfold` is actually much less useful that one thinks in the beginning, so I always try to remove all `unfold` once a proof work. And then we always try to get rid of `simp` in the middle of proofs. The result is:
 ```lean
 lemma continuous.pi_mk {X I : Type*} {Y : I → Type*}
@@ -209,10 +209,10 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 23 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126974828):
+#### [ Patrick Massot (May 23 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126974828):
 Out of curiosity, I also tried to build a term proof, but haven't succeeded because of the mysterious rewrite in the middle (which rewrites implicit arguments, which has the weird effect of not changing the visible goal)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 23 2018 at 14:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126974838):
+#### [ Patrick Massot (May 23 2018 at 14:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126974838):
 I can't get more obfuscated than:
 ```lean
 lemma continuous.pi_mk {X I : Type*} {Y : I → Type*}
@@ -221,7 +221,7 @@ lemma continuous.pi_mk {X I : Type*} {Y : I → Type*}
 continuous_Sup_rng $ λ t ht, match ht with ⟨i, hi⟩ := by rw hi ; apply continuous_induced_rng ; exact (H i) end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 23 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126974960):
+#### [ Johannes Hölzl (May 23 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126974960):
 For the sum proof: its easiest to generalize for finset, and then go from list to multiset to finset. I will add this to mathlib:
 ```lean
 
@@ -264,49 +264,49 @@ lemma continuous_finset_sum {α : Type*} {β : Type*} {γ : Type*}
 continuous_multiset_sum _
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975014):
+#### [ Johan Commelin (May 23 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975014):
 @**Patrick Massot** Yes, you are completely right. But it seems the work is now already done (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975238):
+#### [ Mario Carneiro (May 23 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975238):
 you can see how Johannes built the term proof for `pi_mk`; the key is to use `continuous_supr_rng` not `continuous_Sup_rng` because the definition uses `supr` (the indexed supremum) not `Sup` (the set supremum). In fact `supr` is defined in terms of `Sup`, but if you apply the wrong theorem it unfolds this definition and things get harder.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975550):
+#### [ Johan Commelin (May 23 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975550):
 Yes, I will take a closer look. I think I can learn a lot from how Johannes improved my kludge
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 23 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975794):
+#### [ Patrick Massot (May 23 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975794):
 Sure. But this is too efficient in a sense. My message was focused on easy local clean up, that you can actually do without any understanding of the proof. Of course this is only the first step. Really efficient proofs like Johannes' require actual thinking
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975891):
+#### [ Mario Carneiro (May 23 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975891):
 you can also look at my term proof of `continuous_supr_rng`, which uses the `\t` for rewriting
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 23 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975965):
+#### [ Patrick Massot (May 23 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975965):
 I'm a bit frustrated by this \t thing. I know it's somehow the term version of `rw` and I see it everywhere in mathlib, but I was almost never able to use it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975978):
+#### [ Mario Carneiro (May 23 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126975978):
 I admit it was a bit delicate for me at first
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976035):
+#### [ Mario Carneiro (May 23 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976035):
 it is so much weaker than the lean 2 version, it fails whenever the expected type or the thing to rewrite with has metavariables
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976056):
+#### [ Johan Commelin (May 23 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976056):
 Anyway, I just proved that the face map between standard simplices is continuous!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976057):
+#### [ Johan Commelin (May 23 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976057):
 The proof is not cleaned up. But it works (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976067):
+#### [ Mario Carneiro (May 23 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976067):
 but it's often just the thing when you want to rewrite with an equality in the context
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 23 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976197):
+#### [ Patrick Massot (May 23 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976197):
 What about my attempt? Can you use \t there? (without switching to `continuous_supr_rng`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976271):
+#### [ Mario Carneiro (May 23 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976271):
 yes, the proof should be almost identical to the one I pointed at
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976317):
+#### [ Johan Commelin (May 23 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976317):
 Ok, like I said, the proofs are still ugly. But here goes nothing: https://github.com/jcommelin/mathlib/commit/fec9db2028bea163352f574055dad44029d04788
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 23 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976321):
+#### [ Mario Carneiro (May 23 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126976321):
 ```
 lemma continuous.pi_mk
   {X I : Type*} {Y : I → Type*} [t₁ : topological_space X] [t₂ : Πi, topological_space (Y i)]
@@ -315,14 +315,14 @@ lemma continuous.pi_mk
 continuous_Sup_rng $ assume t ⟨i, e⟩, e.symm ▸ continuous_induced_rng (H i)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 23 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126980416):
+#### [ Patrick Massot (May 23 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126980416):
 Hum, I think I stupidly missed the `eq.symm` when I tried
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 23 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126981716):
+#### [ Johannes Hölzl (May 23 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126981716):
 @**Johan Commelin** I forgot that there is already `tendsto_sum`, so you could also derive `continuous_finset_sum` from this.
 Anyway, this all is now in mathlib.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 23 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126985262):
+#### [ Johan Commelin (May 23 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126985262):
 Thanks a lot! I will merge into my fork. Once I clean my stuff up, I think I will make a PR
 
 

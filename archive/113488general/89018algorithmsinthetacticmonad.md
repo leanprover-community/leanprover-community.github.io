@@ -11,33 +11,33 @@ permalink: archive/113488general/89018algorithmsinthetacticmonad.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 05:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593072):
+#### [ Scott Morrison (Sep 09 2018 at 05:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593072):
 I need some remedial help with functional programming. 
 
 Say I have `f : X -> tactic X`, and `x : X`. Suppose that `f` is possibly very expensive to compute. I would like to recursively apply `f` to `x`, and produce an iterator-like object that can traversed elsewhere in the program, in such a way that `f` is never needlessly computed twice.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593112):
+#### [ Scott Morrison (Sep 09 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593112):
 What am I meant to do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 05:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593119):
+#### [ Scott Morrison (Sep 09 2018 at 05:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593119):
 (Oh, and `f` will eventually fail, and the iterator-like object needs to be able to report termination.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 05:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593162):
+#### [ Scott Morrison (Sep 09 2018 at 05:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593162):
 I would love to be able to package this up as merely a `tactic X`, whose every invocation magically produces the next element of the sequence, and handles piping the value of `f f f x` into the calculation of `f f f f x` "behind the scenes".
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 05:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593166):
+#### [ Scott Morrison (Sep 09 2018 at 05:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593166):
 But that seems unlikely. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 05:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593215):
+#### [ Mario Carneiro (Sep 09 2018 at 05:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593215):
 Use a `lazy_list`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 05:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593221):
+#### [ Scott Morrison (Sep 09 2018 at 05:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593221):
 How does that interact with working in the tactic monad?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 05:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593223):
+#### [ Simon Hudon (Sep 09 2018 at 05:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593223):
 I think something is missing in `lazy_list` to allow this: the function is monadic. But I think we can make a monadic lazy list
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593273):
+#### [ Mario Carneiro (Sep 09 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593273):
 ```
 
 meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
@@ -45,10 +45,10 @@ meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
 | cons : α → m mllist → mllist
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593274):
+#### [ Mario Carneiro (Sep 09 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593274):
 sadly this has to be meta, since it's not necessarily positive
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593332):
+#### [ Simon Hudon (Sep 09 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593332):
 You could do something like:
 
 ```lean
@@ -57,25 +57,25 @@ inductive mlazy_list (m : Type u -> Type u) (a : Type u) : Type (u+1)
 | cons (b : Type u)  : m (a x b) -> (b -> mlazy_list) -> mlazy_list
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 06:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593374):
+#### [ Scott Morrison (Sep 09 2018 at 06:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593374):
 Can you explain your one, Simon? I'm not understanding how to use it. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 06:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593489):
+#### [ Mario Carneiro (Sep 09 2018 at 06:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593489):
 eww, you have to package up the whole state to use that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 06:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593493):
+#### [ Mario Carneiro (Sep 09 2018 at 06:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593493):
 also, that in no way resembles a list
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 06:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593536):
+#### [ Scott Morrison (Sep 09 2018 at 06:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593536):
 Mario, I'm failing to write `iterates` for your version... A hint?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 06:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593537):
+#### [ Simon Hudon (Sep 09 2018 at 06:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593537):
 @**Mario Carneiro** you have to squint and cock your head left
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 06:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593542):
+#### [ Simon Hudon (Sep 09 2018 at 06:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593542):
 @**Scott Morrison** Sure, let's have a look
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 06:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593546):
+#### [ Mario Carneiro (Sep 09 2018 at 06:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593546):
 ```
 meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
 | nil {} : mllist
@@ -86,10 +86,10 @@ meta def fix {m : Type u → Type u} [monad m] [alternative m]
 | x := (do a ← f x, return (mllist.cons a (fix a))) <|> pure mllist.nil
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 06:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593591):
+#### [ Mario Carneiro (Sep 09 2018 at 06:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593591):
 the typeclass instances are a bit of a lie since the `monad` and `alternative` instances could potentially be giving different map operations, but since there are no axioms it doesn't matter
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 06:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593598):
+#### [ Mario Carneiro (Sep 09 2018 at 06:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593598):
 oh wait
 ```
 meta def fix {m : Type u → Type u} [alternative m]
@@ -97,13 +97,13 @@ meta def fix {m : Type u → Type u} [alternative m]
 | x := (λ a, mllist.cons a (fix a)) <$> f x <|> pure mllist.nil
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 06:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593629):
+#### [ Scott Morrison (Sep 09 2018 at 06:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593629):
 Ah, okay, I'd just worked out a version of `fix`, but forgotten to check for failure...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 06:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593650):
+#### [ Mario Carneiro (Sep 09 2018 at 06:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593650):
 if you skip that you have a valid infinite list representation a la haskell
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 06:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593869):
+#### [ Mario Carneiro (Sep 09 2018 at 06:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593869):
 ```
 meta def f : nat → tactic nat
 | 0 := tactic.failed
@@ -118,7 +118,7 @@ meta def mllist.force {m} [monad m] {α} : mllist m α → m (list α)
 run_cmd (fix f 10 >>= mllist.force >>= tactic.trace) -- prints 9,...,0 and [9, ..., 0]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 06:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593870):
+#### [ Scott Morrison (Sep 09 2018 at 06:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593870):
 Oooh, and look at that:
 ```
 meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
@@ -153,37 +153,37 @@ end
 ```
 Printing: "2 ! 4 ! 16 !"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593967):
+#### [ Simon Hudon (Sep 09 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593967):
 If you stay in tactics, Mario's version is simpler. Mine is getting tricky because of universes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 09 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594092):
+#### [ Scott Morrison (Sep 09 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594092):
 Thanks, Simon. I'm trapped in the bottom universe anyway,, `expr`-munging,  so I'll go with Mario's for now.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594099):
+#### [ Mario Carneiro (Sep 09 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594099):
 Basically you get into the standard universe issues with coinductive types. I don't know any way to avoid packing the entire state into the type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594113):
+#### [ Simon Hudon (Sep 09 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594113):
 :) good I wish I could have made something that fits in a short snippet. But now, I have to bring in a whole F-algebra which I haven't implemented yet :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594114):
+#### [ Mario Carneiro (Sep 09 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594114):
 You can mathematically reason about the entire completed infinite process, but this has poor code behavior
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594158):
+#### [ Simon Hudon (Sep 09 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594158):
 Doesn't Lean allow you to substitute pure code with something that will be efficient?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 09 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594162):
+#### [ Mario Carneiro (Sep 09 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594162):
 :four_leaf_clover:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594222):
+#### [ Simon Hudon (Sep 09 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594222):
 :) since you mention coinductive types, you mentioned bounded natural functors a while back. Now I'm thinking my current approach might be getting out of hand so I think I'll give them a try
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 09 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133603765):
+#### [ Reid Barton (Sep 09 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133603765):
 > bounded natural functors
 
 Interesting. What you need to construct the initial algebra of a functor F : Set -> Set by transfinite induction is that F is accessible, that is, F commutes with $$\kappa$$-filtered colimits for some **regular cardinal** $$\kappa$$. For example, FX = (S -> X) is $$\kappa$$-accessible if $$|S| < \kappa$$. So I guess this "bounded" condition is related. Do CS people use regular cardinals too?
 I found some paper on the topic which contains a lemma which bounds the cardinality of minimal algebras and the formula involves a successor cardinal, so I guess it is the same idea.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 09 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133618942):
+#### [ Simon Hudon (Sep 09 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133618942):
 Thanks for the attempt at giving me an introduction. I'm afraid I'm more of a noob than that when it comes to category theory
 
 

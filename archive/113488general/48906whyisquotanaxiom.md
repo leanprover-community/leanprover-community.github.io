@@ -11,7 +11,7 @@ permalink: archive/113488general/48906whyisquotanaxiom.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 21 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152363029):
+#### [ Kevin Buzzard (Dec 21 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152363029):
 Can't we just do it like this?
 
 ```lean
@@ -97,16 +97,16 @@ end xena
 
 I think I do all the basic theory of `quot`. I've been teaching quotients (in ZFC) in my class and I was trying to figure out how to explain to mathematicians why all this `quot.sound` stuff all had to be dealt with via extra axioms, but I've just done it all myself. The two sacrifices I had to make were: (1) it doesn't work for props (but who takes a quotient on proofs of a prop?) and (2) `lift` (the map which mathematicians think of as a "descent", quite the other direction to the computer science word) is noncomputable. What does `quot.sound` offer that my set-up doesn't but which I want or need?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 21 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152363044):
+#### [ Kevin Buzzard (Dec 21 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152363044):
 I just make the quotient type as a bunch of equivalence classes.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 21 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152363092):
+#### [ Kevin Buzzard (Dec 21 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152363092):
 A subtype of `set β` consisting of the equiv classes.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 21 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152363322):
+#### [ Reid Barton (Dec 21 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152363322):
 The differences are that `lift` is computable, and `lift f _ (mk r x) = f x`(which it looks like you haven't proved, but I'm sure you can) hold definitionally (this is `quot.lift_beta`).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 22 2018 at 00:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152364358):
+#### [ Kevin Buzzard (Dec 22 2018 at 00:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152364358):
 Actually I'm struggling with the theorem about lift:
 
 ```lean
@@ -137,28 +137,28 @@ Hb : equiv_class r b = C
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 22 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152367268):
+#### [ Chris Hughes (Dec 22 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152367268):
 Also, your proof of `sound` uses `quot.sound`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 22 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152386750):
+#### [ Kevin Buzzard (Dec 22 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152386750):
 Oh does it? I suppose that's cheating :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 22 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152387461):
+#### [ Mario Carneiro (Dec 22 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152387461):
 You use set extensionality in the proof, which is an axiom in ZFC and is derived from `propext` and `quot.sound` in lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 24 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152462524):
+#### [ Kevin Buzzard (Dec 24 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152462524):
 OK so I proved `xena.quot.thm`. I think definitional equality is overrated, and if I have my maths hat on I'd say the same about computability. I am concerned about Chris' comment though. I am doing this to try and figure out how to explain to mathematicians why Lean wants quotients to be an extra axiom. But set extensionality is implied by function extensionality, right? Would another approach have been to make funext and/or propext axioms and then get quotients using my method? At least if we decide not to care about computability and definitional equality and be 100% mathematician.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 24 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152463063):
+#### [ Mario Carneiro (Dec 24 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152463063):
 yes, that's called zfc
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 24 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152463066):
+#### [ Mario Carneiro (Dec 24 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152463066):
 you make set.ext an axiom
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 24 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152463070):
+#### [ Mario Carneiro (Dec 24 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152463070):
 and derive funext and the others by constructing everything from sets
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 24 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152463123):
+#### [ Mario Carneiro (Dec 24 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152463123):
 if you want to convince yourself, make a copy of `set.ext` as an actual axiom, and then derive all that and check that you didn't use propext or quot.sound in `#print axioms`
 
 

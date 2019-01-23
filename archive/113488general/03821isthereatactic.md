@@ -11,47 +11,47 @@ permalink: archive/113488general/03821isthereatactic.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785751):
+#### [ Sean Leather (Sep 12 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785751):
 Is there a tactic for (part of) this?
 
 ```lean
 by cases l; apply exists.intro; assumption; assumption
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785823):
+#### [ Johan Commelin (Sep 12 2018 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785823):
 Will `tidy` do this? Or can it not yet do `exists.intro`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785841):
+#### [ Sean Leather (Sep 12 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785841):
 I've never used `tidy`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785855):
+#### [ Johan Commelin (Sep 12 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785855):
 It is really cool. You'll need `import tactic.tidy`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 12 2018 at 10:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785901):
+#### [ Kenny Lau (Sep 12 2018 at 10:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785901):
 I'd just write the whole thing in term mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786086):
+#### [ Sean Leather (Sep 12 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786086):
 Kenny: I had that, but the tactic is more robust to changes in `l`, which are happening.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786206):
+#### [ Sean Leather (Sep 12 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786206):
 Also, `l` has a lot of fields, so either using pattern matching or `cases l with ...` is annoyingly long.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786220):
+#### [ Johan Commelin (Sep 12 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786220):
 Does `tidy` work?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786279):
+#### [ Sean Leather (Sep 12 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786279):
 ` by cases l; tidy` works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786383):
+#### [ Sean Leather (Sep 12 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786383):
 ` by cases l; tidy {trace_result:=tt}` doesn't print anything. :concerned:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786679):
+#### [ Johan Commelin (Sep 12 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786679):
 Huh, so `tidy` won't do the `cases` for you? I expected that it would try that, as some last resort...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786702):
+#### [ Johan Commelin (Sep 12 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786702):
 @**Sean Leather** You can use hole commands to let VScode replace `tidy` with the proof it generated.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786713):
+#### [ Sean Leather (Sep 12 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786713):
 I suppose that would be listed here if it did:
 
 ```lean
@@ -72,13 +72,13 @@ meta def default_tactics : list (tactic string) :=
   tidy.run_tactics ]
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786720):
+#### [ Johan Commelin (Sep 12 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786720):
 what does `auto_cases` do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786728):
+#### [ Sean Leather (Sep 12 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786728):
 No idea. :slight_smile:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786771):
+#### [ Sean Leather (Sep 12 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786771):
 ```lean
   t' ← whnf t',
   let use_cases := match t' with
@@ -99,29 +99,29 @@ No idea. :slight_smile:
   | _            := ff
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786777):
+#### [ Sean Leather (Sep 12 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786777):
 Looks like it's restricted to certain patterns.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786786):
+#### [ Johan Commelin (Sep 12 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786786):
 Right... I guess that makes sense.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786795):
+#### [ Johan Commelin (Sep 12 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786795):
 Anyway, we still golfed your proof (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 12 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786812):
+#### [ Johan Commelin (Sep 12 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786812):
 It makes sense that `cases l` remains in the proof. It is probably an "idea". After that it is "follow your nose"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786813):
+#### [ Sean Leather (Sep 12 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786813):
 Yep, thanks! I learned something new.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786871):
+#### [ Sean Leather (Sep 12 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786871):
 It would be nice to see what `tidy` is doing, though.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 12 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786948):
+#### [ Keeley Hoek (Sep 12 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786948):
 Sean, are you using a version of mathlib which incorporates this commit?
 https://github.com/leanprover/mathlib/commit/e95111d38c0b2d666f70624ce25a5d728e0db376
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Sep 12 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133787037):
+#### [ Sean Leather (Sep 12 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133787037):
 @**Keeley Hoek** No, certainly not. Thanks!
 
 

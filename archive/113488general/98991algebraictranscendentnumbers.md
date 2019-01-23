@@ -11,7 +11,7 @@ permalink: archive/113488general/98991algebraictranscendentnumbers.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 24 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic/transcendent%20numbers/near/124150419):
+#### [ Kenny Lau (Mar 24 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic/transcendent%20numbers/near/124150419):
 !
 
 

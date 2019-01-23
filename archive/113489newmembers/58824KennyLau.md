@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/58824KennyLau.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Feb 27 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kenny%20Lau/near/123017585):
+#### [ Kenny Lau (Feb 27 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kenny%20Lau/near/123017585):
 this is integersting
 
 

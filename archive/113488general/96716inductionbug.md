@@ -11,7 +11,7 @@ permalink: archive/113488general/96716inductionbug.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 20 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20bug/near/148074216):
+#### [ Kenny Lau (Nov 20 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20bug/near/148074216):
 ```lean
 theorem wtf {α : Type u} (C : multiset α → Prop) (r) : C r :=
 begin

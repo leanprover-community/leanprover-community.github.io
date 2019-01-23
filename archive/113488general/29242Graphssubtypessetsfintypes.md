@@ -11,7 +11,7 @@ permalink: archive/113488general/29242Graphssubtypessetsfintypes.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Pablo Le Hénaff (Jun 15 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121007):
+#### [ Pablo Le Hénaff (Jun 15 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121007):
 Hello hello
 I would like to formalize some theorems of graph theory, but before going any further I would like to get the basis of the implementation right.
 I did do some work representing the edges as a set, but I didn't feel it was the most natural ways to do it. I tried another approach using the binary edge relation between vertices and lots of coercions from sets to subtypes, but it had me write lots of instances which I don't find particularily aesthetic. Here is a piece of code which is right but doesn't seem to carry the best design choices that could be made. What do you think ? :)
@@ -53,22 +53,22 @@ noncomputable def in_degree (v : vertices) := finset.card (in_edges v).to_finset
 -- I would like instances to be inferred out-of-the-box but I didn't succeed
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121155):
+#### [ Mario Carneiro (Jun 15 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121155):
 I think you are misusing `constants` here - this is equivalent to `axiom` in lean, while I think you mean something more like `variables` or `parameters`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Pablo Le Hénaff (Jun 15 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121326):
+#### [ Pablo Le Hénaff (Jun 15 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121326):
 Probably ! My initial script involved the definition of a graph structure and then a graph as a variable. The "constants" part was just to make it shorter, should be "variables" then.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121338):
+#### [ Mario Carneiro (Jun 15 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121338):
 For the theory of possibly infinite graphs, I recommend using a type alpha of vertices and a binary relation E for the edges. In this context it does not differ substantially with order theory
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Pablo Le Hénaff (Jun 15 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121400):
+#### [ Pablo Le Hénaff (Jun 15 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121400):
 But then, how would you describe a subset of the vertices, for instance a clique ?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121450):
+#### [ Mario Carneiro (Jun 15 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121450):
 the subset itself can just be a `set A`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121456):
+#### [ Mario Carneiro (Jun 15 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121456):
 but if you want to talk about the induced subgraph you can use `subtype`
 
 

@@ -11,7 +11,7 @@ permalink: archive/116395maths/48141uniformlemma.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 14 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129677243):
+#### [ Patrick Massot (Jul 14 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129677243):
 Is the following lemma already hidden somewhere in mathlib? Or is it too trivial to be stated? What would be his canonical name?
 ```lean
 import analysis.topology.uniform_space
@@ -26,7 +26,7 @@ lemma separation_rel_of_uniform_continuous {f : α → β} (H : uniform_continuo
 assume _ h', h _ (H h')
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 14 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129677487):
+#### [ Patrick Massot (Jul 14 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129677487):
 Same question for the obvious corollary
 ```lean
 lemma image_eq_of_uniform_continuous_of_separated [separated β] {f : α → β} (H : uniform_continuous f) {x y : α} 
@@ -34,37 +34,37 @@ lemma image_eq_of_uniform_continuous_of_separated [separated β] {f : α → β}
 separated_def.1 (by apply_instance) _ _ $ separation_rel_of_uniform_continuous H h
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 14 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129677492):
+#### [ Patrick Massot (Jul 14 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129677492):
 @**Mario Carneiro** I know this is Johannes domain, but I'd be interested in your opinion about naming here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 15 2018 at 04:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129684119):
+#### [ Mario Carneiro (Jul 15 2018 at 04:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129684119):
 That's a tough one. I don't like the use of the word `image` in the second one, that connotes `''` but it doesn't appear in the statement
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 15 2018 at 04:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129684167):
+#### [ Mario Carneiro (Jul 15 2018 at 04:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129684167):
 Maybe `apply_eq_of_separated` for the second?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 15 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129696241):
+#### [ Patrick Massot (Jul 15 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129696241):
 Ok. It leaves out most of the statement but I don't see how to avoid that when there are so many hypotheses.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Jul 15 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129699884):
+#### [ Johannes Hölzl (Jul 15 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129699884):
 I think `separated_of_uniform_continuous` and `eq_of_separated_of_uniform_continuous` would be also okay.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 15 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129700368):
+#### [ Patrick Massot (Jul 15 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129700368):
 Thanks. I now use these names since you will have to review a PR containing all this at some point.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 15 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129701065):
+#### [ Patrick Massot (Jul 15 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129701065):
 Now, for something really weird, I'll try to go read Bourbaki GT in a bar, hoping this will secure me some place to watch the game. It may be too late already.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 15 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129701130):
+#### [ Patrick Massot (Jul 15 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129701130):
 Maybe  I should point out that my wife and kids are in vacations, so I'm alone at home. Otherwise I wouldn't do that :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 15 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129701134):
+#### [ Kenny Lau (Jul 15 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129701134):
 I think every mathematician should read Bourbaki in a bar
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 15 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129710662):
+#### [ Patrick Massot (Jul 15 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129710662):
 It worked out pretty nicely. Now I know what are the supporting lemmas that I need to prove about completions.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 15 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129710670):
+#### [ Patrick Massot (Jul 15 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129710670):
 Kenny, reading and doing math in bar is very standard, what was slightly weird was the atmosphere around me. But I was able to mostly work until about 15 minutes before the beginning.
 
 

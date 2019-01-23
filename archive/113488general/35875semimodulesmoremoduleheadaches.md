@@ -11,32 +11,32 @@ permalink: archive/113488general/35875semimodulesmoremoduleheadaches.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133678716):
+#### [ Mario Carneiro (Sep 10 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133678716):
 @**Johannes Hölzl** I had problems with using `smul_add'` directly on modules, so I had to duplicate the theorems [here](https://github.com/leanprover/mathlib/blob/b33764d942dc8b1b7f55cace89429c948c1a4b2f/algebra/module.lean#L38-L43). Do you have any ideas?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 10 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133679172):
+#### [ Johannes Hölzl (Sep 10 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133679172):
 hm, are the problems related to projecting the ring to semirings? I think we might also get problems with field to rings for vector spaces...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 10 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133679278):
+#### [ Johan Commelin (Sep 10 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133679278):
 I vote for making `vector_space` notation or abbreviation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 10 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133680412):
+#### [ Johannes Hölzl (Sep 10 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133680412):
 Making `vector_space` an abbreviation is okay for me.
 But I'm not sure if this solves our problems here.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133680743):
+#### [ Mario Carneiro (Sep 10 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133680743):
 yes, `rw` fails because it can't derive the semiring instance (at the right time)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133680836):
+#### [ Mario Carneiro (Sep 10 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133680836):
 I am going to try implementing a solution I mentioned a while ago and not have `module` extend `add_comm_group` but take it as an argument
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 10 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133681100):
+#### [ Johannes Hölzl (Sep 10 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133681100):
 hm, how does this help?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133685721):
+#### [ Mario Carneiro (Sep 10 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133685721):
 It avoids the `ring ?` problem in that typeclass searches for e.g. `has_zero A` go via `add_comm_group A` to `module ? A` and then to `ring ?`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133685804):
+#### [ Mario Carneiro (Sep 10 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133685804):
 But I've stumbled on yet another inexplicable lean bug while attempting this. I've only lightly minimized
 ```lean
 import algebra.big_operators
@@ -68,10 +68,10 @@ example : (0 : β) ∈ p := by simp [zero] -- fails
 end is_submodule
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133685958):
+#### [ Mario Carneiro (Sep 10 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133685958):
 `by apply zero` also fails, but `by refine zero` works
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 10 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133686066):
+#### [ Mario Carneiro (Sep 10 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133686066):
 the failing instance problem:
 ```
 [class_instances]  class-instance resolution trace

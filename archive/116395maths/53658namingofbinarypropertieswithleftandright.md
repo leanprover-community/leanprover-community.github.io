@@ -11,7 +11,7 @@ permalink: archive/116395maths/53658namingofbinarypropertieswithleftandright.htm
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 26 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125715828):
+#### [ Sean Leather (Apr 26 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125715828):
 @**Chris Hughes** updated his `finset.disjoint` PR with a [change](https://github.com/leanprover/mathlib/commit/009ff9b) to rename the following:
 
 * `empty_disjoint` → `disjoint_empty_left`
@@ -19,16 +19,16 @@ permalink: archive/116395maths/53658namingofbinarypropertieswithleftandright.htm
 
 Personally, I prefer the new names: they are more descriptive and don't rely on positional naming, which can be confusing. But I wanted to open up a discussion on this in general to determine the mathlib style guidelines. I don't think these types of things have been consistently named.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 26 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125715961):
+#### [ Sean Leather (Apr 26 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125715961):
 We probably want feedback from @**Johannes Hölzl** and @**Mario Carneiro** in particular.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 26 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125730500):
+#### [ Chris Hughes (Apr 26 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125730500):
 There's also the question of which one's `right` and which one's `left`. I would have named `dvd_mul_right : a ∣ a * b` `dvd_mul_left`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 26 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125732771):
+#### [ Kenny Lau (Apr 26 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125732771):
 @**Chris Hughes** confer or.inl and or.inr
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Apr 30 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125881780):
+#### [ Sean Leather (Apr 30 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125881780):
 I created a [GitHub issue](https://github.com/leanprover/mathlib/issues/129) for this discussion. Please leave any thoughts there.
 
 

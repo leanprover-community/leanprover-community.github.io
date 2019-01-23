@@ -11,16 +11,16 @@ permalink: archive/113488general/43922congrargandsuperficiallydependentfunctions
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781762):
+#### [ Scott Morrison (Aug 02 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781762):
 I'm having trouble constructing `congr_arg` expressions, where the function superficially looks like a dependent function, but after some definitionally unfolding you can see that it isn't really.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781777):
+#### [ Scott Morrison (Aug 02 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781777):
 I've worked out how to get around this in interactive mode, but I can't do it with `expr`s.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781780):
+#### [ Scott Morrison (Aug 02 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781780):
 Here's my work so far.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781824):
+#### [ Scott Morrison (Aug 02 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781824):
 ````
 def F : Π n : ℕ, Type := λ n, ℕ 
 def G : Π n : ℕ, F n := λ n, begin dunfold F, exact 0 end
@@ -60,10 +60,10 @@ begin
 end
 ````
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 02 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781907):
+#### [ Scott Morrison (Aug 02 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781907):
 If anyone could replace the definition of `mk_congr_arg_using_dsimp` so that `test2` works, that would be amazing. :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Minchao Wu (Aug 03 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130826815):
+#### [ Minchao Wu (Aug 03 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130826815):
 A quick solution:
 ```
 meta def mk_congr_arg_using_dsimp (G W : expr) (F : name) : tactic unit :=
@@ -86,10 +86,10 @@ end
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Minchao Wu (Aug 03 2018 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130827714):
+#### [ Minchao Wu (Aug 03 2018 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130827714):
 The attempt is to force lean to be aware that the two types of G collapse, however `(%%G : %%t')` doesn't do the trick. This introduces an additional local hypothesis which has the non-dependent type and proves that it is just `G`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 03 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130827909):
+#### [ Scott Morrison (Aug 03 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130827909):
 Thanks @**Minchao Wu**. In the meantime I'd come up with my own solution:
 ````
 -- Sometimes `mk_congr_arg` fails, when the function is 'superficially dependent'.
@@ -105,10 +105,10 @@ do
 ````
 which is fairly similar!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 03 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130827938):
+#### [ Scott Morrison (Aug 03 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130827938):
 The next question is how to achieve this without making the local hypothesis, so this tactic doesn't pollute the current goal.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Minchao Wu (Aug 03 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130828082):
+#### [ Minchao Wu (Aug 03 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130828082):
 Yeah I'm also wondering if there is a neater solution :)
 
 

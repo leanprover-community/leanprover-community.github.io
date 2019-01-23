@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/25874cannotreduceapplicationinpatternmatch.h
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Shaun Steenkamp (Nov 14 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20reduce%20%20application%20in%20pattern%20match/near/147663171):
+#### [ Shaun Steenkamp (Nov 14 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20reduce%20%20application%20in%20pattern%20match/near/147663171):
 I'm trying to fill in the `sorry` in the code below with `h x`. I expect this to work but it says that
 ```
 26:23: equation type mismatch, term
@@ -56,13 +56,13 @@ def fex
 ```
 Can someone tell me why it's not reducing?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20reduce%20%20application%20in%20pattern%20match/near/147663912):
+#### [ Mario Carneiro (Nov 14 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20reduce%20%20application%20in%20pattern%20match/near/147663912):
 use `let` instead of `have`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Shaun Steenkamp (Nov 14 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20reduce%20%20application%20in%20pattern%20match/near/147664076):
+#### [ Shaun Steenkamp (Nov 14 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20reduce%20%20application%20in%20pattern%20match/near/147664076):
 okay, now I get a message saying I need to use `set_option eqn_compiler.zeta true`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Shaun Steenkamp (Nov 14 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20reduce%20%20application%20in%20pattern%20match/near/147664128):
+#### [ Shaun Steenkamp (Nov 14 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20reduce%20%20application%20in%20pattern%20match/near/147664128):
 and then it works fine
 
 

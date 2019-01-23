@@ -11,67 +11,67 @@ permalink: archive/113488general/31671cpuonmac.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034358):
+#### [ Yulia Zaplatina (Aug 13 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034358):
 Anyone had an issue with lean using > 95% cpu on mac?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034433):
+#### [ Mario Carneiro (Aug 13 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034433):
 lean often takes up as much cpu as it can. It depends on what you are doing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034448):
+#### [ Yulia Zaplatina (Aug 13 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034448):
 Just opened the workspace
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 11:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034604):
+#### [ Mario Carneiro (Aug 13 2018 at 11:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034604):
 If you import a heavy theory, it may take a few minutes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 11:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034617):
+#### [ Mario Carneiro (Aug 13 2018 at 11:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034617):
 You can also try building the lean files with `lean --make` to help speed it up
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034639):
+#### [ Yulia Zaplatina (Aug 13 2018 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034639):
 thanks, I'll try
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034729):
+#### [ Kevin Buzzard (Aug 13 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034729):
 Yulia -- I'll be in the MLC in about an hour. You might want to build your mathlib (make all the .olean files) if this is constantly happening.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034783):
+#### [ Yulia Zaplatina (Aug 13 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034783):
 it went down to 20%, but now that i've open
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034787):
+#### [ Yulia Zaplatina (Aug 13 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034787):
 *opened a file, it's back up to over 300%
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034805):
+#### [ Yulia Zaplatina (Aug 13 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034805):
 @**Kevin Buzzard** I'll do that now 👍🏼
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132035136):
+#### [ Kevin Buzzard (Aug 13 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132035136):
 This is not abnormal behaviour -- the first time Lean starts up it might have to do a lot of work. It could be building the real numbers from the axioms of mathematics, for example. It only needs to do this once though.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036385):
+#### [ Yulia Zaplatina (Aug 13 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036385):
 Ok, so I've built lean and the cpu remains around 90% - is that normal? or is there a way of decreasing it even more?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036480):
+#### [ Mario Carneiro (Aug 13 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036480):
 are there yellow bars in the gutter of vscode?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036563):
+#### [ Yulia Zaplatina (Aug 13 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036563):
 nope
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036614):
+#### [ Yulia Zaplatina (Aug 13 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036614):
 only green, blue and red
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036632):
+#### [ Mario Carneiro (Aug 13 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036632):
 does lean have the :check: in the status bar?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036633):
+#### [ Yulia Zaplatina (Aug 13 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036633):
 oh actually, yes, in some files
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036698):
+#### [ Yulia Zaplatina (Aug 13 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036698):
 yep, there's a :check: but some files are highlighted yellow
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036726):
+#### [ Mario Carneiro (Aug 13 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036726):
 maybe it would be best to wait for Kevin
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036829):
+#### [ Yulia Zaplatina (Aug 13 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036829):
 O
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036883):
+#### [ Yulia Zaplatina (Aug 13 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036883):
 it's down to 10 now :sweat_smile: I think it should be fine, thank you!
 
 

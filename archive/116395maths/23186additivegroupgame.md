@@ -11,10 +11,10 @@ permalink: archive/116395maths/23186additivegroupgame.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802827):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802827):
 The additive group `add_group` in Lean is defined in core Lean, which means it's hard to change. The definition is this:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802831):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802831):
 ```lean
 @[class, priority 100]
 structure add_group : Type u → Type u
@@ -28,22 +28,22 @@ add_group.neg : Π {α : Type u} [c : add_group α], α → α
 add_group.add_left_neg : ∀ {α : Type u} [c : add_group α] (a : α), -a + a = 0
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802834):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802834):
 It's a class, with a bunch of axioms.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802837):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802837):
 And I think one of them follows from the others
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802840):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802840):
 which means that `add_group` can be made to go faster, I think.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802841):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802841):
 Is that right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802842):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802842):
 I wanted to prove this myself:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802843):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802843):
 ```lean
 variables {α : Type}
 theorem add_group.add_zero
@@ -56,28 +56,28 @@ theorem add_group.add_zero
 : ∀ a : α, a + 0 = a := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802882):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802882):
 I just faffed around and cut and pasted that from Lean output, it was pretty painful, it would have been much easier to do in emacs.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802883):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802883):
 And at the end of it all, it didn't work anyway
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802886):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802886):
 because it doesn't know what `+` means yet
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802894):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802894):
 I just wanted to make myself a toy abelian group
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802896):
+#### [ Kevin Buzzard (Apr 28 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802896):
 but then start taking away the axioms by editing the definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 04:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802998):
+#### [ Kevin Buzzard (Apr 28 2018 at 04:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802998):
 All I want to do is to create an additive group but with one axiom missing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802999):
+#### [ Kevin Buzzard (Apr 28 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802999):
 Is there a trick?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125803007):
+#### [ Kevin Buzzard (Apr 28 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125803007):
 Can I create one with type class inference and then write over the axiom with a sorry?
 
 

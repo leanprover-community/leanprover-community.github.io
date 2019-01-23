@@ -11,7 +11,7 @@ permalink: archive/113488general/53646DeMorgansProof.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Stephanie Wang (Dec 13 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151734970):
+#### [ Stephanie Wang (Dec 13 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151734970):
 I'm new to Lean, can someone help me out with this proof of this version of De Morgan's Law? I'm having trouble coming up with the forward proof
 ``` 
 theorem demorgans_law : ¬(p ∨ q) ↔ ¬p ∧ ¬q := 
@@ -24,7 +24,7 @@ theorem demorgans_law : ¬(p ∨ q) ↔ ¬p ∧ ¬q :=
   )
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735268):
+#### [ Kevin Buzzard (Dec 13 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735268):
 I'd start like this:
 
 ```lean
@@ -38,22 +38,22 @@ theorem demorgans_law (p q : Prop) : ¬(p ∨ q) ↔ ¬p ∧ ¬q :=
   )
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735351):
+#### [ Kevin Buzzard (Dec 13 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735351):
 and there is a red error on each of the _'s. I'd then try and figure out how to solve them. Actually, I'm a mathematician, so really I'd go straight into tactic mode...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735412):
+#### [ Kevin Buzzard (Dec 13 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735412):
 Ok so I can do it but it might look incomprehensible. Do you just want a solution or a hint?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Stephanie Wang (Dec 13 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735550):
+#### [ Stephanie Wang (Dec 13 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735550):
 a comprehensible solution would be nice!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735667):
+#### [ Kevin Buzzard (Dec 13 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735667):
 Then you want to use tactic mode!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 13 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735761):
+#### [ Chris Hughes (Dec 13 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735761):
 `assume h, and intro (assume hp, h (or.inl hp)) (assume hq, h (or.inr hq))`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735780):
+#### [ Kevin Buzzard (Dec 13 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735780):
 ```lean
 theorem demorgans_law' (p q : Prop) : ¬(p ∨ q) ↔ ¬p ∧ ¬q :=
 begin
@@ -76,7 +76,7 @@ end
 ```
 half way there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735899):
+#### [ Kevin Buzzard (Dec 13 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735899):
 ```lean
 theorem demorgans_law' (p q : Prop) : ¬(p ∨ q) ↔ ¬p ∧ ¬q :=
 begin
@@ -105,7 +105,7 @@ end
 
 My impression is that computer scientists prefer these term mode things that you were writing, but I've been teaching mathematicians this stuff and tactic mode seems to be far easier for them.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735933):
+#### [ Kevin Buzzard (Dec 13 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151735933):
 ```lean
 theorem demorgans_law (p q : Prop) : ¬(p ∨ q) ↔ ¬p ∧ ¬q :=
 ⟨λ h, ⟨λ hp, h $ or.inl hp, λ hq, h $ or.inr hq⟩,
@@ -113,7 +113,7 @@ theorem demorgans_law (p q : Prop) : ¬(p ∨ q) ↔ ¬p ∧ ¬q :=
 ```
 Computer science proof, incomprehensibled to the max. Chris posted the perhaps happy medium you were looking for.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 13 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151736068):
+#### [ Kevin Buzzard (Dec 13 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151736068):
 ```lean
 theorem demorgans_law'' (p q : Prop): ¬(p ∨ q) ↔ ¬p ∧ ¬q :=
   iff.intro(
@@ -125,7 +125,7 @@ theorem demorgans_law'' (p q : Prop): ¬(p ∨ q) ↔ ¬p ∧ ¬q :=
   )
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Stephanie Wang (Dec 13 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151736196):
+#### [ Stephanie Wang (Dec 13 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151736196):
 Ok this makes a lot of sense to me, thanks so much.
 
 

@@ -11,7 +11,7 @@ permalink: archive/116395maths/66698opensetsareunionsofbasiselements.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495112):
+#### [ Kevin Buzzard (May 13 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495112):
 ```lean
 import analysis.topology.topological_space
 open topological_space
@@ -52,142 +52,142 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495116):
+#### [ Kevin Buzzard (May 13 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495116):
 That's the sort of proof I find very easy to write nowadays in tactic mode.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495122):
+#### [ Kevin Buzzard (May 13 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495122):
 At its heart though is a triviality.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495124):
+#### [ Kevin Buzzard (May 13 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495124):
 `mem_basis_subset_of_mem_open` says
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495167):
+#### [ Kenny Lau (May 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495167):
 you shouldn't use `let` for propositions (`f0`, `f1`, `g1`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495169):
+#### [ Kevin Buzzard (May 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495169):
 for every element `x` of an open set `U`, there's some basis element `V` with `x \in V` and `V \sub U`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495172):
+#### [ Kevin Buzzard (May 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495172):
 So it's one of those things which is in some sense completely trivial
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495177):
+#### [ Kevin Buzzard (May 13 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495177):
 however because I have to use classical arguments I find writing a one-liner very hard
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 13 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495179):
+#### [ Kenny Lau (May 13 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495179):
 also I don't think you need choice to do that, there's a trick I read somewhere
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495180):
+#### [ Kevin Buzzard (May 13 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495180):
 So I just write it in tactic mode and I know I'll never get stuck
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 13 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495183):
+#### [ Kenny Lau (May 13 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495183):
 instead of choosing one of them, choose all of them
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495184):
+#### [ Kevin Buzzard (May 13 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495184):
 Kenny what I care about is whether I should be concerned that I am writing this sort of proof in 30 lines of tactic mode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 13 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495223):
+#### [ Kenny Lau (May 13 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495223):
 well I say that `classical.some` doesn't have a good interface
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495224):
+#### [ Kevin Buzzard (May 13 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495224):
 and whether I should be striving to write a one-liner in term mode.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495225):
+#### [ Kevin Buzzard (May 13 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495225):
 Well I say that you are supposed to be sitting my exam at 10am tomorrow morning, so what are you doing chatting here? ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 13 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495227):
+#### [ Kenny Lau (May 13 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495227):
 proving that determinant is multiplicative (not in Lean)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495229):
+#### [ Kevin Buzzard (May 13 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495229):
 I talked about interface to classical.some recently and Simon wrote `ccases` and Mario wrote `classical.rec_on`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495269):
+#### [ Kevin Buzzard (May 13 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495269):
 so there are some interfaces if you need them
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 13 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495274):
+#### [ Kenny Lau (May 13 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495274):
 well you didn't use them
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495276):
+#### [ Kevin Buzzard (May 13 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495276):
 https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/cases.20eliminating.20into.20type/near/125696468
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495282):
+#### [ Kevin Buzzard (May 13 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495282):
 https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/cases.20eliminating.20into.20type/near/125695647
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495283):
+#### [ Kevin Buzzard (May 13 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495283):
 I didn't use them because I have my own interface now -- see f,f1 and g,g1
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495284):
+#### [ Kevin Buzzard (May 13 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495284):
 I don't really like it but it was easier to do it like that than find the thread
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495324):
+#### [ Kevin Buzzard (May 13 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495324):
 that's not true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495325):
+#### [ Kevin Buzzard (May 13 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495325):
 I didn't use them because I didn't know how to use them in the middle of a function
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495327):
+#### [ Kevin Buzzard (May 13 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495327):
 well, I didn't know how to use Simon's, and Mario's is in some sense just as complicated as what I did
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495334):
+#### [ Kevin Buzzard (May 13 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495334):
 I was not in a situation where I had `exists x, p x` and I wanted `x` and `H : p x`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495336):
+#### [ Kevin Buzzard (May 13 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495336):
 I was in a situation where I wanted to construct a function
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495337):
+#### [ Kevin Buzzard (May 13 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495337):
 so I had `forall i, exists x, p i x`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495383):
+#### [ Kevin Buzzard (May 13 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495383):
 and I wanted a map sending i to x
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495384):
+#### [ Kevin Buzzard (May 13 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495384):
 hey, maybe I'm just saying that the interface for classical.some isn't great
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495393):
+#### [ Kevin Buzzard (May 13 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495393):
 I guess I wanted a map sending i to x and a map sending i to a proof of p i x
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495394):
+#### [ Kevin Buzzard (May 13 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495394):
 More precisely, I wanted a map `f` sending `i` to `x` and a map `f_proof` sending `i` to a proof of `p i (f i)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495433):
+#### [ Kevin Buzzard (May 13 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495433):
 (rather than a proof of `p i (classical.some _)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495439):
+#### [ Kevin Buzzard (May 13 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495439):
 and it still irks me a bit that I can't use a tactic which just builds these functions for me (with exactly those types, so no classical.some mentioned anywhere in the types, just in the definitions of the terms of these types)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495441):
+#### [ Kevin Buzzard (May 13 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495441):
 because my constructions of f f1 g and g1 involved building f, copying the type of the some_spec, editing it to replace classical.some _ with f i, then building f1, and this is a purely mechanical procedure.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495489):
+#### [ Kevin Buzzard (May 13 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495489):
 i.e. I started by writing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495490):
+#### [ Kevin Buzzard (May 13 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495490):
 ```lean
   let f := λ i, classical.some (f0 i),
   let f1 := λ i, classical.some_spec (f0 i),
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495530):
+#### [ Kevin Buzzard (May 13 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495530):
 and then I looked at the type of `f1` in the context, edited it to remove all trace of `classical.some` (replacing it with `f i`) and then inserted the explicit type of `f1`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495531):
+#### [ Kevin Buzzard (May 13 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495531):
 It somehow all feels like both a waste of time and something which students would find confusing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495536):
+#### [ Kevin Buzzard (May 13 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495536):
 Kenny can you write a proof in term mode?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 13 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496195):
+#### [ Mario Carneiro (May 13 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496195):
 You shouldn't be using classical.some in the first place in this proof. It complicates things and there's no need. Before you start optimizing your use don't forget to see if another proof strategy works better by making canonical choices only
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 14:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496206):
+#### [ Kevin Buzzard (May 13 2018 at 14:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496206):
 I am a classical guy and have no feeling as to when I can get away with constructive maths
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496259):
+#### [ Kevin Buzzard (May 13 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496259):
 I just wrote the first proof I thought of
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496298):
+#### [ Kevin Buzzard (May 13 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496298):
 and I still find this sort of proof a joy to write
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 13 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496746):
+#### [ Mario Carneiro (May 13 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496746):
 I would go for the version with a set first:
 ```
 lemma sUnion_basis_elemnts_of_open {α : Type u} [topological_space α]
@@ -207,32 +207,32 @@ let ⟨S, su, sb⟩ := sUnion_basis_elemnts_of_open HB HU in
 ```
 (I didn't start out planning to write a term proof, but there never really came a point where I needed a tactic)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496845):
+#### [ Kevin Buzzard (May 13 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496845):
 Right -- I generally switch to tactic mode when I want to do something like a rw which I'm too lazy to figure out with the funny triangle thing. But here I switched because it just felt easier with the classical.stuff and I felt I'd been beaten too early, that was the reason I asked.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496886):
+#### [ Kevin Buzzard (May 13 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496886):
 I see the constructivist's trick now -- thanks.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496892):
+#### [ Kevin Buzzard (May 13 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496892):
 That was the idea I was missing -- I feel confident that I could have generated a term proof now.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496936):
+#### [ Kevin Buzzard (May 13 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496936):
 PS the mis-spelling of `elements` in the name was not intentional :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496941):
+#### [ Kevin Buzzard (May 13 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496941):
 I wanted to write "Union_of_basis_elements_of_open" but then I had two different ofs with two different meanings
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 13 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496982):
+#### [ Kevin Buzzard (May 13 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126496982):
 PS1 is this already in mathlib? I couldn't find it. It is the canonical thing you do with a basis!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 13 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126501829):
+#### [ Reid Barton (May 13 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126501829):
 > I was in a situation where I wanted to construct a function
 > so I had forall i, exists x, p i x
 > and I wanted a map sending i to x
 
 Use `classical.axiom_of_choice`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 13 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126501880):
+#### [ Reid Barton (May 13 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126501880):
 ```udiff
 @@ -11,6 +11,3 @@
    let f0 := λ i : β, (mem_basis_subset_of_mem_open HB U i.property HU),
@@ -259,7 +259,7 @@ Use `classical.axiom_of_choice`
    }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 13 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126501890):
+#### [ Mario Carneiro (May 13 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126501890):
 Oh yes, sorry for not engaging with the original question, Reid is right that you should use `axiom_of_choice` here
 
 

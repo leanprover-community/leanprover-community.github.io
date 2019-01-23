@@ -11,97 +11,97 @@ permalink: archive/113489newmembers/10725startupspeed.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895169):
+#### [ Scott Olson (Sep 29 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895169):
 Is it normal for Lean to take several minutes to catch up when I freshly open my project in VSCode, even if I've completely precompiled the mathlib dependency to .olean files?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895228):
+#### [ Scott Olson (Sep 29 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895228):
 Maybe not several minutes, but at least around 1 minute
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895274):
+#### [ Scott Olson (Sep 29 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895274):
 And once it's caught up it seems to spend a significant amount of time after that "checking import for sorry" every time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 29 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895497):
+#### [ Reid Barton (Sep 29 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895497):
 I use emacs but it doesn't sound normal. How did you build the mathlib dependency?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 29 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895503):
+#### [ Reid Barton (Sep 29 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895503):
 `leanpkg build` in your project should help. `leanpkg build` inside `_target/deps/mathlib` will confuse lean and lead to this kind of behavior
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895598):
+#### [ Scott Olson (Sep 29 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895598):
 Oh, interesting. I ended up doing the latter because the former wouldn't actually build mathlib at all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895605):
+#### [ Scott Olson (Sep 29 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895605):
 So I probably need to go back and debug what caused the original problem instead
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 29 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895650):
+#### [ Patrick Massot (Sep 29 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895650):
 If you really want to make sure all of mathlib is built, even the pieces not currently needed in your project, you need do do `lean --make` inside `_targets/deps/mathlib`, not `leanpkg build`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 29 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895692):
+#### [ Reid Barton (Sep 29 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895692):
 The original problem is just that lean is "smart" and only compiles the parts of the dependencies that are actually needed--which is annoying if that subset might increase in the future and you'd rather just build it once and be done with it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895694):
+#### [ Scott Olson (Sep 29 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895694):
 I thought it might be something like that but I wasn't sure how to get around it, thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895704):
+#### [ Scott Olson (Sep 29 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895704):
 Do I need to "undo" the `leanpkg build` I did inside `_target/deps/mathlib` somehow, or just run the correct command now?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 29 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895755):
+#### [ Patrick Massot (Sep 29 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895755):
 running the correct command should be enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895905):
+#### [ Scott Olson (Sep 29 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895905):
 How exactly does Lean get confused here - do the .olean files mark themselves in some way, so that my project would not recognize the .olean files I previously built as its own? I'm scanning for hidden files or some other way it would possibly distinguish and finding nothing so far
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 29 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895906):
+#### [ Kevin Buzzard (Sep 29 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895906):
 What OS are you using?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895907):
+#### [ Scott Olson (Sep 29 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895907):
 Windows 10
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895909):
+#### [ Scott Olson (Sep 29 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895909):
 I run linux as well but haven't checked if I get the same behavior there yet
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 29 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895949):
+#### [ Kevin Buzzard (Sep 29 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895949):
 Sebastian was saying the other day that sometimes Windows, or maybe some standard anti-virus, goes through the files and maybe randomly touches them messing up "last updated" times. I think Lean tries to recompile an olean file if it thinks that the lean file was modified after the olean file was built, and maybe it gets confused on Windows? I don't use this OS though and this is all second hand.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895956):
+#### [ Reid Barton (Sep 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895956):
 I think it has something to do with the `leanpkg.path` file, but I don't know exactly what
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895957):
+#### [ Scott Olson (Sep 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895957):
 I'll keep an eye on the last updated times
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895958):
+#### [ Kevin Buzzard (Sep 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895958):
 Sebastian was saying this in an attempt to explain why `leanpkg` regularly takes 10 seconds to start running on windows
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895959):
+#### [ Kevin Buzzard (Sep 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895959):
 despite core lean shipping with the olean files
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 29 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896009):
+#### [ Kevin Buzzard (Sep 29 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896009):
 (leanpkg is written in lean)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896015):
+#### [ Scott Olson (Sep 29 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896015):
 I haven't had that trouble with `leanpkg` startup times. I installed it via `elan` if it makes a difference
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896024):
+#### [ Scott Olson (Sep 29 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896024):
 but perhaps I just don't have an AV that causes that specific problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896067):
+#### [ Scott Olson (Sep 29 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896067):
 I can confirm `leanpkg build` in the correct directory solved the problem for me, thanks all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896070):
+#### [ Scott Olson (Sep 29 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896070):
 My problem before was misinterpreting the docs I was reading and assuming it would build all of mathlib, but I was running it before adding any imports so it actually built none of it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896197):
+#### [ Scott Olson (Sep 29 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896197):
 Incidentally this solved another problem I had where VSCode's lean.exe would rise to over 2GiB of RAM during the initial build and never drop back down. Apparently it doesn't get as high when the precompiled stuff is available
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 29 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896408):
+#### [ Reid Barton (Sep 29 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896408):
 Oh--does your `mathlib` dependency specify a different version of lean than your top-level project, by any chance?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896991):
+#### [ Scott Olson (Sep 29 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134896991):
 Oh yeah, that would probably cause the .olean incompatibility by itself. `mathlib`'s toml says `3.4.1` but I'm using a recently nightly in my project, because if I used `3.4.1` it checks out the `lean-3.4.1` branch of `mathlib` and I wanted `master`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897030):
+#### [ Scott Olson (Sep 29 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897030):
 This is probably a problem for even running `lean --make` inside the mathlib dir, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897132):
+#### [ Scott Olson (Sep 29 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897132):
 I did just run `lean --make` earlier and we can see the olean version difference:
 
 ```
@@ -118,34 +118,34 @@ $ head -c 60 _target/deps/mathlib/data/nat/basic.olean | xxd
 00000030: 6974 0000 0402 6c6f 6769 6300            it....logic.
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 29 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897190):
+#### [ Reid Barton (Sep 29 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897190):
 ```quote
 This is probably a problem for even running `lean --make` inside the mathlib dir, right?
 ```
 Yes if you already ran `leanpkg build` which created the `leanpkg.path` file there.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 29 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897191):
+#### [ Reid Barton (Sep 29 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897191):
 Or wait.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 29 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897226):
+#### [ Reid Barton (Sep 29 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897226):
 Actually I guess it is a question of elan.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897231):
+#### [ Scott Olson (Sep 29 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897231):
 Yeah, `elan` will automatically download and build with whatever version the toml specifies
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897241):
+#### [ Scott Olson (Sep 29 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897241):
 I can probably do the mathlib dir manual `lean --make` by telling elan which specific version to build with, which seems fair to me for an optional manual step
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 29 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897242):
+#### [ Reid Barton (Sep 29 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897242):
 I guess the `lean --make _target/deps/mathlib` instructions are safer in this particular situation then, assuming that elan uses the current working directory to start its search for the toml file
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897282):
+#### [ Scott Olson (Sep 29 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897282):
 Ah yeah I should double check what it does in that case
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897291):
+#### [ Scott Olson (Sep 29 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897291):
 I gotta say it's rather convenient for me coming from Rust that `elan` is based on `rustup` because I have a pretty good grasp on exactly how it works already =)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Sep 29 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897501):
+#### [ Scott Olson (Sep 29 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134897501):
 @**Reid Barton** You're right, using `lean --make _target/deps/mathlib` is the simplest/safest way to make sure it builds the whole thing with your current project's Lean version
 
 

@@ -11,7 +11,7 @@ permalink: archive/113488general/97723modulerefactoring.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359525):
+#### [ Mario Carneiro (Sep 21 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359525):
 I'm a bit late for my birthday deadline, but I have enough of the refactoring done that I'm ready to get feedback on it. See [leanprover-community/module](https://github.com/leanprover/mathlib/compare/master...leanprover-community:module). Remarks:
 
 * The main contributions here are the complete bundling of `linear_map` and `submodule`. In fact both of these were already present in mathlib, but making them primary makes everything go so much smoother.
@@ -21,165 +21,165 @@ I'm a bit late for my birthday deadline, but I have enough of the refactoring do
 
 On the whole, I'm feeling really good about the results, and the proofs are much cleaner.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 21 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359600):
+#### [ Johan Commelin (Sep 21 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359600):
 This is really cool! And yes, please call use `im` :lol:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359655):
+#### [ Mario Carneiro (Sep 21 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359655):
 The name `range` is of course borrowed from terminology on `set`. I would rather not confuse with `image` which is `map` here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359741):
+#### [ Mario Carneiro (Sep 21 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359741):
 `map f p` is the submodule `f[p]` where `p` is a submodule, and `range f = map f \top = f[univ]` which was previously called `im` on linear maps
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359814):
+#### [ Mario Carneiro (Sep 21 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359814):
 What is the common name for the coproduct pairing function? I called it [`copair`](https://github.com/leanprover-community/mathlib/blob/45f72059515083a0ae74567432dfc7853f791235/linear_algebra/basic.lean#L113-L114) since `pair` is used for the product pairing operation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 21 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134360028):
+#### [ Kenny Lau (Sep 21 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134360028):
 but it's the same...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 21 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134360049):
+#### [ Johan Commelin (Sep 21 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134360049):
 I think @**Scott Morrison|110087**  and @**Reid Barton** have the most experience with such decisions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 21 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134363426):
+#### [ Johannes Hölzl (Sep 21 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134363426):
 this is really nice!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 21 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134364133):
+#### [ Patrick Massot (Sep 21 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134364133):
 Mario, could you explain how all this solves the trouble we had with instance loops and multiple possible base rings?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 21 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134370222):
+#### [ Kevin Buzzard (Sep 21 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134370222):
 I got caught up with something else this morning but later on today, when I have Lean time, I will just merge the patch and see how Hilbert basis goes with it. Does it compile sorry-free?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 21 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134370418):
+#### [ Reid Barton (Sep 21 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134370418):
 `copair`/`pair` seems as good as anything else.
 Normally we just write an arrow $$A \oplus B \to C$$ and let the reader do the boring work of figuring out what map we are actually talking about.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 21 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134370446):
+#### [ Kenny Lau (Sep 21 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134370446):
 how about product or coproduct as a bifunctor?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134388143):
+#### [ Mario Carneiro (Sep 21 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134388143):
 @**Patrick Massot**  This doesn't address that issue, although it prepares the way a bit. I anticipate that this should be a comparatively simple change, but I didn't want the two refactorings to interact so I'm going to start on it as soon as this is done.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134388211):
+#### [ Mario Carneiro (Sep 21 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134388211):
 @**Kevin Buzzard** It's not yet building. I finished the main linear algebra files, but I haven't finished up the cleanup of uses outside linear algebra. (There are no sorries, it just breaks.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 21 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134388442):
+#### [ Johannes Hölzl (Sep 21 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134388442):
 @**Mario Carneiro** by the way: the introduction of `coe` rewrites broke some proofs in `set_theory/ordinal` and `cofinality`. I fixed this, but you might want to do a different fix
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389089):
+#### [ Mario Carneiro (Sep 21 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389089):
 yeah, apologies for pushing stuff last night that broke things; my computer was running very slow and I was lacking feedback on whether my fixes worked
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 21 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389417):
+#### [ Johannes Hölzl (Sep 21 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389417):
 No problem. But I'm not sure if these are the intended changes. I didn't look too deep how these new simp rules are supposed to work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389493):
+#### [ Mario Carneiro (Sep 21 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389493):
 The idea is that `coe` will infer transitive instances, but since simp rules are only written on single coercions they won't fire on these composite instances. So we unfold them to multiple coe arrows first
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389521):
+#### [ Mario Carneiro (Sep 21 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389521):
 I don't think I realized this until lately, but lean will also infer transitive instances for `coe` + `coe_fn` and `coe` + `coe_sort`, and since the instances are different there are more simp lemmas associated to these
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389602):
+#### [ Mario Carneiro (Sep 21 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389602):
 I think the breakage is because some simp LHSs were written with composite instances, which now break because simp normal form doesn't have any composite instances. The fix is to make sure simp LHSs have multiple coercion in these cases
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 21 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134390066):
+#### [ Patrick Massot (Sep 21 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134390066):
 Ok, I'm less confused then (about modules, I'm still 100% confused about topological groups). I couldn't understand how those changes could help with the lost ring issue
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134390560):
+#### [ Chris Hughes (Sep 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134390560):
 Is it worth bundling ideals and subgroups as well?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 21 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134391051):
+#### [ Johannes Hölzl (Sep 21 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134391051):
 I think we should replace ideals by submodules, so yes we want to have them bundled. I'm not sure about subgroups. We surely want a bundled version, but maybe still an unbundled one too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 21 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134392526):
+#### [ Kevin Buzzard (Sep 21 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134392526):
 Johannes -- the idea about ideals was that submodule R M makes sense for varying R and M, but ideal R = submodule R R so only one input is needed.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 21 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134392890):
+#### [ Chris Hughes (Sep 21 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134392890):
 But I think you want lattice and semiring on ideals as well, so you need bundles for that.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134396604):
+#### [ Mario Carneiro (Sep 21 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134396604):
 I am of the opinion that `subgroup` and other such algebraic classes should also be bundled; almost all of the lattice structure theorems done here hold for anything that fits the structure of a universal algebra. `ideal R := submodule R R` can be defined as reducible so that all the theorems about submodules still apply.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 21 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134396657):
+#### [ Mario Carneiro (Sep 21 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134396657):
 What are some examples where you think not having `is_sub*` will cause problems?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134403252):
+#### [ Johan Commelin (Sep 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134403252):
 ```quote
 `ideal R := submodule R R` can be defined as reducible so that all the theorems about submodules still apply.
 ```
 @**Mario Carneiro**  I thought you said in Orsay that you couldn't think of any reason why a definition should be reducible. Has that changed? If so, can you explain?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 22 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134412301):
+#### [ Kevin Buzzard (Sep 22 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134412301):
 If I open polynomial.lean (which I need for Hilbert basis) I just get 1000 errors. I think I would be happier to give feedback by trying to write Lean code and then getting stuck or finding things easier than before and reporting back. I find it hard to theorise about changes that I may not fully understand.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 22 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134414013):
+#### [ Mario Carneiro (Sep 22 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134414013):
 Yeah, sorry about that. Mostly you can just open and read `algebra.module` and `linear_algebra.basic` for now. I'll let you know when it's really done (by pushing it to `master`, unless someone objects)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 22 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134414027):
+#### [ Mario Carneiro (Sep 22 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134414027):
 I just didn't want to get too far afield with a change this sweeping without some input
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 22 2018 at 02:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134414217):
+#### [ Mario Carneiro (Sep 22 2018 at 02:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134414217):
 @**Johan Commelin** That's a fair point. There are three options here: (1) nonreducible def (2) reducible def (3) notation. In Orsay I argued that either (1) or (3) suffices in most cases where you think you want (2).
 
 In this case, I don't think it matters too much, although (1) will require copying some instances like the `complete_lattice` instance, and possibly some theorems. Doing this would make the cleanest separation, allowing us to present a solid API for ideals that doesn't talk about modules half the time. (2) and (3) will entail some amount of API leakage here, moreso with (3) since it is `submodule R R` that will appear in all your statements. 
 
 The downsides of reducible defs (inconsistent handling in rw and simp) don't really apply when the def is a type since you don't usually do rewrites on a type, you just force it to be defeq to something else.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 28 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781266):
+#### [ Mario Carneiro (Sep 28 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781266):
 This is a change I haven't implemented, but I'm considering it and want to get some feedback. Maybe a basis should be an injective function from some type into the module, i.e. the "basis" is really the range of this function, and the function gets to pick its indexing type. The reason is because we often tend to use a basis as an index for a sum, or as the domain of the free vector space to which to express isomorphism, or as the set whose cardinality is the dimension of the space - all of these roles are better accommodated by having an algebra of indexing types (which we already have courtesy of DTT) where measuring cardinality and indexing is more natural. (Also, it allows a basis to carry computational content, which isn't super important but indicates that this might be moving in the right direction.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781707):
+#### [ Reid Barton (Sep 28 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781707):
 From a mathematical perspective this change is very natural. We often write things like "let {b_1, ..., b_n} be a basis of V" but usually (whether we are aware of it or not) we really mean we are working with an indexed collection b_i, i.e., a function {1, ..., n} -> V.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781777):
+#### [ Reid Barton (Sep 28 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781777):
 It's easy to say things which are false if taken literally in the "set style". For example: {x, y} is a linearly independent set in a vector space if and only if there do not exist nonzero a, b such that ax + by = 0. Well, not if x = y!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781792):
+#### [ Reid Barton (Sep 28 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781792):
 On the other hand there are occasionally times when you genuinely need to work with subsets because you want to use the order structure and/or know that the collection of all possible bases is small, for example when proving that every vector space has a basis
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 28 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781797):
+#### [ Mario Carneiro (Sep 28 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781797):
 I think the statement about every vector space has a basis will explicitly use subsets
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781842):
+#### [ Reid Barton (Sep 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781842):
 I think the function approach is not really restrictive then anyways. You just say "a subset such that the inclusion is a basis".
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781853):
+#### [ Mario Carneiro (Sep 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781853):
 i.e. every vector space has a basis where the function is the subtype coercion and the indexing set is a subtype of the vector space
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781855):
+#### [ Reid Barton (Sep 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781855):
 (By the way, injectivity of the function is a consequence of being a basis, not a precondition.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 28 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781869):
+#### [ Mario Carneiro (Sep 28 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781869):
 I agree, I think under most circumstances you should be able to prove injectivity, except in trivial cases and in those cases you probably don't want to impose it additionally
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 28 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781913):
+#### [ Mario Carneiro (Sep 28 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781913):
 (bases over the zero ring are weird)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781932):
+#### [ Reid Barton (Sep 28 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781932):
 Hmm... yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 28 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781956):
+#### [ Mario Carneiro (Sep 28 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781956):
 speaking of which... `unit` should be a ring
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 28 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781998):
+#### [ Mario Carneiro (Sep 28 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781998):
 it would fit nicely with the ring instance for products and Pis
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782068):
+#### [ Reid Barton (Sep 28 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782068):
 The nlab definition of basis is: A basis of a free R-module M (possibly a vector space, see basis of a vector space) is a linear isomorphism $$B\colon M \to \oplus_{i\in I}R$$ to a direct sum of copies of the ring R, regarded as a module over itself.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782086):
+#### [ Reid Barton (Sep 28 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782086):
 I think this kind of property is more important than "for all i /= j, b_i /= b_j"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782104):
+#### [ Reid Barton (Sep 28 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782104):
 ... if you find yourself having to make some decision regarding the zero ring
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 28 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782355):
+#### [ Reid Barton (Sep 28 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782355):
 Yes okay, now I see you were saying the same thing regarding definition of bases over the zero ring
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 28 2018 at 02:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134783593):
+#### [ Mario Carneiro (Sep 28 2018 at 02:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134783593):
 so what does this say about linearly independent sets?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 28 2018 at 02:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134783641):
+#### [ Mario Carneiro (Sep 28 2018 at 02:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134783641):
 I guess these should also be indexed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134785061):
+#### [ Johan Commelin (Sep 28 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134785061):
 ```quote
 speaking of which... `unit` should be a ring
 ```
@@ -187,321 +187,321 @@ speaking of which... `unit` should be a ring
 instance : comm_ring unit := by tidy
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134785183):
+#### [ Johan Commelin (Sep 28 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134785183):
 Good luck golfing that...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 28 2018 at 03:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134785315):
+#### [ Johan Commelin (Sep 28 2018 at 03:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134785315):
 I'm pretty sure that `tidy` will also prove for you that it is the terminal object in `Ring` and `CRing`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 28 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134807675):
+#### [ Kevin Buzzard (Sep 28 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134807675):
 I must confess I was surprised when I first saw that in Lean a basis was a subset. Mulling over this, I realised that it was because I was used to teaching students about bases of *finite-dimensional* vector spaces -- and this is not a conversation about bases, this is also a conversation about the concepts of linear independence and spanning -- and in these cases it seems more convenient when developing the theory to be considering lists of elements rather than subsets (so order matters, and repeats are OK). For a dumb example, consider the zero ring `R`. Then `R^3=R` and hence I want `[0,0,0]` to be a basis for `R`, which it is. This is the only case where bases can have repeated elements and also the only case where bases can have different cardinalities. A less pathological example is that if a basis of a fdvs is a list then a linear map is a matrix, rather than some weird concept of a matrix where we don't mind permuting the rows and columns which we'd get for sets. My students did a bunch of stuff involving this over the summer -- linear maps = matrices and so on -- and although their code is probably not mathlib-ready it would not surprise me if they had worked out some good useful and correct statements.
 
 The only situation I know where subsets are better than maps from a type is in the Zorn proof that every vector space has a basis. But this result is in some sense a bit of a novelty, my impression is that working mathematicians very rarely think about infinite-dimensional vector spaces with no extra structure at all, and if there is extra structure (a topology or whatever) then the abstract notion of a basis is usually not what we want anyway (c.f. "basis" of a Hilbert space = lin ind subset with dense span).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 04 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135187101):
+#### [ Johan Commelin (Oct 04 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135187101):
 If we are refactoring modules... would it make sense to rename `span` to `generate`? It would be more in line with all the other forms of `generate`...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 04 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193289):
+#### [ Mario Carneiro (Oct 04 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193289):
 I was actually thinking about going the other way :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 04 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193368):
+#### [ Mario Carneiro (Oct 04 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193368):
 specifically as relates to other "closure" operations e.g. subgroup closure and normal closure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 04 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193424):
+#### [ Mario Carneiro (Oct 04 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193424):
 For set-of-set operations like `filter` and `topology` I prefer `generate`, but maybe that's not principled enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 04 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193452):
+#### [ Mario Carneiro (Oct 04 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193452):
 I agree some uniformity of naming would be a good thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 04 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193845):
+#### [ Johan Commelin (Oct 04 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193845):
 Ok, I don't really care which one gets chosen :lol:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135377864):
+#### [ Mario Carneiro (Oct 08 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135377864):
 So I've got to working on `ideal` now, and I have come to realize that ideal theory is not simply a specialization of submodule theory. It's obvious in hindsight, but as a category the homs are different - a ring hom is not a linear map, and a linear map is not a ring hom
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135377912):
+#### [ Mario Carneiro (Oct 08 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135377912):
 So this means that things like `map` and `comap` don't work the same way on rings
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135377924):
+#### [ Mario Carneiro (Oct 08 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135377924):
 In particular I don't even think there is a notion of `ideal.map` unless you assume the map is surjective
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 05:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378146):
+#### [ Mario Carneiro (Oct 08 2018 at 05:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378146):
 Is there a way to make sense of a ring-changing hom from (R,M) to (R',M') modules?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 08 2018 at 06:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378473):
+#### [ Scott Morrison (Oct 08 2018 at 06:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378473):
 Perhaps there's a notion of a map (R,M) to (R',M') as a linear map f : M to M', and a ring hom g : R' to R (note this is backwards), satisfying g(r') m = r' f(m).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 08 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378476):
+#### [ Scott Morrison (Oct 08 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378476):
 I'm not sure it's particularly useful.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378488):
+#### [ Mario Carneiro (Oct 08 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378488):
 yeah I was thinking the ring part might end up contravariant
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378490):
+#### [ Mario Carneiro (Oct 08 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378490):
 so I guess this does not generalize ring homs as maps (R,R) -> (R', R')
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378925):
+#### [ Johan Commelin (Oct 08 2018 at 06:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378925):
 ```quote
 Is there a way to make sense of a ring-changing hom from (R,M) to (R',M') modules?
 ```
 @**Mario Carneiro** What exactly do you mean with this question?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378968):
+#### [ Mario Carneiro (Oct 08 2018 at 06:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378968):
 I wonder if there is a common generalization of ring homs, (R,R) -> (R', R') and linear maps (R,M) -> (R, M')
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378976):
+#### [ Mario Carneiro (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378976):
 is there a category theory operation for taking a "total space" over the categories R-Mod where R is an object in the category Ring?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378980):
+#### [ Johan Commelin (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378980):
 Sure.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378985):
+#### [ Johan Commelin (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378985):
 That's a fibered category
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378994):
+#### [ Johan Commelin (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378994):
 And this one is one of the first examples
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379047):
+#### [ Johan Commelin (Oct 08 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379047):
 A map `(R,M) → (R',M')` is a pair `R → R'` + `R' \otimes_R M → M'`. (Or do I need commutativity for that tensor product?)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379051):
+#### [ Johan Commelin (Oct 08 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379051):
 Yes, I do.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379052):
+#### [ Johan Commelin (Oct 08 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379052):
 This doesn't work for arbitrary `R → R'`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379094):
+#### [ Johan Commelin (Oct 08 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379094):
 @**Mario Carneiro** Were you planning on doing left- right- and two-sided-ideals?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379097):
+#### [ Johan Commelin (Oct 08 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379097):
 Or only ideals in comm_rings?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379102):
+#### [ Mario Carneiro (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379102):
 Just comm ring ideals, since that's what's there now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379107):
+#### [ Johan Commelin (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379107):
 Ok, so for comm_ring modules you get this really nice fibered category `Mod`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379109):
+#### [ Johan Commelin (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379109):
 Is that what you were looking for?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379113):
+#### [ Johan Commelin (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379113):
 Note that by adjunction you can also just give a map `M → M'` that is `R`-linear
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379128):
+#### [ Mario Carneiro (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379128):
 > `R' \otimes_R M`
 
 what is this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379153):
+#### [ Johan Commelin (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379153):
 Tensor product
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379154):
+#### [ Johan Commelin (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379154):
 turning `M` into an `R'`-module
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379155):
+#### [ Mario Carneiro (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379155):
 so R' is viewed as a R-module here?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379156):
+#### [ Johan Commelin (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379156):
 Yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379164):
+#### [ Mario Carneiro (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379164):
 oh, there's an interesting construction we don't have
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379166):
+#### [ Johan Commelin (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379166):
 Which one?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379169):
+#### [ Mario Carneiro (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379169):
 a ring hom `R -> R'` yields a R-module structure on `R'`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379173):
+#### [ Johan Commelin (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379173):
 You mean the forgetful functor?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379176):
+#### [ Johan Commelin (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379176):
 From `R'`-mod to `R`-mod?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379216):
+#### [ Mario Carneiro (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379216):
 It's not forgetful, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379218):
+#### [ Johan Commelin (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379218):
 Not really
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379219):
+#### [ Mario Carneiro (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379219):
 The hom could be anything
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379222):
+#### [ Johan Commelin (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379222):
 I still think of it as "forgetting"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379229):
+#### [ Johan Commelin (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379229):
 We have `R` is an `R`-mod
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379233):
+#### [ Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379233):
 So if you chain that to the "forget" instance, you have what you want.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379239):
+#### [ Mario Carneiro (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379239):
 I don't follow
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379242):
+#### [ Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379242):
 I tried adding "forget" about 3 months ago, and I ran into trouble.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379244):
+#### [ Mario Carneiro (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379244):
 what forget instance?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379248):
+#### [ Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379248):
 But maybe with the refactor, you can now do it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379249):
+#### [ Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379249):
 I mean `R'` is an `R'`-mod + every `R'`-mod is an `R`-mod.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379273):
+#### [ Johan Commelin (Oct 08 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379273):
 I want your instance to be broken into 2 steps.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379301):
+#### [ Johan Commelin (Oct 08 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379301):
 ```quote
 what forget instance?
 ```
 The "forgetful" functor instance
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379302):
+#### [ Mario Carneiro (Oct 08 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379302):
 > every R'-mod is an R-mod
 
 This one requires an explicit ring hom input
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379308):
+#### [ Johan Commelin (Oct 08 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379308):
 Hmmm, it does... unless we turn `R'` into an algebra
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379310):
+#### [ Johan Commelin (Oct 08 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379310):
 over `R`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379318):
+#### [ Mario Carneiro (Oct 08 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379318):
 ah, we don't have anything like that yet
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379369):
+#### [ Mario Carneiro (Oct 08 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379369):
 I needed assoc algebras around this time in metamath, now I forget why
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379428):
+#### [ Mario Carneiro (Oct 08 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379428):
 Ah - multivariate polynomials are the free assoc algebra
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379457):
+#### [ Johan Commelin (Oct 08 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379457):
 The ones we have are also commutative
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379496):
+#### [ Johan Commelin (Oct 08 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379496):
 At some point we might want non-commutative polynomials as well
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379511):
+#### [ Mario Carneiro (Oct 08 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379511):
 I have never touched noncomm polynomials, but I guess it's not so hard with the group ring construction
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379514):
+#### [ Mario Carneiro (Oct 08 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379514):
 ... + free monoid construction which we already have
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379515):
+#### [ Johan Commelin (Oct 08 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379515):
 So, could we have `f^* M'`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379555):
+#### [ Mario Carneiro (Oct 08 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379555):
 I think so, what does that mean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379556):
+#### [ Johan Commelin (Oct 08 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379556):
 where `f` is a ring hom `R → R'` and `M'` is an `R'`-mod
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379559):
+#### [ Johan Commelin (Oct 08 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379559):
 So `f^*` is the functor `R'-mod → R-mod`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379565):
+#### [ Mario Carneiro (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379565):
 ah, okay so this is the contravariant thing that scott mentioned
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379567):
+#### [ Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379567):
 Right, and it is adjoint to tensoring.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379568):
+#### [ Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379568):
 Which is covariant
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379570):
+#### [ Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379570):
 no, that's bullcrap
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379571):
+#### [ Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379571):
 I'm brainfarting
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379609):
+#### [ Johan Commelin (Oct 08 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379609):
 tensor is adjoint to hom
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379614):
+#### [ Johan Commelin (Oct 08 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379614):
 Lol. So you get to choose: either you use `f^*` which is contravariant. Or you use tensor products, and you get something covariant, but "harder to parse".
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383276):
+#### [ Johan Commelin (Oct 08 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383276):
 @**Mario Carneiro** How would all this abstract nonsense help with:
 ```quote
 So I've got to working on `ideal` now, and I have come to realize that ideal theory is not simply a specialization of submodule theory. It's obvious in hindsight, but as a category the homs are different - a ring hom is not a linear map, and a linear map is not a ring hom
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 08 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383285):
+#### [ Kenny Lau (Oct 08 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383285):
 And nobody here has pointed out that extensions of ideals exist, c.f. Atiyah-Macdonald P.9
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 08 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383328):
+#### [ Kenny Lau (Oct 08 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383328):
 ```quote
 In particular I don't even think there is a notion of `ideal.map` unless you assume the map is surjective
 ```
 if f:A->B is a ring hom and L is an ideal in A then L^e is the ideal generated by f(L)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 08 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383339):
+#### [ Kenny Lau (Oct 08 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383339):
 [2018-10-08.png](/user_uploads/3121/OAIFV_UuuBZXylsyoLFs_sUK/2018-10-08.png)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383404):
+#### [ Mario Carneiro (Oct 08 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383404):
 yeah, okay that's a better idea
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383408):
+#### [ Mario Carneiro (Oct 08 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383408):
 just close the resulting set under ideal operations
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383456):
+#### [ Johan Commelin (Oct 08 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383456):
 @**Mario Carneiro** Do you have some sort of todo list of what remains for this refactor?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383458):
+#### [ Mario Carneiro (Oct 08 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383458):
 @**Johan Commelin** It's just some idle speculation on my part, I don't really have any concrete implementation ideas
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383464):
+#### [ Mario Carneiro (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383464):
 I'm currently in "tying up loose ends" mode in the refactor, I don't want to introduce new things
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383467):
+#### [ Johan Commelin (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383467):
 Great!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383470):
+#### [ Mario Carneiro (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383470):
 it's already behind schedule too much
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383513):
+#### [ Mario Carneiro (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383513):
 although it has made several other projects come to the fore, which I will probably have to start working on after I'm done
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383515):
+#### [ Mario Carneiro (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383515):
 foremost of which is the multiple scalar field thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383519):
+#### [ Johan Commelin (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383519):
 After you are done, I think `faster` should be the first thing on your list. :lol:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383522):
+#### [ Mario Carneiro (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383522):
 I'm actually working on that ATM
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383525):
+#### [ Johan Commelin (Oct 08 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383525):
 Wonderful! Thanks for doing that!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135384515):
+#### [ Kevin Buzzard (Oct 08 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135384515):
 Here are some thoughts. The fundamental notion in algebraic geometry is an "f-map" -- see 6.21.7 in [the stacks project](https://stacks.math.columbia.edu/tag/008C). Lemma 6.21.8 shows that this is a natural idea. Although it's dressed up in a geometric language, this is something related to the conversation here. The notion of an f-map shows up in the definition of a morphism of ringed spaces in [definition 6.21](https://stacks.math.columbia.edu/tag/0090). In the discussion just below 6.26.3 [here](https://stacks.math.columbia.edu/tag/0094) we see the notion of an f-map of sheaves of modules. Note in particular in that discussion that the f-maps from G to F are in canonical bijection with two other hom sets, one involving only sheaves on X and one involving only sheaves on Y.
 
 Now of course all this needs a lot of unravelling, and the way to unravel is to ask how what de Jong writes translates into the case of affine schemes, which are just commutative rings in disguise. If I got it right, then he says to focus on the following idea: if $$f:A\to B$$ is a map of rings and if $$G$$ is an $$A$$-module and $$F$$ a $$B$$-module, an $$f$$-map $$G\to F$$ is simply an $$A$$-module homomorphism from $$G$$ to $$F$$, and the observation is that such maps naturally biject with the $$B$$-module homomorphisms from $$G\otimes_AB$$ to $$F$$. I think this is different to what Scott suggests -- he went the other way.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135384772):
+#### [ Kevin Buzzard (Oct 08 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135384772):
 ```quote
 I wonder if there is a common generalization of ring homs, (R,R) -> (R', R') and linear maps (R,M) -> (R, M')
 ```
 I think $$f$$-maps give this. An $$f$$-map $$(R,M)\to (R',M')$$ is a ring map $$R\to R'$$ and an $$R$$-module map $$M\to M'$$ (note I'm constantly using this trick of, the moment I have a ring map $$R\to R'$$, considering all $$R'$$-modules as $$R$$-modules). If $$R\to R'$$ is the identity then this is just an $$R$$-module homomorphism, and an *example* of an $$f$$-map $$(R,R)\to(R',R')$$ is given by $$(f,f)$$, but given $$f:R\to R'$$ there are $$f$$-maps $$(R,R)\to (R',R')$$ which are not $$(f,f)$$.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385018):
+#### [ Kevin Buzzard (Oct 08 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385018):
 OK so Johan has isolated exactly the same idea, but somehow it seems that he has come from a completely different viewpoint (I don't know what a fibred category is). Regarding commutative v non-commutative, I think it's a good idea to push commutative here. Someone impressed on me decades ago that one should not think of commutative ring theory as a special case of non-commutative ring theory but regard them as completely different areas. I don't know anything about research into non-commutative ring theory, but commutative ring theory is very much alive and kicking -- e.g. ideas from the theory of perfectoid spaces were used here https://arxiv.org/abs/1608.08882 to resolve a the direct summand conjecture. Commutative algebra is the foundation of modern algebraic geometry and I have always been of the opinion (even before I knew anything about formal proof verification software) that books like Atiyah--Macdonald and Matsumura (both standard commutative algebra textbooks) somehow "operated close to the axioms" whilst still being of great modern interest. If we want to push Lean as a tool for algebraic geometry, which it one day might become, then there's no harm focussing on commutative algebra. When someone eventually decides to do some basic representation theory of finite groups we might have to plough through basics of semisimple algebras but that is somehow a completely different project.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385035):
+#### [ Johan Commelin (Oct 08 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385035):
 @**Kevin Buzzard** A fibered category is the thing that underlies a stack.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385039):
+#### [ Johan Commelin (Oct 08 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385039):
 Basically it abstracts $$f$$-maps
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385344):
+#### [ Kevin Buzzard (Oct 08 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385344):
 ```quote
 > every R'-mod is an R-mod
 
@@ -509,118 +509,118 @@ This one requires an explicit ring hom input
 ```
 Patrick mentioned recently that sometimes it's best to concentrate on the morphisms, not the objects. In alg geom we even see it in the name -- an $$f$$-map is a construction which depends on a map $$f$$ of rings. In fact Johan is saying all the right things, I need to get up much earlier to get ahead of him. Given $$f:R\to R'$$ there are then adjoint functors $$(R-mod)\to(R'-mod)$$ and $$(R'-mod)\to(R-mod)$$ and hopefully Kenny proved enough about universal property of tensor products to show that these are adjoints. I think that Scott's punt went in the wrong direction. There is a time when you get maps one way and the other way, but that's when you go back to schemes.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385406):
+#### [ Johan Commelin (Oct 08 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385406):
 ```quote
 In fact Johan is saying all the right things, I need to get up much earlier to get ahead of him. 
 ```
 I've got a 2-year old daughter. You can't win.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385439):
+#### [ Johan Commelin (Oct 08 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385439):
 Well, what I think that Scott meant that `f → f^*` is contravariant.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385440):
+#### [ Kevin Buzzard (Oct 08 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385440):
 Kenny's construction is something else though. If $$L$$ is an ideal of $$A$$ then $$L^e$$, the pushforward ideal, is less well-behaved. $$L^e$$ is the image of $$L\otimes_AB$$ (the canonical thing when it comes to modules) under the natural map from this guy to $$B$$ corresponding by adjointness to the map $$L\to B$$. So it might satisfy some universal property for ideals, but probably not for modules.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385492):
+#### [ Kevin Buzzard (Oct 08 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385492):
 OK I think that's all I have to say and I think that most of it had been said already, but at least I caught up.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385493):
+#### [ Johan Commelin (Oct 08 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385493):
 For ideals it will probably give you a Galois connection. Here! I said it. Without checking.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385562):
+#### [ Mario Carneiro (Oct 08 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385562):
 But I guess $$L^e$$ is the best you can do when you have a ring hom A->B and an ideal L?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385574):
+#### [ Johan Commelin (Oct 08 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385574):
 If you want an ideal of `B`, yes.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385584):
+#### [ Johan Commelin (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385584):
 Otherwise, you could just tensor, and treat it as a module.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385586):
+#### [ Mario Carneiro (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385586):
 Is this a thing we can currently do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385590):
+#### [ Johan Commelin (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385590):
 What?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385592):
+#### [ Mario Carneiro (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385592):
 tensoring like that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385594):
+#### [ Johan Commelin (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385594):
 I guess almost
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385634):
+#### [ Johan Commelin (Oct 08 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385634):
 @**Kenny Lau** Did you include extension of scalars in your work on tensor products?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385647):
+#### [ Johan Commelin (Oct 08 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385647):
 @**Mario Carneiro** Given what we have, it shouldn't be too hard
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 08 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385977):
+#### [ Kenny Lau (Oct 08 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385977):
 I don’t think I did.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135386823):
+#### [ Kevin Buzzard (Oct 08 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135386823):
 Oh I see. The issue is that if $$M$$ is an $$A$$-module and $$B$$ is an $$A$$-algebra (and hence an $$A$$-module) then $$M\otimes_AB$$ is not just an $$A$$-module but a $$B$$-module.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135386914):
+#### [ Johan Commelin (Oct 08 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135386914):
 Right, we don't have something like that atm
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135386928):
+#### [ Johan Commelin (Oct 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135386928):
 But it shouldn't be hard to put a `B`-mod structure on the tensor product.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 08 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135387004):
+#### [ Johan Commelin (Oct 08 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135387004):
 I don't know if it should "extend" the `A`-mod structure, in the sense that if you "restrict" scalars you get an `A`-mod that is defeq to what you started with.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 08 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135421783):
+#### [ Patrick Massot (Oct 08 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135421783):
 ```quote
 foremost of which is the multiple scalar field thing
 ```
 I'm completely lost: I thought this module refactor was mostly about multiple scalars
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 23 2018 at 01:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136304439):
+#### [ Kenny Lau (Oct 23 2018 at 01:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136304439):
 How's it going? @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 23 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136306139):
+#### [ Mario Carneiro (Oct 23 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136306139):
 waiting on my school work to decrease in intensity
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 23 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136306145):
+#### [ Mario Carneiro (Oct 23 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136306145):
 hopefully I should be able to find some time for it this week
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136911662):
+#### [ Kenny Lau (Nov 01 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136911662):
 https://github.com/leanprover-community/mathlib/commits/module
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136911664):
+#### [ Kenny Lau (Nov 01 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136911664):
 @**Mario Carneiro** is there anything we can help with?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912060):
+#### [ Mario Carneiro (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912060):
 Possibly... I'm just short on time these days. The main work is done, I think, but a bunch of files still need to be updated
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912064):
+#### [ Kenny Lau (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912064):
 what can we do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912067):
+#### [ Kenny Lau (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912067):
 should I fix the errors?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912068):
+#### [ Mario Carneiro (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912068):
 go in there and make the red squiggles go away
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912116):
+#### [ Kenny Lau (Nov 01 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912116):
 roger that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912204):
+#### [ Mario Carneiro (Nov 01 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912204):
 Don't get too attached to anything that you write there, I'll probably have a look through all the files anyway, but it will be a lot easier if it's not already broken
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919089):
+#### [ Kenny Lau (Nov 01 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919089):
 @**Mario Carneiro** there are things that you deleted and things that depend on them, right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919093):
+#### [ Kenny Lau (Nov 01 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919093):
 I'll just leave those untouched
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919165):
+#### [ Mario Carneiro (Nov 01 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919165):
 like what? I think all deleted files have equivalents
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919191):
+#### [ Kenny Lau (Nov 01 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919191):
 like the order embedding of submodules of submodules, and the prime ideal, and the trivial ideal
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919263):
+#### [ Kenny Lau (Nov 01 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919263):
 and also this:
 ```lean
 @[simp] theorem Union_set_of_directed {ι} (hι : nonempty ι)
@@ -629,40 +629,40 @@ and also this:
   ((supr S : submodule α β) : set β) = ⋃ i, S i :=
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919265):
+#### [ Mario Carneiro (Nov 01 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919265):
 prime ideals are still there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919287):
+#### [ Mario Carneiro (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919287):
 search for that, it moved somewhere else
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919297):
+#### [ Mario Carneiro (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919297):
 I think it is Union_coe now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919305):
+#### [ Kenny Lau (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919305):
 `prime_ideal` doesn't give me anything
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919307):
+#### [ Kenny Lau (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919307):
 and i wouldn't search for `prime`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919355):
+#### [ Mario Carneiro (Nov 01 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919355):
 the trivial ideal is bottom
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919360):
+#### [ Kenny Lau (Nov 01 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919360):
 ok I searched for `prime` and I found it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136925189):
+#### [ Kenny Lau (Nov 01 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136925189):
 @**Mario Carneiro** what about the embedding “submodules of N” -> “submodules of M” where N is a submodule of M?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 16:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136928650):
+#### [ Mario Carneiro (Nov 01 2018 at 16:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136928650):
 I think that's `map N.subtype` or `map_subtype.order_iso`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136942283):
+#### [ Kenny Lau (Nov 01 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136942283):
 @**Mario Carneiro** I've pushed a partial fix
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136942285):
+#### [ Kenny Lau (Nov 01 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136942285):
 I'll see what more I can do
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136986811):
+#### [ Kenny Lau (Nov 02 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136986811):
 @**Mario Carneiro** for principal ideal domains, the situation is that `{x | a ∣ x}` is a set not an ideal, so these definitions are a bit troublesome:
 ```lean
 class is_principal_ideal [comm_ring α] (S : set α) : Prop :=
@@ -672,128 +672,128 @@ class principal_ideal_domain (α : Type*) extends integral_domain α :=
 (principal : ∀ (S : ideal α), is_principal_ideal (S : set α))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136986813):
+#### [ Kenny Lau (Nov 02 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136986813):
 what should I do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137008240):
+#### [ Kenny Lau (Nov 02 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137008240):
 @**Mario Carneiro** [`ideal.quotient.eq`](https://github.com/leanprover/mathlib/blob/master/ring_theory/ideals.lean#L140) is missing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137008271):
+#### [ Kenny Lau (Nov 02 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137008271):
 (and `submodule.quotient.eq` doesn't count)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137064504):
+#### [ Kenny Lau (Nov 02 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137064504):
 Successfully reduced to 4 errors. Pushed.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137076716):
+#### [ Mario Carneiro (Nov 02 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137076716):
 the ideal `{x | a ∣ x}` is now spelled `span {a}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079093):
+#### [ Kenny Lau (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079093):
 @**Mario Carneiro** by "now" do you mean "I've changed that in my private copy" or "I should change that and then push it"?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079105):
+#### [ Mario Carneiro (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079105):
 I mean in the module branch that's how it is currently used
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079113):
+#### [ Mario Carneiro (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079113):
 so if you find it elsewhere you should use that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079114):
+#### [ Kenny Lau (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079114):
 so it's the latter?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079118):
+#### [ Kenny Lau (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079118):
 ok
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079137):
+#### [ Mario Carneiro (Nov 02 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079137):
 is_principal_ideal should be a property of S : ideal
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079292):
+#### [ Kenny Lau (Nov 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079292):
 and what is to become of `ideal.quotient.eq`? @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079358):
+#### [ Mario Carneiro (Nov 02 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079358):
 what does `quotient_ring` look like now?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079414):
+#### [ Kenny Lau (Nov 02 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079414):
 it looks like `ideal.quotient` now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079430):
+#### [ Kenny Lau (Nov 02 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079430):
 we have `ideal.quotient.mk := submodule.quotient.mk` and we have `submodule.quotient,eq`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079446):
+#### [ Kenny Lau (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079446):
 but not `ideal.quotient.eq`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079455):
+#### [ Mario Carneiro (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079455):
 oh sure, you can state `ideal.quotient.eq`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079458):
+#### [ Kenny Lau (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079458):
 ok
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079464):
+#### [ Mario Carneiro (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079464):
 it's just a defeq copy paste job
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079476):
+#### [ Kenny Lau (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079476):
 I just thought I wouldn't add things without first asking you
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079481):
+#### [ Mario Carneiro (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079481):
 I have not added all theorems from submodules to ideals, I intended to add them as needed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079549):
+#### [ Mario Carneiro (Nov 02 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079549):
 you can often just use the submodule version directly, but it is slightly less ergonomic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079650):
+#### [ Kenny Lau (Nov 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079650):
 I agree (with the latter statement)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084347):
+#### [ Kenny Lau (Nov 02 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084347):
 ```lean
 lemma mem_span_singleton {x y : α} :
   x ∈ span ({y} : set α) ↔ ∃ a, a * y = x :=
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084351):
+#### [ Kenny Lau (Nov 02 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084351):
 @**Mario Carneiro** can I change this to use dvd?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084382):
+#### [ Mario Carneiro (Nov 02 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084382):
 maybe make another theorem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084453):
+#### [ Kenny Lau (Nov 02 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084453):
 but nobody uses that theorem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084455):
+#### [ Kenny Lau (Nov 02 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084455):
 you added that theorem yourself
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 02 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137085654):
+#### [ Kenny Lau (Nov 02 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137085654):
 ```lean
 lemma is_maximal_of_irreducible {p : α} (hp : irreducible p) :
   is_maximal (span ({p} : set α)) :=
 ```
 Should this be an instance?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137085959):
+#### [ Mario Carneiro (Nov 02 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137085959):
 oh I see, it's copy pasted from the analogous theorem on submodule, where you can't use dvd
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137086049):
+#### [ Mario Carneiro (Nov 02 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137086049):
 as for that last one - probably not. Things like `irreducible` and `maximal` and `nat.prime` are forming a new kind of idiom, where the predicate is a `class` but most of the theorems use it like normal assumptions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 02 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137086099):
+#### [ Mario Carneiro (Nov 02 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137086099):
 This is primarily intended to support the few cases where you have to use typeclass inference, like in Z/nZ is a field
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 03 2018 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089370):
+#### [ Kevin Buzzard (Nov 03 2018 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089370):
 I want there to be an "is_an_integer" predicate on eg rat to save me from coercions.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089440):
+#### [ Kenny Lau (Nov 03 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089440):
 @**Kevin Buzzard** wrong thread?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 03 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089490):
+#### [ Kevin Buzzard (Nov 03 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089490):
 Isn't that a predicate which is a class?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089518):
+#### [ Kenny Lau (Nov 03 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089518):
 oh well this is going off track
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 03 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089626):
+#### [ Chris Hughes (Nov 03 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089626):
 Why is it a class?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089816):
+#### [ Mario Carneiro (Nov 03 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089816):
 I don't just mean a predicate that is a class, we have plenty of those like `first_countable X`. I mean predicates that are classes that we use without instance brackets in most theorems
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090743):
+#### [ Kenny Lau (Nov 03 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090743):
 I feel like there is not enough transparency with the module refactoring, so I've decided to write something about it.
 
 Major changes made:
@@ -813,73 +813,73 @@ Major changes made:
 - Everything you want to know about linear combinations is now in the newly created file `linear_algebra/lc.lean`.
 - `linear_algebra/linear_map_module.lean` and `linear_algebra/prod_module.lean` and `linear_algebra/quotient_module.lean` and `linear_algebra/submodule.lean` and `linear_algebra/subtype_module.lean` are deleted (with their contents placed elsewhere).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090764):
+#### [ Mario Carneiro (Nov 03 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090764):
 Ha, this was my secret plan all along
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090808):
+#### [ Kenny Lau (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090808):
 I think one would prefer transparency
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090810):
+#### [ Mario Carneiro (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090810):
 now that kenny had to read the stuff he knows what changed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090817):
+#### [ Mario Carneiro (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090817):
 and can write a nice summary for us
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090822):
+#### [ Kenny Lau (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090822):
 lol
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090864):
+#### [ Mario Carneiro (Nov 03 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090864):
 A remark on `module.of_core`: it's only intended for use when you aren't proving it's a semimodule first
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090910):
+#### [ Mario Carneiro (Nov 03 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090910):
 like if you don't care about semimodules
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090954):
+#### [ Kenny Lau (Nov 03 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090954):
 I'm sure Kevin doesn't
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090961):
+#### [ Mario Carneiro (Nov 03 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090961):
 By the way, `is_linear_map` is a late addition. I'm hoping it will not be needed much at all, but it's useful to have as a mixin occasionally
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091015):
+#### [ Kenny Lau (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091015):
 one would have to refactor `tensor_product` to get rid of all the dependencies thereto, I believe
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091016):
+#### [ Mario Carneiro (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091016):
 I really want `linear_map` to be the primary one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091023):
+#### [ Mario Carneiro (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091023):
 oh, I may have done that already
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091025):
+#### [ Kenny Lau (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091025):
 not entirely
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091026):
+#### [ Mario Carneiro (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091026):
 shoot, I have an unsaved file in vscode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091030):
+#### [ Kenny Lau (Nov 03 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091030):
 lol
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091130):
+#### [ Mario Carneiro (Nov 03 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091130):
 re: interface for linear_equiv, you don't need to prove the inverse is linear, that's not in the structure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091149):
+#### [ Mario Carneiro (Nov 03 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091149):
 it's just the union (pushout?) of linear_map and equiv
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091304):
+#### [ Kenny Lau (Nov 03 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091304):
 oh, right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091863):
+#### [ Kenny Lau (Nov 03 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091863):
 @**Mario Carneiro** are you going to push your file?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092023):
+#### [ Mario Carneiro (Nov 03 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092023):
 oh wait, looks like I already pushed most of it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092026):
+#### [ Mario Carneiro (Nov 03 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092026):
 you already had the important stuff
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092090):
+#### [ Kenny Lau (Nov 03 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092090):
 but tensor product still depends on is_linear_map right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092235):
+#### [ Kenny Lau (Nov 03 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092235):
 ```lean
 protected def id : R ⊗ M ≃ₗ M :=
 { inv_fun := (⊗ₜ) 1,
@@ -893,114 +893,114 @@ protected def id : R ⊗ M ≃ₗ M :=
     λ r, linear_map.is_linear (r • linear_map.id)⟩ : R ⊗ M →ₗ M) }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092236):
+#### [ Kenny Lau (Nov 03 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092236):
 I don't think anyone wants to see this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092333):
+#### [ Mario Carneiro (Nov 03 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092333):
 what is your objection exactly?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092419):
+#### [ Kenny Lau (Nov 03 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092419):
 1. the linear map needs to be put after `..`; 2. lack of `is_linear_map.comp` and the fact that `lift.ext` and most of the things in `tensor_product` depend on `is_linear_map` make proofs very long and cumbersome
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093199):
+#### [ Mario Carneiro (Nov 03 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093199):
 I've only done the first half of that file, so some things may still need to be hashed out
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093203):
+#### [ Mario Carneiro (Nov 03 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093203):
 `lift.ext` should take linear maps as input
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093273):
+#### [ Mario Carneiro (Nov 03 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093273):
 You shouldn't feel bound to the current way statements of theorems are written, that's what refactoring is about
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093296):
+#### [ Mario Carneiro (Nov 03 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093296):
 Ideally, this construction should be easy, just cobbling together functions we already know are linear
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093354):
+#### [ Mario Carneiro (Nov 03 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093354):
 I think we need another constructor for is_bilinear_map, or is_linear_map, that takes a linear function and asks you to prove equality to the target function
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093401):
+#### [ Mario Carneiro (Nov 03 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093401):
 which corresponds to the alternate definition `def is_linear_map (f : β → γ) := ∃ g : β →ₗ γ, ∀ x, f x = g x`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096037):
+#### [ Kenny Lau (Nov 03 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096037):
 ```quote
 `lift.ext` should take linear maps as input
 ```
 I don't think that will work, because there are things that need to be proved to be linear
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 03:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096098):
+#### [ Kenny Lau (Nov 03 2018 at 03:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096098):
 do you think I should change `is_bilinear_map` to `bilinear_map`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 03:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096203):
+#### [ Mario Carneiro (Nov 03 2018 at 03:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096203):
 Huh? `lift.ext` takes two functions and proofs that they are linear
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 03:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096204):
+#### [ Mario Carneiro (Nov 03 2018 at 03:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096204):
 that can always be contracted to a function taking a `linear_map` arg
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 03:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096254):
+#### [ Mario Carneiro (Nov 03 2018 at 03:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096254):
 I thought about it, but do the set of all bilinear maps have a nice structure like linear maps? Like can you add them and such
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 03:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096331):
+#### [ Kenny Lau (Nov 03 2018 at 03:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096331):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 03:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096332):
+#### [ Kenny Lau (Nov 03 2018 at 03:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096332):
 they're even a module
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096371):
+#### [ Kenny Lau (Nov 03 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096371):
 they're as nice as linear maps
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096374):
+#### [ Kenny Lau (Nov 03 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096374):
 (because of the universal property of tensor product :P)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096836):
+#### [ Mario Carneiro (Nov 03 2018 at 04:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096836):
 well okay then
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096849):
+#### [ Mario Carneiro (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096849):
 I think `bilinear_map` still needs to reference `is_linear_map` though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096851):
+#### [ Kenny Lau (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096851):
 ```lean
 @[reducible] def bilinear_map := M →ₗ N →ₗ P
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096852):
+#### [ Kenny Lau (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096852):
 how about this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096854):
+#### [ Mario Carneiro (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096854):
 oh! does that work?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096856):
+#### [ Kenny Lau (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096856):
 I'm experimenting with it now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096859):
+#### [ Mario Carneiro (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096859):
 is Mod(R) a CCC?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096898):
+#### [ Kenny Lau (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096898):
 CCC?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096899):
+#### [ Mario Carneiro (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096899):
 cartesian closed category
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096900):
+#### [ Mario Carneiro (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096900):
 i.e. that thing means what you want it to
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096901):
+#### [ Kenny Lau (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096901):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096910):
+#### [ Kenny Lau (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096910):
 actually I don't know
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096913):
+#### [ Kenny Lau (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096913):
 I just know that Hom(M tensor N, P) = Hom(M, Hom(N, P))
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096914):
+#### [ Kenny Lau (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096914):
 so (- tensor N) is right adjoint to Hom(N, -)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096923):
+#### [ Mario Carneiro (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096923):
 that looks a lot like the universal property of the exponential
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096963):
+#### [ Mario Carneiro (Nov 03 2018 at 04:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096963):
 Hom(N,P) there is actually an object of the category
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097797):
+#### [ Kenny Lau (Nov 03 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097797):
 ```lean
 import group_theory.free_abelian_group
 import linear_algebra.basic tactic.squeeze
@@ -1087,127 +1087,127 @@ linear_map.comp ⟨g.comp, λ x y, linear_map.ext $ λ n, g.map_add _ _,
 end bilinear_map
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097798):
+#### [ Kenny Lau (Nov 03 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097798):
 looking good
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097901):
+#### [ Mario Carneiro (Nov 03 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097901):
 maybe I'm spoiled, but I would hope that there was a direct way to get `comm`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097902):
+#### [ Mario Carneiro (Nov 03 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097902):
 maybe it requires the tensor product though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097943):
+#### [ Mario Carneiro (Nov 03 2018 at 04:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097943):
 I guess it is equivalent to saying that `left` is a linear map
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098004):
+#### [ Mario Carneiro (Nov 03 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098004):
 If `apply : M -> (M ->l N) ->l N` was linear we would have it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098005):
+#### [ Kenny Lau (Nov 03 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098005):
 and if `comp` was also linear.. :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098051):
+#### [ Mario Carneiro (Nov 03 2018 at 04:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098051):
 yeah, there should be a principled way to do this using CCCs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098052):
+#### [ Kenny Lau (Nov 03 2018 at 04:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098052):
 but that would be too category-theoretical for our purposes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098057):
+#### [ Mario Carneiro (Nov 03 2018 at 04:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098057):
 I mean with the categories unfolded away
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098062):
+#### [ Mario Carneiro (Nov 03 2018 at 04:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098062):
 We know that CCCs interpret lambda calculus, so literally anything you can write down that is type correct will be linear
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098104):
+#### [ Mario Carneiro (Nov 03 2018 at 04:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098104):
 we just need the right building blocks to get everything else
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098106):
+#### [ Kenny Lau (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098106):
 but we also know that lambda calculus is generated by abstraction and application?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098113):
+#### [ Mario Carneiro (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098113):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098114):
+#### [ Kenny Lau (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098114):
 but abstraction isn't a linear map?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098116):
+#### [ Mario Carneiro (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098116):
 That's `apply`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 04:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098159):
+#### [ Kenny Lau (Nov 03 2018 at 04:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098159):
 so what's the conclusion?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098162):
+#### [ Mario Carneiro (Nov 03 2018 at 04:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098162):
 er, no - abstraction is the UMP of apply
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098170):
+#### [ Mario Carneiro (Nov 03 2018 at 04:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098170):
 it works because the families we are considering are themselves linear in their free variables
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098173):
+#### [ Mario Carneiro (Nov 03 2018 at 04:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098173):
 so you get a "lambda" like operator
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098216):
+#### [ Mario Carneiro (Nov 03 2018 at 04:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098216):
 In this context we wouldn't actually be able to write down lambda, because we have "the wrong lambda", it isn't linear because we don't have the right notion of family for the category
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 04:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098221):
+#### [ Mario Carneiro (Nov 03 2018 at 04:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098221):
 but we can run any lambda term through the CCC translation to get a term using only CCC primitives, and we can prove these are all linear
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137103669):
+#### [ Johan Commelin (Nov 03 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137103669):
 I really like where this is going! Keep up the good work!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 03 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137104926):
+#### [ Kevin Buzzard (Nov 03 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137104926):
 Yes many thanks Kenny for trying to get the show back on the road. Does this stuff compile yet? Is it worth going back to Hilbert basis theorem yet?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110271):
+#### [ Kenny Lau (Nov 03 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110271):
 Fixed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110475):
+#### [ Kenny Lau (Nov 03 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110475):
 @**Mario Carneiro** what's the next step?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110481):
+#### [ Mario Carneiro (Nov 03 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110481):
 is it compiling now?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110485):
+#### [ Kenny Lau (Nov 03 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110485):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110524):
+#### [ Mario Carneiro (Nov 03 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110524):
 sweet
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110532):
+#### [ Mario Carneiro (Nov 03 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110532):
 unfortunately I still need to finish and review it myself, so it's in the queue with the other PRs now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110546):
+#### [ Mario Carneiro (Nov 03 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110546):
 If things go well I will have time this weekend for it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110590):
+#### [ Kenny Lau (Nov 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110590):
 nice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110591):
+#### [ Mario Carneiro (Nov 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110591):
 but if you see any other ways to improve it, add more theorems etc, now's the time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110605):
+#### [ Mario Carneiro (Nov 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110605):
 the CCC laws seem like a good place to start
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110608):
+#### [ Mario Carneiro (Nov 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110608):
 prove that `curry : (A X B -> C) -> (A -> B -> C)` is a linear map
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110655):
+#### [ Mario Carneiro (Nov 03 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110655):
 an equiv, even
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110661):
+#### [ Kenny Lau (Nov 03 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110661):
 ok
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110702):
+#### [ Kenny Lau (Nov 03 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110702):
 I don't think that's true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110907):
+#### [ Mario Carneiro (Nov 03 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110907):
 put `l` everywhere
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110908):
+#### [ Mario Carneiro (Nov 03 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110908):
 that's homs in the category
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110950):
+#### [ Kenny Lau (Nov 03 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110950):
 it's `(M tensor N) -> P` equiv `M -> (N -> P)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 13:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111063):
+#### [ Kenny Lau (Nov 03 2018 at 13:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111063):
 ```
 1. (M ⊗ N) ⊗ P -> M ⊗ (N ⊗ P)
 2. (M ⊗ N) -> P -> M ⊗ (N ⊗ P)
@@ -1218,95 +1218,95 @@ it's `(M tensor N) -> P` equiv `M -> (N -> P)`
 7. M -> N ⊗ P -> M ⊗ (N ⊗ P)
 ````
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111403):
+#### [ Mario Carneiro (Nov 03 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111403):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111408):
+#### [ Mario Carneiro (Nov 03 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111408):
 linear equiv I assume
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111419):
+#### [ Mario Carneiro (Nov 03 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111419):
 But I chose that one specifically because it's one of the CCC primitives
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111422):
+#### [ Johan Commelin (Nov 03 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111422):
 *canonical* linear equiv, even... :grinning_face_with_smiling_eyes:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111473):
+#### [ Mario Carneiro (Nov 03 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111473):
 `apply` is another: `(M -> N) X M -> N`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111476):
+#### [ Mario Carneiro (Nov 03 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111476):
 it's trivial with that equiv though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111486):
+#### [ Mario Carneiro (Nov 03 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111486):
 I think the hom adjunction is equivalent to a few terms that you can compose
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111490):
+#### [ Mario Carneiro (Nov 03 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111490):
 like apply and curry
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111532):
+#### [ Mario Carneiro (Nov 03 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111532):
 do we have everything we need for the tensor product to be a product?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111538):
+#### [ Mario Carneiro (Nov 03 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111538):
 Is it also the coproduct?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111546):
+#### [ Johan Commelin (Nov 03 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111546):
 Nope
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111550):
+#### [ Johan Commelin (Nov 03 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111550):
 Coproduct is the direct sum, which is also the product
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111594):
+#### [ Johan Commelin (Nov 03 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111594):
 Tensor product is in fact the coproduct in the category of commutative rings
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 03 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111617):
+#### [ Kevin Buzzard (Nov 03 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111617):
 Yes but for modules over a commutative ring it's a different story. You can see something funny is going on because there aren't natural maps from M to M tensor N or from M tensor N to M
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 03 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111643):
+#### [ Kevin Buzzard (Nov 03 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111643):
 Other than the zero map
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111668):
+#### [ Mario Carneiro (Nov 03 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111668):
 wait what?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111674):
+#### [ Mario Carneiro (Nov 03 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111674):
 this is a funny product indeed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137112176):
+#### [ Kenny Lau (Nov 03 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137112176):
 ```
 1. (M ⊗ N) ⊗ P -> M ⊗ (N ⊗ P)
 2. (M ⊗ N) -> P -> M ⊗ (N ⊗ P)
 3. M -> N -> P -> M ⊗ (N ⊗ P)
 4. M -> N ⊗ P -> M ⊗ (N ⊗ P)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137112714):
+#### [ Kenny Lau (Nov 03 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137112714):
 `(N ≃ₗ P) -> ((M →ₗ N) ≃ₗ (M →ₗ P))`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137112878):
+#### [ Johan Commelin (Nov 03 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137112878):
 Are you listing the things that you are currently proving?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113439):
+#### [ Mario Carneiro (Nov 03 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113439):
 I think he's just enumerating type correct statements and looking for inhabited types?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113487):
+#### [ Johan Commelin (Nov 03 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113487):
 Do we have `dual`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113493):
+#### [ Johan Commelin (Nov 03 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113493):
 Because `M.dual \otimes N = Hom(M,N)` might be an interesting statement...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113504):
+#### [ Kenny Lau (Nov 03 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113504):
 that's just `M ->L R`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113549):
+#### [ Kenny Lau (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113549):
 and what you said is only true for M finitely dimensional vector space
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113551):
+#### [ Johan Commelin (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113551):
 Of course, but it is a useful concept.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113555):
+#### [ Johan Commelin (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113555):
 I'm probably missing some hypotheses...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113557):
+#### [ Mario Carneiro (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113557):
 don't let truth get in the way of beauty
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114111):
+#### [ Kenny Lau (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114111):
 ```lean
 protected def assoc : (M ⊗ N) ⊗ P ≃ₗ M ⊗ (N ⊗ P) :=
 linear_equiv.of_linear
@@ -1320,49 +1320,49 @@ linear_equiv.of_linear
         rw lift'_apply <|> rw comm'_apply <|> rw unlift_apply <|> rw unlift'_apply <|> rw id_apply })
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114113):
+#### [ Johan Commelin (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114113):
 @**Kenny Lau** How far are we from defining the category of commutative `R`-algebras?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114114):
+#### [ Kenny Lau (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114114):
 oh well
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114116):
+#### [ Kenny Lau (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114116):
 what's the concrete version of your question?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114155):
+#### [ Johan Commelin (Nov 03 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114155):
 Flat ring homs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114159):
+#### [ Kenny Lau (Nov 03 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114159):
 ```lean
 @[reducible] def bilinear_map := M →ₗ N →ₗ P
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114160):
+#### [ Kenny Lau (Nov 03 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114160):
 should we just remove `bilinear_map` entirely?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114169):
+#### [ Johan Commelin (Nov 03 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114169):
 I think we can leave it out till people start complaining.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114173):
+#### [ Johan Commelin (Nov 03 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114173):
 I would encourage everyone to use linear maps out of the tensor product.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114231):
+#### [ Johan Commelin (Nov 03 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114231):
 Anyway, I would be really happy if we have flat ring homs. Especially if it is readable, instead of the obfuscated kludge that we sometimes see... I think flat ring homs can be a good test case to see if mathlib is ready for the 25 other properties of ring homs that algebraic geometry depends upon.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114271):
+#### [ Kenny Lau (Nov 03 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114271):
 what are the 25 other properties?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114278):
+#### [ Kenny Lau (Nov 03 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114278):
 ```lean
 def map (f : M →ₗ P) (g : N →ₗ Q) : M ⊗ N →ₗ P ⊗ Q :=
 lift $ comp₁ (comp₂ (mk _ _ _) g) f
 ```
 man my interface is really good
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114317):
+#### [ Johan Commelin (Nov 03 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114317):
 https://stacks.math.columbia.edu/tag/02WE most of these have an equivalent for rings
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114408):
+#### [ Kenny Lau (Nov 03 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114408):
 ```lean
 def map (f : M →ₗ P) (g : N →ₗ Q) : M ⊗ N →ₗ P ⊗ Q :=
 lift $ comp₁ (comp₂ (mk _ _ _) g) f
@@ -1373,33 +1373,33 @@ rfl
 ```
 how on earth is this `rfl`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114472):
+#### [ Mario Carneiro (Nov 03 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114472):
 of course it is, it's a quotient
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114480):
+#### [ Kenny Lau (Nov 03 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114480):
 well then why isn't this `rfl`:
 ```lean
 @[simp] lemma lift.tmul (x y) :
   lift f (x ⊗ₜ y) = f x y :=
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114580):
+#### [ Kenny Lau (Nov 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114580):
 ```lean
 @[simp] lemma lift.tmul (x y) :
   lift f (x ⊗ₜ y) = f x y :=
 zero_add _
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114583):
+#### [ Kenny Lau (Nov 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114583):
 I guess that's why
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114587):
+#### [ Mario Carneiro (Nov 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114587):
 where'd that come from?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114639):
+#### [ Kenny Lau (Nov 03 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114639):
 the free group
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 03 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114640):
+#### [ Chris Hughes (Nov 03 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114640):
 ```quote
 ```lean
 @[simp] lemma lift.tmul (x y) :
@@ -1409,25 +1409,25 @@ zero_add _
 ```
 I love proofs like this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114643):
+#### [ Mario Carneiro (Nov 03 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114643):
 `free_abelian_group.lift` also isn't `rfl`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114655):
+#### [ Kenny Lau (Nov 03 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114655):
 right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114656):
+#### [ Kenny Lau (Nov 03 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114656):
 it's zero_add as well
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114700):
+#### [ Mario Carneiro (Nov 03 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114700):
 but why? It's built out of pieces that are rfl
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114702):
+#### [ Mario Carneiro (Nov 03 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114702):
 is it `free_group.to_group`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114716):
+#### [ Mario Carneiro (Nov 03 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114716):
 ah yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114756):
+#### [ Mario Carneiro (Nov 03 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114756):
 ```
 def to_group.aux : list (α × bool) → β :=
 λ L, list.prod $ L.map $ λ x, cond x.2 (f x.1) (f x.1)⁻¹
@@ -1436,179 +1436,179 @@ def to_group : free_group α → β :=
 quot.lift (to_group.aux f) $ λ L₁ L₂ H, red.step.to_group H
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114760):
+#### [ Mario Carneiro (Nov 03 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114760):
 ```
 @[simp] lemma to_group.of {x} : to_group f (of x) = f x :=
 one_mul _
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114810):
+#### [ Kenny Lau (Nov 03 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114810):
 so it's all in `list.prod`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114879):
+#### [ Kenny Lau (Nov 03 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114879):
 under which semantics is `by simp; simp only [linear_equiv.apply_symm_apply]` supposed to work where `by simp [linear_equiv.apply_symm_apply]` fails?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114881):
+#### [ Mario Carneiro (Nov 03 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114881):
 lol, now this has got me thinking about rewriting `free_group` again
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114931):
+#### [ Mario Carneiro (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114931):
 one way to get the right defeqs here is to have the actual definition of `free_group` be the quotient of expressions in the language of groups with the group laws, and then prove that this is isomorphic to lists
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114932):
+#### [ Kenny Lau (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114932):
 and how would one implement "expressions"?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114933):
+#### [ Mario Carneiro (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114933):
 expressions in the language of groups means trees
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114935):
+#### [ Mario Carneiro (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114935):
 you just have a symbol for one and inv and mul
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114977):
+#### [ Mario Carneiro (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114977):
 and the basis elements
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114979):
+#### [ Mario Carneiro (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114979):
 and you get trees
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114980):
+#### [ Kenny Lau (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114980):
 and what do you mean by tree?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114987):
+#### [ Mario Carneiro (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114987):
 ```
 inductive group_expr (A) : Type
 | one : group_expr
 | inv : group_expr -> group_expr
 | mul : group_expr -> group_expr -> group_expr
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114999):
+#### [ Kenny Lau (Nov 03 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114999):
 aha
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115007):
+#### [ Kenny Lau (Nov 03 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115007):
 how would that help?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115008):
+#### [ Mario Carneiro (Nov 03 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115008):
 if you define this as  an inductive, and define the relations as a quotient, you will get really nice defeq
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115051):
+#### [ Mario Carneiro (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115051):
 `lift (x * y) = lift x * lift y`, `lift 1 = 1`, `lift x = f x`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115052):
+#### [ Kenny Lau (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115052):
 I don't see how this is different from redefining `list.prod` so that `list.prod [f]` is definitionally equivalent to `f`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115054):
+#### [ Kenny Lau (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115054):
 oh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115056):
+#### [ Kenny Lau (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115056):
 fair enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115068):
+#### [ Johan Commelin (Nov 03 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115068):
 ```quote
 one way to get the right defeqs here is to have the actual definition of `free_group` be the quotient of expressions in the language of groups with the group laws, and then prove that this is isomorphic to lists
 ```
 Wait... in the other thread you said we shouldn't focus on getting all the right defeqs... :sad:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115069):
+#### [ Mario Carneiro (Nov 03 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115069):
 lol
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115071):
+#### [ Mario Carneiro (Nov 03 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115071):
 sometimes it matters
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115081):
+#### [ Mario Carneiro (Nov 03 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115081):
 The reason quotient types exist is because of defeqs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115116):
+#### [ Mario Carneiro (Nov 03 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115116):
 otherwise we would just use sets of sets
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115127):
+#### [ Johan Commelin (Nov 03 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115127):
 /me doesn't follow... noob alert...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115130):
+#### [ Mario Carneiro (Nov 03 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115130):
 there is no way to build quotient types like lean's without an axiom
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115169):
+#### [ Mario Carneiro (Nov 03 2018 at 15:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115169):
 we can get something provably isomorphic, but it won't have the defeq on lift
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 15:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115173):
+#### [ Johan Commelin (Nov 03 2018 at 15:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115173):
 I probably haven't experience the pain of working without lean's quotient types... what is wrong with sets of sets?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115182):
+#### [ Mario Carneiro (Nov 03 2018 at 15:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115182):
 It allows you to define functions that have a certain behavior by definition on the basis elements
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115224):
+#### [ Mario Carneiro (Nov 03 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115224):
 You can live without defeq, in set theory they do this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115225):
+#### [ Kenny Lau (Nov 03 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115225):
 @**Mario Carneiro** so, are you going to do it, or do you intend me to do it? :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115226):
+#### [ Mario Carneiro (Nov 03 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115226):
 but it is nice to have for computational purposes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115235):
+#### [ Mario Carneiro (Nov 03 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115235):
 I think I have enough major projects to do :) Like Johan says, it's not essential
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115237):
+#### [ Kenny Lau (Nov 03 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115237):
 ok
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115239):
+#### [ Mario Carneiro (Nov 03 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115239):
 but if it interests you, feel free
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115242):
+#### [ Johan Commelin (Nov 03 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115242):
 I encourage both of you to first get this merged into mathlib before embarking on new projects...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 03 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115287):
+#### [ Johan Commelin (Nov 03 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115287):
 (or expanding the scope of this refactor)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115306):
+#### [ Kenny Lau (Nov 03 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115306):
 ok I pushed the tensor product
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115308):
+#### [ Kenny Lau (Nov 03 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115308):
 @**Mario Carneiro** should we PR it now?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115350):
+#### [ Mario Carneiro (Nov 03 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115350):
 sure, that will give it more exposure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115356):
+#### [ Kenny Lau (Nov 03 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115356):
 more exposure to what?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115365):
+#### [ Mario Carneiro (Nov 03 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115365):
 people with ideas
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115406):
+#### [ Mario Carneiro (Nov 03 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115406):
 or who like to read about new things on github
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115409):
+#### [ Mario Carneiro (Nov 03 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115409):
 obviously I'm already aware of this PR, and I will merge it when ready
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115420):
+#### [ Kenny Lau (Nov 03 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115420):
 and when is it ready?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115514):
+#### [ Mario Carneiro (Nov 03 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115514):
 when I am satisfied with all the changes? It was unfinished when I last reviewed it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 03 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115519):
+#### [ Mario Carneiro (Nov 03 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115519):
 thank you for fixing the bugs, but some things still take time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 03 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137120657):
+#### [ Patrick Massot (Nov 03 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137120657):
 Thank you very much @**Kenny Lau** for the documentation effort (and help with actual Lean)! Should we already copy that to [docs/theories/linear_algebra](https://github.com/leanprover/mathlib/blob/master/docs/theories/linear_algebra.md) or could it still change?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137120659):
+#### [ Kenny Lau (Nov 03 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137120659):
 It could still change
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 03 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137120699):
+#### [ Patrick Massot (Nov 03 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137120699):
 Ok. It would be very useful if you could update it when it will stabilize, so that we'll be able to incorporate it to the docs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137130652):
+#### [ Kenny Lau (Nov 03 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137130652):
 @**Mario Carneiro** ok I pushed the refactored `free_group.lean`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137130654):
+#### [ Kenny Lau (Nov 03 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137130654):
 (it won't build now; I'll fix the errors if you like the new `free_group`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137131106):
+#### [ Kenny Lau (Nov 03 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137131106):
 also, I don't understand why it is ok that `linear_map` doesn't take the ring as an argument
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 03 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137131918):
+#### [ Kenny Lau (Nov 03 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137131918):
 ok I put the free group in [a new branch](https://github.com/leanprover-community/mathlib/tree/module-with-free-group) and resetted the PR'ed branch
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166041):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166041):
 So I thought I'd try and get the hang of modules in Lean. Is this construction somewhere in the module branch:
 
 ```lean
@@ -1619,7 +1619,7 @@ example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (
 ```
 ?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166228):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166228):
 Idly trying to prove it myself:
 ```lean
 import linear_algebra.basic
@@ -1649,10 +1649,10 @@ HM : module S M
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166337):
+#### [ Chris Hughes (Nov 04 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166337):
 It's a new structure. Don't you just have to define a `has_scalar` instance first?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166359):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166359):
 ```lean
 import linear_algebra.basic
 
@@ -1675,16 +1675,16 @@ example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (
 
 My question is whether this is already in the module refactoring, which I think was to a certain extent inspired by the fact that this used to be hard to do
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166407):
+#### [ Chris Hughes (Nov 04 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166407):
 I don't think type class inference knows how to infer `f`. Try making the first things a def, and then giving `to_has_scalar` or whatever explicitly. Thinking about it, I don't think the second thing can be an instance with the current setup either.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166579):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166579):
 Oh this is exactly one of those situations where I don't know how to put something into the type class inference machine because I'm in term mode.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166582):
+#### [ Chris Hughes (Nov 04 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166582):
 `by haveI := _; exact _`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166634):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166634):
 ```lean
 import linear_algebra.basic
 
@@ -1707,16 +1707,16 @@ example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166635):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166635):
 no errors :D
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166642):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166642):
 so I have to go into tactic mode to put something into the type class inference machine?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166648):
+#### [ Chris Hughes (Nov 04 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166648):
 I think so.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166690):
+#### [ Chris Hughes (Nov 04 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166690):
 This should also work I think.
 ```lean
 example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
@@ -1731,34 +1731,34 @@ example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166812):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166812):
 Now I have problems with two smuls. @**Kenny Lau** Is this done already? I don't want to waste my time if it's already there, but this is exactly what I have always needed for Hilbert basis.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166821):
+#### [ Chris Hughes (Nov 04 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166821):
 I would wait until after module refactorign
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166822):
+#### [ Kenny Lau (Nov 04 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166822):
 the right thing to do is just say smul := sorry, right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166823):
+#### [ Kenny Lau (Nov 04 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166823):
 no, this hasn’t been done
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166867):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166867):
 I thought module refactoring had happened
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166871):
+#### [ Kenny Lau (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166871):
 you should also read my summary of the changes, this is mentioned there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166872):
+#### [ Kenny Lau (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166872):
 and also you should use module.of_core
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166873):
+#### [ Kenny Lau (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166873):
 and also you should use module.of_core
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166874):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166874):
 I thought I had read your summary of the changes :-/
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166884):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166884):
 Chris your version is better:
 ```lean
 example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
@@ -1784,10 +1784,10 @@ by haveI := has_scalar_of_ring_hom R S f M;
 }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167005):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167005):
 I see. I think Kenny is pointing out that by "The idiom for making an instance module α β (after proving that β is an abelian group) is module.of_core" he means the strong statement that end users should actually never make modules directly. Is that right Kenny? I still need an instance of `module R M` though -- how do I get it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167057):
+#### [ Kevin Buzzard (Nov 04 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167057):
 ```lean
 example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
   [add_comm_group M] [HM : module S M] : module R M := module.of_core {
@@ -1800,19 +1800,19 @@ example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (
 ```
 Maybe I'm on the right lines now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167070):
+#### [ Kenny Lau (Nov 04 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167070):
 right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167310):
+#### [ Kevin Buzzard (Nov 04 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167310):
 ```lean
     add_smul := λ r s m, -- (is_ring_hom.map_add f).symm ▸ (add_smul (f r) (f s) m), -- stupid triangle never works for me
       begin show f (r + s) • m = f r • m + f s • m, rw is_ring_hom.map_add f, exact add_smul (f r) (f s) m,end,
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167371):
+#### [ Kenny Lau (Nov 04 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167371):
 i think you are missing two arguments
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167450):
+#### [ Kevin Buzzard (Nov 04 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167450):
 ```lean
 import linear_algebra.basic
 
@@ -1828,10 +1828,10 @@ example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (
 ```
 Still haven't lost my touch ;-) [ugh]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167457):
+#### [ Kevin Buzzard (Nov 04 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167457):
 well so far I got 0% of the way through proving Hilbert basis, but at least I learnt not to use `module`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167736):
+#### [ Kevin Buzzard (Nov 04 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167736):
 Does this completely fundamental fact have a name?
 
 Current version:
@@ -1850,58 +1850,58 @@ instance module_of_module_of_ring_hom {R : Type*} [ring R] {S : Type*} [ring S] 
   }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167788):
+#### [ Kevin Buzzard (Nov 04 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167788):
 rw doesn't do unfolding (i.e. if I tell it `rw H` with `H : X = Y` and `X` isn't directly in view, it won't start unfolding things in an attempt to find `X`, even if something immediately unfolds to give `X`). Is the same true for the stupid triangle?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167790):
+#### [ Chris Hughes (Nov 04 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167790):
 Yes. What about `erw`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167798):
+#### [ Kevin Buzzard (Nov 04 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167798):
 I still seem to need the `show` for `add_smul`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167925):
+#### [ Kevin Buzzard (Nov 04 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167925):
 `    add_smul := λ r s m, (((@is_ring_hom.map_add _ _ _ _ f _ r s).symm ▸ (add_smul (f r) (f s) m)) :  f (r + s) • m = f r • m + f s • m),`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167926):
+#### [ Kevin Buzzard (Nov 04 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167926):
 longer than the tactic proof ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 04 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167940):
+#### [ Johan Commelin (Nov 04 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167940):
 It ought to be `by tidy`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167986):
+#### [ Kevin Buzzard (Nov 04 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167986):
 does `tidy` know to try a theorem called `add_smul` when proving something called `add_smul`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 04 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167991):
+#### [ Johan Commelin (Nov 04 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167991):
 Only if it is a simp-lemma
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 04 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137168005):
+#### [ Johan Commelin (Nov 04 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137168005):
 But maybe, once backwords reasoning is merged, this could realistically done by `tidy`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 04 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137168971):
+#### [ Kevin Buzzard (Nov 04 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137168971):
 Will this instance ever trigger?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137170222):
+#### [ Chris Hughes (Nov 04 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137170222):
 I doubt it. It will have to find a ring hom out of nowhere.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137170360):
+#### [ Kenny Lau (Nov 04 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137170360):
 maybe we should make ring_hom just like linear_map
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) David Michael Roberts (Nov 04 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137171588):
+#### [ David Michael Roberts (Nov 04 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137171588):
 ```quote
 is Mod(R) a CCC?
 ```
 No, because the monoidal structure is not cartesian. What you want is https://ncatlab.org/nlab/show/closed+monoidal+category
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145302840):
+#### [ Kenny Lau (Nov 05 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145302840):
 (deleted)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145302841):
+#### [ Kenny Lau (Nov 05 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145302841):
 (deleted)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303310):
+#### [ Mario Carneiro (Nov 05 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303310):
 okay, my other obligations are done, so I'm working on finishing the refactoring tonight
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303430):
+#### [ Kenny Lau (Nov 05 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303430):
 ```lean
 import data.polynomial
 
@@ -1942,34 +1942,34 @@ def ideal.leading_coeff {R : Type u} [nonzero_comm_ring R] (I : ideal (polynomia
   end }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303431):
+#### [ Kenny Lau (Nov 05 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303431):
 @**Mario Carneiro** why does this time out?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303491):
+#### [ Mario Carneiro (Nov 05 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303491):
 polynomials have had problems with long elaboration in the past
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303494):
+#### [ Mario Carneiro (Nov 05 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303494):
 check that it isn't doing any crazy typeclass searches?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303620):
+#### [ Kenny Lau (Nov 05 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303620):
 it's searching for `has_one nat` and `has_add nat` like a billion times
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303719):
+#### [ Mario Carneiro (Nov 05 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303719):
 still profiling (slow business, of course) but it looks like the second block takes much longer than the first
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303725):
+#### [ Kenny Lau (Nov 05 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303725):
 oh, thanks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303733):
+#### [ Kenny Lau (Nov 05 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303733):
 @**Kevin Buzzard** should I push what I have in my kmb_hilbert_basis?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303748):
+#### [ Mario Carneiro (Nov 05 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303748):
 it takes 3.5 seconds with the sorry in, which is bad but not that bad so I guess you are worried about the commented out bit
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303805):
+#### [ Kenny Lau (Nov 05 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303805):
 but why does `polynomial` have long elaboration time?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 07:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304062):
+#### [ Mario Carneiro (Nov 05 2018 at 07:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304062):
 If I replace the last `rwa` in the second block with `rw`, the final state is:
 ```
 ...
@@ -1978,16 +1978,16 @@ this : leading_coeff (g * X ^ (nat_degree f - nat_degree g) + f) = b + a
 ```
 I'm not sure how assumption is supposed to close that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304145):
+#### [ Kenny Lau (Nov 05 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304145):
 ah
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 08:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304160):
+#### [ Mario Carneiro (Nov 05 2018 at 08:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304160):
 it's probably taking forever unfolding all the things to see if those are actually the same
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 08:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304269):
+#### [ Kenny Lau (Nov 05 2018 at 08:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304269):
 should I add two submodules together?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 08:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304491):
+#### [ Kenny Lau (Nov 05 2018 at 08:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304491):
 ```lean
 import algebra.module
 
@@ -2008,22 +2008,22 @@ instance submodule.has_add' : has_add (submodule R M) :=
     by rw [← hz, smul_add]⟩ }⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304533):
+#### [ Mario Carneiro (Nov 05 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304533):
 isn't this `\sup`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304534):
+#### [ Kenny Lau (Nov 05 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304534):
 oh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304535):
+#### [ Kenny Lau (Nov 05 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304535):
 lol
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 08:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304565):
+#### [ Mario Carneiro (Nov 05 2018 at 08:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304565):
 I realize that ring theorists prefer the notations $$A + B$$ and $$A\cap B$$ to $$A\vee B$$ and $$A\wedge B$$, but I think we should go for more notational uniformity
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784108):
+#### [ Kenny Lau (Nov 05 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784108):
 oh, `coeff_is_linear` uses `is_linear_map`, should I refactor that? @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784560):
+#### [ Kenny Lau (Nov 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784560):
 ```lean
 def map_mk (I J : ideal α) : ideal I.quotient :=
 { carrier := mk I '' J,
@@ -2035,55 +2035,55 @@ def map_mk (I J : ideal α) : ideal I.quotient :=
 ```
 I think we can generalize this @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784575):
+#### [ Mario Carneiro (Nov 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784575):
 to what?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784617):
+#### [ Mario Carneiro (Nov 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784617):
 yes on `coeff` btw, you may need a second function though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146785589):
+#### [ Kenny Lau (Nov 05 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146785589):
 @**Mario Carneiro** and how far away are we from the refactoring?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146785630):
+#### [ Mario Carneiro (Nov 05 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146785630):
 plan is to finish it today; I am currently rejiggering some stuff with `is_unit` and `nonunits` prompted by some of Rob's applications
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786349):
+#### [ Kenny Lau (Nov 05 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786349):
 are you working on a separate branch or a private repo or something? i.e. should I just push to that branch?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786408):
+#### [ Mario Carneiro (Nov 05 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786408):
 I'm working locally, feel free to keep committing to the `module` branch and I'll merge when I push
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786420):
+#### [ Kenny Lau (Nov 05 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786420):
 do you want to push your work to the community branches?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786436):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786436):
 Kenny and I are just chatting on Skype
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786437):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786437):
 For Hilbert basis
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786489):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786489):
 one perhaps needs that there's some inclusion of lattices -- if R -> S is a ring hom and M is an S-module
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786501):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786501):
 then there's an order preserving injection from the lattice of sub-S-modules to the lattice of sub-R-modules
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786568):
+#### [ Mario Carneiro (Nov 05 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786568):
 okay, it's broken tho
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786582):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786582):
 A sub-R-module is just a sub-f(R)-module where f(R) is the subring of S
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786605):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786605):
 If R -> S is an injection with M an S-module then there's an injection from the sub-S-modules to the sub-R-modules
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786657):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786657):
 If R -> S is a surjection and M is an R-module then the submodule of M consisting of stuff which is annihiliated by the kernel of R->S is an S-module
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786709):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786709):
 and that way you get an injection from sub-S-modules to sub-R-modules
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787850):
+#### [ Kenny Lau (Nov 05 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787850):
 ```lean
 import data.polynomial
 
@@ -2102,88 +2102,88 @@ def ideal.of_polynomial' : submodule R (polynomial R) :=
 ```
 @**Mario Carneiro**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787867):
+#### [ Mario Carneiro (Nov 05 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787867):
 it's probably guessing the wrong scalar ring here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787870):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787870):
 I thought it never had to guess anything nowadays?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787918):
+#### [ Mario Carneiro (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787918):
 that's the next thing on the list after the module refactor
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787923):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787923):
 There's a _list_??
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787928):
+#### [ Johan Commelin (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787928):
 I feel there is a need for module refactor 2.0 :rolling_on_the_floor_laughing:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787930):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787930):
 I never realised modules were so hard :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787987):
+#### [ Kenny Lau (Nov 05 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787987):
 yeah that's 'coz you're a mathematician
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146788414):
+#### [ Mario Carneiro (Nov 05 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146788414):
 the list is my todo list, and it's on the list because people want modules to have multiple scalar rings
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146788582):
+#### [ Kevin Buzzard (Nov 05 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146788582):
 I am just trying to formalise various standard results in undergraduate algebra like Hilbert basis and reporting back on what mathematicians use
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794422):
+#### [ Mario Carneiro (Nov 05 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794422):
 @**Kenny Lau** @**Johannes Hölzl** The final draft of the module refactor is pushed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794432):
+#### [ Kenny Lau (Nov 05 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794432):
 so... coeff is linear?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794653):
+#### [ Mario Carneiro (Nov 05 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794653):
 it is now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 05 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794754):
+#### [ Kenny Lau (Nov 05 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794754):
 thanks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794766):
+#### [ Kevin Buzzard (Nov 05 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794766):
 So how do I make an S-module into an R-module if I have a ring hom $$f : R \to S$$?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794771):
+#### [ Kevin Buzzard (Nov 05 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794771):
 thanks too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794880):
+#### [ Mario Carneiro (Nov 05 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794880):
 Maybe there should be a way to put chosen ring homs in the typeclass infrastructure?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794939):
+#### [ Mario Carneiro (Nov 05 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794939):
 Otherwise you just have to introduce it locally every time
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794957):
+#### [ Mario Carneiro (Nov 05 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794957):
 I assume you aren't asking how to define the R-module structure, that's not difficult at all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 05 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146795078):
+#### [ Johan Commelin (Nov 05 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146795078):
 ```quote
 Maybe there should be a way to put chosen ring homs in the typeclass infrastructure?
 ```
 I think we could also try using a structure `algebra`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 05 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146795319):
+#### [ Kevin Buzzard (Nov 05 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146795319):
 ```quote
 I assume you aren't asking how to define the R-module structure, that's not difficult at all
 ```
 Right -- I'm asking for the idiomatic way to do it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 05 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146796014):
+#### [ Johannes Hölzl (Nov 05 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146796014):
 @**Mario Carneiro**  why  is it now a mixing, i.e. why is the group structure not part of modules anymore?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146796108):
+#### [ Mario Carneiro (Nov 05 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146796108):
 Because the parent coercion `module R M => add_comm_group M` was causing much of the module typeclass issues
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146796123):
+#### [ Mario Carneiro (Nov 05 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146796123):
 plus if `R` becomes not an `out_param` then it won't even work
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 05 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146802129):
+#### [ Johannes Hölzl (Nov 05 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146802129):
 the module PR looks very good to me
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 05 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146804978):
+#### [ Johan Commelin (Nov 05 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146804978):
 It's merged :tada: :thumbs_up: :octopus:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 05 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146804983):
+#### [ Johannes Hölzl (Nov 05 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146804983):
 COMMIT 1000
 
 

@@ -11,7 +11,7 @@ permalink: archive/113488general/64871pnatandequationcompiler.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 16 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850385):
+#### [ Kevin Buzzard (Nov 16 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850385):
 Can I somehow make the equation compiler work on pnat as well as it works on nat? Something like
 
 ```lean
@@ -22,13 +22,13 @@ def f : ℕ+ → ℕ+
 
 How does the equation compiler work? It is presumably bound to the inbuilt constructors? Would this basically just entail writing a new pnat with `one` and `succ` and then defining stuff like `*` on the new structure?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850569):
+#### [ Kenny Lau (Nov 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850569):
 is it possible to build a custom equation compiler?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 16 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850900):
+#### [ Mario Carneiro (Nov 16 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850900):
 right. Lean 3 doesn't have the necessary customizability for this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 16 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850924):
+#### [ Mario Carneiro (Nov 16 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850924):
 Although we could write our own equation compiler if we write our own version of `def`
 
 

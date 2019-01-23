@@ -11,7 +11,7 @@ permalink: archive/116395maths/69812Ismathlibbrokencurrentlyno.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 06 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133406331):
+#### [ Kevin Buzzard (Sep 06 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133406331):
 ```lean
 import ring_theory.ideals
 
@@ -28,29 +28,29 @@ maximum class-instance resolution depth has been reached
 ```
 I think I'm up to date. This is from the Noetherian branch of community mathlib but it doesn't seem to work with (non-community) mathlib master either.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133406390):
+#### [ Kevin Buzzard (Sep 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133406390):
 hmm on the other hand I just managed to compile mathlib master so I don't know what's going on.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 06 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133406443):
+#### [ Kevin Buzzard (Sep 06 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133406443):
 It's the coercion from finset beta to set beta which seems to cause the loop
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 06 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133408030):
+#### [ Johannes Hölzl (Sep 06 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133408030):
 `(2) ?x_7 : has_coe (finset β) ?x_5 := @quotient_ring.has_coe ?x_9 ?x_10 ?x_11 ?x_12`
 ouch, doesn't seam to be a good coercion rule...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 06 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133408329):
+#### [ Johannes Hölzl (Sep 06 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133408329):
 not this one but the `quotient_module` one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 06 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133408472):
+#### [ Johannes Hölzl (Sep 06 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133408472):
 it should work now
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 06 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133409247):
+#### [ Mario Carneiro (Sep 06 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133409247):
 This is the same kind of problem as in `option.has_coe`. You can't coerce out of an arbitrary type in `has_coe`, you have to use `has_coe_t` directly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 06 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133409438):
+#### [ Johannes Hölzl (Sep 06 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133409438):
 hm, then it needs to be changed further. I just fixed the implicit instead of instance for the out_param problem.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 06 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133425189):
+#### [ Kevin Buzzard (Sep 06 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133425189):
 I'm sick of not being able to understand and debug this stuff. What happened in practice is that I wanted to do a bit more work on the noetherian branch yesterday evening but instead spent 30 minutes pulling, rebasing and compiling mathlib because I could see the error and I could not see how to fix it, I could only see how to try and get up to date and hope the error would go away. I would like to learn how to diagnose and fix what just happened and I still find these traces intimidating. Because I don't understand the traces I spent some time looking through recent mathlib commits to try and spot some suspicious looking instances but I couldn't find any. My next step would have been to go through each commit in mathlib, because I know the code worked last week and it didn't work yesterday, to try and find the offending one, but I suspect that neither of you did this.
 
 OK so I still have a borked noetherian branch [because I didn't update yet]. Presumably I start with `set_option trace.class_instances true`. I now get 100+ lines of output. Here is a random snippet:
@@ -76,7 +76,7 @@ https://gist.github.com/kbuzzard/e113b65c54e35bff839fb88365811ef5
 
 There is now no hurry on this (hopefully) but if at some point someone could explain how to get from it to the diagnosis above (which I must admit I do not fully understand -- but I see the words "it should work now" which I am very grateful for -- thanks Johannes!), I'd be much obliged.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 06 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133430208):
+#### [ Kevin Buzzard (Sep 06 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133430208):
 PS I can confirm that the noetherian branch is now building again (and also that I am unsure whether I should be merging or rebasing when I update mathlib-community from mathlib master and then update the noetherian branch, or indeed whether it even matters).
 
 

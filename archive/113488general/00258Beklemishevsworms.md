@@ -11,7 +11,7 @@ permalink: archive/113488general/00258Beklemishevsworms.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 31 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154084805):
+#### [ Kenny Lau (Dec 31 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154084805):
 ```lean
 def next_aux (N : nat) : list nat -> nat
 | [] := 0
@@ -36,22 +36,22 @@ def worm_step (initial : nat) : Π step : nat, list nat
 theorem worm_principle : ∀ n, ∃ s, worm_step n s = [] := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 31 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154084808):
+#### [ Kenny Lau (Dec 31 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154084808):
 Try to fill the sorry :P
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 31 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154087365):
+#### [ Kevin Buzzard (Dec 31 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154087365):
 It's like Goodstein's theorem. I'd never seen it before. Nice! Is there some proof using ordinals like Goodstein?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 31 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154087416):
+#### [ Kevin Buzzard (Dec 31 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154087416):
 Could you make it so that the proof is `dec_trivial`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 31 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154087424):
+#### [ Kevin Buzzard (Dec 31 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154087424):
 add some clever decidability instance
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 31 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154098834):
+#### [ Mario Carneiro (Dec 31 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154098834):
 Not really. (See https://www.researchgate.net/publication/27709556_The_Worm_principle for the original proof that this function terminates.) You can make any theorem provable by `dec_trivial` because if it's provable then it's decidable, but the really important part of this argument is the well-foundedness of a particular order. I would suggest mapping to `onote`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 01 2019 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154106468):
+#### [ Mario Carneiro (Jan 01 2019 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154106468):
 Here's the ordinal function:
 ```lean
 def build_aux : list nat → list nat × list (list nat)

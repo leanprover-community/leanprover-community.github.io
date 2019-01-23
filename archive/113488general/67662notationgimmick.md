@@ -11,82 +11,82 @@ permalink: archive/113488general/67662notationgimmick.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447537):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447537):
 If I have a family of rings `{gamma : Type} (R : gamma -> Type) [forall i, ring (R i)]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447541):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447541):
 For a mathematician it would look clearer if I could write `forall i, ring R_i`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447585):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447585):
 can i make R an instance of some notation typeclass or use some other notation gimmick to do this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 02 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447591):
+#### [ Kenny Lau (Jun 02 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447591):
 madness
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447595):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447595):
 you're such a pessimist
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447597):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447597):
 just because it could be another valid variable name
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447606):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447606):
 what about some weird unicode underline that's not valid
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 02 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447664):
+#### [ Mario Carneiro (Jun 02 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447664):
 This was a proposal on core lean a while back
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 02 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447665):
+#### [ Simon Hudon (Jun 02 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447665):
 That's a terrible idea.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 02 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447666):
+#### [ Mario Carneiro (Jun 02 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447666):
 oh wait I misunderstood
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 02 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447670):
+#### [ Mario Carneiro (Jun 02 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447670):
 I thought you wanted to avoid the `gamma` and `R` decls
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447712):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447712):
 it's the underscore I want
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447715):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447715):
 sorry
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 02 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447716):
+#### [ Mario Carneiro (Jun 02 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447716):
 `R_i` parsed as nonatomic is a terrible idea, underscores are used *gratuitously* in lean as spaces that don't break the identifier
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447718):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447718):
 We would always talk about a family $$R_i$$ of rings
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447722):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447722):
 how about subscript i?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 02 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447728):
+#### [ Mario Carneiro (Jun 02 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447728):
 That's actually been discussed before too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447730):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447730):
 proper subscript would be brilliant
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 02 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447731):
+#### [ Mario Carneiro (Jun 02 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447731):
 Did you know there is a subscript for every letter except q?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447734):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447734):
 sometimes I know that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447776):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447776):
 I have been browsing that file
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447778):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447778):
 I was looking for cool curly sheaf notation :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 02 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447796):
+#### [ Mario Carneiro (Jun 02 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447796):
 Anyway I suggest you don't try too hard to perfectly replicate all the inconsistencies in math notation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 02 2018 at 03:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447893):
+#### [ Simon Hudon (Jun 02 2018 at 03:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447893):
 As an additional note, I believe an identifier followed by a subscript (like `fooₐ`) is treated as one big identifier, not as `foo` followed by `ₐ`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 02 2018 at 03:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127448374):
+#### [ Kevin Buzzard (Jun 02 2018 at 03:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127448374):
 Yes I'm sure you're right. It would just look less nerdy
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 02 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127448450):
+#### [ Simon Hudon (Jun 02 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127448450):
 Hmmm, a mathematician complaining about looking too nerdy ...
 
 

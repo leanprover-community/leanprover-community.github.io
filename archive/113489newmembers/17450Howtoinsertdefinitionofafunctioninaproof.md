@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/17450Howtoinsertdefinitionofafunctioninaproo
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 02:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136147887):
+#### [ Tobias Grosser (Oct 20 2018 at 02:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136147887):
 Hi, I again have a simple beginners questions. The definition of
 ```lean
 def Gaussian_elimination [decidable_eq α] [has_inv α]:
@@ -62,28 +62,28 @@ M : matrix (fin m) (fin m) α
 
 I expected a simple `rw Gaussian_elimination` to inline the definition of Gaussian_eliminatin into the proof. But unfortunately this did not work out. Any ideas what I did wrong?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 02:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148002):
+#### [ Tobias Grosser (Oct 20 2018 at 02:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148002):
 I unfortunately just get "failed"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 20 2018 at 03:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148305):
+#### [ Chris Hughes (Oct 20 2018 at 03:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148305):
 It will only reduce if it's applied to `m+1` or `0`, not `m`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 03:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148381):
+#### [ Tobias Grosser (Oct 20 2018 at 03:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148381):
 I see.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 03:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148383):
+#### [ Tobias Grosser (Oct 20 2018 at 03:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148383):
 Any quick pointer how I introduce m+1 or 0?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 03:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148439):
+#### [ Tobias Grosser (Oct 20 2018 at 03:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148439):
 Found it. Just need to do 'induction m'.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 03:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148481):
+#### [ Tobias Grosser (Oct 20 2018 at 03:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136148481):
 Thanks a lot, this was easy.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136149746):
+#### [ Tobias Grosser (Oct 20 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136149746):
 OK, the basecase is now also proofen. Learned the 'ext' tactic and fin_zero_elim.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136149747):
+#### [ Tobias Grosser (Oct 20 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136149747):
 I am now in
 ```lean
 case nat.succ
@@ -114,46 +114,46 @@ M : matrix (fin (nat.succ m_n)) (fin (nat.succ m_n)) α
     M
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136149749):
+#### [ Tobias Grosser (Oct 20 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136149749):
 That seems complicated.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 03:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136149755):
+#### [ Tobias Grosser (Oct 20 2018 at 03:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136149755):
 In case anybody wants to drop me a bone, this would be appreciated.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 20 2018 at 04:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150894):
+#### [ Chris Hughes (Oct 20 2018 at 04:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150894):
 `funext` is a start
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150900):
+#### [ Tobias Grosser (Oct 20 2018 at 04:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150900):
 Thanks.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 20 2018 at 04:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150903):
+#### [ Chris Hughes (Oct 20 2018 at 04:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150903):
 But it looks really complicated.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150910):
+#### [ Tobias Grosser (Oct 20 2018 at 04:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150910):
 That's what I feel.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150950):
+#### [ Tobias Grosser (Oct 20 2018 at 04:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150950):
 Maybe I approach this from the wrong angle.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 20 2018 at 04:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150952):
+#### [ Chris Hughes (Oct 20 2018 at 04:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150952):
 What is `pick_encodable`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150953):
+#### [ Tobias Grosser (Oct 20 2018 at 04:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150953):
 I basically want to show that " (M : matrix (fin m) (fin m) α) : (getL M) *ₘ (getU M) = M :="
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150963):
+#### [ Tobias Grosser (Oct 20 2018 at 04:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150963):
 That comes from: `  let optional_ij := pick_encodable (α) (λ el, el ≠ 0) (x+1) (y+1) A in`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150969):
+#### [ Tobias Grosser (Oct 20 2018 at 04:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136150969):
 It finds a non-zero element in the matrix.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151009):
+#### [ Tobias Grosser (Oct 20 2018 at 04:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151009):
 And returns an optional.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 20 2018 at 04:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151011):
+#### [ Chris Hughes (Oct 20 2018 at 04:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151011):
 What is `getL`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151015):
+#### [ Tobias Grosser (Oct 20 2018 at 04:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151015):
 ```lean
 def getL [decidable_eq α] [has_inv α] {m n : nat}  (M : matrix (fin n) (fin m) α) :=
   let res := Gaussian_elimination n m M in
@@ -164,7 +164,7 @@ def getU [decidable_eq α] [has_inv α] {m n : nat}  (M : matrix (fin n) (fin m)
   res.2.1
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151022):
+#### [ Tobias Grosser (Oct 20 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151022):
 That's the full algorithm:
 ```lean
 def Gaussian_elimination [decidable_eq α] [has_inv α]:
@@ -203,169 +203,169 @@ def Gaussian_elimination [decidable_eq α] [has_inv α]:
      )
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151024):
+#### [ Tobias Grosser (Oct 20 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151024):
 It computes a matrix L, a matrix U and the rank of the matrix M.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151130):
+#### [ Tobias Grosser (Oct 20 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151130):
 I feel I should proof something simpler.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151131):
+#### [ Tobias Grosser (Oct 20 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151131):
 E.g. that the result matrix is in upper triangular form.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 20 2018 at 04:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151312):
+#### [ Chris Hughes (Oct 20 2018 at 04:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151312):
 What are `xrow` and `fin_swap` and `block_mx`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 04:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151515):
+#### [ Tobias Grosser (Oct 20 2018 at 04:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151515):
 https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151629):
+#### [ Tobias Grosser (Oct 20 2018 at 05:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151629):
 http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.652.3183&rep=rep1&type=pdf
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151630):
+#### [ Tobias Grosser (Oct 20 2018 at 05:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151630):
 Is the relevant paper.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151670):
+#### [ Tobias Grosser (Oct 20 2018 at 05:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151670):
 I just started playing around with it. See sec 3.1 for the relevant algorithm.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 20 2018 at 05:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151823):
+#### [ Chris Hughes (Oct 20 2018 at 05:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151823):
 That is surprising. I was going to say that my instinct would be to do it totally differently, and express each Gaussian elimination operation, as multiplication by a well chosen matrix, and prove the properties of the matrices that correspond to the Gaussian elimination operations. Georges Gonthier probably knows what he's doing though.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151874):
+#### [ Tobias Grosser (Oct 20 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151874):
 I am new to lean. Probably this problem is too difficult for now, but I feel I understand matrices so I want to follow a proof that already exists, is interesting and at the same time useful.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151877):
+#### [ Tobias Grosser (Oct 20 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151877):
 If you have advices what would be reasonable steps and which parts would be useful for mathlib, that would certainly be helpful.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151886):
+#### [ Tobias Grosser (Oct 20 2018 at 05:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151886):
 The paper justifies some of the choices they have taken.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151926):
+#### [ Tobias Grosser (Oct 20 2018 at 05:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151926):
 Now the proof structure itself can likely be changed without affecting everything that uses Gaussian elimination.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151927):
+#### [ Tobias Grosser (Oct 20 2018 at 05:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151927):
 Would be interesting to see if your proof idea might even be nicer than their original proof idea.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151977):
+#### [ Tobias Grosser (Oct 20 2018 at 05:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136151977):
 I doubt that the proof structure depends a lot on coq vs. lean, but if your proof is more accessible to people less advanced than Georges, this would be interesting to me.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 05:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152216):
+#### [ Mario Carneiro (Oct 20 2018 at 05:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152216):
 My guess is that translating so strictly from Coq is not going to come out well
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152260):
+#### [ Mario Carneiro (Oct 20 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152260):
 The thing about translations is that even though the axioms are similar, the *language*, in the informal sense, is different. We use different modes of speech for the same kinds of things
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152265):
+#### [ Mario Carneiro (Oct 20 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152265):
 and the library is "written in that language", meaning that you will encounter friction if you don't use it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 20 2018 at 05:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152284):
+#### [ Scott Morrison (Oct 20 2018 at 05:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152284):
 My student @**Jack Crawford** has also been looking at gaussian elimination. He's been using an inductive type describing individual steps of row operations.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 20 2018 at 05:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152293):
+#### [ Scott Morrison (Oct 20 2018 at 05:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152293):
 It acts like a "relation" between two matrices, but carries the data of the elementary matrix to multiply by.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152330):
+#### [ Tobias Grosser (Oct 20 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152330):
 Are you talking about Jack?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152334):
+#### [ Tobias Grosser (Oct 20 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152334):
 I mean, I obviously have no idea what the right approach is.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152336):
+#### [ Tobias Grosser (Oct 20 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152336):
 Just use this to learn stuff.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152341):
+#### [ Mario Carneiro (Oct 20 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152341):
 It might help to try to invent your own gaussian elimination
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152343):
+#### [ Mario Carneiro (Oct 20 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152343):
 rather than porting from coq
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152350):
+#### [ Mario Carneiro (Oct 20 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152350):
 Use the coq development and wikipedia to help you with the maths, and just focus on the lean encoding part
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152391):
+#### [ Tobias Grosser (Oct 20 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152391):
 So you feel my translation from coq is not very ideomatic in lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152394):
+#### [ Mario Carneiro (Oct 20 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152394):
 that's right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152397):
+#### [ Tobias Grosser (Oct 20 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152397):
 It seems to do what I want, so I am reasonably happy with it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152401):
+#### [ Mario Carneiro (Oct 20 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152401):
 in particular, I would work more with fintypes and less with fin n
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152402):
+#### [ Tobias Grosser (Oct 20 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152402):
 As I don't really know lean, I have zero feeling what would be more ideomatic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152410):
+#### [ Tobias Grosser (Oct 20 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152410):
 OK, I can change this. Not sure though if this would change the overall algorithm a lot.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 20 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152415):
+#### [ Mario Carneiro (Oct 20 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152415):
 I would be curious to hear how Jack is doing things differently
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152416):
+#### [ Tobias Grosser (Oct 20 2018 at 05:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152416):
 It might be interesting to look into the code from @**Jack Crawford**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152456):
+#### [ Tobias Grosser (Oct 20 2018 at 05:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152456):
 Yes.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152467):
+#### [ Tobias Grosser (Oct 20 2018 at 05:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152467):
 He promised to share the code, but his now on exam leave.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152478):
+#### [ Tobias Grosser (Oct 20 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152478):
 It seems Scott gave already quite some input on @**Jack Crawford** 's code, so I assume it is more ideomatic.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152479):
+#### [ Tobias Grosser (Oct 20 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152479):
 @**Scott Morrison|110087** , what is your goal with GE?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Oct 20 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152480):
+#### [ Jack Crawford (Oct 20 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152480):
 I really need to clean a few things up first and am currently on mobile so don’t have my code with me, but as Scott said, I’m just using inductive types to break row equivalence down into steps
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Oct 20 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152483):
+#### [ Jack Crawford (Oct 20 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152483):
 I’ll share the code as soon as I have it neater and a little more complete
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152523):
+#### [ Tobias Grosser (Oct 20 2018 at 05:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152523):
 Would it make sense to build up a matrix theory similar to http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.652.3183&rep=rep1&type=pdf
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152525):
+#### [ Tobias Grosser (Oct 20 2018 at 05:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152525):
 mathcomp.mxalgebra?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152526):
+#### [ Tobias Grosser (Oct 20 2018 at 05:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152526):
 Or is this not even useful in the context of lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152530):
+#### [ Tobias Grosser (Oct 20 2018 at 05:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152530):
 @**Jack Crawford** , no need to rush.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152535):
+#### [ Tobias Grosser (Oct 20 2018 at 05:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152535):
 I would be glad to look over your code to learn from it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Oct 20 2018 at 05:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152577):
+#### [ Jack Crawford (Oct 20 2018 at 05:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152577):
 I have an inductive type that represents a single “step” of a row equivalence, with a constructor for scaling, swapping, and linear addition of matrices, and then I have another inductive type that gives me the transitive closure of this.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Oct 20 2018 at 05:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152640):
+#### [ Jack Crawford (Oct 20 2018 at 05:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152640):
 Then I have a few functions that perform individual steps of the GE algorithm (putting the pivot in the right place, scaling the pivot, eliminating down the column). Then I show that the result of each of these steps are row-equivalent (by my previous inductive definition of row-equivalence) with the original matrix, and then I make a new function that just combines these steps of the Gaussian elimination in the obvious way, and show that it is also row-equivalent by carrying through my proofs that each of the individual steps that it is composed of is row-equivalent
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152643):
+#### [ Tobias Grosser (Oct 20 2018 at 05:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152643):
 I see.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Oct 20 2018 at 05:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152684):
+#### [ Jack Crawford (Oct 20 2018 at 05:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152684):
 and from my row-equivalence I can get the proof that the invertible matrix which represents all of the steps of the row reduction, times the original matrix, is in fact the row-reduced version of the matrix
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152685):
+#### [ Tobias Grosser (Oct 20 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152685):
 I see,
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152691):
+#### [ Tobias Grosser (Oct 20 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152691):
 Do you also compute an extended gaussian elimination similar to what 'Georges Gonthier' does?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152695):
+#### [ Tobias Grosser (Oct 20 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152695):
 Meaning, do you e.g. have proofs about the rank of the matrix?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Oct 20 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152907):
+#### [ Jack Crawford (Oct 20 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136152907):
 Not yet, I haven’t actually gotten to proving much at all yet because I’ve had to re-write substantial parts of my code a few times over now. Hopefully this will be the final iteration! Haven’t really given much of a thought to matrix rank yet
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136153002):
+#### [ Tobias Grosser (Oct 20 2018 at 05:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136153002):
 OK. Please ping me when it's time to look at your code.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 20 2018 at 05:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136153003):
+#### [ Tobias Grosser (Oct 20 2018 at 05:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136153003):
 Also, feedback on the Georges paper would be interesting.
 
 

@@ -11,7 +11,7 @@ permalink: archive/116395maths/69945Hausdorffification.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026443):
+#### [ Kenny Lau (Oct 18 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026443):
 ```lean
 import analysis.topology.continuity
 
@@ -51,70 +51,70 @@ instance Hausdorffification.t2_space :
     end }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026483):
+#### [ Kenny Lau (Oct 18 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026483):
 Is there any way to do this constructively?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 18 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026590):
+#### [ Johannes Hölzl (Oct 18 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026590):
 usually the relation is defined as "define $a \sim b$ if any open set containing $a$ intersects any open set containing $b$". maybe this works constructively?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026600):
+#### [ Kenny Lau (Oct 18 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026600):
 you need to iterate that transfinitely many times to have a T2 space
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026609):
+#### [ Kenny Lau (Oct 18 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026609):
 and that would involve induction-recursion (is the name right?) which is stronger than Lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026660):
+#### [ Mario Carneiro (Oct 18 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026660):
 Why? What is the idea behind this definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) David Michael Roberts (Oct 18 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026664):
+#### [ David Michael Roberts (Oct 18 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026664):
 https://ncatlab.org/nlab/show/Hausdorff+space#in_constructive_mathematics
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026689):
+#### [ Mario Carneiro (Oct 18 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026689):
 by the way, I think that the definition of T2 in mathlib is contrapositive of the right one
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026771):
+#### [ Mario Carneiro (Oct 18 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026771):
 which apparently nLab calls "weakly Hausdorff"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026901):
+#### [ Mario Carneiro (Oct 18 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026901):
 also, I don't see any nonconstructivity in that proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136042314):
+#### [ Kenny Lau (Oct 18 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136042314):
 I used not_forall
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136049981):
+#### [ Kenny Lau (Oct 18 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136049981):
 ```quote
 Why? What is the idea behind this definition
 ```
 quotient a lot until you get a T2 space, but don't quotient more than necessary
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136049993):
+#### [ Mario Carneiro (Oct 18 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136049993):
 what's the problem with Johannes's definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136050007):
+#### [ Kenny Lau (Oct 18 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136050007):
 that it doesn't produce a T2 space
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136050017):
+#### [ Mario Carneiro (Oct 18 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136050017):
 why
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136050064):
+#### [ Mario Carneiro (Oct 18 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136050064):
 like where does the proof break down
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136050068):
+#### [ Kenny Lau (Oct 18 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136050068):
 https://topospaces.subwiki.org/wiki/Hausdorffization#Example_to_illustrate_why_one_step_isn.27t_enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136061666):
+#### [ Mario Carneiro (Oct 18 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136061666):
 > you need to iterate that transfinitely many times to have a T2 space
 > and that would involve induction-recursion (is the name right?) which is stronger than Lean
 
 You don't need proof principles stronger than lean. You just need to know that the process stops eventually, by bounding the space of possible relations
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136061871):
+#### [ Mario Carneiro (Oct 18 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136061871):
 although topospaces wiki is shamefully cavalier about defining an ordinal indexed sequence of topological spaces with direct limits and then just saying "take $$h^\infty$$" as if that were well defined
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136061992):
+#### [ Mario Carneiro (Oct 18 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136061992):
 In lean, it is an interesting example of an inductive predicate that is positive but not strictly positive
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136062288):
+#### [ Mario Carneiro (Oct 18 2018 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136062288):
 ```
 inductive hausify : α → α → Prop
 | refl : ∀ x, hausify x x
@@ -124,7 +124,7 @@ inductive hausify : α → α → Prop
 ```
 This definition is monotone but not syntactically
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136062874):
+#### [ Mario Carneiro (Oct 18 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136062874):
 So here's how you can do the transfinite induction construction:
 ```lean
 inductive hausify1 (haus : α → α → Prop) : α → α → Prop
@@ -142,52 +142,52 @@ def hausify (x y : α) : Prop := ∃ r, hausify_transfinite r ∧ r x y
 ```
 Needless to say I prefer your definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 18 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136066103):
+#### [ Kenny Lau (Oct 18 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136066103):
 I prefer yours
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136066687):
+#### [ Mario Carneiro (Oct 18 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136066687):
 this whole construction is doing something similar to yours, quotienting by all relations that are hausdorffish
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 18 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136066706):
+#### [ Mario Carneiro (Oct 18 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136066706):
 it's easier to say `t2_space (quotient r)` than all this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136074995):
+#### [ Kenny Lau (Oct 19 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136074995):
 can you define ε_0 using that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075001):
+#### [ Kenny Lau (Oct 19 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075001):
 oh wait you already defined ordinal notations inductively
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075035):
+#### [ Kenny Lau (Oct 19 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075035):
 wait no I'm confused
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075791):
+#### [ Mario Carneiro (Oct 19 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075791):
 This allows you to do transfinite iteration over a fixed type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075805):
+#### [ Mario Carneiro (Oct 19 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075805):
 the key is the fact that it is all taking place in one complete lattice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075818):
+#### [ Kenny Lau (Oct 19 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075818):
 I see
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075820):
+#### [ Kenny Lau (Oct 19 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075820):
 So you can't define ordinals using this zero-lim-succ
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075869):
+#### [ Mario Carneiro (Oct 19 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075869):
 You have to build an inductive `Type` to do that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075877):
+#### [ Mario Carneiro (Oct 19 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075877):
 by the way epsilon_0 is the supremum of all ordinals with `ordinal_notation`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075881):
+#### [ Mario Carneiro (Oct 19 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075881):
 in case you wanted to define it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075909):
+#### [ Mario Carneiro (Oct 19 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075909):
 It is possible to extend ordinal notations to epsilon_0 and beyond using the veblen hierarchy, but I don't think anyone around here cares about large countable ordinals
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075974):
+#### [ Mario Carneiro (Oct 19 2018 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136075974):
 I think we also have what we need to define omega_1^CK using computable functions
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136093605):
+#### [ Kevin Buzzard (Oct 19 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136093605):
 Is this a reflection?
 
 

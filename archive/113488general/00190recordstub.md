@@ -11,11 +11,11 @@ permalink: archive/113488general/00190recordstub.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 20 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136169584):
+#### [ Reid Barton (Oct 20 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136169584):
 The hole command to create a record stub is really nice!
 Can any emacs gurus (@**Simon Hudon**?) tell me how I can write an emacs command that will insert `{! !}` at the point, navigate inside it (if necessary), and then invoke the Instance Stub hole command?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 20 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183553):
+#### [ Simon Hudon (Oct 20 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183553):
 Sure :) Let's go step by step. In your configuration file (`.emacs` or `.emacs.d/init.el`), create a function, let's say:
 
 ```emacs-lisp
@@ -23,7 +23,7 @@ Sure :) Let's go step by step. In your configuration file (`.emacs` or `.emacs.d
   (print "hello world"))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 20 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183684):
+#### [ Simon Hudon (Oct 20 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183684):
 You can change it a little so that you can invoke it from anywhere in emacs:
 
 ```emacs-lisp
@@ -34,7 +34,7 @@ You can change it a little so that you can invoke it from anywhere in emacs:
 
 Then, you just need `M-x lean-insert-stub` to invoke it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 20 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183728):
+#### [ Simon Hudon (Oct 20 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183728):
 And if you want it to actually do something: 
 
 ```emacs-lisp
@@ -43,31 +43,31 @@ And if you want it to actually do something:
   (insert "{!  !}"))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 20 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183809):
+#### [ Reid Barton (Oct 20 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183809):
 I tried having it call `(lean-hole)` next but I got an error even though repositioning the cursor after the insert isn't necessary interactively
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 20 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183855):
+#### [ Reid Barton (Oct 20 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183855):
 ```
 error in lean-server command handler: (wrong-type-argument number-or-marker-p nil)
 Server response was:
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 20 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183867):
+#### [ Simon Hudon (Oct 20 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183867):
 I'm looking at `lean-hole--command` instead
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 20 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183935):
+#### [ Reid Barton (Oct 20 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183935):
 It kind of looks like the lean mode is not designed to handle selecting a hole command non-interactively, in terms of the code structure
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 20 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184005):
+#### [ Reid Barton (Oct 20 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184005):
 Am I supposed to locally set this thing `completing-read-function`? Is that the "emacs way"?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 20 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184014):
+#### [ Reid Barton (Oct 20 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184014):
 not that that helps, when it is not getting that far yet
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 20 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184074):
+#### [ Simon Hudon (Oct 20 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184074):
 Yeah, now that I look more closely, it's not obvious
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 20 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184663):
+#### [ Simon Hudon (Oct 20 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184663):
 To be fair, I'm still new to emacs. Maybe @**Sebastian Ullrich** can shed some light. What I got so far is:
 
 ```emacs-lisp

@@ -11,16 +11,16 @@ permalink: archive/113488general/08893listoftactics.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jakob von Raumer (Mar 20 2018 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20of%20tactics/near/123967762):
+#### [ Jakob von Raumer (Mar 20 2018 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20of%20tactics/near/123967762):
 Is there a tactic that allows me to give a list of tactics where each one solves one goal?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 20 2018 at 16:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20of%20tactics/near/123967842):
+#### [ Simon Hudon (Mar 20 2018 at 16:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20of%20tactics/near/123967842):
 Yes try this: https://github.com/leanprover/lean/blob/master/library/init/meta/tactic.lean#L845-L847
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 20 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20of%20tactics/near/123967976):
+#### [ Mario Carneiro (Mar 20 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20of%20tactics/near/123967976):
 The interactive way to write this is `tac; [tac1, tac2, tac3]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 20 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20of%20tactics/near/123968190):
+#### [ Simon Hudon (Mar 20 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20of%20tactics/near/123968190):
 I should really stop assuming people are scripting when answering :stuck_out_tongue_closed_eyes:
 
 

@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/97741troublerunningleanonmac.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yuhan Du (Aug 13 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038880):
+#### [ Yuhan Du (Aug 13 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038880):
 ```
 dyn3218-19:bin apple$ ls
 lean		leanchecker	leanpkg
@@ -24,46 +24,46 @@ Abort trap: 6
 
 can someone help with this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038910):
+#### [ Mario Carneiro (Aug 13 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038910):
 I think if you are compiling it yourself there is some line to install `libgmp` in the readme?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038915):
+#### [ Kevin Buzzard (Aug 13 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038915):
 This is the current nightly
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038956):
+#### [ Kevin Buzzard (Aug 13 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038956):
 I just don't know how to install gmp on a mac
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038958):
+#### [ Kevin Buzzard (Aug 13 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038958):
 (or indeed how to do anything on a mac)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038960):
+#### [ Yulia Zaplatina (Aug 13 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038960):
 Homebrew solves the problem
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yulia Zaplatina (Aug 13 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038964):
+#### [ Yulia Zaplatina (Aug 13 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038964):
 https://brew.sh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038971):
+#### [ Kevin Buzzard (Aug 13 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038971):
 I think Homebrew solved a problem like this before. I should write this in the docs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 13:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132039153):
+#### [ Kevin Buzzard (Aug 13 2018 at 13:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132039153):
 Can one install Lean through homebrew? I'm guessing no
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 13 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132039278):
+#### [ Sean Leather (Aug 13 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132039278):
 I used to do it with Lean 2. I don't know if it's been kept up to date, though.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 13 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132039866):
+#### [ Sean Leather (Aug 13 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132039866):
 I just read the rest of the thread before Kevin's message. I believe Yulia is referring to installing `libgmp` via `brew install gmp`, which will probably fix Yuhan's problem.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 13 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132040275):
+#### [ Patrick Massot (Aug 13 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132040275):
 Since Lean is currently frozen, it seems like a very good time to update that brew thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132040340):
+#### [ Kevin Buzzard (Aug 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132040340):
 FWIW we have everything up and running now. On MacOS High Sierra we installed brew, and then `brew install gmp` (to get `lean` running) and `brew install coreutils` (to get `leanpkg` running).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132040348):
+#### [ Kevin Buzzard (Aug 13 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132040348):
 Yuhan also installed git somehow, or had git already, but that was before I arrived.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 13 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132040849):
+#### [ Sean Leather (Aug 13 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132040849):
 IIRC, `git` comes with the Xcode command line tools.
 
 

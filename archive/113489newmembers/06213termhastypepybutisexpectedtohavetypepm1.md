@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/06213termhastypepybutisexpectedtohavetypepm1
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 02 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150728969):
+#### [ Alistair Tucker (Dec 02 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150728969):
 Am I trying to do something impossible?
 ```lean
 theorem mwe {α : Type*} {p : α → Prop} (h : ∃ (y : α), p y) : ∃ (y : α), p y :=
@@ -22,7 +22,7 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729021):
+#### [ Kevin Buzzard (Dec 02 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729021):
 ```lean
 theorem mwe {α : Type*} {p : α → Prop} (h : ∃ (y : α), p y) : ∃ (y : α), p y := h
 
@@ -30,7 +30,7 @@ theorem mwe {α : Type*} {p : α → Prop} (h : ∃ (y : α), p y) : ∃ (y : α
 
 So the theorem is true, at least :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729038):
+#### [ Kevin Buzzard (Dec 02 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729038):
 ```lean
 theorem mwe {α : Type*} {p : α → Prop} (h : ∃ (y : α), p y) : ∃ (y : α), p y :=
 begin
@@ -40,7 +40,7 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 02 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729091):
+#### [ Kenny Lau (Dec 02 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729091):
 ```lean
 meta def tactic.interactive.result : tactic unit :=
 tactic.result >>= tactic.trace
@@ -57,19 +57,19 @@ exists.intro ?m_1 (Exists.dcases_on h (λ (y : α) (hy : p y), ?m_2[h, y, hy]))
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 02 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729095):
+#### [ Alistair Tucker (Dec 02 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729095):
 Yes :)  But there is some reason it's in that order. I think...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 02 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729096):
+#### [ Kenny Lau (Dec 02 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729096):
 (`result` is the proof term constructed at that particular moment)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 02 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729099):
+#### [ Kenny Lau (Dec 02 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729099):
 and you can see why this is impossible
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729154):
+#### [ Kevin Buzzard (Dec 02 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729154):
 After your application of `exists.intro` one of your goals has a metavariable, which is not at all ideal. I would recommend not using `apply exists.intro` for this sort of reason.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729224):
+#### [ Kevin Buzzard (Dec 02 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729224):
 ```lean
 theorem mwe {α : Type*} {p : α → Prop} (h : ∃ (y : α), p y) : ∃ (y : α), p y :=
 begin
@@ -91,10 +91,10 @@ end
 
 That's a way to dig yourself out of the hole.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729230):
+#### [ Kevin Buzzard (Dec 02 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729230):
 `#print axioms mwe -- classical.choice`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 02 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729285):
+#### [ Kenny Lau (Dec 02 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729285):
 ```lean
 theorem mwe {α : Type*} {p : α → Prop} (h : ∃ (y : α), p y) : ∃ (y : α), p y :=
 begin
@@ -109,23 +109,23 @@ exists.intro (classical.some h) (Exists.dcases_on h (λ (y : α) (hy : p y), cla
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 02 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729286):
+#### [ Alistair Tucker (Dec 02 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729286):
 Ha!  it turns out there was no good reason for putting it in that order :)
 What do you recommend instead of apply exists.intro?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729289):
+#### [ Kevin Buzzard (Dec 02 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729289):
 `use`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 02 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729290):
+#### [ Reid Barton (Dec 02 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729290):
 It would probably be better to do the `cases` first
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Dec 02 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729347):
+#### [ Rob Lewis (Dec 02 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729347):
 It's not always bad to `apply exists.intro` and have a metavar for one goal. Sometimes you want to just show the body of the exists, and let Lean figure out what the witness was by unification. (Like in Kenny's example.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 02 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729348):
+#### [ Kenny Lau (Dec 02 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729348):
 I'm surprised the `_` worked
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729351):
+#### [ Kevin Buzzard (Dec 02 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729351):
 ```lean
 import tactic.interactive
 
@@ -139,16 +139,16 @@ end
 #print axioms mwe -- no axioms
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 02 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729362):
+#### [ Alistair Tucker (Dec 02 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729362):
 "use" is a tactic?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729365):
+#### [ Kevin Buzzard (Dec 02 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729365):
 As of about a week ago
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729375):
+#### [ Kevin Buzzard (Dec 02 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729375):
 `existsi` is an older one, it's a bit less robust but it would work here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729418):
+#### [ Kevin Buzzard (Dec 02 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729418):
 ```lean
 theorem mwe {α : Type*} {p : α → Prop} (h : ∃ (y : α), p y) : ∃ (y : α), p y :=
 begin
@@ -158,19 +158,19 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729420):
+#### [ Kevin Buzzard (Dec 02 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729420):
 no import needed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 02 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729424):
+#### [ Alistair Tucker (Dec 02 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729424):
 Thank you all
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 02 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729433):
+#### [ Reid Barton (Dec 02 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729433):
 Your original one didn't work because you wanted `exact hy` to also solve the other goal with `y`, but `y` was not in scope for the other goal!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729480):
+#### [ Kevin Buzzard (Dec 02 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729480):
 Yes! And it's hard to get access to it too, because `\exists` only eliminates to `Prop`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 02 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729501):
+#### [ Kenny Lau (Dec 02 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729501):
 again, you can see it using this:
 ```lean
 meta def tactic.interactive.result : tactic unit :=
@@ -188,10 +188,10 @@ exists.intro ?m_1 (Exists.dcases_on h (λ (y : α) (hy : p y), ?m_2[h, y, hy]))
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 02 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729503):
+#### [ Kenny Lau (Dec 02 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729503):
 there's no way to unify `?m_1` with `y` because `y` doesn't even exist in the scope of `?m_1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729543):
+#### [ Kevin Buzzard (Dec 02 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150729543):
 [just to be clear -- Kenny's code doesn't run]
 
 

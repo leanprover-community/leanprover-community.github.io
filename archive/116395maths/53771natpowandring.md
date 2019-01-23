@@ -11,7 +11,7 @@ permalink: archive/116395maths/53771natpowandring.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 09 2018 at 03:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802027):
+#### [ Kevin Buzzard (Jun 09 2018 at 03:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802027):
 ```lean
 import tactic.ring 
 
@@ -22,43 +22,43 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 09 2018 at 03:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802028):
+#### [ Kevin Buzzard (Jun 09 2018 at 03:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802028):
 Could I have done that in one line with `ring`? [using some options or something]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 09 2018 at 03:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802751):
+#### [ Andrew Ashworth (Jun 09 2018 at 03:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802751):
 [deleted - incorrect information]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 09 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802943):
+#### [ Kevin Buzzard (Jun 09 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802943):
 So I could make an even cooler ring tactic by writing a tactic which tries to do those unfolds and then applies ring?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 09 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802946):
+#### [ Kevin Buzzard (Jun 09 2018 at 03:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802946):
 Is life that easy?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 09 2018 at 03:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127803089):
+#### [ Andrew Ashworth (Jun 09 2018 at 03:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127803089):
 [deleted - incorrect information]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 09 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127803099):
+#### [ Andrew Ashworth (Jun 09 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127803099):
 [deleted - incorrect information]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 09 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127808199):
+#### [ Mario Carneiro (Jun 09 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127808199):
 ring should handle powers... it automatically handles ring like operations that make sense as polynomial expressions, although it can't handle x^n for nonconstant n
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 09 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127808250):
+#### [ Mario Carneiro (Jun 09 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127808250):
 in particular it has optimizations for sparse polynomials like x^100 + x, which requires interpreting ^
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jun 09 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127809868):
+#### [ Andrew Ashworth (Jun 09 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127809868):
 that's pretty sweet! I didn't expect that you'd put that much effort into the tactic. thanks for writing it!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 09 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127816599):
+#### [ Kevin Buzzard (Jun 09 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127816599):
 Yes thanks very much indeed for writing it. It is an essential part of the "mathematician's interface" to Lean. Writing it was I'm sure nontrivial but at the end of the day, as I know I've said before, if a mathematician can't prove things like the example above with one or two lines then they will never take to Lean.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 09 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127816655):
+#### [ Kevin Buzzard (Jun 09 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127816655):
 Just to be clear -- in the example above `ring` falls without the initial unfolding
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 09 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127816664):
+#### [ Patrick Massot (Jun 09 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127816664):
 The `ring` tactic is already very useful but it has bugs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 09 2018 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127822932):
+#### [ Johan Commelin (Jun 09 2018 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127822932):
 How hard would it be to state a theorem about the `ring` tactic, and prove that the implementation is compliant? Then we are sure we won't have bugs. But I guess that the `meta` stuff makes this complicated.
 
 

@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/25823Provingn2notequal2.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Yuhan Du (Aug 31 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132228):
+#### [ Yuhan Du (Aug 31 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132228):
 I am trying to prove the statement that $$n^2 \neq 2$$
 ```lean
 import algebra.group_power
@@ -19,25 +19,25 @@ theorem what_i_need: ¬ (∃ n : ℤ , n ^ 2 = 2 ) := sorry
 ```
 Could someone possibly help me?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 31 2018 at 18:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132637):
+#### [ Kevin Buzzard (Aug 31 2018 at 18:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132637):
 Yesterday there was some chat about proving integer squares were 0 or 1 or 4 mod 8. It just occurs to me that an analogous approach mod 4 would do this (or mod 3)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 31 2018 at 18:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132650):
+#### [ Kevin Buzzard (Aug 31 2018 at 18:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132650):
 https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/0.3C.3Dd.3C3.20implies.20d.3D0.2C1.2C2
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 31 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132662):
+#### [ Patrick Massot (Aug 31 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132662):
 have you looked at https://github.com/leanprover/mathlib/blob/master/data/nat/prime.lean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133133995):
+#### [ Mario Carneiro (Aug 31 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133133995):
 Well, this is quite a bit easier than proving that sqrt 2 is irrational
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134009):
+#### [ Mario Carneiro (Aug 31 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134009):
 You can do it by cases on `n.nat_abs`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134023):
+#### [ Mario Carneiro (Aug 31 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134023):
 too small when it is 0 or 1, too big when it is >= 2
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 31 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134030):
+#### [ Chris Hughes (Aug 31 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134030):
 This is one method.
 ```lean
 import data.zmod
@@ -47,22 +47,22 @@ example : ¬ ∃ n : ℤ, n ^ 2 = 2 :=
 by have := h n; rw ← hn at this; simpa
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 31 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134087):
+#### [ Kevin Buzzard (Aug 31 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134087):
 The congruence trick is somehow better -- if a positive integer is not a square then it's not a square mod p for infinitely many p, and so you can just work in zmod p for the smallest such p :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 31 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134103):
+#### [ Chris Hughes (Aug 31 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134103):
 It's also not very easy to come up with.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134107):
+#### [ Mario Carneiro (Aug 31 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134107):
 Even easier, you can square the square root and see if it matches
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134115):
+#### [ Mario Carneiro (Aug 31 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134115):
 that should make it an easy dec_trivial proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 31 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134185):
+#### [ Kevin Buzzard (Aug 31 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134185):
 Oh that's a good idea -- prove that n is a square iff (sqrt n)^2=n
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 31 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134869):
+#### [ Chris Hughes (Aug 31 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134869):
 Not quite sure why this doesn't work
 ```lean
 
@@ -77,43 +77,43 @@ lemma two_not_square : ¬ ∃ n : ℤ, n ^ 2 = 2 := dec_trivial
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134933):
+#### [ Mario Carneiro (Aug 31 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134933):
 `nat.sqrt` is defined through well founded recursion, which may cause a problem on all but the simplest problems. A similar issue came up with `nat.prime`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134946):
+#### [ Mario Carneiro (Aug 31 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134946):
 I assume the `#eval` worked
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 31 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134958):
+#### [ Chris Hughes (Aug 31 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133134958):
 The eval did work. So the issue is that it's just too slow?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133135006):
+#### [ Mario Carneiro (Aug 31 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133135006):
 I think it won't reduce well founded proofs because it requires evaluating theorems
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133135016):
+#### [ Mario Carneiro (Aug 31 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133135016):
 you can probably get `#reduce` to do it but that's not so helpful
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133135036):
+#### [ Mario Carneiro (Aug 31 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133135036):
 We need another `norm_num` extension for this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 31 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133135213):
+#### [ Chris Hughes (Aug 31 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133135213):
 Why can I prove `example : nat.gcd 4 5 = 1 := rfl`? That uses well founded recursion I take it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 31 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133135479):
+#### [ Mario Carneiro (Aug 31 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133135479):
 I think it is just a complexity problem. The `#reduce` times out for the sqrt example but not gcd
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 01 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133171042):
+#### [ Patrick Massot (Sep 01 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133171042):
 This thread is really depressing. Sometimes I feel like we are going somewhere (like when we make progress on topological groups or noetherian modules) but then some super elementary problem is raised and we abruptly come back to reality: trivial things are not trivial at all in Lean.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 01 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133171440):
+#### [ Kevin Buzzard (Sep 01 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133171440):
 The proof that there's no integer whose square is 2 is "it doesn't work for small n, and big n are too big". Formalising this is a bore. Automating it is possible, but it hasn't been done yet. That's not depressing, it just means things need to be done. Chris made an attempt. In 1 year's time there might be 10 Chris's at Imperial (here's hoping).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Sever (Sep 01 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133175553):
+#### [ Ali Sever (Sep 01 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133175553):
 I aspire to be a Chris one day
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 01 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133175779):
+#### [ Kevin Buzzard (Sep 01 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133175779):
 That would be great Ali :-) come along on Thursday evenings in Oct and help me deal with the inevitable pile of freshers!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 01 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133177505):
+#### [ Kenny Lau (Sep 01 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133177505):
 ```lean
 import data.nat.basic algebra.group_power
 
@@ -164,25 +164,25 @@ decidable_of_iff (∃ k, k * k = n)
 theorem what_i_need: ¬ (∃ n : ℤ , n ^ 2 = 2 ) := dec_trivial
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 01 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133177509):
+#### [ Kenny Lau (Sep 01 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133177509):
 btw the first part of my code is from [this discussion](https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/bounded.20exists.20decidable/near/125567139) four months ago
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 01 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133177515):
+#### [ Kenny Lau (Sep 01 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133177515):
 (and mathlib still doesn't know it's true :P)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 01 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133177567):
+#### [ Kenny Lau (Sep 01 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133177567):
 ```quote
 This thread is really depressing. Sometimes I feel like we are going somewhere (like when we make progress on topological groups or noetherian modules) but then some super elementary problem is raised and we abruptly come back to reality: trivial things are not trivial at all in Lean.
 ```
 @**Patrick Massot** Well this is just a puzzle that cannot be generalized to more useful maths...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 01 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133177980):
+#### [ Mario Carneiro (Sep 01 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133177980):
 Yes, of course this is the other option - to check n is a square, just look at all the squares and see if n is in the list. It is much slower than squaring the square root, but it works better in small cases in the kernel since there are no wf definitions involved
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 01 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133178989):
+#### [ Patrick Massot (Sep 01 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133178989):
 Kenny, why don't you PR the general stuff above? That could be useful in lots of small annoying situations
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 01 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133178993):
+#### [ Bryan Gin-ge Chen (Sep 01 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133178993):
 Following Patrick Massot's suggestion to look at `data.nat.prime`, I started trying to prove it using `nat.not_prime_mul`but I got stuck.
 ```lean
 import algebra.group_power data.nat.prime
@@ -206,22 +206,22 @@ end
 ```
 I think the main thing I'm missing how to do is showing that proving it for $$1<n \in \mathbb{N}$$ suffices to show it for all $$n\in\mathbb{Z}$$.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 01 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179095):
+#### [ Mario Carneiro (Sep 01 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179095):
 In this direction, I suggest proving `¬ nat.prime (n*n)`. It has no assumptions, but you have to special case 0 and 1
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 01 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179096):
+#### [ Patrick Massot (Sep 01 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179096):
 yes, this is what I had in mind
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 01 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179135):
+#### [ Patrick Massot (Sep 01 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179135):
 I hoped that proving that from prime.lean wouldn't be too hard
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 01 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179143):
+#### [ Mario Carneiro (Sep 01 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179143):
 I thought it was a theorem already but I could be mistaken
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 01 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179146):
+#### [ Mario Carneiro (Sep 01 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179146):
 there is `not_prime_mul` which takes care of the large n case
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 01 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179308):
+#### [ Patrick Massot (Sep 01 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179308):
 Even without trying to go to the heart of the matter, natural number hell strikes:
 ```lean
 import algebra.group_power data.nat.prime
@@ -240,25 +240,25 @@ end
 ```
 The `rw h` doesn't work. `simp [h]` does work, but these kind of things is really the worse of Lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 01 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179314):
+#### [ Patrick Massot (Sep 01 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179314):
 And I'm not even talking about trying to deduce the result with integers instead of natural numbers
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 01 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179481):
+#### [ Mario Carneiro (Sep 01 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179481):
 you have to use `rw ← nat.pow_two`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 01 2018 at 16:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179740):
+#### [ Patrick Massot (Sep 01 2018 at 16:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179740):
 I'm sure there is a solution, but having to know all that is really painful
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 01 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179820):
+#### [ Mario Carneiro (Sep 01 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179820):
 most of this "ambient knowledge" is encoded in the simp lemmas, which is why `simp [h]` worked. If you look at the rewrites used you will see normalization of the group_power instance on nat to `nat.pow`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 01 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179863):
+#### [ Mario Carneiro (Sep 01 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179863):
 the problem is that `nat` has two power notations, one elementary from `nat.pow` and another from the group power instance
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 01 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179866):
+#### [ Mario Carneiro (Sep 01 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133179866):
 `nat.pow` is the canonical one, at least until it is removed (it's in core)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 01 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133180082):
+#### [ Patrick Massot (Sep 01 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133180082):
 @**Bryan Gin-ge Chen** 
 ```lean
 import algebra.group_power data.nat.prime
@@ -285,10 +285,10 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 01 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133180087):
+#### [ Patrick Massot (Sep 01 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133180087):
 This is still cheating because there is nothing about negative integers
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Sep 04 2018 at 05:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133288582):
+#### [ Bryan Gin-ge Chen (Sep 04 2018 at 05:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133288582):
 A few days late and not very pretty, but I managed to complete your proof @**Patrick Massot** 
 ```lean
 import algebra.group_power data.nat.prime
@@ -339,7 +339,7 @@ end
 ```
 I think I learned a few things along the way, though it still feels like I've got a long way to go before I can do anything useful...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 04 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133295018):
+#### [ Kevin Buzzard (Sep 04 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133295018):
 of course anyone reading this thread and seeing several very long proofs that 2 isn't a square might argue that we all have a long way to go before we can do anything useful...
 
 

@@ -11,10 +11,10 @@ permalink: archive/113488general/90648masterbranchisbroken.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 07 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340328):
+#### [ Scott Morrison (Oct 07 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340328):
 Ugh, `master` is broken in mathlib.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 07 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340329):
+#### [ Scott Morrison (Oct 07 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340329):
 ```
 arguta:mathlib scott$ git status
 On branch master
@@ -34,19 +34,19 @@ h₂ : r ↔ s
 ⊢ p ↔ s
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Oct 07 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340330):
+#### [ Scott Morrison (Oct 07 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340330):
 (I spent 20 minutes trying to work out how my branch had broken something, before realising it wasn't my fault.)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 07 2018 at 08:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340368):
+#### [ Simon Hudon (Oct 07 2018 at 08:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340368):
 My bad. we should comment out those tests while I'm fixing that tactic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 07 2018 at 08:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340518):
+#### [ Simon Hudon (Oct 07 2018 at 08:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340518):
 @**Mario Carneiro** Can you comment out these test cases please?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 07 2018 at 08:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340525):
+#### [ Mario Carneiro (Oct 07 2018 at 08:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340525):
 eh, can you PR it? It takes me an hour to move to and from `module` branch
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 07 2018 at 08:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340729):
+#### [ Simon Hudon (Oct 07 2018 at 08:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340729):
 Here you go: https://github.com/leanprover/mathlib/pull/398
 
 

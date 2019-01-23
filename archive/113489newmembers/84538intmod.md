@@ -11,85 +11,85 @@ permalink: archive/113489newmembers/84538intmod.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906477):
+#### [ petercommand (Nov 01 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906477):
 Trying to prove `int.mod (int.of_nat a_1) ↑p < ↑p` in lean, but I wasn't able to unfold int.mod.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906517):
+#### [ Mario Carneiro (Nov 01 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906517):
 there should be a theorem called `int.mod_lt` for this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906523):
+#### [ Mario Carneiro (Nov 01 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906523):
 it is `int.mod_lt_of_pos` and it isn't true when `a_1 = 0`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906589):
+#### [ petercommand (Nov 01 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906589):
 I can't find int.mod_lt in C-c C-d
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906637):
+#### [ petercommand (Nov 01 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906637):
 There is nat.mod_lt though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 01 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906692):
+#### [ Johan Commelin (Nov 01 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906692):
 @**petercommand** Welcome! Can you tell if Mario's suggestion works?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906699):
+#### [ petercommand (Nov 01 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906699):
 no
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 01 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906705):
+#### [ Johan Commelin (Nov 01 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906705):
 Ok, can you give a more detailed version of what you want to prove? A "minimal working example" (MWE)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 01 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906750):
+#### [ Johan Commelin (Nov 01 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906750):
 So something of the form
 ```lean
 lemma foobar (p : ??) (a_1 : int) : int.mod (int.of_nat a_1) ↑p < ↑p := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906810):
+#### [ petercommand (Nov 01 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906810):
 `def test : Π (a b : ℤ) (p : ℕ), (a + b) % p < p := sorry `
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 01 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906902):
+#### [ Johan Commelin (Nov 01 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906902):
 That isn't true if `p = 0`, right?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 01 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906960):
+#### [ Mario Carneiro (Nov 01 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906960):
 Do you have mathlib? `int.mod_lt_of_pos` is in `data.int.basic`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906989):
+#### [ petercommand (Nov 01 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906989):
 @**Johan Commelin**  ah, it should be `def test : Π (a b : ℤ) (p : ℕ) (p >= 2), (a + b) % p < p := sorry`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907038):
+#### [ petercommand (Nov 01 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907038):
 @**Mario Carneiro**  Ah..Thanks! I didn't set up mathlib
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907099):
+#### [ petercommand (Nov 01 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907099):
 why wasn't I able to unfold `int.mod` though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 01 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907272):
+#### [ Johan Commelin (Nov 01 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907272):
 I guess it is some sort of inductive definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907273):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907273):
 `int` is an inductive type with two constructors. `int.mod` eats an `int`, and how it unfolds depends on which constructor you use -- `int.mod` can't unfold unless it knows which it is.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907290):
+#### [ petercommand (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907290):
 Which, in `int.of_nat a_1`, is `of_nat`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907291):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907291):
 But on the other hand you probably don't want to be unfolding `int.mod`. The devs will have made all the infrastructure you need, at least that's the philosophy.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907296):
+#### [ petercommand (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907296):
 True
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907297):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907297):
 If you post a MWE I can try to help.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907354):
+#### [ petercommand (Nov 01 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907354):
 `def test : Π (a p : ℕ) (p > 0) , int.mod (int.of_nat a) ↑p < ↑p := sorry ` something like this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907408):
+#### [ petercommand (Nov 01 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907408):
 Thanks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907429):
+#### [ petercommand (Nov 01 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907429):
 My first MWE wasn't clear, this one should be a bit better
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907479):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907479):
 the answer appears to be that the exact definition of `int.mod` uses `↑a` instead of `int.of_nat a`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907498):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907498):
 ```lean
 def test : Π (a p : ℕ) (p > 0) , int.mod (int.of_nat a) ↑p < ↑p := 
 begin
@@ -100,22 +100,22 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907500):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907500):
 All the more reason why you shouldn't be unfolding it ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907578):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907578):
 I just wrote `#check int.mod` and then right clicked on `int.mod` and peeked the actual definition.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907650):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907650):
 Of course the two things are definitionally equal: `example (a : ℕ) : int.of_nat a = ↑a := rfl `
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907654):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907654):
 But under the hood `unfold` is using `simp`, and I think `simp` can be fussy about not changing things to definitionally equal things.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907658):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907658):
 Well, that's my amateur diagnosis anyway.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907777):
+#### [ Kenny Lau (Nov 01 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907777):
 ```lean
 def test (a b : ℤ) (p : ℕ) (Hp : p ≥ 2) : (a + b) % p < p :=
 match a+b with
@@ -127,10 +127,10 @@ end
 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907786):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907786):
 A side comment -- I think `test` is not quite what you want to prove (AFK)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907800):
+#### [ Kenny Lau (Nov 01 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907800):
 ```lean
 def test (a b : ℤ) (p : ℕ) (Hp : p > 0) : (a + b) % p < p :=
 match a+b with
@@ -141,13 +141,13 @@ end
 ```
 (I just noticed that you changed the condition again)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907877):
+#### [ petercommand (Nov 01 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907877):
 hmm, this is quite annoying..I thought `int.mod` was directly matching on the constructor
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907942):
+#### [ petercommand (Nov 01 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907942):
 @**Kenny Lau** thanks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907960):
+#### [ Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907960):
 ```lean
 def test (a b : ℤ) (p : ℕ) (Hp : p > 0) : (a + b) % p < p :=
 match a+b with
@@ -156,16 +156,16 @@ match a+b with
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907961):
+#### [ Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907961):
 it is
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907966):
+#### [ Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907966):
 oh, and it isn't `def`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907967):
+#### [ Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907967):
 it's `theorem`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908008):
+#### [ Kenny Lau (Nov 01 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908008):
 ```lean
 theorem test (a b : ℤ) (p : ℕ) (Hp : p > 0) : (a + b) % p < p :=
 match a+b with
@@ -174,42 +174,42 @@ match a+b with
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908019):
+#### [ petercommand (Nov 01 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908019):
 aren't they synonyms?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908020):
+#### [ Kenny Lau (Nov 01 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908020):
 no
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908028):
+#### [ petercommand (Nov 01 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908028):
 what's different between def and thoerem?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908031):
+#### [ Kenny Lau (Nov 01 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908031):
 def is data
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908032):
+#### [ Kenny Lau (Nov 01 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908032):
 theorem is proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908082):
+#### [ petercommand (Nov 01 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908082):
 I mean, semantically, are they different?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908095):
+#### [ Kenny Lau (Nov 01 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908095):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908114):
+#### [ petercommand (Nov 01 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908114):
 proof irrelevance?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908179):
+#### [ petercommand (Nov 01 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908179):
 https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html
 Ah, it says that 
 `by proof irrelevance, any two proofs of that theorem are definitionally equal.`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908184):
+#### [ Kenny Lau (Nov 01 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908184):
 ```lean
 theorem x : nat := 5
 def test : x=5 := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908186):
+#### [ Kenny Lau (Nov 01 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908186):
 ```quote
 https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html
 Ah, it says that 
@@ -217,7 +217,7 @@ Ah, it says that
 ```
 that's irrelevant
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908209):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908209):
 Kenny, independent of that def/theorem business, what's happening below? @**petercommand** 's original formulation of the MWE has something wrong with it I think:
 
 ```lean
@@ -232,7 +232,7 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908253):
+#### [ Kenny Lau (Nov 01 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908253):
 ```lean
 def test : 5=5 := rfl
 #print prefix test
@@ -248,105 +248,105 @@ test2 : 5 = 5
 -/
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908274):
+#### [ Kenny Lau (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908274):
 @**Kevin Buzzard** lol the conditions keep changing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908278):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908278):
 I think the `p` in `forall p` isn't the same as the `p` in `p > 0`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908282):
+#### [ Kenny Lau (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908282):
 @**petercommand** can you make up your mind?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908284):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908284):
 I never changed anything, I just copied his MWE.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908289):
+#### [ Kenny Lau (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908289):
 ```quote
 I think the `p` in `forall p` isn't the same as the `p` in `p > 0`.
 ```
 I think it's the same
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908332):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908332):
 Did you look at my tactic mode post?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908334):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908334):
 There's an extra nat
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908337):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908337):
 `-- ??`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908349):
+#### [ Kenny Lau (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908349):
 I don't know why you have 4 `intro`s
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908354):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908354):
 because Lean is asking for 4. That's the point I'm trying to make
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908359):
+#### [ Kenny Lau (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908359):
 what do you mean Lean is asking for 4
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908366):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908366):
 What do you mean? The function wants 4 inputs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908367):
+#### [ Kenny Lau (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908367):
 that's spooky
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908369):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908369):
 Must be Halloween.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908412):
+#### [ Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908412):
 oh!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908413):
+#### [ petercommand (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908413):
 o.o
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908420):
+#### [ Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908420):
 lol
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908427):
+#### [ Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908427):
 ```lean
 theorem test : Π (a : ℕ) (p > 0) , int.mod (int.of_nat a) ↑p < ↑p :=
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908428):
+#### [ Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908428):
 `>` is a binder or something
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908432):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908432):
 right
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908489):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908489):
 @**petercommand** this is fine: `theorem test : ∀ (a p : ℕ), (p > 0) → int.mod (int.of_nat a) ↑p < ↑p :=`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908504):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908504):
 but `(p > 0)` before the comma gets interpreted as "and there's another variable p, different to the p you just mentioned"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908516):
+#### [ Kenny Lau (Nov 01 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908516):
 I don't think @**petercommand** has tested his "MWE" before posting
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908518):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908518):
 `def test' : Π (a : ℕ) (p > 0) , int.mod (int.of_nat a) ↑p < ↑p := ` is OK
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908521):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908521):
 I just made it a bit more minimal, that's all ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908569):
+#### [ petercommand (Nov 01 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908569):
 ```quote
 I don't think @**petercommand** has tested his "MWE" before posting
 ```
 Yeah, I should've tested the MWEs o.o Thought that was simple enough
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908575):
+#### [ Kenny Lau (Nov 01 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908575):
 ```lean
 theorem test' (a : ℕ) (p > 0) : int.mod (int.of_nat a) ↑p < ↑p :=
 int.coe_nat_lt_coe_nat_of_lt (nat.mod_lt _ H)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908636):
+#### [ petercommand (Nov 01 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908636):
 Hmm, actually, I tested the MWEs, but didn't discover that I got one more variable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) petercommand (Nov 01 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908637):
+#### [ petercommand (Nov 01 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908637):
 anyway
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908828):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908828):
 ```lean
 import data.int.basic
 
@@ -354,58 +354,58 @@ theorem test' (a p : ℕ) (H : p > 0) : int.mod (int.of_nat a) ↑p < ↑p :=
 int.mod_lt_of_pos a (int.coe_nat_lt_coe_nat_of_lt H)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 01 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908830):
+#### [ AHan (Nov 01 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908830):
 @**Kenny Lau**  About the difference between "def" and "theorem", why is there test.eqations._eqn_1 appeared in your example
 `def test : 5=5 := rfl
 #print prefix test`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908835):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908835):
 because Kenny (intentionally) wrote bad code
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908842):
+#### [ Kenny Lau (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908842):
 because `test` is now a definition so it has definitional equations
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908844):
+#### [ Kenny Lau (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908844):
 just write any old definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908846):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908846):
 If you use def instead of theorem or theorem instead of def, expect random things
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908858):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908858):
 because they were not designed to be used in these circumstances
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908901):
+#### [ Kenny Lau (Nov 01 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908901):
 undocumented behaviour... lul
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908906):
+#### [ Kevin Buzzard (Nov 01 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908906):
 I think "garbage in, garbage out" is well documented in the literature
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 01 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908975):
+#### [ AHan (Nov 01 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908975):
 What does the definitional equations refers to here?
 And how to use it in a normal def?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909036):
+#### [ Kenny Lau (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909036):
 you don't really use it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909041):
+#### [ Kenny Lau (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909041):
 it's internal mechanism
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909042):
+#### [ Kevin Buzzard (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909042):
 Every time you make a definition (especially a nice complicated one, maybe with pattern matching) Lean creates some secret "equation lemmas"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909043):
+#### [ Kevin Buzzard (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909043):
 and when you try and unfold the definition, Lean uses these lemmas
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909058):
+#### [ Kevin Buzzard (Nov 01 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909058):
 As Kenny says, this is all done internally and the user is not supposed to have to worry about it. It's basically the trick which makes "unfold" work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909070):
+#### [ Kevin Buzzard (Nov 01 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909070):
 `unfold X` is `simp only [equation lemmas for X]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 01 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909131):
+#### [ Kevin Buzzard (Nov 01 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909131):
 (this is my slightly amateurish understanding of it -- I am a mathematician so shouldn't really be talking about implementation issues)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Nov 01 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909163):
+#### [ AHan (Nov 01 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909163):
 Are they the beta reduction rules?
 
 

@@ -11,7 +11,7 @@ permalink: archive/113488general/00468OferGabberonformalproof.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 17 2019 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ofer%20Gabber%20on%20formal%20proof/near/155353065):
+#### [ Kevin Buzzard (Jan 17 2019 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ofer%20Gabber%20on%20formal%20proof/near/155353065):
 Ofer Gabber is an extremely precise pure mathematician, and has even been known to refuse to put his name on a paper containing joint work with others because he didn't 100% check all of the work of all of the other people. 
 
 He turned 60 recently and as part of the celebrations he was interviewed by Luc Illusie. Illusie asks Gabber about formal proof verification systems here:
@@ -32,12 +32,12 @@ referring explicitly to these diagrams commuting.
 
 The reason I think Gabber is wrong is that to verify that you typed the question into a computer correctly, you only need to check that your *definitions* are the right ones, and if you are proving complicated theorems about relatively simple objects (e.g. duality theorems about schemes) and you already proved 100 lemmas about these objects, then your definition is extremely likely to be correct by this point.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 17 2019 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ofer%20Gabber%20on%20formal%20proof/near/155361336):
+#### [ Mario Carneiro (Jan 17 2019 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ofer%20Gabber%20on%20formal%20proof/near/155361336):
 I think he is largely correct, but he overstates the difficulty of overcoming the problem. There *is* a danger of infinite regress, just as there is a danger of infinite regress in justifying axioms by recourse to intuitions that are formalized as more axioms, which themselves need justification... The whole point of axiomatic reasoning is to say "okay, this is the bottom, we are making no attempt to justify these statements mathematically so you should read these and convince yourself that they are correct / coherent with respect to your intuitions".
 
 The same thing happens in verified computation. You have programs that check proofs, and you have to trust that they are correct and don't smuggle in any false statements or "cheat" in the verification. You can verify these programs are correct, but then the methods by which you do this check are themselves open to criticism of the same kind. The way to break the loop is to have an equivalent of axioms, a program where you say "okay, this is the bottom, the 'trusted kernel' - we make no attempt to justify this is correct so you need to read it and believe it works in order to trust the results of everything after". So the correctness claim involves both the definitions involved as well as the programs doing the checking. The important part is that it does not involve the proof itself - this is where computers can lift the burden off the human to read through the whole argument and check every bit; instead the human has to read the meta-proof, the proof checker, and believe that it actually checks proofs.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Thales (Jan 17 2019 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ofer%20Gabber%20on%20formal%20proof/near/156326053):
+#### [ Thales (Jan 17 2019 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ofer%20Gabber%20on%20formal%20proof/near/156326053):
 Both Illusie and Gabber were at my talk on formal proofs at the Loeser conference a few weeks before this interview was published.  Illusie's question to Gabber was essentially the same question he asked me at the end of my talk.  Illusie wants a machine-verified way to check signs in commutative diagrams.  It is not uncommon for results only to hold up to a  unknown sign, and these signs can be hard to get right, and different papers have incompatible sign conventions.
 
 Gabber had questions and comments after my talk, and we also talked after my Bourbaki seminar on formal proofs a few years ago.    I'm not sure why he would have a issue with a trusted kernel with proof correctness verified by the type system.

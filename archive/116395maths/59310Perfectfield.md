@@ -11,7 +11,7 @@ permalink: archive/116395maths/59310Perfectfield.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 17 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135957480):
+#### [ Kenny Lau (Oct 17 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135957480):
 Currently this is my definition:
 ```lean
 /-- A perfect field is a field of characteristic p that has p-th root. -/
@@ -20,19 +20,19 @@ class perfect_field (α : Type u) [field α] (p : ℕ) [char_p α p] : Type u :=
 (frobenius_pth_root : ∀ x, frobenius α p (pth_root x) = x)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 17 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135957484):
+#### [ Kenny Lau (Oct 17 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135957484):
 Do you guys have a better suggestion?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 17 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135957489):
+#### [ Kenny Lau (Oct 17 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135957489):
 My idea is that we can change the definition once we have enough theory about separable polynomials.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 17 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135957495):
+#### [ Kenny Lau (Oct 17 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135957495):
 And go with this definition for now.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135990765):
+#### [ Mario Carneiro (Oct 17 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135990765):
 use `discrete_field`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135990773):
+#### [ Mario Carneiro (Oct 17 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135990773):
 `field` is deprecated
 
 

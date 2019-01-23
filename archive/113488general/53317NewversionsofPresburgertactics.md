@@ -11,7 +11,7 @@ permalink: archive/113488general/53317NewversionsofPresburgertactics.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Oct 30 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136761498):
+#### [ Seul Baek (Oct 30 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136761498):
 This project has been neglected for a long time, so I decided to tidy it up a bit. The new versions are available at https://github.com/skbaek/qe/. The main changes are :
 
 1. Now there are tactics for `nat`, although they are slower than `int` equivalents due to quantifiers added during translation
@@ -24,46 +24,46 @@ The main tactics are in the `main.lean` files of each directory. You can see the
 
 3 and 4 were done just to show that the shared-framework approach is viable. The idea (from [Tobias Nipkow](http://www21.in.tum.de/~nipkow/pubs/jar10.pdf)) is that QE-based FoL decision procedures mostly follow the same scheme, so the common part should be factored out using some module or typeclass system. Once this work is done, it is easy to cook up more decision procedures, since all you need to do is define (and prove soundness for) a single quantifier elimination step.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 30 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136763199):
+#### [ Patrick Massot (Oct 30 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136763199):
 Thanks! Could you include a glossary of what all those acronyms mean? Maybe in a README.md?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 30 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136763375):
+#### [ Patrick Massot (Oct 30 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136763375):
 What are all those commented out lines in the test files? Things that should work but don't?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 30 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136763429):
+#### [ Patrick Massot (Oct 30 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136763429):
 For the purpose of using tests as documentation, it would probably be more efficient to move those test files somewhere more visible
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Oct 30 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136764118):
+#### [ Seul Baek (Oct 30 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136764118):
 ```quote
 Thanks! Could you include a glossary of what all those acronyms mean? Maybe in a README.md?
 ```
 Yes, I should either do that, or actually give intelligible names to definitions, which I was too lazy to type out when doing the proofs.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Oct 30 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136764373):
+#### [ Seul Baek (Oct 30 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136764373):
 The commented out lines are either theorems which currently time out, or nontheorems which would be useful for testing the soundness of unverified vm-versions of the tactics (which currently don't exist, but are easy to implement if necessary).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Oct 30 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136764898):
+#### [ Seul Baek (Oct 30 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136764898):
 Do you mean that it would be useful to add some introductory information about the tactics for users, and include tests as part of it? So far I've been using the tests just to check that it works, but I guess you're right that this would be more helpful as documentation.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 30 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136765454):
+#### [ Rob Lewis (Oct 30 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136765454):
 Maybe call them "examples" instead of "tests," if they're being used as documentation. But yeah, this would be super helpful!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 30 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136765465):
+#### [ Rob Lewis (Oct 30 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136765465):
 How much of mathlib does this depend on?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 30 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136766401):
+#### [ Rob Lewis (Oct 30 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136766401):
 This looks great, by the way, I'm excited to try it out.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Oct 30 2018 at 11:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136767194):
+#### [ Seul Baek (Oct 30 2018 at 11:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136767194):
 It depends mainly on the `int` and `nat` libraries, along with some inequality stuff from algebraic libraries. At one point I needed some gcd lemmas not included in the master branch, so the current .toml file is tweaked to get 3.4.1 instead. But when I look for it now I can't pinpoint that incompatibility, so perhaps it works with master now.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Oct 30 2018 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136767205):
+#### [ Seul Baek (Oct 30 2018 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136767205):
 Thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 30 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136767372):
+#### [ Tobias Grosser (Oct 30 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136767372):
 Very interesting.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 30 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136774706):
+#### [ Tobias Grosser (Oct 30 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136774706):
 @**Seul Baek** , when trying to compile this I get some errors:
 
 ```
@@ -107,10 +107,10 @@ could not resolve import: reify
 could not resolve import: list
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Seul Baek (Oct 30 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136777126):
+#### [ Seul Baek (Oct 30 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136777126):
 Oops, I forgot to push the commit in which I deleted older versions of files. I think it should work now.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 30 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136801178):
+#### [ Tobias Grosser (Oct 30 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136801178):
 I also needed:
 
 ```
@@ -126,10 +126,10 @@ index 6af0ace..369287c 100644
 +end list
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 30 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136804241):
+#### [ Tobias Grosser (Oct 30 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136804241):
 Nice. Some expressions already work nicely.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 30 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136804252):
+#### [ Tobias Grosser (Oct 30 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136804252):
 Others time out quite a bit.
 
 

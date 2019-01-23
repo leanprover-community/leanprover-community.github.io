@@ -11,7 +11,7 @@ permalink: archive/113488general/06120tactictoexpr.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Dec 11 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151462345):
+#### [ Edward Ayers (Dec 11 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151462345):
 How can I get `tactic.to_expr` to not apply metavariables to implicit arguments? That is;
 ``` lean
 constant α : Type
@@ -25,13 +25,13 @@ run_cmd do
 ```
 I really want to find a way of getting `trace t` to say `∀ {a:α}, a = a` given only the declaration name `P`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 11 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151468593):
+#### [ Reid Barton (Dec 11 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151468593):
 Do you need to go through `to_expr`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Dec 11 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151468620):
+#### [ Rob Lewis (Dec 11 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151468620):
 `e ← tactic.to_expr p.mk_explicit` should work for this case.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 11 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151468935):
+#### [ Reid Barton (Dec 11 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151468935):
 I was going to suggest
 ```lean
 run_cmd do
@@ -40,7 +40,7 @@ run_cmd do
     pure ()
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Dec 11 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151470588):
+#### [ Rob Lewis (Dec 11 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151470588):
 Yeah, that's better here, although I guess it depends on the real context.
 
 

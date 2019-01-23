@@ -11,7 +11,7 @@ permalink: archive/113488general/33035oldstructurecmdinstructureliterals.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146821394):
+#### [ Mario Carneiro (Nov 05 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146821394):
 Here's a strange discovery:
 ```lean
 import order.complete_lattice
@@ -51,16 +51,16 @@ end lattice
 ```
 If you put `set_option old_structure_cmd true` instead, this proof times out
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 05 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146821466):
+#### [ Mario Carneiro (Nov 05 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146821466):
 this despite the fact that there are no structures being declared
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 05 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146826135):
+#### [ Johannes Hölzl (Nov 05 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146826135):
 uff, luckily I didn't run into this. Does the `{ f := _, .. _}` notation depend on `old_structure_cmd`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Nov 06 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146851518):
+#### [ Sebastian Ullrich (Nov 06 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146851518):
 [It does](https://github.com/leanprover/lean/blob/687745d887ebd89da94ba36d853eff12746af136/src/frontends/lean/elaborator.cpp#L2854). Maybe it shouldn't.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Nov 06 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146851533):
+#### [ Sebastian Ullrich (Nov 06 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146851533):
 The structure instance notation is pretty complex and fragile in Lean 3. I'm really not sure what we should do with it in Lean 4.
 
 

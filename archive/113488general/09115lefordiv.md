@@ -11,25 +11,25 @@ permalink: archive/113488general/09115lefordiv.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Apr 04 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124631308):
+#### [ Nicholas Scheel (Apr 04 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124631308):
 This seems like a silly question but I've scoured mathlib and init for this lemma and I can't find it: `∀ {n m : ℕ} (h : n ≤ m) {k}, n/k ≤ m/k`
 I don't think it can be derived from `div_le_of_le_mul` since `k*(n/k) = n` does not necessarily hold (only if `k | n`)
 a version for multiplication would be nice too
 does this exist? is there a nice way to prove it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 04 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124631526):
+#### [ Simon Hudon (Apr 04 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124631526):
 I think `le_div_iff_mul_le`with `div_mul_le_self` should allow you to prove that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 04 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632258):
+#### [ Chris Hughes (Apr 04 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632258):
 It doesn't. Applying `le_div_of_mul_le` gives you something false to prove, if say `n=4`, `m=5`, `k=3`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 04 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632310):
+#### [ Simon Hudon (Apr 04 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632310):
 Don't use `le_div_of_mul_le`; use `le_div_iff_mul_le` instead
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 04 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632336):
+#### [ Chris Hughes (Apr 04 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632336):
 Sorry, I was talking about a  `div_le` not `le_div`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Apr 04 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632408):
+#### [ Nicholas Scheel (Apr 04 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632408):
 Thanks for the tip! :bow: I think I got it working now:
 ```
 lemma nat.le_mul {n m : ℕ} (h : n ≤ m) {k} : n*k ≤ m*k
@@ -51,40 +51,40 @@ lemma nat.le_div {n m : ℕ} (h : n ≤ m) {k} : n/k ≤ m/k
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 04 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632672):
+#### [ Simon Hudon (Apr 04 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632672):
 A a matter of style, you may prefer `cases lt_or_eq_of_le (zero_le k) with hk hk` instead of `cases k with k`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Matt Wilson (Apr 04 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632693):
+#### [ Matt Wilson (Apr 04 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632693):
 peanut gallery question, but how long does that take to run
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 04 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632760):
+#### [ Simon Hudon (Apr 04 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632760):
 About 51ms on my system
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 04 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632821):
+#### [ Simon Hudon (Apr 04 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124632821):
 Sorry, wrong proof. @**Nicholas Scheel** 's proof takes 6ms
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Apr 04 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124637611):
+#### [ Simon Hudon (Apr 04 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124637611):
 @**Nicholas Scheel** Feel free to send a pull request of that theorem to mathlib. You should call it `nat.div_le_div`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124645163):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124645163):
 ` nat.mul_le_mul_right : ∀ {n m : ℕ} (k : ℕ), n ≤ m → n * k ≤ m * k ` is already there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 05 2018 at 00:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124645166):
+#### [ Kevin Buzzard (Apr 05 2018 at 00:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124645166):
 but I haven't seen the div version before
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 05 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650222):
+#### [ Mario Carneiro (Apr 05 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650222):
 I'm also surprised to find this is missing. I will add it to mathlib, by the name `nat.div_le_div_right`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Apr 05 2018 at 03:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650281):
+#### [ Nicholas Scheel (Apr 05 2018 at 03:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650281):
 @**Mario Carneiro** @**Simon Hudon**  How about this? https://github.com/MonoidMusician/mathlib/pull/1 ;)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 05 2018 at 03:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650329):
+#### [ Mario Carneiro (Apr 05 2018 at 03:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650329):
 I'm also going to rewrite the proof, since it's a one-liner. I think Simon gave a hint earlier about this, see if you can shorten your proof
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Apr 05 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650541):
+#### [ Nicholas Scheel (Apr 05 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650541):
 hmm okay, I don’t know enough to see how to shorten it like that and I’ve run out of time tonight, feel free to pick it up if you want 🙂
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 05 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650589):
+#### [ Mario Carneiro (Apr 05 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650589):
 oh, actually I forgot about the zero case. Anyway here's my attempt at shortening it:
 ```
 protected theorem div_le_div {n m : ℕ} (h : n ≤ m) {k : ℕ} : n / k ≤ m / k :=
@@ -92,10 +92,10 @@ protected theorem div_le_div {n m : ℕ} (h : n ≤ m) {k : ℕ} : n / k ≤ m /
 (nat.le_div_iff_mul_le _ _ hk).2 $ le_trans (nat.div_mul_le_self _ _) h
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nicholas Scheel (Apr 05 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650592):
+#### [ Nicholas Scheel (Apr 05 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650592):
 (whoops didn’t realize that I PRed my own repo)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 05 2018 at 03:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650653):
+#### [ Mario Carneiro (Apr 05 2018 at 03:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124650653):
 looking at the differences, I guess I didn't do much besides compactify the same steps, more or less
 
 

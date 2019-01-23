@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/57893orderedpairs.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077221):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077221):
 I'm defining a subset of the Cartesian product of two types, specifically: 
 
 ```lean
@@ -21,22 +21,22 @@ def graph : set X × Y :=
 
 (`f` is a function, `x` has not been separately defined) What's the right notation for this (the ordered pairs, and also the set builder itself)?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077285):
+#### [ Kenny Lau (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077285):
 what do you mean by "right notation"?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077288):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077288):
 A notation that works in Lean.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077300):
+#### [ Kenny Lau (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077300):
 do you mean `set (X × Y)`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077303):
+#### [ Kenny Lau (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077303):
 oh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077304):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077304):
 No, I mean for the ordered pairs.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077370):
+#### [ Kenny Lau (Oct 19 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077370):
 ```lean
 universes u v
 variables {X : Type u} {Y : Type v} (f : X → Y)
@@ -44,31 +44,31 @@ def graph : set (X × Y) :=
 { z | z.2 = f z.1 }
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077386):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077386):
 Ah.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077387):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077387):
 Thanks.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077411):
+#### [ Kevin Buzzard (Oct 19 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077411):
 It's kind of annoying that you can't write `{⟨x,y⟩ : X × Y | y = f x}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077469):
+#### [ Kenny Lau (Oct 19 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077469):
 you can't define that in ZFC either
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077470):
+#### [ Kenny Lau (Oct 19 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077470):
 you need to use specification and an existential
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077487):
+#### [ Kevin Buzzard (Oct 19 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077487):
 I guess you could use `set.image` or `set.range`, whatever it's called
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077650):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077650):
 `def graph' : set (X × Y) := set.range (λ x, ⟨x,f x⟩) `
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077661):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077661):
 (after `import data.set.basic`)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077723):
+#### [ Kenny Lau (Oct 19 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077723):
 ```lean
 import data.set.lattice
 universes u v
@@ -77,10 +77,10 @@ def graph : set (X × Y) :=
 ⨆ x : X, {(x, f x)}
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077827):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077827):
 What's `⨆`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077886):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077886):
 ```lean
 import data.set.basic
 
@@ -93,76 +93,76 @@ def graph' : set (X × Y) := set.range (λ x, ⟨x,f x⟩)
 example : graph = graph' := sorry
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077894):
+#### [ Kenny Lau (Oct 19 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077894):
 `set X` is a complete lattice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077913):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077913):
 Abhi: `⨆` is notation so you can start with `#print notation ⨆`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077923):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077923):
 but if you don't want to go down the lattice rabbithole you could try my homework :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077997):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077997):
 I'd be able to do the homework myself if I knew how to prove `A = B iff B = A` :-/
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077999):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077999):
 `eq.symm` only goes one way
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078000):
+#### [ Kenny Lau (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078000):
 eq_comm
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078007):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078007):
 I'm not sure how to interpret the results of #print notation. All I get is `'⨆':1024 binders ',':0 (scoped 0) := #0` What's a binder?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078057):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078057):
 oh oops
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078060):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078060):
 yes that is impossible to interpret
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078085):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078085):
 A binder is something like forall or exists or lambda I think
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078094):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078094):
 Kenny is using `⨆` in the same sort of way that one would use those things.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078137):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078137):
 Yeah, I can tell it's something like forall, but I'm not sure what the difference is.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078141):
+#### [ Mario Carneiro (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078141):
 I think you can click on the sup to go to definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078143):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078143):
 I get "no definition found"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078144):
+#### [ Mario Carneiro (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078144):
 It's the analogue of `\bigcup` for lattices
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078146):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078146):
 It's in `order/complete_lattice.lean`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078149):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078149):
 `notation `⨆` binders `, ` r:(scoped f, supr f) := r`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078169):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078169):
 I taught Abhi about bigcup today in lectures :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078211):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078211):
 Glad to see my lectures are coming in handy in his day to day life
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078237):
+#### [ Mario Carneiro (Oct 19 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078237):
 "day to day life"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078244):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078244):
 I don't understand that notation line at all. I think notation in Lean is somehow evil; most of it is fine and then there are some weird hacks which I don't get at all. The key point is `supr` somehow, and then everything else is some notation mantra I guess
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078294):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078294):
 `def supr [complete_lattice α] (s : ι → α) : α := Sup {a : α | ∃i : ι, a = s i}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078339):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078339):
 so `supr s` is the supremum of the range of `s`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078511):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078511):
 Btw I'm trying `def p1 (g : graph) : X := g.1` based on the earlier definition of `graph`, but it doesn't work:
 
 ```lean
@@ -183,73 +183,73 @@ def p1 (g : graph) : X := g.1
 
 I guess part of the problem is that `G` is not a type -- I tried coercing it as `↑G`, but that just produces more errors.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078535):
+#### [ Reid Barton (Oct 19 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078535):
 I think the bigger problem is Lean doesn't know what you want to take the graph of
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078541):
+#### [ Mario Carneiro (Oct 19 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078541):
 I can't make sense of that definition
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078543):
+#### [ Reid Barton (Oct 19 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078543):
 I would make `f` an explicit argument and then pass it in `p1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078594):
+#### [ Mario Carneiro (Oct 19 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078594):
 what does `g : graph` mean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078596):
+#### [ Mario Carneiro (Oct 19 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078596):
 it's not a type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078618):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078618):
 ```quote
 what does `g : graph` mean?
 ```
 Yeah, I realise that, but I want to show (separately from the definition) it's a bijection from `graph` to `X`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078677):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078677):
 ```quote
 I would make `f` an explicit argument and then pass it in `p1`
 ```
 Indeed that removes the first error. How, though?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078690):
+#### [ Mario Carneiro (Oct 19 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078690):
 Keep in mind that `graph f`is not a type either, it's a set
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078699):
+#### [ Mario Carneiro (Oct 19 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078699):
 lean knows to coerce from a set to a type, but maybe you want the subtype instead?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078706):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078706):
 a set is a term not a Type Abhi. Did you come to my lecture today?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078759):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078759):
 ```quote
 a set is a term not a Type Abhi. Did you come to my lecture today?
 ```
 I realise that -- but how else would I later show it to be a bijection from graph to X?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078760):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078760):
 If `X` is a type and `p : X -> Prop` then in Lean there are two very different ways to express what in set theory is just "the subset of X consisting of elements `a` for which `p a` is true"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078763):
+#### [ Kenny Lau (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078763):
 it did took me some time to figure out that Kevin wants us to prove that the two big big functions `graph` and `graph'` are equal
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078770):
+#### [ Kenny Lau (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078770):
 so you should start with `ext X Y f`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078772):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078772):
 One is the set `{x : X | p x}` and one is the subtype `{x : X // p x}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078800):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078800):
 I am in the middle of showing my `graph` is Kenny's `supr` thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078861):
+#### [ Kenny Lau (Oct 19 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078861):
 I bet `example : graph = graph' :=` isn't what Kevin wanted us to prove
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078867):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078867):
 I proved that using `eq.comm`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 19 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078880):
+#### [ Kenny Lau (Oct 19 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078880):
 `example : graph X Y f = graph' X Y f :=`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079017):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079017):
 ```lean
 import data.set.basic
 import data.set.lattice
@@ -268,43 +268,43 @@ example : graph = graph'' := sorry
 ```
 I did them both :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 19 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079020):
+#### [ Kevin Buzzard (Oct 19 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079020):
 I am not proud of the second one though.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079102):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079102):
 Re:the bijection, I *can* write `def p1 (g : graph f) := g.1`(still defining `graph` as a set because subtype gives me even more errors), but then `p1` for some reason has the wrong type. Apparently `g.1` isn't processed correctly (it still has type `X × Y` and not `X`).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079129):
+#### [ Mario Carneiro (Oct 19 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079129):
 that has to do with the fact that it is a subtype
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079183):
+#### [ Mario Carneiro (Oct 19 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079183):
 `g` is a pair of an element of `X x Y` and a proof that this element satisfies `z.2 = f z.1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079184):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079184):
 Is the notation for ordered pairs different for subtypes?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 19 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079190):
+#### [ Mario Carneiro (Oct 19 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079190):
 so the X value is `g.1.1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079202):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079202):
 That works, but I don't get why.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079207):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079207):
 (deleted)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079216):
+#### [ Reid Barton (Oct 19 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079216):
 or `g.val.fst`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079275):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079275):
 Ok, I get the argument, but I'm not sure why it's defined that way (to include a proof).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079360):
+#### [ Reid Barton (Oct 19 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079360):
 If you didn't have to provide a proof when constructing a value of the subtype, then it would just be the same as the entire original type.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079477):
+#### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079477):
 Why does the same convention not apply to sets?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 19 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079571):
+#### [ Reid Barton (Oct 19 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079571):
 I don't really understand the question. A set is not a type; perhaps that's the answer
 
 

@@ -11,28 +11,28 @@ permalink: archive/144837PRreviews/63247429finitesubgroupsofintegraldomain.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 20 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136142678):
+#### [ Chris Hughes (Oct 20 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136142678):
 Can anyone think of a good name for a file containing the proof that any finite subgroup of the units of an integral domain is cyclic? It imports `data.polynomial` and `group_theory.order_of_element`, so a file name that encompasses all thing depending on that would be great. I hate thinking of names.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 20 2018 at 05:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136152756):
+#### [ Johan Commelin (Oct 20 2018 at 05:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136152756):
 `ring_theory/basic.lean`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 20 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136152859):
+#### [ Chris Hughes (Oct 20 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136152859):
 The bulk of it is actually just a proof about groups, that satisfy the condition that the number of nth roots of one is le n, so I'll put that in group theory.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 20 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136161594):
+#### [ Kevin Buzzard (Oct 20 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136161594):
 ```quote
 `ring_theory/basic.lean`
 ```
 `commutative_algebra/basic.lean`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 20 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136161606):
+#### [ Kevin Buzzard (Oct 20 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136161606):
 This is specifically a result about commutative rings, and given the make-up of people here there is going to be a lot more commutative ring theory being generated before a big push on stuff like group rings for non-abelian groups etc. It's time we were proud to be commutative.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 20 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136161647):
+#### [ Kenny Lau (Oct 20 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136161647):
 right, but first the modules need to be refactored
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 20 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136161690):
+#### [ Kevin Buzzard (Oct 20 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23429%20finite%20subgroups%20of%20integral%20domain/near/136161690):
 I don't think this stops us making the directory :-)
 
 

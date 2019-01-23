@@ -11,19 +11,19 @@ permalink: archive/113488general/68209customrecursor.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123198503):
+#### [ Simon Hudon (Mar 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123198503):
 I'm creating a recursor for a type that I defined and I'd like `match` and `cases` to pick it instead of what Lean generated. Is there a way to do that?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Mar 02 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123198843):
+#### [ Andrew Ashworth (Mar 02 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123198843):
 instead of cases, why not use `induction`where you can specify the recursor?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 02 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123198918):
+#### [ Mario Carneiro (Mar 02 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123198918):
 No, that's not really possible. You can use the `using`clause of `induction`, but it's not particularly reliable in my experience. I don't really consider it supported
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 02 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123199074):
+#### [ Simon Hudon (Mar 02 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123199074):
 For `cases` on coinductive types, I can make my own tactics but it would be great if the same tactic could cover both inductive and coinductive types
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 02 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123199079):
+#### [ Simon Hudon (Mar 02 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20recursor/near/123199079):
 Maybe I should just add that to my wish list
 
 

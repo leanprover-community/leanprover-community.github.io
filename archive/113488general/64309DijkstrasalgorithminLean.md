@@ -11,7 +11,7 @@ permalink: archive/113488general/64309DijkstrasalgorithminLean.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 08 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151183263):
+#### [ Kevin Buzzard (Dec 08 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151183263):
 One of my children was explaining Dijkstra's algorithm to me -- they are far more computer-sciency than I am. After some conversation I decided that they might be saying this:
 
 ```lean
@@ -64,31 +64,31 @@ Dijkstra G W Ewt start finish ≤ some (path_length Ewt Es) := sorry
 
 What happens next? I (or he) need(s) to implement the algorithm (the first sorry) and then prove that it has the properties I claim (the other sorries). Does this algorithm get written in Lean or meta Lean? It can be written in Lean, right? Then I can prove things about it. Have I got this straight? My sons are learning a bunch of algorithms and I'm trying to figure out what I can say about them in Lean.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 08 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184026):
+#### [ Johan Commelin (Dec 08 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184026):
 Right. I would implement it in Lean. My guess/hope is that it shouldn't be too hard.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 08 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184072):
+#### [ Johan Commelin (Dec 08 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184072):
 But I think one of the reasons that graph theory hasn't been fleshed out much is that it's hard to get the data structures right. You want to be both general enough and usable. But for a one-off push for Dijkstra, I guess this should work.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 08 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184218):
+#### [ Kevin Buzzard (Dec 08 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184218):
 This is exactly the sort of thing I don't understand, and which my children were telling me about. So now we have to think about issues involving exactly how to implement the data structures which show up in the implementation of the algorithm?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 08 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184617):
+#### [ Johan Commelin (Dec 08 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184617):
 Well, I'm certainly not an expert in graph theory. So I would probably just go for it, and see where I get stuck.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 08 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184621):
+#### [ Johan Commelin (Dec 08 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184621):
 But probably Mario, Sean or Simon can share a lot more wisdom here.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 08 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184664):
+#### [ Johan Commelin (Dec 08 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184664):
 Dijkstra is just a form of BFS, and Simon already implemented a BFS algorithm in meta Lean for the `tfae` tactic.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 08 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184794):
+#### [ Kevin Buzzard (Dec 08 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184794):
 Is implementing it in Lean and implementing it in meta Lean two completely different problems? I tried to put in enough hypotheses to guarantee that the algorithm terminates in finite type. My son and I were desperate to get some kinds of infinite graphs in but we pretty soon found some weird examples where the algorithm was poorly behaved, so we decided to stick to finite types for vertex and edge types.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 08 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184909):
+#### [ Johan Commelin (Dec 08 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151184909):
 It probably is a different game whether you use `meta` or not.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Dec 08 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151194004):
+#### [ Andrew Ashworth (Dec 08 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151194004):
 There's a bit on graphs in Coq here: https://softwarefoundations.cis.upenn.edu/vfa-current/Color.html, if this has caught your interest.
 
 

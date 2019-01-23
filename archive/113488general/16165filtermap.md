@@ -11,7 +11,7 @@ permalink: archive/113488general/16165filtermap.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126378246):
+#### [ Patrick Massot (May 10 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126378246):
 Is this already somewhere in core or mathlib?
 ```lean
 lemma filter_map_comm {I : Type*} {J : Type*} (f : I → J) (P : J → Prop) (r: list I) [decidable_pred P] :
@@ -23,7 +23,7 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 10 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379540):
+#### [ Simon Hudon (May 10 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379540):
 try:
 
 ```
@@ -36,64 +36,64 @@ theorem filter_map_filter_map (f : α → option β) (g : β → option γ) (l :
 
 from `data.list.basic`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379629):
+#### [ Patrick Massot (May 10 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379629):
 What do you mean? The lemma is not there but there may be a shorter proof using those results?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 10 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379663):
+#### [ Simon Hudon (May 10 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379663):
 Yes exactly. Sorry, I was overly concise
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379737):
+#### [ Patrick Massot (May 10 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379737):
 It looks at least as complicated as what I already have
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379748):
+#### [ Patrick Massot (May 10 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379748):
 And I don't want to frustrate Kenny by stealing a golfing challenge from him
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 10 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379819):
+#### [ Simon Hudon (May 10 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379819):
 That's very considerate :)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379852):
+#### [ Patrick Massot (May 10 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379852):
 Actually I'd rather use Kenny (or anyone else) to help me fighting nat substraction
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379859):
+#### [ Patrick Massot (May 10 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379859):
 For instance:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 10 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379865):
+#### [ Simon Hudon (May 10 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379865):
 I like the resulting proof because it avoids induction
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379880):
+#### [ Patrick Massot (May 10 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379880):
 `example (a b k : ℕ) : b + k - (a + k) = b - a `
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379934):
+#### [ Patrick Massot (May 10 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379934):
 What do you mean avoid induction? `map` and `filter` are defined inductively
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379939):
+#### [ Patrick Massot (May 10 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379939):
 You can at best hide induction
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379947):
+#### [ Patrick Massot (May 10 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379947):
 Note that both sides are zero is b is larger than a
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379959):
+#### [ Patrick Massot (May 10 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379959):
 So it looks like a "false" result but this one is actually true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379962):
+#### [ Patrick Massot (May 10 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126379962):
 I think
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380041):
+#### [ Patrick Massot (May 10 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380041):
 Do you have a solution with `filter_map`? Actually it could be useful to learn what `filter_map` is good for
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 10 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380170):
+#### [ Simon Hudon (May 10 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380170):
 ```quote
 What do you mean avoid induction? `map` and `filter` are defined inductively
 ```
 They're recursively defined. But yeah, you can never get around using induction / recursion directly or indirectly but I feel hiding induction produces nicer interfaces. The laws about `filter_map` seem like you can prove a lot about `filter` and `map` without induction.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 10 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380179):
+#### [ Simon Hudon (May 10 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380179):
 It's a generalization of both `map` and `filter`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380248):
+#### [ Patrick Massot (May 10 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380248):
 I still don't see how it could help me here
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 10 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380518):
+#### [ Reid Barton (May 10 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380518):
 ```quote
 `example (a b k : ℕ) : b + k - (a + k) = b - a `
 ```
@@ -102,10 +102,10 @@ example (a b k : ℕ) : b + k - (a + k) = b - a :=
 nat.add_sub_add_right b k a
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380569):
+#### [ Patrick Massot (May 10 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380569):
 :astonished:
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 10 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380590):
+#### [ Simon Hudon (May 10 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380590):
 I think I overlooked a detail. I thought just doing a `rw` would work but here is what I get:
 
 ```lean
@@ -120,40 +120,40 @@ I think I overlooked a detail. I thought just doing a `rw` would work but here i
 
 That should be hard either, but it makes the proof longer than expected
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380594):
+#### [ Patrick Massot (May 10 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380594):
 That's crazy
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380596):
+#### [ Patrick Massot (May 10 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380596):
 That's also crazy
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380599):
+#### [ Patrick Massot (May 10 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380599):
 Thanks Reid
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380617):
+#### [ Patrick Massot (May 10 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126380617):
 I wasn't hoping for this to be in Lean core...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381158):
+#### [ Patrick Massot (May 10 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381158):
 I'm becoming better and better at proof obfuscation. If I ever need to read those proofs, I'll hate myself.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 10 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381226):
+#### [ Reid Barton (May 10 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381226):
 it's too hard to resist the golf
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381282):
+#### [ Patrick Massot (May 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381282):
 Right now I'm staring at line saying `congr_n 1 ; funext ; simp only [nat.add_sub_cancel, nat.add_sub_add_right]`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381295):
+#### [ Patrick Massot (May 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381295):
 I wrote two minutes ago
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381297):
+#### [ Patrick Massot (May 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381297):
 And I already have no clue what it does
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381299):
+#### [ Patrick Massot (May 10 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381299):
 Mario and Johannes will be so proud
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381363):
+#### [ Patrick Massot (May 10 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381363):
 Because it's half the proof of some trivial statement, and trivial statement must have obfuscated proof according to mathlib style guide
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381371):
+#### [ Patrick Massot (May 10 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381371):
 ```lean
 lemma big.shift (P : ℕ → Prop) [decidable_pred P] (F : ℕ → R) (a b k : ℕ) : 
   (big[(◆)/nil]_(i=a..b | (P i)) (F i)) = (big[(◆)/nil]_(i=(a+k)..(b+k) | (P (i-k))) (F (i-k))) :=
@@ -163,58 +163,58 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381380):
+#### [ Patrick Massot (May 10 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381380):
 (for instance `big[(◆)/nil]` could be a `\Sum` operator
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 10 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381460):
+#### [ Kevin Buzzard (May 10 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381460):
 This is just the sort of stuff which I really needed last November and wasn't there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 10 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381471):
+#### [ Kevin Buzzard (May 10 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381471):
 I remember having to give up on a 1st year problem sheet question because I couldn't prove that sum from 1 to n was equal to sum from n to 1 :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 10 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381475):
+#### [ Kevin Buzzard (May 10 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381475):
 [at the time]
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 10 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381521):
+#### [ Reid Barton (May 10 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381521):
 imagine where we'd be if Gauss had had a computer
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 10 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381527):
+#### [ Kevin Buzzard (May 10 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381527):
 I don't even want to think about that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 10 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381534):
+#### [ Kevin Buzzard (May 10 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381534):
 how much time did Gauss and Euler waste working out examples etc
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381541):
+#### [ Patrick Massot (May 10 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381541):
 They would have had computer aided waste of time instead
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 10 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381556):
+#### [ Kevin Buzzard (May 10 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381556):
 Maybe they would have just played minecraft all day
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 10 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381559):
+#### [ Kevin Buzzard (May 10 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381559):
 and we'd be worse off
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381562):
+#### [ Patrick Massot (May 10 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381562):
 yep
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 10 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381571):
+#### [ Patrick Massot (May 10 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126381571):
 or watched lol cats on youtube
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 11 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126402529):
+#### [ Sean Leather (May 11 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126402529):
 If they were functional programmers (esp. in Haskell), I think they would have enjoyed [Lambdacats](https://spl.smugmug.com/Humor/Lambdacats/).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (May 11 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126404033):
+#### [ Moses Schönfinkel (May 11 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126404033):
 Hehe, we're slowly eroding formality of this forum :).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (May 11 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126404169):
+#### [ Patrick Massot (May 11 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126404169):
 I think it was already pretty badly eroded
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (May 11 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126404210):
+#### [ Moses Schönfinkel (May 11 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126404210):
 I believe cat pictures are new tho.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (May 11 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126404214):
+#### [ Moses Schönfinkel (May 11 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126404214):
 Dank memes next.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 11 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126405008):
+#### [ Sean Leather (May 11 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126405008):
 ```quote
 Hehe, we're slowly eroding formality of this forum :).
 ```

@@ -11,7 +11,7 @@ permalink: archive/113488general/57712inductionwithgeneralize.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Nov 16 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851332):
+#### [ Sarah Mameche (Nov 16 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851332):
 Hi, I want to do induction over the following predicate `types`:
 
 ```lean
@@ -41,13 +41,13 @@ expected type
 ```
 In Coq, the induction works. I assume Lean is more strict about generalizing numbers before doing an induction?  I'm not sure about how to generalize in this case, as 0 appears in the type of the empty context. So the standard way of adding an assumption `h : X = empty_ctx` and substituting X doesn't work because X again has type `fin 0 → type`. Could you give me some details or tell me if I'm on the wrong track?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 16 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851364):
+#### [ Kenny Lau (Nov 16 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851364):
 what is `Fin`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 16 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851438):
+#### [ Kenny Lau (Nov 16 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851438):
 could you provide an MWE?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Nov 16 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851814):
+#### [ Sarah Mameche (Nov 16 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851814):
 ```lean 
 def Fin : nat → Type
   | 0 := empty
@@ -86,10 +86,10 @@ begin intros H₁ e H₂,
   induction H₁ 
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 17 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852574):
+#### [ Reid Barton (Nov 17 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852574):
 I'm not sure how to do it with induction, but I would probably try using the equation compiler
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 17 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852628):
+#### [ Chris Hughes (Nov 17 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852628):
 Changing the definition of `types` to this works.
 ```lean
 inductive types {m : ℕ} : (Fin m → type) → tm m → type → Prop
@@ -97,19 +97,19 @@ inductive types {m : ℕ} : (Fin m → type) → tm m → type → Prop
 | tapp Γ (e₁ : tm m) e₂ (A B) : types Γ e₁ (A ⤏ B) → types Γ e₂ A → types Γ (app e₁ e₂) B
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 17 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852765):
+#### [ Reid Barton (Nov 17 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852765):
 but that won't work for `tlam`, which increases the size of the context
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 17 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852773):
+#### [ Chris Hughes (Nov 17 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852773):
 I see.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 17 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147853368):
+#### [ Chris Hughes (Nov 17 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147853368):
 `destruct H\1` also works.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 17 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147853439):
+#### [ Chris Hughes (Nov 17 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147853439):
 Although I don't think that gives the goal you want. It didn't choose a very good motive.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 17 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147853454):
+#### [ Chris Hughes (Nov 17 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147853454):
 This is a nasty method that hopefully does get the right goal at least
 ```lean
 lemma preservation (A : type) {n} (ctx : Fin n → type) (e₁ : tm 0) :
@@ -126,7 +126,7 @@ lemma preservation (A : type) {n} (ctx : Fin n → type) (e₁ : tm 0) :
     end sorry rfl (heq.refl _)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 17 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147860085):
+#### [ Mario Carneiro (Nov 17 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147860085):
 here are a few more options:
 ```lean
 lemma preservation (A : type) (e₁ : tm 0)
@@ -154,10 +154,10 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 17 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147860093):
+#### [ Mario Carneiro (Nov 17 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147860093):
 in this case it doesn't matter that you have `empty_ctx` since it's unique anyway
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (Nov 17 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147868864):
+#### [ Sarah Mameche (Nov 17 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147868864):
 Great, thanks!
 
 

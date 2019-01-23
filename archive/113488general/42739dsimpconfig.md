@@ -11,7 +11,7 @@ permalink: archive/113488general/42739dsimpconfig.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Oct 10 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/135537467):
+#### [ Edward Ayers (Oct 10 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/135537467):
 Please could someone help me fill in these holes in the docstring for `dsimp_config`?
 ```lean
 structure dsimp_config :=
@@ -29,37 +29,37 @@ structure dsimp_config :=
 (memoize                   := tt) -- [TODO] what is being memoised?
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Oct 10 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/135537599):
+#### [ Edward Ayers (Oct 10 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/135537599):
 (I'm working through `init/meta` in the Lean source and adding all the missing docstrings)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 15 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147772589):
+#### [ Chris Hughes (Nov 15 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147772589):
 @**Edward Ayers** Is a copy of your Lean with docstring available online anywhere? It would be really useful.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Nov 16 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147809879):
+#### [ Edward Ayers (Nov 16 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147809879):
 https://github.com/EdAyers/lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Nov 16 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147809934):
+#### [ Edward Ayers (Nov 16 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147809934):
 Checkout the `doc` branch
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Nov 16 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147809977):
+#### [ Edward Ayers (Nov 16 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147809977):
 I use the build from that branch as my main lean executable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 16 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810027):
+#### [ Patrick Massot (Nov 16 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810027):
 Do you mean you added stuff besides docstrings?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Nov 16 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810032):
+#### [ Edward Ayers (Nov 16 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810032):
 No I haven't added anything except docstrings on that branch
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Nov 16 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810043):
+#### [ Edward Ayers (Nov 16 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810043):
 (hopefully, no guarantees)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Nov 16 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810057):
+#### [ Edward Ayers (Nov 16 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810057):
 It builds mathlib though so its probably fine. I didn't sneak in `false` as an axiom anywhere.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Edward Ayers (Nov 16 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810108):
+#### [ Edward Ayers (Nov 16 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810108):
 I also can't guarantee that the docstrings I added aren't misleading, they are more a side-effect of me trying to understand the sourcecode
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 16 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810263):
+#### [ Chris Hughes (Nov 16 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/147810263):
 Thanks @**Edward Ayers**
 
 

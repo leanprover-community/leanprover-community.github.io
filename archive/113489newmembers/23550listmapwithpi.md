@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/23550listmapwithpi.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 09 2018 at 08:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147355746):
+#### [ Gavid Liebnich (Nov 09 2018 at 08:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147355746):
 Hello. I have an issue using dependent function space in conjunction with `list.map`. Could anyone take a peek?
 In the following state:
 ```lean
@@ -37,25 +37,25 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 09 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147356172):
+#### [ Mario Carneiro (Nov 09 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147356172):
 Is `g` a variable? If so, `subst g` is probably the easiest thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 09 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147356421):
+#### [ Gavid Liebnich (Nov 09 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147356421):
 I am not sure I know what variable means in this context, but `g` is a list computed by a function, so I think it is not. The equivalence `h : g = g'` basically expands `bar x y` to `x :: bar x' y`. I've tried `subst expand_bar`, but the "given expression is not a local constant".
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 09 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147356591):
+#### [ Gavid Liebnich (Nov 09 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147356591):
 Definitely not a variable, come to think of it, `h : g = g'` is just `h : expand_bar a b = a :: expand_bar a' b`. And I don't think I can `subst expand_bar`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 09 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147357025):
+#### [ Mario Carneiro (Nov 09 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147357025):
 I think you need to unsimplify your example then. This is generally speaking a complicated problem with nonuniform solutions, I would have to know more about the problem to say how to proceed
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 09 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147357098):
+#### [ Gavid Liebnich (Nov 09 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147357098):
 I will give it a try, thanks. I did a lot of simplifying, may have lost something along the way :).
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 09 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147357269):
+#### [ Patrick Massot (Nov 09 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147357269):
 The `subst` tactic (instead of `rw`) may help you
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Nov 10 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147436293):
+#### [ Floris van Doorn (Nov 10 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147436293):
 I don't know if this works in your actual example, but you could try reverting everything which depends on `g`:
 ```
 example (h : g = g') : @foo α g f = [] :=
@@ -67,7 +67,7 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Nov 10 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147436358):
+#### [ Floris van Doorn (Nov 10 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147436358):
 Note that this `rw` now also rewrites the type of `f`.
 
 

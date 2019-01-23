@@ -11,7 +11,7 @@ permalink: archive/113488general/83804simplemmaabab.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 05 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945303):
+#### [ Kevin Buzzard (Aug 05 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945303):
 @**Guillermo Barajas Ayuso** wanted
 
 ```lean
@@ -37,64 +37,64 @@ f a b = f (a + (1 - 1) * (b - a) / (2 ^ 0)) (a + 1 * (b - a) / (2 ^ 0)) := by si
 
 Should `a + (b + -a) = b` be a simp lemma? It's about time I got the hang of this stuff. It's passing all the rules of thumb I've picked up, but my rules of thumb are not yet watertight...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 06 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945623):
+#### [ Patrick Massot (Aug 06 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945623):
 It's funny, I came across the exact same problem yesterday. Don't forget you can also use `simp [-sub_eq_add_neg, ...]` to get rid of the annoying "simplification"
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945720):
+#### [ Mario Carneiro (Aug 06 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945720):
 I'm okay with adding this as a simp lemma, but it doesn't really fix the problem - you will also need lemmas for `a + (b + (c + -a))` and `a + (b + (-a + c))` and so on. The problem is that simp doesn't make any attempt to bring negatives together, so at best you can get lucky if they don't have so far to migrate
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945760):
+#### [ Mario Carneiro (Aug 06 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945760):
 This is in part what `ring` is for, and Jeremy suggested also focusing an `abel` type tactic focusing only on the additive stuff
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 06 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945763):
+#### [ Patrick Massot (Aug 06 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945763):
 I also wanted to ask for a version of ring working in an abelian group
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 06 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945764):
+#### [ Kevin Buzzard (Aug 06 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945764):
 removing `sub_eq_add_neg` stops Lean from simplifying `(1 - 1)` :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945769):
+#### [ Mario Carneiro (Aug 06 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945769):
 I think `sub_eq_add_neg` is a bad choice of simp lemma, but I know why it's there - it limits the expressivity of input statements so you need fewer simp lemmas overall
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945809):
+#### [ Kevin Buzzard (Aug 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945809):
 I thought that simp internally put things into some secret ordering using associativity and commutativity?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945810):
+#### [ Mario Carneiro (Aug 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945810):
 of course if `sub_eq_add_neg` was not a simp lemma we would need `a - a = 0` to be a simp lemma
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945812):
+#### [ Patrick Massot (Aug 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945812):
 Is this also part of what Johannes simplifier work is meant to address?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945813):
+#### [ Mario Carneiro (Aug 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945813):
 it does, but that ordering does not put `a` and `-a` close together
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945815):
+#### [ Kevin Buzzard (Aug 06 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945815):
 ```quote
 it does, but that ordering does not put `a` and `-a` close together
 ```
 Might I suggest a different secret ordering?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945822):
+#### [ Mario Carneiro (Aug 06 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945822):
 this is an active area of research
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 06 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945824):
+#### [ Kevin Buzzard (Aug 06 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945824):
 Oh wow
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 06 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945826):
+#### [ Kevin Buzzard (Aug 06 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945826):
 How come humans are so good at it?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945827):
+#### [ Mario Carneiro (Aug 06 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945827):
 because they use adaptive algorithms that pay attention to the right things
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945868):
+#### [ Mario Carneiro (Aug 06 2018 at 00:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945868):
 and that's really hard and complicated
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945870):
+#### [ Mario Carneiro (Aug 06 2018 at 00:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945870):
 keep in mind that `simp` is used in way more circumstances than doing algebra on commutative groups
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945878):
+#### [ Mario Carneiro (Aug 06 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945878):
 and you need to keep up performance in the other areas too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945930):
+#### [ Mario Carneiro (Aug 06 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945930):
 I think Johannes was working on adding "simpprocs" to the simplifier, which would enable this kind of adaptivity. It would notice we are doing algebra and fire up the algebra module that knows to do cancellation and stuff
 
 

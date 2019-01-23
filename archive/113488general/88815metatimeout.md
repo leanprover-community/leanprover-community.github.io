@@ -11,7 +11,7 @@ permalink: archive/113488general/88815metatimeout.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 13 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015530):
+#### [ Patrick Massot (Aug 13 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015530):
 I'm still playing with Lean introspection, but I can't sort declarations in order to print first axioms, then constants, then definition, and then theorems. I try
 ```lean
 meta def declaration_kind_nb : declaration → ℕ
@@ -32,10 +32,10 @@ do curr_env ← get_env,
 ```
 and get either determistic timeout or worse (excessive memory consumption, segfault...)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 13 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015764):
+#### [ Simon Hudon (Aug 13 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015764):
 What if you print only the length of the resulting list?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015805):
+#### [ Mario Carneiro (Aug 13 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015805):
 this works for me:
 ```
 meta instance : decidable_rel declaration_compare :=
@@ -49,31 +49,31 @@ do curr_env ← get_env,
 run_cmd sort_env
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015812):
+#### [ Mario Carneiro (Aug 13 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015812):
 the problem is that the format instance for `list string` involves a recursion, so it is very deeply nested and hits the recursion limit
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015817):
+#### [ Mario Carneiro (Aug 13 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015817):
 (this is why TCO is important in functional programming languages)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 13 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015861):
+#### [ Patrick Massot (Aug 13 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015861):
 Thanks!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 13 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015934):
+#### [ Patrick Massot (Aug 13 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015934):
 Is there a more natural way to do define that comparison function?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016013):
+#### [ Mario Carneiro (Aug 13 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016013):
 Not particularly; you could do a cases on both and return true or false in each case
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Aug 13 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016054):
+#### [ Patrick Massot (Aug 13 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016054):
 This was my original plan, but I decided there were too many cases
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016068):
+#### [ Mario Carneiro (Aug 13 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016068):
 this is a legitimate way to cut down the number of cases from O(n^2) to O(n)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016119):
+#### [ Mario Carneiro (Aug 13 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016119):
 I wish there was a built in (autogenerated) `T.discr` function that returns the discriminant of the type, which is basically this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016126):
+#### [ Mario Carneiro (Aug 13 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016126):
 it has an O(1) implementation, since this is the tag on the vm object
 
 

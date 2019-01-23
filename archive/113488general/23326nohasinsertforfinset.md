@@ -11,13 +11,13 @@ permalink: archive/113488general/23326nohasinsertforfinset.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jul 04 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20%60has_insert%60%20for%20%60finset%60/near/129094565):
+#### [ Chris Hughes (Jul 04 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20%60has_insert%60%20for%20%60finset%60/near/129094565):
 ```lean
 example {α : Type*} : has_insert α (finset α) := by apply_instance -- doesn't work
 ```
 Shouldn't there be a `has_insert` instance on `finset`? Without it I can't use the notation `{0,1,2}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 04 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20%60has_insert%60%20for%20%60finset%60/near/129094776):
+#### [ Mario Carneiro (Jul 04 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20%60has_insert%60%20for%20%60finset%60/near/129094776):
 there is an insert operation, but it requires decidable_eq
 
 

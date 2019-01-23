@@ -11,10 +11,10 @@ permalink: archive/113488general/99238finnfinm.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 08 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151189960):
+#### [ Kevin Buzzard (Dec 08 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151189960):
 I was looking at the full Lean proof that if `fin n` bijects with `fin m` then `n = m`. It seems to me to be very long. It follows from the theorem that two fintypes biject with each other if and only if they have the same cardinality, but the cardinality of a fintype is defined to be the cardinality of the underlying list, and one now has to prove that this is well-defined. One might argue that this can be done relatively straightforwardly using `list.perm`, but the permutation equivalence relation on list is not defined to be "there's a bijection", it's defined to be the statement that we can make one list from another using some sequence of moves which define the inductive `perm` type, so now this reduces us to the statement that any bijection between lists comes from a perm, and this seems to be a fair amount of effort -- and all this is just to define the cardinality of a fintype. One still has to prove the theorem after this. Are there much shorter proofs available or is this what an actual proof of this statement looks like? In ZFC is there a shorter proof that if $$\{1,2,3,\ldots,n\}$$ bijects with $$\{1,2,\ldots,m\}$$ then $$n=m$$? Can one for example use the pigeonhole principle, arguing that if $$n\not=m$$ then wlog $$n>m$$ and now any map from a set with $$n$$ elements to a set with $$m$$ elements cannot be an injection by the pigeonhole principle?  Is this in Lean? Is this just the same work expressed in another way?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 09 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151215999):
+#### [ Chris Hughes (Dec 09 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151215999):
 My attempt
 ```lean
 import data.equiv.basic data.fin
@@ -75,18 +75,18 @@ le_antisymm
   (pigeonhole e.symm e.symm.bijective.1)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 09 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151220117):
+#### [ Kevin Buzzard (Dec 09 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151220117):
 Chris I suspect that your life would have been easier if you'd used results involving `fintype.card`. But I think you have proved my point. I am telling all the students "look, the composite of injective functions is injective" and the proof is something which is just a few lines long in Lean. I am also telling them "the reals have this cool completeness property" but here I am clear that this is actually a lot of work, it is just work that we are not going to do. 
 
 But I am also telling them "look, the pigeonhole principle is obvious" and I don't see any way of proving it which doesn't involve some pretty messy induction. My course contains lies. I say to them "look, if X and Y are finite sets and X injects into Y then the size of X is at most the size of Y, this is obvious because consider the image of the map" and yet I do not even tell them what I mean by the size of a set and if I need this sort of result for X and Y of the form $$\{1,2,3,\ldots,n\}$$ before I can define "size" then these arguments are circular.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 09 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151228257):
+#### [ Reid Barton (Dec 09 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151228257):
 I think at some point you have to use this idea that if f is a bijection from {1,...,n}  to {1,...,m} then by permuting the input (or output) we can assume that f sends n to m and then the restriction of f to {1,...,n-1] is a bijection to {1,...,m-1}.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 09 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151228807):
+#### [ Chris Hughes (Dec 09 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151228807):
 That's the messy part.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 09 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151229379):
+#### [ Mario Carneiro (Dec 09 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fin%20n%29%20%E2%89%83%20%28fin%20m%29/near/151229379):
 You could leverage some theorems about `equiv.swap` here, I think?
 
 

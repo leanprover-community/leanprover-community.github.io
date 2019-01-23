@@ -11,7 +11,7 @@ permalink: archive/113488general/83026internshipatOracleLabs.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jeremy Avigad (Nov 28 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/internship%20at%20Oracle%20Labs/near/148718363):
+#### [ Jeremy Avigad (Nov 28 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/internship%20at%20Oracle%20Labs/near/148718363):
 I just posted this message on the Lean-user mailing list:
 
 Dear all,

@@ -11,7 +11,7 @@ permalink: archive/113488general/59078leanbot.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 11 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanbot/near/129464616):
+#### [ Sean Leather (Jul 11 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanbot/near/129464616):
 Somebody is working on a [leanbot for IRC](https://github.com/forked-from-1kasper/leanbot). Can that person or somebody else make it work for Zulip, too?
 
 

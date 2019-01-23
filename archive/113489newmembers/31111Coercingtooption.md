@@ -11,79 +11,79 @@ permalink: archive/113489newmembers/31111Coercingtooption.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204948):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204948):
 Where can I find lemmas about coercing to option (e.g. `ℕ` to `option ℕ`)? I want basic things like `↑(n - m) = ↑n - ↑m`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204961):
+#### [ Mario Carneiro (Jan 15 2019 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204961):
 what does subtraction mean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204982):
+#### [ Mario Carneiro (Jan 15 2019 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204982):
 I don't think option has a `has_sub` instance
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205154):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205154):
 But option N does.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205221):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205221):
 Oh wait, you mean `↑n - ↑m` won't be defined at all.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205251):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205251):
 What about something like `1 + ↑(n - 1) = ↑n`? That's what I actually need to prove.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205270):
+#### [ Mario Carneiro (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205270):
 option doesn't have an add or 1 either
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205286):
+#### [ Mario Carneiro (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205286):
 what are you doing?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205303):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205303):
 Degrees of polynomials.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205315):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205315):
 You can add degrees of polynomials, but they're defined via option.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205329):
+#### [ Mario Carneiro (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205329):
 Isn't it `with_bot N` or something?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205336):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205336):
 Yeah.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205346):
+#### [ Mario Carneiro (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205346):
 that's a different thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205412):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205412):
 Ok, because `with_bot` has additional structure.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205415):
+#### [ Mario Carneiro (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205415):
 `with_bot` has an addition, `option` doesn't
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205416):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205416):
 But how do I coerce to `with_bot`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205423):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205423):
 I mean, are there lemmas about it in mathlib?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205548):
+#### [ Mario Carneiro (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205548):
 I think you want `with_bot.coe_add`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205551):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205551):
 Ah, I see.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205560):
+#### [ Mario Carneiro (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205560):
 the lemmas are in `algebra.ordered_group`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205587):
+#### [ Mario Carneiro (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205587):
 but if `n : nat` then `1 + \u(n - 1) = \u n` is false at 0
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205616):
+#### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205616):
 Yeah, I have an `n > 1` hypothesis, that's alright.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205634):
+#### [ Mario Carneiro (Jan 15 2019 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205634):
 if you cases on `n` then the zero case is impossible and the succ case is by refl
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 15 2019 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205704):
+#### [ Mario Carneiro (Jan 15 2019 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205704):
 oh wait, not refl, you have to commute the 1+ first
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 15 2019 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155206605):
+#### [ Kevin Buzzard (Jan 15 2019 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155206605):
 ```quote
 that's a different thing
 ```

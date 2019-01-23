@@ -11,7 +11,7 @@ permalink: archive/113488general/11013Newbieerror.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254021):
+#### [ Johan Commelin (May 08 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254021):
 I've got the following code
 ```lean
 import algebra.ring data.finsupp
@@ -27,7 +27,7 @@ instance : module R (free_module S) := sorry
 end free_module
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254025):
+#### [ Johan Commelin (May 08 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254025):
 And this is the error
 ```
 don't know how to synthesize placeholder
@@ -38,40 +38,40 @@ S : Type u_2
 ⊢ Type ?
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254034):
+#### [ Johan Commelin (May 08 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254034):
 Aah, I should point out that the red squiggles are under `free_module` in the line with `sorry`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254076):
+#### [ Mario Carneiro (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254076):
 Shouldn't `R` be explicit in `free_module`? It is not inferrable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254077):
+#### [ Johan Commelin (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254077):
 I think the error means that it can't figure out in which universe `free_module S` lives
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254085):
+#### [ Johan Commelin (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254085):
 Aah, Ok, is that the problem. I thought it was automatically included, since I declared it a variable
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254090):
+#### [ Johan Commelin (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254090):
 Or should I then use `()` instead of `{}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254096):
+#### [ Kenny Lau (May 08 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254096):
 it isn't a parameter
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 08 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254097):
+#### [ Mario Carneiro (May 08 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254097):
 it is included, but the later use might refer to a different `R`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254154):
+#### [ Johan Commelin (May 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254154):
 Ok... well, that fixed my problem. Thanks a lot!
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254155):
+#### [ Kenny Lau (May 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254155):
 no, don't use parameter
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254158):
+#### [ Kenny Lau (May 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254158):
 you won't be able to use it once you leave the section
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254203):
+#### [ Johan Commelin (May 08 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254203):
 Hmm, what do you mean?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254205):
+#### [ Johan Commelin (May 08 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254205):
 I now have
 ```lean
 import algebra.ring data.finsupp
@@ -90,37 +90,37 @@ end
 end free_module
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254209):
+#### [ Johan Commelin (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254209):
 Is that wrong?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254214):
+#### [ Kenny Lau (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254214):
 never mind
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254216):
+#### [ Kenny Lau (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254216):
 that isn't wrong
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254219):
+#### [ Johan Commelin (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254219):
 Ok, I don't mind learning a better way (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254265):
+#### [ Johan Commelin (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254265):
 So, why is `split` failing? I expected to get 4 goals, according to the 4 axioms of a module
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254270):
+#### [ Kenny Lau (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254270):
 constructor
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254273):
+#### [ Kenny Lau (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254273):
 but you don't want to use it since it `extends` something
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254279):
+#### [ Kenny Lau (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254279):
 maybe if you really want to stay in tactic mode, do `refine {..}`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254482):
+#### [ Johan Commelin (May 08 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254482):
 Well, I don't *want* to stay in tactic mode. It is just that I have no clue how to do things in term mode. And tactic mode helps me a bit (-;
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254761):
+#### [ Johan Commelin (May 08 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254761):
 So what would be the proper way to prove this `instance`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254774):
+#### [ Kenny Lau (May 08 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254774):
 ```lean
 instance : module R (free_module R S) :=
 { smul := _,
@@ -128,16 +128,16 @@ instance : module R (free_module R S) :=
 ```
 etc
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254830):
+#### [ Johan Commelin (May 08 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254830):
 Ok, thanks! I'll try to do that.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126255445):
+#### [ Johan Commelin (May 08 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126255445):
 Lol, this is already in `finsupp`: `to_module`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126255448):
+#### [ Kenny Lau (May 08 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126255448):
 lol
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126256750):
+#### [ Johan Commelin (May 08 2018 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126256750):
 The errors continue:
 ```lean
 import algebra.ring data.finsupp
@@ -166,7 +166,7 @@ definition is_finitely_generated (M : Type*) [module R M] : Prop :=
 end generators
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126256792):
+#### [ Johan Commelin (May 08 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126256792):
 Errors:
 ```
 generators.lean:19:57: error
@@ -184,70 +184,70 @@ S : set M
 ⊢ Type ?
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126256799):
+#### [ Johan Commelin (May 08 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126256799):
 But I am telling it that M is a module over R, so why can't it unify `?m_1` with `R`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258817):
+#### [ Kevin Buzzard (May 08 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258817):
 You started a new section so Lean has forgotten about the variable R
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258821):
+#### [ Kevin Buzzard (May 08 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258821):
 wait
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258825):
+#### [ Kevin Buzzard (May 08 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258825):
 that doesn't seem to be true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258898):
+#### [ Kevin Buzzard (May 08 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258898):
 It seems to be because you don't ever mention R so the type class inference doesn't kick in
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258966):
+#### [ Kevin Buzzard (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258966):
 `definition generated_submodule (S : set M) [module R M] := set.range (natural_map S) -- works`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258971):
+#### [ Kevin Buzzard (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258971):
 Type class inference is a strange thing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258973):
+#### [ Kenny Lau (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258973):
 include R
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258974):
+#### [ Kevin Buzzard (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258974):
 I would still not say I had completely got the hang of it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258979):
+#### [ Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258979):
 ```lean
 include R
 definition generated_submodule (S : set M) := set.range (natural_map S) -- works
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259016):
+#### [ Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259016):
 Kenny's fix
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259021):
+#### [ Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259021):
 What does `include` do?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259026):
+#### [ Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259026):
 I thought this was for including variable names in tactic proofs
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259037):
+#### [ Kevin Buzzard (May 08 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259037):
 As for the equality failing
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259038):
+#### [ Kevin Buzzard (May 08 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259038):
 `set.univ : Π {α : Type u}, set α`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259041):
+#### [ Kevin Buzzard (May 08 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259041):
 `set.univ` doesn't take `M`, it guesses it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259081):
+#### [ Kevin Buzzard (May 08 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259081):
 ```lean
 definition is_finitely_generated (M : Type*) [module R M] : Prop :=
 ∃ S : finset M, generated_submodule {x | x ∈ S} = set.univ -- works
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259083):
+#### [ Kevin Buzzard (May 08 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259083):
 Recently I realised that I pretty fully understood most Lean errors
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259086):
+#### [ Kevin Buzzard (May 08 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259086):
 i.e. I can look at the error and actually figure out what is wrong with my code, in many cases
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259096):
+#### [ Kevin Buzzard (May 08 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259096):
 ```
 type mismatch at application
   generated_submodule {x : M | x ∈ S} = set.univ M
@@ -259,43 +259,43 @@ but is expected to have type
   set M : Type ?
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259103):
+#### [ Kevin Buzzard (May 08 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259103):
 says "the right hand side is supposed to have type `set M` but it has type `Prop` so you have not written what you meant to write -- it doesn't typecheck."
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259146):
+#### [ Kevin Buzzard (May 08 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259146):
 You are attempting to assert that two sets are equal
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259147):
+#### [ Kevin Buzzard (May 08 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259147):
 so the correct type is `set M`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259149):
+#### [ Kevin Buzzard (May 08 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259149):
 so the problem is that `set.univ M` has type Prop instead of type `set M`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259156):
+#### [ Kevin Buzzard (May 08 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259156):
 and now you look at what `set.univ` actually does by hovering your mouse over `set.univ`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259159):
+#### [ Kevin Buzzard (May 08 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259159):
 and you see your error
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259207):
+#### [ Kevin Buzzard (May 08 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259207):
 I would urge you @**Johan Commelin** to learn to read errors so you can find out the problem.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259211):
+#### [ Kevin Buzzard (May 08 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259211):
 Sometimes the problem is that type class inference has failed. Type class inference is just something you have to get the hang of and I had to ask and ask here about it -- see my typeclass inference woes thread
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259224):
+#### [ Kevin Buzzard (May 08 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259224):
 But for other errors, try and make it so that there is exactly one error (i.e put sorry everywhere else) and then try and read the error.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 08 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259266):
+#### [ Kevin Buzzard (May 08 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259266):
 And then hope that you can fix it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 08 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259847):
+#### [ Johan Commelin (May 08 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259847):
 Ok, thanks! I hope to get the hang of it as well...
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 08 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126266575):
+#### [ Chris Hughes (May 08 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126266575):
 `set.univ : set M` should help
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 08 2018 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126266785):
+#### [ Chris Hughes (May 08 2018 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126266785):
 Or perhaps `@set.univ M`
 
 

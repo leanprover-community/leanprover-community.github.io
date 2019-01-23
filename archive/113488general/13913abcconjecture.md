@@ -11,12 +11,12 @@ permalink: archive/113488general/13913abcconjecture.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 07 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abc%20conjecture/near/135343888):
+#### [ Patrick Massot (Oct 07 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abc%20conjecture/near/135343888):
 >@**Kevin Buzzard**, have you seen @**David Michael Roberts** attempt to summarise the latest disagreement between Mochizuki and Scholze? <https://thehighergeometer.files.wordpress.com/2018/09/mochizuki_final1.pdf>. It's very much about whether such replacements were valid or not.
 
 @**David Michael Roberts** Did you get any answer from either side?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) David Michael Roberts (Oct 07 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abc%20conjecture/near/135347351):
+#### [ David Michael Roberts (Oct 07 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abc%20conjecture/near/135347351):
 Not yet. I guess it's just percolating through social media at the moment.
 
 

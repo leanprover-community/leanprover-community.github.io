@@ -11,13 +11,13 @@ permalink: archive/113488general/91713Buildinglean2.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 01 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130742054):
+#### [ Ali Caglayan (Aug 01 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130742054):
 Is anyone able to build lean2 on their machine? I've tried twice already and its always failed. I am currently trying a third time. I am building on Ubuntu bionic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 01 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130742067):
+#### [ Ali Caglayan (Aug 01 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130742067):
 Infact I've tried a third time and still no luck
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 01 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130742119):
+#### [ Ali Caglayan (Aug 01 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130742119):
 Traceback (most recent call last):
   File "/home/ali/lean2/src/../bin/linja", line 758, in <module>
     sys.exit(main())
@@ -37,31 +37,31 @@ make[1]: *** [CMakeFiles/standard_lib.dir/all] Error 2
 Makefile:162: recipe for target 'all' failed
 make: *** [all] Error 2
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 01 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130742145):
+#### [ Ali Caglayan (Aug 01 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130742145):
 This is a fresh clone of lean2 using the build/release cmake
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Aug 01 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130743827):
+#### [ Sebastian Ullrich (Aug 01 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130743827):
 @**Ali Caglayan** I don't remember much about building Lean 2, but have you installed ninja? Can you call it from a command line, like say `ninja --version`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 01 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130743901):
+#### [ Ali Caglayan (Aug 01 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130743901):
 @**Sebastian Ullrich**  I was hoping not to install ninja as I don't exactly have a lot of space.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Aug 01 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130743931):
+#### [ Sebastian Ullrich (Aug 01 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130743931):
 Lean 2 depends on ninja
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 01 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130743954):
+#### [ Ali Caglayan (Aug 01 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130743954):
 In the install instructions it said it was optional. I will try this again with more room.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 01 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130743973):
+#### [ Ali Caglayan (Aug 01 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130743973):
 See https://github.com/leanprover/lean/blob/master/doc/make/ubuntu-16.04.md
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Aug 02 2018 at 00:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130744505):
+#### [ Sebastian Ullrich (Aug 02 2018 at 00:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130744505):
 Those are for Lean 3. I think there is some crazy code in Lean 2 that downloads ninja if you don't have it yet, but as you can see, it will try to call ninja in the end. Maybe you can make Lean work without linja, which is a wrapper around ninja for Lean, but I don't remember enough details about it.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 02 2018 at 00:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130746377):
+#### [ Ali Caglayan (Aug 02 2018 at 00:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130746377):
 I have managed to build it now. The whole problem was no having ninja.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Caglayan (Aug 02 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130746386):
+#### [ Ali Caglayan (Aug 02 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130746386):
 I guess I can uninstall ninja now its built
 
 

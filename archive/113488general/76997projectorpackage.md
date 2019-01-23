@@ -11,16 +11,16 @@ permalink: archive/113488general/76997projectorpackage.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 13 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/project%20or%20package/near/135725749):
+#### [ Kevin Buzzard (Oct 13 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/project%20or%20package/near/135725749):
 I've just realised that in some of my docs I use the words "project" and "package" interchangeably when talking about "a directory with a `leanpkg.toml` file in it". Are the words interchangeable? If not, which one should I be using?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Oct 13 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/project%20or%20package/near/135725770):
+#### [ Gabriel Ebner (Oct 13 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/project%20or%20package/near/135725770):
 Yes, they're used interchangeably.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 13 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/project%20or%20package/near/135726478):
+#### [ Patrick Massot (Oct 13 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/project%20or%20package/near/135726478):
 I guess there is a psychological difference, especially you use other people packages in order to work on your own project
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Oct 13 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/project%20or%20package/near/135728520):
+#### [ Simon Hudon (Oct 13 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/project%20or%20package/near/135728520):
 Or you could say that your project is to develop the package that you're interested in.
 
 

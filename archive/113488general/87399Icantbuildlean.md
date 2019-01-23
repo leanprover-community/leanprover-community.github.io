@@ -11,7 +11,7 @@ permalink: archive/113488general/87399Icantbuildlean.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457140):
+#### [ Kenny Lau (Mar 08 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457140):
 `ninja` gives me error. here's an excerpt:
 ```
 C:\lean\library\init\algebra\ordered_group.lean:342:7: error: _interaction: trying to evaluate sorry
@@ -104,22 +104,22 @@ C:\lean\library\init\algebra\ordered_group.lean:341:0: error: failed to synthesi
 α : Type u,
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457142):
+#### [ Kenny Lau (Mar 08 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457142):
 The error is kinda long and I don't know where to copy it from
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457453):
+#### [ Kenny Lau (Mar 08 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457453):
 https://github.com/leanprover/lean
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457454):
+#### [ Kenny Lau (Mar 08 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457454):
 nvm lean is still building
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 08 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457457):
+#### [ Simon Hudon (Mar 08 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457457):
 When you install Lean, where does it put the library? Try deleting that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457613):
+#### [ Kenny Lau (Mar 08 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457613):
 I've got a new error
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457614):
+#### [ Kenny Lau (Mar 08 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457614):
 ```
 [36/40] Building CXX object shell/CMakeFiles/lean.dir/server.cpp.obj
 [37/40] Linking CXX executable shell\lean_js.exe
@@ -130,60 +130,60 @@ Error copying file "C:/lean/build/release/shell/lean.exe" to "C:/lean/src/../bin
 ninja: build stopped: subcommand failed.
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457639):
+#### [ Kenny Lau (Mar 08 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457639):
 I've reverted to an older version by `git checkout`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457641):
+#### [ Kenny Lau (Mar 08 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457641):
 and then I tried to build it again
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 08 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457693):
+#### [ Simon Hudon (Mar 08 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457693):
 Did you pick a revision which builds on Travis and AppVeyor?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457699):
+#### [ Kenny Lau (Mar 08 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457699):
 I used `832d235` because Kevin Buzzard is currently running on that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457703):
+#### [ Kenny Lau (Mar 08 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457703):
 how do I check if it builds on Travis and AppVeyor?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 08 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457826):
+#### [ Simon Hudon (Mar 08 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457826):
 You can go: https://github.com/leanprover/lean/commits/master
 
 The commits that pass both have a green check mark
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457889):
+#### [ Kenny Lau (Mar 08 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457889):
 the last green check mark is March 2 :o
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 08 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457903):
+#### [ Mario Carneiro (Mar 08 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457903):
 @**Kenny Lau** The last error you posted usually indicates that `lean.exe`is locked (usually because it is running somewhere), so the copy command fails. I have had success with deleting `lean.exe` and then running `ninja` again
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457913):
+#### [ Kenny Lau (Mar 08 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457913):
 oh thanks, lemme try
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457963):
+#### [ Kenny Lau (Mar 08 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457963):
 but should I just go with the green check marks
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 08 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458050):
+#### [ Mario Carneiro (Mar 08 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458050):
 Sometimes this fails as well because `ninja` fails to detect that `lean.exe` has been deleted, and starts running the build script from after when the file should already exist. When this happens I just touch any cpp file and run `ninja` again to force recompilation
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458375):
+#### [ Kenny Lau (Mar 08 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458375):
 @**Mario Carneiro** I deleted lean.exe, now it's complaining that lean.exe isn't there
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 08 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458388):
+#### [ Mario Carneiro (Mar 08 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458388):
 see my last comment
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 08 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458408):
+#### [ Mario Carneiro (Mar 08 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458408):
 open any cpp file, add and delete a space somewhere, and save, then run ninja again
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458452):
+#### [ Kenny Lau (Mar 08 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458452):
 oh
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458456):
+#### [ Kenny Lau (Mar 08 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458456):
 nice
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 08 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458579):
+#### [ Kenny Lau (Mar 08 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458579):
 parabens por mim, it worked
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 08 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458722):
+#### [ Kevin Buzzard (Mar 08 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123458722):
 I just built lean head on Ubuntu 16.04 -- hopefully no memory leaks any more!
 
 

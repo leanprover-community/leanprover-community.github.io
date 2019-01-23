@@ -11,7 +11,7 @@ permalink: archive/116395maths/98060idealrestatement.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 29 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ideal%20restatement/near/134885438):
+#### [ Patrick Massot (Sep 29 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ideal%20restatement/near/134885438):
 As often, I find myself moving stuff around without doing anything. I just wrote:
 ```lean
 lemma image_subset_iff' {α : Type*} {β : Type*} (f : α → β) (s : set α) (t : set β) :
@@ -46,7 +46,7 @@ end
 which is restating the definition of an ideal in a functional way, which is suitable for topological reasoning in:
 `instance ideal_closure [topological_ring α] (S : set α) [is_ideal S] : is_ideal (closure S)`. Am I doing this right? Should we have a more systematic way of doing such things, or even a tactic (probably transforming the functional form into a pointwise form)?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 29 2018 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ideal%20restatement/near/134885496):
+#### [ Patrick Massot (Sep 29 2018 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ideal%20restatement/near/134885496):
 Maybe I should also add the instance proof in order to show why the functional form is useful:
 ```lean
 instance ideal_closure [topological_ring α] (S : set α) [is_ideal S] : is_ideal (closure S) :=
@@ -63,7 +63,7 @@ begin
 end
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 29 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ideal%20restatement/near/134885537):
+#### [ Patrick Massot (Sep 29 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ideal%20restatement/near/134885537):
 By the way, I have no idea why `split` is happy to transform the goal `is_ideal' S` into the expected three goals, but doesn't want to do anything with the goal `is_ideal S`
 
 

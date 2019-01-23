@@ -11,124 +11,124 @@ permalink: archive/113488general/85526characteristicoffields.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921382):
+#### [ Kenny Lau (Oct 16 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921382):
 @**Mario Carneiro** @**Johan Commelin** @**Kevin Buzzard** how should we define the `char` of a field?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921432):
+#### [ Mario Carneiro (Oct 16 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921432):
 I think your definition should be on semirings instead of zero/one/mul classes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921541):
+#### [ Mario Carneiro (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921541):
 I guess it could be on rings, since a nonzero characteristic semiring is a ring
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921546):
+#### [ Chris Hughes (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921546):
 Should it be a class or just a Prop?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921574):
+#### [ Mario Carneiro (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921574):
 a prop, it is a prop
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921587):
+#### [ Mario Carneiro (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921587):
 oh wait you aren't asking about `char_p`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921653):
+#### [ Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921653):
 both
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921654):
+#### [ Chris Hughes (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921654):
 I'm asking about `char`.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921657):
+#### [ Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921657):
 I'm asking about this thing in general
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921670):
+#### [ Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921670):
 how did metamath / other languages deal with this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921676):
+#### [ Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921676):
 and is char(Q) 0 or 1?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921705):
+#### [ Mario Carneiro (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921705):
 char(Q) is 0
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921712):
+#### [ Kenny Lau (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921712):
 in where?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921720):
+#### [ Mario Carneiro (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921720):
 in metamath
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921723):
+#### [ Mario Carneiro (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921723):
 and in math
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921730):
+#### [ Kenny Lau (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921730):
 but how is char defined?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921736):
+#### [ Kenny Lau (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921736):
 I feel like there's 1,000,000 subtleties
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921739):
+#### [ Mario Carneiro (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921739):
 the order of 1
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921811):
+#### [ Kenny Lau (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921811):
 how is order defined?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921818):
+#### [ Chris Hughes (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921818):
 We don't have `order_of` on non finite groups
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921840):
+#### [ Mario Carneiro (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921840):
 and the order of a group element is the smallest nonzero power of the element that is 1
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921850):
+#### [ Mario Carneiro (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921850):
 or 0 if it doesn't exist
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921852):
+#### [ Kenny Lau (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921852):
 so that's a `def` not a `prop`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921861):
+#### [ Kenny Lau (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921861):
 ok I don't like this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921866):
+#### [ Mario Carneiro (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921866):
 metamath doesn't care about computability tho
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921867):
+#### [ Kenny Lau (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921867):
 do we have another approach?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921873):
+#### [ Mario Carneiro (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921873):
 there is a computable definition yielding a `roption nat`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921939):
+#### [ Mario Carneiro (Oct 16 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921939):
 and if we define `get_or_else` for `roption` then we can make it 0 otherwise
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921988):
+#### [ Kenny Lau (Oct 16 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921988):
 would it be usable?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922050):
+#### [ Mario Carneiro (Oct 16 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922050):
 I am a fan of `roption` definitions; it would give you a relational interface
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922054):
+#### [ Mario Carneiro (Oct 16 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922054):
 `p \in char R`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922092):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922092):
 The characteristic of a ring is the kernel of the canonical ring homomorphism from the integers to the ring.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922108):
+#### [ Mario Carneiro (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922108):
 there is also the ideal option
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922114):
+#### [ Kenny Lau (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922114):
 ```quote
 The characteristic of a ring is the kernel of the canonical ring homomorphism from the integers to the ring.
 ```
 next
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922123):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922123):
 That's the best definition.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922145):
+#### [ Mario Carneiro (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922145):
 that's just restating x^n = 0 though
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922199):
+#### [ Mario Carneiro (Oct 16 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922199):
 maybe a better question is not what is the characteristic but what is it for
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922241):
+#### [ Mario Carneiro (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922241):
 We have PID defined, right? Is it constructive exists?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922259):
+#### [ Kenny Lau (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922259):
 ```lean
 class is_principal_ideal (S : set α) : Prop :=
 (principal : ∃ a : α, S = {x | a ∣ x})
@@ -137,197 +137,197 @@ class principal_ideal_domain (α : Type*) extends integral_domain α :=
 (principal : ∀ (S : set α) [is_ideal S], is_principal_ideal S)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922262):
+#### [ Kenny Lau (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922262):
 yes
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922273):
+#### [ Mario Carneiro (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922273):
 well no
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922280):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922280):
 That looks right to me. Is Mario asking about whether there's a function from ideals to generators though?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922284):
+#### [ Mario Carneiro (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922284):
 yeah
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922332):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922332):
 A maths PID is what Kenny just quoted.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922341):
+#### [ Mario Carneiro (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922341):
 I guess there is no constructive proof that Z is a PID then?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922345):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922345):
 Of course the notion of PID was not invented by constructivists.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922350):
+#### [ Kenny Lau (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922350):
 nothing involving arbitrary sets can be constructive
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922351):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922351):
 History is written by the victors
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922383):
+#### [ Mario Carneiro (Oct 16 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922383):
 that's not exactly true kenny, it's possible that the ideal structure can be leveraged to give a generator
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922388):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922388):
 ```quote
 I guess there is no constructive proof that Z is a PID then?
 ```
 The standard proof in textbooks ("if the ideal is zero then done, if not then choose the smallest positive integer") is constructive.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922440):
+#### [ Mario Carneiro (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922440):
 well, constructive with LEM
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922465):
+#### [ Kenny Lau (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922465):
 you can't decide if the ideal is zero
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922466):
+#### [ Mario Carneiro (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922466):
 you can't determine if an arbitrary ideal is zero
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922471):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922471):
 In Z??
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922475):
+#### [ Mario Carneiro (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922475):
 that's exactly the problem with defining characteristic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922477):
+#### [ Kenny Lau (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922477):
 give me an algorithm
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922490):
+#### [ Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922490):
 the set of periods of an element is an ideal of Z
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922500):
+#### [ Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922500):
 but you can't tell if it is zero
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922506):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922506):
 I'm not going to talk about this any more. It's silly.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922511):
+#### [ Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922511):
 I think we have our answer Kenny
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922516):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922516):
 :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922518):
+#### [ Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922518):
 totalize it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922565):
+#### [ Kenny Lau (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922565):
 could you summarize the answer?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922575):
+#### [ Kevin Buzzard (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922575):
 Are you going to assume LEM?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922576):
+#### [ Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922576):
 char Q = 0
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922579):
+#### [ Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922579):
 `noncomputable`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922584):
+#### [ Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922584):
 live with it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922598):
+#### [ Kenny Lau (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922598):
 no roption?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922599):
+#### [ Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922599):
 if you insist, you can define `char' A : roption nat`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922611):
+#### [ Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922611):
 and define `char` in terms of it
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922615):
+#### [ Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922615):
 but most of the theory will be about `char`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922618):
+#### [ Kenny Lau (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922618):
 it won't be a class then
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922620):
+#### [ Patrick Massot (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922620):
 `kenny_char : roption Prop` (because who knows?)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922637):
+#### [ Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922637):
 also, `char` is a type
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922640):
+#### [ Kenny Lau (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922640):
 but every ring has a unique char
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922649):
+#### [ Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922649):
 characters
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922699):
+#### [ Mario Carneiro (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922699):
 there is also the ideal definition, dunno how useful it is but that's constructive too
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922704):
+#### [ Patrick Massot (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922704):
 Let's write it in French then! `car`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922705):
+#### [ Kenny Lau (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922705):
 I mean, it's useful to make "char A = p" into a class
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922710):
+#### [ Mario Carneiro (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922710):
 I agree on that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922715):
+#### [ Mario Carneiro (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922715):
 `char_p` is fine and unproblematic
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922719):
+#### [ Kenny Lau (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922719):
 oh ok
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922722):
+#### [ Reid Barton (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922722):
 ```quote
 but every ring has a unique char
 ```
 isn't this not true constructively? or am I really confused
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922744):
+#### [ Mario Carneiro (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922744):
 no, that's true
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922750):
+#### [ Kenny Lau (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922750):
 I'm talking about the reason to make it into a typeclass
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922760):
+#### [ Mario Carneiro (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922760):
 if a ring has two characteristics then they are equal
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922763):
+#### [ Kenny Lau (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922763):
 ```lean
 class char_p (α : Type u) [has_zero α] [has_one α] [has_add α] (p : ℕ) : Prop :=
 (cast_eq_zero : (p:α) = 0)
 ```
 Do we all agree that this definition is deficit?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922770):
+#### [ Reid Barton (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922770):
 It's the "has" part I am worried about
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922780):
+#### [ Reid Barton (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922780):
 I agree "unique" is okay.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922831):
+#### [ Mario Carneiro (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922831):
 no you can't prove existence of a characteristic (number) in general without LEM
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922835):
+#### [ Mario Carneiro (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922835):
 the ideal is fine of course
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922838):
+#### [ Reid Barton (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922838):
 right, okay
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 16 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923259):
+#### [ Reid Barton (Oct 16 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923259):
 ```quote
 I guess there is no constructive proof that Z is a PID then?
 ```
 I think you can even prove constructively that "Z is a PID" => LEM
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 16 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923313):
+#### [ Reid Barton (Oct 16 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923313):
 by taking a proposition P and defining the ideal I = {x | x = 0 \/ P}
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 16 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923331):
+#### [ Reid Barton (Oct 16 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923331):
 and then looking at whether its generator is zero or not
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923475):
+#### [ Kenny Lau (Oct 16 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923475):
 ```lean
 class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
 (cast_eq_zero_iff : ∀ x:ℕ, (x:α) = 0 ↔ p ∣ x)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923477):
+#### [ Kenny Lau (Oct 16 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923477):
 how about this
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923619):
+#### [ Kenny Lau (Oct 16 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923619):
 ```lean
 class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
 (cast_eq_zero_iff : ∀ x:ℕ, (x:α) = 0 ↔ p ∣ x)
@@ -341,19 +341,19 @@ nat.dvd_antisymm
   ((char_p.cast_eq_zero_iff α q p).1 char_p.cast_eq_zero)
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923715):
+#### [ Kenny Lau (Oct 16 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923715):
 ```quote
 I think your definition should be on semirings instead of zero/one/mul classes
 ```
 but `char_zero` is defined on `[add_monoid \a] [has_one \a]`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135924255):
+#### [ Mario Carneiro (Oct 16 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135924255):
 or that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135924367):
+#### [ Kenny Lau (Oct 16 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135924367):
 existe uma diferencia?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925799):
+#### [ Kenny Lau (Oct 16 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925799):
 ```lean
 class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
 (cast_eq_zero_iff : ∀ x:ℕ, (x:α) = 0 ↔ p ∣ x)
@@ -390,13 +390,13 @@ let ⟨c, H⟩ := char_p.exists α in
 ⟨c, H, λ y H2, by resetI; apply char_p.eq α⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925803):
+#### [ Kenny Lau (Oct 16 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925803):
 How does this look? @**Mario Carneiro** @**Patrick Massot**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925816):
+#### [ Kenny Lau (Oct 16 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925816):
 @**Kevin Buzzard**
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925950):
+#### [ Kevin Buzzard (Oct 16 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925950):
 ```quote
 ```lean
 class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
@@ -405,19 +405,19 @@ class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
 ```
 I see you went for the ideal idea after all ;-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925962):
+#### [ Mario Carneiro (Oct 16 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925962):
 `char_p.eq` should definitely not have square brackets
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925979):
+#### [ Kevin Buzzard (Oct 16 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925979):
 `is_char_p`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926065):
+#### [ Mario Carneiro (Oct 16 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926065):
 Maybe it should be a property of Z, then you can literally say `is_ideal (char_p A)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926427):
+#### [ Kenny Lau (Oct 16 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926427):
 wait I'm confused
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926429):
+#### [ Kenny Lau (Oct 16 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926429):
 ```lean
 theorem char_p.eq (α : Type u) [semiring α] (p q : ℕ) (c1 : char_p α p) (c2 : char_p α q) : p = q :=
 nat.dvd_antisymm
@@ -425,13 +425,13 @@ nat.dvd_antisymm
   ((char_p.cast_eq_zero_iff α q p).1 (char_p.cast_eq_zero _ _))
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926434):
+#### [ Kenny Lau (Oct 16 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926434):
 how can the proof still work now that I turned `[]` to `()`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926462):
+#### [ Mario Carneiro (Oct 16 2018 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926462):
 maybe kevin knows... I told him the solution to this puzzle a few weeks ago
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926477):
+#### [ Kenny Lau (Oct 16 2018 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926477):
 anyway how is this now?
 ```lean
 class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
@@ -469,24 +469,24 @@ let ⟨c, H⟩ := char_p.exists α in
 ⟨c, H, λ y H2, char_p.eq α H2 H⟩
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 16 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926549):
+#### [ Mario Carneiro (Oct 16 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926549):
 `char_p.exists` should be defining a function... called `char`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926554):
+#### [ Kenny Lau (Oct 16 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926554):
 we can functionize that
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926587):
+#### [ Kevin Buzzard (Oct 16 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926587):
 He told Johannes too.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926599):
+#### [ Kenny Lau (Oct 16 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926599):
 ```
 invalid definition, a declaration named 'char' has already been declared
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926600):
+#### [ Kenny Lau (Oct 16 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926600):
 hard luck
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926906):
+#### [ Kenny Lau (Oct 16 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926906):
 ```lean
 noncomputable def ring_char (α : Type u) [semiring α] : ℕ :=
 classical.some (char_p.exists_unique α)
@@ -499,43 +499,43 @@ theorem ring_char.eq (α : Type u) [semiring α] {p : ℕ} (C : char_p α p) : p
 (classical.some_spec (char_p.exists_unique α)).2 p C
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926909):
+#### [ Kenny Lau (Oct 16 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926909):
 how is this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927432):
+#### [ Kevin Buzzard (Oct 16 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927432):
 ```quote
 how can the proof still work now that I turned `[]` to `()`?
 ```
 Type class inference just grabs anything it can find to the left of the colon. The round and square brackets are just for the signature of the theorem, they don't affect how type class inference works in the proof. This is not so well-known because it's not common to put a typeclass left of the colon and not in a square bracket.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927447):
+#### [ Kevin Buzzard (Oct 16 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927447):
 I discovered it a few weeks ago when I was trying to understand Patrick's type class hell with his completions and had exactly the same reaction.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927490):
+#### [ Kevin Buzzard (Oct 16 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927490):
 I've had to construct that argument from memory because my search for the conversation failed. Hopefully it's some sort of approximation to the truth.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Oct 16 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927856):
+#### [ Bryan Gin-ge Chen (Oct 16 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927856):
 I guess it's [this conversation?](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/Separation.20stuff/near/134261338) I found it by searching for "left of colon".
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927950):
+#### [ Kenny Lau (Oct 16 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927950):
 @**Mario Carneiro** Could you help me with some typeclass problems? It's in L324 here: https://github.com/kckennylau/Lean/blob/master/perfect_closure.lean#L324
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927966):
+#### [ Kenny Lau (Oct 16 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927966):
 Lean can't figure out the coercion in `(↑x : perfect_closure α p)`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928018):
+#### [ Kevin Buzzard (Oct 16 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928018):
 https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/Separation.20stuff/near/134261591
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928021):
+#### [ Kevin Buzzard (Oct 16 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928021):
 You owe Mario a light bulb
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928069):
+#### [ Kenny Lau (Oct 16 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928069):
 done
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 16 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928099):
+#### [ Kevin Buzzard (Oct 16 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928099):
 (thanks Bryan)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 16 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928788):
+#### [ Kenny Lau (Oct 16 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928788):
 @**Mario Carneiro** never mind it's stupid
 
 

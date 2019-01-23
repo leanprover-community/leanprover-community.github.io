@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/47161finsetsemilatticesupbot.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Nov 20 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20semilattice_sup_bot/near/148054444):
+#### [ Alistair Tucker (Nov 20 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20semilattice_sup_bot/near/148054444):
 Hi! In finset.lean there is
 ```lean
 instance : semilattice_inf_bot (finset α) :=
@@ -19,10 +19,10 @@ instance : semilattice_inf_bot (finset α) :=
 ```
 but no equivalent instance for semilattice_sup_bot. Is there some good reason for this?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 20 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20semilattice_sup_bot/near/148054870):
+#### [ Johannes Hölzl (Nov 20 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20semilattice_sup_bot/near/148054870):
 I don't see any reason why this is missing.
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Nov 20 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20semilattice_sup_bot/near/148055198):
+#### [ Alistair Tucker (Nov 20 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20semilattice_sup_bot/near/148055198):
 Thanks
 
 

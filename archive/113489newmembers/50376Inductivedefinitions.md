@@ -11,7 +11,7 @@ permalink: archive/113489newmembers/50376Inductivedefinitions.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 28 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926297):
+#### [ Ken Roe (Aug 28 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926297):
 I see a number of comments in my code that a definition of the form:
 ```lean
 inductive allFirsts {t1} {t2} : list t1 → list (t1 × t2) → Prop
@@ -25,10 +25,10 @@ allFirsts l1 l2 <-> l2.map prod.fst = l1
 
 The second form is not a complete definition.  How can I use this form as a definition?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Aug 28 2018 at 18:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926525):
+#### [ Chris Hughes (Aug 28 2018 at 18:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926525):
 `def allFirsts {t1 t2} (l1 : list t1) (l2 : list (t1 × t2)) : Prop := l2.map prod.fst = l1`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 28 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926967):
+#### [ Kevin Buzzard (Aug 28 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926967):
 ```lean
 import tactic.interactive
 

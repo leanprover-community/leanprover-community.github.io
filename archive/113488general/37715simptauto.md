@@ -11,7 +11,7 @@ permalink: archive/113488general/37715simptauto.html
 
 
 {% raw %}
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (May 31 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127356880):
+#### [ Sean Leather (May 31 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127356880):
 So close and yet so far:
 
 ```lean
@@ -22,19 +22,19 @@ a : b₁ = b₂
 ⊢ b₂ = b₁
 ```
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 31 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127378132):
+#### [ Kevin Buzzard (May 31 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127378132):
 eq.symm is not a good simp lemma :-)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (May 31 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127378623):
+#### [ Simon Hudon (May 31 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127378623):
 What is the goal before you call `tauto`?
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 31 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127379550):
+#### [ Reid Barton (May 31 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127379550):
 I made a version of `tauto` that calls `cc` (which is how I discovered that `cc` bug I mentioned here a while ago)
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (May 31 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127379554):
+#### [ Reid Barton (May 31 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127379554):
 instead of `done`
 
-#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jun 01 2018 at 08:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127401951):
+#### [ Sean Leather (Jun 01 2018 at 08:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127401951):
 The goal is rather complicated (but seems like it should be automatically solvable), and I don't have it around anymore. The proof doesn't involve `eq.symm`. But I've noticed this same pattern a few times when trying `tauto`. Here's another example that I just tried. It seems that `tauto` can't solve this (which is just `or.inr`)?
 
 ```lean
