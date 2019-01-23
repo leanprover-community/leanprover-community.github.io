@@ -12,6 +12,7 @@
 from datetime import date, datetime
 from pathlib import Path
 from zlib import adler32
+from operator import attrgetter
 import zulip, string, os, time, json, urllib
 #import os
 #import time
@@ -22,7 +23,7 @@ json_root = Path("./_json")
 md_root = Path("archive")
 md_index = Path("index.md")
 html_root = Path("archive")
-stream_blacklist = ['rss', 'travis']
+stream_blacklist = ['rss', 'travis', 'announce']
 
 # confic_file should point to a Zulip api config
 client = zulip.Client(config_file="./.zuliprc")
@@ -130,7 +131,7 @@ def write_topic_index(s): #(stream_name, topics):
 def write_stream_index(streams):
     outfile = open(md_root / md_index, 'w+', encoding='utf-8')
     outfile.write("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive\npermalink: {}/index.html\n---\n\n---\n\n## Streams:\n\n".format(html_root))
-    for s in streams:
+    for s in sorted(streams, key=lambda s: s['id']):
         outfile.write("* [{0}]({1}/index.html) ({2} topic{3})\n\n".format(
             s['name'], 
             sanitize_stream(s['name'], s['id']), 
