@@ -9,7 +9,7 @@ permalink: archive/113488general/72682orderofsimplemmas.html
 
 ---
 
-#### [Sebastien Gouezel (Nov 25 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/order%20of%20simp%20lemmas/near/148324441):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Nov 25 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/order%20of%20simp%20lemmas/near/148324441):
 There are in `data/set/basic.lean` the following two simp lemmas, in this order:
 ```lean
 @[simp] theorem mem_image (f : α → β) (s : set α) (y : β) : y ∈ f '' s ↔ ∃ x, x ∈ s ∧ f x = y

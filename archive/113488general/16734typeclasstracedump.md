@@ -9,7 +9,7 @@ permalink: archive/113488general/16734typeclasstracedump.html
 
 ---
 
-#### [Johan Commelin (Aug 07 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20trace%20dump/near/131025671):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 07 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20trace%20dump/near/131025671):
 Is this expected behaviour?
 ```lean
 import linear_algebra.multivariate_polynomial

@@ -9,7 +9,7 @@ permalink: archive/113488general/55897rwfails.html
 
 ---
 
-#### [Kevin Buzzard (Nov 24 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286611):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 24 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286611):
 What have I done wrong here?
 
 ```lean
@@ -53,13 +53,13 @@ expected type
   real.nat _a
 ```
 
-#### [Kenny Lau (Nov 24 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286682):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 24 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286682):
 well the second `r` is also being rewrited
 
-#### [Chris Hughes (Nov 24 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286695):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 24 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286695):
 `H` is an implicit argument in the rhs of `H2`, and it will have the wrong type after the `r` on the rhs is rewritten.
 
-#### [Kenny Lau (Nov 24 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286760):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 24 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286760):
 ```lean
 import data.real.basic
 
@@ -75,15 +75,15 @@ instance real.rat_of_nat (r : ℝ) [H : real.nat r] : real.rat r :=
 ⟨H.n, by rw rat.cast_coe_nat H.n; exact H.pf⟩
 ```
 
-#### [Johan Commelin (Nov 24 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286776):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 24 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286776):
 Are there simp-lemmas that reduce these double coercions?
 
-#### [Kenny Lau (Nov 24 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286819):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 24 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286819):
 sure
 
-#### [Johan Commelin (Nov 24 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286956):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 24 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286956):
 So, `by simpa using H.pf`?
 
-#### [Kenny Lau (Nov 24 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286967):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 24 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286967):
 je kant het proberen... toch
 

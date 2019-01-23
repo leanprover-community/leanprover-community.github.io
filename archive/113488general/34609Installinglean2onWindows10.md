@@ -9,7 +9,7 @@ permalink: archive/113488general/34609Installinglean2onWindows10.html
 
 ---
 
-#### [Thomas Eckl (Aug 23 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean2%20on%20Windows%2010/near/132650105):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Thomas Eckl (Aug 23 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean2%20on%20Windows%2010/near/132650105):
 I would like to work with the HoTT library of Lean2, so I tried to install lean2 on Windows 10 machines (a laptop and a Surface Pro3) following the instructions at [https://github.com/leanprover/lean2/blob/master/doc/make/msys2.md](https://github.com/leanprover/lean2/blob/master/doc/make/msys2.md), and I failed several times at the same stage when running the ninja command. Below I copied just the last log-message of several very similar ones.  Any idea what to do?
 
 [7/223] Building CXX object util/lp/CMakeFiles/lp.dir/lar_core_solver_instances.cpp.obj
@@ -26,12 +26,12 @@ C:/lean2/src/util/lp/permutation_matrix.h:126:44: error: cannot convert 'const s
 										  ^~~~~~~~~~~~~
 ninja: build stopped: subcommand failed.
 
-#### [Thomas Eckl (Aug 29 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean2%20on%20Windows%2010/near/133022349):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Thomas Eckl (Aug 29 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean2%20on%20Windows%2010/near/133022349):
 Digging out my c++ -knowledge (probably not a bad idea when using lean) I realized that the problem in the file permutation.h was that a pointer to m_permutation and not m_permutation itself should be returned. Since m_permutation is a vector, changing m_permutation to m_permutation.data()  in the incriminated line will do.
 
-#### [Andrew Ashworth (Aug 30 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean2%20on%20Windows%2010/near/133028541):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Aug 30 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean2%20on%20Windows%2010/near/133028541):
 I'm glad you were able to solve this problem. I'm afraid your topic didn't get much attention because very few people in this chat are interested in Lean 2 and HoTT. Even more so now that Lean 4 is on the horizon. You might be interested in https://github.com/gebner/hott3.
 
-#### [Floris van Doorn (Aug 30 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean2%20on%20Windows%2010/near/133046441):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Floris van Doorn (Aug 30 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean2%20on%20Windows%2010/near/133046441):
 I'm not active on Zulip, so I didn't see this message earlier, but if you make a pull request for Lean 2 with the fix, I'm happy to merge it.
 

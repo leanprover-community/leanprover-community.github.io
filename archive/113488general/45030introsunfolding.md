@@ -9,7 +9,7 @@ permalink: archive/113488general/45030introsunfolding.html
 
 ---
 
-#### [Patrick Massot (Jun 27 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128723966):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 27 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128723966):
 Is this normal?
 ```lean
 example (P Q : Prop)  : P → Q :=
@@ -29,12 +29,12 @@ end
 ```
 It seems this prevents `finish` to work successfully in some cases without a preliminary `intros a b c d e f`
 
-#### [Kevin Buzzard (Jun 27 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128724587):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 27 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128724587):
 that's kind of interesting. If you make f reducible, or unfold it explicitly, maybe `intros` works.
 
-#### [Patrick Massot (Jun 27 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128725099):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 27 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128725099):
 Of course explicit unfolding works. But reducible is not enough.
 
-#### [Simon Hudon (Jun 27 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128725144):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 27 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128725144):
 you can also try `intros _`
 

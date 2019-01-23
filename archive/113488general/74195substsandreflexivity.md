@@ -9,7 +9,7 @@ permalink: archive/113488general/74195substsandreflexivity.html
 
 ---
 
-#### [Sean Leather (Aug 20 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/substs%20and%20reflexivity/near/132442829):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Aug 20 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/substs%20and%20reflexivity/near/132442829):
 It seems like `subst` solves a reflexive goal but `substs` does not. If I replace `subst p, subst q`with `substs p q`, I have to add `refl` to solve the goal.
 
 Looking at the definition of the interactive `subst`, I can see why:

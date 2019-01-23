@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/23264noobquestionaboutcardinal.html
 
 ---
 
-#### [Kenny Lau (Sep 13 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133871212):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 13 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133871212):
 ```lean
 import set_theory.cardinal
 
@@ -20,7 +20,7 @@ example (α : Type*) (S T : set α)
 sorry
 ```
 
-#### [Chris Hughes (Sep 13 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133873000):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 13 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133873000):
 ```lean
 open cardinal
 
@@ -38,7 +38,7 @@ begin
 end
 ```
 
-#### [Kenny Lau (Sep 13 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133873086):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 13 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133873086):
 ```lean
 import set_theory.cardinal
 
@@ -57,6 +57,6 @@ end
 
 ```
 
-#### [Kenny Lau (Sep 13 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133873150):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 13 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133873150):
 anyway why do we need so many lines
 

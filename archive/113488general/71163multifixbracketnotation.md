@@ -9,7 +9,7 @@ permalink: archive/113488general/71163multifixbracketnotation.html
 
 ---
 
-#### [Johan Commelin (Jun 11 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889037):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889037):
 Is this bound to become a massive headache, if possible at all?
 ```lean
 universe u
@@ -18,13 +18,13 @@ local notation `[` a `,` b `]` := has_bracket.bracket
 ```
 The notation $$[x,y]$$ is very common (I would say, *mandatory*) in the theory of Lie algebras.
 
-#### [Kevin Buzzard (Jun 11 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889262):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 11 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889262):
 it breaks list notation, so one question is: are you likely to be using list notation? Let's face it, list notation isn't that common in mathematics. Will you use it behind the scenes though? I am not sure I used a single list when doing schemes.
 
-#### [Kevin Buzzard (Jun 11 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889303):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 11 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889303):
 (at least, not explicitly)
 
-#### [Johan Commelin (Jun 11 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899035):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899035):
 ```lean
 import algebra.module
 
@@ -56,7 +56,7 @@ class is_add_subgroup [add_group α] (s : set α) extends is_add_submonoid s : P
 ```
 How does Lean figure out `has_mem α` to make sense of the `-a`? The cargo-cult programmer in me is stumped.
 
-#### [Reid Barton (Jun 11 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899473):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 11 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899473):
 I don't know why, but changing the last line to
 ```lean
 variables {𝔤 : Type*} [la : lie_algebra R 𝔤]
@@ -64,56 +64,56 @@ include la
 ```
 made it work for me.
 
-#### [Reid Barton (Jun 11 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899477):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 11 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899477):
 If I had to guess, it has something to do with the additional parameter `R`
 
-#### [Johan Commelin (Jun 11 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899495):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899495):
 Thanks... that'll do for now :wink:
 
-#### [Sebastian Ullrich (Jun 11 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899771):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jun 11 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899771):
 Yes, section variables used as `out_param`s are a bit broken. Lean will auto-include section class variables only when all its parameters are (auto-)included, but it should ignore `out_param`s during that.
 
-#### [Sebastian Ullrich (Jun 11 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899782):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jun 11 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899782):
 So `include R` should work too
 
-#### [Johan Commelin (Jun 11 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899849):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899849):
 It doesn't...
 
-#### [Sebastian Ullrich (Jun 11 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899927):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jun 11 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899927):
 ¯\_(ツ)_/¯
 
-#### [Reid Barton (Jun 11 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127900028):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 11 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127900028):
 Maybe need to include the `[comm_ring R]` variable also then
 
-#### [Johan Commelin (Jun 11 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127900036):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127900036):
 Then yours becomes more efficient (-;
 
-#### [Johan Commelin (Jun 11 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127900184):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127900184):
 After Reid's (hacky) fix, the next line gives problems. I would like to solve it myself, but I don't know why Lean is unhappy. Here is the line:
 ```lean
 instance subset.lie_algebra {𝔥 : set 𝔤} [is_lie_subalgebra 𝔥] : lie_algebra R 𝔥 := sorry
 ```
 I get red squiggles before the `is_lie_subalgebra` instance. Lean thinks it needs to infer an extra Type. I have tried some `set_option`s to get more info, but I couldn't figure it out (e.g. `trace.class_instances` and `pp.all`). How should I attack this error?
 
-#### [Johan Commelin (Jun 11 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914479):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914479):
 Is there documentation for `out_param`? What is it's purpose? I think I heard somewhere that there have been long discussions about it. Has that been condensed into some docs? It feels to me like `out_param` is making it harder to work with modules, rather than easier.
 
-#### [Patrick Massot (Jun 11 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914499):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 11 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914499):
 I think all documentation is here on Zulip (or gitter) and source code
 
-#### [Johan Commelin (Jun 11 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914575):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914575):
 I tried implicitly turning an `R`-algebra into an `R`-module, by chaining together `ring.to_module` and restriction of scalars... guess what happened
 
-#### [Johan Commelin (Jun 11 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914657):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914657):
 (I wanted to put the commutator bracket on the algebra [to make the link with this thread])
 
-#### [Johan Commelin (Jun 11 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914674):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 11 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914674):
 Anyway, I ran head first into the type class loop again.
 
-#### [Kevin Buzzard (Jun 12 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924610):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 12 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924610):
 Mario explaining out_param to me on gitter:
 
-#### [Kevin Buzzard (Jun 12 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924612):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 12 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924612):
 ```
 elaborator deals with opt_param, type class deals with out_param
 
@@ -148,10 +148,10 @@ it holds the optional value so it can be inferred by the usual rules for optiona
 It is occasionally useful when you want to have an optional argument right of the colon (the := syntax only works on the parameters)
 ```
 
-#### [Kevin Buzzard (Jun 12 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924746):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 12 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924746):
 Mario and Sebastian talking about module and params:
 
-#### [Kevin Buzzard (Jun 12 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924752):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 12 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924752):
 ```
 To review, the problem is that the definition:
 
@@ -177,13 +177,13 @@ Jan 19 10:10
 Where you want it to solve the second instance first, which fixes A and the first instance
 ```
 
-#### [Kevin Buzzard (Jun 12 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924890):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 12 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924890):
 https://gitter.im/leanprover_public/Lobby?at=5a61beb85ade18be399654c0
 
-#### [Kevin Buzzard (Jun 12 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924893):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 12 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924893):
 Johannes too
 
-#### [Johan Commelin (Jun 12 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127939887):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 12 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127939887):
 Ok, I think I half understand the issues involved. Does this mean that
 ```lean
 namespace restriction_of_scalars
@@ -217,6 +217,6 @@ end restriction_of_scalars
 ```
 implies self-destruction :boom: ?
 
-#### [Johan Commelin (Jun 12 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127940673):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 12 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127940673):
 Ok, maybe this is asking to much. But would it be ok if we restrict to the case where `R` is a subring, and `f = subtype.val`?
 

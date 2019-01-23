@@ -9,7 +9,7 @@ permalink: archive/113488general/37878somethingistaking1second.html
 
 ---
 
-#### [Kenny Lau (Jul 23 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147638):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 23 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147638):
 ```lean
 import linear_algebra.multivariate_polynomial
 
@@ -42,17 +42,17 @@ end
 #check 2
 ```
 
-#### [Kenny Lau (Jul 23 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147646):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 23 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147646):
 ```
 elaboration of functorial_C_X took 975ms
 ```
 
-#### [Johan Commelin (Jul 23 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147865):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 23 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147865):
 Over here it isn't even a proof...
 
-#### [Kenny Lau (Jul 23 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147908):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 23 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147908):
 that's just the first step
 
-#### [Johan Commelin (Jul 23 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147911):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 23 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147911):
 Ok
 

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/08348parallelcombinator.html
 
 ---
 
-#### [Olli (Sep 13 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133876440):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Olli (Sep 13 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133876440):
 is there a way to use the `exact` tactic with the parallel tactic combinator:
 
 works:
@@ -38,10 +38,10 @@ nested exception message:
 invalid object declaration, environment already has an object named '_example._match_1'
 ```
 
-#### [Kenny Lau (Sep 13 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133886990):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 13 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133886990):
 does `rintro` work?
 
-#### [Ali Sever (Sep 13 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133901349):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Sever (Sep 13 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133901349):
 This also works,
 ```lean
 example : p ∧ q ↔ q ∧ p :=
@@ -51,10 +51,10 @@ begin
 end
 ```
 
-#### [Mario Carneiro (Sep 13 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133901899):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 13 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133901899):
 @**Sebastian Ullrich** This seems to be indicative of a very strange dependency between parsing and creating definitions. Does this still behave the same way in lean 4?
 
-#### [Mario Carneiro (Sep 13 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133903258):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 13 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133903258):
 Oh wow, this is stranger than I thought.
 ```lean
 open tactic
@@ -93,9 +93,9 @@ end
 ```
 My new theory is that it has something to do with the way a tactic is elaborated when it contains a subexpression with side effects like this
 
-#### [Sebastian Ullrich (Sep 13 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133912590):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Sep 13 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133912590):
 Yeah, `to_expr` is creating a new elaborator. This is horrible, haha
 
-#### [Sebastian Ullrich (Sep 13 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133912887):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Sep 13 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133912887):
 Well, I guess it could just skip auxiliary names that have already been taken
 

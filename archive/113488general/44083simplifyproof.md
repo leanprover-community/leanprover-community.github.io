@@ -9,7 +9,7 @@ permalink: archive/113488general/44083simplifyproof.html
 
 ---
 
-#### [Scott Morrison (Jun 06 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646386):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 06 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646386):
 At some point Mario told me how to write a "simplify_proof" tactic, but in my fiddling with it I seem to have lost the essential magic step where the new, simplified proof is actually installed in place of the original proof:
 ````
 open tactic
@@ -27,12 +27,12 @@ match tac1 s with
 end
 ````
 
-#### [Scott Morrison (Jun 06 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646390):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 06 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646390):
 Or am I misunderstanding what this should do?
 
-#### [Scott Morrison (Jun 06 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646595):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 06 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646595):
 Ah, got it! Somewhere along the way I put a spurious ' at the end of the `result.success` line, preventing the tactic from doing its time travel trick.
 
-#### [Kevin Buzzard (Jun 06 2018 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646896):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 06 2018 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646896):
 I sometimes wonder what `simp` is doing, and I know that I can look, but I can never be bothered. I vaguely suspect there might be times where replacing a call to `simp` with a call to what it actually does might be better -- am I just living in a dream world do you think? (in the sense that it's unlikely to make any noticeable difference other than obfusctating my code?)
 

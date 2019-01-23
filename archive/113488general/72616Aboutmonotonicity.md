@@ -9,7 +9,7 @@ permalink: archive/113488general/72616Aboutmonotonicity.html
 
 ---
 
-#### [Simon Hudon (Mar 16 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123813072):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123813072):
 I'm currently working on monotonicity related simplification. In some places I consider associativity and commutativity with regards to monotonicity but let's leave that aside for now.
 
 A general monotonicity law for addition looks like:
@@ -64,76 +64,76 @@ The difference is in the side condition. They could be unified and make `(h : 0 
 
 Does anybody have an opinion on this large number of lemmas just for multiplication?
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816761):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816761):
 Don't all of these just follow from 0<=x, 0<=y implies 0<=xy, a<=b implies a+t <= b+t and standard ring theory axioms?
 
-#### [Simon Hudon (Mar 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816943):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816943):
 Do you mean "do all those multiplication lemmas follow from ..."?
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816949):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816949):
 right
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816951):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816951):
 but presumably you're asking something else
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816956):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816956):
 I mean, I am saying that they should do
 
-#### [Simon Hudon (Mar 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816957):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123816957):
 In any case, their truth is rather straightforward. What I'm wondering about is how usable they are.
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817031):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817031):
 I have no feeling for this sort of thing. Does simp solve any of them? Presumably some cunning tactic would solve them all?
 
-#### [Simon Hudon (Mar 16 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817048):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817048):
 For instance, if I don't split `mul_mono_nonpos_nonpos` into `mul_mono_nonpos_nonpos_left` and `mul_mono_nonpos_nonpos_right`, I get a simpler set of rules. However, some situations won't be addressed by monotonicity because `0 ≤ x0` and `0 ≤ x1` are stronger assumptions than what is strictly necessary
 
-#### [Simon Hudon (Mar 16 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817116):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817116):
 I believe you are talking about proving them. Again, proving them is easy. I'm writing them up so that the monotonicity tactic will be able to decompose proofs of `x * y ≤ z * w` into simpler subgoals.
 
-#### [Simon Hudon (Mar 16 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817216):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817216):
 The tricky part in doing that is remembering to have assumptions about some of your terms being non-negative or non-positive.
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817225):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817225):
 But there are are lots of ways to deduce `x*y <= z*w`, right?
 
-#### [Simon Hudon (Mar 16 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817252):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817252):
 If you forget, `mono` will list all the ways in which `*` is monotonic with the corresponding side conditions
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817255):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817255):
 e.g. `0<=x<=z and 0<=y<=w`, or `0<=x<=w and 0<=y<=z`, or...
 
-#### [Simon Hudon (Mar 16 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817273):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817273):
 Exactly. That's why I have 12 monotonicity lemmas for multiplication. It seems like a lot to me but maybe it's justifiable
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817275):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817275):
 `z<=x<=0 and w<=y<=0...`
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817323):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817323):
 Do you care about `0<=x and z<=-x and 0<=y and w<=-y`?
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817346):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817346):
 `0<=x<=3z and 0<=y<=w/3`?
 
-#### [Simon Hudon (Mar 16 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817350):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817350):
 I hadn't thought of it. Maybe I should care about that.
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817354):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817354):
 I don't really know what your applications are.
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817406):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817406):
 It's slightly disconcerting that there are so many!
 
-#### [Simon Hudon (Mar 16 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817409):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817409):
 ```quote
 `0<=x<=3z and 0<=y<=w/3`?
 ```
 That, I will leave out.
 
-#### [Simon Hudon (Mar 16 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817414):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817414):
 Let me give you an example
 
-#### [Simon Hudon (Mar 16 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817589):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817589):
 Let's say that you have to prove:
 
 ```
@@ -155,18 +155,18 @@ and get the proof reduced to two goals:
 
 provided that you have the right assumptions about `x₀`, `x₁`, `x₂`, `x₃`, `x₄`, `x₅`, namely, them being non-negative or non-positive.
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817661):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817661):
 If there were a simp lemma that said `0<x -> (a<=b iff x*a <= x*b)` and similar for `0>x` wouldn't simp get you as far as `y0*y1<=z0*z1` or similar?
 
-#### [Kevin Buzzard (Mar 16 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817706):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Mar 16 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817706):
 and then you have no reason to believe y0<=z0 and y1<=z1 because maybe y0<=3*z0 and y1<=z1/3
 
-#### [Simon Hudon (Mar 16 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817789):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817789):
 Of course, as a user, you're the one deciding to call `mono`. And if you want to keep `y` and `z` in the same goal `ac_mono` will get you the goal that you're mentioning. But `simp` can't get you there automatically because the choice of rewrite is not unique so marking those lemmas as `[simp]` would make your proofs brittle
 
-#### [Simon Hudon (Mar 16 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817847):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817847):
 And if you only want a few steps of mono, you can use `mono^3` instead and it will stop after three applications of monotonicity laws
 
-#### [Simon Hudon (Mar 16 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817872):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Mar 16 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/About%20monotonicity/near/123817872):
 The point is, in a monotonic context, you can get rid of all lot of noise in one shot using `mono` or `ac_mono`
 

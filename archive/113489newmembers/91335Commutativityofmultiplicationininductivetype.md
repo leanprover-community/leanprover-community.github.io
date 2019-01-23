@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/91335Commutativityofmultiplicationininductiv
 
 ---
 
-#### [Carlesso Diego (Jan 05 2019 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Commutativity%20of%20multiplication%20in%20inductive%20type/near/154475123):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Carlesso Diego (Jan 05 2019 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Commutativity%20of%20multiplication%20in%20inductive%20type/near/154475123):
 Hi! As it is suggested in exercise n1 chapter 7 of "theorem Proving in Lean" I'm trying to define some operations(such as multiplication, predecessor etc.) with the inductive type and then prove some theorem about them as they did with addition. I'm struggling at the moment with trying to prove commutativity of multiplication, in the following code my problems start at the proper comment "HERE".
 
 ```lean
@@ -137,13 +137,13 @@ I think that the proof is correct, or at least I can't see the error, maybe I'm 
 The errors I got are in ```succ_mul``` and in ```mul_comm```.
 (the ```instance``` command I use is something I shouldn't know from the tutorial but as they use it once I adapt it to my needs, maybe I did it in a wrong way, but I don't think that that is the main problem. From what I understand is just a way, for example, to let me use ```m * n```instead of ```mult m n```  ).
 
-#### [Chris Hughes (Jan 05 2019 at 15:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Commutativity%20of%20multiplication%20in%20inductive%20type/near/154475186):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 05 2019 at 15:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Commutativity%20of%20multiplication%20in%20inductive%20type/near/154475186):
 `rw add_comm m` works at `HERE`. There are two places where it's possible to `rw add_comm` so you have to give the correct one.
 
-#### [Chris Hughes (Jan 05 2019 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Commutativity%20of%20multiplication%20in%20inductive%20type/near/154475231):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 05 2019 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Commutativity%20of%20multiplication%20in%20inductive%20type/near/154475231):
 On the next line you use a lemma about `nat` in the core library, which doesn't apply to the `nat` that you defined.
 
-#### [Carlesso Diego (Jan 06 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Commutativity%20of%20multiplication%20in%20inductive%20type/near/154510669):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Carlesso Diego (Jan 06 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Commutativity%20of%20multiplication%20in%20inductive%20type/near/154510669):
 ```quote
 `rw add_comm m` works at `HERE`. There are two places where it's possible to `rw add_comm` so you have to give the correct one.
 ```

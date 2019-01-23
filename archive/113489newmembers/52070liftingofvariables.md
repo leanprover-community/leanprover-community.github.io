@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/52070liftingofvariables.html
 
 ---
 
-#### [Ken Roe (Jul 22 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%25%25%20lifting%20of%20variables/near/130095457):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 22 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%25%25%20lifting%20of%20variables/near/130095457):
 I've discovered that %% automatically lifts bound variables as shown in the following example:
 
 ```lean
@@ -33,7 +33,7 @@ The trace generates the following output:
 
 Notice that the @var tt 1 in the "trace" has become (var 2).  Is there a way to prevent this lifting of variables?
 
-#### [Simon Hudon (Jul 22 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%25%25%20lifting%20of%20variables/near/130101029):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 22 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%25%25%20lifting%20of%20variables/near/130101029):
 I recommend you not to use `var` directly because much of the Lean API assumes that your expressions are closed (not `var` without their binders). What you can do is:
 
 ```lean

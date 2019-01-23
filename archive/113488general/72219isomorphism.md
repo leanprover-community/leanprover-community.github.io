@@ -9,16 +9,16 @@ permalink: archive/113488general/72219isomorphism.html
 
 ---
 
-#### [Blair Shi (Jul 30 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130566051):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 30 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130566051):
 Can anyone tell me what should I do to prove a basis v1,v2,...,vn of a fdvs V/k is just an isomorphism k^n -> V in lean? Should I show the homomorphism firstly and then show the homomorphism is bijective?
 
-#### [Kenny Lau (Jul 30 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130566059):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 30 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130566059):
 I would think so
 
-#### [Johan Commelin (Jul 30 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130566275):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 30 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130566275):
 Yes, that is best... it will make your life easier when you prove injectivity.
 
-#### [Kevin Buzzard (Jul 30 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130566917):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 30 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130566917):
 ```quote
 Can anyone tell me what should I do to prove a basis v1,v2,...,vn of a fdvs V/k is just an isomorphism k^n -> V in lean? Should I show the homomorphism firstly and then show the homomorphism is bijective?
 ```
@@ -30,6 +30,6 @@ I think first I would prove that for V and n, there's a bijection between k-line
 
 I have some minor hold-ups at home but I hope to be at work for 11:30 -- are you in today Blair? We could talk more then.
 
-#### [Blair Shi (Jul 30 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130568215):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 30 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130568215):
 @**Kevin Buzzard** I am in mlc now. I think we can talk later
 

@@ -9,15 +9,15 @@ permalink: archive/113488general/74262lookwhatIfoundontheinternet.html
 
 ---
 
-#### [Johan Commelin (Sep 11 2018 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/133750937):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 11 2018 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/133750937):
 https://mathematicswithoutapologies.wordpress.com/2018/09/11/guest-post-by-kevin-buzzard/
 
-#### [Johan Commelin (Sep 18 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/134180682):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 18 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/134180682):
 https://jiggerwit.wordpress.com/2018/09/18/a-review-of-the-lean-theorem-prover/
 
-#### [Johan Commelin (Sep 18 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/134180893):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Sep 18 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/134180893):
 @**William Stein**  Tom Hales mentions CoCalc :smiley:
 
-#### [William Stein (Sep 18 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/134185186):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) William Stein (Sep 18 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/134185186):
 Thanks!
 

@@ -9,23 +9,23 @@ permalink: archive/113488general/44283Thiswillbrickyourcomputer.html
 
 ---
 
-#### [Kenny Lau (Sep 14 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133943778):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133943778):
 ```lean
 import data.int.basic
 set_option trace.class_instances true
 #check λ n : ℤ, (n : ℕ)
 ```
 
-#### [Kevin Buzzard (Sep 14 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133945380):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 14 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133945380):
 This is well known. Lean will time out trying to coerce an int into a nat rather than give up
 
-#### [Kenny Lau (Sep 14 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133945390):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133945390):
 remove the first line and it's fine!
 
-#### [Kevin Buzzard (Sep 14 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133945432):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 14 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133945432):
 Hopefully fixed in Lean 4
 
-#### [Kenny Lau (Sep 17 2018 at 08:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134082892):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 17 2018 at 08:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134082892):
 ```lean
 import data.polynomial
 
@@ -50,39 +50,39 @@ end
 derivative_C_mul_X x 0
 ```
 
-#### [Mario Carneiro (Sep 17 2018 at 08:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134082945):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 17 2018 at 08:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134082945):
 there are some nontrivial defeq simplifications there
 
-#### [Mario Carneiro (Sep 17 2018 at 08:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134082985):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 17 2018 at 08:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134082985):
 at least try `by simpa using derivative_C_mul_X x 0` first
 
-#### [Kenny Lau (Sep 17 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083001):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 17 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083001):
 it's intentionally incorrect
 
-#### [Mario Carneiro (Sep 17 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083004):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 17 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083004):
 then what's the surprise?
 
-#### [Kenny Lau (Sep 17 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083005):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 17 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083005):
 well Lean should tell me instead of time out
 
-#### [Mario Carneiro (Sep 17 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083008):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 17 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083008):
 you just asked it to reduce some big expression to 0
 
-#### [Mario Carneiro (Sep 17 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083048):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 17 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083048):
 it's got to unfold a bunch of definitions and run the power function, etc
 
-#### [Mario Carneiro (Sep 17 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083051):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 17 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083051):
 it's not obviously not defeq
 
-#### [Kenny Lau (Sep 17 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083053):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 17 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083053):
 I don't actually know if it's defeq
 
-#### [Mario Carneiro (Sep 17 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083056):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 17 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083056):
 neither does lean...
 
-#### [Kenny Lau (Sep 17 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083268):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 17 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083268):
 oh wow it's already done
 
-#### [Kenny Lau (Sep 17 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083271):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 17 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083271):
 i'm lucky i realized so soon
 

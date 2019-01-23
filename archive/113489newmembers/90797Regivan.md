@@ -9,15 +9,15 @@ permalink: archive/113489newmembers/90797Regivan.html
 
 ---
 
-#### [Regivan Santiago (Feb 28 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Regivan/near/123086826):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Regivan Santiago (Feb 28 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Regivan/near/123086826):
 Hello
 
-#### [Kevin Buzzard (Feb 28 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Regivan/near/123087023):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Feb 28 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Regivan/near/123087023):
 You made it :-)
 
-#### [Minchao Wu (Feb 28 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Regivan/near/123088173):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Minchao Wu (Feb 28 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Regivan/near/123088173):
 Hello
 
-#### [Patrick Massot (Feb 28 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Regivan/near/123088214):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Feb 28 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Regivan/near/123088214):
 Welcome!
 

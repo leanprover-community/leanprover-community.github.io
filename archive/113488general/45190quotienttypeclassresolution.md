@@ -9,7 +9,7 @@ permalink: archive/113488general/45190quotienttypeclassresolution.html
 
 ---
 
-#### [Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182192):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182192):
 here is a working example:
 ```lean
 import group_theory.coset
@@ -58,16 +58,16 @@ example (L : left_cosets (stab G X x)) : false :=
 quotient.induction_on L _
 ```
 
-#### [Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182195):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182195):
 working but not minimalized
 
-#### [Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182198):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182198):
 the error is on the last line
 
-#### [Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182199):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182199):
 I cannot use `quotient.induction_on` because apparently Lean doesn't know that `left_cosets (stab G X x)` is a quotient
 
-#### [Kenny Lau (Apr 17 2018 at 07:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182246):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 07:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182246):
 error message:
 ```
 [class_instances]  class-instance resolution trace
@@ -80,16 +80,16 @@ error message:
 @left_rel G _inst_1 (@stab G _inst_1 X _inst_2 ?x_9) _
 [...]
 
-#### [Kenny Lau (Apr 17 2018 at 07:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182252):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 07:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182252):
 what is this supposed to mean
 
-#### [Kenny Lau (Apr 17 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182316):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182316):
 I think the `x` messed up everything
 
-#### [Kenny Lau (Apr 17 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182318):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 17 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182318):
 How do i solve this problem?
 
-#### [Mario Carneiro (Apr 17 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125183528):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 17 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125183528):
 `left_rel` is a bad instance, because it depends on `s` which is not in the output. I made it a `def` and used `local instance` for the proofs in that file. With this modification, you have to write
 ```
 example (L : left_cosets (stab G X x)) : false :=

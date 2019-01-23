@@ -9,31 +9,31 @@ permalink: archive/116395maths/12844Writingreadableunclutteredgrouptheory.html
 
 ---
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808670):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808670):
 I noticed that the definition of a group in Lean was one more axiom than it could be
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808710):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808710):
 you can prove `mul_one` from the other axioms
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808713):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808713):
 This may well have been talked about before
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808714):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808714):
 But I thought I'd write a blog post on this
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808715):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808715):
 and I wanted to talk about the proof of `mul_one` (which goes via `mul_left_cancel`)
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808719):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808719):
 for Lean-groups-without-`mul_one`
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808721):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808721):
 But I could not make the arguments look beautiful
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808723):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808723):
 This is kind of OK
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808724):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808724):
 ```lean
 lemma gripe.mul_left_cancel {G : Type} [has_mul G] [has_one G] [has_inv G] [gripe G]
 : ∀ (a b c : G), a * b = a * c → b = c :=
@@ -50,13 +50,13 @@ begin
 end
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808776):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808776):
 although all this `has_mul` stuff is both really cluttering things up and not actually telling us the one useful thing about it, which is that it is a map alpha -> alpha -> alpha
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808784):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808784):
 I made a type for that
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808785):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808785):
 ```lean
 class gripe (G : Type) [has_mul G] [has_one G] [has_inv G] :=
 (mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
@@ -64,25 +64,25 @@ class gripe (G : Type) [has_mul G] [has_one G] [has_inv G] :=
 (mul_left_inv : ∀ (a : G), a⁻¹ * a = 1)
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808828):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808828):
 But got a bit sick about still having to say we have a `has_mul`. On the other hand I really want the notation.
 
-#### [Reid Barton (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808836):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808836):
 can you use `extends` instead of those extra parameters to the class? I've never used it myself but I see it in the algebraic classes
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808837):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808837):
 Other complains about that calc proof is that I need to give too many hint, I seem to have to mention the type's name (gripe) randomly and I can only sometimes get away with `_`s, and why do I even have to put them at all?
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808843):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808843):
 I tried without the structure
 
-#### [Kenny Lau (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808845):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808845):
 ```quote
 This may well have been talked about before
 ```
 https://gitter.im/leanprover_public/Lobby?at=59fd723d976e63937e268f50
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808888):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808888):
 ```lean
 lemma mul_left_cancel' {G : Type} [has_mul G] [has_one G] [has_inv G]
 (mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
@@ -102,10 +102,10 @@ begin
 end
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808938):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808938):
 and that seemed to go better, but then
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808940):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808940):
 ```lean
 theorem mul_one' {G : Type} [has_mul G] [has_one G] [has_inv G]
 (mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
@@ -120,52 +120,52 @@ end
 
 ```
 
-#### [Kenny Lau (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808942):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808942):
 @**Kevin Buzzard** edit > change title
 
-#### [Reid Barton (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808943):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808943):
 Oh, I guess you are complaining about `has_mul` being opaque to the reader wherever it appears, not that you had to write it twice?
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808948):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808948):
 I couldn't apply the theorem I proved without carrying around all the axioms.
 
-#### [Kenny Lau (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808949):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808949):
 wrong thread
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808952):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808952):
 I want to write a blog post which looks good and works in Lean and proves clearly that one of the axioms of a group follows from the others
 
-#### [Kenny Lau (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808953):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808953):
 god
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808991):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808991):
 but I really want the kids to understand that they can also do some of their group theory example sheets in Lean
 
-#### [Kenny Lau (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808995):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808995):
 whatever
 
-#### [Reid Barton (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808998):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808998):
 How do you feel about using `variables` instead?
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808999):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808999):
 can I move this?
 
-#### [Kenny Lau (Apr 28 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809007):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809007):
 @**Scott Morrison** sorry, had to move your messages as well; could you move your messages back to "notations in category theory"?
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809008):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809008):
 Sorry
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809010):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809010):
 The stupidity of all the has_one has_mul stuff
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809049):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809049):
 is that these typeclasses have notation attached to them
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809050):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809050):
 and you want to use the notation
 
-#### [Reid Barton (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809051):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809051):
 ```lean
 variable {G : Type}
 variable (mul : G → G → G)
@@ -183,37 +183,37 @@ variable (mul_left_inv : ∀ (a : G), a⁻¹ * a = 1)
 lemma mul_left_cancel' : ∀ (a b c : G), a * b = a * c → b = c :=
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809053):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809053):
 Maybe instead of local notation I can use instances
 
-#### [Reid Barton (Apr 28 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809250):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809250):
 oh, I forgot `variables` don't get along well with tactics
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823314):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823314):
 I am just going to bite the bullet and implement it in 5 different ways and see which one is best
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823316):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823316):
 `class has_group_notation (G : Type) extends has_mul G, has_one G, has_inv G`
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823322):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823322):
 Does that class exist @**Mario Carneiro** ?
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823328):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823328):
 It seems to come with free and painless type class inference
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823374):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823374):
 I had not appreciated how that barrage of classes in `core.lean` was actually just a barrage of notation. Each typeclass corresponds to precisely one piece of notation. I had not realised this before!
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823419):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823419):
 I don't really understand notation and don't use any in my schemes work.
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823422):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823422):
 actually I think I suddenly understand it a whole lot better
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823427):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823427):
 my class corresponds to a finite set of notations.
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823661):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823661):
 ```lean
 class group' (G : Type) extends has_group_notation G :=
 (mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
@@ -222,55 +222,55 @@ class group' (G : Type) extends has_group_notation G :=
 
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823664):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823664):
 @**Reid Barton**
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823665):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823665):
 That's the way to get rid of all that continually carrying around `[has_add]`
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823670):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823670):
 ```lean
 lemma group'.mul_left_cancel {G : Type} [group' G]
 : ∀ (a b c : G), a * b = a * c → b = c := sorry
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823671):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823671):
 This thread is about making the proof that one of the axioms of a group as defined by Lean follows from all of the others
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823711):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823711):
 look as nice and uncluttered as possible
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823727):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823727):
 The strat is : first prove `mul_left_cancel` (without using `mul_one` of course), and then deduce `mul_one`. I know there are other strategies but that's the strategy I'd like to showcase in Lean
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823728):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823728):
 so I can show the undergraduates one way of revising for their upcoming group theory exam
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823743):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823743):
 I want to show them that using Lean to do abstract basic chase stuff around stuff in group theory is really easy in Lean
 
-#### [Kevin Buzzard (Apr 28 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823771):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823771):
 I'll blog about it but I need to get it as nice looking as possible first
 
-#### [Kevin Buzzard (Apr 28 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824936):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824936):
 https://gist.github.com/kbuzzard/2adf2b42a9ea23dabc2eb26a1a4b20fb
 
-#### [Kevin Buzzard (Apr 28 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824937):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824937):
 My efforts using classes
 
-#### [Kevin Buzzard (Apr 28 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824938):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824938):
 I had to keep writing the class name
 
-#### [Kevin Buzzard (Apr 28 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824943):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824943):
 and the calc proof needed a lot of blanks
 
-#### [Kevin Buzzard (Apr 28 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824944):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824944):
 How could this be improved?
 
-#### [Kevin Buzzard (Apr 28 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824984):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824984):
 I am going to try other ways of setting this up to see pros and cons
 
-#### [Kenny Lau (Apr 28 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824987):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824987):
 Change
 ```lean
 (mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
@@ -280,49 +280,49 @@ to
 (mul_assoc : ∀ {a b c : G}, a * b * c = a * (b * c))
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825665):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825665):
 Do you think that's right?
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825667):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825667):
 I changed it for the constants example
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825668):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825668):
 and my tactic proof got worse
 
-#### [Kenny Lau (Apr 28 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825669):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825669):
 if you change it then you don't need to put underscores
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825674):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825674):
 I'll show you you're wrong
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825716):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825716):
 https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/group_axioms_constants.lean
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825718):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825718):
 But maybe you can fix it :-)
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825720):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825720):
 there is a point in tactic mode where I needed underscores :-(
 
-#### [Kenny Lau (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825723):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825723):
 where?
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825729):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825729):
 https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/group_axioms_class.lean
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825730):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825730):
 not there
 
-#### [Kenny Lau (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825732):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825732):
 so where am I wrong?
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825733):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825733):
 https://github.com/kbuzzard/xena/blob/48ce83d8bc9782a08ee852d126e784f696086846/canonical_isomorphism/group_axioms_constants.lean#L48
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825734):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825734):
 there
 
-#### [Reid Barton (Apr 28 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825775):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825775):
 In the calc proof, if you just begin every justification with `by rw`, you can make it quite uniform (at least in this case)
 ```lean
   exact calc b = 1 * b         : by rw group'.one_mul
@@ -334,7 +334,7 @@ In the calc proof, if you just begin every justification with `by rw`, you can m
            ... = c             : by rw group'.one_mul
 ```
 
-#### [Kenny Lau (Apr 28 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825776):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825776):
 Change
 ```lean
 lemma mul_left_cancel : ∀ {a b c : G}, a * b = a * c → b = c := 
@@ -344,57 +344,57 @@ to
 lemma mul_left_cancel : ∀ (a) {b c : G}, a * b = a * c → b = c := 
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825781):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825781):
 do you feel that this change is actually justified rather than it being an attempt to sort out a problem?
 
-#### [Kenny Lau (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825782):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825782):
 yes, because `a` could not be infered from the final type `b = c`
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825783):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825783):
 yes
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825784):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825784):
 I wondered if that was a reasonable justification for the change
 
-#### [Chris Hughes (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825823):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825823):
 It can be inferred from the hypothesis though.
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825824):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825824):
 exactly
 
-#### [Kenny Lau (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825825):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825825):
 well if you don't want to change it you can state the hypothesis explicitly using `have`
 
-#### [Reid Barton (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825826):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825826):
 > ... = (a⁻¹ * a) * b : by rw [mul_left_inv] -- why does that line even work? I believe it should fail. Is it a bug?
 
 I was puzzled by this too up until quite recently. The reason it works is that `rw` does not rewrite the left hand side to the right hand side as one might think. Rather, it rewrites the desired equality `1 * b = (a⁻¹ * a) * b` to whatever it becomes after the rewrite, and that rewrite might occur on either side.
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825827):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825827):
 so Kenny based on your logic what are the forms of the other axioms that I should be using?
 
-#### [Reid Barton (Apr 28 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825833):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825833):
 Then because the rewritten goal is of the form `a = a`, it gets solved by `rfl` automatically
 
-#### [Kenny Lau (Apr 28 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825834):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825834):
 @**Kevin Buzzard** maybe don't make `a` explicit afterall, lol
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825835):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825835):
 :-)
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825887):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825887):
 I don't quite know what I am looking for here. I guess what is going on is that different conventions produce different results which may or may not have slight annoyances
 
-#### [Reid Barton (Apr 28 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825888):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825888):
 Also if you use `by rw` on every line of the calc proof, then it doesn't matter whether you make the arguments of the axioms explicit or not
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825980):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825980):
 Kenny in none of the standard typeclasses do I see variables in axioms being introduced with `{}`. I am imagining there is a good reason for this
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825987):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825987):
 Letting them all be `{}` announces that you're 100 percent convinced that unification will save you
 
-#### [Kenny Lau (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825988):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825988):
 well they have interface like
 ```lean
 class semigroup (α : Type u) extends has_mul α :=
@@ -404,64 +404,64 @@ lemma mul_assoc [semigroup α] : ∀ a b c : α, a * b * c = a * (b * c) :=
 semigroup.mul_assoc
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825989):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825989):
 but letting them all be `()` does not mean you're giving up home
 
-#### [Kenny Lau (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825990):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825990):
 oh wait
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825991):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825991):
 because other things might fill in the gaps later
 
-#### [Kenny Lau (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825992):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825992):
 right, you still need `_` for `mul_assoc` lol
 
-#### [Kenny Lau (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826031):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826031):
 so maybe change back to `()` and use Reid's approach
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826032):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826032):
 Sometimes I did
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826033):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826033):
 sometimes I didn't
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826040):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826040):
 Oh I make the interface!
 
-#### [Kenny Lau (Apr 28 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826053):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826053):
 I'm saying, the interface in the library still uses explicit variables
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826096):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826096):
 `exact calc b = 1 * b         : by rw group'.one_mul` -- that "shouldn't work" either
 
-#### [Kenny Lau (Apr 28 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826097):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826097):
 why not?
 
-#### [Kenny Lau (Apr 28 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826100):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826100):
 the goal is `b = 1 * b`
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826105):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826105):
 Oh I see
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826106):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826106):
 of course
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826107):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826107):
 Kenny do you understand why that bug is not a bug?
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826149):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826149):
 line 33
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826164):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826164):
 Oh I now understand
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826165):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826165):
 I should think of what the rw actually does
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826166):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826166):
 not what I want it to do
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826218):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826218):
 ```lean
 lemma mul_left_cancel : ∀ {a b c : G}, a * b = a * c → b = c := 
 begin
@@ -476,49 +476,49 @@ begin
 end
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826221):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826221):
 Yes that's really nice
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826224):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826224):
 That's just how a mathematician would explain it
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826228):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826228):
 "apply this axiom"
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826233):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826233):
 "I don't care which way"
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826234):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826234):
 "the obvious way"
 
-#### [Kenny Lau (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826236):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826236):
 I'm sure you can have fewer lines lol
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826237):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826237):
 of course
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826253):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826253):
 but this is the raw beauty which you see here
 
-#### [Kenny Lau (Apr 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826280):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826280):
 and then your `begin intros exact` kind of defeat the purpose of entering tactic mode
 
-#### [Kevin Buzzard (Apr 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826282):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826282):
 ha ha you are exactly right
 
-#### [Reid Barton (Apr 28 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826292):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 28 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826292):
 I wasn't sure whether to comment about the intros line, haha
 
-#### [Kenny Lau (Apr 28 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826294):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826294):
 comment about them.
 
-#### [Kenny Lau (Apr 28 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826451):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826451):
 @**Kevin Buzzard** I just finished writing a file without ever entering tactic mode
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831048):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831048):
 All the rewrites fail in the below
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831051):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831051):
 ```lean
 class has_group_notation (G : Type) extends has_mul G, has_one G, has_inv G
 
@@ -543,16 +543,16 @@ lemma group'.mul_left_cancel : ∀ (a b c : G), a * b = a * c → b = c :=
                 ... = c : by rw one_mul
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831052):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831052):
 I am using a structure
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831053):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831053):
 I don't understand the error messages
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831054):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831054):
 First is
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831055):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831055):
 ```
 rewrite tactic failed, did not find instance of the pattern in the target expression
   1 * ?m_3
@@ -564,52 +564,52 @@ Habac : a * b = a * c
 ⊢ b = 1 * b
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831094):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831094):
 I am unimpressed with Lean's instance-finding abilities here
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831095):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831095):
 what am i missing?
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831099):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831099):
 I wondered how changing a class to astructure changed things
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831106):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831106):
 I think all notation as a notational typeclass works great in these sorts of situations
 
-#### [Kenny Lau (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831107):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831107):
 Lean only finds classes, not structures
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831109):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831109):
 it's clear what it's doing
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831110):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831110):
 and it's doing nothing more
 
-#### [Kenny Lau (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831111):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831111):
 the structure isnt even in the hypotheses
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831154):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831154):
 I don't understand
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831158):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831158):
 I will take notation off
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831160):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831160):
 and put pp.all on
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831161):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831161):
 am I missing something simple?
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831166):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831166):
 kenny can you fix it?
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831171):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831171):
 that might help me understand
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831267):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831267):
 Look at this beautiful proof
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831273):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831273):
 ```lean
 lemma mul_left_cancel' {G : Type} [has_mul G] [has_one G] [has_inv G]
 (mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
@@ -626,40 +626,40 @@ lemma mul_left_cancel' {G : Type} [has_mul G] [has_one G] [has_inv G]
     ... = c             : by rw one_mul
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831281):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831281):
 Can you show me how to make a proof which is just as beautiful, but using a class or structure?
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831329):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831329):
 I am getting sick of carrying the axioms around with me
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831368):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831368):
 I have packaged up all the notation in a typeclass
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831369):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831369):
 but I want to package all the group axioms up as well
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831379):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831379):
 The typeclass system is perfect for notation.
 
-#### [Kevin Buzzard (Apr 28 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831381):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831381):
 There is very little risk of a diamond :-)
 
-#### [Kevin Buzzard (Apr 28 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831406):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831406):
 I want to package everything away but keep the proof beautiful
 
-#### [Kevin Buzzard (Apr 28 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831438):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831438):
 and once I have managed that, I think I am done.
 
-#### [Chris Hughes (Apr 28 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831505):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 28 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831505):
 Why aren't you just using the `group` typeclass?
 
-#### [Mario Carneiro (Apr 28 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831988):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 28 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831988):
 The `has_group_notation` class has been discussed in some of Jeremy's explorations, called `group_struct`, but it's not needed in mathlib as it is now
 
-#### [Mario Carneiro (Apr 28 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832087):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 28 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832087):
 The standard way to show that an axiom is redundant is to have an auxiliary constructor for `group` that doesn't have the redundant axioms
 
-#### [Chris Hughes (Apr 28 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832272):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 28 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832272):
 Is this better?
 ```lean
 
@@ -687,22 +687,22 @@ lemma group'.mul_left_cancel : ∀ (a b c : G), a * b = a * c → b = c :=
                 ... = c : by rw one_mul'
 ```
 
-#### [Chris Hughes (Apr 28 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832280):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 28 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832280):
 You had two `has_group_notation` instances, one from `group'` and another one
 
-#### [Kenny Lau (Apr 28 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832281):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832281):
 Just use a namespace and drop the fucking primes
 
-#### [Chris Hughes (Apr 28 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832284):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 28 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832284):
 one mul is global
 
-#### [Kenny Lau (Apr 28 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832322):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832322):
 protected
 
-#### [Chris Hughes (Apr 28 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832326):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 28 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832326):
 but it doesn't know which `one_mul` I mean.
 
-#### [Mario Carneiro (Apr 28 2018 at 23:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832826):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 28 2018 at 23:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832826):
 ```
 def group.mk' {α : Type*} [semigroup α] [has_one α] [has_inv α]
   (one_mul : ∀ (a : α), 1 * a = a)
@@ -723,31 +723,31 @@ have ∀ a : α, a * a⁻¹ = 1, from
   ..‹semigroup α›, ..‹has_one α›, ..‹has_inv α› }
 ```
 
-#### [Scott Morrison (Apr 29 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125834341):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 29 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125834341):
 This is a common problem in making definitions --- do you go for maximal axioms (so that you don't need lots of lemmas later, and the big results follow easily from the definitions), or minimal axioms (so instances are easy to construct)? Often, the right solution in Lean is to go for maximal axioms with alternate constructors that require minimal axioms.
 
-#### [Kevin Buzzard (Apr 29 2018 at 02:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125836997):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 02:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125836997):
 ```quote
 The standard way to show that an axiom is redundant is to have an auxiliary constructor for `group` that doesn't have the redundant axioms
 ```
 Yes but these are mathematicians with no functional programming background and I think they would prefer to see something which looks like an honest proof (never mention the axiom, then prove it) rather than wrapping anything in a complicated structure.
 
-#### [Kevin Buzzard (Apr 29 2018 at 02:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125837057):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 02:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125837057):
 Mario your proof is in some sense canonical, but I prefer mine for pedagogical reasons.
 
-#### [Kevin Buzzard (Apr 29 2018 at 04:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125839656):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 04:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125839656):
 ```quote
 Just use a namespace and drop the fucking primes
 ```
 Kenny can you do it? Namespaces seem to lead to overloading anyway.
 
-#### [Kevin Buzzard (Apr 29 2018 at 04:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125839695):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 04:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125839695):
 I am reluctant to prime the axioms
 
-#### [Kevin Buzzard (Apr 29 2018 at 04:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125839696):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 04:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125839696):
 but maybe I have to
 
-#### [Mario Carneiro (Apr 29 2018 at 05:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125840944):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 29 2018 at 05:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125840944):
 > something which looks like an honest proof (never mention the axiom, then prove it)
 
 I'm confused. Isn't that pretty much exactly what my proof does? I start with a semigroup with a one and inv, and the left_inv and one_mul axioms, and derive mul_one. There is no funny business at all, or complicated structures, it's literally just proving one statement from another, and then wrapping it up in a `group`. The proof part could also be factored out like so:
@@ -781,7 +781,7 @@ def group.mk' : group α :=
 end
 ```
 
-#### [Mario Carneiro (Apr 29 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125841574):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 29 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125841574):
 Another way to present a proof like this is via an auxiliary class like your `gripe`, like so:
 ```
 class gripe (α : Type*) extends semigroup α, has_one α, has_inv α :=
@@ -816,6 +816,6 @@ instance (α) [gripe α] : group α :=
 end gripe
 ```
 
-#### [Kevin Buzzard (May 02 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/126004737):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (May 02 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/126004737):
 Here's how it ended up. https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/
 

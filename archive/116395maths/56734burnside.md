@@ -9,7 +9,7 @@ permalink: archive/116395maths/56734burnside.html
 
 ---
 
-#### [Kenny Lau (Apr 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125134940):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125134940):
 ```
 theorem burnside : nonempty ((Σ g, fixed G X g) ≃ (orbits G X × G)) :=
 ⟨calc  (Σ g, fixed G X g)
@@ -29,41 +29,41 @@ theorem burnside : nonempty ((Σ g, fixed G X g) ≃ (orbits G X × G)) :=
 ... ≃ (orbits G X × G) :
   equiv.sigma_equiv_prod _ _⟩
 
-#### [Kenny Lau (Apr 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125134941):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125134941):
 @**Kevin Buzzard**
 
-#### [Kevin Buzzard (Apr 16 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125137378):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125137378):
 Now you could do Sylow's theorems :-) but they might not be to your taste. I wonder if there's anything to learn from the Coq presentation of all this. I would imagine they use this sort of stuff everywhere in the odd order theorem.
 
-#### [Kenny Lau (Apr 16 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125137426):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125137426):
 @**Kevin Buzzard** sylow uses burnside?
 
-#### [Kevin Buzzard (Apr 16 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125137704):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125137704):
 One proof I've seen does. I'm sure there are others :-) but it wouldn't surprise me if all of them used "counting" in some way.
 
-#### [Johannes Hölzl (Apr 16 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138288):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Apr 16 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138288):
 There is also Sylow's first theorem in Lean2 https://github.com/leanprover/lean2/tree/master/library/theories/finite_group_theory/pgroup.lean
 We never did the effort to port this development to Lean 3, and a lot of stuff changed since them. But I think it would be worthwhile to take a look.
 
-#### [Kenny Lau (Apr 16 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138291):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138291):
 I say, the theory of (finite) cardinality in Lean is not well-developed
 
-#### [Johannes Hölzl (Apr 16 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138541):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Apr 16 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138541):
 Come on, you know that mathlib is a open source project. It's only as developed, as people put an effort into developing it.
 This includes by the way answering comments on pull requests ;-)
 
-#### [Kenny Lau (Apr 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138590):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138590):
 well
 
-#### [Kenny Lau (Apr 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138596):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138596):
 fixing those things created more error for me, so I need time to de-frustrate myself and to fix those errors
 
-#### [Kevin Buzzard (Apr 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138654):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138654):
 ...and revise for mechanics. I might soon need some other localization facts which aren't there yet, but I still didn't finish wrestling with compactness. Is Johannes talking about localization or something else?
 
-#### [Kenny Lau (Apr 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138658):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138658):
 free group
 
-#### [Kenny Lau (Apr 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138659):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138659):
 https://github.com/leanprover/mathlib/pull/89#discussion_r179398893
 

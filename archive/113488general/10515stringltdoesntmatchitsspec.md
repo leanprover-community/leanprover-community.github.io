@@ -9,7 +9,7 @@ permalink: archive/113488general/10515stringltdoesntmatchitsspec.html
 
 ---
 
-#### [Mario Carneiro (Jun 21 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128386824):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 21 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128386824):
 @**Gabriel Ebner** @**Sebastian Ullrich** I started trying to prove that `string.lt` is a total order, and then I discovered it's not true:
 ```
 #eval to_bool ([1, 2] < [2, 1]) -- tt
@@ -17,7 +17,7 @@ permalink: archive/113488general/10515stringltdoesntmatchitsspec.html
 ```
 Surely this is a bug?
 
-#### [Mario Carneiro (Jun 21 2018 at 00:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128386901):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 21 2018 at 00:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128386901):
 Even worse, it behaves differently (correctly) on actual strings:
 ```
 #eval to_bool ("ab" < "ba") -- tt
@@ -26,10 +26,10 @@ Even worse, it behaves differently (correctly) on actual strings:
 example : "ba" < "ab" := dec_trivial
 ```
 
-#### [Sebastian Ullrich (Jun 21 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128392824):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jun 21 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128392824):
 [oops](https://github.com/leanprover/lean/blob/a4aae537fe771ee92d746d4a2be1e73c543e48b9/library/init/data/list/basic.lean#L278)
 
-#### [Mario Carneiro (Jun 21 2018 at 03:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128393318):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 21 2018 at 03:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128393318):
 I'm using this in mathlib:
 ```
 inductive lex (r : α → α → Prop) : list α → list α → Prop
@@ -39,10 +39,10 @@ inductive lex (r : α → α → Prop) : list α → list α → Prop
 ```
 Feel free to poach
 
-#### [Sebastian Ullrich (Jun 21 2018 at 03:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128393382):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Jun 21 2018 at 03:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128393382):
 Right, an inductive definition is certainly nicer here
 
-#### [Mario Carneiro (Jun 21 2018 at 03:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128393430):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 21 2018 at 03:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128393430):
 here's the decidability proof, although it needs rejiggering for core:
 ```
 instance decidable_rel [decidable_eq α] (r : α → α → Prop)

@@ -9,7 +9,7 @@ permalink: archive/116395maths/01990hornerpolynomials.html
 
 ---
 
-#### [Chris Hughes (Nov 29 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/horner%20polynomials/near/148810007):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 29 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/horner%20polynomials/near/148810007):
 I remember @**Johannes Hölzl**  saying something in Orsay about having an interface for polynomials in horner form? What exactly did he mean by this? Is something like this worth having, and is it worth proving the equation lemmas for this, and proving it in a semiring? It does make some proofs easier.
 ```lean
 @[elab_as_eliminator] def rec_on_horner {α : Type*}
@@ -37,7 +37,7 @@ by rw [← mod_by_monic_add_div p monic_X, mod_by_monic_X, ← coeff_zero_eq_eva
 using_well_founded {dec_tac := tactic.assumption}
 ```
 
-#### [Johannes Hölzl (Nov 30 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/horner%20polynomials/near/148849553):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Nov 30 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/horner%20polynomials/near/148849553):
 My idea was a little bit different. Instead of using `p + C a` and assuming `coeff p 0 = 0` we only use
 ```lean
 def horner p a := p * X + C a

@@ -9,7 +9,7 @@ permalink: archive/113488general/26111interfacefordite.html
 
 ---
 
-#### [Kenny Lau (Apr 28 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125812949):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125812949):
 ```lean
 noncomputable def succ (C : set (set α)) : set (set α) :=
 if H : ∃ A, A ∈ (hat S C) \ C then insert (classical.some H) C else C
@@ -38,7 +38,7 @@ succ.rec_on S C
   (λ t H z, id)
 ```
 
-#### [Kenny Lau (Apr 28 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125813006):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125813006):
 ```lean
 noncomputable def succ (C : set (set α)) : set (set α) :=
 if H : ∃ A, A ∈ (hat S C) \ C then insert (classical.some H) C else C
@@ -67,10 +67,10 @@ succ.rec_on S C
   (λ t H z, id)
 ```
 
-#### [Kenny Lau (Apr 28 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125813007):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125813007):
 which one is better?
 
-#### [Kenny Lau (Apr 28 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125813201):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125813201):
 why does elaborator fail for this one?
 ```lean
 type mismatch, term
@@ -81,21 +81,21 @@ but is expected to have type
   is_chain C → is_chain (succ S C) : Prop
 ```
 
-#### [Kevin Buzzard (Apr 28 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821121):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821121):
 `dite` stinks and I would strongly encourage you to work on this until it stinks less.
 
-#### [Kevin Buzzard (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821160):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821160):
 `dite` is such a normal thing coming from procedural languages
 
-#### [Kevin Buzzard (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821164):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821164):
 and it's so hard to eliminate
 
-#### [Kenny Lau (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821165):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821165):
 I did write an interface
 
-#### [Kevin Buzzard (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821166):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821166):
 I know
 
-#### [Kenny Lau (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821167):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821167):
 but the elaborator fails lol
 

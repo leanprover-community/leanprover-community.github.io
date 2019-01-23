@@ -9,7 +9,7 @@ permalink: archive/116395maths/32161classicallyunconstructive.html
 
 ---
 
-#### [Sean Leather (Jul 18 2018 at 08:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/classically%20unconstructive/near/129853896):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean Leather (Jul 18 2018 at 08:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/classically%20unconstructive/near/129853896):
 [Johan Commelin](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/.C2.AC.20(2.20.E2.88.A3.205)/near/129830258):
 
 ```quote

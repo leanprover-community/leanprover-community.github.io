@@ -9,16 +9,16 @@ permalink: archive/113489newmembers/60294LogicinLEAN.html
 
 ---
 
-#### [Sean G McCain (Nov 01 2018 at 23:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136955882):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean G McCain (Nov 01 2018 at 23:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136955882):
 Is someone able to send me a private message regarding first order logic in LEAN? I am working a homework that requires it and it is difficult, for LEAN is very new to me.
 
-#### [Bryan Gin-ge Chen (Nov 02 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136956419):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Nov 02 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136956419):
 If you have specific questions you should feel free to ask them (publicly) in this thread. Have you seen the relevant chapters of [Logic & Proof](http://avigad.github.io/logic_and_proof/first_order_logic.html)?
 
-#### [Sean G McCain (Nov 02 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136956754):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean G McCain (Nov 02 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136956754):
 I have seen them, and that is the book that I use for reference. However, I am yet to be able to figure out the issue.
 
-#### [Sean G McCain (Nov 02 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136956856):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean G McCain (Nov 02 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136956856):
 Here is the code I have: 
 I am needing to prove the statement following example:
      
@@ -43,28 +43,28 @@ function expected at
 term has type
   A y
 
-#### [Chris Hughes (Nov 02 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136956965):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 02 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136956965):
 `A y` is not a function, it's a `Prop`.
 
-#### [Chris Hughes (Nov 02 2018 at 00:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136956985):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 02 2018 at 00:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136956985):
 `A` is a function.
 
-#### [Sean G McCain (Nov 02 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136957170):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean G McCain (Nov 02 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136957170):
 So, what would need to follow the 'from'
 
-#### [Bryan Gin-ge Chen (Nov 02 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136957338):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Nov 02 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136957338):
 I would reconsider the strategy for proving this. In particular, your `assume` statements are out-of-order / some of them are unnecessary.
 
-#### [Bryan Gin-ge Chen (Nov 02 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136957526):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Nov 02 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136957526):
 As a hint, `assume h1:∀ x, A x ∧ B x` should come first, and then `assume x:U`. You can see this by breaking down what you're trying to prove from left to right. Remember that you can use an underscore `_` and lean will tell you the type of what you're still missing.
 
-#### [Sean G McCain (Nov 02 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136958036):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sean G McCain (Nov 02 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136958036):
 After doing so, I am given more errors than before.
 
-#### [Andrew Ashworth (Nov 02 2018 at 00:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136958542):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Nov 02 2018 at 00:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136958542):
 add more underscores, the compiler will tell you what you're doing wrong
 
-#### [Bryan Gin-ge Chen (Nov 02 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136958565):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Nov 02 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136958565):
 Maybe this will help. Let me go through the last example from section 9.2 of Logic & Proof which is very similar. 
 
 Let's start by just putting an underscore in for the entire proof:

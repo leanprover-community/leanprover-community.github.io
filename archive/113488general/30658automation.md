@@ -9,19 +9,19 @@ permalink: archive/113488general/30658automation.html
 
 ---
 
-#### [Scott Morrison (Jun 05 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574167):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574167):
 I was just having a look at @**Chris Hughes**'s nice PR for quotient groups.
 
-#### [Scott Morrison (Jun 05 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574170):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574170):
 I golfed it a bit, using my "obviously" and "tidy" tactics, and would like to see how people feel about the result.
 
-#### [Scott Morrison (Jun 05 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574180):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574180):
 Chris's  proof is at <https://github.com/leanprover/mathlib/pull/154/commits/b7edcbdd1f783da5f17dcd840057352157afdac0>.
 
-#### [Scott Morrison (Jun 05 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574222):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574222):
 I factored this into essentially three bits: 2 lemmas about elements in normal subgroups, a few "hints" for my automation, and then the following proof:
 
-#### [Scott Morrison (Jun 05 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574225):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574225):
 ````
 instance quotient_group' [group α] (s : set α) [normal_subgroup s] : group (left_cosets s) :=
 by refine 
@@ -31,10 +31,10 @@ by refine
   .. }; obviously
 ````
 
-#### [Scott Morrison (Jun 05 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574227):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574227):
 which is about as easy on the eye as I think one can hope for.
 
-#### [Scott Morrison (Jun 05 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574235):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574235):
 The lemmas are:
 ````
 lemma quotient_group_aux  [group α] (s : set α) [normal_subgroup s] (a b : α) (h : a⁻¹ * b ∈ s) : a * b⁻¹ ∈ s :=
@@ -52,10 +52,10 @@ begin
 end
 ````
 
-#### [Scott Morrison (Jun 05 2018 at 02:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574311):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574311):
 which are dull variants on what Chris had done, just extracted out. I made no attempt to automate those, but I think it's not too much a stretch to hope that one could explain to a computer how to do these.
 
-#### [Scott Morrison (Jun 05 2018 at 02:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574316):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574316):
 The ugly part of my "obviously-golfed" version is the "hints": before the nice instance proof I need to say:
 ````
 -- Some 'hint' attributes for obviously.
@@ -65,30 +65,30 @@ local attribute [semiapplicable] quotient_group_aux quotient_group_aux' -- `semi
 local attribute [simp] mul_assoc
 ````
 
-#### [Scott Morrison (Jun 05 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574324):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574324):
 The whole thing is available at <https://github.com/semorrison/lean-tidy/blob/master/examples/quotient_group.lean>.
 
-#### [Scott Morrison (Jun 05 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574427):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574427):
 (Regarding the hints: `attribute [applicable] is_submonoid.one_mem` would become a global attribute in my dream world --- whenever the goal is to prove `1 ∈ s`, for `s` a monoid, you should let the computer do that for you. :-) With another simple lemma about normal subgroups, one could do without the `attribute [simp] mul_assoc` hint, which is pretty fragile.)
 
-#### [Scott Morrison (Jun 05 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127576401):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127576401):
 (On the subject of the two lemmas, once we have PIDs and Smith normal form, we can write a general purpose tactic which shows whether a given word lies in the normal subgroup generated by some collection of words, and hence prove goals of the form `w \mem s`, given one or more hypotheses of the same form.)
 
-#### [Scott Morrison (Jun 05 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127576415):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Jun 05 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127576415):
 (Such a tactic would remove the need for both the `semiapplicable` and `simp` hints above.)
 
-#### [Johan Commelin (Jun 05 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127583599):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 05 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127583599):
 Wow! That's some nice golfing. And golfing where you increase readability, instead of obfuscating!
 
-#### [Johan Commelin (Jun 05 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127583641):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 05 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127583641):
 @**Kevin Buzzard** Don't you think these tactics would help a lot with the perfectoid project?
 
-#### [Johan Commelin (Jun 05 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127583645):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jun 05 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127583645):
 If we want to produce code that is somewhat legible to mathematicians.
 
-#### [Kevin Buzzard (Jun 05 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127585727):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 05 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127585727):
 I am pretty sure that these tactics will make life much easier for mathematicians. Goodness knows if I will be able to use them. I have no idea of the problems I'll face with perfectoid spaces.
 
-#### [Patrick Massot (Jun 05 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127586790):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jun 05 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127586790):
 Automation is clearly the key. Proof assistants can become useful tools for mathematicians only if every stupid proof eventually gets automatic
 

@@ -9,7 +9,7 @@ permalink: archive/113488general/16371modifiedinductiononnat.html
 
 ---
 
-#### [Kevin Buzzard (Nov 18 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147917777):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147917777):
 I am doing the homework I set my students. I seem to often want "induction on n >= 1" and in this question I even want "induction starting at n = 2". I have a family of propositions `P n` for `n : nat`, which are true for n >= 2 (and this can be proved by induction on n>=2), and I also have the hypothesis `Hn2 : n >= 2`. Currently (in tactic mode) I write
 
 ```lean
@@ -28,19 +28,19 @@ I don't think it would be too hard to knock up some kind of "modified principle 
 
 I might try to get a minion to do this. How would this work exactly?  I've just looked at the source code for meta induction and it looks intimidating, but I guess that's because it works on a general inductive type. Is this a feasible project for a student? What should it be called? What should the syntax be? `modified_induction n Hn2 with d Hd`?  It's just something that seems to come up a lot in my class, that's why I'm interested.
 
-#### [Reid Barton (Nov 18 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918117):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 18 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918117):
 No need for a custom tactic, you can define that as a lemma, and maybe invoke it with `inducting ... using`.
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918290):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918290):
 Hmm. What is this `using` of which you speak? Is that some keyword I don't know?
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918299):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918299):
 it comes out blue in VS code so I guess it means something...
 
-#### [Reid Barton (Nov 18 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918336):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 18 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918336):
 It's one of the keywords that can be used by interactive tactics I guess
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918435):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918435):
 ```lean
 theorem Q0502' (n : ℕ) : n ≥ 2 → 4 ^ n > 3 ^ n + 2 ^ n :=
 begin
@@ -61,13 +61,13 @@ end
 ```
 This isn't so bad, although using induction twice does look weird. I think I still want it to be better though. I need to learn about `using` apparently...
 
-#### [Reid Barton (Nov 18 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918438):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 18 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918438):
 Check out the docstring for `induction` (it's quite long)
 
-#### [Mario Carneiro (Nov 18 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918796):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918796):
 this is not the easiest way to prove it
 
-#### [Mario Carneiro (Nov 18 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918968):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918968):
 ```lean
 example (P : nat → Prop) (h0 : P 37) (h1 : ∀ n ≥ 37, P n → P (n + 1)) : ∀ n ≥ 37, P n :=
 begin
@@ -79,19 +79,19 @@ begin
 end
 ```
 
-#### [Mario Carneiro (Nov 18 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918969):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147918969):
 this is what I usually do when I have an induction with a weird base case
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919062):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919062):
 But it makes it harder to see what's going on
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919065):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919065):
 It's still better than both my ways though :-)
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919070):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919070):
 but that doesn't mean that I'm happy with it.
 
-#### [Mario Carneiro (Nov 18 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919113):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919113):
 this is a bit more flexible with weird induction steps:
 ```lean
 example (P : nat → Prop) {m} (h0 : P m) (h1 : ∀ n ≥ m, P n → P (n + 1)) : ∀ n ≥ m, P n :=
@@ -106,37 +106,37 @@ begin
 end
 ```
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919124):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919124):
 That's the optimal set-up I guess. So now I can do "induction n using ^^^" somehow?
 
-#### [Mario Carneiro (Nov 18 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919125):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919125):
 eh, it's not that great
 
-#### [Mario Carneiro (Nov 18 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919164):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919164):
 `induction using` has little to offer over `refine` and it is much pickier
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919174):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919174):
 I just want to make it a one-liner for my students to go from goal `P n` and hypothesis `Hn : n >= 2` to goals `P 2` and `P (d + 1)`, the latter with hypotheses `P d` and `d >= 2`
 
-#### [Mario Carneiro (Nov 18 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919216):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 18 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919216):
 sure, just use this lemma
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919218):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919218):
 indeed!
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919454):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919454):
 Yes, this is better than anything I had. I've added modified induction to `xenalib` :-)
 
-#### [Kevin Buzzard (Nov 18 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919455):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 18 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147919455):
 Thanks!
 
-#### [Patrick Massot (Nov 18 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147925201):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 18 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147925201):
 ```quote
 `induction using` has little to offer over `refine` and it is much pickier
 ```
  It may require Lean 4 but I hope we'll have something as powerfull as SSReflect `elim` instead
 
-#### [Sebastien Gouezel (Dec 01 2018 at 17:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/150688665):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Dec 01 2018 at 17:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/150688665):
 ```quote
 this is a bit more flexible with weird induction steps:
 ```lean
@@ -154,12 +154,12 @@ end
 ```
  Has this been incorporated in mathlib? It turns out that I just need this lemma right now :)
 
-#### [Sebastien Gouezel (Dec 01 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/150689029):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Dec 01 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/150689029):
 In the middle of a proof, I need to define by induction a function from ℕ to some type α. I know how to do this with a top-level definition, but I could not figure out the syntax inside a proof. Is this possible?
 
-#### [Reid Barton (Dec 01 2018 at 17:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/150689418):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 01 2018 at 17:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/150689418):
 I don't think you can do it using the equation compiler
 
-#### [Sebastien Gouezel (Dec 01 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/150689522):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Dec 01 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/150689522):
 Yes, I have probably to use `nat.rec_on`, but this looks really arcane.
 

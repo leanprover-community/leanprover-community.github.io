@@ -9,22 +9,22 @@ permalink: archive/113489newmembers/23913Coeback.html
 
 ---
 
-#### [Alexandru-Andrei Bosinta (Nov 25 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148320607):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 25 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148320607):
 If I have a positive integer, how do I get a natural number out of it? For more context, I need to use the floor function which outputs an integer and then do induction with this integer, with`let p : ℤ → Prop := λ (m : ℕ), m ≤ n → (n - m ∈ s ∨ (0 : ℤ) ∈ s), ` (s is a set of positive integers). I basically need to prove that if n is in the set, then 0 is in the set as well,  but induction on integers won't work because I can't prove a special case.
 
-#### [Rob Lewis (Nov 25 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148321896):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Nov 25 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148321896):
 I'm not sure I understand your situation exactly. Does `int.nat_abs` help you? `int.nat_abs (int.of_nat k)` reduces to `k`, and there are lemmas like `int.nat_abs_of_nonneg`.
 
-#### [Kevin Buzzard (Nov 25 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148324816):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148324816):
 Although it's counter-intuitive to mathematicians, the way to get a nat back from a non-negative int is indeed to take the absolute value. You could think of the absolute value function as a function from int to nat which reverses the inclusion from nat to int, and returns junk for values not in the image; there are loads of such functions in Lean. Whenever a mathematician thinks they want a partial function (i.e. a function only defined on some elements of a nice set) the computer scientists tend to have defined it on all the set and either given it junk values on the other elements (e.g. log, which does some random thing to negative reals, and division, which does some random thing when you divide by 0) or observed that actually the function you want is the special case of a natural function which you might well want in general. For example the partial inverse of nat to int is called absolute value, the partial inverse of int to rat or real is called the floor function, the partial inverse of int to rat is called the numerator function. In all cases there will be a lemma which says that this function is indeed the one-sided inverse (i.e. `abs (n : Z) = n` if `n : nat` -- this is called `nat_abs_of_nat` and the proof is `rfl`), and if the image is easily classifiable (which it is for nat to int -- it's the non-negative ints) then there will be another lemma saying that the image is what you think it is it's (`of_nat_nonneg` in the nat to int case) and finally a lemma saying that if you're in the image and you go back then forward you get back to where you start ( Rob pointed out the relevant function in the nat to int case).
 
-#### [Alexandru-Andrei Bosinta (Nov 25 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328259):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 25 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328259):
 Thanks for the explanation! It worked, but I've been having a lot of trouble with coercions so I had to rewrite my entire proof (which is already long). Now I am in the final stage of this proof.
 
-#### [Kevin Buzzard (Nov 25 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328316):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328316):
 Coercions are really meh. Mathematicians don't know they are there. I think Lean is bad at handling them though. I would like to see Lean letting mathematicians use them as if they weren't there. Did you read my notes on cast? https://github.com/leanprover/mathlib/blob/master/docs/extras/casts.md Maybe they help. But it should all be easier.
 
-#### [Kevin Buzzard (Nov 25 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328371):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328371):
 I occasionally think about whether one could handle all of this with typeclasses. Instead of going from int back to nat, have a typeclass `int.is_nat`on `int` which keeps track of whether something is a nat (and which nat it is). See if we can get the typeclass system to do the coersions for us, rather than `simp`.
 
 Basic idea:
@@ -46,34 +46,34 @@ instance real.rat_of_nat (r : ℝ) [H : real.nat r] : real.rat r :=
 
 ```
 
-#### [Alexandru-Andrei Bosinta (Nov 25 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328491):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 25 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328491):
 I didn't read your notes yet. I will have a look later, but I figured out how to do it. I basically tried to avoid using the `↑` operator and just try to use the functions which give you the coercions (`rat.mk n 1` for integer `n` to rational `n` and `int.nat_abs` for naturals to integers). It was really annoying because in my first attempt I was even getting an error about metavariables and `calc` wasn't working.
 
-#### [Kevin Buzzard (Nov 25 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328498):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328498):
 Yeah, that's not how you're supposed to do it at all :-) No wonder it was a frustrating experience :-)
 
-#### [Kevin Buzzard (Nov 25 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328507):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328507):
 I just use (n : rat) to get from nat to rat
 
-#### [Kevin Buzzard (Nov 25 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328552):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328552):
 If you use the coercions then simp will do a lot of the dirty work for you. If you use the explicit functions then simp doesn't know about these so you have to do everything by hand.
 
-#### [Kevin Buzzard (Nov 25 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328569):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328569):
 `simp` is a tool for proving *equalities*. Any two things which should "obviously be equal", like `\u a + \u b` and `\u (a + b)` -- `simp` should know this. You can figure out the lemmas yourself, but it's much easier to use simp.
 
-#### [Alexandru-Andrei Bosinta (Nov 25 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328626):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 25 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328626):
 I started getting annoyed debugging my code, so I gave up and decided to do it my implicit functions which are way more clear to me.  It was probably not a very good way of doing my proof. I may try to fix the code later.
 
-#### [Kevin Buzzard (Nov 25 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328642):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148328642):
 If you post something here I can look at it. I've had to deal with a lot of coercions from nat to int in the past, so I know some tips.
 
-#### [Alexandru-Andrei Bosinta (Nov 25 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148329229):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 25 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148329229):
 I will post it in a bit when I finish my whole proof. It shouldn't be long until I am done.
 
-#### [Kevin Buzzard (Nov 25 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148329360):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148329360):
 If you look at my solutions to my example sheet questions from last year you will see me in coercion hell often -- Mario used to have to drag me out of the mire. Now at least I understand the way Lean has been designed with coercions, or at least well enough to mean I don't get stuck any more. Over the summer I had some people doing number theory, and they were forever coercing from nat to int and back again, and they struggled too (and Chris would have to drag them out of the mire).
 
-#### [Alexandru-Andrei Bosinta (Nov 25 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148329649):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 25 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148329649):
 ```
 import data.rat data.set.basic order.bounds tactic.ring tactic.linarith data.nat.basic
 open classical
@@ -178,16 +178,16 @@ end ) )
 ```
 The code is very long unfortunately, but it's finally done.
 
-#### [Kevin Buzzard (Nov 25 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148329938):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148329938):
 Oh wooah! You did the Dedekind Cuts question in Lean! Nice!
 
-#### [Alexandru-Andrei Bosinta (Nov 25 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148331184):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alexandru-Andrei Bosinta (Nov 25 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148331184):
 It's far from done. But I thought you already knew I was working on it.
 
-#### [Kevin Buzzard (Nov 25 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148333814):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 25 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148333814):
 Yeah I guess we talked about it on Thurs. I guess several people have done bits and bobs but that `suff_small_bound` is a pain!
 
-#### [Mario Carneiro (Nov 26 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148351790):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 26 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coe%20back/near/148351790):
 Hm, this piqued my interest. Here's my attempt, including a missing library theorem in `algebra.archimedean`:
 ```lean
 import data.rat algebra.archimedean

@@ -9,18 +9,18 @@ permalink: archive/113489newmembers/13755existsatmostone.html
 
 ---
 
-#### [Ali Sever (Jul 25 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists%20at%20most%20one/near/130274521):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ali Sever (Jul 25 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists%20at%20most%20one/near/130274521):
 I want to state `p a b → ∃ (at most one) c, q c`, and if such `c` exists, I want `f a b = c`.  Is there a smart/efficient way to do this?
 
-#### [Kevin Buzzard (Jul 25 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists%20at%20most%20one/near/130275258):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists%20at%20most%20one/near/130275258):
 you'll need the axiom of choice, because you're constructing data from a proof :-)
 
-#### [Simon Hudon (Jul 25 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists%20at%20most%20one/near/130275840):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 25 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists%20at%20most%20one/near/130275840):
 Are you trying to build such a `f`?
 
 The assertion I think could be made as `p a b -> ∀ c₀ c₁, q c₀ → q c₁ → c₀ = c₁`
 
-#### [Simon Hudon (Jul 25 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists%20at%20most%20one/near/130276240):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 25 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists%20at%20most%20one/near/130276240):
 If you're defining `f`, you can do it in two ways:
 
 ```lean

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/82236Instanceaffectsothersections.html
 
 ---
 
-#### [AHan (Jan 01 2019 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154128043):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 01 2019 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154128043):
 ```lean
 import data.finsupp
 variables {σ : Type*} {α : Type*}
@@ -33,31 +33,31 @@ end b
 The error message : "is maximum class-instance resolution depth has been reached (the limit can be increased by setting option 'class.instance_max_depth') (the class-instance resolution trace can be visualized by setting option 'trace.class_instances')" at the `(≤)` in `section b`
 seems like `section b` is affected by the `decidable_linear_order` instance in `section a`, but I don't understand why, and how to fix this...
 
-#### [Kevin Buzzard (Jan 01 2019 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154128780):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jan 01 2019 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154128780):
 I don't have access to Lean right now but is the issue that the instance gives you a linear order on the finsupp and then in section b you are putting another unrelated order on the finsupp and hence breaking the golden rule of typeclasses -- one instance per type?
 
-#### [Reid Barton (Jan 01 2019 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129611):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 01 2019 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129611):
 instances are not scoped to sections
 
-#### [Reid Barton (Jan 01 2019 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129654):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 01 2019 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129654):
 It's just as though you wrote `instance <long string of variables> : decidable_linear_order (σ →₀ ℕ)` at the top level.
 
-#### [Reid Barton (Jan 01 2019 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129664):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 01 2019 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129664):
 If you want to make a scoped instance, you can write an ordinary definition and then give it `local attribute [instance]` inside a `section`
 
-#### [Chris Hughes (Jan 01 2019 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129771):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 01 2019 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129771):
 Leaving aside the `section` issue, I think this is a bad instance, because there's a cycle, there's a `linear_order` to `decidable_linear_order` instance, and a `decidable_linear_order` to `linear_order` instance somewhere in the library. This sort of thing can cause type class inference to get stuck.
 
-#### [AHan (Jan 01 2019 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129920):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 01 2019 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129920):
 @**Kevin Buzzard**  actually the order in `section a` and `section b` are the same in my case, but some functions in `section a` are only depend on `comm_semiring α`, while functions in `section b` are depend on `integral_domain α`. I can only think of using seperate sections like this to avoid confilict between `comm_semiring α` and `integral_domain α`
 
-#### [Reid Barton (Jan 01 2019 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129984):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 01 2019 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129984):
 From what you've provided so far it looks like the hypotheses involving $$\alpha$$ are independent of the hypotheses involving $$\sigma$$
 
-#### [Reid Barton (Jan 01 2019 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129987):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 01 2019 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129987):
 that is, no hypothesis involves both
 
-#### [AHan (Jan 01 2019 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130045):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 01 2019 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130045):
 @**Reid Barton**  you mean like ?
 ```lean
 def x [decidable_eq σ] [linear_order (σ →₀ ℕ)] [@decidable_rel (σ →₀ ℕ) (≤)]
@@ -68,26 +68,26 @@ def x [decidable_eq σ] [linear_order (σ →₀ ℕ)] [@decidable_rel (σ →�
 }
 ```
 
-#### [Reid Barton (Jan 01 2019 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130110):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 01 2019 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130110):
 Yes, or using `variables` the way you do now is also fine.
 
-#### [AHan (Jan 01 2019 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130249):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 01 2019 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130249):
 Then when a lemma needs this decidable_linear_order instance, it won't automatically infer this instance right?
 
-#### [Reid Barton (Jan 01 2019 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130299):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jan 01 2019 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130299):
 That's right, but you can "install" the instance locally in a proof using `letI`
 
-#### [AHan (Jan 01 2019 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130345):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 01 2019 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130345):
 @**Chris Hughes**  Yeah..you're right...
 but I can't just add an instance `[decidable_linear_order (σ →₀ ℕ)]`,  as it might cause conflict between `finsupp.decidable_eq` and `decidable_linear_order.decidable_eq`
 
-#### [Chris Hughes (Jan 01 2019 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130587):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 01 2019 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130587):
 `decidable_linear_order.decidable_eq` isn't an instance, so it's okay.
 
-#### [AHan (Jan 01 2019 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130992):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 01 2019 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130992):
 But I do encounter such kind of error... some term looks just the same, and I couldn't use `rw` tactic
 
-#### [AHan (Jan 01 2019 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154131487):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 01 2019 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154131487):
 This is the minimal example I can figure out so far...
 there is a type mismatch at `rw union_min'` which says `h₁` uses `finsupp.decidable_eq` but the third parameter of `union_min'` is expected to use `eq.decidable`
 
@@ -127,7 +127,7 @@ end
 end c
 ```
 
-#### [Patrick Massot (Jan 01 2019 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154135743):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 01 2019 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154135743):
 I'm not sure I understand your question, but you may like:
 ```lean
 lemma x {p q : mv_polynomial σ α} (hp : p ≠ 0) (hq : q ≠ 0) (hpq : p + q ≠ 0) : p + q ≠ 0 :=
@@ -138,12 +138,12 @@ begin
 end
 ```
 
-#### [Patrick Massot (Jan 01 2019 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154136362):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 01 2019 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154136362):
 and I suspect that filling in the decidable_linear_order instance would help avoiding the problem
 
-#### [Chris Hughes (Jan 01 2019 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154136639):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jan 01 2019 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154136639):
 It's not a nice solution, but adding this line before `x` works `local attribute [instance, priority 0] finsupp.decidable_eq`. There's not a good solution for this sort of thing in general at the moment.
 
-#### [AHan (Jan 01 2019 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154137734):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) AHan (Jan 01 2019 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154137734):
 @**Patrick Massot**  @**Chris Hughes**  Thanks a lot! Both solutions seems to solve my problem.
 

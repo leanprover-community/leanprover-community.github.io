@@ -9,7 +9,7 @@ permalink: archive/116395maths/64802provingsizeatleast3.html
 
 ---
 
-#### [Kevin Buzzard (Aug 13 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132037729):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132037729):
 I would be interested in a relatively slick proof of either of the below examples:
 
 ```lean
@@ -29,10 +29,10 @@ This is for pedagogical purposes and I don't really mind if we stick to fintypes
 
 As a side issue, is `cardinal.mk` really the way to talk about the cardinality of a type? Is there not some interface function?
 
-#### [Mario Carneiro (Aug 13 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132037883):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132037883):
 `cardinal.mk` is the interface function
 
-#### [Kenny Lau (Aug 13 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132038796):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 13 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132038796):
 ```lean
 import data.fintype
 import set_theory.cardinal
@@ -68,7 +68,7 @@ three.cardinal ▸ nonempty.intro ⟨λ n, three.rec_on n a b c,
 λ x y h, by cases x; cases y; dsimp at h; cc⟩
 ```
 
-#### [Mario Carneiro (Aug 13 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132038797):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 13 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132038797):
 hm, I needed some additional library functions for this, attached. The main proof is not so hard:
 ```lean
 @[simp] lemma fintype.card_coe (s : finset α) :
@@ -97,19 +97,19 @@ begin
 end
 ```
 
-#### [Kenny Lau (Aug 13 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132038801):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 13 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132038801):
 just 3 seconds apart!
 
-#### [Kevin Buzzard (Aug 13 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132063967):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 13 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132063967):
 Thanks to both of you! [I've only just seen these].
 
-#### [Kevin Buzzard (Aug 14 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132075090):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132075090):
 This is one of those "easy in maths, hard in Lean" moments :-/ I am going to need stuff like "card X = 3 iff there exists a,b,c all distinct and every element of X must be a, b or c" [but I've gotta scoot]. I think I can take it from here but this is all a bit ugly. Mathematicians are so good at 3 :-/
 
-#### [Mario Carneiro (Aug 14 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132084120):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132084120):
 that latter fact is essentially exactly the definition of a fintype instance where the underlying multiset has three elements
 
-#### [Kevin Buzzard (Aug 14 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132131438):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132131438):
 Here's a proof for the cardinal case:
 
 ```lean
@@ -139,45 +139,45 @@ end
 
 Now I need to do `four` :cry: (but that's the last one)
 
-#### [Mario Carneiro (Aug 14 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132131694):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132131694):
 noo... my heart, it hurts
 
-#### [Mario Carneiro (Aug 14 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132131735):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132131735):
 `n` is easier than `3`
 
-#### [Kevin Buzzard (Aug 14 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132131957):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132131957):
 So 4 is easier than 3? :-)
 
-#### [Mario Carneiro (Aug 14 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132131963):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132131963):
 3 is easier than 3
 
-#### [Kevin Buzzard (Aug 14 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132062):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132062):
 I did think about doing the general case but at the end of the day I want to extract exactly those things in the conclusion, and I wasn't entirely sure how easy it would be if I had a list of size n or whatever, so I decided to bite the bullet now rather than later.
 
-#### [Mario Carneiro (Aug 14 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132086):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132086):
 trust me, it's way easier to conclude from the general statement, even if the final goal is exactly the statement you wrote
 
-#### [Mario Carneiro (Aug 14 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132147):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132147):
 hint: if you have a list of length 3, then you can `match` it against `[a, b, c]`
 
-#### [Kevin Buzzard (Aug 14 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132148):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132148):
 I was a bit surprised to see `simp` leave me with a goal `not 0 = 1` in the H12 proof.
 
-#### [Mario Carneiro (Aug 14 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132170):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132170):
 and `d \in [a, b, c]` and `list.nodup [a, b, c]` will simplify to the disjunctions you wrote
 
-#### [Kevin Buzzard (Aug 14 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132192):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132192):
 This is the stupid cardinal version, because Richard Thomas complained that I was assuming unnecessary finiteness hypotheses.
 
-#### [Mario Carneiro (Aug 14 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132241):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132241):
 there are theorems showing equivalence to the finite versions in `cardinal`
 
-#### [Kevin Buzzard (Aug 14 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132253):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132253):
 Oh OK, maybe I'll take it from here. Thanks!
 
-#### [Kevin Buzzard (Aug 14 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132278):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 14 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132278):
 It's just my lack of experience which made me do the 3 case explicitly. I could see I could try for the n case, but I figured that doing the 3 case directly would be less painful. I guess your instincts immediately told you otherwise.
 
-#### [Mario Carneiro (Aug 14 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132331):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 14 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132132331):
 even 2 is sometimes tricky, but certainly `2 < n < 3`
 

@@ -9,19 +9,19 @@ permalink: archive/113488general/21444natstrongrecon.html
 
 ---
 
-#### [Kenny Lau (Sep 14 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133965949):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133965949):
 Can we make this `@[elab_as_eliminator]`?
 
-#### [Kevin Buzzard (Sep 14 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133969734):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 14 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133969734):
 How will that change things?
 
-#### [Chris Hughes (Sep 14 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133969852):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 14 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133969852):
 It means it changes the way the motive is inferred, without which, these lemmas are pretty much unusable.
 
-#### [Kenny Lau (Sep 14 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133970442):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133970442):
 also I just wrote a beta lemma
 
-#### [Kenny Lau (Sep 14 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133970444):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133970444):
 ```lean
 attribute [elab_as_eliminator] nat.strong_rec_on
 

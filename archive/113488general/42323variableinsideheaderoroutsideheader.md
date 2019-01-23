@@ -9,7 +9,7 @@ permalink: archive/113488general/42323variableinsideheaderoroutsideheader.html
 
 ---
 
-#### [Kenny Lau (Jul 25 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20inside%20header%20or%20outside%20header/near/130250391):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20inside%20header%20or%20outside%20header/near/130250391):
 ```lean
 import algebra.module
 universes u v w u₁
@@ -68,6 +68,6 @@ variables {f : M → N → P} (hf : is_bilinear_map f) -- fails
 end hidden2
 ```
 
-#### [Kenny Lau (Jul 25 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20inside%20header%20or%20outside%20header/near/130250398):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20inside%20header%20or%20outside%20header/near/130250398):
 why does it make a difference whether the variables are inside or outside the header (the space between the name of the definition and the colon)?
 

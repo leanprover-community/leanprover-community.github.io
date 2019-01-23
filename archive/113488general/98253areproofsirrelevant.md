@@ -9,7 +9,7 @@ permalink: archive/113488general/98253areproofsirrelevant.html
 
 ---
 
-#### [Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121844):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121844):
 (working example, far from minimal, sorry for that)
 https://gist.github.com/kckennylau/4a009e228980fdbe9f6c879f9fa0eca5
 Excerpt:
@@ -63,24 +63,24 @@ continuous_mul continuous_const continuous_id _ hs
       continuous_coinduced_rng _ hs) }-/
 ```
 
-#### [Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121848):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121848):
 Problem: If I use the first proof, then there is error below; if I use the second proof, then there is no error.
 
-#### [Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121852):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121852):
 @**Mario Carneiro** please help
 
-#### [Mario Carneiro (Jun 15 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122041):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122041):
 why would they be the same?
 
-#### [Kenny Lau (Jun 15 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122048):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122048):
 because they're just proofs?
 
-#### [Mario Carneiro (Jun 15 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122055):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jun 15 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122055):
 it's an instance
 
-#### [Kenny Lau (Jun 15 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122058):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122058):
 what should I do?
 
-#### [Kenny Lau (Jun 15 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122146):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jun 15 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122146):
 ah I solved it by making `topological_group.coinduced` a theorem
 

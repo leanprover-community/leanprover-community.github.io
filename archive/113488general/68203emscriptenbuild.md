@@ -9,7 +9,7 @@ permalink: archive/113488general/68203emscriptenbuild.html
 
 ---
 
-#### [Sebastian Ullrich (Apr 30 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887589):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 30 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887589):
 I see the emscripten situation is as stellar as ever :| .
 Using the official Arch Linux build:
 ```
@@ -33,37 +33,37 @@ make[1]: *** [CMakeFiles/Makefile2:1180: CMakeFiles/gmp.dir/all] Error 2
 make: *** [Makefile:163: all] Error 2
 ```
 
-#### [Sebastian Ullrich (Apr 30 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887631):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 30 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887631):
 /cc @**Gabriel Ebner** @**Scott Morrison** @**loki der quaeler**
 
-#### [Kevin Buzzard (Apr 30 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887638):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 30 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887638):
 https://gitter.im/leanprover_public/lean_js
 
-#### [Kevin Buzzard (Apr 30 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887639):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 30 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887639):
 (for reference)
 
-#### [Johan Commelin (Apr 30 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887687):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 30 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887687):
 Once we have multiplayer lean on cocalc we can forget about these headaches :video_game:
 
-#### [Kevin Buzzard (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887852):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887852):
 no because I want people who are idly reading my blog with no cocalc account to be able to see modern lean and mathlib doing stuff at the click of a button.
 
-#### [Kevin Buzzard (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887854):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887854):
 so we have one 3.4.1 headache
 
-#### [Kevin Buzzard (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887855):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887855):
 but then that's it
 
-#### [Kevin Buzzard (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887857):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887857):
 [assuming Mario can get mathlib working with 3.4.1]
 
-#### [Kevin Buzzard (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887859):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887859):
 [or else the number of headaches goes up again]
 
-#### [Johan Commelin (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887860):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 30 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887860):
 Ok, fair enough
 
-#### [Gabriel Ebner (Apr 30 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125890720):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Apr 30 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125890720):
 try this:
 ```udiff
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
@@ -81,6 +81,6 @@ index 863f6a66d..6163d9b32 100644
      )
 ```
 
-#### [Sebastian Ullrich (Apr 30 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125891597):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Apr 30 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125891597):
 @**Gabriel Ebner** Seems to work, thanks!
 

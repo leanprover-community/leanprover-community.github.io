@@ -9,7 +9,7 @@ permalink: archive/113488general/23272mustliveinsameuniverse.html
 
 ---
 
-#### [Reid Barton (Jul 17 2018 at 05:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790411):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 17 2018 at 05:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790411):
 Any insight into this error?
 ```lean
 inductive value
@@ -25,10 +25,10 @@ nested occurrence 'rbnode.well_formed.{0} _nest_3_3.prod.json.value (fun (a : _n
 -/
 ```
 
-#### [Reid Barton (Jul 17 2018 at 05:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790488):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 17 2018 at 05:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790488):
 I think it's because `rbtree` is defined as a subtype, and so contains a field which is a Prop, but I don't know what I should do about it
 
-#### [Simon Hudon (Jul 17 2018 at 05:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790726):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 17 2018 at 05:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790726):
 You can only use inductive types this way. `rbnode` is inductive so you may be able to write your definition as:
 
 ```lean
@@ -36,12 +36,12 @@ inductive value
 | object : forall (t : rbnode /- something in terms of value -/), t.well_formed lt -> value
 ```
 
-#### [Simon Hudon (Jul 17 2018 at 05:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790735):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 17 2018 at 05:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790735):
 Then you can write a function that puts the `rbmap` back together.
 
-#### [Mario Carneiro (Jul 17 2018 at 05:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790740):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 17 2018 at 05:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790740):
 You can define it if you use `meta inductive`
 
-#### [Reid Barton (Jul 17 2018 at 05:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790781):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 17 2018 at 05:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790781):
 Oh nice, `meta` is good enough for me (for now anyways)
 

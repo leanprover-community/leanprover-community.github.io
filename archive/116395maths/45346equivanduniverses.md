@@ -9,10 +9,10 @@ permalink: archive/116395maths/45346equivanduniverses.html
 
 ---
 
-#### [Kevin Buzzard (Apr 29 2018 at 02:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837442):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 02:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837442):
 I am interested in beefing up equiv but I am only now coming to terms with how universes work and do not yet really understand how they affect the picture if at all
 
-#### [Kevin Buzzard (Apr 29 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837448):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837448):
 ```lean
 import data.equiv
 universes u v y z
@@ -37,22 +37,22 @@ definition u_uv {X : Type z} {Y : Type z} : equiv (αu X Y) (αuv X Y) :=
 definition u_uv {X : Type u} {Y : Type v} : equiv (αu X Y) (\auv X Y) := sorry
 ```
 
-#### [Kevin Buzzard (Apr 29 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837452):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837452):
 the last one isn't a puzzle
 
-#### [Kevin Buzzard (Apr 29 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837455):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837455):
 it unfortunately doesn't typecheck because of universe issues
 
-#### [Kevin Buzzard (Apr 29 2018 at 02:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837460):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Apr 29 2018 at 02:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837460):
 Is there any way of somehow forcing it to typecheck with universe coercion or something? And then would equiv still fail?
 
-#### [Reid Barton (Apr 29 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125838746):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 29 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125838746):
 I guess the zeroth thing to know about universes is that `universe u` doesn't mean "Fix a universe $U$"; it just makes `u` a legal thing to put somewhere that a universe is expected.
 In other words, the `u` and `v`s in `\au`, `\auv`, `\av` are unrelated, and definitions `\au` and `\av` are exactly the same.
 
-#### [Reid Barton (Apr 29 2018 at 03:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125838886):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 29 2018 at 03:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125838886):
 You can think of Lean universes as corresponding to Grothendieck universes except that Lean universes are not cumulative, so that a type belongs to `Type u` for just one `u`.
 
-#### [Reid Barton (Apr 29 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125839130):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Apr 29 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125839130):
 To "move" a type from one universe to a bigger one, use `ulift`. The new type is `equiv` to the old one (`equiv.ulift`).
 

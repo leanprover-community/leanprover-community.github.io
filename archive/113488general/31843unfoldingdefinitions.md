@@ -9,7 +9,7 @@ permalink: archive/113488general/31843unfoldingdefinitions.html
 
 ---
 
-#### [Guy Leroy (Aug 22 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573040):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Guy Leroy (Aug 22 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573040):
 I have the following def:
 ```lean
 def jacobi_sym : ℤ → ℤ → ℤ
@@ -28,18 +28,18 @@ h : ¬n = 1
 How can I unfold ``` jacoby_sym ``` such that it shows ``` if b % 2 = 1 then jacobi_sym_aux a b else 0``` ? 
 If I write ```unfold jacobi_sym``` the tactic fails
 
-#### [Kenny Lau (Aug 22 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573174):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573174):
 MWE please
 
-#### [Kenny Lau (Aug 22 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573310):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573310):
 but `rw [jacobi_sym.equations._eqn_2 a n h]` should work
 
-#### [Kenny Lau (Aug 22 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573444):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Aug 22 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573444):
 but a better solution would be to not use the equation compiler to define `jacobi_sym`, but rather use ite
 
-#### [Guy Leroy (Aug 22 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573551):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Guy Leroy (Aug 22 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573551):
 Thank you very much!
 
-#### [Simon Hudon (Aug 22 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132583964):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 22 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132583964):
 Out of curiosity, have you tried `dunfold`? It is based on `dsimp` which is more careful about preserving definitional equality.
 

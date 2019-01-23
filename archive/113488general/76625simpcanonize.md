@@ -9,7 +9,7 @@ permalink: archive/113488general/76625simpcanonize.html
 
 ---
 
-#### [Simon Hudon (Jan 22 2019 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622369):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 22 2019 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622369):
 I'm trying to get rid of some simp loops and I just realized that there is a part of it I don't understand and it seems to be getting into a loop. Here is the trace that Lean prints for it:
 
 ```
@@ -41,19 +41,19 @@ _inst_2
 
 How do I prevent it from looping? I tried `simp [-category_theory.types]` and it doesn't work.
 
-#### [Johan Commelin (Jan 22 2019 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622930):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 22 2019 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622930):
 But `category_theory.types` isn't even marked as `[simp]`. How come the simplifier is using it?
 
-#### [Simon Hudon (Jan 22 2019 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156627682):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 22 2019 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156627682):
 I am puzzled too. My tentative answer is that it comes from the `canonize` phase of `simp` which I did not know of. It seems like a phase where class instances are reduced but I can't say more. @**Sebastian Ullrich**, would you care to enlighten us?
 
-#### [Simon Hudon (Jan 22 2019 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156638222):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 22 2019 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156638222):
 Update: using `set_option trace.debug.dsimplify true` and using `dsimp` instead of `simp`, I managed to find the offender which was unrelated to `canonize`
 
-#### [Mario Carneiro (Jan 22 2019 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156643964):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jan 22 2019 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156643964):
 MWE
 
-#### [Simon Hudon (Jan 23 2019 at 00:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649250):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 23 2019 at 00:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649250):
 ```lean
 
 import category_theory.category
@@ -96,6 +96,6 @@ by { simp, }
 -- solution: increase stack space in your system)
 ```
 
-#### [Simon Hudon (Jan 23 2019 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649296):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jan 23 2019 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649296):
 If you comment out `Cokleisli.comp_def`, the error disappears
 

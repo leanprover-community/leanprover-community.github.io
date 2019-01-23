@@ -9,7 +9,7 @@ permalink: archive/113488general/54986Leansunfoldingmechanism.html
 
 ---
 
-#### [Sarah Mameche (May 07 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%E2%80%99s%20unfolding%20mechanism/near/126219226):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sarah Mameche (May 07 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%E2%80%99s%20unfolding%20mechanism/near/126219226):
 Hi there, 
 
 Is Lean’s unfolding of mutually recursive definitions any different than the unfolding of ‚normal‘ definitions?
@@ -23,6 +23,6 @@ Is there a way to work around this? As I am using proof terms, it would also be 
 Thanks in advance!
 Sarah
 
-#### [Mario Carneiro (May 08 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%E2%80%99s%20unfolding%20mechanism/near/126249977):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 08 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%E2%80%99s%20unfolding%20mechanism/near/126249977):
 Definitions by mutual recursion are compiled to well founded recursions, and the generated equations are not guaranteed to be definitional. The equation compiler generates equations for all the match branches; they are used automatically if you `rw [T]` or `simp [T]` where `T`is your definition.
 

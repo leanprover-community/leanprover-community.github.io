@@ -9,21 +9,21 @@ permalink: archive/113489newmembers/31377Traceofsimpsteps.html
 
 ---
 
-#### [Ken Roe (Jul 25 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300149):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 25 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300149):
 I applied "simp" to a complex hypothesis and got an unexpected result.  Is there a way to get a trace of the steps taken by simp?
 
-#### [Kenny Lau (Jul 25 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300168):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300168):
 ```lean
 set_option trace.simp_lemmas true
 set_option trace.simplify true
 ```
 
-#### [Kenny Lau (Jul 25 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300170):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300170):
 I think it's the second one
 
-#### [Kenny Lau (Jul 25 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300172):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300172):
 but why not both
 
-#### [Reid Barton (Jul 25 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300213):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 25 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300213):
 trace.simplify.rewrite will show just the successful steps
 

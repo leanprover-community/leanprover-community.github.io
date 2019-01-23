@@ -9,7 +9,7 @@ permalink: archive/116395maths/29791finsuppmodules.html
 
 ---
 
-#### [Johan Commelin (Nov 22 2018 at 03:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finsupp%20modules/near/148149210):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 22 2018 at 03:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finsupp%20modules/near/148149210):
 I think the module part of finsupp is broken. For example in
 ```lean
 lemma sum_smul_index [ring β] [add_comm_monoid γ] {g : α →₀ β} {b : β} {h : α → β → γ}

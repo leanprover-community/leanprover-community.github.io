@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/56392Usingrewritetosimplifyaboundvariableexp
 
 ---
 
-#### [Ken Roe (Aug 06 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950190):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 06 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950190):
 ```lean
 theorem fsimp3 { x : ℕ } : x=0 → f x = 1 :=
 begin
@@ -24,25 +24,25 @@ end
 ```
 How do I get the "rewrite fsimp3" tactic to work in the "fsimp4" proof?
 
-#### [Scott Morrison (Aug 06 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950208):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950208):
 Probably use `conv`. Do you want to post an MWE?
 
-#### [Ken Roe (Aug 06 2018 at 02:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950318):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 06 2018 at 02:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950318):
 Go ahead and post
 
-#### [Scott Morrison (Aug 06 2018 at 02:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950372):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950372):
 No, I was suggesting that _you_ post a minimal example that shows the problem --- in particular you haven't included the definition of `f`!
 
-#### [Scott Morrison (Aug 06 2018 at 02:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950374):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950374):
 I think `def f (x : ℕ) := x + 1` probably serves your purpose.
 
-#### [Mario Carneiro (Aug 06 2018 at 02:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950425):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 02:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950425):
 `rw` does not work under a binder. You can either use `simp` instead, or use `conv` or `funext` to enter the binder
 
-#### [Reid Barton (Aug 06 2018 at 02:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950432):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 06 2018 at 02:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950432):
 For conv, see https://github.com/leanprover/mathlib/blob/master/docs/extras/conv.md
 
-#### [Ken Roe (Aug 06 2018 at 02:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950433):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 06 2018 at 02:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950433):
 Oops--Missed that def
 ```lean
 def f (x : ℕ) := x+1
@@ -59,13 +59,13 @@ begin
 end
 ```
 
-#### [Scott Morrison (Aug 06 2018 at 02:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950482):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950482):
 I'm pretty confused how you intend to do anything using `rw fsimp3`, even under the binder.
 
-#### [Scott Morrison (Aug 06 2018 at 02:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950491):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 02:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950491):
 You've only got `e=0`, but now want to say something about all `x`?
 
-#### [Ken Roe (Aug 06 2018 at 02:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950780):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 06 2018 at 02:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950780):
 It looks like conv fails:
 ```lean
 theorem fsimp4 {e : ℕ } : e=0 → (λ x : ℕ, x+(f x)=1+x)=(λ x : ℕ, 1=1) :=
@@ -88,10 +88,10 @@ x : ℕ
 ⊢ x = 0
 ```
 
-#### [Reid Barton (Aug 06 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950786):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Aug 06 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950786):
 That's because, as Scott pointed out, what you're trying to prove is not true
 
-#### [Ken Roe (Aug 06 2018 at 03:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950908):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 06 2018 at 03:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950908):
 Actually, I found the error:
 ```lean
 theorem fsimp4 {e : ℕ } : e=0 → (λ x : ℕ, x+(f x)=1+x) e=(λ x : ℕ, 1=1) e :=
@@ -107,6 +107,6 @@ end
 ```
 However, the error I got is confusing.  The "x=0" got changed to "x" on the screen in the message.
 
-#### [Mario Carneiro (Aug 06 2018 at 03:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130951440):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 03:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130951440):
 this proof attempt is not valid for the same reason as before. You can't try to prove the functions are equal because they aren't. You can only prove that the functions *evaluated at `e`* are equal, so you need to do beta reduction first (using `dsimp`) and then try to prove it
 

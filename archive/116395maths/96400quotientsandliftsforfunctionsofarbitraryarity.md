@@ -9,7 +9,7 @@ permalink: archive/116395maths/96400quotientsandliftsforfunctionsofarbitraryarit
 
 ---
 
-#### [William DeMeo (Dec 02 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150709555):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) William DeMeo (Dec 02 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150709555):
 I'm trying to learn how to implement general quotient structures.  Unfortunately, I've only been able to figure out how to lift unary operations.  How does one lift operations of arbitrary arity?
 
 More specifically, here's what I'm trying to do. 
@@ -58,42 +58,42 @@ Here's the code for the unary case.  There's probably an easier way to do this, 
   quot.lift (πᵤ  f r) (resp_proj_of_compatible_unary f r h) 
 ```
 
-#### [Chris Hughes (Dec 02 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150712210):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 02 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150712210):
 One way of doing this is to put a relation on $$\rho \rightarrow \alpha$$ defined as $$\lambda x y, \forall a : \alpha, r (x (a)) (y( a))$$. I don't think you can define a function of this type `quotient.lift_onₙ (x : Π a : α, quotient (s a)) 
   (f : (Π a : α, β a) → γ) (h : ∀ x₁ x₂ : Π a, β a, 
   (∀ a, x₁ a ≈ x₂ a) → f x₁ = f x₂) : γ` without choice though. There is something in `data.fintype` that let's you do it computably when your indexing type is finite, but the fact that that's only defined on fintypes suggestsit might not be possible on infinite types.
 
-#### [Reid Barton (Dec 02 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150725987):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 02 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150725987):
 @**William DeMeo** You can use `quotient.choice` in mathlib to turn a product of quotients into a quotient of the product, and then `lift` on that to define a function.
 
-#### [Reid Barton (Dec 02 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150725999):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 02 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150725999):
 As far as I know you can't do this computably/without axioms, though it would be possible to implement by extending Lean.
 
-#### [Kevin Buzzard (Dec 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150726048):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150726048):
 By "without axioms" you just mean "without some standard axioms which are inbuilt into Lean but which break computability", right?
 
-#### [Reid Barton (Dec 02 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150726086):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 02 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150726086):
 Yes
 
-#### [William DeMeo (Dec 02 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150727665):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) William DeMeo (Dec 02 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150727665):
 @**Chris Hughes** Great, thanks for the hints!  I will look at data.fintype.  I'd like to be able to do this *computably* at least for finitary operations.  (By the way, just to be sure I understand your suggestions, I think you meant to put $$\rho$$ in place of $$\alpha$$ in the two places where $$\alpha$$ appears... correct?)  Thanks again for your help!
 
-#### [Chris Hughes (Dec 02 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150727708):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 02 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150727708):
 Yes I did mean to put rho instead of alpha
 
-#### [William DeMeo (Dec 02 2018 at 17:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150727794):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) William DeMeo (Dec 02 2018 at 17:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150727794):
 ```quote
 @**William DeMeo** You can use `quotient.choice` in mathlib to turn a product of quotients into a quotient of the product, and then `lift` on that to define a function.
 ```
  Thanks @**Reid Barton** , maybe I'll try that if after I get it to work computably for fintype.
 
-#### [Reid Barton (Dec 02 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150727839):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 02 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150727839):
 https://github.com/leanprover/mathlib/commit/ddbb81389b6d6cd3d0395f474896dcd59e1ed9e4
 
-#### [Reid Barton (Dec 02 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150727841):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 02 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150727841):
 added both `quotient.choice` and a computable `finset` version
 
-#### [William DeMeo (Dec 02 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150729558):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) William DeMeo (Dec 02 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150729558):
 ```quote
 added both `quotient.choice` and a computable `finset` version
 ```

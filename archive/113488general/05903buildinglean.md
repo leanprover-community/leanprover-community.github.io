@@ -9,7 +9,7 @@ permalink: archive/113488general/05903buildinglean.html
 
 ---
 
-#### [Scott Morrison (Apr 04 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/building%20lean/near/124608405):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 04 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/building%20lean/near/124608405):
 I've just updated the OS X command line tools, I get a million warnings when trying to build Lean:
 ````
 /Users/scott/projects/lean/lean/src/util/small_object_allocator.h:42:71: warning: 'operator delete' has a non-throwing exception specification but can still throw [-Wexceptions]
@@ -29,6 +29,6 @@ inline void operator delete[](void *, lean::small_object_allocator &) { lean_unr
  ^ 
 ````
 
-#### [Scott Morrison (Apr 04 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/building%20lean/near/124608407):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 04 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/building%20lean/near/124608407):
 Presumably we want to switch off these warnings?
 

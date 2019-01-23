@@ -9,7 +9,7 @@ permalink: archive/113488general/23087boundedexistsdecidable.html
 
 ---
 
-#### [Kenny Lau (Apr 23 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125567139):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 23 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125567139):
 ```lean
 instance nat.decidable_bexists_lt (n : nat) (P : Π k < n, Prop) :
   ∀ [H : ∀ n h, decidable (P n h)], decidable (∃ n h, P n h) :=
@@ -36,12 +36,12 @@ decidable_of_iff (∃ k h, P ⟨k, h⟩)
 ⟨λ ⟨k, hk1, hk2⟩, ⟨⟨k, hk1⟩, hk2⟩, λ ⟨⟨k, hk1⟩, hk2⟩, ⟨k, hk1, hk2⟩⟩
 ```
 
-#### [Kenny Lau (Apr 23 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125567143):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 23 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125567143):
 @**Mario Carneiro** nao penso que isso e em mathlib agora
 
-#### [Kenny Lau (Apr 23 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125567144):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 23 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125567144):
 would you include them inside?
 
-#### [Chris Hughes (Apr 23 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125569210):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Apr 23 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125569210):
 Not sure, but I think they might be there for generic fintypes.
 

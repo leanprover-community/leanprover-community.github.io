@@ -9,7 +9,7 @@ permalink: archive/116395maths/48283stuckongeneralisingfinsupptomodule.html
 
 ---
 
-#### [Johan Commelin (May 28 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127201824):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127201824):
 I really don't see why I'm getting stuck here. See the two comment lines just after the first `sorry`.
 ```lean
 /- should this be stronger? [module γ β] → module γ (α →₀ β) -/   -- yes!
@@ -34,18 +34,18 @@ def to_module [decidable_eq γ] [ring β] [module β γ] : module β (α →₀ 
   .. finsupp.add_comm_group }
 ```
 
-#### [Johan Commelin (May 28 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202256):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202256):
 Never mind. I just realised that `is_linear_map` is not a class. Not going down the rabbit hole of modules.
 
-#### [Kenny Lau (May 28 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202261):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 28 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202261):
 `linear_map` is
 
-#### [Johan Commelin (May 28 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202328):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202328):
 And where does that beast live?
 
-#### [Johan Commelin (May 28 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202329):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202329):
 not in algebra/module
 
-#### [Johan Commelin (May 28 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202473):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 28 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127202473):
 Ok, I found it... thanks!
 

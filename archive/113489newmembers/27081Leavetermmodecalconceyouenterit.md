@@ -9,19 +9,19 @@ permalink: archive/113489newmembers/27081Leavetermmodecalconceyouenterit.html
 
 ---
 
-#### [Abhimanyu Pallavi Sudhir (Oct 11 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135604247):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 11 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135604247):
 Part of my proof involved calc, but now I want to return to tactic mode to complete my proof. How do I do this?
 
-#### [Abhimanyu Pallavi Sudhir (Oct 11 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135604263):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 11 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135604263):
 The way I've done this in the past is to do the term mode in a separate lemma.
 
-#### [Andrew Ashworth (Oct 11 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135604665):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Oct 11 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135604665):
 just type `begin` `end` again
 
-#### [Mario Carneiro (Oct 11 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135604690):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 11 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135604690):
 depends on how you have set it up. You could have the calc block inside tactic mode, or you could have a tactic block in one of the steps of a calc block
 
-#### [Kevin Buzzard (Oct 11 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135605855):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 11 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135605855):
 ```lean
 example : 2 + 2 = 5 :=
 begin
@@ -38,7 +38,7 @@ end
 
 @**Abhimanyu Pallavi Sudhir**  -- post a MWE if what I said doesn't help.
 
-#### [Abhimanyu Pallavi Sudhir (Oct 11 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135607561):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 11 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135607561):
 Here's the code:
 ```lean
 import tactic.norm_num
@@ -73,12 +73,12 @@ begin
     end
 ```
 
-#### [Abhimanyu Pallavi Sudhir (Oct 11 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135607593):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 11 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135607593):
 I did what you said, but that doesn't work.
 
-#### [Rob Lewis (Oct 11 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135607681):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 11 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135607681):
 You need a comma at the end of the `calc`.
 
-#### [Abhimanyu Pallavi Sudhir (Oct 11 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135607719):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Oct 11 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135607719):
 Oh... thanks. Yep, now it's working.
 

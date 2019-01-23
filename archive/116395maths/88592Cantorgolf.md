@@ -9,7 +9,7 @@ permalink: archive/116395maths/88592Cantorgolf.html
 
 ---
 
-#### [Kevin Buzzard (Dec 12 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151537525):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 12 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151537525):
 1) Is there a very short proof of this in Lean / mathlib?
 
 ```lean
@@ -24,10 +24,10 @@ let ⟨D, e⟩ := h (λ a, ¬ f a a) in
 (iff_not_self (f D D)).1 $ iff_of_eq (congr_fun e D)
 ```
 
-#### [Rob Lewis (Dec 12 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151537662):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Dec 12 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151537662):
 For 1), `by tauto!`It shouldn't need classical logic but `by tauto` fails.
 
-#### [Kevin Buzzard (Dec 12 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151537663):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 12 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151537663):
 My answer to (1):
 
 ```lean
@@ -41,10 +41,10 @@ end
 
 I'm sure something much better will exist.
 
-#### [Kevin Buzzard (Dec 12 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151537700):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 12 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151537700):
 ...and indeed it existed before I even posted! Many thanks Rob!
 
-#### [Kevin Buzzard (Dec 12 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538379):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 12 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538379):
 Why my code no work?
 
 ```lean
@@ -65,10 +65,10 @@ begin
 end
 ```
 
-#### [Kevin Buzzard (Dec 12 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538702):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 12 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538702):
 Changing `tauto!` to `sorry` fixes the error. Is it a combination of the equation compiler and the tactic? Why is this happening?
 
-#### [Kevin Buzzard (Dec 12 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538742):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 12 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538742):
 ```lean
 import tactic.interactive
 
@@ -89,22 +89,22 @@ end
 
 Also doesn't work.
 
-#### [Reid Barton (Dec 12 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538747):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 12 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538747):
 For some reason using lambda with pattern matching like this makes a hypothesis (I think it's called `_fun_match`) which I guess represents some kind of recursion
 
-#### [Reid Barton (Dec 12 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538832):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 12 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538832):
 if you use a tactic which tries to apply everything like `tauto`, it'll try to apply `_fun_match` and then you get this error
 
-#### [Reid Barton (Dec 12 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538880):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 12 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538880):
 Same with let but I think the hypothesis name is different
 
-#### [Reid Barton (Dec 12 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538901):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 12 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151538901):
 You could use `begin rintros \<Hi,Hs\>, cases ...`
 
-#### [Kevin Buzzard (Dec 12 2018 at 18:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151541033):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 12 2018 at 18:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151541033):
 I was trying to get out of tactic mode, on this occasion.
 
-#### [Kevin Buzzard (Dec 12 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151541245):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 12 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151541245):
 Here's the game. I have a version of Cantor's theorem in Lean, spelt out so that mathematicians with epsilon Lean experience can still understand it:
 
 ```lean
@@ -157,6 +157,6 @@ let ⟨D, e⟩ := h (λ a, ¬ f a a) in
 
 and I was attempting to expand this into a tactic mode proof. I could just use rcases, as you say.
 
-#### [Rob Lewis (Dec 12 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151551702):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Dec 12 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151551702):
 You can use `simpa using Hlogical_nonsense` to avoid the weird `tauto` behavior, but I guess it doesn't look quite as good when you have to name the hypothesis.
 

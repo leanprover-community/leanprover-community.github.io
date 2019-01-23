@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/35833referencinginhabitedinstances.html
 
 ---
 
-#### [Ken Roe (Aug 11 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/referencing%20inhabited%20instances/near/131964186):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Aug 11 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/referencing%20inhabited%20instances/near/131964186):
 If I declare values as inhabited instances, how do I reference the instances?
 ```lean
 def cell := option ℕ
@@ -28,7 +28,7 @@ def empty_cell : option ℕ := cell.inhabited
 ```
 The last three "def" constructs don't seem to work.
 
-#### [Simon Hudon (Aug 11 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/referencing%20inhabited%20instances/near/131964248):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 11 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/referencing%20inhabited%20instances/near/131964248):
 If you write `#print inhabited` you should see the following appear:
 
 ```lean

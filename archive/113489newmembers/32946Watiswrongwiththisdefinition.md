@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/32946Watiswrongwiththisdefinition.html
 
 ---
 
-#### [Ken Roe (Jul 24 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Wat%20is%20wrong%20with%20this%20definition%3F/near/130214027):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 24 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Wat%20is%20wrong%20with%20this%20definition%3F/near/130214027):
 ```lean
 inductive evv : ℕ -> Prop
 | Base := (evv 0)
@@ -20,7 +20,7 @@ gives the following error:
 invalid return type for 'evv.Base'
 ```
 
-#### [Simon Hudon (Jul 24 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Wat%20is%20wrong%20with%20this%20definition%3F/near/130214285):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jul 24 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Wat%20is%20wrong%20with%20this%20definition%3F/near/130214285):
 Try:
 
 ```lean

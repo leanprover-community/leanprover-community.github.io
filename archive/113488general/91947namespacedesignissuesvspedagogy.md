@@ -9,7 +9,7 @@ permalink: archive/113488general/91947namespacedesignissuesvspedagogy.html
 
 ---
 
-#### [Kevin Sullivan (Aug 03 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130837483):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Aug 03 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130837483):
 The context for the following is an effort to use Lean in teaching a lower-level undergraduate course. Students are easily confused. I'm trying to use namespaces in the usual way so that we can recapitulate the definitions of built-in types, such as bool, without getting name conflicts. It "works", but in the course of figuring out the details, I noted some inconsistencies that I myself found confusing and that students are likely to find confusing, too. I comment the code. The key lines are marked AAA through EEE.
 
 In the outer environment I define a type, bar, with constructors p and q, and open its namespace. This models the built-in type, bool, the namespace of which is open by default. Then I define a namespace, foo. Within foo, I define bar again, in the same way. Everything else occurs within the foo namespace.
@@ -62,7 +62,7 @@ def id(a: bar): bar := a
 
 end foo
 
-#### [Johan Commelin (Aug 03 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130837541):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 03 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130837541):
 Kevin, you can use three backticks around your code to create a codeblock. If you write "lean" after the first set of backticks you get syntax highlighting! Like so
 ```
 ```lean
@@ -71,7 +71,7 @@ Kevin, you can use three backticks around your code to create a codeblock. If yo
 ````
 ```
 
-#### [Kevin Sullivan (Aug 03 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130837550):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Aug 03 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130837550):
 ```quote
 The context for the following is an effort to use Lean in teaching a lower-level undergraduate course. Students are easily confused. I'm trying to use namespaces in the usual way so that we can recapitulate the definitions of built-in types, such as bool, without getting name conflicts. It "works", but in the course of figuring out the details, I noted some inconsistencies that I myself found confusing and that students are likely to find confusing, too. I comment the code. The key lines are marked AAA through EEE.
 
@@ -128,7 +128,7 @@ end foo
 
 Ok, I guess in case #2, type inference is resolving the type of p. What about the first inconsistency?
 
-#### [Kevin Sullivan (Aug 03 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130837633):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Aug 03 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130837633):
 ```quote
 Kevin, you can use three backticks around your code to create a codeblock. If you write "lean" after the first set of backticks you get syntax highlighting! Like so
 ```
@@ -171,16 +171,16 @@ def id(a: bar): bar := a
 
 end foo
 
-#### [Simon Hudon (Aug 03 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130839743):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 03 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130839743):
 I think the take away from AAA through CCC is that when you use `open` you must fully qualify the name that you use.
 
-#### [Simon Hudon (Aug 03 2018 at 15:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130840086):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 03 2018 at 15:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130840086):
 This might provide some more helpful details: https://leanprover.github.io/reference/other_commands.html#namespaces
 
-#### [Kevin Buzzard (Aug 03 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130850440):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 03 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130850440):
 I completely agree that this is confusing; I ran into this myself when trying to teach mathematicians how to build `nat` with its addition etc. I tried to do everything within a namespace but could never get everything to be as straightforward as I wanted. My solution in the end was to simply give up trying to build `my_namespace.nat` and as you can see at https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/ I just called them `xnat` instead (x for xena). I was even super-paranoid and made them in a `xena` namespace. Now the trick is to make sure nobody opens `nat` :-) and then I found that my problems had gone away. Within the `xena` namespace I could define things like `add_assoc` and because of this pile of preventative measures I could be fairly confident that nobody would be trying to use the default `add_assoc` later on when proving `add_comm` or whatever for `xnat`. You might want to call my solution a workaround, but I took the practical viewpoint that it wasn't my job to teach people about namespaces -- they were mathematicians. You might be in a different situation of course.
 
-#### [Kevin Buzzard (Aug 03 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130850682):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 03 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20design%20issues%20vs.%20pedagogy/near/130850682):
 PS if you start with
 ```lean
 inductive bar : Type 7

@@ -9,7 +9,7 @@ permalink: archive/113488general/20107equalityfromscratch.html
 
 ---
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035424):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035424):
 While looking at Kevin's [great blog post](https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/) about unsigned integers from scratch I thought to push myself a little bit and I've tried to do them *even more* from scratch, by giving up the existing `eq` or `=`.
 
 So let's say we have an inductive `xnat` and an inductive xnat `equality` like this:
@@ -36,44 +36,44 @@ And now, the strangest thing happens, the placeholder no longer expects a proof 
 
 But why does it typecheck? Why suddently a proof of `equality a a` is good enough as a proof of `equality b a`. Is there something special in the type-system that makes it work?
 
-#### [Mario Carneiro (Aug 07 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035618):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035618):
 Look at the type of `equality.rec_on`.
 ```lean
 protected def equality.rec_on : Π {a : xnat} {C : xnat → Sort l} {a_1 : xnat}, equality a a_1 → C a → C a_1
 ```
 It says that if you want to prove a property `C` of `a_1 : xnat` given `equality a a_1`, it suffices to prove `C a`. In this case we know `equality a b`, so we need a property `C` depending on `b` such that `C a` is easy. In this case we take `\lam b, equality b a` as our `C`, so `C a` is `equality a a` which we prove by `refl`, and `C b` is `equality b a` which is what we wanted to show.
 
-#### [Mario Carneiro (Aug 07 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035869):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035869):
 You should be sure to look at the definition of `equality.symm` with `pp.all true`, so you can see how lean filled in the "motive" `C` in that rec_on application
 
-#### [Mario Carneiro (Aug 07 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035878):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035878):
 or use `@equality.rec_on` and fill in all the fields yourself
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036133):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036133):
 Thanks Mario, this is making it less magical. I'm on your most recent suggestion.
 
-#### [Kevin Buzzard (Aug 07 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036339):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 07 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036339):
 Kenny Lau once said to me "Lean does not do magic", and at that time I thought that lots of things Lean did (simp, type class inference) were magic. Kenny's comment spurred me on to trying to figure out how everything was working; the point is that Lean *never* does magic, and in any given case you can simply look at what it did and how it did it. Figuring out how to do that really helped me to learn Lean better.
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036344):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036344):
 Ah, of course, it makes sense. `equality a b` is the same as `(equality a) b`. So our `C` becomes `equality a`. Thanks Mario!
 
-#### [Mario Carneiro (Aug 07 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036376):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036376):
 ah, be careful: `equality a` would be a perfect motive to prove `equality a b -> equality a b`, but this is symmetry, so there is a twist
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036388):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036388):
 So the solution is simply `@equality.rec_on a (equality a) b eq1 (equality.refl a)`, and that makes sense.
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036435):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036435):
 Is `C` the motif?
 
-#### [Mario Carneiro (Aug 07 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036451):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036451):
 yes, that's the usual terminology
 
-#### [Mario Carneiro (Aug 07 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036476):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036476):
 sometimes you get an error message talking about a motive, that's what it is referring to
 
-#### [Mario Carneiro (Aug 07 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036675):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036675):
 If you use the "flipped" motive `λ b, equality b a`, you have:
 ```
 #check λ a b eq1, @equality.rec_on a (λ b, equality b a) b eq1 (equality.refl a)
@@ -81,40 +81,40 @@ If you use the "flipped" motive `λ b, equality b a`, you have:
 ```
 and notice that the conclusion there, `(λ (b : xnat), equality b a) b`, beta reduces to `equality b a` which is the desired symmetrized equality
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037522):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037522):
 Yes you're right, I didn't notice this wasn't typechecking. This lambda abstraction is a really nice trick, I don't think I would have come up with this myself.
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037601):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037601):
 Anyway, thank you Mario, I think this is now really clear.
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037619):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037619):
 I'll try to work through transitivity in a similar manner
 
-#### [Mario Carneiro (Aug 07 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037620):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037620):
 the really interesting thing is that lean will automatically do that lambda abstraction trick
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037733):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037733):
 Now, @**Kevin Buzzard**  if this is not magic I don't know what is.
 
-#### [Kevin Buzzard (Aug 07 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037744):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 07 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037744):
 I'm not sure it's magic
 
-#### [Kevin Buzzard (Aug 07 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037799):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 07 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037799):
 Is it just matching types up?
 
-#### [Kevin Buzzard (Aug 07 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037814):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 07 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037814):
 I'm not quite following, I'm trying to get on a bus in Majorca
 
-#### [Mario Carneiro (Aug 07 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037826):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037826):
 the algorithm is very simple: the goal says `equality b a`, and we just replace every `b` with `a`, then we look at what we changed and replace that with a variable, let's call it `x`. So the motive is `λ x, equality x a`
 
-#### [Mario Carneiro (Aug 07 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037911):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037911):
 this produces a lambda term such that replacing `x` with `b` gives us our original goal, and replacing `x` with `a` gives us our new goal which should be easier, in this case `equality a a`
 
-#### [Mario Carneiro (Aug 07 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037993):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 07 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037993):
 you should try using this algorithm in the proof of transitivity to work out the right motive, then see whether you got it right by letting lean do it for you
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131038529):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131038529):
 I've actually just done it in my head. It worked:
 
 ```
@@ -134,12 +134,12 @@ definition equality.trans: Π (a b c : xnat), Π eq1: (equality a b), Π eq2 : (
 
 I'm sure I'll learn the algorithm one day, but I think I'll go and buy some beef now. Cooking sous vide steaks for friends this evening.
 
-#### [Adam Kurkiewicz (Aug 07 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131038727):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Adam Kurkiewicz (Aug 07 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131038727):
 Thank you Mario, this was really helpful!
 
-#### [Kevin Buzzard (Aug 07 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131041113):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 07 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131041113):
 Warning: sometimes Lean can't generate the right motive. CS people start going on about higher order unification being undecidable when this sort of thing comes up. The problem is that if Lean can figure out that `C b` is supposed to be `f a b c b = 0` then it can't work out if `C x` is supposed to be `f a x c x = 0` or `f a b c x = 0` or ... etc.  So don't expect Lean to do miracles. See https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html#elaboration-hints
 
-#### [Kevin Buzzard (Aug 07 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131041181):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 07 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131041181):
 Remember -- Lean does not do magic. Part of the art is working out when you're asking Lean to do magic :-)
 

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/23412Derivinghypothesisfromifstatements.html
 
 ---
 
-#### [Tobias Grosser (Oct 02 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056007):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056007):
 Hi, I am currently cleaning up my gaussian elimination proof. At one point I defined the following functions:
 ```lean
 def fin_first {n m} (i : fin (n + m)) {h: i.val < n}: fin (n) :=
@@ -43,13 +43,13 @@ def block_mx {m_down m_up n_left n_right: nat} :
 
 Whenever I apply fin_first and fin_second, I would like to make the hypothesis "h" available based on the information in the if-condition.
 
-#### [Tobias Grosser (Oct 02 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056162):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056162):
 I feel this is a super trivial question, but I did not find a good example googling for it. Can somebody throw me the right keywords / reference?
 
-#### [Rob Lewis (Oct 02 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056304):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056304):
 If you write `if h :  j.val < n_left then _ else _` you'll get local hypotheses with the right types in the placeholders.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056328):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056328):
 ```lean
 test.lean:25:29: error
 
@@ -72,43 +72,43 @@ h : j.val < n_left
 ⊢ j.val < n_left
 ```
 
-#### [Tobias Grosser (Oct 02 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056374):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056374):
 I seem to be so close.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056407):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056407):
 I would hope lean picks this from the context. But it does not seem to do so.
 
-#### [Patrick Massot (Oct 02 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056461):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056461):
 https://leanprover.github.io/theorem_proving_in_lean/type_classes.html?highlight=dite#decidable-propositions
 
-#### [Rob Lewis (Oct 02 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056479):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056479):
 You want Lean to fill in those arguments automatically when it finds them in the local context?
 
-#### [Rob Lewis (Oct 02 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056539):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056539):
 You can write `def fin_first {n m} (i : fin (n + m)) {h: i.val < n . assumption}: fin (n)`
 
-#### [Rob Lewis (Oct 02 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056555):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056555):
 (I think that's the right syntax, don't have Lean open right this second to check.)
 
-#### [Patrick Massot (Oct 02 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056569):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056569):
 binders in `def fin_first {n m} (i : fin (n + m)) {h: i.val < n}: fin (n)` are a bit strange, how `h` could be inferred from the explicit arguments?
 
-#### [Tobias Grosser (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056585):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056585):
 I have no idea what I am doing here.
 
-#### [Patrick Massot (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056588):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056588):
 Of course Rob's solution should work in your use case
 
-#### [Tobias Grosser (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056601):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056601):
 I hoped "{" and "}" would create a "free" argument
 
-#### [Tobias Grosser (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056610):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056610):
 Which would be filled in if available in the local context.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056664):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056664):
 Rob suggested to use "assumption", right?
 
-#### [Tobias Grosser (Oct 02 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056695):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056695):
 This gives:
 ```lean
 test.lean:7:52: error
@@ -119,16 +119,16 @@ test.lean:7:55: error
 command expected
 ```
 
-#### [Tobias Grosser (Oct 02 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056704):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056704):
 Will  ook for assumption in the lean doc
 
-#### [Rob Lewis (Oct 02 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056711):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056711):
 { } creates implicit arguments. They're arguments that can be filled in completely from other arguments, basically. Lean won't automatically search your local context for matches, because (1) there could be tons of stuff in the context, and (2) there could be multiple matches there.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056784):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056784):
 I see. How do I tell lean which matches I want? Should I use ! to make the parameters explicit and then provide the ones needed explicitly?
 
-#### [Rob Lewis (Oct 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056795):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056795):
 Here's the correct syntax for using auto parameters like my suggestion:
 ```lean
 def f (n : ℕ) (h : n > 1 . tactic.assumption) : true := trivial
@@ -137,76 +137,76 @@ example (n : ℕ) : true :=
 if h : n > 1 then f n else trivial
 ```
 
-#### [Rob Lewis (Oct 02 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056932):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056932):
 With auto parameters, you give a tactic that will be executed to fill in that argument. So using `tactic.assumption` with an auto param will try to find something in the context that will work.
 
-#### [Rob Lewis (Oct 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057019):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057019):
 ```quote
 I see. How do I tell lean which matches I want? Should I use ! to make the parameters explicit and then provide the ones needed explicitly?
 ```
 I'm not sure exactly what you mean. It's usually clear in a signature which arguments are inferrable from others, assuming the declaration is fully applied. The custom is to make as much implicit as you can.
 
-#### [Rob Lewis (Oct 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057088):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057088):
 There's no ! syntax anymore, that was only in Lean 2. But you can use placeholders `_` to ask the elaborator to fill in explicit arguments.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057250):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057250):
 Great.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057251):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057251):
 I got this working.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057301):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057301):
 I previously used "{}" around the assumption tactic, but I need to use "()"
 
-#### [Rob Lewis (Oct 02 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057335):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057335):
 Great! Sorry, I should have checked before I wrote it with {}, heh.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057408):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057408):
 These seem to be really basic questions, but I have now only a last issue.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057411):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057411):
 h_j : ¬j.val < n_left
 ⊢ j.val ≥ n_left
 
-#### [Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057416):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057416):
 Is what I see in the else branch.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057421):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057421):
 This seems to be an obvious rewrite.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057431):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057431):
 Unfortunately, I don't understand where I would even insert my tactic to do the rewrite.
 
-#### [Rob Lewis (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057433):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057433):
 `le_of_not_gt`
 
-#### [Patrick Massot (Oct 02 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057443):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057443):
 No you need a lemma here
 
-#### [Patrick Massot (Oct 02 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057446):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057446):
 Yes, that lemma
 
-#### [Rob Lewis (Oct 02 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057473):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057473):
 Are you using the auto param trick? Because I see that this might complicate things a bit.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057563):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057563):
 I currently write "up_right (fin_first i) (fin_second j (begin rw of_not_gt at h_j end))"
 
-#### [Tobias Grosser (Oct 02 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057567):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057567):
 ```lean
 up_right (fin_first i) (fin_second j (begin rw of_not_gt at h_j end))
 ```
 
-#### [Tobias Grosser (Oct 02 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057621):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057621):
 Which seems to not type-check even syntactically.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057635):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057635):
 I feel I mix proofs and normal programs beyond what is reasonable.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057762):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057762):
 Also, as a lemma I seem to need "ge_of_not_lt", but I can fix this.
 
-#### [Patrick Massot (Oct 02 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057808):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057808):
 ```lean
 meta def tobias : tactic unit :=
 `[apply le_of_not_gt,  assumption] <|>  `[assumption]
@@ -220,58 +220,58 @@ example (n : ℕ) : true :=
 if h :  n ≤ 1 then f n else trivial
 ```
 
-#### [Rob Lewis (Oct 02 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057878):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057878):
 Haha, you beat me to it, I just wrote almost exactly the same thing.
 
-#### [Patrick Massot (Oct 02 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057900):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057900):
 And my daughter tried to help you
 
-#### [Tobias Grosser (Oct 02 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057932):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057932):
 This is very much appreciated!
 
-#### [Tobias Grosser (Oct 02 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057944):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057944):
 The full family working on lean!
 
-#### [Tobias Grosser (Oct 02 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057963):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057963):
 What I understand is that I can only provide tactics at function definition, not at the call-site.
 
-#### [Rob Lewis (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058030):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058030):
 Oh, you can certainly provide them at the call site too.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058039):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058039):
 In this case, I could just change the hypothesis of fin_second to what I want.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058056):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058056):
 I tried to avoid this, as I felt the hypothesis that I stated is more canonical.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058066):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058066):
 Cool so how would I add them to the call site?
 
-#### [Patrick Massot (Oct 02 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058097):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058097):
 I meant my daughter tried to help Rob winning the race
 
-#### [Rob Lewis (Oct 02 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058115):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058115):
 If you make the inequality hypotheses to `fin_first` and `fin_second` explicit arguments, using `(h : i.val < n)`, then you can apply it using `fin_first i (by assumption)`.
 
-#### [Rob Lewis (Oct 02 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058182):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058182):
 Or `by tobias` in this case.
 
-#### [Patrick Massot (Oct 02 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058314):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058314):
 More seriously, the basics of implicit arguments goes like this: say you have a lemma (or function) with arguments `(f : a -> b) (hf : continuous f)`. Then having `hf` forces the value of `f`, so you can mark `f` as implicit by changing the declaration to `{f : a -> b} (hf : continuous f)`. This was you can provide only `hf` when applying the lemma and Lean will figure out `f`. In your case Lean had no hope to figure out `h` from other arguments so you need to keep it explicit, or use auto-param like in Rob's solution.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058479):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058479):
 I see.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058485):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058485):
 Got it.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058505):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058505):
 I can now successfully forward the hypothesis.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058510):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058510):
 Thanks again, I learned sth new.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058568):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058568):
 For completeness, this is how my code looks like:
 
 ```lean
@@ -310,39 +310,39 @@ def block_mx {m_down m_up n_left n_right: nat} :
       down_right (fin_second i (by apply le_of_not_gt; assumption)) (fin_second j (by apply le_of_not_gt; assumption))
 ```
 
-#### [Rob Lewis (Oct 02 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058597):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058597):
 It's not that common to use auto params, but this is actually a pretty good application. `linarith` would be a reasonable auto param too if it handled negations of inequalities.
 
-#### [Patrick Massot (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058621):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058621):
 I can feel the approximate SMT solver temptation here
 
-#### [Tobias Grosser (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058629):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058629):
 :D
 
-#### [Patrick Massot (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058649):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058649):
 https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/linarith.20.26.20nat/near/134919571
 
-#### [Tobias Grosser (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058650):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058650):
 I certainly would like to explore more powerful linarithmetic tactics here. But this is a separate discussion.
 
-#### [Tobias Grosser (Oct 02 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058720):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 02 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058720):
 I know, we have a solver for full Presburger arithmetic based on dual simplex. Eventually, this is what I would like to understand if we can make it work in lean.
 
-#### [Rob Lewis (Oct 02 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135061274):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 02 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135061274):
 ```quote
 I can feel the approximate SMT solver temptation here
 ```
 https://github.com/leanprover/mathlib/pull/384
 
-#### [Tobias Grosser (Oct 03 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135087439):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 03 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135087439):
 Amazing. This got even merged already. Will try to use it.
 
-#### [Tobias Grosser (Oct 03 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135087599):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 03 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135087599):
 I fact, i tried to use it already and it did not work. Thought I need to dig deeper, but then I found this in the tactic description:  "In particular, it will not work on nat."
 
-#### [Tobias Grosser (Oct 03 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135087622):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Tobias Grosser (Oct 03 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135087622):
 Seems that's a problem in my case. Any reason why it would not work?
 
-#### [Rob Lewis (Oct 03 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135089959):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Oct 03 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135089959):
 Oops, I guess the description is outdated. It will work on `nat`, but it isn't complete (it's just doing Fourier Motzkin elimination). It also doesn't know about nat subtraction, which could be a problem in your case.
 

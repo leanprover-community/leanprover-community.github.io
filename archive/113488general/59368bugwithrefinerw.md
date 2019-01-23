@@ -9,7 +9,7 @@ permalink: archive/113488general/59368bugwithrefinerw.html
 
 ---
 
-#### [Kenny Lau (Dec 18 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20refine%20%2B%20rw/near/152093977):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 18 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20refine%20%2B%20rw/near/152093977):
 ```lean
 example (H : (0 = 0 → 0 = 1) → true) : true :=
 begin
@@ -30,7 +30,7 @@ begin
 end
 ```
 
-#### [Kenny Lau (Dec 18 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20refine%20%2B%20rw/near/152094049):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Dec 18 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20refine%20%2B%20rw/near/152094049):
 and also workaround:
 ```lean
 example (H : (0 = 0 → 0 = 1) → true) : true :=

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/53381sameoldtypeclassissueIalwayshave.html
 
 ---
 
-#### [Kevin Buzzard (Oct 08 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401453):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401453):
 I really should write these down at some point; I'm always having to ask. I still can't quite control `haveI` `exactI` etc.
 
 I saw in the code of one of my first year students the comment `what's with rw mul_self_iff_eq_one? can't it be used to prove 0 = 1?`. I thought this was a great comment. I encouraged the student to formalise their question in Lean. And then I tried to knock this off myself.
@@ -27,16 +27,16 @@ lemma lean_is_broken : (∀ {α : Type*} [_inst_1 : group α] {a : α}, a * a = 
 
 damnit is there a trick to get past type class inference issues? It would be nice if students could be taught to answer their own questions like this.
 
-#### [Mario Carneiro (Oct 08 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401601):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401601):
 put `by exactI` between the group instance and the point of use
 
-#### [Gabriel Ebner (Oct 08 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401606):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Oct 08 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401606):
 The only typeclass instances that are used by the elaborator are the ones before the colon:
 ```lean
 lemma l_i_b [this_gets_used] : ∀ [this_not], foo := sorry
 ```
 
-#### [Kevin Buzzard (Oct 08 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401729):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401729):
 ```quote
 put `by exactI` between the group instance and the point of use
 ```
@@ -55,20 +55,20 @@ a : α
 ⊢ Sort ?
 ```
 
-#### [Kevin Buzzard (Oct 08 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401774):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401774):
 I know they can just create the term with `let X := mul_self_iff_eq_one` in a tactic mode proof -- I was just trying to explictly put it into the question.
 
-#### [Mario Carneiro (Oct 08 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401896):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 08 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401896):
 this works fine for me:
 ```
 lemma lean_is_broken : (∀ {α : Type*} [_inst_1 : group α] {a : α}, by exactI a * a = a ↔ a = 1)
                           → (0 : ℕ) = 1 := sorry
 ```
 
-#### [Kevin Buzzard (Oct 08 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401899):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401899):
 Maybe that's actually a better answer because then they can see the term and not the type.
 
-#### [Kevin Buzzard (Oct 08 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401903):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401903):
 ```lean
 lemma lean_is_broken : (0 : ℝ) = 1 :=
 begin
@@ -77,19 +77,19 @@ begin
 end
 ```
 
-#### [Kevin Buzzard (Oct 08 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135402028):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135402028):
 ```lean
 lemma lean_is_broken' : (∀ {α : Type*} [group α] {a : α}, by exactI a * a = a ↔ a = 1)
                           → (0 : ℝ) = 1 := sorry
 ```
 Yup you're right, I don't know what I did :-/
 
-#### [Kevin Buzzard (Oct 08 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135402105):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135402105):
 @**Abhimanyu Pallavi Sudhir** There are some ideas about how to formalise your question.
 
-#### [Kevin Buzzard (Oct 08 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135402292):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135402292):
 The best questions on this forum are ones where people actually post MWEs -- completely working Lean code which people can just cut and paste -- and then ask a question about it. But when I began to learn to formulate my basic questions in this way, I realised that I was starting to be able to answer them myself without having to ask at all.
 
-#### [Kevin Buzzard (Oct 08 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135402362):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 08 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135402362):
 The biggest wins are when, in the process of formalising it, you remember that what you're stuck on is actually something you already asked about earlier :-) Then you go and search the forums and read what was said at the time.
 

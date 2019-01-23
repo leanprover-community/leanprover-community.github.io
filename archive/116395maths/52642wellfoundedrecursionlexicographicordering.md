@@ -9,7 +9,7 @@ permalink: archive/116395maths/52642wellfoundedrecursionlexicographicordering.ht
 
 ---
 
-#### [Jack Crawford (Sep 14 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941390):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Sep 14 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941390):
 Hi, I have a pleb question about how Lean infers whether recursion is well-founded or not.
 I'm writing a recursive function whose first two arguments are of type `fin m` and `fin n`,  and my algorithm:
  1) always decreases the size of my `fin n`
@@ -19,13 +19,13 @@ However, when I simply change the order that my arguments appear from `fin m -> 
 
 It seems that Lean is only trying to show well-foundedness from my first argument and can't work out that there should be well-foundedness on the lexicographic order of my `fin m` and `fin n`, or that just my `fin n` alone should suffice. Everything's sort of "doing what I want it to" except that I have to write the arguments to my function in an unconventional way. How can I tell Lean to just look for well-foundedness on my second argument (the `fin n`), or on the lexicographic pair of `fin m` and `fin n`, and not just purely on my `fin m`? Thanks!
 
-#### [Kenny Lau (Sep 14 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941463):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941463):
 MWE
 
-#### [Kevin Buzzard (Sep 14 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941803):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 14 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941803):
 By default Lean uses lexicographic ordering when trying to prove recursive functions are well-defined, so definitely the input order matters. The notes at https://github.com/leanprover/mathlib/blob/master/docs/extras/well_founded_recursion.md probably tell you all you need to know
 
-#### [Jack Crawford (Sep 14 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941855):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Sep 14 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941855):
 @**Kenny Lau** 
 here's an MWE, compare the pair:
 ``` 
@@ -50,12 +50,12 @@ begin
 end
 ```
 
-#### [Kevin Buzzard (Sep 14 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941878):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 14 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941878):
 the linked notes explain how to change the well-order on your input.
 
-#### [Jack Crawford (Sep 14 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941927):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Sep 14 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941927):
 @**Kevin Buzzard**  ah oops I didn't see that before I responded to Kenny, thanks, I'll have a look!
 
-#### [Kenny Lau (Sep 14 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941991):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 14 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941991):
 well I mean, what are you trying to do, instead of MWE of the error
 

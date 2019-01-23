@@ -9,7 +9,7 @@ permalink: archive/116395maths/27561Recursorsfordegreeinequalities.html
 
 ---
 
-#### [Chris Hughes (Nov 19 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147942053):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 19 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147942053):
 Today I wrote two proofs of the following lemma, about nonconstant polynomials. They illustrate a use of recursive propositions. For the second proof, I defined `nonconstant` as a recursive Proposition, instead of `degree p > 0`, and it was a much easier proof that didn't have any of the faffing around with degree. Is this sort of stuff worth having in the library. I'm experimenting with finding a useful recursor for `degree p < degree q`.
 ```lean
 lemma polynomial_tendsto_infinity : ∀ {p : polynomial ℂ}, 0 < degree p →
@@ -110,24 +110,24 @@ nonconstant.rec_on (nonconstant_of_degree_pos h)
         (le_trans (le_abs_self _) (complex.abs_abs_sub_le_abs_sub _ _))⟩)
 ```
 
-#### [Johan Commelin (Nov 19 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147946548):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Nov 19 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147946548):
 Hey, that's a smart approach I think. I think the lemma should be `nonconstant_iff_degree_pos`, so that you can go back and forth.
 
-#### [Mario Carneiro (Nov 19 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147946661):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 19 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147946661):
 another way to express this is to write a "recursor" for `degree p > 0` along these lines
 
-#### [Mario Carneiro (Nov 19 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147946725):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 19 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147946725):
 that recursor is equivalent to the theorem `nonconstant_of_degree_pos` but doesn't require defining a new predicate
 
-#### [Moses Schönfinkel (Nov 19 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147951339):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Nov 19 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147951339):
 I love the way you avoid the clunky `using_well_founded` construct :).
 
-#### [Kevin Buzzard (Nov 19 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147952836):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 19 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147952836):
 Vaguely related: when I was working on Hilbert Basis (before module refactoring), I found using degree very hard; there were often case splits. `deg(X)=1` was only true if the ring wasn't the zero ring, `deg(f) * c = deg(f)` was only true when c*leading_coeff(f) was non-zero, `deg(f+g)` was a mass of case splits, and so on. It was only later on that I realised that the natural condition was "deg <= n" not "deg = n"; for "deg <= n" (which produces a sub-R-module of R[X]) all the lemmas are very natural. "Non-constant" is the negation of "deg <= 0" but I don't know if this has anything to do with the obstructions that Chris was running into.
 
-#### [Patrick Massot (Nov 19 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147953494):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 19 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147953494):
 I'm sure it would be good to have nicer recursors for polynomial but, for the purpose of this properness proof, what is missing in order to write an efficient proof is the big O library (I should resume work on that). As far as I understand, the best formal proofs are sequences of lemmas with three lines long proofs. Here there is a very clear path where you prove $$aX^ n$$ is $$O(X^n)$$ then $$X^n = o(X^k)$$ if $$k$$ bigger than $$n$$, then  $$O(f) + O(f) = O(f)$$ (this one is already in our WIP I think!) then $$P = O(X^{deg P})$$, then $$f$$ proper implies $$f + o(f)$$ proper and then $X^n$ is proper for positive $$n$$. Maybe I missed one or two lemmas, but you get the idea. This will be a string of reusable 2 lines long proofs lemmas, and will match the paper and pen proof.
 
-#### [Patrick Massot (Nov 19 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147953617):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 19 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147953617):
 Also the story about the projective line is a bit misleading here, since we don't need any structure on $$P^1$$ in this discussion, except maybe topological. We need filters stuff for sure, maybe also Alexandrov compactification if we want
 

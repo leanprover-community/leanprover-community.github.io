@@ -9,16 +9,16 @@ permalink: archive/113488general/32921moreproblemswithcoercions.html
 
 ---
 
-#### [Scott Morrison (Aug 06 2018 at 07:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958740):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958740):
 So... I've been trying to implement @**Mario Carneiro**'s suggestion that I define the coercion allowing `F X` for a functor `F` on an object `X`, and define a @[simp] lemma unfolding the coercion.
 
-#### [Scott Morrison (Aug 06 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958750):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958750):
 I immediately run into trouble, however, where `simp` fails to apply the simp lemma, because a `motive is not correct`:
 
-#### [Scott Morrison (Aug 06 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958756):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958756):
 Here's my slightly minimised example:
 
-#### [Scott Morrison (Aug 06 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958758):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958758):
 ````
 namespace category_theory
 
@@ -87,72 +87,72 @@ end Functor
 end category_theory
 ````
 
-#### [Scott Morrison (Aug 06 2018 at 07:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958801):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958801):
 (Being told my motive is not correct always makes me feel very guilty.)
 
-#### [Scott Morrison (Aug 06 2018 at 07:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958803):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958803):
 Hopefully I'm just doing something dumb here...
 
-#### [Scott Morrison (Aug 06 2018 at 07:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958904):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958904):
 -----
 
-#### [Mario Carneiro (Aug 06 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958979):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958979):
 You have to use `dsimp`
 
-#### [Mario Carneiro (Aug 06 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958983):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958983):
 is there a reason you use `by refl` instead of `rfl` to prove rfl-lemmas?
 
-#### [Mario Carneiro (Aug 06 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958989):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958989):
 this messes up dsimp
 
-#### [Scott Morrison (Aug 06 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959028):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959028):
 ah..
 
-#### [Scott Morrison (Aug 06 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959029):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959029):
 I never knew that.
 
-#### [Scott Morrison (Aug 06 2018 at 07:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959043):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959043):
 Okay. That should fix my problems, but wow, gross! :-)
 
-#### [Mario Carneiro (Aug 06 2018 at 07:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959047):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 07:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959047):
 You should always prove definitional theorems by `rfl`
 
-#### [Mario Carneiro (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959096):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959096):
 because lean reads that specially: `A = B := rfl` means `A === B`
 
-#### [Scott Morrison (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959098):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959098):
 what does `by refl` do?
 
-#### [Mario Carneiro (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959100):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959100):
 It proves the theorem normally, so you just end up learning `A = B`
 
-#### [Scott Morrison (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959101):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959101):
 surely that's the same thing
 
-#### [Scott Morrison (Aug 06 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959109):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959109):
 but isn't the proof term the same either way?
 
-#### [Scott Morrison (Aug 06 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959111):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959111):
 I guess I can check.
 
-#### [Mario Carneiro (Aug 06 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959112):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959112):
 it is, but the literal token `rfl` is used by the lean parser to add the `@[_refl_lemma]` attribute
 
-#### [Johan Commelin (Aug 06 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959361):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 06 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959361):
 It really is a pity that `refl` and `rfl` have such important but subtle distinctions, while only differing by one letter.
 
-#### [Johan Commelin (Aug 06 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959364):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Aug 06 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959364):
 And then `rfl` (without `e`) adds `@[_refl_lemma]` (with `e`)!
 
-#### [Mario Carneiro (Aug 06 2018 at 08:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960266):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 08:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960266):
 to be fair, one is a tactic and one is a term, so they differ by more than one letter
 
-#### [Mario Carneiro (Aug 06 2018 at 08:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960280):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 08:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960280):
 although you shouldn't confuse `rfl` with `eq.refl` either
 
-#### [Mario Carneiro (Aug 06 2018 at 08:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960327):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 06 2018 at 08:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960327):
 similarly there is `iff.rfl` and `iff.refl`, etc. The naming convention has `rfl` have an implicit argument and `refl` has an explicit arg
 
-#### [Scott Morrison (Aug 06 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130961287):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 06 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130961287):
 Thanks for explaining this `rfl` vs `refl` thing. Switching to `rfl` really helps, both here and elsewhere. :-)
 

@@ -9,7 +9,7 @@ permalink: archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfi
 
 ---
 
-#### [Chris Hughes (Jun 14 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128082489):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 14 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128082489):
 In the following code, `rw` manages to recognize that two different expressions involving different paths of inferring the `has_mul` type class are equal. It can't do this with two definitionally equal `fintype` instances however. What's the difference between `has_mul` and `fintype` that leads to this behaviour?
 
 ```lean
@@ -71,24 +71,24 @@ end
 lemma card_bool4 : @fintype.card bool2 bool2_fintype3 = 2 := card_bool1
 ```
 
-#### [Simon Hudon (Jun 14 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128082839):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Jun 14 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128082839):
 what error do you get?
 
-#### [Chris Hughes (Jun 14 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083025):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 14 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083025):
 I accidentally gave an example that did work. I've just edited it.
 
-#### [Chris Hughes (Jun 14 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083327):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 14 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083327):
 `card_bool2` works not because they're defeq, but perhaps because it knows fintype is a subsingleton.
 
-#### [Reid Barton (Jun 14 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083559):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 14 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083559):
 I think it works because it reduced both `card_bool1` and `card_bool2` to `2 = 2`
 
-#### [Reid Barton (Jun 14 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083570):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 14 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083570):
 it = `card_bool2`
 
-#### [Reid Barton (Jun 14 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083640):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jun 14 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083640):
 I don't know why your `rw one_times_two` works though.
 
-#### [Kevin Buzzard (Jun 14 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083660):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jun 14 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083660):
 Yeah, rw is usually really snotty about things like this
 

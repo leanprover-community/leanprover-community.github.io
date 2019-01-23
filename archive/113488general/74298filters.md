@@ -9,7 +9,7 @@ permalink: archive/113488general/74298filters.html
 
 ---
 
-#### [Rohan Mitta (Sep 05 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133377621):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rohan Mitta (Sep 05 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133377621):
 Hi,
 
 I'm attempting to prove a proposition from a Topology book and am getting stuck using filters, which I'm not very comfortable with in lean. Can anyone help me with the first sorry? I'm pretty sure that step is true due to the uniform continuity of f but I can't figure out what to do with it.
@@ -47,17 +47,17 @@ begin
 end
 ```
 
-#### [Reid Barton (Sep 05 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378115):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 05 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378115):
 H3 must be true because `nhds` only depends on the topology and f and g are homeomorphisms.
 One direction of the equality will be from continuous.tendsto. The other one should require the continuity of g
 
-#### [Johannes Hölzl (Sep 05 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378211):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 05 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378211):
 Also, you have an uniform isomorphism (i.e. `f` with `g` as inverse). This implies that it is an topological `embedding`, a `dense_embedding` and `uniform_embedding`. If you look for them this should give you enough rules to prove your statement.
 
-#### [Reid Barton (Sep 05 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378251):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 05 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378251):
 ... plus either left_inv or right_inv, and filter.map_map
 
-#### [Patrick Massot (Sep 05 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378669):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 05 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378669):
 @**Rohan Mitta** don't listen to them, you were almost done. Stating only only implication since the other one follows by symmetry:
 ```lean
 theorem complete_iff_of_uniform_cts_bij {α : Type*} [metric_space α] {β : Type*} [metric_space β] (f : α → β)
@@ -80,13 +80,13 @@ begin
 end
 ```
 
-#### [Kevin Buzzard (Sep 05 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378866):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 05 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378866):
 Thanks all of you (I'm sitting next to Rohan)
 
-#### [Rohan Mitta (Sep 05 2018 at 16:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378965):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rohan Mitta (Sep 05 2018 at 16:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378965):
 Amazing, thanks everyone!
 
-#### [Patrick Massot (Sep 05 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379170):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 05 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379170):
 Small cleanup:
 ```lean
 open function
@@ -107,6 +107,6 @@ begin
 end
 ```
 
-#### [Johannes Hölzl (Sep 05 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379874):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Sep 05 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379874):
 Thanks Patrick to actually look at the proof (obviously, I didn't ...)
 

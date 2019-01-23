@@ -9,6 +9,6 @@ permalink: archive/113488general/15107tacticsforsubsingletons.html
 
 ---
 
-#### [Chris Hughes (Jun 25 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics%20for%20subsingletons/near/128604841):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Jun 25 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics%20for%20subsingletons/near/128604841):
 Is there a version of `exact` that doesn't care if two subsingleton terms are not defeq. Same question for `rw`. If not, I might have a go at writing one.
 

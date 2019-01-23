@@ -9,7 +9,7 @@ permalink: archive/113488general/01273auxiliarylemmaforinduction.html
 
 ---
 
-#### [Kevin Buzzard (Aug 23 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132633649):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 23 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132633649):
 ```lean
 structure foo :=
 (size : ℕ)
@@ -40,15 +40,15 @@ end
 
 Is this introduction of an auxiliary lemma a sensible way to go about things, or am I better off trying to prove what I want directly using some fancy equation compiler trickery?
 
-#### [Simon Hudon (Aug 23 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132637724):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 23 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132637724):
 Are you using the auxiliary lemma in order to have `m` to do your induction on? Have you tried `generalize h : x.size = m, induction m with n Hn`?
 
-#### [Kevin Buzzard (Aug 23 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132638452):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 23 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132638452):
 Aah that's the trick. Thanks Simon!
 
-#### [Simon Hudon (Aug 23 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132639057):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 23 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132639057):
 Any time :)
 
-#### [Simon Hudon (Aug 23 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132639260):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 23 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132639260):
 I wonder if it would be worth combining the two tactics so that `induction e` (with `e` an arbitrary expression) would produce the equality assumption.
 

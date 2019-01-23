@@ -9,7 +9,7 @@ permalink: archive/113488general/21143newbieprooffromassumptionofinductivelydefi
 
 ---
 
-#### [Kevin Sullivan (Oct 17 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135988274):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Sullivan (Oct 17 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135988274):
 Given a typical definition of an evenness property ...
 
 ```lean
@@ -35,16 +35,16 @@ To prove that 8 is even, I can use repeat { apply ev_SS }.
 
 What is a stylistically nicer way to prove that 7 isn't even.
 
-#### [Kevin Buzzard (Oct 17 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135989820):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 17 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135989820):
 You could move this thread into the `new members` stream. And if you're posting code you can triple quote it: write ` ```lean ` at the beginning and ` ``` ` at the end. For your question: you could prove `ev n` was decidable, and then `dec_trivial` would decide it.
 
-#### [Andrew Ashworth (Oct 17 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135990543):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Oct 17 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135990543):
 I think this is something that can be improved in Lean 4, when reflection runs a bit faster. https://people.csail.mit.edu/jgross/personal-website/papers/2018-reification-by-parametricity-itp-camera-ready.pdf
 
-#### [Andrew Ashworth (Oct 17 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135990685):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Oct 17 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135990685):
 the paper's first few sections go through several ways of implementing an evenness checker
 
-#### [Kevin Buzzard (Oct 17 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992402):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 17 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992402):
 got it:
 
 ```lean
@@ -56,7 +56,7 @@ instance decidable_ev : ∀ n, decidable (ev n)
 example : ¬ ev 7 := dec_trivial
 ```
 
-#### [Kevin Buzzard (Oct 17 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992403):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 17 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992403):
 dammit I failed:
 
 ```lean
@@ -99,7 +99,7 @@ state:
 -/
 ```
 
-#### [Kevin Buzzard (Oct 17 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992404):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 17 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992404):
 ```lean
 example : ¬ (ev 7) :=
 begin
@@ -109,31 +109,31 @@ end
 ```
 is an answer (using the lemma I proved in the previous post).
 
-#### [Kevin Buzzard (Oct 17 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992525):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 17 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992525):
 Sorry, had dodgy internet and posts have appeared in random order
 
-#### [Chris Hughes (Oct 17 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992534):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 17 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992534):
 I'm guessing `dec_trivial` failed because you didn't make decidable an instance.
 
-#### [Kevin Buzzard (Oct 17 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992607):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 17 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992607):
 My rw proof doesn't work for some reason
 
-#### [Scott Olson (Oct 17 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992638):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Oct 17 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992638):
 I think the problem is rewriting with an `iff` invokes propext which then cannot reduce?
 
-#### [Scott Olson (Oct 17 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992659):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Oct 17 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992659):
 ```lean
 #eval (ev 2 : bool) -- tt
 #reduce (ev 2 : bool) -- decidable.rec (λ (h : ev 2 → false), ff) (λ (h : ev 2), tt) (eq.rec (is_true ev_0) _)
 ```
 
-#### [Scott Olson (Oct 17 2018 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992755):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Oct 17 2018 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992755):
 If you `set_option pp.proofs true` the innocent little `_` there is `(propext <large iff structure expression>)`
 
-#### [Kevin Buzzard (Oct 17 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992771):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 17 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992771):
 Nice!
 
-#### [Kenny Lau (Oct 17 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992968):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 17 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135992968):
 ```lean
 inductive ev : ℕ → Prop
 | ev_0 : ev 0
@@ -148,10 +148,10 @@ instance : decidable_pred ev
     end
 ```
 
-#### [Chris Hughes (Oct 17 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135993101):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 17 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135993101):
 @**Kenny Lau** now that we've established that "computable" functions aren't really computable unless you avoid `propext` and `quot.sound`, are you going to start avoiding those axioms as well?
 
-#### [Kenny Lau (Oct 17 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135993158):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 17 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135993158):
 ```lean
 inductive ev : ℕ → Prop
 | ev_0 : ev 0
@@ -166,7 +166,7 @@ instance decidable_ev : ∀ n, decidable (ev n)
 | (n + 2) := decidable_of_decidable_of_iff (decidable_ev n) (ev_iff n)
 ```
 
-#### [Kenny Lau (Oct 17 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135993447):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 17 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135993447):
 ```lean
 inductive ev : ℕ → Prop
 | ev_0 : ev 0
@@ -187,6 +187,6 @@ instance : decidable_pred ev :=
 λ n, decidable_of_decidable_of_iff infer_instance (ev_iff n)
 ```
 
-#### [Mario Carneiro (Oct 17 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135998146):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 17 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135998146):
 You should use `bodd` instead, it has an efficient implementation in VM and a not stupid implementation in kernel
 

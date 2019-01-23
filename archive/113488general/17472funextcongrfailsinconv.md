@@ -9,7 +9,7 @@ permalink: archive/113488general/17472funextcongrfailsinconv.html
 
 ---
 
-#### [Kenny Lau (Sep 10 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/133645086):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 10 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/133645086):
 ```lean
 import data.finset algebra.big_operators
 
@@ -19,7 +19,7 @@ begin
 end
 ```
 
-#### [Kenny Lau (Sep 10 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/133645096):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 10 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/133645096):
 ```lean
 Tactic State
 
@@ -53,18 +53,18 @@ x : α
 ⊢ finset.prod (finset.attach s) (λ (_x : {x // x ∈ s}), 1) = ?m_1 x
 ```
 
-#### [Kenny Lau (Sep 10 2018 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/133674125):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 10 2018 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/133674125):
 @**Mario Carneiro**
 
-#### [Kenny Lau (Sep 15 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/134001585):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 15 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/134001585):
 is nobody going to care about this
 
-#### [Scott Morrison (Sep 15 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/134001595):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Sep 15 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/134001595):
 Hmm, I care a little :-) I would like more tactics inside conv, too :-)
 
-#### [Kenny Lau (Sep 15 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/134001767):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 15 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/134001767):
 @**Mario Carneiro**
 
-#### [Mario Carneiro (Sep 15 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/134001871):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 15 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/134001871):
 There is very little I can do about bugs in `conv`
 

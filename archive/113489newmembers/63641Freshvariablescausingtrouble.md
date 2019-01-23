@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/63641Freshvariablescausingtrouble.html
 
 ---
 
-#### [Jack Crawford (Oct 24 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Fresh%20variables%20causing%20trouble/near/136386136):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Oct 24 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Fresh%20variables%20causing%20trouble/near/136386136):
 I'm in a bit of a pickle right now trying to deal with one of those messy `__mlocal__fresh__1234_56789` variables.
 
 I have the following relevant lines in my tactic state:
@@ -36,10 +36,10 @@ Here's the actual code that's giving me this tactic state (you can see the fresh
   sorry,
 end``
 
-#### [Mario Carneiro (Oct 24 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Fresh%20variables%20causing%20trouble/near/136388270):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 24 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Fresh%20variables%20causing%20trouble/near/136388270):
 You should use `| _ _ (@row_equivalent.cons M N L r₁ r₂)` in the pattern match
 
-#### [Jack Crawford (Oct 24 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Fresh%20variables%20causing%20trouble/near/136394125):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Jack Crawford (Oct 24 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Fresh%20variables%20causing%20trouble/near/136394125):
 Ah yes, I don't know why I didn't think of this myself -- silly question!
 Thanks @Mario!
 

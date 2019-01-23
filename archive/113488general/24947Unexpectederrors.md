@@ -9,7 +9,7 @@ permalink: archive/113488general/24947Unexpectederrors.html
 
 ---
 
-#### [Chris Hughes (May 27 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171623):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 27 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171623):
 Just finished proving this theorem about roots of polynomials, but I'm getting the following errors and I don't understand why
 ```
 unexpected occurrence of recursive function
@@ -53,63 +53,63 @@ using_well_founded {rel_tac := λ _ _, `[exact ⟨_, measure_wf degree⟩]}
 ```
 The full file is here https://github.com/dorhinj/leanstuff/blob/master/univariate_poly.lean
 
-#### [Kenny Lau (May 27 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171663):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171663):
 it happens with equation compilers
 
-#### [Kenny Lau (May 27 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171666):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171666):
 since they provide you with the theorem you're trying to prove, in case you want to do recursion
 
-#### [Kenny Lau (May 27 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171669):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171669):
 but some tactics touch every local hypothesis
 
-#### [Kenny Lau (May 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171714):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171714):
 Suspects I spot: `contradiction`, `simp * at *`
 
-#### [Kenny Lau (May 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171715):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171715):
 the latter has a higher chance of being the perpetrator
 
-#### [Chris Hughes (May 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171716):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171716):
 I don't think it's that or it would have asked me to prove something. I replaced both of those with `admit` and I still get the error.
 
-#### [Kenny Lau (May 27 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171808):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171808):
 how did you define `polynomial`?
 
-#### [Kenny Lau (May 27 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171809):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171809):
 can you prove strong induction?
 
-#### [Chris Hughes (May 27 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172447):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (May 27 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172447):
 polynomial is `ℕ →₀ α`. I have proved and defined stuff in this manner before. I have just rewritten this function using `well_founded.fix`, and it works, but it would be nice to know what's going on.
 
-#### [Kenny Lau (May 27 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172498):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172498):
 https://i.imgflip.com/2b3qrs.jpg
 
-#### [Mario Carneiro (May 27 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172737):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 27 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172737):
 noooo lean memes
 
-#### [Andrew Ashworth (May 27 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172770):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (May 27 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172770):
 I wouldn't feel bad about directly using `well_founded.fix`... the using_well_founded tactic is undocumented and hard to debug unless you know what's going on behind the scenes
 
-#### [Mario Carneiro (May 27 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172776):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 27 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172776):
 I don't think this should be a problematic definition, but I can't run it as is
 
-#### [Andrew Ashworth (May 27 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172824):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (May 27 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172824):
 (but maybe I'm just bad at Lean)
 
-#### [Mario Carneiro (May 27 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172828):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 27 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172828):
 (it's not actually a tactic, it's a keyword)
 
-#### [Andrew Ashworth (May 27 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172883):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (May 27 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172883):
 (shows how much I've used it... I needed wf recursion a few months ago and struggled with `well_founded.fix`, and since it worked, never bothered to figure out `using_well_founded`)
 
-#### [Mario Carneiro (May 27 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172932):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 27 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172932):
 the offending tactic is `by finish` at the end
 
-#### [Kenny Lau (May 27 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172933):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 27 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172933):
 I must be blind
 
-#### [Mario Carneiro (May 27 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172938):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 27 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172938):
 use `by clear roots_aux; finish` instead
 
-#### [Mario Carneiro (May 27 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172981):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 27 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127172981):
 I found it by just replacing things by `sorry` until the error went away
 

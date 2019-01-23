@@ -9,16 +9,16 @@ permalink: archive/113488general/03820finhasnorecursor.html
 
 ---
 
-#### [Kenny Lau (Mar 30 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402350):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Mar 30 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402350):
 fin doesn’t have the morally correct recursor. we should prove it maybe.
 
-#### [Mario Carneiro (Mar 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402455):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402455):
 There are two obvious approaches: using `fz` and `fs` like in `fin2`, or by peeling off the right end instead, with `raise_fin` and `last` or whatever you want to call them
 
-#### [Mario Carneiro (Mar 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402457):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 30 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402457):
 there should be more consistent naming here...
 
-#### [Mario Carneiro (Mar 30 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402660):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Mar 30 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402660):
 ```
 @[elab_as_eliminator] def fin.succ_rec
   {C : ∀ n, fin n → Sort*}

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/64616metadefsyntaxerror.html
 
 ---
 
-#### [Ken Roe (Jul 18 2018 at 04:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129846795):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Ken Roe (Jul 18 2018 at 04:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129846795):
 I was trying out the example from the Lean meta programming paper.  However their example gives a syntax error:
 
 ```lean
@@ -36,12 +36,12 @@ command expected
 
 This is with Lean 3.4.1.  How do I fix the error?
 
-#### [Mario Carneiro (Jul 18 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129846865):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 18 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129846865):
 the name of the def is `findd`?
 
-#### [Mario Carneiro (Jul 18 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129846918):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 18 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129846918):
 the `command expected` error is often fixed by scrolling down or setting the lean checking mode (on the status bar) to "check visible files" instead of "check visible lines"
 
-#### [Reid Barton (Jul 18 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129848796):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 18 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129848796):
 Or restarting lean.
 

@@ -9,34 +9,34 @@ permalink: archive/113488general/71999generalizeproofs.html
 
 ---
 
-#### [Reid Barton (Dec 01 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148900772):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 01 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148900772):
 Does `generalize_proofs` ever work?
 
-#### [Reid Barton (Dec 01 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148900782):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 01 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148900782):
 I get this error `unknown declaration '1'`
 
-#### [Simon Hudon (Dec 01 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901101):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Dec 01 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901101):
 What did you write?
 
-#### [Simon Hudon (Dec 01 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901129):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Dec 01 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901129):
 I think `generalize_proofs` is obsolete. I remember @**Mario Carneiro** saying that `h_generalize` does the work `generalize_proofs` was intended to do
 
-#### [Reid Barton (Dec 01 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901289):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 01 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901289):
 something very complicated
 
-#### [Reid Barton (Dec 01 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901307):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 01 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901307):
 ah, let me try that
 
-#### [Reid Barton (Dec 01 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901538):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 01 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901538):
 hmm, I realized I need to also generalize the type that it is being converted to, and that seems tricky
 
-#### [Reid Barton (Dec 01 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901543):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Dec 01 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901543):
 I'll just go back to my interim solution
 
-#### [Simon Hudon (Dec 01 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901761):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Dec 01 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148901761):
 Try `h_generalize! h : my_var == new_name` then you can generalize the type of the new variable
 
-#### [Chris Hughes (Dec 01 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148902893):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 01 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148902893):
 Does changing the definition of `collect_proofs_in` in `tactic.generalize_proofs` to this work?
 ```lean
 private meta def collect_proofs_in :
@@ -85,12 +85,12 @@ match e with
 end
 ```
 
-#### [Chris Hughes (Dec 01 2018 at 02:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148903419):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Dec 01 2018 at 02:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148903419):
 I think the problem is that `infer_type` fails given a `sort`
 
-#### [Mario Carneiro (Dec 01 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148905988):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 01 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148905988):
 `generalize_proofs` is not so much obsolete as broken and abandoned
 
-#### [Mario Carneiro (Dec 01 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148905991):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 01 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148905991):
 I think it works as long as there are no binders in the goal
 

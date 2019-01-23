@@ -9,7 +9,7 @@ permalink: archive/113488general/08557howtouselinearcombination.html
 
 ---
 
-#### [Blair Shi (Jul 23 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130142613):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 23 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130142613):
 ```
 variables {k : Type u} {V : Type v}
 variable [field k]
@@ -37,18 +37,18 @@ inferred
 ```
 Can anyone help me to solve this problem?
 
-#### [Patrick Massot (Jul 23 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130143764):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 23 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130143764):
 Probably not until you give us a MWE (depending only on mathlib and not your own code).
 
-#### [Patrick Massot (Jul 23 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130143772):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 23 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130143772):
 You can use gist or pasteall if it's too long
 
-#### [Reid Barton (Jul 23 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130149943):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Jul 23 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130149943):
 I think you should not have both `field k` and `ring k`
 
-#### [Kevin Buzzard (Jul 23 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130170440):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 23 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130170440):
 Yes -- try deleting the `variable [field k]` line and see if it works. If it doesn't, then follow Patrick's advice and post some code which will work for everyone, if possible.
 
-#### [Blair Shi (Jul 24 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130176920):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Blair Shi (Jul 24 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130176920):
 Yes, I deleted `variable [field k]`. now it works. Thx!
 

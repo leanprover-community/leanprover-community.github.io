@@ -9,25 +9,25 @@ permalink: archive/113488general/79543automaticcases.html
 
 ---
 
-#### [Kenny Lau (Jul 28 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130457556):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130457556):
 Can we have a tactic that does `cases` on the argument of `XX.rec` or `XX.rec_on`?
 
-#### [Kevin Buzzard (Jul 28 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130457669):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130457669):
 That sounds like a really nice basic tactic for a tactic-learner to write!
 
-#### [Kenny Lau (Jul 28 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130457886):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130457886):
 good! are you a tactic-learner?
 
-#### [Kevin Buzzard (Jul 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130458769):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130458769):
 Maybe @**Chris Hughes** is? I think he got a bit disheartened when he realised he had 100 questions and couldn't face asking Mario and Simon all of them though...
 
-#### [Kevin Buzzard (Jul 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130458770):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130458770):
 (and of course I was no help)
 
-#### [Kevin Buzzard (Jul 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130458776):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130458776):
 Maybe there should be a basic tactic-writing thread. The workflow I see is: start Zulip thread, spam it with basic questions which are not covered in PIL, experts occasionally make insightful comments, someone writes some notes and sticks them up in the mathlib docs project, we all learn something.
 
-#### [Kevin Buzzard (Jul 28 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130458988):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130458988):
 From Programming In Lean:
 
 ```lean
@@ -57,7 +57,7 @@ end
 
 That's how to break up an `and` in the hypotheses. You just want to break up a `rec` in the conclusion. How hard can it be? ;-)
 
-#### [Johan Commelin (Jul 28 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130459043):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 28 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130459043):
 ```quote
 Maybe there should be a basic tactic-writing thread. The workflow I see is: start Zulip thread, spam it with basic questions which are not covered in PIL, experts occasionally make insightful comments, someone writes some notes and sticks them up in the mathlib docs project, we all learn something.
 ```

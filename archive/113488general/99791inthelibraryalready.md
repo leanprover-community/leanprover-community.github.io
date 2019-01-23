@@ -9,7 +9,7 @@ permalink: archive/113488general/99791inthelibraryalready.html
 
 ---
 
-#### [Scott Morrison (Aug 14 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/in%20the%20library%20already%3F/near/132078222):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Aug 14 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/in%20the%20library%20already%3F/near/132078222):
 Is this in the library somewhere?
 ```
 def list.split_on_aux {α} [decidable_eq α] (a : α) : list α → list α → list (list α) 

@@ -9,7 +9,7 @@ permalink: archive/113488general/48331isthischoicecomputable.html
 
 ---
 
-#### [Kenny Lau (Sep 04 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133307935):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133307935):
 Can the two `sorry`s be filled in?
 ```lean
 variables (ι : Type*) (β : ι → Type*) [Π i, has_zero (β i)]
@@ -49,24 +49,24 @@ theorem choice_eq (i j : ι) (x : β i) (H) : of ι β i x = of ι β j (choice 
 end pointed_sigma
 ```
 
-#### [Kenny Lau (Sep 04 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133307990):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133307990):
 So I have a bunch of pointed types, indexed by the type `ι`.
 
-#### [Kenny Lau (Sep 04 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133308002):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133308002):
 I'm building the pointed union of these pointed types.
 
-#### [Kenny Lau (Sep 04 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133308007):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133308007):
 (The point is represented by zero.)
 
-#### [Kenny Lau (Sep 04 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133308016):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133308016):
 So for each `i : ι`, I have a function from the pointed set indexed by `i` to the union.
 
-#### [Kenny Lau (Sep 04 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133308037):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133308037):
 I'm wondering if I can reverse this operation, i.e. given an element of the pointed union, with a proof that it is from some element of the pointed set indexed by `i`, I would like to give back this element of the pointed set.
 
-#### [Reid Barton (Sep 04 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133312135):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 04 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133312135):
 I suspect you need decidable equality on I
 
-#### [Kenny Lau (Sep 04 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133312361):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 04 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133312361):
 that's also what I suspect, but I can't prove
 

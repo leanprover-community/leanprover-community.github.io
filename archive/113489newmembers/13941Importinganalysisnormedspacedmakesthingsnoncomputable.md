@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/13941Importinganalysisnormedspacedmakesthing
 
 ---
 
-#### [Abhimanyu Pallavi Sudhir (Dec 18 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Importing%20analysis.normed_spaced%20makes%20things%20noncomputable/near/152088656):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Dec 18 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Importing%20analysis.normed_spaced%20makes%20things%20noncomputable/near/152088656):
 The following code:
 
 ```lean
@@ -25,6 +25,6 @@ Works perfectly fine, but if I add `import analysis.normed_space`to the top, `se
 def seq_smul (c : ℝ) : seq → seq := λ s n, c * (s n)
 ```
 
-#### [Mario Carneiro (Dec 18 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Importing%20analysis.normed_spaced%20makes%20things%20noncomputable/near/152088730):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 18 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Importing%20analysis.normed_spaced%20makes%20things%20noncomputable/near/152088730):
 hm, I guess the instance priorities need adjustment
 

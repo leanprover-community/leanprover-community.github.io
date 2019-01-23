@@ -9,10 +9,10 @@ permalink: archive/113488general/71472propextquotsoundandeqrec.html
 
 ---
 
-#### [Chris Hughes (Oct 09 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135462261):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 09 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135462261):
 Is every `nat` defined using `propext`, `quot.sound` and `eq.rec` but without choice guaranteed to reduce to `succ $ succ $ succ ... zero`?
 
-#### [Gabriel Ebner (Oct 09 2018 at 18:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135481037):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Oct 09 2018 at 18:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135481037):
 You don't even need `quot.sound`:
 ```lean
 lemma not_refl : true = (true ∨ false) :=
@@ -28,13 +28,13 @@ set_option pp.proofs true
 #eval does_not_reduce_to_zero
 ```
 
-#### [Gabriel Ebner (Oct 09 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135481110):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Oct 09 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135481110):
 I'm pretty sure @**Mario Carneiro** has an example lying around that doesn't even need `propext`; I think you can do this even with a counterexample to the transitivity of definitional equality.
 
-#### [Kevin Buzzard (Oct 09 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135481440):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 09 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135481440):
 An excellent question and an excellent answer!
 
-#### [Scott Olson (Oct 09 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135481619):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Oct 09 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135481619):
 Here's an example with quotients:
 
 ```lean
@@ -54,31 +54,31 @@ AIUI, the kernel reduction rules for quotients only know how to reduce terms in 
 
 EDIT: simplified example
 
-#### [Chris Hughes (Oct 09 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135482021):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 09 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135482021):
 I did manage to prove `does_not_reduce_to_zero = 0`, after quite a bit of fiddling around. Next question, is there an example where it's not provably equal to something of the form `succ $ succ $ ... 0`
 
-#### [Chris Hughes (Oct 09 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135482155):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 09 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135482155):
 This basically means that a lot of computable functions aren't really computable. That is surprising.
 
-#### [Scott Olson (Oct 09 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135482382):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Oct 09 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135482382):
 There's a section about the implications of axioms in Lean here https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html
 
-#### [Scott Olson (Oct 09 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135482525):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Olson (Oct 09 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135482525):
 In particular Lean makes a distinction between canonicity (being able to evaluate any closed term of type ℕ to `succ $ succ $ ... 0`) and computability
 
-#### [Gabriel Ebner (Oct 09 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135482544):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Oct 09 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135482544):
 ```quote
 This basically means that a lot of computable functions aren't really computable.
 ```
 No, they're perfectly computable.  Just not using the reduction relation of the type theory.  (The easiest way to compute them is using type erasure, i.e., VM execution.)
 
-#### [Mario Carneiro (Oct 09 2018 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135494239):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 09 2018 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135494239):
 The extra magic sauce that the VM has and the kernel reduction doesn't is the reduction `eq.rec h e ~> e`, regardless of the type of `h`. This is not type correct unless `h : A = A`, in which case the kernel knows about it as well, but the VM just plows ahead anyway
 
-#### [Mario Carneiro (Oct 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135494367):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135494367):
 This means that the VM deals with terms that are not type correct, and this is resolved by saying that types are "erased" so that now the terms have no meaning except for their reduction behavior. Concretely, this means that any term of type `Sort u` is replaced with `*`, as well as any proofs (terms of type `p : Prop`). When you see me talk about "data" vs non-data, this is what I am talking about. Anything which is a type has no runtime representation except as a neutral object that does nothing
 
-#### [Chris Hughes (Oct 13 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135706032):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Oct 13 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135706032):
 ```quote
 I'm pretty sure @**Mario Carneiro** has an example lying around that doesn't even need `propext`; I think you can do this even with a counterexample to the transitivity of definitional equality.
 ```
@@ -107,7 +107,7 @@ def does_reduce : ℕ := @eq.rec _ _ (λ _, ℕ) 0 _ acc_rec_lemma
 ```
 @**Mario Carneiro** Is it possible?
 
-#### [Kenny Lau (Oct 13 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135706590):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 13 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135706590):
 not sure how relevant this is, but maybe one can produce some examples using this:
 ```lean
 inductive bad : Type
@@ -146,10 +146,10 @@ bad.unpack_pack_0_0 : ∀ (x_unpacked : list bad), bad.unpack_0_0 (bad.pack_0_0 
 -/
 ```
 
-#### [Kenny Lau (Oct 13 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135706602):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 13 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135706602):
 @**Mario Carneiro** what is `pack` and `unpack` and `primitive` and are there any more hidden constructors like this?
 
-#### [Mario Carneiro (Oct 13 2018 at 04:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135712980):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 04:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135712980):
 @**Chris Hughes** Actually I think Gabriel's recollection of me is incorrect, that is, I think that canonicity actually holds for closed terms of Lean's DTT with no axioms. I don't have a full proof yet (this is likely a future project), but it's not that hard to show that at least a term can't get stuck, from which the theorem follows assuming strong normalization. Basically, there is a coherent notion of "head position" for a term that determines where to look in a closed term to find a redex, and if there is no redex there then it's a stuck term.
 
 If you look at the left-most part of an application (i.e. follow all apps up the left part), you may find:
@@ -168,10 +168,10 @@ This is a more interesting question. For the first two axioms I am inclined to s
 
 For `choice` it's clearly false; `@classical.choice nat <0>` is a term of type `nat` which is not provably equal to any numeral.
 
-#### [Mario Carneiro (Oct 13 2018 at 04:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135713102):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 04:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135713102):
 In fact, I think conservativity of `propext` should follow from conservativity of `A ~= B -> A = B`, that is, any two types with the same cardinality are consistently equal
 
-#### [Mario Carneiro (Oct 13 2018 at 04:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135713753):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 04:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135713753):
 @**Kenny Lau** Luckily (for me), nested and mutual inductives are compiled down to regular inductives by lean when you write them, so the kernel knows nothing of them and they don't affect any metatheoretic properties like canonicity. I'm not sure why it's a prefix instead of a suffix (@**Sebastian Ullrich** bug?), but the real inductive type is `_nest_1_1._nest_1_1.bad._mut_`, and there are a bunch more theorems in that namespace:
 ```lean
 #print prefix _nest_1_1
@@ -209,22 +209,22 @@ _nest_1_1.list.bad.rec : Π (C : _nest_1_1.list.bad → Sort l),
 -/
 ```
 
-#### [Mario Carneiro (Oct 13 2018 at 04:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135713821):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 04:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135713821):
 When Lean 4 comes around, though, I will have to add another chapter on this mess because nested inductives are coming to a kernel near you
 
-#### [Kevin Buzzard (Oct 13 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135720885):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 13 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135720885):
 ```quote
 but the real inductive type is `_nest_1_1._nest_1_1.bad._mut_`, and there are a bunch more theorems in that namespace:
 ```
 o_O so many consequences of one definition! I had no idea that these ones were there.
 
-#### [Mario Carneiro (Oct 13 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135721078):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135721078):
 that's not even all of them, I removed the usual theorems about `cases_on` and `rec_on` and `brec_on` and `ibelow` and `no_confusion` and `has_sizeof`. . .
 
-#### [Mario Carneiro (Oct 13 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135721090):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135721090):
 nested inductive translation seems kind of overcomplicated
 
-#### [Kenny Lau (Oct 13 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722421):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 13 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722421):
 ```lean
 inductive bad : Type
 | bad : list bad → bad
@@ -243,46 +243,46 @@ but is expected to have type
 -/
 ```
 
-#### [Mario Carneiro (Oct 13 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722527):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722527):
 I don't think I need to say it since you've already found out: equation compiler on nested inductives doesn't produce defeq equation lemmas
 
-#### [Mario Carneiro (Oct 13 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722530):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722530):
 this is one of the reasons equation lemmas are a thing
 
-#### [Kenny Lau (Oct 13 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722531):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 13 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722531):
 what does canonicity mean?
 
-#### [Mario Carneiro (Oct 13 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722577):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722577):
 the exact statement is a bit tricky, but basically every closed term reduces to a normal form which can be described explicitly by the type
 
-#### [Mario Carneiro (Oct 13 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722580):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722580):
 i.e. for nat this means `succ $ ... $ 0`
 
-#### [Kenny Lau (Oct 13 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722584):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 13 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722584):
 but this error I found, it doesn't affect canonicity?
 
-#### [Mario Carneiro (Oct 13 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722596):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722596):
 no because nothing there is an axiomatic constant
 
-#### [Mario Carneiro (Oct 13 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722603):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722603):
 it's all a layer over the real inductive type
 
-#### [Mario Carneiro (Oct 13 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722605):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722605):
 That theorem has to be proven by cases or induction or something internally so it's not defeq
 
-#### [Kevin Buzzard (Oct 13 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722841):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Oct 13 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722841):
 (warning: amateur alert). So this is exactly the situation where you can't prove your example by `rfl` (even though to naive eyes it looks like it should be `rfl`) so you prove it by hand (possibly using some weird theorems with weird names with `_` at the beginning), give it a good name, mark it as a simp lemma, and move on.
 
-#### [Mario Carneiro (Oct 13 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722854):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722854):
 yes
 
-#### [Mario Carneiro (Oct 13 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722855):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722855):
 except in this case lean did it all for you and slapped a nice API over the whole thing
 
-#### [Mario Carneiro (Oct 13 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722865):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722865):
 In this case you can write `by rw bad.to_list` and it will use the equation lemmas for `bad.to_list`, which in this case are actually nontrivial theorems
 
-#### [Kenny Lau (Oct 13 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722965):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Oct 13 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135722965):
 ```lean
 inductive bad : Type
 | bad : list bad → bad
@@ -301,10 +301,10 @@ theorem bad.very_bad : ∀ (L : list bad), bad.to_list (bad.bad L) = L :=
 -/
 ```
 
-#### [Mario Carneiro (Oct 13 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135723063):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Oct 13 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135723063):
 this is just a funny way of writing `bad.to_list.equations._eqn_1 L` of course
 
-#### [Gabriel Ebner (Oct 13 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135725329):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (Oct 13 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135725329):
 @**Mario Carneiro** Thanks for the explanation, I'm looking forward to the canonicity result.  Tiny nitpick:
 ```quote
  it is not the case that i.e. `propext iff.rfl` reduces to `rfl`, which can spoil the inductive recursor case later. 

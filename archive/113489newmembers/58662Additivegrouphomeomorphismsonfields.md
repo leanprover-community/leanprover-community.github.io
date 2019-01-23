@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.htm
 
 ---
 
-#### [Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907204):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907204):
 Since fields extend additive groups , I thought that something `hom_int_to_field` below should work:
 
 ```lean
@@ -47,51 +47,51 @@ theorem hom_int_to_field : @is_add_group_hom _ _ _ (AK : add_group K) int_to_fie
 
 Can't I use the fact that fields are -- by definition -- additive groups?
 
-#### [Johan Commelin (Jan 11 2019 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907306):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 11 2019 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907306):
 You know about `int.cast`?
 
-#### [Johan Commelin (Jan 11 2019 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907333):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 11 2019 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907333):
 It is your `int_to_field`, for arbitrary rings
 
-#### [Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907334):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907334):
 Oh, I didn't know it casted to a general field. Yes, `int.cast.is_ring_hom`
 
-#### [Johan Commelin (Jan 11 2019 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907414):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 11 2019 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907414):
 And somewhere there must be a proof that it is a ring hom
 
-#### [Johan Commelin (Jan 11 2019 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907423):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 11 2019 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907423):
 But that doesn't answer why your instance can't be found.
 
-#### [Johan Commelin (Jan 11 2019 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907425):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 11 2019 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907425):
 I don't know what's wrong there.
 
-#### [Johan Commelin (Jan 11 2019 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907451):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 11 2019 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907451):
 (Also, mathematician's field is `discrete_field`. For reasons that I don't get. Since I'm a mathematician :see_no_evil:)
 
-#### [Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907550):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907550):
 Oh -- what about subfields? Is there a "discrete subfield"?
 
-#### [Johan Commelin (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907558):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907558):
 @**Kenny Lau** :up:
 
-#### [Kenny Lau (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907566):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907566):
 I think every subfield of a discrete field is discrete by default
 
-#### [Kenny Lau (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907568):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907568):
 but I don't think this is in mathlib yet
 
-#### [Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907673):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907673):
 And discrete field homeomorphisms? Can I just use `is_field_hom`?
 
-#### [Kenny Lau (Jan 11 2019 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907740):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jan 11 2019 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907740):
 yes
 
-#### [Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154908228):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154908228):
 ```quote
 But that doesn't answer why your instance can't be found.
 ```
 If I change `theorem` to `instance`, it works.
 
-#### [Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154908234):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154908234):
 That's how they do it in mathlib.
 

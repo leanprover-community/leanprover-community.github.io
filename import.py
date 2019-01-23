@@ -98,7 +98,7 @@ def structure_link(stream_id, stream_name, topic_name, post_id):
     return 'https://leanprover.zulipchat.com/#narrow/stream/' + sanitized
 
 def format_message(name, date, msg, link):
-    return u'#### [{0} ({1})]({3}):\n{2}'.format(name, date, msg, link)
+    return u'#### [{4} {0} ({1})]({3}):\n{2}'.format(name, date, msg, link, '![Click to go to Zulip](../../assets/img/zulip2.png)')
 
 def write_topic(messages, stream_name, stream_id, topic_name, outfile):
     for c in messages:
@@ -163,5 +163,5 @@ def write_markdown():
         for t in s['topics']:
             get_topic_and_write(s, t)
 
-populate_all()
+#populate_all()
 write_markdown()

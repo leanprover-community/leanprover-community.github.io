@@ -9,16 +9,16 @@ permalink: archive/113488general/82734CPUoverloadoverheat.html
 
 ---
 
-#### [Kenny Lau (Sep 07 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPU%20overload%2Boverheat/near/133502597):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Sep 07 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPU%20overload%2Boverheat/near/133502597):
 [2018-09-07.png](/user_uploads/3121/f0u1jdEuMaYzxZ0Yyr0oAuvs/2018-09-07.png)
 Lean uses a lot of the memory and heats up my laptop a lot
 
-#### [Sebastian Ullrich (Sep 07 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPU%20overload%2Boverheat/near/133520815):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Sep 07 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPU%20overload%2Boverheat/near/133520815):
 Works as intended
 
-#### [Patrick Massot (Sep 07 2018 at 18:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPU%20overload%2Boverheat/near/133522225):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 07 2018 at 18:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPU%20overload%2Boverheat/near/133522225):
 Do you think we'll have Lean on GPU one day?
 
-#### [Mario Carneiro (Sep 07 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPU%20overload%2Boverheat/near/133522788):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 07 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPU%20overload%2Boverheat/near/133522788):
 Because it's important to make sure that lean destroys your whole computer, not just the CPU area
 

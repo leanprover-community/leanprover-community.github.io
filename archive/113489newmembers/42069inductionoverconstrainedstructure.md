@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/42069inductionoverconstrainedstructure.html
 
 ---
 
-#### [Gavid Liebnich (Nov 13 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20over%20constrained%20structure/near/147588184):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gavid Liebnich (Nov 13 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20over%20constrained%20structure/near/147588184):
 I am slightly stuck on a proof, could anyone point me in the right direction? The tl;dr is that I have a structure `X` holding `n` and a proof that `h : 0 < n`. However, `h` makes it impossible to do induction on `n`, because my inductive hypotheses requires me to construct a new `X` such that `h` holds, which is untrue for an arbitrary `n`.
 
 Here's a hopefully small example:
@@ -56,12 +56,12 @@ end
 
 The resulting state has the inductive hypothesis: `∀ (h : 0 < n) (data : vector ℕ n), yield {n := n, h := h, data := data} = vector.to_list ({n := n, h := h, data := data}.data)`, which is not usable, because I can't show `h`.
 
-#### [Mario Carneiro (Nov 13 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20over%20constrained%20structure/near/147589062):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 13 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20over%20constrained%20structure/near/147589062):
 You can case on whether `0 < n` or not
 
-#### [Mario Carneiro (Nov 13 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20over%20constrained%20structure/near/147589079):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 13 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20over%20constrained%20structure/near/147589079):
 if not, then `n = 0`, and this is your "actual" base case
 
-#### [Moses Schönfinkel (Nov 13 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20over%20constrained%20structure/near/147589595):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Moses Schönfinkel (Nov 13 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20over%20constrained%20structure/near/147589595):
 (deleted)
 

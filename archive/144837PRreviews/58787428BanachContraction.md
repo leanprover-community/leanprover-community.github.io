@@ -9,26 +9,26 @@ permalink: archive/144837PRreviews/58787428BanachContraction.html
 
 ---
 
-#### [Johan Commelin (Dec 11 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151452941):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Dec 11 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151452941):
 PR by @**Rohan Mitta**.
 
-#### [Rohan Mitta (Dec 13 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151607136):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rohan Mitta (Dec 13 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151607136):
 I edited this PR based on feedback from Patrick, I think it's ready now but any other feedback would be appreciated!
 
-#### [Patrick Massot (Dec 13 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151618862):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 13 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151618862):
 I think there is still overlap with existing stuff, eg https://github.com/leanprover/mathlib/blob/master/data/real/cau_seq_filter.lean#L164
 
-#### [Patrick Massot (Dec 13 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151618877):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 13 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151618877):
 And I'm sure you can extract lemmas from the Banach contraction proof
 
-#### [Alistair Tucker (Dec 15 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151834889):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 15 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151834889):
 (deleted)
 
-#### [Alistair Tucker (Dec 15 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151834942):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 15 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151834942):
 In fact I don't think I found a use for anything in cau_seq_filter.lean
    (Edit : I see this was because I didn't go beyond the first half of metric_sequences.lean)
 
-#### [Alistair Tucker (Dec 15 2018 at 13:08)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151835097):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 15 2018 at 13:08)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151835097):
 We've got `sequentially_complete.tendsto_div`used in metric_sequences.lean, in
 ```lean
 theorem lim_sequence_of_mem_closure {Y : set α} {a : α} (H : a ∈ closure Y) :
@@ -36,112 +36,112 @@ theorem lim_sequence_of_mem_closure {Y : set α} {a : α} (H : a ∈ closure Y) 
 ```
 But nothing from metric_sequences.lean is actually used in banach_contraction.lean any more
 
-#### [Alistair Tucker (Dec 17 2018 at 16:31)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036009):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 16:31)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036009):
 Isn't this basically constructive? It's a shame I that we have to mark as noncomputable the function to return the fixed point because the definition of completeness uses an exists.
 
-#### [Patrick Massot (Dec 17 2018 at 16:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036085):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 16:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036085):
 It looks very non-computable to me
 
-#### [Patrick Massot (Dec 17 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036140):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036140):
 This is what we keep repeating to our students: compactness and completeness give you elements for free! Constructive maths don't give anything for free, they want you to suffer.
 
-#### [Alistair Tucker (Dec 17 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036161):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036161):
 Why is that? If I have a cauchy sequence of, say, reals then I have constructed a real
 
-#### [Patrick Massot (Dec 17 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036192):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036192):
 This is a very special case, because you constructed real like that
 
-#### [Patrick Massot (Dec 17 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036251):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036251):
 And it's breaking an abstraction barrier
 
-#### [Patrick Massot (Dec 17 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036288):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036288):
 We want to use this theorem for many complete spaces which are not constructed as completions
 
-#### [Alistair Tucker (Dec 17 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036327):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036327):
 OK. Can you give me an example?
 
-#### [Patrick Massot (Dec 17 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036342):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036342):
 Differentiable functions for instance
 
-#### [Patrick Massot (Dec 17 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036376):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036376):
 Say you want to prove Cauchy-Lipschitz theorem about existence and uniqueness of solutions to nice ordinary differential equations
 
-#### [Alistair Tucker (Dec 17 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152044239):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152044239):
 I think @Rohan Mitta will probably want to kill me because I put Mario off reviewing this :oh_no:
 
-#### [Alistair Tucker (Dec 17 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152044258):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152044258):
 I panicked
 
-#### [Mario Carneiro (Dec 17 2018 at 18:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045032):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 17 2018 at 18:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045032):
 if you want some more tips: the style of tactic indentation isn't quite standard, there are some funny names like `Banach's_fixed_point` and generally nonconforming names (they should be more or less strictly based on reading the symbols), `fixed_point_of_iteration_limit'` and `fixed_point_of_iteration_limit` are the same, the main theorem is far too long (I think it can be shorter, and this should also be lemma'd if not)
 
-#### [Patrick Massot (Dec 17 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045161):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045161):
 I wrote that last remark many times, so I guess they'll need more help there. But I really want to finish completions (before the end of July 2018...)
 
-#### [Alistair Tucker (Dec 17 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045274):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045274):
 We do have a much shorter one here https://github.com/agjftucker/mathlib/blob/Banach/analysis/topology/banach_contraction.lean#L253
 
-#### [Patrick Massot (Dec 17 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045404):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045404):
 That's much better!
 
-#### [Patrick Massot (Dec 17 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045488):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045488):
 What's the difference with the next statement?
 
-#### [Patrick Massot (Dec 17 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045558):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045558):
 Why can't you get rid of `0 ≤ K →`?
 
-#### [Alistair Tucker (Dec 17 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045561):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045561):
 The statement is much the same but the method is different
 
-#### [Alistair Tucker (Dec 17 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045676):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045676):
 I think because otherwise you need inhabiteds ?
 
-#### [Alistair Tucker (Dec 17 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045720):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045720):
 In fact you need at least two distinct points
 
-#### [Mario Carneiro (Dec 17 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045730):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 17 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045730):
 the space is already inhabited
 
-#### [Mario Carneiro (Dec 17 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045736):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 17 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045736):
 why two points?
 
-#### [Patrick Massot (Dec 17 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045796):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045796):
 Oh I see
 
-#### [Patrick Massot (Dec 17 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045799):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045799):
 crazy computers...
 
-#### [Alistair Tucker (Dec 17 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045811):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045811):
 To prove that K >=0 I think you need two
 
-#### [Mario Carneiro (Dec 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045947):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045947):
 yeah, but if the space has only one point then it's a fixed point :P
 
-#### [Patrick Massot (Dec 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045958):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045958):
 Yeah!
 
-#### [Patrick Massot (Dec 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045970):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045970):
 Let's begin with this very natural case disjunction!
 
-#### [Mario Carneiro (Dec 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045977):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045977):
 lol
 
-#### [Mario Carneiro (Dec 17 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045995):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 17 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045995):
 I would suggest putting `K >= 0` in the definition of lipschitz
 
-#### [Alistair Tucker (Dec 17 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152046020):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152046020):
 OK I can change that in the main theorem :) But I might still need some `0 \leq K` in the preceding lemmas
 
-#### [Sebastien Gouezel (Dec 17 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152054653):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastien Gouezel (Dec 17 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152054653):
 ```quote
 I would suggest putting `K >= 0` in the definition of lipschitz
 ```
  Yes, definitely -- I played a lot with this in Isabelle, and it turned out to be much more manageable once I enforced `K >= 0`.
 
-#### [Alistair Tucker (Dec 17 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152054798):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Alistair Tucker (Dec 17 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152054798):
 will do. Thanks
 
-#### [Kevin Buzzard (Dec 17 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152056937):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Dec 17 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152056937):
 ```quote
 Let's begin with this very natural case disjunction!
 ```

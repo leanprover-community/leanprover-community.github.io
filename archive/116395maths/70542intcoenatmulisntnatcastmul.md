@@ -9,7 +9,7 @@ permalink: archive/116395maths/70542intcoenatmulisntnatcastmul.html
 
 ---
 
-#### [Kevin Buzzard (Aug 01 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130677240):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 01 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130677240):
 ```lean
 #check @int.coe_nat_mul -- int.coe_nat_mul : ∀ (m n : ℕ), ↑(m * n) = ↑m * ↑n -- this is in ℤ
 #check @nat.cast_mul -- nat.cast_mul : ∀ {α : Type u_1} [_inst_1 : semiring α] (m n : ℕ), ↑(m * n) = ↑m * ↑n
@@ -43,15 +43,15 @@ theorem nat.cast_pow' (n : ℕ) : ∀ m : ℕ, (n : ℤ) ^ m = (n ^ m : ℕ)
 
 Maybe the last one should be `int.coe_nat_pow` or something? Am I missing a trick? I'm trying to move smoothly between the naturals, the integers, and the integers mod p.
 
-#### [Kevin Buzzard (Aug 01 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130677411):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Aug 01 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130677411):
 [I'm threatening to add some of these functions to my brief `nat` PR by the way]
 
-#### [Mario Carneiro (Aug 01 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130682881):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 01 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130682881):
 Yes. There are two coercions from N to Z, with different names. They are proven the same, so given one theorem the other isn't far away, but you have to have both sets of theorems
 
-#### [Mario Carneiro (Aug 01 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130682992):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 01 2018 at 03:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130682992):
 There are also two power functions N -> N -> N, with different names, the specialization of `monoid.pow` and `nat.pow`, again they are proven the same and a simp lemma will translate one to the other
 
-#### [Mario Carneiro (Aug 01 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130683031):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Aug 01 2018 at 03:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130683031):
 In both cases you can put the blame on the fact that the special case is defined in lean core and mathlib can't undefine it, although I'm not sure I would remove `int.coe_nat` if I could
 

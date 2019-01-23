@@ -9,16 +9,16 @@ permalink: archive/113488general/60330localrecursivefunction.html
 
 ---
 
-#### [Reid Barton (Sep 14 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133958735):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Sep 14 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133958735):
 Can you define a recursive function with a `let` inside a `do` block (in a `meta` definition)?
 
-#### [Sebastian Ullrich (Sep 14 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133962580):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Sep 14 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133962580):
 No
 
-#### [Sebastian Ullrich (Sep 14 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133962812):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Sep 14 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133962812):
 Well, you could write a meta `fix`, but that's still not very ergonomical
 
-#### [Chris Hughes (Sep 14 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133964819):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 14 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133964819):
 ```lean
 meta def foo (n : ℕ) : option ℕ :=
 do let m : ℕ :=
@@ -32,9 +32,9 @@ return m
 
 ```
 
-#### [Chris Hughes (Sep 14 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133964837):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Sep 14 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133964837):
 I had to do `by exact` for some reason
 
-#### [Sebastian Ullrich (Sep 14 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133964901):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Sebastian Ullrich (Sep 14 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133964901):
 Now that's just terrible :P
 

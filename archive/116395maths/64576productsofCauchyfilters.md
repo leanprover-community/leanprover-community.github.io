@@ -9,49 +9,49 @@ permalink: archive/116395maths/64576productsofCauchyfilters.html
 
 ---
 
-#### [Patrick Massot (Jul 24 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130232215):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 24 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130232215):
 I need that a product of Cauchy filters is Cauchy. I couldn't see it in mathlib, so I wrote a couple of lines on paper and decided I should be able to brute force Lean to swallow it. The result on https://gist.github.com/PatrickMassot/aca4545c10aa9d96bf37d9231fb3470c is not pretty (even if you cut in half the two redundant parts). Here brutality is to go all the way down to elements of our uniform spaces. I suspect I missed (or mathlib is missing) some support lemmas which would allow to operate at a higher level. @**Mario Carneiro** and @**Johannes Hölzl**, this is probably a good occasion to set a new golfing factor record.
 
-#### [Patrick Massot (Jul 24 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130232299):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 24 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130232299):
 @**Kevin Buzzard** if we manage to formalize perfectoid spaces, and someone asks me: "Wow, so you know about perfectoid spaces?" I'll answer "Yeah, it's all about filters...".
 
-#### [Kevin Buzzard (Jul 24 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130234862):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 24 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130234862):
 Oh we'll definitely formalise perfectoid spaces -- although perhaps not before Scholze gets his fields medal. A lot of it is about completions, for sure...
 
-#### [Patrick Massot (Jul 24 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235030):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 24 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235030):
 We still have one week
 
-#### [Patrick Massot (Jul 24 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235068):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 24 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235068):
 How far are you from perfectoid spaces if you assume topological rings have completions?
 
-#### [Kevin Buzzard (Jul 24 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235581):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 24 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235581):
 I need quotient groups.
 
-#### [Patrick Massot (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235768):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235768):
 Don't you have quotient groups?
 
-#### [Kevin Buzzard (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235778):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235778):
 I wrote something, and then Chris wrote something else which probably contradicts it, and he PR'd his to mathlib. There are just so many stupid things which aren't there. I can't define what it means for a valuation to be continuous without quotient rings, fields of fractions etc. It might be possible to do within a week.
 
-#### [Kevin Buzzard (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235798):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235798):
 But with schemes there was a period of several months when I thought it could all be done in a week and then another hitch appeared.
 
-#### [Kevin Buzzard (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235801):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235801):
 I'll take a look now.
 
-#### [Patrick Massot (Jul 24 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235900):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 24 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235900):
 I hope I'll be done with completions before the end of this week (but I had the same hope one week ago)
 
-#### [Patrick Massot (Jul 24 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235932):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 24 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235932):
 I had to change my strategy to understand completions of products because I've been too optimistic
 
-#### [Kevin Buzzard (Jul 24 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235942):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 24 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235942):
 Oh I remember now -- I wrote a list of what I needed in the perfectoid thread. I need that a free group is generated by its generators. Some things are only proved for multiplicative groups and some only for additive.
 
-#### [Patrick Massot (Jul 24 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130236021):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 24 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130236021):
 Maybe @**Kenny Lau** can help here. He worked a lot on free groups
 
-#### [Kevin Buzzard (Jul 24 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130236195):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 24 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130236195):
 ```lean
 import group_theory.coset 
 
@@ -88,13 +88,13 @@ group.add_closure ((group.free_ab_gens X) '' set.univ) = set.univ := sorry
 
 was what I thought I needed after spending several hours proving that if something happened in universe v then it also happened in universe u.
 
-#### [Kenny Lau (Jul 25 2018 at 03:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249068):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 03:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249068):
 ```quote
 Oh I remember now -- I wrote a list of what I needed in the perfectoid thread. I need that a free group is generated by its generators. Some things are only proved for multiplicative groups and some only for additive.
 ```
 I have a similar theorem for free abelian groups (see the other thread).
 
-#### [Kenny Lau (Jul 25 2018 at 03:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249323):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 03:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249323):
 but actually there's already enough lemmas in `free_group.lean` to prove it:
 ```lean
 theorem free_group.gen :
@@ -105,10 +105,10 @@ calc  set.univ
 ... = group.closure (set.range $ @free_group.of α) : free_group.to_group.range_eq_closure
 ```
 
-#### [Kenny Lau (Jul 25 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249394):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249394):
 but here's an alternative proof:
 
-#### [Kenny Lau (Jul 25 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249395):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249395):
 ```lean
 import group_theory.free_group
 
@@ -137,81 +137,81 @@ free_group.induction_on x
   (λ _ _, group.in_closure.mul)
 ```
 
-#### [Kevin Buzzard (Jul 25 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263318):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263318):
 Sorry -- I need it for free _abelian_ groups, as defined via the finsupp construction :-/
 
-#### [Kenny Lau (Jul 25 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263334):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263334):
 1. there is a free abelian group in my new tensor product (the constructive one)
 
-#### [Kenny Lau (Jul 25 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263336):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263336):
 2. there is a free abelian group in my old tensor product which uses finsupp
 
-#### [Kevin Buzzard (Jul 25 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263348):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263348):
 I don't want to use random pieces of your random repos :-(
 
-#### [Kenny Lau (Jul 25 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263398):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263398):
 my old tensor product is in the stacks project
 
-#### [Kevin Buzzard (Jul 25 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263403):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263403):
 That's still a random repo :-(
 
-#### [Kenny Lau (Jul 25 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263409):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 25 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263409):
 :-(
 
-#### [Kevin Buzzard (Jul 25 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263446):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263446):
 Although it sounds super-boring I wonder whether after this perfectoid thing I should stop worrying about putting hard maths into Lean and turn my attention to putting easy maths into mathlib. It might teach me a lot about how to write really good Lean code as opposed to just adequate code which runs.
 
-#### [Johan Commelin (Jul 25 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263656):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263656):
 Hmm, I don't know... I think you should keep the hat of visionary mathematician. There's enough soldiers in your little army to do the "easy math". There are not many people that can think about the big picture.
 
-#### [Patrick Massot (Jul 25 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263681):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 25 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263681):
 At some point we really need to have easy stuff though. Maybe it's because I'm learning so slowly, but I'm a bit pessimistic about Kevin's army learning enough in two summer months to be able to significantly improve the amount of easy maths in mathlib.
 
-#### [Johan Commelin (Jul 25 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263731):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263731):
 True, but Kevin is writing a book. And I hope that will enable a lot of people to do more stuff. You want some exponential growth to happen. That won't happen if Kevin is busy proving stuff about quotient groups.
 
-#### [Johan Commelin (Jul 25 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263741):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263741):
 It might happen if every semester 10 UG's from Imperial get interested in Lean and start their own journeys.
 
-#### [Kevin Buzzard (Jul 25 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263742):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263742):
 I am pessimistic that by 2 months all the students will be writing mathlib-ready code. However I am very optimistic that some of them will be writing good code, and some of them will be writing code which (perhaps inefficiently) fills in holes in mathlb.
 
-#### [Johan Commelin (Jul 25 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263743):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263743):
 After 5 years...
 
-#### [Johan Commelin (Jul 25 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263808):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263808):
 I think it is awesome that you guys are now going to teach classes with Lean. I can't pull that off (both because of my Lean-level and career-level).
 
-#### [Johan Commelin (Jul 25 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263816):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263816):
 But this hasn't happened before, I think. That *math* students get taught with ITP's
 
-#### [Kevin Buzzard (Jul 25 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263822):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263822):
 Yes, I am trying to make Lean part of the "culture" here. When I can be bothered to actually go to work I will walk into a room with 10-15 students all doing, and talking about, Lean, and I'll spend the day helping them. I'm hoping it will slowly snowball but I have no idea how realistic this is. I'm pretty sure that in every class of 250 we have I should be able to find 5-10 who are interested and get the hang of it even with no support. The question is how many more I can get in if I make it much easier for them.
 
-#### [Patrick Massot (Jul 25 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263836):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 25 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263836):
 I'm not even talking of mathlib-ready code (I still can't do it myself!). But it could be close enough so that straightening it would be less work than starting from scratch.
 
-#### [Johan Commelin (Jul 25 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263940):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263940):
 Right, but already you told us that these students are starting to help each other. Which is fantastic. And 2 years from now it will be easy to find TA's for the courses you are giving.
 
-#### [Patrick Massot (Jul 25 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263944):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 25 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263944):
 I won't have 250 students, rather more like 25 (only the students selected for a combined CS/math program). I'm not as brave as Kevin, I'll wait to see what I can do with few good students before trying to use Lean on everybody.
 
-#### [Johan Commelin (Jul 25 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263955):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263955):
 I do agree that if you teach a course to 250 students, you might want to give them some helper-files that they should import.
 
-#### [Kevin Buzzard (Jul 25 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263961):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 25 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263961):
 That's September's job.
 
-#### [Johan Commelin (Jul 25 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263963):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263963):
 I just hope that it won't eat up all your time, so that the big picture starts to die...
 
-#### [Patrick Massot (Jul 25 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130264013):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jul 25 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130264013):
 ```quote
 I think it is awesome that you guys are now going to teach classes with Lean. I can't pull that off (both because of my Lean-level and career-level).
 ```
 I hope Lean-level is irrelevant... Career level clearly is, partly because it allows to fool people into trusting you, but mostly because it allows to potentially waste time.
 
-#### [Johan Commelin (Jul 25 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130264062):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 25 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130264062):
 Well, at my Lean-level, it does become relevant. You are several Lean-levels above me. Your career-level is infinitely beyond mine: tenure vs not
 

@@ -9,7 +9,7 @@ permalink: archive/113488general/96433Tactictonotactic.html
 
 ---
 
-#### [Nima (Apr 21 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125479107):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nima (Apr 21 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125479107):
 Is there an easy way to re-write the last function without using tactic?
 ```lean
 section 
@@ -28,7 +28,7 @@ end
 end
 ```
 
-#### [Mario Carneiro (Apr 21 2018 at 05:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125479500):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 05:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125479500):
 ```
 theorem check_of_p (h : p) : check ↔ cnd₁ := iff_of_eq (if_pos h)
 theorem check_of_not_p (h : ¬ p) : check ↔ cnd₂ := iff_of_eq (if_neg h)
@@ -40,7 +40,7 @@ else
   f₂ ((check_of_not_p h).1 c)
 ```
 
-#### [Nima (Apr 21 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125481942):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Nima (Apr 21 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125481942):
 Thank you, `if_pos` and `if_neg` are what I was looking for.
 ```lean
 def f' (c:check): nat :=
@@ -48,12 +48,12 @@ def f' (c:check): nat :=
   else        f₁ (eq.mp (if_neg h) c) 
 ```
 
-#### [Kenny Lau (Apr 21 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125482384):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 21 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125482384):
 Nima beats Mario
 
-#### [Mario Carneiro (Apr 21 2018 at 07:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125482438):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 07:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125482438):
 I wrote it that way for a reason. You should not rely on definitional expansion in this way as it is brittle. The point of the lemma is to isolate the unfolding of `check` so that this isn't happening in an ambiguous context
 
-#### [Mario Carneiro (Apr 21 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125482447):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 21 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125482447):
 The usage of `iff` is by convention since these are propositions
 

@@ -9,9 +9,9 @@ permalink: archive/179818LeanTogether2019/09264brokenlink.html
 
 ---
 
-#### [Bryan Gin-ge Chen (Jan 10 2019 at 02:46)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/broken%20link/near/154809207):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Bryan Gin-ge Chen (Jan 10 2019 at 02:46)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/broken%20link/near/154809207):
 On the Lean Together website, the link to Kevin Buzzard's slides is currently broken. It should be changed to https://lean-forward.github.io/lean-together/2019/slides/buzzard.pdf
 
-#### [Rob Lewis (Jan 10 2019 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/broken%20link/near/154823775):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jan 10 2019 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/broken%20link/near/154823775):
 Fixed, thanks.
 

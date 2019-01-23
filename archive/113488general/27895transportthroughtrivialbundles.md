@@ -9,7 +9,7 @@ permalink: archive/113488general/27895transportthroughtrivialbundles.html
 
 ---
 
-#### [Scott Morrison (Apr 27 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125769004):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 27 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125769004):
 I find myself needing a few lemmas about parallel transport through trivial bundles. (In the first case, this is literally the case, the later ones are close analogues.)
 
 ````
@@ -38,18 +38,18 @@ begin
 end
 ````
 
-#### [Scott Morrison (Apr 27 2018 at 12:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125769016):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 27 2018 at 12:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125769016):
 Are these welcome in `mathlib`? If so, where do they go?
 
-#### [Scott Morrison (Apr 27 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125769054):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 27 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125769054):
 (These all arise after using `cases` on hypotheses in fairly harmless ways.)
 
-#### [Scott Morrison (Apr 28 2018 at 04:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125803956):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Scott Morrison (Apr 28 2018 at 04:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125803956):
 I made a PR for this at <https://github.com/leanprover/mathlib/pull/124>.
 
-#### [Johan Commelin (Apr 28 2018 at 05:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125805005):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 28 2018 at 05:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125805005):
 This is all going to follow from your `transportable` stuff later on, I guess...
 
-#### [Johan Commelin (Apr 28 2018 at 05:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125805006):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Apr 28 2018 at 05:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125805006):
 I mean, parallel transport in maths is an instance of transport of structure...
 

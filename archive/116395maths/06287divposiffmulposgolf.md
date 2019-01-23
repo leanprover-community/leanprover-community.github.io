@@ -9,7 +9,7 @@ permalink: archive/116395maths/06287divposiffmulposgolf.html
 
 ---
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700596):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700596):
 ```lean
 import analysis.real
 
@@ -33,25 +33,25 @@ end
 ```
 I was surprised this wasn't already in, for preordered semimonoids with bot or whatever
 
-#### [Mario Carneiro (Nov 14 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700710):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700710):
 I'm not, that's a weird theorem
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700874):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700874):
 what about `0 < x * y iff (x < 0 and y < 0) or (x > 0 and y > 0)`?
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700885):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700885):
 and similarly for `0 < x / y`
 
-#### [Kenny Lau (Nov 14 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700919):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 14 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700919):
 `pos_and_pos_or_neg_and_neg_of_mul_pos`?
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700945):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700945):
 Oh, you found it?
 
-#### [Kenny Lau (Nov 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701006):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701006):
 I found x*y>0 implies x,y>0 or x,y<0
 
-#### [Mario Carneiro (Nov 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701014):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701014):
 I guess the best decomposition of it is something like
 ```
 0 < x * y
@@ -61,43 +61,43 @@ I guess the best decomposition of it is something like
 ... ↔ 0 < x / y
 ```
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701017):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701017):
 ha ha it's in core
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701044):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701044):
 I think you should use `pos_and_pos_or_neg_and_neg_of_mul_pos`
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701046):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701046):
 just for the name
 
-#### [Mario Carneiro (Nov 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701071):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701071):
 whenever the name gets that long my eyes cross trying to read it
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701091):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701091):
 we should think of a more rigorous encrypted way to name lemmas
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701096):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701096):
 to keep them shorter
 
-#### [Mario Carneiro (Nov 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701110):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701110):
 have you seen metamath naming conventions? :D
 
-#### [Mario Carneiro (Nov 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701173):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701173):
 it would probably be called `mulanor` or the like
 
-#### [Reid Barton (Nov 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701204):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701204):
 that's a cool name
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701205):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701205):
 the md5sum of `pos_and_pos_or_neg_and_neg_of_mul_pos` is shorter, maybe we should use that
 
-#### [Mario Carneiro (Nov 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701225):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701225):
 lol that's a bad sign
 
-#### [Mario Carneiro (Nov 14 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701257):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147701257):
 probably gzip can do better
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702518):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702518):
 ```quote
 I'm not, that's a weird theorem
 ```
@@ -108,74 +108,74 @@ theorem Q4 : { x : ℝ | x ≠ 0 ∧ 3 * x + 1 / x < 4 } =
 ```
 ? I used this along the way to clear denominators but it was still an annoying case bash
 
-#### [Kenny Lau (Nov 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702583):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702583):
 oh god
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702659):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702659):
 yes it's M1F sheet 3
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702670):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702670):
 you should have seen my proof last year!
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702771):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702771):
 It took me 25 lines to get to `⊢ 0 < (1 - x) * x * (3 * x - 1) ↔ x < 0 ∨ 1 / 3 < x ∧ x < 1`
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702785):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702785):
 and now the case bash is much easier
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702799):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702799):
 but I had to clear denominators along the way
 
-#### [Kenny Lau (Nov 14 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702914):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 14 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702914):
 how about no
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702958):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147702958):
 If it's a reasonable M1F question and if you want formal proof verification systems to be taken seriously by mathematicians, this has to be relatively straightforward
 
-#### [Reid Barton (Nov 14 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703048):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 14 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703048):
 Someone want to implement a cylindrical algebraic decomposition tactic?
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703084):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703084):
 Is that what's necessary?
 
-#### [Mario Carneiro (Nov 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703089):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703089):
 it's a case bash
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703092):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703092):
 Can we make it an issue or is this unreasonable?
 
-#### [Kevin Buzzard (Nov 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703100):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703100):
 It's a cylindrical algebraic decomposition Mario
 
-#### [Mario Carneiro (Nov 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703112):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703112):
 the generalization of this to more vars is CAD
 
-#### [Reid Barton (Nov 14 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703177):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 14 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703177):
 Yeah you don't really need it for one variable & rational roots.
 
-#### [Kevin Buzzard (Nov 14 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703194):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703194):
 `theorem Q4 : { x : ℝ | x ≠ 0 ∧ 3 * x + 1 / x < 4 } =
   {y : ℝ | y < 0 ∨ ((1 : ℝ) / 3 < y ∧ y < 1)}` you mean like this?
 
-#### [Kevin Buzzard (Nov 14 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703243):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703243):
 It's still a pain to prove that if `1/3 < x` and `x < 1` then `3 * x + 1 / x < 4`
 
-#### [Kevin Buzzard (Nov 14 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703262):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703262):
 My reworking to `⊢ 0 < (1 - x) * x * (3 * x - 1) ↔ x < 0 ∨ 1 / 3 < x ∧ x < 1` is definitely paying dividends
 
-#### [Kenny Lau (Nov 14 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703268):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 14 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703268):
 I think you should just let the IC gang prove that
 
-#### [Mario Carneiro (Nov 14 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703323):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703323):
 in general you have to figure out ordering of real algebraic numbers which is a pain
 
-#### [Mario Carneiro (Nov 14 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703366):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 14 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703366):
 and the best known algorithm is double exponential, a great *improvement* over the previous algorithm
 
-#### [Kenny Lau (Nov 14 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703451):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 14 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147703451):
 what a pity, I was going to use it in my next gce exam
 
-#### [Kevin Buzzard (Nov 14 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147704530):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147704530):
 ```lean
 theorem Q4 : { x : ℝ | x ≠ 0 ∧ 3 * x + 1 / x < 4 } = 
   {x : ℝ | x < 0 ∨ ((1 : ℝ) / 3 < x ∧ x < 1)} :=
@@ -266,13 +266,13 @@ end
 ```
 Much better than last year's effort
 
-#### [Kenny Lau (Nov 14 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147704744):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 14 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147704744):
 "much better"
 
-#### [Kevin Buzzard (Nov 14 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147704761):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 14 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147704761):
 thanks
 
-#### [Kenny Lau (Nov 15 2018 at 00:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706417):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706417):
 ```lean
 import analysis.real
 
@@ -320,19 +320,19 @@ begin
 end
 ```
 
-#### [Kenny Lau (Nov 15 2018 at 00:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706420):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706420):
 @**Kevin Buzzard**
 
-#### [Kenny Lau (Nov 15 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706433):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706433):
 half your size
 
-#### [Kevin Buzzard (Nov 15 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706502):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 15 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706502):
 It's still a lot longer than what most of the first years produce with pen and paper though isn't it :-/
 
-#### [Kevin Buzzard (Nov 15 2018 at 00:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706584):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 15 2018 at 00:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706584):
 you did the case split at the start. I worked on the goal first. Is your way better or would you have written half as much as me if you'd used my strategy too?
 
-#### [Kenny Lau (Nov 15 2018 at 00:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706587):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706587):
 btw:
 ```lean
 lemma div_pos_iff_mul_pos (x y : ℝ) (Hy : y ≠ 0) : 0 < x * y ↔ 0 < x / y :=
@@ -345,44 +345,44 @@ begin
 end
 ```
 
-#### [Kenny Lau (Nov 15 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706603):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706603):
 ```lean
 lemma div_pos_iff_mul_pos (x y : ℝ) (Hy : y ≠ 0) : 0 < x * y ↔ 0 < x / y :=
 by rw [← @mul_lt_mul_right _ _ _ (x/y) _ (mul_self_pos Hy)];
   rw [zero_mul, ← mul_assoc, div_mul_cancel _ Hy]
 ```
 
-#### [Kenny Lau (Nov 15 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706702):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706702):
 ```lean
 lemma div_pos_iff_mul_pos (x y : ℝ) (Hy : y ≠ 0) : 0 < x * y ↔ 0 < x / y :=
 by rw [← div_lt_div_right (mul_self_pos Hy), zero_div, ← div_div_eq_div_mul, mul_div_cancel _ Hy]
 ```
 
-#### [Kenny Lau (Nov 15 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706705):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706705):
 (98 characters!)
 
-#### [Kenny Lau (Nov 15 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706769):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706769):
 ```quote
 you did the case split at the start. I worked on the goal first. Is your way better or would you have written half as much as me if you'd used my strategy too?
 ```
  I mean, you also did case split at the start
 
-#### [Reid Barton (Nov 15 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706788):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 15 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706788):
 Isn't that `Hy` hypothesis actually unneeded?
 
-#### [Reid Barton (Nov 15 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706795):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 15 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706795):
 If `y = 0` then both things are 0
 
-#### [Kenny Lau (Nov 15 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706981):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147706981):
 great
 
-#### [Kenny Lau (Nov 15 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147707018):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147707018):
 "Lean helps me understand maths better"
 
-#### [Kenny Lau (Nov 15 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147707033):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 15 2018 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147707033):
 "`y` doesn't need to be nonzero"
 
-#### [Mario Carneiro (Nov 15 2018 at 02:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147713393):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Nov 15 2018 at 02:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147713393):
 ```lean
 import data.real.basic tactic.ring data.set.intervals
 
@@ -420,15 +420,15 @@ begin
 end
 ```
 
-#### [Kevin Buzzard (Nov 15 2018 at 03:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147716871):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Nov 15 2018 at 03:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147716871):
 I shall explode this proof tomorrow
 
-#### [Patrick Massot (Nov 15 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147728220):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 15 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147728220):
 Mario, why do you need to explicitly invoke all those `and_iff_right`, `or_iff_right`, `or_iff_left`? Isn't it something that the simplifier should do (using hypothesis `x0`)?
 
-#### [Patrick Massot (Nov 15 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147728438):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Nov 15 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147728438):
 Makes me think: @**Simon Hudon** what happened to your monotonicity tactic?
 
-#### [Simon Hudon (Nov 15 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147754940):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Nov 15 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147754940):
 Mario is still unhappy with it.
 

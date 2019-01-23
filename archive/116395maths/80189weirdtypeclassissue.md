@@ -9,7 +9,7 @@ permalink: archive/116395maths/80189weirdtypeclassissue.html
 
 ---
 
-#### [Johan Commelin (Oct 18 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026131):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026131):
 Consider this code:
 ```lean
 import category_theory.category
@@ -43,16 +43,16 @@ U : C
 ⊢ category C
 ```
 
-#### [Johan Commelin (Oct 18 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026148):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026148):
 Why are `C` and the category structure duplicated there? And why can't it resolve the type class issue?
 
-#### [Johannes Hölzl (Oct 18 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026219):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (Oct 18 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026219):
 what happens if you remove the `include` and write the variables directly as parameters for `coverage`?
 
-#### [Johan Commelin (Oct 18 2018 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026236):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026236):
 These includes are all over the place in Scott's library. If you remove it you get red squiggles under the `⟶` in `obj i ⟶ U`.
 
-#### [Johan Commelin (Oct 18 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026298):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026298):
 ```lean
 def coverage := Π {U : C}, set (covering_family U)
 ```
@@ -66,20 +66,20 @@ U : C
 ```
 So now the duplication is gone. But it still can't resolve the type class...
 
-#### [Johan Commelin (Oct 18 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026368):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026368):
 The following works but is very ugly.
 ```lean
 def coverage := Π {U : C}, set (@covering_family _ 𝒞 U)
 ```
 
-#### [Johan Commelin (Oct 18 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136034898):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136034898):
 In general I think the fact that we need `include 𝒞` all the time is a sign that something is wrong. But I have no clue what is wrong and how to fix it.
 
-#### [Reid Barton (Oct 18 2018 at 14:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136039835):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 18 2018 at 14:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136039835):
 I usually include the universe parameters when I run into this kind of issue, like `covering_family.{u\1 u\2}`. (BTW, usually we use a `v`-type letter for the morphism universe.)
 I have no idea about the duplicate display in the error message though.
 
-#### [Johan Commelin (Oct 18 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136040495):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136040495):
 I currently have
 ```lean
 import category_theory.examples.topological_spaces
@@ -196,19 +196,19 @@ end topological_space
 ```
 Lean is especially unhappy about the part where I try to define the `sieve`.
 
-#### [Johan Commelin (Oct 18 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136040514):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136040514):
 Currently I'm just going to wait till some PR's get merged.
 
-#### [Reid Barton (Oct 18 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136041150):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 18 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136041150):
 Lots of those `_`s in sieve still need to be filled in, right?
 
-#### [Reid Barton (Oct 18 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136041176):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 18 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136041176):
 Or at least... 3 I guess?
 
-#### [Johan Commelin (Oct 18 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136041777):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136041777):
 Yes, that is right. But I need fibre products for the for the `_` in the first `Sigma`. :sad:
 
-#### [Reid Barton (Oct 18 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043495):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 18 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043495):
 ```quote
 In general I think the fact that we need `include 𝒞` all the time is a sign that something is wrong. But I have no clue what is wrong and how to fix it.
 ```
@@ -216,22 +216,22 @@ So there are two issues which come up a lot due to the way category theory uses 
 1. The `include 𝒞` thing is a workaround for a specific elaborator bug where it doesn't correctly account for universe parameters of variables that have been included by the "square bracket rule". If you hit this bug then you will see an error about something like "bad tactic or buggy elaborator".
 2. It also often happens that you have to help Lean out with some explicit universe parameters. I think what is going on is that one of the parameters is not constrained by anything (usually the `v`), and so Lean is looking for a `category.{u ?u_1} C` instance. Apparently it's unwilling to take an instance `category.{u v} C` for some specific `v` and specialize `?u_1` to `v`. I'm not sure whether this is a bug or just something where the system doesn't work in the way we would usually prefer.
 
-#### [Johan Commelin (Oct 18 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043564):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 18 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043564):
 I see. I wouldn't mind if universe unification was slightly more greedy in this case.
 
-#### [Reid Barton (Oct 18 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043615):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 18 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043615):
 Your `covering_family` thing is the second issue.
 
-#### [Reid Barton (Oct 18 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043903):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 18 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043903):
 Maybe we would like to have something like `out_param` on the universe parameter `v`, but that's not currently possible
 
-#### [Reid Barton (Oct 18 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043980):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 18 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043980):
 Also I don't really understand how `out_param` works, so I could be way off-base.
 
-#### [Reid Barton (Oct 18 2018 at 15:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136044517):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Oct 18 2018 at 15:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136044517):
 Maybe the clearest example of this is something like `terminal_object (C : Type u) [category.{u v} C] [has_terminal_object.{u v} C] : C` where you could have a type `C : Type u` equipped with two totally different `category.{u v}` and `category.{u w}` structures with different terminal objects. The type of `terminal_object C` is just `C` which has `Type u` so there is no way you could ever constrain the `v` parameter.
 
-#### [Johan Commelin (Oct 19 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136107468):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 19 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136107468):
 The issues aren't gone, but my definition of `sieve` is converging onto something far more readable then I had before:
 ```lean
 import category_theory.examples.topological_spaces
@@ -313,6 +313,6 @@ def sheaf_condition (f : (covering_family U)) {C : Type u₂} [category.{u₂ v�
 end covering_family
 ```
 
-#### [Johan Commelin (Oct 19 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136107519):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Oct 19 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136107519):
 But there are still a lot of typeclass issues.
 

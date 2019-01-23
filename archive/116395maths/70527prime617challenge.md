@@ -9,7 +9,7 @@ permalink: archive/116395maths/70527prime617challenge.html
 
 ---
 
-#### [Kevin Buzzard (Jul 26 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130359176):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130359176):
 ```lean
 import data.nat.prime 
 
@@ -20,25 +20,25 @@ example : prime 617 := sorry
 
 I tried `dec_trivial` with `local attribute [instance] decidable_prime_1` but it times out on my machine. There is a lemma that says p is prime iff no factors <= sqrt(p) -- can one somehow persuade Lean to use this?
 
-#### [Kevin Buzzard (Jul 26 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130359652):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130359652):
 The reason this is even a thing is that a question on the number theory example sheet that students are working on asks them to use quadratic reciprocity to evaluate whether something is a square mod 617. They managed to solve the question assuming quadratic reciprocity and that 617 was prime :-) The smaller numbers we can handle
 
-#### [Rob Lewis (Jul 26 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130360645):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jul 26 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130360645):
 It looks like `decidable_prime` already does this: https://github.com/leanprover/mathlib/blob/master/data/nat/prime.lean#L90
 
-#### [Rob Lewis (Jul 26 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130360660):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jul 26 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130360660):
 Why are you trying to use `decidable_prime_1`?
 
-#### [Rob Lewis (Jul 26 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130360768):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jul 26 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130360768):
 `#eval if nat.prime 617 then tt else ff` is  instant without adding the local instance.
 
-#### [Mario Carneiro (Jul 26 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130361003):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 26 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130361003):
 You can also use `#eval to_bool (nat.prime 617)` for the same purpose
 
-#### [Kevin Buzzard (Jul 26 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130361928):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130361928):
 I want a proof!
 
-#### [Kevin Buzzard (Jul 26 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130361929):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130361929):
 ```lean
 import data.nat.prime 
 
@@ -71,13 +71,13 @@ end
 
 Is it possible to work out how close I got?
 
-#### [Kevin Buzzard (Jul 26 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130362377):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130362377):
 Hmm, I think I only make it up to 6 :-/
 
-#### [Kevin Buzzard (Jul 26 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130362737):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130362737):
 Ok I have a strat. I can prove 617 = 154 * 4 + 1 using norm_num and then use some lemmas about division to reduce non-divisibility of 617 by 4 to non-divisibility of 1 by 4, which I can prove with `dec_trivial`. I then repeat up to 24. I write a python script which generates the code I want.
 
-#### [Kevin Buzzard (Jul 26 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130363560):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130363560):
 ```lean
 import tactic.norm_num 
 import data.nat.prime 
@@ -157,28 +157,28 @@ revert hm2,exact dec_trivial,
 end
 ```
 
-#### [Kevin Buzzard (Jul 26 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130363563):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130363563):
 There's a proper proof.
 
-#### [Mario Carneiro (Jul 26 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130363582):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 26 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130363582):
 I'm on it...
 
-#### [Kevin Buzzard (Jul 26 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130363741):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 26 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130363741):
 /me thinks that `#eval` should be renamed `#evil`
 
-#### [Rob Lewis (Jul 26 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130364211):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jul 26 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130364211):
 Ah, sorry, I shouldn't try to read this while listening to talks.
 
-#### [Rob Lewis (Jul 26 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130364221):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Rob Lewis (Jul 26 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130364221):
 I end up missing obvious things in both places!
 
-#### [Mario Carneiro (Jul 28 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130449391):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 28 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130449391):
 Challenge accepted
 ```
 example : nat.prime 617 := by norm_num
 ```
 
-#### [Kenny Lau (Jul 28 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130451800):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Jul 28 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130451800):
 ```lean
 import tactic.norm_num data.nat.prime
 
@@ -191,16 +191,16 @@ state:
 -/
 ```
 
-#### [Johan Commelin (Jul 28 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130453651):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (Jul 28 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130453651):
 A wonderful example of the theorem that examples aren't theorems.
 
-#### [Kevin Buzzard (Jul 28 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130455413):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130455413):
 Maybe you should have tried 57
 
-#### [Kevin Buzzard (Jul 28 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130455453):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130455453):
 Looks like I need to update my blog post :-)
 
-#### [Kevin Buzzard (Jul 28 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130455877):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130455877):
 ```quote
 ```lean
 import tactic.norm_num data.nat.prime
@@ -216,6 +216,6 @@ state:
 ```
 Kenny it works for me. Did you update your mathlib? This is code that Mario just wrote.
 
-#### [Kevin Buzzard (Jul 28 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130455927):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 28 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130455927):
 And thanks Mario! I think my students were going to have some trouble with the example sheet questions if they couldn't get as far as 617.
 

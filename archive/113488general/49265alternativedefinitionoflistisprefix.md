@@ -9,28 +9,28 @@ permalink: archive/113488general/49265alternativedefinitionoflistisprefix.html
 
 ---
 
-#### [Kenny Lau (Apr 19 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285727):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 19 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285727):
 Could we have a subtype instead of an existential here, as the data is lost in the latter?
 
-#### [Kenny Lau (Apr 19 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285728):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 19 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285728):
 @**Mario Carneiro**
 
-#### [Mario Carneiro (Apr 19 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285742):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 19 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285742):
 the data isn't lost, you can recover it by dropping the first `n` elements of the larger list
 
-#### [Mario Carneiro (Apr 19 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285743):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 19 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285743):
 where `n` is the length of the smaller list
 
-#### [Kenny Lau (Apr 19 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285744):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 19 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285744):
 right, but has this been done in mathlib?
 
-#### [Mario Carneiro (Apr 19 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285745):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 19 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285745):
 The existential is used because I want it to be a prop
 
-#### [Kenny Lau (Apr 19 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285784):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Apr 19 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285784):
 I mean, the choice function for this existential isn't in mathlib
 
-#### [Mario Carneiro (Apr 19 2018 at 05:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125286245):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Apr 19 2018 at 05:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125286245):
 ```
 theorem prefix_iff_eq_append (l₁ l₂ : list α) : l₁ <+: l₂ ↔ l₁ ++ drop (length l₁) l₂ = l₂ :=
 ⟨λ h, let ⟨r, e⟩ := h in begin

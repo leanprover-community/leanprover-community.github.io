@@ -9,7 +9,7 @@ permalink: archive/113488general/97591mutualinductives.html
 
 ---
 
-#### [Chris Hughes (Nov 04 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132804):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132804):
 What's the "canonical" proof that the Types A and B are empty. I proved it by reference to the auxiliary `A._mut_`. Is there a nicer way?
 ```lean
 mutual inductive A, B
@@ -19,7 +19,7 @@ with B : Type
 | mk : A → B
 ```
 
-#### [Kenny Lau (Nov 04 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132957):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132957):
 ```lean
 mutual inductive A, B
 with A : Type
@@ -31,10 +31,10 @@ def A.to_sort (l : Sort*) : A → l
 | (A.mk (B.mk x)) := A.to_sort x
 ```
 
-#### [Chris Hughes (Nov 04 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132960):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132960):
 Of course.
 
-#### [Chris Hughes (Nov 04 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137133128):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Chris Hughes (Nov 04 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137133128):
 Are there any recursors that look a bit like this?
 ```lean
 def AB.reca : Π {Ca : A → Sort*} {Cb : B → Sort*} 
@@ -43,6 +43,6 @@ def AB.reca : Π {Ca : A → Sort*} {Cb : B → Sort*}
   (a : A), Ca a
 ```
 
-#### [Kenny Lau (Nov 04 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137133175):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (Nov 04 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137133175):
 you can write one
 

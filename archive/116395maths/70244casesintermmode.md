@@ -9,7 +9,7 @@ permalink: archive/116395maths/70244casesintermmode.html
 
 ---
 
-#### [Johan Commelin (May 01 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937140):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 01 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937140):
 I am trying to tell Lean what a path in a quiver is. How do I finish `is_a_path`?
 ```lean
 universes u
@@ -26,10 +26,10 @@ definition is_a_path : (list Q.E) → Prop :=
 λ l, sorry
 ```
 
-#### [Mario Carneiro (May 01 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937192):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 01 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937192):
 hint: use `list.chain`
 
-#### [Kenny Lau (May 01 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937200):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937200):
 ```lean
 inductive list.chain : Π {α : Type u}, (α → α → Prop) → α → list α → Prop
 constructors:
@@ -38,16 +38,16 @@ list.chain.cons : ∀ {α : Type u} {R : α → α → Prop} {a b : α} {l : lis
   R a b → list.chain R b l → list.chain R a (b :: l)
 ```
 
-#### [Kenny Lau (May 01 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937201):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937201):
 interesting
 
-#### [Johan Commelin (May 01 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937248):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 01 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937248):
 By the way, do you think it is a good idea to use lists to capture paths?
 
-#### [Mario Carneiro (May 01 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937304):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 01 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937304):
 You may want more complicated inductive structures in some circumstances, but here a list of edges is sufficient
 
-#### [Kenny Lau (May 01 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937307):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937307):
 ```lean
 
 universes u v
@@ -66,25 +66,25 @@ definition is_a_path : (list Q.E) → Prop
 | (hd1::hd2::tl) := Q.t hd1 = Q.s hd2 ∧ is_a_path (hd2::tl)
 ```
 
-#### [Johan Commelin (May 01 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937323):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 01 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937323):
 Aaah, so I should use `|`. Thanks! But now you are not using `list.chain`
 
-#### [Mario Carneiro (May 01 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937326):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 01 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937326):
 you could use `list.chain` for the latter two cases
 
-#### [Kenny Lau (May 01 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937328):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937328):
 the definition using `list.chain` is left to the reader as an exercise :P
 
-#### [Mario Carneiro (May 01 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937371):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 01 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937371):
 alternatively, you could define it as an inductive type, which may be more natural
 
-#### [Kenny Lau (May 01 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937375):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937375):
 oh... I just realized I wanted induction-recursion
 
-#### [Mario Carneiro (May 01 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937379):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 01 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937379):
 not for this...
 
-#### [Kenny Lau (May 01 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937383):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937383):
 ```lean
 mutual inductive path, head
 with path : Type (max u v)
@@ -94,55 +94,55 @@ with head : path → Q.V
 ```
 failed idea
 
-#### [Mario Carneiro (May 01 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937390):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 01 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937390):
 you want the head to be a parameter, like in `chain`
 
-#### [Kenny Lau (May 01 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937446):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937446):
 oh what
 
-#### [Johan Commelin (May 01 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937459):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 01 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937459):
 Kenny, I don't understand your last definition. What does `mutual` do?
 
-#### [Kenny Lau (May 01 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937460):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937460):
 https://leanprover.github.io/theorem_proving_in_lean/theorem_proving_in_lean.pdf
 P.120, Section 7.9
 
-#### [Kenny Lau (May 01 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937499):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937499):
 note that I was trying induction-recursion which is not a thing
 
-#### [Kenny Lau (May 01 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937501):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937501):
 not to confuse you
 
-#### [Johan Commelin (May 01 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937524):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 01 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937524):
 But your current definition is not equivalent to mine, right?
 
-#### [Kenny Lau (May 01 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937532):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937532):
 yours? I haven't seen your definition
 
-#### [Johan Commelin (May 01 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937572):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 01 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937572):
 Hmm, agreed. My bad.
 
-#### [Johan Commelin (May 01 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937574):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 01 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937574):
 Let me try again: your second definition is not equivalent to your first, right?
 
-#### [Kenny Lau (May 01 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937576):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937576):
 but I haven't finished my second definition
 
-#### [Johan Commelin (May 01 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937591):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 01 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937591):
 Aaah, ok
 
-#### [Kenny Lau (May 01 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937592):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937592):
 @**Mario Carneiro** (maybe on its own thread?) if Lean had induction-recursion, would you be able to prove false? would there be a shorter proof than following godel?
 
-#### [Mario Carneiro (May 01 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937643):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 01 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937643):
 No. Induction recursion would strengthen the system, it wouldn't be able to prove its own consistency because it now has induction-recursion and the simulated lean language would not
 
-#### [Kenny Lau (May 01 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937649):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937649):
 why can't you simulate induction-recursion with induction-recursion?
 
-#### [Mario Carneiro (May 01 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937654):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (May 01 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937654):
 you probably need induction-recursion-recursion or something
 
-#### [Kenny Lau (May 01 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937655):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kenny Lau (May 01 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937655):
 hmm
 

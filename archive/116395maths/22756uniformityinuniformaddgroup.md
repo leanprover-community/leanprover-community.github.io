@@ -9,7 +9,7 @@ permalink: archive/116395maths/22756uniformityinuniformaddgroup.html
 
 ---
 
-#### [Patrick Massot (Dec 19 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniformity%20in%20uniform%20add%20group/near/152209408):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Dec 19 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniformity%20in%20uniform%20add%20group/near/152209408):
 I guess this question is mostly for @**Johannes Hölzl**, but everyone is welcome to participate. Remember that, given an additive group structure and a uniform structure on a type `a`, the Prop-valued class `uniform_add_group a` states that substraction is uniformly continuous. The key lemma about such groups is https://github.com/leanprover/mathlib/blob/master/analysis/topology/topological_structures.lean#L343 stating `uniformity = comap (λx:α×α, x.2 - x.1) (nhds (0:α))`. The key technical ingredient is:
 ```lean
 lemma mem_uniformity_of_uniform_continuous_invarant [uniform_space α] {s:set (α×α)} {f : α → α → α}

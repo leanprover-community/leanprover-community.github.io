@@ -9,7 +9,7 @@ permalink: archive/116395maths/21625TopologyonRn.html
 
 ---
 
-#### [Johan Commelin (May 14 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528202):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528202):
 I have the following code
 ```lean
 import analysis.topology.topological_space analysis.real data.finsupp
@@ -47,62 +47,62 @@ instance : topological_space (standard_simplex n)
 end standard_simplex
 ```
 
-#### [Johan Commelin (May 14 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528205):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528205):
 I get red squiggles under `topology_Rn`, in its definition
 
-#### [Johan Commelin (May 14 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528226):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528226):
 The error is: `rec_fn_macro only allowed in meta definitions`
 
-#### [Johan Commelin (May 14 2018 at 10:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528267):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 10:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528267):
 So, two questions: how do I get lean to automatically deduce the topology on R^n on the second line of the induction? There is already an instance of `topological_space (α × β)`...
 
-#### [Johan Commelin (May 14 2018 at 10:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528272):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 10:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528272):
 The second is, how did I get this error, if I only copied a line from the proof of `topological_space (α × β)`...?
 
-#### [Johannes Hölzl (May 14 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528752):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 14 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528752):
 It looks like you need to mark your definition`noncomputable` (or your entire theory).
 
 But in general I would not advice to use this type construction. I think for `R ^ n`there are two options: Use `vec n R` (define the canonical topology on lists using `lfp`, and then use subtype for `vec`), or use `fin n -> R` and use the topological space construction on function spaces.
 
-#### [Johannes Hölzl (May 14 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528822):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 14 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528822):
 The advantage of seeing `R^n` as a function space is that you can do a lot of proofs assuming arbitrary functions, and no induction is necessary on your type itself.
 
-#### [Gabriel Ebner (May 14 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528935):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (May 14 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528935):
 @**Johan Commelin** You stumbled upon this bug: https://github.com/leanprover/lean/issues/1890  The unsoundness issue was fixed last year, but apparently there are still cases where you can accidentally use general recursion in non-meta definitions.  The culprit is the `begin apply_instance end`, which defines t₂ in terms of itself.
 
-#### [Johan Commelin (May 14 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528991):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528991):
 So.. how do I fix it?
 
-#### [Johan Commelin (May 14 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528995):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528995):
 I some how wish I could skip those `have`-lines anyway
 
-#### [Johan Commelin (May 14 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529047):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529047):
 The system should figure that out itself..., although maybe the first `have`-line is to hard for it.
 
-#### [Johannes Hölzl (May 14 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529049):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 14 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529049):
 ```quote
 So.. how do I fix it?
 ```
 Seriously: Use another type!
 
-#### [Johan Commelin (May 14 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529069):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529069):
 Like what? (Confused newbie behind this keyboard...)
 
-#### [Johannes Hölzl (May 14 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529144):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 14 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529144):
 Use `fin n -> R`, the topological space is already setup, i.e. it only needs the instance for `α → β` where `β` has a topological space.
 
-#### [Johan Commelin (May 14 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529208):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529208):
 Ok, I'll try that
 
-#### [Gabriel Ebner (May 14 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529325):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Gabriel Ebner (May 14 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126529325):
 > So.. how do I fix it?
 
 Aside from "don't do it" as Johannes already said, the main thing you can try if you see this bug is to move the `have` statements out of the begin-end block.  In this case, it is enough if you move just the `have t₁` before the begin.
 
-#### [Johan Commelin (May 14 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530333):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530333):
 @**Johannes Hölzl** Ok, so now I have `fin n \to \R`, but how do I get a topology on it? Because I can't find the instance that you just described...
 
-#### [Johannes Hölzl (May 14 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530364):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 14 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530364):
 Hm, works here:
 ```lean
 import analysis.real
@@ -117,7 +117,7 @@ def test : Π {α : Type u_1} {n : ℕ} [t : topological_space α], topological_
 -/
 ```
 
-#### [Johannes Hölzl (May 14 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530429):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johannes Hölzl (May 14 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530429):
 Or more specific
 ```lean
 noncomputable def test {n:ℕ} : topological_space (fin n → ℝ) :=
@@ -136,7 +136,7 @@ noncomputable def test : Π {n : nat}, topological_space.{0} (fin n → real) :=
 
 Don't forget `noncomputable` Maybe you want to setup it for your theory: use `noncomputable theory`  at the beginning (after the imports)
 
-#### [Johan Commelin (May 14 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530805):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530805):
 Ok, that helped.
 ```lean
 definition topology_Rn : Π (n : ℕ), topological_space (ℝ^n) :=
@@ -145,6 +145,6 @@ intros n, show topological_space (fin n → ℝ), apply_instance,
 end
 ```
 
-#### [Johan Commelin (May 14 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530844):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Johan Commelin (May 14 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126530844):
 Not term-mode, but I don't care too much (-;
 

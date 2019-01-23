@@ -9,41 +9,41 @@ permalink: archive/113488general/10945Unincludinganinclude.html
 
 ---
 
-#### [Keeley Hoek (Sep 29 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878195):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 29 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878195):
 If `include blah` occurs in my current namespace, is there a way to make a special definition which doesn't take `blah` as an argument?
 
-#### [Patrick Massot (Sep 29 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878197):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 29 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878197):
 `omit blah`
 
-#### [Patrick Massot (Sep 29 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878199):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Sep 29 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878199):
 and then reinclude
 
-#### [Keeley Hoek (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878790):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878790):
 awesome cheers!
 
-#### [Keeley Hoek (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878828):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878828):
 how about turning a `list α` into an `expr`?
 
-#### [Mario Carneiro (Sep 29 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134879034):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Sep 29 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134879034):
 I think `reflect` is what you want?
 
-#### [Keeley Hoek (Sep 29 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134879356):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 29 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134879356):
 Sweet!
 
-#### [Keeley Hoek (Sep 29 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134879364):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 29 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134879364):
 Has anyone ever gotten the error `VM does not have code for 'xyz.abc'` after trying to use something they `environment.add`ed?
 
-#### [Kevin Buzzard (Sep 29 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134879479):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Sep 29 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134879479):
 The only time I get that error is when I've accidentally used `theorem` to make a definition
 
-#### [Keeley Hoek (Sep 29 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134880407):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 29 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134880407):
 it turned out to be a really obscure problem, where if you call user_attribute.get_param with someone who doesn't have the attribute set, the vm un-gracefully shoots you down without a catchable `fail`
 
-#### [Keeley Hoek (Sep 29 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134881168):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Sep 29 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134881168):
 If this ever comes up for anyone else, `environment.add` is a little messed up if you want to later add attributes
 Instead use `tactic.add_decl` (both are implemented in C++)
 
-#### [Simon Hudon (Sep 29 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134895695):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Sep 29 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134895695):
 ```quote
 it turned out to be a really obscure problem, where if you call user_attribute.get_param with someone who doesn't have the attribute set, the vm un-gracefully shoots you down without a catchable `fail`
 ```

@@ -9,7 +9,7 @@ permalink: archive/113488general/59614VMdoesnothavecodeformultisetstronginductio
 
 ---
 
-#### [Kevin Buzzard (Jul 08 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309672):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 08 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309672):
 What's happening here? I'm defining a map from `multiset nat` to `nat` :
 
 ```lean
@@ -37,25 +37,25 @@ code generation failed, VM does not have code for 'multiset.strong_induction_on'
 
 I must be honest, I don't really know what a virtual machine is. I don't really see an obstruction to evaluating the function, however I can see that there might be issues with dealing with the quotient type. Can't the VM just assume everything is well-defined on equivalence classes and have a punt? Or is the issue elsewhere?
 
-#### [Andrew Ashworth (Jul 08 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309806):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Andrew Ashworth (Jul 08 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309806):
 does `#reduce` produce the same error message?
 
-#### [Mario Carneiro (Jul 08 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309871):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 08 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309871):
 `multiset.strong_induction_on` should not have been marked a `lemma` instead of a `def`
 
-#### [Mario Carneiro (Jul 08 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309913):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 08 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309913):
 because it produces elements of type `p s : Sort*`
 
-#### [Kevin Buzzard (Jul 08 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309917):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 08 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309917):
 Oh! :-)
 
-#### [Kevin Buzzard (Jul 08 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309929):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Kevin Buzzard (Jul 08 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309929):
 I should really add this to my list of "basic checks when something isn't working". I've been caught out in the past myself writing `have` instead of `let` and then wondering why something won't unfold.
 
-#### [Mario Carneiro (Jul 08 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129310102):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 08 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129310102):
 This is a different issue. The VM constructs code for all definitions that are not `noncomputable`; this is what enables the use of `#eval` to run functions. But `lemma` and `theorem` definitions do not have code generated, which is usually okay since these are usually propositions which do not have any computational content anyway, but it causes problems if data is marked like this
 
-#### [Mario Carneiro (Jul 08 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129310119):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Jul 08 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129310119):
 This can cause issues even if you don't use `#eval` at all:
 ```
 lemma A : nat := 42

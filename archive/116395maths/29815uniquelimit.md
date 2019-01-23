@@ -9,7 +9,7 @@ permalink: archive/116395maths/29815uniquelimit.html
 
 ---
 
-#### [Patrick Massot (Jan 19 2019 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20limit/near/156454309):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 19 2019 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20limit/near/156454309):
 @**Kevin Buzzard** I looked at https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean There is a comment saying you don't know how to use `wlog`. I think what you were looking for is:
 ```lean
 lemma limits_aux (a : ℕ → ℝ) (l m : ℝ) (hl : is_limit a l)
@@ -21,7 +21,7 @@ begin
 ```
 and then put the proof exactly as it was (and remove "_aux" from the name of the lemma since it's now directly proving what you want)
 
-#### [Patrick Massot (Jan 19 2019 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20limit/near/156454331):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Patrick Massot (Jan 19 2019 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20limit/near/156454331):
 But your proof is rather contrived. Why not doing:
 ```lean
 lemma zero_of_abs_lt_all (x : ℝ) (h : ∀ ε, ε > 0 → |x| < ε) : x = 0 :=

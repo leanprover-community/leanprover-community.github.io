@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/15266emacstipfilladapt.html
 
 ---
 
-#### [Joseph Corneli (Aug 07 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131036154):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Joseph Corneli (Aug 07 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131036154):
 I had run into an [issue](https://github.com/leanprover/lean-mode/issues/7) with filling block comments in lean-mode.
 
 The problem is solved with
@@ -19,10 +19,10 @@ The problem is solved with
 ```
 Maybe that's helpful for someone.
 
-#### [Joseph Corneli (Aug 07 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131036263):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Joseph Corneli (Aug 07 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131036263):
 ... oh, but maybe I spoke too soon, since by default that screws up the fill behavior for `--` style comments.
 
-#### [Joseph Corneli (Aug 07 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131036781):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Joseph Corneli (Aug 07 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131036781):
 OK, adding one line to the relevant token table fixed it:
 
 ```
@@ -53,14 +53,14 @@ OK, adding one line to the relevant token table fixed it:
         ("$" end-of-line)))
 ```
 
-#### [Simon Hudon (Aug 07 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131046804):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 07 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131046804):
 I've created a repo for user contributions to `lean-mode`: https://github.com/leanprover-community/lean-mode-contrib
 
 That might be a good place to put it
 
-#### [Joseph Corneli (Aug 07 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131055013):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Joseph Corneli (Aug 07 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131055013):
 OK I'll try to tidy up and send there. Thanks!
 
-#### [Simon Hudon (Aug 07 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131063330):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Simon Hudon (Aug 07 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131063330):
 :+1:
 

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/72607Useifconditionwithinthenoutput.html
 
 ---
 
-#### [Abhimanyu Pallavi Sudhir (Nov 28 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Use%20%22if%22%20condition%20within%20%22then%22%20output/near/148749574):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Abhimanyu Pallavi Sudhir (Nov 28 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Use%20%22if%22%20condition%20within%20%22then%22%20output/near/148749574):
 I'm trying to write something like this:
 
 ```lean
@@ -31,9 +31,9 @@ French brackets don't work either because the condition isn't recorded as an ass
 
 Is this where `dite` comes in?
 
-#### [Reid Barton (Nov 28 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Use%20%22if%22%20condition%20within%20%22then%22%20output/near/148749758):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 28 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Use%20%22if%22%20condition%20within%20%22then%22%20output/near/148749758):
 try deleting those parentheses?
 
-#### [Reid Barton (Nov 28 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Use%20%22if%22%20condition%20within%20%22then%22%20output/near/148749765):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Reid Barton (Nov 28 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Use%20%22if%22%20condition%20within%20%22then%22%20output/near/148749765):
 around `hr : - rad < x ∧ x < rad`
 

@@ -9,7 +9,7 @@ permalink: archive/113488general/06147underhandedlean.html
 
 ---
 
-#### [Mario Carneiro (Dec 27 2018 at 02:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/underhanded%20lean/near/152579911):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Mario Carneiro (Dec 27 2018 at 02:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/underhanded%20lean/near/152579911):
 wow, I didn't expect this to work:
 ```lean
 open lean.parser interactive interactive.types
@@ -25,7 +25,7 @@ def contradiction : false := sure -- looks good to me
 ```
 Apparently you can override basically all lean command tokens, including `section`, `namespace`, `def` and `end`
 
-#### [Keeley Hoek (Dec 27 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/underhanded%20lean/near/152597048):
+#### [![Click to go to Zulip](../../assets/img/zulip2.png) Keeley Hoek (Dec 27 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/underhanded%20lean/near/152597048):
 Yep
 At one point I tried a sneaky 'begin' override, but the problem is you can never close a block you open
 
