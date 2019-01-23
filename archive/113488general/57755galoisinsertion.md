@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57755galoisinsertion.html
 ---
 
-## [general](index.html)
-### [galois insertion](57755galoisinsertion.html)
+## Stream: [general](index.html)
+### Topic: [galois insertion](57755galoisinsertion.html)
+
+---
 
 #### [Kenny Lau (Sep 25 2018 at 07:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/galois%20insertion/near/134575752):
 ```lean

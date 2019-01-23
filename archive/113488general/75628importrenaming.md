@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75628importrenaming.html
 ---
 
-## [general](index.html)
-### [import renaming?](75628importrenaming.html)
+## Stream: [general](index.html)
+### Topic: [import renaming?](75628importrenaming.html)
+
+---
 
 #### [Scott Morrison (Aug 09 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/import%20renaming%3F/near/131161156):
 can someone point me to the syntax for import renaming? I can't find it. :-(

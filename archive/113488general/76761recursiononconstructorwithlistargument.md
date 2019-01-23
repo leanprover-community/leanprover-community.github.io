@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76761recursiononconstructorwithlistargument.html
 ---
 
-## [general](index.html)
-### [recursion on constructor with list argument](76761recursiononconstructorwithlistargument.html)
+## Stream: [general](index.html)
+### Topic: [recursion on constructor with list argument](76761recursiononconstructorwithlistargument.html)
+
+---
 
 #### [Seul Baek (Jun 09 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127832469):
 I'm experimenting with embedding first-order logic in Lean, and I'm using the following definition of terms : 

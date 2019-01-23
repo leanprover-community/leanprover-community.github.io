@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05553Finitemaps.html
 ---
 
-## [general](index.html)
-### [Finite maps](05553Finitemaps.html)
+## Stream: [general](index.html)
+### Topic: [Finite maps](05553Finitemaps.html)
+
+---
 
 #### [Ben Sherman (Nov 06 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20maps/near/146891105):
 Is there a Lean (3) library for finite maps (i.e., key-value maps where finitely many keys are mapped to values)? I don't need performance, just reasoning really. But I'd also be fine if the key type requires decidable ordering (I would assume it would require at least decidable equality). Should I use this https://github.com/spl/lean-finmap?

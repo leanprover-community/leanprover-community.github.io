@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16165filtermap.html
 ---
 
-## [general](index.html)
-### [filter map](16165filtermap.html)
+## Stream: [general](index.html)
+### Topic: [filter map](16165filtermap.html)
+
+---
 
 #### [Patrick Massot (May 10 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20map/near/126378246):
 Is this already somewhere in core or mathlib?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/50870equivimagecompl.html
 ---
 
-## [general](index.html)
-### [equiv.image_compl](50870equivimagecompl.html)
+## Stream: [general](index.html)
+### Topic: [equiv.image_compl](50870equivimagecompl.html)
+
+---
 
 #### [Patrick Massot (Apr 01 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.image_compl/near/124501726):
 Do we have `example (f : equiv a b) (s : set a) : f '' -s = - f '' s` hidden somewhere?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/04628Inductivepropsyntax.html
 ---
 
-## [new members](index.html)
-### [Inductive prop syntax](04628Inductivepropsyntax.html)
+## Stream: [new members](index.html)
+### Topic: [Inductive prop syntax](04628Inductivepropsyntax.html)
+
+---
 
 #### [cbailey (Aug 29 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20prop%20syntax/near/133006097):
 Hi, I was wondering if anyone can explain the inductive prop syntax in Lean a little bit; the definition of less_than_or_equal in basic.lean is written in a way that returns a partially applied function for the base case (|refl: less_than_or_equal a), but it doesn't visibly define behavior for that curried return function that would actually say when the prop is true. I noticed that if I #print less_than_or_equal, it comes back as the more familiar Coq style of |refl: forall (a: nat), less_than_or_equal a a, where you explicitly say this prop is true if the two elements are a and a, and the prop has the signature nat -> nat -> Prop without the named (a: nat) parameter. Does Lean default to using reflexivity as the truth condition for an inductively defined prop's base case, or is there something more important about the partially applied function that I'm missing?

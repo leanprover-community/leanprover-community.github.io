@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42707VScodeextensionhangs.html
 ---
 
-## [general](index.html)
-### [VScode extension hangs](42707VScodeextensionhangs.html)
+## Stream: [general](index.html)
+### Topic: [VScode extension hangs](42707VScodeextensionhangs.html)
+
+---
 
 #### [Patrick Massot (Apr 16 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension%20hangs/near/125166001):
 Tonight VScode refuses to let me use lean. I have code that compiles fine using the command line lean, but in VScode orange side bars stay for a very long time before having `excessive memory consumption`

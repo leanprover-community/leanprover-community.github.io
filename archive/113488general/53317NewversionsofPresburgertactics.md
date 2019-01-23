@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53317NewversionsofPresburgertactics.html
 ---
 
-## [general](index.html)
-### [New versions of Presburger tactics](53317NewversionsofPresburgertactics.html)
+## Stream: [general](index.html)
+### Topic: [New versions of Presburger tactics](53317NewversionsofPresburgertactics.html)
+
+---
 
 #### [Seul Baek (Oct 30 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20versions%20of%20Presburger%20tactics/near/136761498):
 This project has been neglected for a long time, so I decided to tidy it up a bit. The new versions are available at https://github.com/skbaek/qe/. The main changes are :

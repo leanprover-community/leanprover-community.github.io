@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/55185Proptobool.html
 ---
 
-## [new members](index.html)
-### [Prop to bool](55185Proptobool.html)
+## Stream: [new members](index.html)
+### Topic: [Prop to bool](55185Proptobool.html)
+
+---
 
 #### [Olli (Sep 11 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Prop%20to%20bool/near/133728628):
 I'm sure this will be covered later in the book, but I was wondering if there is a quick explanation for why I can't turn this `prime` Prop into a bool?

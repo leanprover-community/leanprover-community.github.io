@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/20928CauchySchwarzcalc.html
 ---
 
-## [maths](index.html)
-### [Cauchy-Schwarz calc](20928CauchySchwarzcalc.html)
+## Stream: [maths](index.html)
+### Topic: [Cauchy-Schwarz calc](20928CauchySchwarzcalc.html)
+
+---
 
 #### [Patrick Massot (May 29 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy-Schwarz%20calc/near/127276213):
 Sometimes when someone new comes here to ask maths questions, I wonder if we have a new mathematician interested in Lean. So I googled @**Patrick Stevens**  and found https://www.patrickstevens.co.uk/cauchy-schwarz-proof/

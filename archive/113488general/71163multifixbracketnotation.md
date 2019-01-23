@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71163multifixbracketnotation.html
 ---
 
-## [general](index.html)
-### [multifix bracket notation](71163multifixbracketnotation.html)
+## Stream: [general](index.html)
+### Topic: [multifix bracket notation](71163multifixbracketnotation.html)
+
+---
 
 #### [Johan Commelin (Jun 11 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889037):
 Is this bound to become a massive headache, if possible at all?

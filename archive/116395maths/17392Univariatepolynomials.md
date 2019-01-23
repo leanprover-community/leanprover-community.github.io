@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/17392Univariatepolynomials.html
 ---
 
-## [maths](index.html)
-### [Univariate polynomials](17392Univariatepolynomials.html)
+## Stream: [maths](index.html)
+### Topic: [Univariate polynomials](17392Univariatepolynomials.html)
+
+---
 
 #### [Kevin Buzzard (May 03 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univariate%20polynomials/near/126058586):
 Here's another "canonical isomorphism" question. Johannes has implemented multivariate polynomials with variables in some index type sigma.

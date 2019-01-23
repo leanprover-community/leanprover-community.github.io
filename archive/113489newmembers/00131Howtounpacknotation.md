@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/00131Howtounpacknotation.html
 ---
 
-## [new members](index.html)
-### [How to "unpack" notation?](00131Howtounpacknotation.html)
+## Stream: [new members](index.html)
+### Topic: [How to "unpack" notation?](00131Howtounpacknotation.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Oct 14 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135784139):
 How can I "unpack" notation like `∉`, `∩`, etc.? I want to convert a proposition of the form `x ∉ S` to `x ∈ S → false`. Is this possible just definitionally or do I need to apply some lemma?

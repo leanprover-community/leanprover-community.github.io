@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/24026Categorytheory.html
 ---
 
-## [maths](index.html)
-### [Category theory](24026Categorytheory.html)
+## Stream: [maths](index.html)
+### Topic: [Category theory](24026Categorytheory.html)
+
+---
 
 #### [Kenny Lau (Apr 01 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/124502143):
 https://github.com/kckennylau/category-theory/blob/master/src/adjunction_examples.lean

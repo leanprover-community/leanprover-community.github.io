@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38818leanpkgbreaksmymathlib.html
 ---
 
-## [general](index.html)
-### [leanpkg breaks my mathlib](38818leanpkgbreaksmymathlib.html)
+## Stream: [general](index.html)
+### Topic: [leanpkg breaks my mathlib](38818leanpkgbreaksmymathlib.html)
+
+---
 
 #### [Kevin Buzzard (Jul 10 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20breaks%20my%20mathlib/near/129401172):
 ```

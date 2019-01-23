@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/15266emacstipfilladapt.html
 ---
 
-## [new members](index.html)
-### [emacs tip: filladapt](15266emacstipfilladapt.html)
+## Stream: [new members](index.html)
+### Topic: [emacs tip: filladapt](15266emacstipfilladapt.html)
+
+---
 
 #### [Joseph Corneli (Aug 07 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131036154):
 I had run into an [issue](https://github.com/leanprover/lean-mode/issues/7) with filling block comments in lean-mode.

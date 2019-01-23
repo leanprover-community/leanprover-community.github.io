@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86798wellfoundedfix.html
 ---
 
-## [general](index.html)
-### [well_founded.fix](86798wellfoundedfix.html)
+## Stream: [general](index.html)
+### Topic: [well_founded.fix](86798wellfoundedfix.html)
+
+---
 
 #### [Kenny Lau (Jul 28 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded.fix/near/130481709):
 ```lean

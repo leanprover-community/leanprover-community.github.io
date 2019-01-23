@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/95204directedsets.html
 ---
 
-## [maths](index.html)
-### [directed sets](95204directedsets.html)
+## Stream: [maths](index.html)
+### Topic: [directed sets](95204directedsets.html)
+
+---
 
 #### [Scott Morrison (Sep 01 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/directed%20sets/near/133171891):
 I was expecting to find a type `[directed α]`, to go along with `preorder`, `partial_order`, etc. Instead I can only find these:

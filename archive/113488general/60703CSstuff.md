@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60703CSstuff.html
 ---
 
-## [general](index.html)
-### [CS stuff](60703CSstuff.html)
+## Stream: [general](index.html)
+### Topic: [CS stuff](60703CSstuff.html)
+
+---
 
 #### [Simon Hudon (Aug 30 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CS%20stuff/near/133077454):
 I wrote a package for serialization in Lean. Is this something people would like to have in `mathlib` or the nursery?

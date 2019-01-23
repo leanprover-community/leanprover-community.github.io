@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/85801computabledivisionbynonzeroreal.html
 ---
 
-## [maths](index.html)
-### [computable division by non-zero real](85801computabledivisionbynonzeroreal.html)
+## Stream: [maths](index.html)
+### Topic: [computable division by non-zero real](85801computabledivisionbynonzeroreal.html)
+
+---
 
 #### [Kevin Buzzard (Aug 09 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188580):
 If I have a proof that `r : ℝ` is non-zero, can I make `def f : ℝ → ℝ := λ x, x / r` computable?

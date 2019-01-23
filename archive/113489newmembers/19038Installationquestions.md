@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/19038Installationquestions.html
 ---
 
-## [new members](index.html)
-### [Installation questions](19038Installationquestions.html)
+## Stream: [new members](index.html)
+### Topic: [Installation questions](19038Installationquestions.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Oct 06 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Installation%20questions/near/135290991):
 Here's a new thread for installation questions.

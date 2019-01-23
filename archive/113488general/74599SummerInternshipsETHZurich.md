@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74599SummerInternshipsETHZurich.html
 ---
 
-## [general](index.html)
-### [Summer Internships ETH Zurich](74599SummerInternshipsETHZurich.html)
+## Stream: [general](index.html)
+### Topic: [Summer Internships ETH Zurich](74599SummerInternshipsETHZurich.html)
+
+---
 
 #### [Tobias Grosser (Nov 24 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Summer%20Internships%20ETH%20Zurich/near/148276335):
 Dear students,

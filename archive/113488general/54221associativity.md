@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54221associativity.html
 ---
 
-## [general](index.html)
-### [associativity](54221associativity.html)
+## Stream: [general](index.html)
+### Topic: [associativity](54221associativity.html)
+
+---
 
 #### [Simon Hudon (Jul 30 2018 at 04:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/associativity/near/130552015):
 I'm writing a tactic about associativity and I'm inferring the associativity of the operators that appear in an expression. It turns out that this is the bottleneck of my script: building an instance of `is_associative` takes hundreds of ms. Is there a faster way to do it?

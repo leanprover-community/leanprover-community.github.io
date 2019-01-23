@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/78247categories.html
 ---
 
-## [maths](index.html)
-### [categories](78247categories.html)
+## Stream: [maths](index.html)
+### Topic: [categories](78247categories.html)
+
+---
 
 #### [Reid Barton (Sep 05 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/categories/near/133380177):
 This new functor arrow doesn't seem to have an abbreviation in emacs.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58617Willsimpgoinaloop.html
 ---
 
-## [general](index.html)
-### [Will simp go in a loop?](58617Willsimpgoinaloop.html)
+## Stream: [general](index.html)
+### Topic: [Will simp go in a loop?](58617Willsimpgoinaloop.html)
+
+---
 
 #### [Kenny Lau (Apr 03 2018 at 05:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Will%20simp%20go%20in%20a%20loop%3F/near/124558352):
 If I have two simp lemmas that are the inverse of each other, will simp go into a loop? For example:

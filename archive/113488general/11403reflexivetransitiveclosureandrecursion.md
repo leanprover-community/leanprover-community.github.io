@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11403reflexivetransitiveclosureandrecursion.html
 ---
 
-## [general](index.html)
-### [reflexive-transitive closure and recursion](11403reflexivetransitiveclosureandrecursion.html)
+## Stream: [general](index.html)
+### Topic: [reflexive-transitive closure and recursion](11403reflexivetransitiveclosureandrecursion.html)
+
+---
 
 #### [Shachar Itzhaky (Jun 12 2018 at 17:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflexive-transitive%20closure%20and%20recursion/near/127960102):
 Lean has a transitive closure but I want a reflexive-transitive one. So I wrote the following definition:

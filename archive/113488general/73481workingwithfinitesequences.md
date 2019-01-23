@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73481workingwithfinitesequences.html
 ---
 
-## [general](index.html)
-### [working with finite sequences](73481workingwithfinitesequences.html)
+## Stream: [general](index.html)
+### Topic: [working with finite sequences](73481workingwithfinitesequences.html)
+
+---
 
 #### [Kevin Buzzard (Mar 09 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20with%20finite%20sequences/near/123486171):
 Kenny and I will need to do some work with finite sequences to prove that affine schemes are schemes. Here is an example of the sorts of issues we are running into.

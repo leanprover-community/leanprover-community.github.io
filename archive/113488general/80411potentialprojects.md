@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80411potentialprojects.html
 ---
 
-## [general](index.html)
-### [potential projects](80411potentialprojects.html)
+## Stream: [general](index.html)
+### Topic: [potential projects](80411potentialprojects.html)
+
+---
 
 #### [Scott Morrison (Aug 28 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/potential%20projects/near/132925636):
 At our Orsay meeting we just wrote a list of interesting-but-not-impossible projects for formalisation in Lean.

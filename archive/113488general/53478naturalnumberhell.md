@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53478naturalnumberhell.html
 ---
 
-## [general](index.html)
-### [natural number hell](53478naturalnumberhell.html)
+## Stream: [general](index.html)
+### Topic: [natural number hell](53478naturalnumberhell.html)
+
+---
 
 #### [Patrick Massot (May 15 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580412):
 I want to use `big.map` once I have the `map`

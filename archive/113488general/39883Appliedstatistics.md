@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39883Appliedstatistics.html
 ---
 
-## [general](index.html)
-### [Applied statistics](39883Appliedstatistics.html)
+## Stream: [general](index.html)
+### Topic: [Applied statistics](39883Appliedstatistics.html)
+
+---
 
 #### [Simon Hudon (Jul 06 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Applied%20statistics/near/129172046):
 I haven't done any statistics in a while. Can someone point me to a formula I can use to calculate the probability that `x ≤ y` if both are normally distributed random variables?

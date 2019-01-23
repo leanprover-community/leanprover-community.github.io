@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/34126bundledincategorytheory.html
 ---
 
-## [general](index.html)
-### [bundled in category_theory](34126bundledincategorytheory.html)
+## Stream: [general](index.html)
+### Topic: [bundled in category_theory](34126bundledincategorytheory.html)
+
+---
 
 #### [Sean Leather (Oct 04 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20in%20category_theory/near/135174961):
 I just discovered `bundled` in `category_theory.category`:

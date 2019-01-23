@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/48097CreatingdefinitionsinLean.html
 ---
 
-## [new members](index.html)
-### [Creating definitions in Lean](48097CreatingdefinitionsinLean.html)
+## Stream: [new members](index.html)
+### Topic: [Creating definitions in Lean](48097CreatingdefinitionsinLean.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Oct 14 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Creating%20definitions%20in%20Lean/near/135772739):
 I am trying to define an equivalence class in Lean, where I already have a binary relation, defined as a variable `variable (r : S → S → Prop)` -- how would I insert the requirement of `binary_relation` satisfying `equivalence` while defining an equivalence class?

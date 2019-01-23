@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/71627Ringcompletion.html
 ---
 
-## [maths](index.html)
-### [Ring completion](71627Ringcompletion.html)
+## Stream: [maths](index.html)
+### Topic: [Ring completion](71627Ringcompletion.html)
+
+---
 
 #### [Patrick Massot (Dec 18 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110493):
 @**Johannes Hölzl**  I think I just completed the topological ring completion project. Remember where we got stuck last time: we could define a ring structure on `completion a` assuming that `a` was a *separated* topological ring, see https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L1168. We could also construct a ring structure on `quotient (separatation_setoid a)`, see https://github.com/leanprover/mathlib/blob/master/analysis/topology/quotient_topological_structures.lean#L204. I did that by leveraging the algebraic quotient construction, using that the separation relation for uniform groups is the same as the left coset relation for the closure of zero. This meant fighting the system to use an equivalence relation equality to relate the quotients. Then I constructed https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L710-L711 `completion (quotient $ separatation_setoid a) ≃ completion α` which I hoped to use to glue the preceding two constructions and get a ring structure on `completion α`. But this meant fighting Lean again, for lack of transport of structure along this equiv.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88707subsetorsubtype.html
 ---
 
-## [general](index.html)
-### [subset or subtype?](88707subsetorsubtype.html)
+## Stream: [general](index.html)
+### Topic: [subset or subtype?](88707subsetorsubtype.html)
+
+---
 
 #### [Kevin Buzzard (Mar 04 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20or%20subtype%3F/near/123268484):
 I wrote presheaves of types twice in my life and I see now that my definitions differ.

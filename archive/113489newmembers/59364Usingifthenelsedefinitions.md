@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/59364Usingifthenelsedefinitions.html
 ---
 
-## [new members](index.html)
-### [Using if-then-else definitions](59364Usingifthenelsedefinitions.html)
+## Stream: [new members](index.html)
+### Topic: [Using if-then-else definitions](59364Usingifthenelsedefinitions.html)
+
+---
 
 #### [Mark Dickinson (Nov 03 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20if-then-else%20definitions/near/137127809):
 I'm missing something fundamental. If I've defined a function `ℕ → ℕ` by making use of the if-then-else construct, how do I go about proving anything about that function? For example, given:

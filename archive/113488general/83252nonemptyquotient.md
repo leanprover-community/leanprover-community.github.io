@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83252nonemptyquotient.html
 ---
 
-## [general](index.html)
-### [nonempty quotient](83252nonemptyquotient.html)
+## Stream: [general](index.html)
+### Topic: [nonempty quotient](83252nonemptyquotient.html)
+
+---
 
 #### [Patrick Massot (Sep 30 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nonempty%20quotient/near/134934075):
 Do we already have something like:

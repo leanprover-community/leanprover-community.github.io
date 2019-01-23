@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03125Leanlibraryfixes.html
 ---
 
-## [general](index.html)
-### [Lean library fixes](03125Leanlibraryfixes.html)
+## Stream: [general](index.html)
+### Topic: [Lean library fixes](03125Leanlibraryfixes.html)
+
+---
 
 #### [Joe Hendrix (Dec 04 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20library%20fixes/near/150883678):
 The lean3 repo indicates that only major bugfixes will be accepted.  Are there any official or semi-official repos for more minor fixes that could be merged, but aren't?  e.g. make a `monad_except` instance for `except`, add missing `decidable` instances for predicates?

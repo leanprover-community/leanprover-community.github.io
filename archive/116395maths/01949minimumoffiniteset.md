@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/01949minimumoffiniteset.html
 ---
 
-## [maths](index.html)
-### [minimum of finite set](01949minimumoffiniteset.html)
+## Stream: [maths](index.html)
+### Topic: [minimum of finite set](01949minimumoffiniteset.html)
+
+---
 
 #### [Patrick Massot (May 23 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/minimum%20of%20finite%20set/near/126993170):
 ```quote

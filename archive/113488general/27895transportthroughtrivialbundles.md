@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27895transportthroughtrivialbundles.html
 ---
 
-## [general](index.html)
-### [transport through trivial bundles](27895transportthroughtrivialbundles.html)
+## Stream: [general](index.html)
+### Topic: [transport through trivial bundles](27895transportthroughtrivialbundles.html)
+
+---
 
 #### [Scott Morrison (Apr 27 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125769004):
 I find myself needing a few lemmas about parallel transport through trivial bundles. (In the first case, this is literally the case, the later ones are close analogues.)

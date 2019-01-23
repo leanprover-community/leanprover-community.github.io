@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/42973moreintnatmoansandgolfplea.html
 ---
 
-## [maths](index.html)
-### [more int nat moans and golf plea](42973moreintnatmoansandgolfplea.html)
+## Stream: [maths](index.html)
+### Topic: [more int nat moans and golf plea](42973moreintnatmoansandgolfplea.html)
+
+---
 
 #### [Kevin Buzzard (Sep 28 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20int%20nat%20moans%20and%20golf%20plea/near/134808309):
 ```lean

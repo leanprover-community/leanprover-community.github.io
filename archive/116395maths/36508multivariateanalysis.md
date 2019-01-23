@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/36508multivariateanalysis.html
 ---
 
-## [maths](index.html)
-### [multivariate analysis](36508multivariateanalysis.html)
+## Stream: [maths](index.html)
+### Topic: [multivariate analysis](36508multivariateanalysis.html)
+
+---
 
 #### [Jeremy Avigad (Oct 10 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/multivariate%20analysis/near/135568640):
 Friends,

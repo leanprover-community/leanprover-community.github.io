@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58029closurecompleqvsclosurecompl.html
 ---
 
-## [general](index.html)
-### [closure_compl_eq vs closure_compl](58029closurecompleqvsclosurecompl.html)
+## Stream: [general](index.html)
+### Topic: [closure_compl_eq vs closure_compl](58029closurecompleqvsclosurecompl.html)
+
+---
 
 #### [Kenny Lau (Oct 02 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/closure_compl_eq%20vs%20closure_compl/near/135058320):
 [closure_compl_eq vs closure_compl](/user_uploads/3121/799w6_d5y5HxDNH8PGRRdgyJ/2018-10-02-6.png)

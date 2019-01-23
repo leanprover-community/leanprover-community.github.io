@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72721timeoutwithsplitifs.html
 ---
 
-## [general](index.html)
-### [timeout with split_ifs](72721timeoutwithsplitifs.html)
+## Stream: [general](index.html)
+### Topic: [timeout with split_ifs](72721timeoutwithsplitifs.html)
+
+---
 
 #### [Kenny Lau (Jul 28 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130454443):
 ```lean

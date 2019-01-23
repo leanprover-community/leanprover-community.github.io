@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08589resetI.html
 ---
 
-## [general](index.html)
-### [resetI](08589resetI.html)
+## Stream: [general](index.html)
+### Topic: [resetI](08589resetI.html)
+
+---
 
 #### [Simon Hudon (Apr 11 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resetI/near/124910648):
 Is there any reason `resetI` wouldn't work in the latest nightly? I have a very short proof with `intro ; resetI` in it and I get:

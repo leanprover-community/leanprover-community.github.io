@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22522lawfulclasses.html
 ---
 
-## [general](index.html)
-### [lawful classes](22522lawfulclasses.html)
+## Stream: [general](index.html)
+### Topic: [lawful classes](22522lawfulclasses.html)
+
+---
 
 #### [Simon Hudon (Mar 23 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lawful%20classes/near/124114932):
 I'm having a look at the new `is_lawful_functor`. I just realized that it does not extend `functor`. That makes some signatures pretty verbose. Is there a plan to make shortcuts like `lawful_functor` that would combine both?

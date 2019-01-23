@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/17703536algebraovercommring.html
 ---
 
-## [PR reviews](index.html)
-### [#536 algebra over comm_ring](17703536algebraovercommring.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#536 algebra over comm_ring](17703536algebraovercommring.html)
+
+---
 
 #### [Kenny Lau (Jan 10 2019 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/154831785):
 Changed the target to `ring` not `comm_ring`.
@@ -105,4 +107,34 @@ korp -> lichaam
 
 #### [Johan Commelin (Jan 11 2019 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/154902859):
 @**Assia Mahboubi** @**Cyril Cohen** (I subscribed you to this stream. No sure if you want that... It's all about discussing PRs to mathlib.)
+
+#### [Kenny Lau (Jan 23 2019 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/156674418):
+@**Johannes Hölzl** It looks like the instance `S : set R, h : is_subring S |- algebra S R` would never work if the first parameter of `algebra` is an out_param
+
+#### [Kenny Lau (Jan 23 2019 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/156674481):
+should we reconsider making it a class instead of making it a structure?
+
+#### [Johannes Hölzl (Jan 23 2019 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/156677314):
+I think for algebra we cannot have it an `out_param` anymore. We already see that it is a problem for `module`, but for `algebra` it completely breaks down
+
+#### [Kenny Lau (Jan 23 2019 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/156677450):
+ok
+
+#### [Kenny Lau (Jan 23 2019 at 11:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/156677473):
+@**Johannes Hölzl** then why is module still using out_param?
+
+#### [Kevin Buzzard (Jan 23 2019 at 11:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/156677476):
+What does this mean in practice for people like me who don't really know what an `out_param` is?
+
+#### [Johannes Hölzl (Jan 23 2019 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/156679581):
+@**Kenny Lau** its some work to change it right now, and it requires the user to annotate more types at inconvenient places
+
+#### [Kenny Lau (Jan 23 2019 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/156679641):
+@**Johannes Hölzl** well I tried to change it before, and then I got some error, and I posted it in the general chat, and nobody helped fix the error
+
+#### [Kenny Lau (Jan 23 2019 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/156679664):
+https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Module.20refactor
+
+#### [Johannes Hölzl (Jan 23 2019 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/156679759):
+Yes, we should revive this branch.
 

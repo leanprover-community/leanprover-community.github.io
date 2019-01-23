@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/43719defaultinhabitedfor.html
 ---
 
-## [new members](index.html)
-### [default / inhabited for ℚ, ℝ, ℂ](43719defaultinhabitedfor.html)
+## Stream: [new members](index.html)
+### Topic: [default / inhabited for ℚ, ℝ, ℂ](43719defaultinhabitedfor.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Aug 13 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/default%20/%20inhabited%20for%20%E2%84%9A%2C%20%E2%84%9D%2C%20%E2%84%82/near/132070075):
 I'm going through [TPIL's chapter on typeclasses](https://leanprover.github.io/theorem_proving_in_lean/type_classes.html#type-classes-and-instances) and while messing around tried the following:

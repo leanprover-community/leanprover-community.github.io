@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38122vscodecompletions.html
 ---
 
-## [general](index.html)
-### [[vscode] completions](38122vscodecompletions.html)
+## Stream: [general](index.html)
+### Topic: [[vscode] completions](38122vscodecompletions.html)
+
+---
 
 #### [Edward Ayers (Aug 12 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bvscode%5D%20completions/near/131991476):
 Sometimes I will type `\langle` or whatever and vscode won't underline it and I will have to delete it all and keep typing `\` until eventually the underline appears. Then when I click space it will complete. This is extremely annoying and happens every other time seemingly randomly. Are there some settings that will prevent this?

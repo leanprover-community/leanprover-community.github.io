@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/29013TopologyBeginner.html
 ---
 
-## [maths](index.html)
-### [Topology - Beginner](29013TopologyBeginner.html)
+## Stream: [maths](index.html)
+### Topic: [Topology - Beginner](29013TopologyBeginner.html)
+
+---
 
 #### [Luca Gerolla (Jul 05 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20-%20Beginner/near/129159440):
 Hello, I am a beginner and I am trying to define a path (in particular a path from `x` to `y` on a topological space).

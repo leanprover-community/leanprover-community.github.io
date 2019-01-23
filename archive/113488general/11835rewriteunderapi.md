@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11835rewriteunderapi.html
 ---
 
-## [general](index.html)
-### [rewrite under a pi](11835rewriteunderapi.html)
+## Stream: [general](index.html)
+### Topic: [rewrite under a pi](11835rewriteunderapi.html)
+
+---
 
 #### [Kevin Buzzard (Sep 27 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751362):
 ```lean

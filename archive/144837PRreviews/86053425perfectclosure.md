@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/86053425perfectclosure.html
 ---
 
-## [PR reviews](index.html)
-### [#425 perfect closure](86053425perfectclosure.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#425 perfect closure](86053425perfectclosure.html)
+
+---
 
 #### [Kenny Lau (Oct 18 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23425%20perfect%20closure/near/136024821):
 Does this clash with your module refactoring?

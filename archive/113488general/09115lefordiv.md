@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09115lefordiv.html
 ---
 
-## [general](index.html)
-### [le for div?](09115lefordiv.html)
+## Stream: [general](index.html)
+### Topic: [le for div?](09115lefordiv.html)
+
+---
 
 #### [Nicholas Scheel (Apr 04 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le%20for%20div%3F/near/124631308):
 This seems like a silly question but I've scoured mathlib and init for this lemma and I can't find it: `∀ {n m : ℕ} (h : n ≤ m) {k}, n/k ≤ m/k`

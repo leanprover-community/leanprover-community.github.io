@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/50044nearlynoconfusion.html
 ---
 
-## [general](index.html)
-### [nearly no_confusion](50044nearlynoconfusion.html)
+## Stream: [general](index.html)
+### Topic: [nearly no_confusion](50044nearlynoconfusion.html)
+
+---
 
 #### [Kevin Buzzard (Mar 24 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124130895):
 I spent some time with Chris at Xena last night trying to get to the bottom of `no_confusion`.  I seem to have a slightly simpler approach which gives what looks to me like everything we need for a proof of the idea that two nats are equal iff they were constructed using the same constructors in the same order.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04670obtain.html
 ---
 
-## [general](index.html)
-### [obtain](04670obtain.html)
+## Stream: [general](index.html)
+### Topic: [obtain](04670obtain.html)
+
+---
 
 #### [Johan Commelin (Nov 09 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain/near/147351059):
 I just realised there is `obtain`:

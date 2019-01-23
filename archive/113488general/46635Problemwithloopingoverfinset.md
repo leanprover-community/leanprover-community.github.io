@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/46635Problemwithloopingoverfinset.html
 ---
 
-## [general](index.html)
-### [Problem with looping over finset](46635Problemwithloopingoverfinset.html)
+## Stream: [general](index.html)
+### Topic: [Problem with looping over finset](46635Problemwithloopingoverfinset.html)
+
+---
 
 #### [AHan (Jan 15 2019 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20looping%20over%20finset/near/155177808):
 Given `s : finset ℕ`,  how can I construct `s' : finset (ℕ × ℕ)` s.t.  `∀ a b,  a b ∈ s ↔ (a, b) ∈ s'` ?

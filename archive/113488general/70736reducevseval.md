@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/70736reducevseval.html
 ---
 
-## [general](index.html)
-### [#reduce vs #eval](70736reducevseval.html)
+## Stream: [general](index.html)
+### Topic: [#reduce vs #eval](70736reducevseval.html)
+
+---
 
 #### [Simon Hudon (Feb 27 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20vs%20%23eval/near/123060876):
 Does it ever happen that #reduce runs forever while #eval terminates immediately?

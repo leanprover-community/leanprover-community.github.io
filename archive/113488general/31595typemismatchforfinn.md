@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31595typemismatchforfinn.html
 ---
 
-## [general](index.html)
-### [type mismatch for fin n](31595typemismatchforfinn.html)
+## Stream: [general](index.html)
+### Topic: [type mismatch for fin n](31595typemismatchforfinn.html)
+
+---
 
 #### [Kevin Buzzard (Mar 11 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579325):
 I am surprised that this doesn't typecheck:

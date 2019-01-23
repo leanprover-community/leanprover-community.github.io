@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81802missingextlemmas.html
 ---
 
-## [general](index.html)
-### [missing ext lemmas?](81802missingextlemmas.html)
+## Stream: [general](index.html)
+### Topic: [missing ext lemmas?](81802missingextlemmas.html)
+
+---
 
 #### [Johan Commelin (Oct 03 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135088491):
 How many of the following should be marked with `@[extensionality]`?

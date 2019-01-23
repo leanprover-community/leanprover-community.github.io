@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/25874cannotreduceapplicationinpatternmatch.html
 ---
 
-## [new members](index.html)
-### [cannot reduce  application in pattern match](25874cannotreduceapplicationinpatternmatch.html)
+## Stream: [new members](index.html)
+### Topic: [cannot reduce  application in pattern match](25874cannotreduceapplicationinpatternmatch.html)
+
+---
 
 #### [Shaun Steenkamp (Nov 14 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20reduce%20%20application%20in%20pattern%20match/near/147663171):
 I'm trying to fill in the `sorry` in the code below with `h x`. I expect this to work but it says that

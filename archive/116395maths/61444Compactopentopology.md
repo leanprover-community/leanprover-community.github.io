@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/61444Compactopentopology.html
 ---
 
-## [maths](index.html)
-### [Compact-open topology](61444Compactopentopology.html)
+## Stream: [maths](index.html)
+### Topic: [Compact-open topology](61444Compactopentopology.html)
+
+---
 
 #### [Patrick Massot (Sep 24 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Compact-open%20topology/near/134554654):
 I see @**Johannes Hölzl**  merged https://github.com/leanprover/mathlib/pull/368 before Reid answered my comments. Was this done on purpose?

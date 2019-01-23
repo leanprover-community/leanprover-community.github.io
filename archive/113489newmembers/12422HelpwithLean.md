@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/12422HelpwithLean.html
 ---
 
-## [new members](index.html)
-### [Help with Lean](12422HelpwithLean.html)
+## Stream: [new members](index.html)
+### Topic: [Help with Lean](12422HelpwithLean.html)
+
+---
 
 #### [Ken Roe (Jul 10 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20Lean/near/129411503):
 I just started using Lean.  Can someone help me by telling me what I need to replace "sorry" with to prove this theorem:

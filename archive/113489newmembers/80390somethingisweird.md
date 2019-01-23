@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/80390somethingisweird.html
 ---
 
-## [new members](index.html)
-### [`some`thing is weird](80390somethingisweird.html)
+## Stream: [new members](index.html)
+### Topic: [`some`thing is weird](80390somethingisweird.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148117675):
 I've been looking at the `classical.lean` file, and `p_implies_uv` strikes me as a very odd theorem. You have a proposition `p`, and you have two propositions, `u` which is `some` proposition such that it is true or `p` is true, and `v` which is `some` proposition such that it is false or `p` is true.  

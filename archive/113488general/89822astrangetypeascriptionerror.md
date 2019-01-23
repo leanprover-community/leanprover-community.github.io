@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89822astrangetypeascriptionerror.html
 ---
 
-## [general](index.html)
-### [a strange type ascription error](89822astrangetypeascriptionerror.html)
+## Stream: [general](index.html)
+### Topic: [a strange type ascription error](89822astrangetypeascriptionerror.html)
+
+---
 
 #### [Scott Morrison (Jun 22 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128464038):
 I am getting an error of the form 

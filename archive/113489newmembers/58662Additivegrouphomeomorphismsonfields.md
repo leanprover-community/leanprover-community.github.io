@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html
 ---
 
-## [new members](index.html)
-### [Additive group homeomorphisms on fields](58662Additivegrouphomeomorphismsonfields.html)
+## Stream: [new members](index.html)
+### Topic: [Additive group homeomorphisms on fields](58662Additivegrouphomeomorphismsonfields.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907204):
 Since fields extend additive groups , I thought that something `hom_int_to_field` below should work:

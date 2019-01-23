@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/85298AndrewAshworth.html
 ---
 
-## [new members](index.html)
-### [Andrew Ashworth](85298AndrewAshworth.html)
+## Stream: [new members](index.html)
+### Topic: [Andrew Ashworth](85298AndrewAshworth.html)
+
+---
 
 #### [Andrew Ashworth (Feb 26 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Andrew%20Ashworth/near/123002176):
 Testing... is this thing on?

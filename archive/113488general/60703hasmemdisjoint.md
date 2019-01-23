@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60703hasmemdisjoint.html
 ---
 
-## [general](index.html)
-### [has_mem disjoint](60703hasmemdisjoint.html)
+## Stream: [general](index.html)
+### Topic: [has_mem disjoint](60703hasmemdisjoint.html)
+
+---
 
 #### [Sean Leather (Oct 02 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_mem%20disjoint/near/135017185):
 Currently, there is this definition in `data/list/basic.lean`:

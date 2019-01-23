@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/15301Scalarmultiplicationnotdefinedforfunctions.html
 ---
 
-## [maths](index.html)
-### [Scalar multiplication not defined for functions](15301Scalarmultiplicationnotdefinedforfunctions.html)
+## Stream: [maths](index.html)
+### Topic: [Scalar multiplication not defined for functions](15301Scalarmultiplicationnotdefinedforfunctions.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Nov 22 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Scalar%20multiplication%20not%20defined%20for%20functions/near/148196578):
 It seems that `smul` over `ℝ` isn't defined for functions from `ℝ` to `ℝ` -- or at least, I can't get it to work.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/19307CommutefromAmsterdamForestHoteltotheVU.html
 ---
 
-## [Lean Together 2019](index.html)
-### [Commute from Amsterdam Forest Hotel to the VU](19307CommutefromAmsterdamForestHoteltotheVU.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [Commute from Amsterdam Forest Hotel to the VU](19307CommutefromAmsterdamForestHoteltotheVU.html)
+
+---
 
 #### [Gabriel Ebner (Jan 04 2019 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Commute%20from%20Amsterdam%20Forest%20Hotel%20to%20the%20VU/near/154439635):
 @**Patrick Massot** you asked on the main stream how to get to the VU.  I'm also staying at the Amsterdam Forest Hotel if you need assistance.  It takes about 15 minutes by bus (including waiting time and getting to the room at VU).  You can also walk to the VU, in summer it was a wonderful trip along Amstelveen's grachten; it takes about 30 minutes by foot.  If you intend to take public transport, I strongly recommend getting an OV chipkaart.

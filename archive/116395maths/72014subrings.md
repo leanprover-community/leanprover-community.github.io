@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/72014subrings.html
 ---
 
-## [maths](index.html)
-### [subrings](72014subrings.html)
+## Stream: [maths](index.html)
+### Topic: [subrings](72014subrings.html)
+
+---
 
 #### [Johan Commelin (Jun 07 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subrings/near/127699034):
 ```lean

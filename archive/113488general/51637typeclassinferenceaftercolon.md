@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51637typeclassinferenceaftercolon.html
 ---
 
-## [general](index.html)
-### [type class inference after colon](51637typeclassinferenceaftercolon.html)
+## Stream: [general](index.html)
+### Topic: [type class inference after colon](51637typeclassinferenceaftercolon.html)
+
+---
 
 #### [Kevin Buzzard (Mar 11 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123577754):
 In `example (α : Type) [comm_ring α] : ∀ x y z : α, x*(y+z)=x*y+x*z := mul_add`, type class inference enables us to use `mul_add`. Is it possible to move the colon to the left of the alpha though? Not that  I need to, it's just an idle question. If I try `example : ∀ (α : Type) [comm_ring α], ∀ x y z : α, x*(y+z)=x*y+x*z := mul_add` then Lean complains about not being able to find `has_add alpha` etc.

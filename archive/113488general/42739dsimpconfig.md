@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42739dsimpconfig.html
 ---
 
-## [general](index.html)
-### [dsimp_config](42739dsimpconfig.html)
+## Stream: [general](index.html)
+### Topic: [dsimp_config](42739dsimpconfig.html)
+
+---
 
 #### [Edward Ayers (Oct 10 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp_config/near/135537467):
 Please could someone help me fill in these holes in the docstring for `dsimp_config`?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26779transparency.html
 ---
 
-## [general](index.html)
-### [transparency](26779transparency.html)
+## Stream: [general](index.html)
+### Topic: [transparency](26779transparency.html)
+
+---
 
 #### [Edward Ayers (Aug 21 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transparency/near/132514588):
 In `tactic.meta` there is a definition called `transparency`:

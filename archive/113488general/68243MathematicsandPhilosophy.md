@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68243MathematicsandPhilosophy.html
 ---
 
-## [general](index.html)
-### [Mathematics and Philosophy](68243MathematicsandPhilosophy.html)
+## Stream: [general](index.html)
+### Topic: [Mathematics and Philosophy](68243MathematicsandPhilosophy.html)
+
+---
 
 #### [Sean Leather (Apr 12 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mathematics%20and%20Philosophy/near/124978055):
 [Proof and Other Dilemmas: Mathematics and Philosophy, reviewed by @**Jeremy Avigad** (pdf, December 2011)](https://www.ams.org/notices/201111/rtx111101580p.pdf)

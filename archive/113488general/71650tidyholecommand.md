@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71650tidyholecommand.html
 ---
 
-## [general](index.html)
-### [tidy hole command](71650tidyholecommand.html)
+## Stream: [general](index.html)
+### Topic: [tidy hole command](71650tidyholecommand.html)
+
+---
 
 #### [Johan Commelin (Sep 03 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133272160):
 @**Scott Morrison** The tidy hole command is really marvellous. Here are some trivialities that might give epsilon improvement:

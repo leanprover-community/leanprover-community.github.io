@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63294refinestruct.html
 ---
 
-## [general](index.html)
-### [refine_struct](63294refinestruct.html)
+## Stream: [general](index.html)
+### Topic: [refine_struct](63294refinestruct.html)
+
+---
 
 #### [Simon Hudon (May 31 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refine_struct/near/127375963):
 @**Patrick Massot** I finally got around to writing a `refine_struct` tactic to generalize and simplify the automation of the `indexed_product` proofs. 

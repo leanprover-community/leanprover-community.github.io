@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81772RichStandardLibrary.html
 ---
 
-## [general](index.html)
-### [Rich Standard Library?](81772RichStandardLibrary.html)
+## Stream: [general](index.html)
+### Topic: [Rich Standard Library?](81772RichStandardLibrary.html)
+
+---
 
 #### [Speee (Jul 14 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rich%20Standard%20Library%3F/near/129671263):
 I see that Jeremy Avigad boasts of a rich standard library in Lean here (pdf): https://leanprover.github.io/talks/stanford2017.pdf

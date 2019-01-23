@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68526typeresizing.html
 ---
 
-## [general](index.html)
-### [type resizing](68526typeresizing.html)
+## Stream: [general](index.html)
+### Topic: [type resizing](68526typeresizing.html)
+
+---
 
 #### [Reid Barton (Jun 01 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20resizing/near/127424550):
 Suppose I have a type `α : Type (u+1)` and I know `∃ β : Type u, nonempty (β ≃ α)`. Is there a "canonical" (= without choice, I guess?) way to obtain a type `α' : Type u` and an equivalence `α ≃ α'`?

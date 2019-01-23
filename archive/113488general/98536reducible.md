@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98536reducible.html
 ---
 
-## [general](index.html)
-### [@[reducible]](98536reducible.html)
+## Stream: [general](index.html)
+### Topic: [@[reducible]](98536reducible.html)
+
+---
 
 #### [Kenny Lau (Apr 01 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124484786):
 When should I use `@[reducible] def` and when to just use `def`?

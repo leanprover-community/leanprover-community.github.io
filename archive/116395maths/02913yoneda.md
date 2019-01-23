@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/02913yoneda.html
 ---
 
-## [maths](index.html)
-### [yoneda](02913yoneda.html)
+## Stream: [maths](index.html)
+### Topic: [yoneda](02913yoneda.html)
+
+---
 
 #### [Johan Commelin (Oct 18 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/yoneda/near/136033284):
 @**Scott Morrison|110524** Is there a reason why `yoneda` takes the category as explicit argument? Now we have to write `yoneda C X` instead of just `yoneda X`.

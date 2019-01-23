@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/42046topology.html
 ---
 
-## [maths](index.html)
-### [topology](42046topology.html)
+## Stream: [maths](index.html)
+### Topic: [topology](42046topology.html)
+
+---
 
 #### [Reid Barton (Dec 13 2018 at 23:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/151738935):
 Hi @**Sebastien Gouezel**, I was wondering whether you either have proved or were planning to prove Urysohn'slemma or the Tietze extension theorem.

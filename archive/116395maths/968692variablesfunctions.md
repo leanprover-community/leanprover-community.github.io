@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/968692variablesfunctions.html
 ---
 
-## [maths](index.html)
-### [2 variables functions](968692variablesfunctions.html)
+## Stream: [maths](index.html)
+### Topic: [2 variables functions](968692variablesfunctions.html)
+
+---
 
 #### [Patrick Massot (Dec 15 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/2%20variables%20functions/near/151852102):
 Is it evil to do something like:

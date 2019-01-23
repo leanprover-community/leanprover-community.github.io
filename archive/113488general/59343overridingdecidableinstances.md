@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59343overridingdecidableinstances.html
 ---
 
-## [general](index.html)
-### [overriding decidable instances](59343overridingdecidableinstances.html)
+## Stream: [general](index.html)
+### Topic: [overriding decidable instances](59343overridingdecidableinstances.html)
+
+---
 
 #### [Scott Morrison (Sep 22 2018 at 08:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/overriding%20decidable%20instances/near/134423873):
 Can someone point me to an example of overriding a `decidable` instance with a faster algorithm?

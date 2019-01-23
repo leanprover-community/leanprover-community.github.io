@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82120constructivisingusingtruncsubtypeiswellorder.html
 ---
 
-## [general](index.html)
-### [constructivising using `trunc (subtype (is_well_order _))`](82120constructivisingusingtruncsubtypeiswellorder.html)
+## Stream: [general](index.html)
+### Topic: [constructivising using `trunc (subtype (is_well_order _))`](82120constructivisingusingtruncsubtypeiswellorder.html)
+
+---
 
 #### [Kenny Lau (Nov 23 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructivising%20using%20%60trunc%20%28subtype%20%28is_well_order%20_%29%29%60/near/148204645):
 How many things can we constructivise with a `trunc (subtype (is_well_order _))` hypothesis? I'm sure we can make a truncated basis this way... Maybe if it can constructivise a lot of stuff, I would imagine making it as wide-used as `decidable_eq`

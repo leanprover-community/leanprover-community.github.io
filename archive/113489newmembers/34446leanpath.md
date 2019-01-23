@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/34446leanpath.html
 ---
 
-## [new members](index.html)
-### [lean path](34446leanpath.html)
+## Stream: [new members](index.html)
+### Topic: [lean path](34446leanpath.html)
+
+---
 
 #### [Hendrik (Sep 22 2018 at 06:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean%20path/near/134421026):
 I have the following problem: After installing the lean vs code extension and downloading the math library, adding the math library to a workspace results in unresolved imports because the math library is not inside the LEAN_PATH.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42445Nantestalkvideo.html
 ---
 
-## [general](index.html)
-### [Nantes talk video](42445Nantestalkvideo.html)
+## Stream: [general](index.html)
+### Topic: [Nantes talk video](42445Nantestalkvideo.html)
+
+---
 
 #### [Patrick Massot (Jan 18 2019 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156362257):
 The maths department in Nantes uploaded the video of the Lean talk I gave in November at http://media.math.sciences.univ-nantes.fr/fr/node/801 It's in French and the most interesting part was also in my Amsterdam talk, but it could still be useful for people who intend to give talks presenting Lean to mathematicians.

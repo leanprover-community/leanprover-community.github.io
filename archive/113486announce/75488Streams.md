@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113486announce/75488Streams.html
 ---
 
-## [announce](index.html)
-### [Streams](75488Streams.html)
+## Stream: [announce](index.html)
+### Topic: [Streams](75488Streams.html)
+
+---
 
 #### [Notification Bot (Feb 27 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113486-announce/topic/Streams/near/123020000):
 Mario Carneiro just created a new stream #**mathlib travis**.

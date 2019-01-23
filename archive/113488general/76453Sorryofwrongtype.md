@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76453Sorryofwrongtype.html
 ---
 
-## [general](index.html)
-### [Sorry of wrong type!](76453Sorryofwrongtype.html)
+## Stream: [general](index.html)
+### Topic: [Sorry of wrong type!](76453Sorryofwrongtype.html)
+
+---
 
 #### [Moses Schönfinkel (Mar 21 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sorry%20of%20wrong%20type%21/near/124004577):
 Heh...

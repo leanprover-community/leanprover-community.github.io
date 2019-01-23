@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73049notationandvariables.html
 ---
 
-## [general](index.html)
-### [notation and variables](73049notationandvariables.html)
+## Stream: [general](index.html)
+### Topic: [notation and variables](73049notationandvariables.html)
+
+---
 
 #### [Kevin Buzzard (Nov 30 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20and%20variables/near/148826839):
 It suddenly occurs to me, about 10 hours before a lecture (and I intend to spend at least 7 of those hours sleeping) that it would be cool if I could do some examples of basic arguments with equivalence relations in Lean, live in the lecture. But actually I am not sure of the best way to do this. Here's the sort of thing I want to do -- prove, for example, that if `r` is an equivalence relation, and `r a b` and `r c b` and `r c d`, then `r a d`. But I want to do it with notation -- I want to write `a ~ b` or some -- any -- random symbol, rather than the prefix notation `r`. However when I define `r : S -> S -> Prop` as a variable I find that I can't use notation, because `r` is a local variable, and if I define `r` within an example -- `example (S : Type) (r : S -> S -> Prop)...` then I can't figure out how to get notation working before I state the theorem. What am I missing? This is for teaching purposes, so I want it to look as slick as possible.

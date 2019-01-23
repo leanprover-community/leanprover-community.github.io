@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/07107462idealoperations.html
 ---
 
-## [PR reviews](index.html)
-### [#462 ideal operations](07107462idealoperations.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#462 ideal operations](07107462idealoperations.html)
+
+---
 
 #### [Kenny Lau (Nov 07 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23462%20ideal%20operations/near/146936148):
 @**Kevin Buzzard** @**Mario Carneiro** `pow` comes for free after I've proved semiring! :D

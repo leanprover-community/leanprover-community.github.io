@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/18934instance.html
 ---
 
-## [general](index.html)
-### [instance](18934instance.html)
+## Stream: [general](index.html)
+### Topic: [instance](18934instance.html)
+
+---
 
 #### [Kenny Lau (Aug 13 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance/near/132041055):
 `algebra/module.lean`:

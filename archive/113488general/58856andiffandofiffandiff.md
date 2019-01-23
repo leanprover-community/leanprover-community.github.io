@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58856andiffandofiffandiff.html
 ---
 
-## [general](index.html)
-### [and_iff_and_of_iff_and_iff](58856andiffandofiffandiff.html)
+## Stream: [general](index.html)
+### Topic: [and_iff_and_of_iff_and_iff](58856andiffandofiffandiff.html)
+
+---
 
 #### [Johan Commelin (Oct 03 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135087802):
 Would this be a useful lemma for mathlib? If so, where should it go? I currently solve this by `split; intros; split,` but that is a bit of a hack, and creates 4 goals where usually 2 should suffice.

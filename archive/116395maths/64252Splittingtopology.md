@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/64252Splittingtopology.html
 ---
 
-## [maths](index.html)
-### [Splitting topology](64252Splittingtopology.html)
+## Stream: [maths](index.html)
+### Topic: [Splitting topology](64252Splittingtopology.html)
+
+---
 
 #### [Patrick Massot (Jan 22 2019 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20topology/near/156605219):
 @**Mario Carneiro** @**Johannes Hölzl** @**Reid Barton** I continued moving on the topology reorganization project. The next step was to split `topology.basic` and `topology.continuity` while gathering the basics of continuity and the basics of topological spaces. My current result is at https://github.com/leanprover-community/mathlib/tree/top_split I need comments before moving on. My next step would be to reorganize uniform spaces and topological structures, still following the general scheme discussed in Amsterdam
@@ -49,4 +51,10 @@ But looking through the changeset it looks very sensible
 
 #### [Patrick Massot (Jan 22 2019 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20topology/near/156607124):
 We know you don't like reducing line counts. This was very clear from reading the topology part of mathlib, and also from the Amsterdam discussion. But I think this is still a nice goal, especially when we find out there are sensible cutting points. And of course the 1000 number is totally arbitrary, although there is a certain psychological impact above that threshold.
+
+#### [Patrick Massot (Jan 22 2019 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20topology/near/156644076):
+So, should I open a PR?
+
+#### [Johannes Hölzl (Jan 22 2019 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20topology/near/156645505):
+Yes, I think this is a good PR
 

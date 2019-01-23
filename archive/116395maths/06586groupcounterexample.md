@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/06586groupcounterexample.html
 ---
 
-## [maths](index.html)
-### [group counterexample](06586groupcounterexample.html)
+## Stream: [maths](index.html)
+### Topic: [group counterexample](06586groupcounterexample.html)
+
+---
 
 #### [Kevin Buzzard (Nov 23 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214352):
 Q1 part (i) on the 2nd year group theory sheet at Imperial (where $$G$$ is a group throughout) is "True or false : If we can find elements $$g$$, $$h$$ in $$G$$ such that $$gh = hg$$ then $$G$$ is abelian."

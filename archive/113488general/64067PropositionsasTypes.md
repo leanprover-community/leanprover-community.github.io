@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64067PropositionsasTypes.html
 ---
 
-## [general](index.html)
-### [Propositions as Types](64067PropositionsasTypes.html)
+## Stream: [general](index.html)
+### Topic: [Propositions as Types](64067PropositionsasTypes.html)
+
+---
 
 #### [Lyle Kopnicky (Apr 16 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125127870):
 I'm not clear why the definition of `p1` below is not a type error. What can it possibly mean for `p1` to be a proof of a proof of a proposition?

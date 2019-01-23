@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/08397Usingaddrightinj.html
 ---
 
-## [new members](index.html)
-### [Using @add_right_inj](08397Usingaddrightinj.html)
+## Stream: [new members](index.html)
+### Topic: [Using @add_right_inj](08397Usingaddrightinj.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Oct 13 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%40add_right_inj/near/135737105):
 How many parameters do I need to specify to use `←@add_right_inj`? I'm trying to understand how to use tactics with implicit parameters, but can't seem to get it right. I keep getting `failed to synthesize type class instance`

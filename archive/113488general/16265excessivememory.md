@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16265excessivememory.html
 ---
 
-## [general](index.html)
-### [excessive memory](16265excessivememory.html)
+## Stream: [general](index.html)
+### Topic: [excessive memory](16265excessivememory.html)
+
+---
 
 #### [Johan Commelin (Sep 24 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/excessive%20memory/near/134535868):
 On my laptop I get the following error pretty often:

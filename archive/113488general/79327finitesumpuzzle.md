@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79327finitesumpuzzle.html
 ---
 
-## [general](index.html)
-### [finite sum puzzle](79327finitesumpuzzle.html)
+## Stream: [general](index.html)
+### Topic: [finite sum puzzle](79327finitesumpuzzle.html)
+
+---
 
 #### [Kevin Buzzard (Mar 30 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20sum%20puzzle/near/124390119):
 ```

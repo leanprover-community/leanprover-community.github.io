@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/34767Suggestionsformathscomputingprojects.html
 ---
 
-## [maths](index.html)
-### [Suggestions for maths/computing projects](34767Suggestionsformathscomputingprojects.html)
+## Stream: [maths](index.html)
+### Topic: [Suggestions for maths/computing projects](34767Suggestionsformathscomputingprojects.html)
+
+---
 
 #### [Kevin Buzzard (Sep 29 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Suggestions%20for%20maths/computing%20projects/near/134880233):
 In the UK the system is that the undergraduates come into university having chosen their major and can only do classes offered by the corresponding department(s). The third year undergraduates doing a joint maths/computing degree hence know quite a bit of maths and CS. I have been asked to suggest possible projects for these students. No other pure mathematicians ever get involved. If anyone has any suggestions for projects they they think might be appropriate then I would be very interested to hear them.

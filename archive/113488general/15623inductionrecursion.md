@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/15623inductionrecursion.html
 ---
 
-## [general](index.html)
-### [induction recursion?](15623inductionrecursion.html)
+## Stream: [general](index.html)
+### Topic: [induction recursion?](15623inductionrecursion.html)
+
+---
 
 #### [Max New (Apr 25 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20recursion%3F/near/125688817):
 Does lean support inductive-recursive definitions?

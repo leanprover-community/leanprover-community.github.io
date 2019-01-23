@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/89037TakingtheStacksProjectformalisationforward.html
 ---
 
-## [maths](index.html)
-### [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html)
+## Stream: [maths](index.html)
+### Topic: [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html)
+
+---
 
 #### [Kevin Buzzard (Oct 09 2018 at 17:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Taking%20the%20Stacks%20Project%20formalisation%20forward/near/135477612):
 I formalised the definition of a scheme -- in theory at least. I proved that an affine scheme was a scheme which gave me some sort of hope that I'd formalised the definition correctly. The files are a mess, some people were never happy with the names of the theorems or the names of the lean files, the whole thing needs a tidy. I have a Masters student who *might* be interested. What are the priorities here? He'd like to prove some more lemmas about schemes (and indeed we as a department would like to see some original material). But maybe I could use this as impetus to tidy the whole thing up. Does anyone have any ideas about what could be priorities here? @**Patrick Massot** and @**Johan Commelin** you probably both have clearer ideas than me about where this project should be going.

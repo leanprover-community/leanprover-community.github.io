@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20539squeezesimp.html
 ---
 
-## [general](index.html)
-### [squeeze_simp](20539squeezesimp.html)
+## Stream: [general](index.html)
+### Topic: [squeeze_simp](20539squeezesimp.html)
+
+---
 
 #### [Johan Commelin (Oct 08 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squeeze_simp/near/135401004):
 @**Simon Hudon** To what extend do you think `sed` and `lean` could cooperate to automatically turn every `simp` into a `squeeze_simp`, and then every `squeeze_simp` into a `simp only`? Can we automate Kenny?

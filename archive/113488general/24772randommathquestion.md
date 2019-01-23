@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24772randommathquestion.html
 ---
 
-## [general](index.html)
-### [random math question](24772randommathquestion.html)
+## Stream: [general](index.html)
+### Topic: [random math question](24772randommathquestion.html)
+
+---
 
 #### [Andrew Ashworth (Mar 31 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462875):
 so, seeing as how there are many mathematicians here, can anyone recommend a textbook on algebraic topology? I'd like to be able to read https://arxiv.org/pdf/1802.04443.pdf

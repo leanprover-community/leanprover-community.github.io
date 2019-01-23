@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/49853Slidesforperfectoidtalk.html
 ---
 
-## [Lean Together 2019](index.html)
-### [Slides for perfectoid talk](49853Slidesforperfectoidtalk.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [Slides for perfectoid talk](49853Slidesforperfectoidtalk.html)
+
+---
 
 #### [Kevin Buzzard (Jan 11 2019 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Slides%20for%20perfectoid%20talk/near/154930325):
 Patrick told me on Thursday that I should outline what a perfectoid space was. I wasn't at all sure what to say to a room containing computer scientists, but somehow whilst speaking to them and answering questions it became a bit clearer to me what I could say and what level to go for.

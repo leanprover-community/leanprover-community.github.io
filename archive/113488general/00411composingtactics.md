@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00411composingtactics.html
 ---
 
-## [general](index.html)
-### [composing tactics](00411composingtactics.html)
+## Stream: [general](index.html)
+### Topic: [composing tactics](00411composingtactics.html)
+
+---
 
 #### [Andrew Ashworth (Jun 02 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/composing%20tactics/near/127458510):
 Suppose I prove a goal using `by repeat {constructor}`. What is the syntax for creating a new def of type `tactic unit` that does the same thing? Do I have to drop down into using the non-interactive tactics?

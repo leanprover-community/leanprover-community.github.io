@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00258Beklemishevsworms.html
 ---
 
-## [general](index.html)
-### [Beklemishev's worms](00258Beklemishevsworms.html)
+## Stream: [general](index.html)
+### Topic: [Beklemishev's worms](00258Beklemishevsworms.html)
+
+---
 
 #### [Kenny Lau (Dec 31 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154084805):
 ```lean

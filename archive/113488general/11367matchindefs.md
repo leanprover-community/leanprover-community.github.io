@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11367matchindefs.html
 ---
 
-## [general](index.html)
-### [match in defs](11367matchindefs.html)
+## Stream: [general](index.html)
+### Topic: [match in defs](11367matchindefs.html)
+
+---
 
 #### [Chris Hughes (Apr 02 2018 at 17:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20in%20defs/near/124532070):
 Out of the following two definitions, I find the first much easier to use.

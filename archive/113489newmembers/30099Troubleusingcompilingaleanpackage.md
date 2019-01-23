@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/30099Troubleusingcompilingaleanpackage.html
 ---
 
-## [new members](index.html)
-### [Trouble using compiling a lean package](30099Troubleusingcompilingaleanpackage.html)
+## Stream: [new members](index.html)
+### Topic: [Trouble using compiling a lean package](30099Troubleusingcompilingaleanpackage.html)
+
+---
 
 #### [Calle Sönne (Nov 17 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20using%20compiling%20a%20lean%20package/near/147882741):
 Im trying compile a leanpackage. I assume the way you do is by running leanpkg build in the folder where leanpkg.toml is located. However doing that gives me the following error:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57153mathlibnightly.html
 ---
 
-## [general](index.html)
-### [mathlib nightly](57153mathlibnightly.html)
+## Stream: [general](index.html)
+### Topic: [mathlib nightly](57153mathlibnightly.html)
+
+---
 
 #### [Kenny Lau (Mar 31 2018 at 07:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444305):
 Is this possible? @**Mario Carneiro** (or maybe I could host it myself?)

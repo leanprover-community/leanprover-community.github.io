@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/07722howexpensiveisrw.html
 ---
 
-## [general](index.html)
-### [how expensive is rw?](07722howexpensiveisrw.html)
+## Stream: [general](index.html)
+### Topic: [how expensive is rw?](07722howexpensiveisrw.html)
+
+---
 
 #### [Kenny Lau (May 31 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20expensive%20is%20rw%3F/near/127334288):
 a profiler for a long proof I just typed:

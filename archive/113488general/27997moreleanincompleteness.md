@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27997moreleanincompleteness.html
 ---
 
-## [general](index.html)
-### [more lean incompleteness](27997moreleanincompleteness.html)
+## Stream: [general](index.html)
+### Topic: [more lean incompleteness](27997moreleanincompleteness.html)
+
+---
 
 #### [Mario Carneiro (Apr 04 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20lean%20incompleteness/near/124609074):
 @**Gabriel Ebner** I found another place where I lie in the paper compared to lean's actual behavior:

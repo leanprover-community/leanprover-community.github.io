@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58831Implicitconstanttypescope.html
 ---
 
-## [general](index.html)
-### [Implicit constant-type scope](58831Implicitconstanttypescope.html)
+## Stream: [general](index.html)
+### Topic: [Implicit constant-type scope](58831Implicitconstanttypescope.html)
+
+---
 
 #### [Moses Schönfinkel (Mar 14 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implicit%20constant-type%20scope/near/123699670):
 Is there a way to tell lean that every numeric constant (a'la `1` `42`) I use in <some scope> is actually from `Z` rather than `N` or am I stuck with `(0 : Z)`? (Coq has `Open Scope ZScope` command that lets me do this sort of thing.)

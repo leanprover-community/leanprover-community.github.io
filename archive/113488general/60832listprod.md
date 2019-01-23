@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60832listprod.html
 ---
 
-## [general](index.html)
-### [list.prod](60832listprod.html)
+## Stream: [general](index.html)
+### Topic: [list.prod](60832listprod.html)
+
+---
 
 #### [Kenny Lau (Jun 20 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.prod/near/128334739):
 Was there any point in time where `list.prod [t]` was definitionally equivalent to `t * 1`?

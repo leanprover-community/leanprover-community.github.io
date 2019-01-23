@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/95007420constructionsoflimits.html
 ---
 
-## [PR reviews](index.html)
-### [#420 constructions of limits](95007420constructionsoflimits.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#420 constructions of limits](95007420constructionsoflimits.html)
+
+---
 
 #### [Scott Morrison (Oct 14 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23420%20constructions%20of%20limits/near/135788640):
 This extends the first PR on (co)limits. It

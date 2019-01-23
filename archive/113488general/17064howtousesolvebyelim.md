@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17064howtousesolvebyelim.html
 ---
 
-## [general](index.html)
-### [how to use `solve_by_elim`](17064howtousesolvebyelim.html)
+## Stream: [general](index.html)
+### Topic: [how to use `solve_by_elim`](17064howtousesolvebyelim.html)
+
+---
 
 #### [Chris Hughes (Aug 17 2018 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20%60solve_by_elim%60/near/132313630):
 What is the syntax for giving `solve_by_elim` a discharger. I tried ``solve_by_elim `[cc] `` like the docs suggest, but I couldn't get it to work.

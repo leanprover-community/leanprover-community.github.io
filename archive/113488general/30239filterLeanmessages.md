@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30239filterLeanmessages.html
 ---
 
-## [general](index.html)
-### [filter Lean messages](30239filterLeanmessages.html)
+## Stream: [general](index.html)
+### Topic: [filter Lean messages](30239filterLeanmessages.html)
+
+---
 
 #### [Patrick Massot (Aug 08 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filter%20Lean%20messages/near/131101820):
 @**Gabriel Ebner** it would be nice to add a button next to the "Updating/Stopped" toggle which would allow filtering out certain context lines, especially everything starting with `_inst_`. Because of mixin classes, I currently work on a proof whose starting context goes up to `_inst_24`. Very quickly I need to scroll down to see the current goal...

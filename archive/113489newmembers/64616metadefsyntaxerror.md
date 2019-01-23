@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/64616metadefsyntaxerror.html
 ---
 
-## [new members](index.html)
-### [meta def syntax error](64616metadefsyntaxerror.html)
+## Stream: [new members](index.html)
+### Topic: [meta def syntax error](64616metadefsyntaxerror.html)
+
+---
 
 #### [Ken Roe (Jul 18 2018 at 04:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129846795):
 I was trying out the example from the Lean meta programming paper.  However their example gives a syntax error:

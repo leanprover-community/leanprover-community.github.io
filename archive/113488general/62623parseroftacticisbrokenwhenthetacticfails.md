@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/62623parseroftacticisbrokenwhenthetacticfails.html
 ---
 
-## [general](index.html)
-### [parser.of_tactic is broken when the tactic fails](62623parseroftacticisbrokenwhenthetacticfails.html)
+## Stream: [general](index.html)
+### Topic: [parser.of_tactic is broken when the tactic fails](62623parseroftacticisbrokenwhenthetacticfails.html)
+
+---
 
 #### [Mario Carneiro (Aug 31 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parser.of_tactic%20is%20broken%20when%20the%20tactic%20fails/near/133093024):
 I just stumbled on the following issue:

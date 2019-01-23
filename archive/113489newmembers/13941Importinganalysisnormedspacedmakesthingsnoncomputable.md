@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/13941Importinganalysisnormedspacedmakesthingsnoncomputable.html
 ---
 
-## [new members](index.html)
-### [Importing analysis.normed_spaced makes things noncomputable](13941Importinganalysisnormedspacedmakesthingsnoncomputable.html)
+## Stream: [new members](index.html)
+### Topic: [Importing analysis.normed_spaced makes things noncomputable](13941Importinganalysisnormedspacedmakesthingsnoncomputable.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Dec 18 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Importing%20analysis.normed_spaced%20makes%20things%20noncomputable/near/152088656):
 The following code:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89764isringhominsteadofcastmul.html
 ---
 
-## [general](index.html)
-### [is_ring_hom instead of cast_mul](89764isringhominsteadofcastmul.html)
+## Stream: [general](index.html)
+### Topic: [is_ring_hom instead of cast_mul](89764isringhominsteadofcastmul.html)
+
+---
 
 #### [Chris Hughes (Apr 24 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_ring_hom%20instead%20of%20cast_mul/near/125591171):
 What's the reason not to mark `coe` as a ring_hom instead of using `int.cast_mul` and stuff like that?

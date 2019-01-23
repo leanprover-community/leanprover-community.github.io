@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/95778letxLHS.html
 ---
 
-## [general](index.html)
-### [let x = LHS](95778letxLHS.html)
+## Stream: [general](index.html)
+### Topic: [let x = LHS](95778letxLHS.html)
+
+---
 
 #### [Kevin Buzzard (Apr 07 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756807):
 As sometimes happens, my goal is currently `FPTB.res BU _ _ s = si i` and my proof that these two things are equal is going to involve showing that they're both the unique object with some property. I am in tactic mode. I need to hence feed both sides into a bunch of machinery (the proofs that each side has the property are quite different). The underscores are proofs. I want to write "now let x be the left hand side" just to make things easier to handle, but the proof terms are probably nightmares. I am hoping there's a cute one-liner which lets me do this, based on the fact that I sometimes use `to_lhs` in conv mode. But I don't think `to_lhs` exists in tactic mode.

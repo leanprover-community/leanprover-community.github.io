@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55555canwemakeacorelemmaintoasimplemma.html
 ---
 
-## [general](index.html)
-### [can we make a core lemma into a simp lemma](55555canwemakeacorelemmaintoasimplemma.html)
+## Stream: [general](index.html)
+### Topic: [can we make a core lemma into a simp lemma](55555canwemakeacorelemmaintoasimplemma.html)
+
+---
 
 #### [Johan Commelin (Aug 07 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20we%20make%20a%20core%20lemma%20into%20a%20simp%20lemma/near/131041229):
 `nat.sub_self` is in core. I think it should be a simp lemma. Can we add such an attribute post-hoc in a mathlib file?

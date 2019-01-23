@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/96855definingapredicate.html
 ---
 
-## [new members](index.html)
-### [defining a predicate](96855definingapredicate.html)
+## Stream: [new members](index.html)
+### Topic: [defining a predicate](96855definingapredicate.html)
+
+---
 
 #### [Patrick Thomas (Nov 26 2018 at 05:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20predicate/near/148346494):
 Hi,

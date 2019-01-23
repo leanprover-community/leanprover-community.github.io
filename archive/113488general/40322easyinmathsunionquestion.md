@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40322easyinmathsunionquestion.html
 ---
 
-## [general](index.html)
-### [easy-in-maths union question](40322easyinmathsunionquestion.html)
+## Stream: [general](index.html)
+### Topic: [easy-in-maths union question](40322easyinmathsunionquestion.html)
+
+---
 
 #### [Kevin Buzzard (Apr 17 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy-in-maths%20union%20question/near/125196178):
 ```lean

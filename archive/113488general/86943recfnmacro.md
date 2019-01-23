@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86943recfnmacro.html
 ---
 
-## [general](index.html)
-### [rec_fn_macro](86943recfnmacro.html)
+## Stream: [general](index.html)
+### Topic: [rec_fn_macro](86943recfnmacro.html)
+
+---
 
 #### [Ben Sherman (May 21 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126885006):
 I just updated Lean from 3.3.0 to 3.4.1, and now when I write this code:

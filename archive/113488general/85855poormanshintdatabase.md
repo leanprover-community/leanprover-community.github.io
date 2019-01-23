@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85855poormanshintdatabase.html
 ---
 
-## [general](index.html)
-### [poor man's hint database](85855poormanshintdatabase.html)
+## Stream: [general](index.html)
+### Topic: [poor man's hint database](85855poormanshintdatabase.html)
+
+---
 
 #### [Moses Schönfinkel (Nov 19 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/poor%20man%27s%20hint%20database/near/147951801):
 Is there a way to simulate Coq's hint database? For example, I often find myself writing `simp [x₁, x₂, x₃, x₄]`, which I would like to replace with `simp [x_lemmas]` where `x_lemmas` is a sort of a "hint database" for lack of better term. (Do note that I don't want to designate `xₙ` to be simp lemmas.)

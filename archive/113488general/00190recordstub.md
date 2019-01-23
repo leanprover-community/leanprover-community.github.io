@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00190recordstub.html
 ---
 
-## [general](index.html)
-### [record stub](00190recordstub.html)
+## Stream: [general](index.html)
+### Topic: [record stub](00190recordstub.html)
+
+---
 
 #### [Reid Barton (Oct 20 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136169584):
 The hole command to create a record stub is really nice!

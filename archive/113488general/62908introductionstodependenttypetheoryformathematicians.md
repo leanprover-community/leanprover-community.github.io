@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/62908introductionstodependenttypetheoryformathematicians.html
 ---
 
-## [general](index.html)
-### [introductions to dependent type theory for mathematicians](62908introductionstodependenttypetheoryformathematicians.html)
+## Stream: [general](index.html)
+### Topic: [introductions to dependent type theory for mathematicians](62908introductionstodependenttypetheoryformathematicians.html)
+
+---
 
 #### [Scott Morrison (Mar 15 2018 at 06:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/introductions%20to%20dependent%20type%20theory%20for%20mathematicians/near/123737728):
 At tea today some colleagues expressed interest in learning about dependent type theory (interactive theorem proving may still be a bridge too far... :-). Does anyone have favourite recommendations for introductions, especially written for a "working mathematician" audience?

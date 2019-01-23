@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/95945howfartogowithjunktheorem.html
 ---
 
-## [general](index.html)
-### [how far to go with junk theorem](95945howfartogowithjunktheorem.html)
+## Stream: [general](index.html)
+### Topic: [how far to go with junk theorem](95945howfartogowithjunktheorem.html)
+
+---
 
 #### [Kevin Buzzard (Nov 14 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20far%20to%20go%20with%20junk%20theorem/near/147692754):
 If `noncomputable definition nth_root (x : ℝ) (n : ℕ) : ℝ :=

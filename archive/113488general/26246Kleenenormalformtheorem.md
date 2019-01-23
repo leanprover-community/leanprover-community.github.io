@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26246Kleenenormalformtheorem.html
 ---
 
-## [general](index.html)
-### [Kleene normal form theorem](26246Kleenenormalformtheorem.html)
+## Stream: [general](index.html)
+### Topic: [Kleene normal form theorem](26246Kleenenormalformtheorem.html)
+
+---
 
 #### [Mario Carneiro (May 21 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kleene%20normal%20form%20theorem/near/126877954):
 Yay, milestone achieved. The statement that I actually proved shows that `eval : code -> N ->. N` which evaluates a partial recursive function given by a code, is itself a partial recursive function. This is also known as a universal Turing machine in the language of Turing machines.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/08826gettinganicerinductionhypothesisfromfinsetinduction.html
 ---
 
-## [new members](index.html)
-### [getting a nicer induction hypothesis from finset.induction](08826gettinganicerinductionhypothesisfromfinsetinduction.html)
+## Stream: [new members](index.html)
+### Topic: [getting a nicer induction hypothesis from finset.induction](08826gettinganicerinductionhypothesisfromfinsetinduction.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Sep 24 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20a%20nicer%20induction%20hypothesis%20from%20finset.induction/near/134558327):
 I'm working on formalizing a proof where the idea is to induct on the size of $$Y \setminus X$$ for two finsets $$X, Y$$. I've currently set up something like the following:

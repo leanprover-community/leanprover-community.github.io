@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/34718propertyappliestoallelementsoflist.html
 ---
 
-## [maths](index.html)
-### [property applies to all elements of list](34718propertyappliestoallelementsoflist.html)
+## Stream: [maths](index.html)
+### Topic: [property applies to all elements of list](34718propertyappliestoallelementsoflist.html)
+
+---
 
 #### [Sean Leather (Apr 30 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/property%20applies%20to%20all%20elements%20of%20list/near/125884050):
 Is there another, convenient way one might specify this given what exists in mathlib?

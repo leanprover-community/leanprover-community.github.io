@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/99122computablefunctionsofreals.html
 ---
 
-## [maths](index.html)
-### [computable functions of reals](99122computablefunctionsofreals.html)
+## Stream: [maths](index.html)
+### Topic: [computable functions of reals](99122computablefunctionsofreals.html)
+
+---
 
 #### [Johan Commelin (Nov 30 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20functions%20of%20reals/near/148864065):
 In my "ordinary maths" research I was confronted with the paper "Computable functions of reals" by Tent and Ziegler, which is really funny because:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17472funextcongrfailsinconv.html
 ---
 
-## [general](index.html)
-### ["funext, congr" fails in conv](17472funextcongrfailsinconv.html)
+## Stream: [general](index.html)
+### Topic: ["funext, congr" fails in conv](17472funextcongrfailsinconv.html)
+
+---
 
 #### [Kenny Lau (Sep 10 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/133645086):
 ```lean

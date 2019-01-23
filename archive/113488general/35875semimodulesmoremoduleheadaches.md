@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35875semimodulesmoremoduleheadaches.html
 ---
 
-## [general](index.html)
-### [semimodules, more module headaches](35875semimodulesmoremoduleheadaches.html)
+## Stream: [general](index.html)
+### Topic: [semimodules, more module headaches](35875semimodulesmoremoduleheadaches.html)
+
+---
 
 #### [Mario Carneiro (Sep 10 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semimodules%2C%20more%20module%20headaches/near/133678716):
 @**Johannes Hölzl** I had problems with using `smul_add'` directly on modules, so I had to duplicate the theorems [here](https://github.com/leanprover/mathlib/blob/b33764d942dc8b1b7f55cace89429c948c1a4b2f/algebra/module.lean#L38-L43). Do you have any ideas?

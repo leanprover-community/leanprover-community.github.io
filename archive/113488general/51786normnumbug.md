@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51786normnumbug.html
 ---
 
-## [general](index.html)
-### [norm_num bug](51786normnumbug.html)
+## Stream: [general](index.html)
+### Topic: [norm_num bug](51786normnumbug.html)
+
+---
 
 #### [Calle Sönne (Nov 08 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20bug/near/147321656):
 Here is what I think is a bug in norm_num:

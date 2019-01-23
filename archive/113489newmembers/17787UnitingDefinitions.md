@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/17787UnitingDefinitions.html
 ---
 
-## [new members](index.html)
-### [Uniting Definitions](17787UnitingDefinitions.html)
+## Stream: [new members](index.html)
+### Topic: [Uniting Definitions](17787UnitingDefinitions.html)
+
+---
 
 #### [Ali Sever (Jul 28 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniting%20Definitions/near/130457466):
 Is there a way I can join perp, perp1 and perp2 into 1 definition? Same thing for perpx.  `l : point → point → set point`

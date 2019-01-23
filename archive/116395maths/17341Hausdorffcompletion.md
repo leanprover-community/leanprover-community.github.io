@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/17341Hausdorffcompletion.html
 ---
 
-## [maths](index.html)
-### [Hausdorff completion](17341Hausdorffcompletion.html)
+## Stream: [maths](index.html)
+### Topic: [Hausdorff completion](17341Hausdorffcompletion.html)
+
+---
 
 #### [Patrick Massot (Jul 11 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorff%20completion/near/129461026):
 @**Johannes Hölzl** around https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L1102, is there any reason why you didn't push to the Hausdorff completion? Is the idea that users should easily combine stuff in this section with the https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L928 section? Or did you intend to continue this?

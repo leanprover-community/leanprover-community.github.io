@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/03444Easytopologicalspacequestion.html
 ---
 
-## [maths](index.html)
-### [Easy topological space question](03444Easytopologicalspacequestion.html)
+## Stream: [maths](index.html)
+### Topic: [Easy topological space question](03444Easytopologicalspacequestion.html)
+
+---
 
 #### [Kevin Buzzard (Apr 02 2018 at 03:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Easy%20topological%20space%20question/near/124507196):
 I've been struggling on this one for about an hour :-/ I have a topological space X and an open set U and a  basis B for the topology. I have x in U, and I simply want to find V in B with x in V and V in U.

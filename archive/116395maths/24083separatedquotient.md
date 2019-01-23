@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/24083separatedquotient.html
 ---
 
-## [maths](index.html)
-### [separated quotient](24083separatedquotient.html)
+## Stream: [maths](index.html)
+### Topic: [separated quotient](24083separatedquotient.html)
+
+---
 
 #### [Patrick Massot (Sep 30 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/separated%20quotient/near/134934490):
 @**Johannes Hölzl** why https://github.com/leanprover-community/mathlib/blob/completions/analysis/topology/completion.lean#L185 is not an instance?

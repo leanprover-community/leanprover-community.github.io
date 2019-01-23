@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29908simpdocumentation.html
 ---
 
-## [general](index.html)
-### [simp documentation](29908simpdocumentation.html)
+## Stream: [general](index.html)
+### Topic: [simp documentation](29908simpdocumentation.html)
+
+---
 
 #### [Simon Hudon (Mar 15 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728672):
 @**Kevin Buzzard** I'm having a look at your recent PR. In "When it is unadvisable to use simp", why not use `show` instead of `suffices`?

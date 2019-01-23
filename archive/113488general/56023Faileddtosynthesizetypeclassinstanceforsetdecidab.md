@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html
 ---
 
-## [general](index.html)
-### [Failedd to synthesize type class instance for set.decidab...](56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html)
+## Stream: [general](index.html)
+### Topic: [Failedd to synthesize type class instance for set.decidab...](56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html)
+
+---
 
 #### [AHan (Dec 14 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151749704):
 In the following example,  I don't understand why lean failed to synthesize type class instance for `decidable (x ∈ s)` ?

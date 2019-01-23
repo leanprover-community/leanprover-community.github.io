@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/68252Typecheckingahigherorderdefinition.html
 ---
 
-## [new members](index.html)
-### [Type checking a higher order definition](68252Typecheckingahigherorderdefinition.html)
+## Stream: [new members](index.html)
+### Topic: [Type checking a higher order definition](68252Typecheckingahigherorderdefinition.html)
+
+---
 
 #### [Ken Roe (Jul 12 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20checking%20a%20higher%20order%20definition/near/129508130):
 Can someone fix the following definition so that it can be type checked:

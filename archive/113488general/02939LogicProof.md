@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02939LogicProof.html
 ---
 
-## [general](index.html)
-### [Logic & Proof](02939LogicProof.html)
+## Stream: [general](index.html)
+### Topic: [Logic & Proof](02939LogicProof.html)
+
+---
 
 #### [Kaushik Chakraborty (Jun 07 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20%26%20Proof/near/127707574):
 Hi, I am going through the online course Logic and Proof. I am stuck in the exercises. Is this the right place to ask such questions?

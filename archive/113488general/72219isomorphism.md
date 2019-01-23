@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72219isomorphism.html
 ---
 
-## [general](index.html)
-### [isomorphism](72219isomorphism.html)
+## Stream: [general](index.html)
+### Topic: [isomorphism](72219isomorphism.html)
+
+---
 
 #### [Blair Shi (Jul 30 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphism/near/130566051):
 Can anyone tell me what should I do to prove a basis v1,v2,...,vn of a fdvs V/k is just an isomorphism k^n -> V in lean? Should I show the homomorphism firstly and then show the homomorphism is bijective?

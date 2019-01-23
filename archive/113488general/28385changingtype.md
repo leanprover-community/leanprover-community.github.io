@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28385changingtype.html
 ---
 
-## [general](index.html)
-### [`@` changing type?](28385changingtype.html)
+## Stream: [general](index.html)
+### Topic: [`@` changing type?](28385changingtype.html)
+
+---
 
 #### [Kevin Buzzard (Jul 06 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60%40%60%20changing%20type%3F/near/129193790):
 What's going on here?

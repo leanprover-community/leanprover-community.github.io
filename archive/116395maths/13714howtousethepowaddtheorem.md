@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/13714howtousethepowaddtheorem.html
 ---
 
-## [maths](index.html)
-### [how to use the pow_add theorem](13714howtousethepowaddtheorem.html)
+## Stream: [maths](index.html)
+### Topic: [how to use the pow_add theorem](13714howtousethepowaddtheorem.html)
+
+---
 
 #### [Truong Nguyen (Sep 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225323):
 Dear Alls,

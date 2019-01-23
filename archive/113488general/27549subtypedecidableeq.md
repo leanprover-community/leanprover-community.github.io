@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27549subtypedecidableeq.html
 ---
 
-## [general](index.html)
-### [subtype.decidable_eq](27549subtypedecidableeq.html)
+## Stream: [general](index.html)
+### Topic: [subtype.decidable_eq](27549subtypedecidableeq.html)
+
+---
 
 #### [Chris Hughes (Jan 04 2019 at 16:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.decidable_eq/near/154417392):
 `subtype.decidable_eq` sometimes fails to reduce in the kernel. Not sure why this is, it doesn't use `propext` or anything. The `instance` `foo` that I wrote in this code does work for some reason.

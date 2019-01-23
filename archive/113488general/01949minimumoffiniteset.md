@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01949minimumoffiniteset.html
 ---
 
-## [general](index.html)
-### [minimum of finite set](01949minimumoffiniteset.html)
+## Stream: [general](index.html)
+### Topic: [minimum of finite set](01949minimumoffiniteset.html)
+
+---
 
 #### [Reid Barton (May 06 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126161321):
 I have a `finset` of rationals which I know is nonempty. How do I find its minimum element?

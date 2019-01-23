@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42157notationintopologicalspacefile.html
 ---
 
-## [general](index.html)
-### [notation in topological space file](42157notationintopologicalspacefile.html)
+## Stream: [general](index.html)
+### Topic: [notation in topological space file](42157notationintopologicalspacefile.html)
+
+---
 
 #### [Kevin Buzzard (Mar 12 2018 at 19:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20in%20topological%20space%20file/near/123620935):
 In `analysis/topology/topological_space.lean` we have s and t being used for more than one thing. Even in the definition of a topological space we have

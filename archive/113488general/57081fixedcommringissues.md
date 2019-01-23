@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57081fixedcommringissues.html
 ---
 
-## [general](index.html)
-### [(fixed) comm_ring issues](57081fixedcommringissues.html)
+## Stream: [general](index.html)
+### Topic: [(fixed) comm_ring issues](57081fixedcommringissues.html)
+
+---
 
 #### [Johan Commelin (Jul 18 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28fixed%29%20comm_ring%20issues/near/129856041):
 I've got the following context/goal:

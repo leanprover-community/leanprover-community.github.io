@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27708Algebraicclosureroadmap.html
 ---
 
-## [general](index.html)
-### [Algebraic closure roadmap](27708Algebraicclosureroadmap.html)
+## Stream: [general](index.html)
+### Topic: [Algebraic closure roadmap](27708Algebraicclosureroadmap.html)
+
+---
 
 #### [Kenny Lau (Oct 14 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Algebraic%20closure%20roadmap/near/135781672):
 I've created a roadmap for constructing an algebraic closure of a field: https://github.com/kckennylau/Lean/blob/master/algebraic-closure-roadmap.md

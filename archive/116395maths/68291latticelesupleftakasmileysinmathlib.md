@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/68291latticelesupleftakasmileysinmathlib.html
 ---
 
-## [maths](index.html)
-### [lattice.le_sup_left' a.k.a. smileys in mathlib](68291latticelesupleftakasmileysinmathlib.html)
+## Stream: [maths](index.html)
+### Topic: [lattice.le_sup_left' a.k.a. smileys in mathlib](68291latticelesupleftakasmileysinmathlib.html)
+
+---
 
 #### [Kevin Buzzard (Aug 05 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice.le_sup_left%27%20a.k.a.%20smileys%20in%20mathlib/near/130925919):
 I thought it was time to learn about uniform spaces, and then I realised I had to learn about filters before that, and then I realised I had to learn about lattices before that.

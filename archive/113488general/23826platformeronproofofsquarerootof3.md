@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23826platformeronproofofsquarerootof3.html
 ---
 
-## [general](index.html)
-### [platformer on proof of square root of 3](23826platformeronproofofsquarerootof3.html)
+## Stream: [general](index.html)
+### Topic: [platformer on proof of square root of 3](23826platformeronproofofsquarerootof3.html)
+
+---
 
 #### [Kevin Buzzard (Mar 10 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/platformer%20on%20proof%20of%20square%20root%20of%203/near/123548752):
 When I was learning about `set_option pp.all true` a while back, I had recently proved that there was no rational number whose square was 3 in Lean, in no doubt an extremely inefficient manner. I wrote the proof term to a file and I just ran into it again yesterday.

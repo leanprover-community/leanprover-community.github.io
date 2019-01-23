@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/50798Usingsufficesintactic.html
 ---
 
-## [new members](index.html)
-### [Using suffices in tactic](50798Usingsufficesintactic.html)
+## Stream: [new members](index.html)
+### Topic: [Using suffices in tactic](50798Usingsufficesintactic.html)
+
+---
 
 #### [Ken Roe (Jul 29 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20suffices%20in%20tactic/near/130509641):
 ```lean

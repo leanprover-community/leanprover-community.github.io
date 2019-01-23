@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01960nthmap.html
 ---
 
-## [general](index.html)
-### [nth_map](01960nthmap.html)
+## Stream: [general](index.html)
+### Topic: [nth_map](01960nthmap.html)
+
+---
 
 #### [Patrick Massot (May 13 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509555):
 Do we have something like

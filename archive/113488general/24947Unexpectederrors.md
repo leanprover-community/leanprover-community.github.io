@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24947Unexpectederrors.html
 ---
 
-## [general](index.html)
-### [Unexpected errors](24947Unexpectederrors.html)
+## Stream: [general](index.html)
+### Topic: [Unexpected errors](24947Unexpectederrors.html)
+
+---
 
 #### [Chris Hughes (May 27 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20errors/near/127171623):
 Just finished proving this theorem about roots of polynomials, but I'm getting the following errors and I don't understand why

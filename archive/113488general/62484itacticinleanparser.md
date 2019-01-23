@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/62484itacticinleanparser.html
 ---
 
-## [general](index.html)
-### [itactic in lean.parser](62484itacticinleanparser.html)
+## Stream: [general](index.html)
+### Topic: [itactic in lean.parser](62484itacticinleanparser.html)
+
+---
 
 #### [Keeley Hoek (Nov 22 2018 at 05:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/itactic%20in%20lean.parser/near/148152572):
 Inside a `lean.parser` monad, I can for example read a `name` by

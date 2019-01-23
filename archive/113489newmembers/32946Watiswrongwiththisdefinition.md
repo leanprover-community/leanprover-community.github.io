@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/32946Watiswrongwiththisdefinition.html
 ---
 
-## [new members](index.html)
-### [Wat is wrong with this definition?](32946Watiswrongwiththisdefinition.html)
+## Stream: [new members](index.html)
+### Topic: [Wat is wrong with this definition?](32946Watiswrongwiththisdefinition.html)
+
+---
 
 #### [Ken Roe (Jul 24 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Wat%20is%20wrong%20with%20this%20definition%3F/near/130214027):
 ```lean

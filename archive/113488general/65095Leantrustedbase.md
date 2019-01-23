@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/65095Leantrustedbase.html
 ---
 
-## [general](index.html)
-### [Lean trusted base](65095Leantrustedbase.html)
+## Stream: [general](index.html)
+### Topic: [Lean trusted base](65095Leantrustedbase.html)
+
+---
 
 #### [Karl Palmskog (Jan 12 2019 at 04:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20trusted%20base/near/154966417):
 Does anyone know if there is a breakdown of the Lean trusted base somewhere? As in, "to trust your Lean code/proofs, you have to accept ...", which is done for Coq in its wiki: https://github.com/coq/coq/wiki/Presentation#what-do-i-have-to-trust-when-i-see-a-proof-checked-by-coq

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61616euclideandivision.html
 ---
 
-## [general](index.html)
-### [euclidean division](61616euclideandivision.html)
+## Stream: [general](index.html)
+### Topic: [euclidean division](61616euclideandivision.html)
+
+---
 
 #### [Nicholas Scheel (Mar 26 2018 at 02:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/euclidean%20division/near/124205800):
 Is there a proof of Euclidean division (divmod) in the libraries somewhere? I've been looking around for theorems with `mod` in the core library and mathlib but couldn't find anything ...

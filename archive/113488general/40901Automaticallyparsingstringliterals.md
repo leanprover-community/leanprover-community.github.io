@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40901Automaticallyparsingstringliterals.html
 ---
 
-## [general](index.html)
-### [Automatically parsing string literals](40901Automaticallyparsingstringliterals.html)
+## Stream: [general](index.html)
+### Topic: [Automatically parsing string literals](40901Automaticallyparsingstringliterals.html)
+
+---
 
 #### [Joe Hendrix (Dec 12 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Automatically%20parsing%20string%20literals/near/151491800):
 I have a type A and a partial function `parseA : string -> except string A`, is there an easy way to get Lean to automatically call `parseA` parser when I have a literal `("foo" : A)`? If `parseA "foo"` returns `except.ok r` then I'd like `r` to be used, and if it fails I'd like Lean to report the error.

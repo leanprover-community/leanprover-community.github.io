@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/66636complexformsuniformspace.html
 ---
 
-## [maths](index.html)
-### [complex forms uniform space](66636complexformsuniformspace.html)
+## Stream: [maths](index.html)
+### Topic: [complex forms uniform space](66636complexformsuniformspace.html)
+
+---
 
 #### [Kenny Lau (Oct 05 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222007):
 ```lean

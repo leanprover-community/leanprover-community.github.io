@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82097derivehandlers.html
 ---
 
-## [general](index.html)
-### [derive handlers](82097derivehandlers.html)
+## Stream: [general](index.html)
+### Topic: [derive handlers](82097derivehandlers.html)
+
+---
 
 #### [Simon Hudon (Aug 31 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handlers/near/133148060):
 I'm writing a derive handler,  and while testing it on my third example, I get the following error:

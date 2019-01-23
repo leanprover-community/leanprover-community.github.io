@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19023keepachangelog.html
 ---
 
-## [general](index.html)
-### [keep a changelog](19023keepachangelog.html)
+## Stream: [general](index.html)
+### Topic: [keep a changelog](19023keepachangelog.html)
+
+---
 
 #### [Sean Leather (Jul 29 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/keep%20a%20changelog/near/130523988):
 I just discovered [Keep a Changlog](https://keepachangelog.com/), which reminded me of our [previous discussions](https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/mathlib.20branches/near/128358255) on mathlib releases.

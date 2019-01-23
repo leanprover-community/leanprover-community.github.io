@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68176unfoldingissue.html
 ---
 
-## [general](index.html)
-### [unfolding issue](68176unfoldingissue.html)
+## Stream: [general](index.html)
+### Topic: [unfolding issue](68176unfoldingissue.html)
+
+---
 
 #### [Kevin Buzzard (May 22 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20issue/near/126947033):
 `(presheaf_of_types_pullback_under_open_immersion {F := F, res := res, Hid := Hid, Hcomp := Hcomp} id _).res`

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/91735isidealnegiff.html
 ---
 
-## [maths](index.html)
-### [is_ideal.neg_iff](91735isidealnegiff.html)
+## Stream: [maths](index.html)
+### Topic: [is_ideal.neg_iff](91735isidealnegiff.html)
+
+---
 
 #### [Patrick Massot (Oct 06 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_ideal.neg_iff/near/135313777):
 ```lean

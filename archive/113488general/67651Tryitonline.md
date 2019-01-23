@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67651Tryitonline.html
 ---
 
-## [general](index.html)
-### [Try it online!](67651Tryitonline.html)
+## Stream: [general](index.html)
+### Topic: [Try it online!](67651Tryitonline.html)
+
+---
 
 #### [Kenny Lau (Mar 31 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Try%20it%20online%21/near/124444027):
 [Lean is now available at tio.run](https://tio.run/##y0lNzPv/PzO3IL@oRCExLzGnsjizWK8oNTGHSzk5IzU5WyEvsUQvMSUlPjk/NxcmpmGkYKUAUqT5/z8A)

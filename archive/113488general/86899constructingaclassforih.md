@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86899constructingaclassforih.html
 ---
 
-## [general](index.html)
-### [constructing a class for ih](86899constructingaclassforih.html)
+## Stream: [general](index.html)
+### Topic: [constructing a class for ih](86899constructingaclassforih.html)
+
+---
 
 #### [Gavid Liebnich (Nov 17 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20a%20class%20for%20ih/near/147882679):
 Could anyone point me in a right direction in this proof?

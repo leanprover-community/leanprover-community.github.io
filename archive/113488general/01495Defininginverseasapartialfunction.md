@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01495Defininginverseasapartialfunction.html
 ---
 
-## [general](index.html)
-### [Defining inverse as a partial function.](01495Defininginverseasapartialfunction.html)
+## Stream: [general](index.html)
+### Topic: [Defining inverse as a partial function.](01495Defininginverseasapartialfunction.html)
+
+---
 
 #### [Edward Ayers (Nov 01 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914681):
 I am investigating defining field inverses so that you have to also give the inverse a certificate that the number being put in is not zero. We can have a separate debate about whether that approach is better than having `inv(0) = 0`, but for now here are my ideas:

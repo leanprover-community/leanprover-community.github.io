@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/92067modallogictemporaltypetheory.html
 ---
 
-## [Lean Together 2019](index.html)
-### [modal logic & temporal type theory](92067modallogictemporaltypetheory.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [modal logic & temporal type theory](92067modallogictemporaltypetheory.html)
+
+---
 
 #### [Joseph Corneli (Jan 07 2019 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/modal%20logic%20%26%20temporal%20type%20theory/near/154580798):
 These talks reminded me of https://arxiv.org/abs/1710.10258

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89520monotone.html
 ---
 
-## [general](index.html)
-### [monotone](89520monotone.html)
+## Stream: [general](index.html)
+### Topic: [monotone](89520monotone.html)
+
+---
 
 #### [Kenny Lau (Mar 29 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/monotone/near/124357030):
 sehr geehrter @**Johannes Hölzl** , monotone doesn't mean what you think it means

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/74503commringclosure.html
 ---
 
-## [maths](index.html)
-### [comm_ring.closure](74503commringclosure.html)
+## Stream: [maths](index.html)
+### Topic: [comm_ring.closure](74503commringclosure.html)
+
+---
 
 #### [Patrick Massot (Oct 09 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135495590):
 @**Kenny Lau** Do you secretely have `comm_ring.closure` with a `subring` instance somewhere in your repositories?

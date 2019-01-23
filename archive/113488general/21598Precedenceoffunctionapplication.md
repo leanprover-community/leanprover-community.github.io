@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21598Precedenceoffunctionapplication.html
 ---
 
-## [general](index.html)
-### [Precedence of function application](21598Precedenceoffunctionapplication.html)
+## Stream: [general](index.html)
+### Topic: [Precedence of function application](21598Precedenceoffunctionapplication.html)
+
+---
 
 #### [Joe Hendrix (Aug 08 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131073950):
 Can notation bind tighter than function application?  e.g. For an operator `^` make `f x ^ y` parse as `f (x ^ y)`?

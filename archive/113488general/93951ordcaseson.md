@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93951ordcaseson.html
 ---
 
-## [general](index.html)
-### [or.dcases_on](93951ordcaseson.html)
+## Stream: [general](index.html)
+### Topic: [or.dcases_on](93951ordcaseson.html)
+
+---
 
 #### [Zesen Qian (Jul 02 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or.dcases_on/near/128973389):
 In general, what does this message mean? induction tactic failed, recursor "or.dcases_on" can only eliminate into Prop.

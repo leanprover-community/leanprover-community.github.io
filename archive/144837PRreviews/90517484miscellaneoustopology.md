@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/90517484miscellaneoustopology.html
 ---
 
-## [PR reviews](index.html)
-### [#484 miscellaneous topology](90517484miscellaneoustopology.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#484 miscellaneous topology](90517484miscellaneoustopology.html)
+
+---
 
 #### [Sebastien Gouezel (Dec 09 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23484%20miscellaneous%20topology/near/151228688):
 I have a lot of new material to add on top of #484, especially on the Hausdorff distance but I think the main interest for the community would be all the missing lemmas I had to add to the library while developping the Hausdorff distance. However, it makes no sense to PR it while #484 (and #464) are not integrated. Is there something I could do to help the process?

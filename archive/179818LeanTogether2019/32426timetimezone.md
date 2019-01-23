@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/32426timetimezone.html
 ---
 
-## [Lean Together 2019](index.html)
-### [time/timezone](32426timetimezone.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [time/timezone](32426timetimezone.html)
+
+---
 
 #### [matt rice (Jan 05 2019 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/time/timezone/near/154474270):
 Saw the schedule link, but doesn't show time zone,  UTC+1h correct?

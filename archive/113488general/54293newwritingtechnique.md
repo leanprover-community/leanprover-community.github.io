@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54293newwritingtechnique.html
 ---
 
-## [general](index.html)
-### [new writing technique](54293newwritingtechnique.html)
+## Stream: [general](index.html)
+### Topic: [new writing technique](54293newwritingtechnique.html)
+
+---
 
 #### [Patrick Massot (Jul 04 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20writing%20technique/near/129102181):
 I've found a nice new trick to write obfuscated^W concise code:

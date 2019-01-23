@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47722unfoldpartialapplication.html
 ---
 
-## [general](index.html)
-### [unfold partial application](47722unfoldpartialapplication.html)
+## Stream: [general](index.html)
+### Topic: [unfold partial application](47722unfoldpartialapplication.html)
+
+---
 
 #### [Pablo Le Hénaff (Jun 08 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfold%20partial%20application/near/127766659):
 Hey.

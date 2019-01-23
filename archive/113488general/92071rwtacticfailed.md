@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/92071rwtacticfailed.html
 ---
 
-## [general](index.html)
-### [rw tactic failed](92071rwtacticfailed.html)
+## Stream: [general](index.html)
+### Topic: [rw tactic failed](92071rwtacticfailed.html)
+
+---
 
 #### [Kenny Lau (Apr 09 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840698):
 ```

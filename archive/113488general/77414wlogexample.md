@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77414wlogexample.html
 ---
 
-## [general](index.html)
-### [wlog example](77414wlogexample.html)
+## Stream: [general](index.html)
+### Topic: [wlog example](77414wlogexample.html)
+
+---
 
 #### [Simon Hudon (Apr 02 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog%20example/near/124531148):
 What about: 

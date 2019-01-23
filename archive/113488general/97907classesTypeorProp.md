@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/97907classesTypeorProp.html
 ---
 
-## [general](index.html)
-### [classes Type or Prop](97907classesTypeorProp.html)
+## Stream: [general](index.html)
+### Topic: [classes Type or Prop](97907classesTypeorProp.html)
+
+---
 
 #### [Reid Barton (Apr 27 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classes%20Type%20or%20Prop/near/125747081):
 Is there any particular reason not to make `t2_space` and similar classes a Prop?

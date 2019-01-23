@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35647heqagain.html
 ---
 
-## [general](index.html)
-### [heq again](35647heqagain.html)
+## Stream: [general](index.html)
+### Topic: [heq again](35647heqagain.html)
+
+---
 
 #### [Reid Barton (Sep 10 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/heq%20again/near/133673026):
 Hmm, I wasn't expecting this to work.

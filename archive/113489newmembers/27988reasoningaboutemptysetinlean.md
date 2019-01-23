@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/27988reasoningaboutemptysetinlean.html
 ---
 
-## [new members](index.html)
-### [reasoning about empty set in lean](27988reasoningaboutemptysetinlean.html)
+## Stream: [new members](index.html)
+### Topic: [reasoning about empty set in lean](27988reasoningaboutemptysetinlean.html)
+
+---
 
 #### [Marcus Klaas (Dec 02 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729616):
 Hi y'all. Sorry to bother again. I'm having trouble working with the empty set. Specifically, I'd like to prove that a set is not empty whenever I can produce a concrete element of it:

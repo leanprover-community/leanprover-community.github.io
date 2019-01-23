@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43440bestdefinitionofcongruentmod37.html
 ---
 
-## [general](index.html)
-### [best definition of "congruent mod 37"](43440bestdefinitionofcongruentmod37.html)
+## Stream: [general](index.html)
+### Topic: [best definition of "congruent mod 37"](43440bestdefinitionofcongruentmod37.html)
+
+---
 
 #### [Kevin Buzzard (Aug 25 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/best%20definition%20of%20%22congruent%20mod%2037%22/near/132741889):
 ```lean

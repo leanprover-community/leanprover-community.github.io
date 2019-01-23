@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28860seqandcoinduction.html
 ---
 
-## [general](index.html)
-### [seq and coinduction](28860seqandcoinduction.html)
+## Stream: [general](index.html)
+### Topic: [seq and coinduction](28860seqandcoinduction.html)
+
+---
 
 #### [Kenny Lau (Mar 27 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/seq%20and%20coinduction/near/124283402):
 I see this comment in `data.seq.seq`:

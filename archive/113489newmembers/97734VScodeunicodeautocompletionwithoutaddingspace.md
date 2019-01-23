@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/97734VScodeunicodeautocompletionwithoutaddingspace.html
 ---
 
-## [new members](index.html)
-### [VS code unicode autocompletion without adding space](97734VScodeunicodeautocompletionwithoutaddingspace.html)
+## Stream: [new members](index.html)
+### Topic: [VS code unicode autocompletion without adding space](97734VScodeunicodeautocompletionwithoutaddingspace.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Aug 15 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/VS%20code%20unicode%20autocompletion%20without%20adding%20space/near/132179797):
 Currently if I want to type `α₁` in VS Code, I type `\a` then hit space, and then hit backspace before typing `\1`+space again. Is there a way to do this without having to hit backspace all the time?

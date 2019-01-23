@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/16807traviscaching.html
 ---
 
-## [maths](index.html)
-### [travis caching](16807traviscaching.html)
+## Stream: [maths](index.html)
+### Topic: [travis caching](16807traviscaching.html)
+
+---
 
 #### [Andrew Ashworth (Jun 02 2018 at 04:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/travis%20caching/near/127449713):
 ```quote

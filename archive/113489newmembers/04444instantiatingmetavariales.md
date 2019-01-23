@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/04444instantiatingmetavariales.html
 ---
 
-## [new members](index.html)
-### [instantiating meta variales](04444instantiatingmetavariales.html)
+## Stream: [new members](index.html)
+### Topic: [instantiating meta variales](04444instantiatingmetavariales.html)
+
+---
 
 #### [Ken Roe (Jul 24 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/instantiating%20meta%20variales/near/130230234):
 Is there a way to instantiate meta variables.  Consider the theorem below:

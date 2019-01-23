@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21301Hopcroftisspeaking.html
 ---
 
-## [general](index.html)
-### [Hopcroft is speaking!](21301Hopcroftisspeaking.html)
+## Stream: [general](index.html)
+### Topic: [Hopcroft is speaking!](21301Hopcroftisspeaking.html)
+
+---
 
 #### [Kenny Lau (Sep 24 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hopcroft%20is%20speaking%21/near/134509660):
 Hopcroft is speaking!

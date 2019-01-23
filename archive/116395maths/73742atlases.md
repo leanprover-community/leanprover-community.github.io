@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/73742atlases.html
 ---
 
-## [maths](index.html)
-### [atlases](73742atlases.html)
+## Stream: [maths](index.html)
+### Topic: [atlases](73742atlases.html)
+
+---
 
 #### [Patrick Massot (Jun 26 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/atlases/near/128648910):
 I decided to try to move forward in my differential topology project without waiting for experts to sort out the module type class issues. So let's say I'm ready to sorry the definition of a diffeomorphism between two open subsets of R^n. Then the definition to formalize is https://en.wikipedia.org/wiki/Differentiable_manifold#Atlases I have no idea how to attack this coercion mess. I'd like to understand the definition of the transitions maps, and understand they are maps between open subsets of R^n

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/54381inducedcoinduced.html
 ---
 
-## [maths](index.html)
-### [induced, coinduced, ...](54381inducedcoinduced.html)
+## Stream: [maths](index.html)
+### Topic: [induced, coinduced, ...](54381inducedcoinduced.html)
+
+---
 
 #### [Kenny Lau (Jun 15 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116033):
 If I have a function f:A->B with a topology on B, are the following two topologies on A x A the same?

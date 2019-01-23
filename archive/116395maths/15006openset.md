@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/15006openset.html
 ---
 
-## [maths](index.html)
-### [open_set](15006openset.html)
+## Stream: [maths](index.html)
+### Topic: [open_set](15006openset.html)
+
+---
 
 #### [Reid Barton (Oct 09 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open_set/near/135489758):
 @**Scott Morrison|110087** I'm curious why you reversed the direction of the arrows of `open_set`. I would rather put the contravariant-ness in the notion of (pre)sheaf.

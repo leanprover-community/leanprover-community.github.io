@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/35833referencinginhabitedinstances.html
 ---
 
-## [new members](index.html)
-### [referencing inhabited instances](35833referencinginhabitedinstances.html)
+## Stream: [new members](index.html)
+### Topic: [referencing inhabited instances](35833referencinginhabitedinstances.html)
+
+---
 
 #### [Ken Roe (Aug 11 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/referencing%20inhabited%20instances/near/131964186):
 If I declare values as inhabited instances, how do I reference the instances?

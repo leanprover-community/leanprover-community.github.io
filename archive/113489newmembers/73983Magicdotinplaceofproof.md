@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/73983Magicdotinplaceofproof.html
 ---
 
-## [new members](index.html)
-### [Magic dot in place of proof?](73983Magicdotinplaceofproof.html)
+## Stream: [new members](index.html)
+### Topic: [Magic dot in place of proof?](73983Magicdotinplaceofproof.html)
+
+---
 
 #### [Mark Dickinson (Nov 05 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Magic%20dot%20in%20place%20of%20proof%3F/near/146826913):
 Looking through the standard library, I see this in `basic.lean`:

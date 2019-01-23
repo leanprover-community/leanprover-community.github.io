@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/04864Trigonometricfunctions.html
 ---
 
-## [new members](index.html)
-### [Trigonometric functions](04864Trigonometricfunctions.html)
+## Stream: [new members](index.html)
+### Topic: [Trigonometric functions](04864Trigonometricfunctions.html)
+
+---
 
 #### [Sebastian Zimmer (Sep 29 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trigonometric%20functions/near/134883106):
 I'd like to learn how to use lean, by attempting to prove something nontrivial. Looking through the potential projects wiki page, trigonometric functions seems like the most promising (in that I can confidently prove the basic identies, facts about pi, etc. from first principles).

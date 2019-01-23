@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28164silentoverflow.html
 ---
 
-## [general](index.html)
-### [silent overflow](28164silentoverflow.html)
+## Stream: [general](index.html)
+### Topic: [silent overflow](28164silentoverflow.html)
+
+---
 
 #### [Kevin Buzzard (Apr 09 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/silent%20overflow/near/124842273):
 ```lean

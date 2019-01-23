@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/52075noobquestions.html
 ---
 
-## [new members](index.html)
-### [noob question(s)](52075noobquestions.html)
+## Stream: [new members](index.html)
+### Topic: [noob question(s)](52075noobquestions.html)
+
+---
 
 #### [Wojciech Nawrocki (Nov 20 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/148007940):
 What's the command to make Lean automatically derive `decidable_eq` for some custom inductive type?
@@ -706,4 +708,61 @@ Hm, I tried `congr` but it seems to iterate the congruence, which gives me unpro
 
 #### [Mario Carneiro (Jan 22 2019 at 03:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156574364):
 use `congr' 1` and increase the number until you get a good result
+
+#### [Wojciech Nawrocki (Jan 22 2019 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156647038):
+The issue of `has_add.add` and its actual value not being definitionally equal makes a lot of my proofs quite ugly - I have to expand definitions first so that the expressions can simplify and then fold them back into the `has_add.add` version (or `has_mul.mul`, etc), because all the ring/module/whatever laws only work on those. For example:
+```lean
+  { /-
+    case context.cons
+    δ γ γ₁ : precontext,
+    π₁ : mult,
+    T₁ : tp,
+    Γ₁ : context γ₁,
+    ih₁ : ∀ {Γ₂ : context γ₁} {Ξ : matrix γ₁ δ}, vmul (Γ₁ + Γ₂) Ξ = vmul Γ₁ Ξ + vmul Γ₂ Ξ,
+    Γ₂ : context (T₁ :: γ₁),
+    Ξ : matrix (T₁ :: γ₁) δ
+    ⊢ vmul (cons π₁ T₁ Γ₁ + Γ₂) Ξ = vmul (cons π₁ T₁ Γ₁) Ξ + vmul Γ₂ Ξ
+    -/
+    cases Γ₂ with _ π₂ _ Γ₂,
+    -- unfold
+    unfold vmul has_add.add context.add has_scalar.smul context.smul at *,
+    simp *,
+    -- fold back
+    let a := vmul Γ₁ (λ (U : tp) (x : γ₁ ∋ U), Ξ U (SVar x)),
+    let b := vmul Γ₂ (λ (U : tp) (x : γ₁ ∋ U), Ξ U (SVar x)),
+    change
+      (π₁ + π₂) • (Ξ T₁ ZVar) + (a + b)
+      =
+      (π₁•(Ξ T₁ ZVar) + a) + (π₂•(Ξ T₁ ZVar) + b),
+    -- simplify using monoid laws
+    simp [context.add_smul, context.add_assoc] },
+```
+is there some tactic or such that I could apply to do this automatically?
+
+#### [Mario Carneiro (Jan 22 2019 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156647545):
+This is what simp lemmas are for
+
+#### [Mario Carneiro (Jan 22 2019 at 23:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156647677):
+If you define `add x (y :: z) := y :: add x z`, for example, and then install `add` as a `has_add` instance, then you can prove `x + (y :: z) = y :: (x + z)` by rfl, and you should state this as a simp lemma
+
+#### [Mario Carneiro (Jan 22 2019 at 23:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156647754):
+You should not ever have to unfold `has_add.add`
+
+#### [Wojciech Nawrocki (Jan 22 2019 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156647865):
+Hm okay, so basically I need to "lift" the behaviour of my functions from the custom definition to one using `has_op.op`? I'll try
+
+#### [Wojciech Nawrocki (Jan 23 2019 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156648686):
+Is it fine to unfold `has_zero.zero` though? My definition of `0` for this type is
+```lean
+def zeros: Π γ, context γ
+| [] := nil
+| (T::δ) := cons 0 T (zeros δ)
+```
+and I need the `cons` to prove `0+Γ=Γ`
+
+#### [Wojciech Nawrocki (Jan 23 2019 at 00:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156649254):
+In any case this is pretty awesome, all my proofs have shortened by half now without the unfolding, thanks a lot!
+
+#### [Mario Carneiro (Jan 23 2019 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156653719):
+For this, you should decide whether you prefer to write the empty context as `0` or `[]`, and write a simp lemma like `0 = []` if you want to get rid of the 0 everywhere. In this case you should also make sure that all your other simp lemmas use the "preferred form" of this element on the LHS
 

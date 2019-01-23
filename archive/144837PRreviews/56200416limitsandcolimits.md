@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/56200416limitsandcolimits.html
 ---
 
-## [PR reviews](index.html)
-### [#416 limits and colimits](56200416limitsandcolimits.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#416 limits and colimits](56200416limitsandcolimits.html)
+
+---
 
 #### [Scott Morrison (Oct 12 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23416%20limits%20and%20colimits/near/135665324):
 Okay, here is limits and colimits (just for general shapes, not all the useful special cases yet), with no dependency on new-fangled tactics.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03820finhasnorecursor.html
 ---
 
-## [general](index.html)
-### [fin has no recursor](03820finhasnorecursor.html)
+## Stream: [general](index.html)
+### Topic: [fin has no recursor](03820finhasnorecursor.html)
+
+---
 
 #### [Kenny Lau (Mar 30 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402350):
 fin doesn’t have the morally correct recursor. we should prove it maybe.

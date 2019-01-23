@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75934Conflictingtransitivecoercions.html
 ---
 
-## [general](index.html)
-### [Conflicting transitive coercions?](75934Conflictingtransitivecoercions.html)
+## Stream: [general](index.html)
+### Topic: [Conflicting transitive coercions?](75934Conflictingtransitivecoercions.html)
+
+---
 
 #### [Nicholas Scheel (May 26 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127117518):
 I have two terms that pretty-print the same but won't be considered equivalent because they seem to use slightly different coerce instances:

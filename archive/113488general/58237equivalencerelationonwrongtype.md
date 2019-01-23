@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58237equivalencerelationonwrongtype.html
 ---
 
-## [general](index.html)
-### [equivalence relation on wrong type](58237equivalencerelationonwrongtype.html)
+## Stream: [general](index.html)
+### Topic: [equivalence relation on wrong type](58237equivalencerelationonwrongtype.html)
+
+---
 
 #### [Kevin Buzzard (Aug 10 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equivalence%20relation%20on%20wrong%20type/near/131202972):
 Luca defined an equivalence relation (homotopy equivalence) on `path x y`, the paths from x to y in a topological space. He defined `loop x` to be `path x x` and then wanted to define `pi_1` to be the equivalence classes. Lean seemed to obstinately refuse to put the equivalence relation on `loop x`, insisting it was on `path x x`. Here's some code that doesn't run, plus some commented out code which fixes the problem.

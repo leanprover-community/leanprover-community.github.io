@@ -4,151 +4,155 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/index.html
 ---
 
-## [PR reviews](index.html)
+## Stream: [PR reviews](index.html)
 
-### [#510 opposite categories](09235510oppositecategories.html)
+---
 
-### [#610](22459610.html)
+### Topics:
 
-### [#567](39974567.html)
+* [#593 Add default setup for VS Code](63887593AdddefaultsetupforVSCode.html) (11 messages, latest: Jan 23 2019 at 12:52)
 
-### [#605 unique](68918605unique.html)
+* [#536 algebra over comm_ring](17703536algebraovercommring.html) (43 messages, latest: Jan 23 2019 at 11:52)
 
-### [#598 analysis reorganization](09722598analysisreorganization.html)
+* [#538 opposites](43082538opposites.html) (163 messages, latest: Jan 23 2019 at 00:36)
 
-### [#489 where](32132489where.html)
+* [#510 opposite categories](09235510oppositecategories.html) (30 messages, latest: Jan 22 2019 at 15:14)
 
-### [#583 move everything into `src`](63394583moveeverythingintosrc.html)
+* [#610](22459610.html) (16 messages, latest: Jan 20 2019 at 21:24)
 
-### [#528 splitting fields](13816528splittingfields.html)
+* [#567](39974567.html) (1 message, latest: Jan 19 2019 at 22:21)
 
-### [#593 Add default setup for VS Code](63887593AdddefaultsetupforVSCode.html)
+* [#605 unique](68918605unique.html) (3 messages, latest: Jan 18 2019 at 22:40)
 
-### [#568 metric namespace](84184568metricnamespace.html)
+* [#598 analysis reorganization](09722598analysisreorganization.html) (34 messages, latest: Jan 18 2019 at 21:08)
 
-### [#538 opposites](43082538opposites.html)
+* [#489 where](32132489where.html) (83 messages, latest: Jan 17 2019 at 11:21)
 
-### [#536 algebra over comm_ring](17703536algebraovercommring.html)
+* [#583 move everything into `src`](63394583moveeverythingintosrc.html) (25 messages, latest: Jan 16 2019 at 19:29)
 
-### [#549 over categories](58376549overcategories.html)
+* [#528 splitting fields](13816528splittingfields.html) (2 messages, latest: Jan 16 2019 at 13:19)
 
-### [#574 quotient_ker_equiv_range](42611574quotientkerequivrange.html)
+* [#568 metric namespace](84184568metricnamespace.html) (14 messages, latest: Jan 13 2019 at 22:59)
 
-### [#376 fold](95337376fold.html)
+* [#549 over categories](58376549overcategories.html) (10 messages, latest: Jan 05 2019 at 22:05)
 
-### [#483 polar coordinates](24156483polarcoordinates.html)
+* [#574 quotient_ker_equiv_range](42611574quotientkerequivrange.html) (12 messages, latest: Jan 05 2019 at 15:20)
 
-### [#481 localization](13962481localization.html)
+* [#376 fold](95337376fold.html) (31 messages, latest: Dec 27 2018 at 21:03)
 
-### [Small and straightforward PRs](94461SmallandstraightforwardPRs.html)
+* [#483 polar coordinates](24156483polarcoordinates.html) (110 messages, latest: Dec 27 2018 at 09:50)
 
-### [#512 discrete categories](13525512discretecategories.html)
+* [#481 localization](13962481localization.html) (18 messages, latest: Dec 22 2018 at 05:40)
 
-### [#428 Banach Contraction](58787428BanachContraction.html)
+* [Small and straightforward PRs](94461SmallandstraightforwardPRs.html) (6 messages, latest: Dec 20 2018 at 15:02)
 
-### [#522 enat](25317522enat.html)
+* [#512 discrete categories](13525512discretecategories.html) (13 messages, latest: Dec 20 2018 at 10:28)
 
-### [#458 Sylow](23171458Sylow.html)
+* [#428 Banach Contraction](58787428BanachContraction.html) (42 messages, latest: Dec 17 2018 at 21:15)
 
-### [#495 multiplicity](58383495multiplicity.html)
+* [#522 enat](25317522enat.html) (9 messages, latest: Dec 17 2018 at 20:10)
 
-### [#461 integral closure](12978461integralclosure.html)
+* [#458 Sylow](23171458Sylow.html) (5 messages, latest: Dec 17 2018 at 18:05)
 
-### [#484 miscellaneous topology](90517484miscellaneoustopology.html)
+* [#495 multiplicity](58383495multiplicity.html) (24 messages, latest: Dec 17 2018 at 15:06)
 
-### [#507 functoriality of (co)cones](73085507functorialityofcocones.html)
+* [#461 integral closure](12978461integralclosure.html) (17 messages, latest: Dec 17 2018 at 14:13)
 
-### [#410 backwards reasoning](59921410backwardsreasoning.html)
+* [#484 miscellaneous topology](90517484miscellaneoustopology.html) (7 messages, latest: Dec 10 2018 at 10:09)
 
-### [#494 limits-2](63126494limits2.html)
+* [#507 functoriality of (co)cones](73085507functorialityofcocones.html) (4 messages, latest: Dec 07 2018 at 18:49)
 
-### [#473 limits and colimits](78187473limitsandcolimits.html)
+* [#410 backwards reasoning](59921410backwardsreasoning.html) (174 messages, latest: Dec 05 2018 at 14:45)
 
-### [#431 apply `to_additive` recursively](14315431applytoadditiverecursively.html)
+* [#494 limits-2](63126494limits2.html) (45 messages, latest: Dec 02 2018 at 23:39)
 
-### [#503 comma](11881503comma.html)
+* [#473 limits and colimits](78187473limitsandcolimits.html) (100 messages, latest: Dec 02 2018 at 06:10)
 
-### [#479 equivalences](65805479equivalences.html)
+* [#431 apply `to_additive` recursively](14315431applytoadditiverecursively.html) (2 messages, latest: Nov 30 2018 at 16:55)
 
-### [#480 Yoneda fixes](89535480Yonedafixes.html)
+* [#503 comma](11881503comma.html) (9 messages, latest: Nov 30 2018 at 15:14)
 
-### [#486 use](29011486use.html)
+* [#479 equivalences](65805479equivalences.html) (44 messages, latest: Nov 28 2018 at 21:39)
 
-### [#496 Ico](29634496Ico.html)
+* [#480 Yoneda fixes](89535480Yonedafixes.html) (14 messages, latest: Nov 28 2018 at 09:05)
 
-### [#478 associators and unitors for functor composition](29941478associatorsandunitorsforfunctorcomposition.html)
+* [#486 use](29011486use.html) (46 messages, latest: Nov 27 2018 at 09:59)
 
-### [#468 revised limits PR](99756468revisedlimitsPR.html)
+* [#496 Ico](29634496Ico.html) (16 messages, latest: Nov 26 2018 at 14:55)
 
-### [rebasing](06572rebasing.html)
+* [#478 associators and unitors for functor composition](29941478associatorsandunitorsforfunctorcomposition.html) (1 message, latest: Nov 15 2018 at 21:49)
 
-### [#392 emetric spaces](80970392emetricspaces.html)
+* [#468 revised limits PR](99756468revisedlimitsPR.html) (6 messages, latest: Nov 15 2018 at 21:07)
 
-### [#463 removing coercions from category_theory/](96488463removingcoercionsfromcategorytheory.html)
+* [rebasing](06572rebasing.html) (26 messages, latest: Nov 14 2018 at 12:17)
 
-### [#462 ideal operations](07107462idealoperations.html)
+* [#392 emetric spaces](80970392emetricspaces.html) (31 messages, latest: Nov 09 2018 at 14:48)
 
-### [#311 dfinsupp and direct sum](00101311dfinsuppanddirectsum.html)
+* [#463 removing coercions from category_theory/](96488463removingcoercionsfromcategorytheory.html) (34 messages, latest: Nov 08 2018 at 10:16)
 
-### [#459 is_iso.inv](15335459isisoinv.html)
+* [#462 ideal operations](07107462idealoperations.html) (61 messages, latest: Nov 08 2018 at 00:38)
 
-### [#431 recursive to_additive](15072431recursivetoadditive.html)
+* [#311 dfinsupp and direct sum](00101311dfinsuppanddirectsum.html) (2 messages, latest: Nov 06 2018 at 12:42)
 
-### [#453 irrational.lean](65987453irrationallean.html)
+* [#459 is_iso.inv](15335459isisoinv.html) (9 messages, latest: Nov 05 2018 at 20:11)
 
-### [#442 troubles with with_bot](34378442troubleswithwithbot.html)
+* [#431 recursive to_additive](15072431recursivetoadditive.html) (4 messages, latest: Nov 05 2018 at 18:19)
 
-### [#443 docs for N -> Z -> Q -> R -> C](09865443docsforNZQRC.html)
+* [#453 irrational.lean](65987453irrationallean.html) (4 messages, latest: Nov 05 2018 at 15:14)
 
-### [#441 poly_comp](36399441polycomp.html)
+* [#442 troubles with with_bot](34378442troubleswithwithbot.html) (4 messages, latest: Nov 02 2018 at 14:19)
 
-### [#436 supercharging conv](37001436superchargingconv.html)
+* [#443 docs for N -> Z -> Q -> R -> C](09865443docsforNZQRC.html) (129 messages, latest: Oct 29 2018 at 19:59)
 
-### [#438 and #439 conv: ring and norm_num](70167438and439convringandnormnum.html)
+* [#441 poly_comp](36399441polycomp.html) (9 messages, latest: Oct 25 2018 at 09:09)
 
-### [#434 ultrafilter monad](35036434ultrafiltermonad.html)
+* [#436 supercharging conv](37001436superchargingconv.html) (3 messages, latest: Oct 24 2018 at 10:29)
 
-### [#429 finite subgroups of integral domain](63247429finitesubgroupsofintegraldomain.html)
+* [#438 and #439 conv: ring and norm_num](70167438and439convringandnormnum.html) (1 message, latest: Oct 23 2018 at 12:54)
 
-### [#85 monotonicity](2111785monotonicity.html)
+* [#434 ultrafilter monad](35036434ultrafiltermonad.html) (1 message, latest: Oct 22 2018 at 04:27)
 
-### [#427 opens](37830427opens.html)
+* [#429 finite subgroups of integral domain](63247429finitesubgroupsofintegraldomain.html) (7 messages, latest: Oct 20 2018 at 11:18)
 
-### [#425 perfect closure](86053425perfectclosure.html)
+* [#85 monotonicity](2111785monotonicity.html) (52 messages, latest: Oct 18 2018 at 16:03)
 
-### [vscode - add unicode completion to markdown files](26165vscodeaddunicodecompletiontomarkdownfiles.html)
+* [#427 opens](37830427opens.html) (3 messages, latest: Oct 18 2018 at 10:08)
 
-### [#416 limits and colimits](56200416limitsandcolimits.html)
+* [#425 perfect closure](86053425perfectclosure.html) (4 messages, latest: Oct 18 2018 at 09:32)
 
-### [#422 limits in CommRing](96225422limitsinCommRing.html)
+* [vscode - add unicode completion to markdown files](26165vscodeaddunicodecompletiontomarkdownfiles.html) (1 message, latest: Oct 17 2018 at 16:20)
 
-### [#419 nat.prime.dvd_choose](72156419natprimedvdchoose.html)
+* [#416 limits and colimits](56200416limitsandcolimits.html) (64 messages, latest: Oct 17 2018 at 12:43)
 
-### [#420 constructions of limits](95007420constructionsoflimits.html)
+* [#422 limits in CommRing](96225422limitsinCommRing.html) (49 messages, latest: Oct 15 2018 at 11:07)
 
-### [#118 direct limit](34616118directlimit.html)
+* [#419 nat.prime.dvd_choose](72156419natprimedvdchoose.html) (1 message, latest: Oct 15 2018 at 00:51)
 
-### [#417 open_set](99325417openset.html)
+* [#420 constructions of limits](95007420constructionsoflimits.html) (14 messages, latest: Oct 15 2018 at 00:50)
 
-### [trailing whitespace](50984trailingwhitespace.html)
+* [#118 direct limit](34616118directlimit.html) (23 messages, latest: Oct 14 2018 at 22:34)
 
-### [#412 updates to installation instructions](24059412updatestoinstallationinstructions.html)
+* [#417 open_set](99325417openset.html) (1 message, latest: Oct 12 2018 at 12:56)
 
-### [#391 faster](22086391faster.html)
+* [trailing whitespace](50984trailingwhitespace.html) (4 messages, latest: Oct 10 2018 at 20:24)
 
-### [#352 fin_cases](62537352fincases.html)
+* [#412 updates to installation instructions](24059412updatestoinstallationinstructions.html) (1 message, latest: Oct 10 2018 at 12:09)
 
-### [determinants](36527determinants.html)
+* [#391 faster](22086391faster.html) (197 messages, latest: Oct 08 2018 at 21:42)
 
-### [#406 det is a monoid_hom](71905406detisamonoidhom.html)
+* [#352 fin_cases](62537352fincases.html) (47 messages, latest: Oct 08 2018 at 19:01)
 
-### [#397](39975397.html)
+* [determinants](36527determinants.html) (23 messages, latest: Oct 08 2018 at 10:00)
 
-### [#396 squeeze_simp](61216396squeezesimp.html)
+* [#406 det is a monoid_hom](71905406detisamonoidhom.html) (1 message, latest: Oct 08 2018 at 09:57)
 
-### [topic names](78740topicnames.html)
+* [#397](39975397.html) (8 messages, latest: Oct 08 2018 at 03:13)
 
-### [documentation PRs](95216documentationPRs.html)
+* [#396 squeeze_simp](61216396squeezesimp.html) (36 messages, latest: Oct 07 2018 at 21:28)
 
-### [hello](47413hello.html)
+* [topic names](78740topicnames.html) (10 messages, latest: Oct 07 2018 at 14:20)
+
+* [documentation PRs](95216documentationPRs.html) (2 messages, latest: Oct 07 2018 at 13:21)
+
+* [hello](47413hello.html) (1 message, latest: Oct 07 2018 at 12:24)
 

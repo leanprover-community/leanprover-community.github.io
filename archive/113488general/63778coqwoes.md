@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63778coqwoes.html
 ---
 
-## [general](index.html)
-### [coq woes](63778coqwoes.html)
+## Stream: [general](index.html)
+### Topic: [coq woes](63778coqwoes.html)
+
+---
 
 #### [Sean Leather (Apr 24 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coq%20woes/near/125609345):
 I'm stuck on trying to understand something in a Coq proof. Any experts on here who can spare a few minutes to help?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/01890Higherorderchaos.html
 ---
 
-## [new members](index.html)
-### [Higher order chaos](01890Higherorderchaos.html)
+## Stream: [new members](index.html)
+### Topic: [Higher order chaos](01890Higherorderchaos.html)
+
+---
 
 #### [Ken Roe (Jul 15 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Higher%20order%20chaos/near/129679786):
 I was experimenting with lambda reductions.  Can someone help me complete the following theorem:

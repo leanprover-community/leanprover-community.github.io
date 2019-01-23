@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/70297completegroups.html
 ---
 
-## [maths](index.html)
-### [complete_groups](70297completegroups.html)
+## Stream: [maths](index.html)
+### Topic: [complete_groups](70297completegroups.html)
+
+---
 
 #### [Patrick Massot (Sep 26 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complete_groups/near/134699334):
  I think the last file you didn't edit is the one you accidentally removed yesterday: `complete_groups.lean`. Currently it's only purpose is the proof of `extend_Z_bilin` which is the crucial ingredient to extend the multiplication of a topological ring to its Hausdorff completion. Note that the separation in `extend_Z_bilin` and `extend_Z_bilin_key` is mostly because the proof was too long to elaborate for Lean to be used interactively (at least on my computer). But also, the key part is actually where stuff happens while the rest is massaging information which is already there. I'd be curious to see whether you can simplify this (I don't mean turn everything into term mode, I mean actual Lean or maths simplification). This closely follows Bourbaki (I can send you the pdf in English if needed) except that the massaging is completely implicit in Bourbaki.

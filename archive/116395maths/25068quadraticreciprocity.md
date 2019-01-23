@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/25068quadraticreciprocity.html
 ---
 
-## [maths](index.html)
-### [quadratic reciprocity](25068quadraticreciprocity.html)
+## Stream: [maths](index.html)
+### Topic: [quadratic reciprocity](25068quadraticreciprocity.html)
+
+---
 
 #### [Kevin Buzzard (May 01 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quadratic%20reciprocity/near/125919765):
 @**Chris Hughes** Did you prove Fermat's Little Theorem https://en.wikipedia.org/wiki/Fermat%27s_little_theorem in Lean? I am interested in proving Euler's Criterion https://en.wikipedia.org/wiki/Euler%27s_criterion and Gauss' Lemma https://en.wikipedia.org/wiki/Gauss%27s_lemma_(number_theory) in Lean, with a view to proving when -1 and +-2 are squares mod p (this is related to quadratic reciprocity).

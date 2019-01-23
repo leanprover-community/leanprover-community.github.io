@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/51517UranusTesting.html
 ---
 
-## [new members](index.html)
-### [Uranus Testing](51517UranusTesting.html)
+## Stream: [new members](index.html)
+### Topic: [Uranus Testing](51517UranusTesting.html)
+
+---
 
 #### [Kenny Lau (Jan 05 2019 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uranus%20Testing/near/154466208):
 Welcome @**Uranus Testing** in UTC+7 (Russia, Mongolia, Christmas Island, Cambodia, Central Kalimantan, Java, Sumatra, West Kalimantan, Laos, Thailand, Vietnam)

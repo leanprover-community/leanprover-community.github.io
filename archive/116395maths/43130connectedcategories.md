@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/43130connectedcategories.html
 ---
 
-## [maths](index.html)
-### [connected categories](43130connectedcategories.html)
+## Stream: [maths](index.html)
+### Topic: [connected categories](43130connectedcategories.html)
+
+---
 
 #### [Reid Barton (Sep 12 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/connected%20categories/near/133812119):
 I took a stab at defining an "interface" for what it means for a category to be connected and used it to prove a standard fact about cofinal functors. @**Mario Carneiro** I'm curious to hear whether you would suggest any improvements.

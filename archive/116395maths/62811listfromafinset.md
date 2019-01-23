@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/62811listfromafinset.html
 ---
 
-## [maths](index.html)
-### [list from a finset](62811listfromafinset.html)
+## Stream: [maths](index.html)
+### Topic: [list from a finset](62811listfromafinset.html)
+
+---
 
 #### [Sean Leather (Apr 13 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/list%20from%20a%20finset/near/125032331):
 Is there a way to get a `list` from a `finset` without using `finset.sort` or writing my own recursive function on `finset`?

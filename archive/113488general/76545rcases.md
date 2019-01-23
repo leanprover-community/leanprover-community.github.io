@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76545rcases.html
 ---
 
-## [general](index.html)
-### [rcases?](76545rcases.html)
+## Stream: [general](index.html)
+### Topic: [rcases?](76545rcases.html)
+
+---
 
 #### [Reid Barton (Sep 07 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rcases%3F/near/133502924):
 Is there a way to use `rcases` with `?` to get hints, or just `rintros`?

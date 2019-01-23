@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05564chainrule.html
 ---
 
-## [general](index.html)
-### [chain rule](05564chainrule.html)
+## Stream: [general](index.html)
+### Topic: [chain rule](05564chainrule.html)
+
+---
 
 #### [Patrick Massot (Feb 28 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/chain%20rule/near/123090490):
 I have this chain rule proof in https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/calculus.lean which 100 lines long. And @**Assia Mahboubi** tells me https://github.com/math-comp/analysis/blob/6b36593f4a6a612212163b25c6bad3522c7fa679/derive.v#L494

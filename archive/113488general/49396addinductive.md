@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49396addinductive.html
 ---
 
-## [general](index.html)
-### [add_inductive](49396addinductive.html)
+## Stream: [general](index.html)
+### Topic: [add_inductive](49396addinductive.html)
+
+---
 
 #### [Jakob von Raumer (Mar 21 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010223):
 Why does

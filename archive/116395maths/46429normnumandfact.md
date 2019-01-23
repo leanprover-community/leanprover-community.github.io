@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/46429normnumandfact.html
 ---
 
-## [maths](index.html)
-### [norm_num and fact](46429normnumandfact.html)
+## Stream: [maths](index.html)
+### Topic: [norm_num and fact](46429normnumandfact.html)
+
+---
 
 #### [Kevin Buzzard (Nov 18 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_num%20and%20fact/near/147921330):
 ```lean

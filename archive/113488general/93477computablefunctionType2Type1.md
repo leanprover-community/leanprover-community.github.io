@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93477computablefunctionType2Type1.html
 ---
 
-## [general](index.html)
-### [computable function Type 2 -> Type 1](93477computablefunctionType2Type1.html)
+## Stream: [general](index.html)
+### Topic: [computable function Type 2 -> Type 1](93477computablefunctionType2Type1.html)
+
+---
 
 #### [Kenny Lau (Jul 31 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computable%20function%20Type%202%20-%3E%20Type%201/near/130632607):
 is there any computable non-constant function Type 2 -> Type 1?

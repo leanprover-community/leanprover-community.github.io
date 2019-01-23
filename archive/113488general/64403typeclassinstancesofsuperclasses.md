@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64403typeclassinstancesofsuperclasses.html
 ---
 
-## [general](index.html)
-### [type class instances of superclasses](64403typeclassinstancesofsuperclasses.html)
+## Stream: [general](index.html)
+### Topic: [type class instances of superclasses](64403typeclassinstancesofsuperclasses.html)
+
+---
 
 #### [Sean Leather (Jun 21 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414454):
 Given roughly the following combination of classes and instances:

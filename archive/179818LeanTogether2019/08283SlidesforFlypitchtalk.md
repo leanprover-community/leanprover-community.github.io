@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/08283SlidesforFlypitchtalk.html
 ---
 
-## [Lean Together 2019](index.html)
-### [Slides for Flypitch talk](08283SlidesforFlypitchtalk.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [Slides for Flypitch talk](08283SlidesforFlypitchtalk.html)
+
+---
 
 #### [Jesse Michael Han (Jan 07 2019 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Slides%20for%20Flypitch%20talk/near/154605847):
 A couple people asked me to post my slides to the Zulip chat. It was nice seeing you all today! [lean-together-2019.pdf](/user_uploads/3121/unUMGa3U-jn8fN9hXOKSOoHa/lean-together-2019.pdf)

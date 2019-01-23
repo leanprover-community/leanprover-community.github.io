@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/46183universalpropertiesagain.html
 ---
 
-## [maths](index.html)
-### [universal properties again](46183universalpropertiesagain.html)
+## Stream: [maths](index.html)
+### Topic: [universal properties again](46183universalpropertiesagain.html)
+
+---
 
 #### [Patrick Massot (Jul 19 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/universal%20properties%20again/near/129954498):
 Since everybody is doing universal properties and fight reluctant universes and type class inference, let me try to get help. Remember I'm working with Hausdorff completions of uniform space. I have a nice proof of their universal properties and I'd like to run the usual stuff on it. Especially today I need uniqueness for this construction. So I forget about my explicit construction and try to run abstract arguments. See https://gist.github.com/PatrickMassot/beb3b40bec8888b3061d9c410c229467 First trouble: I had to setup explicit universe level in order to get Lean to accept `compare`. Then the instances buried in the structure are hard to get out. I guess I'm on a completely wrong track here.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96566BeginnerQuestions.html
 ---
 
-## [general](index.html)
-### [Beginner Questions](96566BeginnerQuestions.html)
+## Stream: [general](index.html)
+### Topic: [Beginner Questions](96566BeginnerQuestions.html)
+
+---
 
 #### [Clyde Watson (Jun 28 2018 at 04:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beginner%20Questions/near/128751244):
 I'm really new to LEAN (and anything like it), and I've had some problems that might be considered a little too simple.

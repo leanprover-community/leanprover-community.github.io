@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54961reflectedalpha.html
 ---
 
-## [general](index.html)
-### [reflected \alpha](54961reflectedalpha.html)
+## Stream: [general](index.html)
+### Topic: [reflected \alpha](54961reflectedalpha.html)
+
+---
 
 #### [Keeley Hoek (Nov 21 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflected%20%5Calpha/near/148091917):
 This probably counts as a newbie question, sorry:

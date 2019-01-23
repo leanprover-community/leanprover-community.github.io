@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93439testing.html
 ---
 
-## [general](index.html)
-### [testing](93439testing.html)
+## Stream: [general](index.html)
+### Topic: [testing](93439testing.html)
+
+---
 
 #### [Kenny Lau (Oct 31 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing/near/136886579):
 @**Kevin Buzzard** do you get a ping?

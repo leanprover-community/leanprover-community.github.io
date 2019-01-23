@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/17888CoercionsNZQRC.html
 ---
 
-## [maths](index.html)
-### [Coercions N->Z->Q->R->C](17888CoercionsNZQRC.html)
+## Stream: [maths](index.html)
+### Topic: [Coercions N->Z->Q->R->C](17888CoercionsNZQRC.html)
+
+---
 
 #### [Kevin Buzzard (Aug 03 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130849802):
 My students want to move freely between these five basic objects, sometimes because they have made poor design decisions but sometimes for genuine reasons. I figured I'd try to get to the bottom of why they were having problems.

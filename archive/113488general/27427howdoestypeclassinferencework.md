@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27427howdoestypeclassinferencework.html
 ---
 
-## [general](index.html)
-### [how does type class inference work?](27427howdoestypeclassinferencework.html)
+## Stream: [general](index.html)
+### Topic: [how does type class inference work?](27427howdoestypeclassinferencework.html)
+
+---
 
 #### [Kevin Buzzard (Dec 10 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/151259224):
 ```lean

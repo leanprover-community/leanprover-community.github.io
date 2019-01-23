@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/14315431applytoadditiverecursively.html
 ---
 
-## [PR reviews](index.html)
-### [#431 apply `to_additive` recursively](14315431applytoadditiverecursively.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#431 apply `to_additive` recursively](14315431applytoadditiverecursively.html)
+
+---
 
 #### [Johan Commelin (Nov 30 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23431%20apply%20%60to_additive%60%20recursively/near/148869284):
 @**Simon Hudon** Somehow I missed this PR, but it looks awesome! Kudos :octopus: :tada: 

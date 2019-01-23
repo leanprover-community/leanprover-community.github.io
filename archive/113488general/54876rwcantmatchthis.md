@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54876rwcantmatchthis.html
 ---
 
-## [general](index.html)
-### [rw can't match this](54876rwcantmatchthis.html)
+## Stream: [general](index.html)
+### Topic: [rw can't match this](54876rwcantmatchthis.html)
+
+---
 
 #### [Kenny Lau (Mar 15 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20can%27t%20match%20this/near/123765206):
 ```

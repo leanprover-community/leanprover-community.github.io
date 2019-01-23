@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/14275showisslow.html
 ---
 
-## [general](index.html)
-### [show is slow](14275showisslow.html)
+## Stream: [general](index.html)
+### Topic: [show is slow](14275showisslow.html)
+
+---
 
 #### [Kevin Buzzard (Aug 04 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888169):
 ```lean

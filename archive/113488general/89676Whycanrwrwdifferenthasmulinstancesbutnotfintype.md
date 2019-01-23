@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html
 ---
 
-## [general](index.html)
-### [Why can rw rw different has_mul instances, but not fintype](89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html)
+## Stream: [general](index.html)
+### Topic: [Why can rw rw different has_mul instances, but not fintype](89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html)
+
+---
 
 #### [Chris Hughes (Jun 14 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128082489):
 In the following code, `rw` manages to recognize that two different expressions involving different paths of inferring the `has_mul` type class are equal. It can't do this with two definitionally equal `fintype` instances however. What's the difference between `has_mul` and `fintype` that leads to this behaviour?

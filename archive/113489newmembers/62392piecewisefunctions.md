@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/62392piecewisefunctions.html
 ---
 
-## [new members](index.html)
-### [piecewise functions](62392piecewisefunctions.html)
+## Stream: [new members](index.html)
+### Topic: [piecewise functions](62392piecewisefunctions.html)
+
+---
 
 #### [Aymon Wuolanne (Dec 20 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152232475):
 Does anyone have any tips for dealing with piecewise functions, in particular showing that they're continuous? I have something like the following in mind:

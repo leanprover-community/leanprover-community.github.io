@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59209strangeparsing.html
 ---
 
-## [general](index.html)
-### [strange parsing](59209strangeparsing.html)
+## Stream: [general](index.html)
+### Topic: [strange parsing](59209strangeparsing.html)
+
+---
 
 #### [Mario Carneiro (May 19 2018 at 06:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20parsing/near/126782270):
 I just discovered that this parses:

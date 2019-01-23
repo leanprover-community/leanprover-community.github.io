@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/56734burnside.html
 ---
 
-## [maths](index.html)
-### [burnside!](56734burnside.html)
+## Stream: [maths](index.html)
+### Topic: [burnside!](56734burnside.html)
+
+---
 
 #### [Kenny Lau (Apr 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125134940):
 ```

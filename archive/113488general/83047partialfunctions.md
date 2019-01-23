@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83047partialfunctions.html
 ---
 
-## [general](index.html)
-### [partial functions](83047partialfunctions.html)
+## Stream: [general](index.html)
+### Topic: [partial functions](83047partialfunctions.html)
+
+---
 
 #### [Victor Porton (Jul 07 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129261641):
 Why this does not work?

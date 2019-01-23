@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71476structureturnedintoclass.html
 ---
 
-## [general](index.html)
-### [structure turned into class](71476structureturnedintoclass.html)
+## Stream: [general](index.html)
+### Topic: [structure turned into class](71476structureturnedintoclass.html)
+
+---
 
 #### [Patrick Massot (Apr 08 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20turned%20into%20class/near/124809321):
 In `topological_space.lean`, I see:

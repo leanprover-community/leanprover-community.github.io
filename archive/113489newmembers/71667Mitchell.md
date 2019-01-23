@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/71667Mitchell.html
 ---
 
-## [new members](index.html)
-### [Mitchell](71667Mitchell.html)
+## Stream: [new members](index.html)
+### Topic: [Mitchell](71667Mitchell.html)
+
+---
 
 #### [Patrick Massot (Mar 06 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mitchell/near/123344776):
 Hi @**Mitchell Rowett** ! How is your group theory going?

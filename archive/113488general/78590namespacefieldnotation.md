@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78590namespacefieldnotation.html
 ---
 
-## [general](index.html)
-### [namespace field notation](78590namespacefieldnotation.html)
+## Stream: [general](index.html)
+### Topic: [namespace field notation](78590namespacefieldnotation.html)
+
+---
 
 #### [Sean Leather (Apr 11 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace%20field%20notation/near/124921576):
 Before I disappeared for a month to handle a visiting-family exception, I was experimenting with using more “namespace field notation.” That is, instead of using `list.map f l`, I would use `l.map f`. I like the conciseness gained by removing the namespace `list`.

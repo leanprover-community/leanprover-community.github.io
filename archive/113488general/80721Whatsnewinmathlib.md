@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80721Whatsnewinmathlib.html
 ---
 
-## [general](index.html)
-### [What's new in mathlib](80721Whatsnewinmathlib.html)
+## Stream: [general](index.html)
+### Topic: [What's new in mathlib](80721Whatsnewinmathlib.html)
+
+---
 
 #### [Johan Commelin (Oct 02 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20new%20in%20mathlib/near/135038239):
 There is a thread in the `#maths` stream: https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/What's.20new.20in.20Lean.20maths.3F

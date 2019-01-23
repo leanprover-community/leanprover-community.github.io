@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/44550Projectionaftermkstructure.html
 ---
 
-## [general](index.html)
-### [Projection after mk-structure](44550Projectionaftermkstructure.html)
+## Stream: [general](index.html)
+### Topic: [Projection after mk-structure](44550Projectionaftermkstructure.html)
+
+---
 
 #### [Keeley Hoek (Sep 16 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Projection%20after%20mk-structure/near/134060550):
 Say I've got a function `mk_struct` which takes some arguments and produces something of type `struct`. The function `mk_struct` needn't be the `struct.mk` constructor---maybe it takes some arguments, proves some stuff about them, and then packages it all up by calling the constructor `struct.mk` (the point is that the arguments of `mk_struct` can be totally different).

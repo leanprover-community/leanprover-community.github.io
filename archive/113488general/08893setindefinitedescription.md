@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08893setindefinitedescription.html
 ---
 
-## [general](index.html)
-### [set.indefinite_description](08893setindefinitedescription.html)
+## Stream: [general](index.html)
+### Topic: [set.indefinite_description](08893setindefinitedescription.html)
+
+---
 
 #### [Kenny Lau (Dec 04 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150884816):
 Is it possible to fill in this sorry?

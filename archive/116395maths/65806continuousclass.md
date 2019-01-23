@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/65806continuousclass.html
 ---
 
-## [maths](index.html)
-### [continuous class](65806continuousclass.html)
+## Stream: [maths](index.html)
+### Topic: [continuous class](65806continuousclass.html)
+
+---
 
 #### [Patrick Massot (Jul 30 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20class/near/130544108):
 Should we turn `continuous` into a class `is_continuous` like we did for group homorphisms? I spent quite a lot of time explicitly invoking lemmas that could be handled by type class inference. Same question for uniform continuity.

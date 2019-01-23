@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/42755localisation.html
 ---
 
-## [maths](index.html)
-### [localisation](42755localisation.html)
+## Stream: [maths](index.html)
+### Topic: [localisation](42755localisation.html)
+
+---
 
 #### [Johan Commelin (Nov 23 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localisation/near/148248534):
 @**Kenny Lau** Did you have a proof somewhere that if you localise a ring at `S`, then `S` maps to `units` of the localisation?

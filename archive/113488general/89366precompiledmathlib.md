@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89366precompiledmathlib.html
 ---
 
-## [general](index.html)
-### [precompiled mathlib](89366precompiledmathlib.html)
+## Stream: [general](index.html)
+### Topic: [precompiled mathlib](89366precompiledmathlib.html)
+
+---
 
 #### [Johan Commelin (Apr 20 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/precompiled%20mathlib/near/125449071):
 ```quote

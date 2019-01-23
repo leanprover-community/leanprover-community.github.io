@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08557howtouselinearcombination.html
 ---
 
-## [general](index.html)
-### [how to use linear combination](08557howtouselinearcombination.html)
+## Stream: [general](index.html)
+### Topic: [how to use linear combination](08557howtouselinearcombination.html)
+
+---
 
 #### [Blair Shi (Jul 23 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20linear%20combination/near/130142613):
 ```

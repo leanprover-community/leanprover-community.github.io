@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/12683LwenheimSkolem.html
 ---
 
-## [general](index.html)
-### [Löwenheim-Skolem](12683LwenheimSkolem.html)
+## Stream: [general](index.html)
+### Topic: [Löwenheim-Skolem](12683LwenheimSkolem.html)
+
+---
 
 #### [Kenny Lau (Oct 09 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/L%C3%B6wenheim-Skolem/near/135492014):
 Is Löwenheim-Skolem true in Lean?

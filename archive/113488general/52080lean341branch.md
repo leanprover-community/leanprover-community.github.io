@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52080lean341branch.html
 ---
 
-## [general](index.html)
-### [lean-3.4.1 branch](52080lean341branch.html)
+## Stream: [general](index.html)
+### Topic: [lean-3.4.1 branch](52080lean341branch.html)
+
+---
 
 #### [Mario Carneiro (May 25 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean-3.4.1%20branch/near/127073781):
 I added a lean-3.4.1 branch to mathlib, which I think should fix the issues with elan/leanpkg (assuming I spelled everything correctly). @**Sebastian Ullrich** Will there be any problem with just keeping the branch up to date with master (although I don't think branch symlinks are a thing)? I don't see any reason not to.

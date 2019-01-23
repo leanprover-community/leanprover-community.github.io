@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/50492Leantalkformathematicians.html
 ---
 
-## [general](index.html)
-### [Lean talk for mathematicians](50492Leantalkformathematicians.html)
+## Stream: [general](index.html)
+### Topic: [Lean talk for mathematicians](50492Leantalkformathematicians.html)
+
+---
 
 #### [Johan Commelin (Sep 03 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20talk%20for%20mathematicians/near/133249947):
 I've been asked to talk about Lean in our colloquium. Still freaking out... what should I put in such a talk? How do I manage expectations, so that they become realistic (instead of "Blah, unusable crap" or "They'll use AI to prove millenium problems. They're stealing our jobs.")

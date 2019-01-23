@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03982Universeissues.html
 ---
 
-## [general](index.html)
-### [Universe issues](03982Universeissues.html)
+## Stream: [general](index.html)
+### Topic: [Universe issues](03982Universeissues.html)
+
+---
 
 #### [Kevin Buzzard (Apr 06 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Universe%20issues/near/124734232):
 I seem to not understand universes properly, or more precisely how to use them properly. I ran into the following issue with some code:

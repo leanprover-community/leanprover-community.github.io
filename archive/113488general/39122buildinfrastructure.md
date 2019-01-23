@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39122buildinfrastructure.html
 ---
 
-## [general](index.html)
-### [build infrastructure](39122buildinfrastructure.html)
+## Stream: [general](index.html)
+### Topic: [build infrastructure](39122buildinfrastructure.html)
+
+---
 
 #### [Scott Morrison (Nov 19 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/build%20infrastructure/near/147995454):
 Ok, I think I am going to take a pause on "math in Lean", and do some infrastructure work.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05477usinginfixindefinition.html
 ---
 
-## [general](index.html)
-### [using infix in definition](05477usinginfixindefinition.html)
+## Stream: [general](index.html)
+### Topic: [using infix in definition](05477usinginfixindefinition.html)
+
+---
 
 #### [Minchao Wu (Mar 21 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using%20infix%20in%20definition/near/124004353):
 I remember that in Lean 2 we could use `infix` inside a definition, referring  to the thing being defined.

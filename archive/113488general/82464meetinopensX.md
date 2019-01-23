@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82464meetinopensX.html
 ---
 
-## [general](index.html)
-### [meet in opens X](82464meetinopensX.html)
+## Stream: [general](index.html)
+### Topic: [meet in opens X](82464meetinopensX.html)
+
+---
 
 #### [Johan Commelin (Nov 10 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meet%20in%20opens%20X/near/147442296):
 If I have `U V : opens X`, then `(U ⊓ V).val` is not defeq to `U.val ∩ V.val`. Can this be fixed while still using the galois insertion to define the lattice structure on `opens X`?

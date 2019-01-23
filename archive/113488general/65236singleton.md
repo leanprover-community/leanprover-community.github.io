@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/65236singleton.html
 ---
 
-## [general](index.html)
-### [singleton](65236singleton.html)
+## Stream: [general](index.html)
+### Topic: [singleton](65236singleton.html)
+
+---
 
 #### [Scott Morrison (Aug 12 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976871):
 Am I just missing a `singleton` class, the pushout of `inhabited` and `subsingleton`? Am I meant to define my own?

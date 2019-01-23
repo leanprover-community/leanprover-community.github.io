@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79130RoomsforLeanTogether.html
 ---
 
-## [general](index.html)
-### [Rooms for Lean Together](79130RoomsforLeanTogether.html)
+## Stream: [general](index.html)
+### Topic: [Rooms for Lean Together](79130RoomsforLeanTogether.html)
+
+---
 
 #### [Jakob von Raumer (Nov 24 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rooms%20for%20Lean%20Together/near/148272878):
 Has anyone already made any room reservations for Amsterdam? @**Rob Lewis** do you know of anything?

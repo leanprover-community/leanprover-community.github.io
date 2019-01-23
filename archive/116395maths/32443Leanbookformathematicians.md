@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/32443Leanbookformathematicians.html
 ---
 
-## [maths](index.html)
-### [Lean book for mathematicians](32443Leanbookformathematicians.html)
+## Stream: [maths](index.html)
+### Topic: [Lean book for mathematicians](32443Leanbookformathematicians.html)
+
+---
 
 #### [Kevin Buzzard (May 30 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lean%20book%20for%20mathematicians/near/127307658):
 I'm writing a book for mathematicians who want to learn Lean.

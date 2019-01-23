@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72810exprreplace.html
 ---
 
-## [general](index.html)
-### [expr.replace](72810exprreplace.html)
+## Stream: [general](index.html)
+### Topic: [expr.replace](72810exprreplace.html)
+
+---
 
 #### [Jakob von Raumer (Mar 19 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr.replace/near/123920774):
 Is there a version of expr.replace that performs replacements until a fixed point is reached?

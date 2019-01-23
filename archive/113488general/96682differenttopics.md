@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96682differenttopics.html
 ---
 
-## [general](index.html)
-### [different topics](96682differenttopics.html)
+## Stream: [general](index.html)
+### Topic: [different topics](96682differenttopics.html)
+
+---
 
 #### [Andrew Ashworth (Feb 26 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/different%20topics/near/123012798):
 ```quote

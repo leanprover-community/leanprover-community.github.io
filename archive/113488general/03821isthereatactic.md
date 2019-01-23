@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03821isthereatactic.html
 ---
 
-## [general](index.html)
-### [is there a tactic?](03821isthereatactic.html)
+## Stream: [general](index.html)
+### Topic: [is there a tactic?](03821isthereatactic.html)
+
+---
 
 #### [Sean Leather (Sep 12 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785751):
 Is there a tactic for (part of) this?

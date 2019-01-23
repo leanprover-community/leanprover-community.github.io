@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/33072consoverload.html
 ---
 
-## [general](index.html)
-### [cons overload](33072consoverload.html)
+## Stream: [general](index.html)
+### Topic: [cons overload](33072consoverload.html)
+
+---
 
 #### [Kenny Lau (Apr 18 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cons%20overload/near/125243066):
 kinda annoyed by the fact that `list.cons` and `multiset.cons` both use `::`

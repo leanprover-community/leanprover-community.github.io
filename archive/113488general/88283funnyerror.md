@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88283funnyerror.html
 ---
 
-## [general](index.html)
-### [funny error](88283funnyerror.html)
+## Stream: [general](index.html)
+### Topic: [funny error](88283funnyerror.html)
+
+---
 
 #### [Kenny Lau (May 31 2018 at 05:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127342120):
 I could not minimize this error.

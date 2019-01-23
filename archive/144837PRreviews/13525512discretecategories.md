@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/13525512discretecategories.html
 ---
 
-## [PR reviews](index.html)
-### [#512 discrete categories](13525512discretecategories.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#512 discrete categories](13525512discretecategories.html)
+
+---
 
 #### [Scott Morrison (Dec 05 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23512%20discrete%20categories/near/150904838):
 Really this is "everything that I thought worth saving from the old limits PR, not including anything about special shapes".

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13255generalize.html
 ---
 
-## [general](index.html)
-### [generalize](13255generalize.html)
+## Stream: [general](index.html)
+### Topic: [generalize](13255generalize.html)
+
+---
 
 #### [Kenny Lau (Apr 19 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize/near/125297691):
 Could someone build a tactic that allows us to generalize at hypotheses?

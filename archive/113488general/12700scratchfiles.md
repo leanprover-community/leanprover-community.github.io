@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/12700scratchfiles.html
 ---
 
-## [general](index.html)
-### [scratch files](12700scratchfiles.html)
+## Stream: [general](index.html)
+### Topic: [scratch files](12700scratchfiles.html)
+
+---
 
 #### [Kevin Buzzard (Sep 15 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/scratch%20files/near/134015349):
 I'd like to have a few scratch files in my clone of community-mathlib, in e.g. a `scratch/` directory. Should I do this with some local trickery in .gitignore, should I change the github version of .gitignore, should I just use `_target`, should I load a second project in VS Code? I want VS Code to stop nagging me about files I just use to do tests or calculations.

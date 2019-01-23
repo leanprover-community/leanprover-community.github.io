@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/56392Usingrewritetosimplifyaboundvariableexpression.html
 ---
 
-## [new members](index.html)
-### [Using rewrite to simplify a bound variable expression](56392Usingrewritetosimplifyaboundvariableexpression.html)
+## Stream: [new members](index.html)
+### Topic: [Using rewrite to simplify a bound variable expression](56392Usingrewritetosimplifyaboundvariableexpression.html)
+
+---
 
 #### [Ken Roe (Aug 06 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950190):
 ```lean

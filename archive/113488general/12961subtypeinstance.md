@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/12961subtypeinstance.html
 ---
 
-## [general](index.html)
-### [subtype_instance](12961subtypeinstance.html)
+## Stream: [general](index.html)
+### Topic: [subtype_instance](12961subtypeinstance.html)
+
+---
 
 #### [Scott Morrison (Oct 15 2018 at 06:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype_instance/near/135805972):
 I'm having trouble using `subtype_instance`.

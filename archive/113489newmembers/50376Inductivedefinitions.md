@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/50376Inductivedefinitions.html
 ---
 
-## [new members](index.html)
-### [Inductive definitions](50376Inductivedefinitions.html)
+## Stream: [new members](index.html)
+### Topic: [Inductive definitions](50376Inductivedefinitions.html)
+
+---
 
 #### [Ken Roe (Aug 28 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926297):
 I see a number of comments in my code that a definition of the form:

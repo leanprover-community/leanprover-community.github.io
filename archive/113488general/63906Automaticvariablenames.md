@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63906Automaticvariablenames.html
 ---
 
-## [general](index.html)
-### [Automatic variable names](63906Automaticvariablenames.html)
+## Stream: [general](index.html)
+### Topic: [Automatic variable names](63906Automaticvariablenames.html)
+
+---
 
 #### [Patrick Stevens (May 29 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Automatic%20variable%20names/near/127275253):
 Another noob question, sorry. I haven't found an answer out there because everyone always proves this theorem using `simp`.

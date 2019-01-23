@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13744continuoustactic.html
 ---
 
-## [general](index.html)
-### [continuous tactic](13744continuoustactic.html)
+## Stream: [general](index.html)
+### Topic: [continuous tactic](13744continuoustactic.html)
+
+---
 
 #### [Kenny Lau (Nov 01 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/continuous%20tactic/near/136888333):
 Can we have a tactic that solves continuity goals, matching e.g. `continuous (f o g)` and splitting it into two goals?

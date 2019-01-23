@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78790typeclassresolutionorunification.html
 ---
 
-## [general](index.html)
-### [type class resolution or unification?](78790typeclassresolutionorunification.html)
+## Stream: [general](index.html)
+### Topic: [type class resolution or unification?](78790typeclassresolutionorunification.html)
+
+---
 
 #### [Kevin Buzzard (Apr 18 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20resolution%20or%20unification%3F/near/125265237):
 This question might be too vague to answer. I have a fixed type `X` and I am doing a lot of work with functions from `{U : set X // P U}` to `Type*` (for example, `X` might be a topological space and the functions might assign a type to each open set in `X`, but I also consider more general possibilities for `P`, e.g. `P` might say "`U` is in a fixed basis for the topological space"). I seem to have three different ways to set up such functions.

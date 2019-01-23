@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11013Newbieerror.html
 ---
 
-## [general](index.html)
-### [Newbie error](11013Newbieerror.html)
+## Stream: [general](index.html)
+### Topic: [Newbie error](11013Newbieerror.html)
+
+---
 
 #### [Johan Commelin (May 08 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254021):
 I've got the following code

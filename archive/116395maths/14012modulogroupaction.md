@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/14012modulogroupaction.html
 ---
 
-## [maths](index.html)
-### [modulo group action](14012modulogroupaction.html)
+## Stream: [maths](index.html)
+### Topic: [modulo group action](14012modulogroupaction.html)
+
+---
 
 #### [Patrick Massot (Sep 13 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/modulo%20group%20action/near/133907297):
 Do I understand correctly that we have a file defining group action and a file defining left and right cosets in a group, but no link between those? And we don't have G\X if G acts on X?

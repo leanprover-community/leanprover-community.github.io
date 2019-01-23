@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/46194implicitarguments.html
 ---
 
-## [general](index.html)
-### [implicit arguments](46194implicitarguments.html)
+## Stream: [general](index.html)
+### Topic: [implicit arguments](46194implicitarguments.html)
+
+---
 
 #### [petercommand (Jan 10 2019 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments/near/154824603):
 Is there any way to tell lean to show all the implicit arguments in an error message?

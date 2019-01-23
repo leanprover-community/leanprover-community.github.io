@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11809ofastrueproofs.html
 ---
 
-## [general](index.html)
-### [of_as_true proofs](11809ofastrueproofs.html)
+## Stream: [general](index.html)
+### Topic: [of_as_true proofs](11809ofastrueproofs.html)
+
+---
 
 #### [Joe Hendrix (Dec 28 2018 at 03:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152632359):
 I'm trying to build up a mental model of the efficiency of using decidable predicates to construct proofs in tactics..

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/41566sheafification.html
 ---
 
-## [maths](index.html)
-### [sheafification](41566sheafification.html)
+## Stream: [maths](index.html)
+### Topic: [sheafification](41566sheafification.html)
+
+---
 
 #### [Johan Commelin (Nov 07 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sheafification/near/146939281):
 @**Scott Morrison|110087** @**Reid Barton** It seems that on a general site, sheafification needs localisation of categories and calculus of fractions. I would like to hear from you if you think it is realistic to work on this now, or is this to hard for now?

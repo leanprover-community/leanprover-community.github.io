@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03072hidingwhenimport.html
 ---
 
-## [general](index.html)
-### [hiding when import?](03072hidingwhenimport.html)
+## Stream: [general](index.html)
+### Topic: [hiding when import?](03072hidingwhenimport.html)
+
+---
 
 #### [Zesen Qian (Jun 27 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hiding%20when%20import%3F/near/128737287):
 Hi, is there some way to hiding a name when importing a module?

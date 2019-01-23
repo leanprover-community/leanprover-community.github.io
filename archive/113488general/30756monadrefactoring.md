@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30756monadrefactoring.html
 ---
 
-## [general](index.html)
-### [monad refactoring](30756monadrefactoring.html)
+## Stream: [general](index.html)
+### Topic: [monad refactoring](30756monadrefactoring.html)
+
+---
 
 #### [Patrick Massot (Mar 01 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/monad%20refactoring/near/123127367):
 @**Sebastian Ullrich** woke up with a lot of homework... Does anyone knows whether basic users like me will see any difference after merging this?

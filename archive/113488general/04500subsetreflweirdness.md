@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04500subsetreflweirdness.html
 ---
 
-## [general](index.html)
-### [subset refl weirdness](04500subsetreflweirdness.html)
+## Stream: [general](index.html)
+### Topic: [subset refl weirdness](04500subsetreflweirdness.html)
+
+---
 
 #### [Reid Barton (May 04 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20refl%20weirdness/near/126108434):
 Is this a bug?

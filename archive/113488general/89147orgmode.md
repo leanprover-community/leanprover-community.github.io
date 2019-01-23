@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89147orgmode.html
 ---
 
-## [general](index.html)
-### [org-mode](89147orgmode.html)
+## Stream: [general](index.html)
+### Topic: [org-mode](89147orgmode.html)
+
+---
 
 #### [Simon Hudon (Mar 12 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/org-mode/near/123623451):
 Has anyone ever used org-mode to do literate programming in Lean?

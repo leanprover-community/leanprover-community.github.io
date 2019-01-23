@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39393annoyance.html
 ---
 
-## [general](index.html)
-### [$ annoyance](39393annoyance.html)
+## Stream: [general](index.html)
+### Topic: [$ annoyance](39393annoyance.html)
+
+---
 
 #### [Kevin Buzzard (May 17 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710552):
 ```lean

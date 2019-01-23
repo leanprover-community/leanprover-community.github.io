@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78605arrayinduction.html
 ---
 
-## [general](index.html)
-### [array induction](78605arrayinduction.html)
+## Stream: [general](index.html)
+### Topic: [array induction](78605arrayinduction.html)
+
+---
 
 #### [Sean Leather (Aug 14 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/array%20induction/near/132096387):
 Given a theorem statement involving an `array`, what might I use in the proof where I would normally use induction if the `array` were instead a `list`?

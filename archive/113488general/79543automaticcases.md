@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79543automaticcases.html
 ---
 
-## [general](index.html)
-### [automatic cases](79543automaticcases.html)
+## Stream: [general](index.html)
+### Topic: [automatic cases](79543automaticcases.html)
+
+---
 
 #### [Kenny Lau (Jul 28 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130457556):
 Can we have a tactic that does `cases` on the argument of `XX.rec` or `XX.rec_on`?

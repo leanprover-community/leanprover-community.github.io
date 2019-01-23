@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09959equivsubsingleton.html
 ---
 
-## [general](index.html)
-### [equiv_subsingleton](09959equivsubsingleton.html)
+## Stream: [general](index.html)
+### Topic: [equiv_subsingleton](09959equivsubsingleton.html)
+
+---
 
 #### [Johan Commelin (Jan 14 2019 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv_subsingleton/near/155086021):
 I couldn't find this in mathlib. Is this considered useful enough to include?

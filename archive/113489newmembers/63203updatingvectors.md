@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/63203updatingvectors.html
 ---
 
-## [new members](index.html)
-### [updating vectors](63203updatingvectors.html)
+## Stream: [new members](index.html)
+### Topic: [updating vectors](63203updatingvectors.html)
+
+---
 
 #### [Marcus Klaas (Dec 11 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/updating%20vectors/near/151447262):
 Hi! Can anyone provide some pointers here? I'm trying to define a function that updates a vector at a given index. This seems to work, but it's very unwieldy:

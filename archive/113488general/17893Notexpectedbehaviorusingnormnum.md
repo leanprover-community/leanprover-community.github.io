@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17893Notexpectedbehaviorusingnormnum.html
 ---
 
-## [general](index.html)
-### [Not expected behavior using norm_num](17893Notexpectedbehaviorusingnormnum.html)
+## Stream: [general](index.html)
+### Topic: [Not expected behavior using norm_num](17893Notexpectedbehaviorusingnormnum.html)
+
+---
 
 #### [Bruno Bentzen (Dec 21 2018 at 03:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Not%20expected%20behavior%20using%20norm_num/near/152302446):
 Hi everyone,

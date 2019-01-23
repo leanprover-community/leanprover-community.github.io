@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57898Removingtransferfromcore.html
 ---
 
-## [general](index.html)
-### [Removing transfer from core](57898Removingtransferfromcore.html)
+## Stream: [general](index.html)
+### Topic: [Removing transfer from core](57898Removingtransferfromcore.html)
+
+---
 
 #### [Gabriel Ebner (Jan 10 2019 at 12:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Removing%20transfer%20from%20core/near/154832021):
 @**Johannes Hölzl** suggested removing transfer from core and move it into mathlib.  Maybe the biggest positive effect is that we could then use the ⇒ symbol in mathlib.

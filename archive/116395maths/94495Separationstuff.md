@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/94495Separationstuff.html
 ---
 
-## [maths](index.html)
-### [Separation stuff](94495Separationstuff.html)
+## Stream: [maths](index.html)
+### Topic: [Separation stuff](94495Separationstuff.html)
+
+---
 
 #### [Patrick Massot (Sep 19 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Separation%20stuff/near/134237694):
 @**Johannes Hölzl** I'm working on uniform spaces again, and I have a couple of question. 

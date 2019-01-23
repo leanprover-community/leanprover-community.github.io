@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/65770promotingequiv.html
 ---
 
-## [maths](index.html)
-### [promoting equiv](65770promotingequiv.html)
+## Stream: [maths](index.html)
+### Topic: [promoting equiv](65770promotingequiv.html)
+
+---
 
 #### [Kevin Buzzard (Apr 10 2018 at 11:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/promoting%20equiv/near/124877520):
 In mathematics, people constantly invoke the idea that an object is "defined up to unique isomorphism".

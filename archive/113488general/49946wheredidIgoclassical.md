@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49946wheredidIgoclassical.html
 ---
 
-## [general](index.html)
-### [where did I go classical?](49946wheredidIgoclassical.html)
+## Stream: [general](index.html)
+### Topic: [where did I go classical?](49946wheredidIgoclassical.html)
+
+---
 
 #### [Kenny Lau (Mar 29 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20did%20I%20go%20classical%3F/near/124368857):
 ```

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05051generalizeintermmode.html
 ---
 
-## [general](index.html)
-### [generalize in term mode](05051generalizeintermmode.html)
+## Stream: [general](index.html)
+### Topic: [generalize in term mode](05051generalizeintermmode.html)
+
+---
 
 #### [Kenny Lau (Apr 21 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497304):
 ```lean

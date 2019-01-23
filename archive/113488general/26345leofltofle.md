@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26345leofltofle.html
 ---
 
-## [general](index.html)
-### [le_of_lt_of_le](26345leofltofle.html)
+## Stream: [general](index.html)
+### Topic: [le_of_lt_of_le](26345leofltofle.html)
+
+---
 
 #### [Chris Hughes (Apr 25 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693526):
 Should we prove `le_of_lt_of_le` so this stuff works?

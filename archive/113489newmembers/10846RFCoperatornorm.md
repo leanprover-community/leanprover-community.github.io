@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/10846RFCoperatornorm.html
 ---
 
-## [new members](index.html)
-### [RFC: operator norm](10846RFCoperatornorm.html)
+## Stream: [new members](index.html)
+### Topic: [RFC: operator norm](10846RFCoperatornorm.html)
+
+---
 
 #### [Jan-David Salchow (Dec 28 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/RFC%3A%20operator%20norm/near/152676704):
 I've been playing with the space of bounded linear maps between normed space, see https://github.com/jdsalchow/mathlib/blob/calculus/analysis/functional/operator_norm.lean

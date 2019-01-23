@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/12632onesymbolbyassumption.html
 ---
 
-## [general](index.html)
-### [one-symbol "by assumption"](12632onesymbolbyassumption.html)
+## Stream: [general](index.html)
+### Topic: [one-symbol "by assumption"](12632onesymbolbyassumption.html)
+
+---
 
 #### [Johan Commelin (Dec 27 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/one-symbol%20%22by%20assumption%22/near/152620996):
 How would people feel about a 1-symbol version of `by assumption`? I now often have hypotheses with unenlightening names `H1` ... `H5`, and these labels are all over the place in my proofs. But they don't really convey any information. I could use the french quotes to tell Lean the type, and it will start looking for a fitting assumption. But often I find that pretty verbose. Because usually, it's just an annoying proof obligation that we want to get rid of. How about `!`, or maybe the unicode `…`?

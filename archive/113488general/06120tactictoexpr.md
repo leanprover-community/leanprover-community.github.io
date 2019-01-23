@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06120tactictoexpr.html
 ---
 
-## [general](index.html)
-### [tactic.to_expr](06120tactictoexpr.html)
+## Stream: [general](index.html)
+### Topic: [tactic.to_expr](06120tactictoexpr.html)
+
+---
 
 #### [Edward Ayers (Dec 11 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151462345):
 How can I get `tactic.to_expr` to not apply metavariables to implicit arguments? That is;

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42802howisOOPdoingintherealworld.html
 ---
 
-## [general](index.html)
-### [how is OOP doing in the "real world"](42802howisOOPdoingintherealworld.html)
+## Stream: [general](index.html)
+### Topic: [how is OOP doing in the "real world"](42802howisOOPdoingintherealworld.html)
+
+---
 
 #### [Adam Kurkiewicz (Apr 06 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20is%20OOP%20doing%20in%20the%20%22real%20world%22/near/124721653):
 @**Moses Schönfinkel**  @**Patrick Massot** @**Kevin Buzzard** 

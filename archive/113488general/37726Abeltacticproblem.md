@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37726Abeltacticproblem.html
 ---
 
-## [general](index.html)
-### [Abel tactic problem](37726Abeltacticproblem.html)
+## Stream: [general](index.html)
+### Topic: [Abel tactic problem](37726Abeltacticproblem.html)
+
+---
 
 #### [Neil Strickland (Jan 16 2019 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Abel%20tactic%20problem/near/155242485):
 I tried the following:

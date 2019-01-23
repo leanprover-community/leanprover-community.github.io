@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66011performanceofassumption.html
 ---
 
-## [general](index.html)
-### [performance of `assumption`](66011performanceofassumption.html)
+## Stream: [general](index.html)
+### Topic: [performance of `assumption`](66011performanceofassumption.html)
+
+---
 
 #### [Sebastien Gouezel (Oct 31 2018 at 14:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20of%20%60assumption%60/near/136852607):
 I just encountered a weird performance issue. In the middle of a rather long proof, I have just proved a fact that I want to use next. If I use `exact this`, this takes less than 3ms. But `assumption` takes 7 seconds... Of course, in this specific case this is not a problem, but first I was using a tactic that calls `assumption`, several times in the proof, and the whole proof then took more than 30s. Is there a way to understand what is going on?

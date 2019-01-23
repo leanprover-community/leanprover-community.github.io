@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22601calciff.html
 ---
 
-## [general](index.html)
-### [calc iff](22601calciff.html)
+## Stream: [general](index.html)
+### Topic: [calc iff](22601calciff.html)
+
+---
 
 #### [Patrick Massot (Dec 20 2018 at 10:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152244122):
 Is there anything we can do to get something like

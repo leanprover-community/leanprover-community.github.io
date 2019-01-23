@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/50628LeaninBeamer.html
 ---
 
-## [general](index.html)
-### [Lean in Beamer](50628LeaninBeamer.html)
+## Stream: [general](index.html)
+### Topic: [Lean in Beamer](50628LeaninBeamer.html)
+
+---
 
 #### [Patrick Massot (Jan 03 2019 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20Beamer/near/154244941):
 How do people put Lean snippets inside LaTeX Beamer slides? Is there a `listings` syntax highlighting somewhere?

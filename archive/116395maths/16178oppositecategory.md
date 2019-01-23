@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/16178oppositecategory.html
 ---
 
-## [maths](index.html)
-### [opposite category](16178oppositecategory.html)
+## Stream: [maths](index.html)
+### Topic: [opposite category](16178oppositecategory.html)
+
+---
 
 #### [Reid Barton (Nov 05 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/opposite%20category/near/146792371):
 ```quote

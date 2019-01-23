@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/65805479equivalences.html
 ---
 
-## [PR reviews](index.html)
-### [#479 equivalences](65805479equivalences.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#479 equivalences](65805479equivalences.html)
+
+---
 
 #### [Scott Morrison (Nov 16 2018 at 04:17)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23479%20equivalences/near/147792343):
 This one was overdue, and lurking in my other repository.

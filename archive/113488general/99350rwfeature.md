@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99350rwfeature.html
 ---
 
-## [general](index.html)
-### [rw feature](99350rwfeature.html)
+## Stream: [general](index.html)
+### Topic: [rw feature](99350rwfeature.html)
+
+---
 
 #### [Kevin Buzzard (Aug 23 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20feature/near/132628472):
 ```lean

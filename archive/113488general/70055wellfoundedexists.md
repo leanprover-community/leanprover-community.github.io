@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/70055wellfoundedexists.html
 ---
 
-## [general](index.html)
-### [well-founded exists](70055wellfoundedexists.html)
+## Stream: [general](index.html)
+### Topic: [well-founded exists](70055wellfoundedexists.html)
+
+---
 
 #### [Sean Leather (Sep 12 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well-founded%20exists/near/133793419):
 Can I prove that a recursive definition `T → Prop` is well-founded if a clause wraps the recursive call with an exists (i.e. `f <pattern> := ∃ .., f <subpattern>`)? If so, how would I begin to do this?

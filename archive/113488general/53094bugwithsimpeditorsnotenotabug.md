@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53094bugwithsimpeditorsnotenotabug.html
 ---
 
-## [general](index.html)
-### [bug with simp (editor's note: not a bug)](53094bugwithsimpeditorsnotenotabug.html)
+## Stream: [general](index.html)
+### Topic: [bug with simp (editor's note: not a bug)](53094bugwithsimpeditorsnotenotabug.html)
+
+---
 
 #### [Kenny Lau (Mar 06 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20simp%20%28editor%27s%20note%3A%20not%20a%20bug%29/near/123327630):
 ```

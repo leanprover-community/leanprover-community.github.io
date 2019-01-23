@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/92147thingstoformalise.html
 ---
 
-## [maths](index.html)
-### [things to formalise](92147thingstoformalise.html)
+## Stream: [maths](index.html)
+### Topic: [things to formalise](92147thingstoformalise.html)
+
+---
 
 #### [Edward Ayers (Aug 07 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/things%20to%20formalise/near/131056409):
 Dear all, I've dabbled with Lean about a year ago. I worked through _theorem proving with lean_ but I didn't go much beyond that. I would like to formalise some easy undergraduate maths just to get back in to it. Any recommendations? I was thinking of doing just some basic groups, ring theory or linear algebra. Last time I looked at Lean they didn't have a formalisation of the reals. Is that still the case? If the reals have been formalised then perhaps doing some simple real analysis. What active existing libraries should I look at for this kind of thing? I am aware of Xena and the official lean library repo.

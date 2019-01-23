@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/63153makinganequiv.html
 ---
 
-## [maths](index.html)
-### [making an equiv](63153makinganequiv.html)
+## Stream: [maths](index.html)
+### Topic: [making an equiv](63153makinganequiv.html)
+
+---
 
 #### [Ali Sever (Sep 07 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20an%20equiv/near/133531588):
 I have `f : α → α → α → α → α → α → Prop` that says `a ≠ b ∧ c ≠ b ∧ d ≠ e ∧ f ≠ e ∧ blah`. I have shown `f`is reflexive, symmetric and transitive (i.e. an equiv on α × α × α), but only when `a ≠ b ∧ c ≠ b`. Now I want to make the equiv classes, I'm having trouble with deciding what to do.

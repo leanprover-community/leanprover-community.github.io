@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/96209canonicalringhomfrominttoR.html
 ---
 
-## [maths](index.html)
-### [canonical ring hom from int to R](96209canonicalringhomfrominttoR.html)
+## Stream: [maths](index.html)
+### Topic: [canonical ring hom from int to R](96209canonicalringhomfrominttoR.html)
+
+---
 
 #### [Johan Commelin (Jul 23 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130132971):
 Does the canonical ring homomorphism from `int` to a ring `R` already have a name in Lean?

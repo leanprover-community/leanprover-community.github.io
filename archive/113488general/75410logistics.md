@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75410logistics.html
 ---
 
-## [general](index.html)
-### [logistics](75410logistics.html)
+## Stream: [general](index.html)
+### Topic: [logistics](75410logistics.html)
+
+---
 
 #### [Simon Hudon (Feb 26 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/logistics/near/123005030):
 Is there a way to move messages from one thread to another in here?

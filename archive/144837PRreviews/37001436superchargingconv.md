@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/37001436superchargingconv.html
 ---
 
-## [PR reviews](index.html)
-### [#436 supercharging conv](37001436superchargingconv.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#436 supercharging conv](37001436superchargingconv.html)
+
+---
 
 #### [Johan Commelin (Oct 23 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23436%20supercharging%20conv/near/136319794):
 Thanks @**Keeley Hoek**! I've wished for these features quite often. :tada:

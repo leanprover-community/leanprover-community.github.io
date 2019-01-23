@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10826Newrecord.html
 ---
 
-## [general](index.html)
-### [New record](10826Newrecord.html)
+## Stream: [general](index.html)
+### Topic: [New record](10826Newrecord.html)
+
+---
 
 #### [Patrick Massot (Jan 05 2019 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154473192):
 I think we have a new record:

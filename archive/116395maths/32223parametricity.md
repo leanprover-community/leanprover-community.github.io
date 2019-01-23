@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/32223parametricity.html
 ---
 
-## [maths](index.html)
-### [parametricity](32223parametricity.html)
+## Stream: [maths](index.html)
+### Topic: [parametricity](32223parametricity.html)
+
+---
 
 #### [Patrick Massot (Nov 08 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/parametricity/near/147288928):
 The parametricity stuff is at https://github.com/leanprover-community/mathlib/tree/param

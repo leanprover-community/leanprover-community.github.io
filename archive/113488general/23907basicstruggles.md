@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23907basicstruggles.html
 ---
 
-## [general](index.html)
-### [basic struggles](23907basicstruggles.html)
+## Stream: [general](index.html)
+### Topic: [basic struggles](23907basicstruggles.html)
+
+---
 
 #### [Johan Commelin (Aug 07 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20struggles/near/131024386):
 I find myself struggling with things that are extremely math-trivial. If I have a goal of the form `a = b`, how do I turn that into `a * c = b * c`? (Assume that `a b c : R` and `[comm_ring R]`.)

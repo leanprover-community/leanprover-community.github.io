@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/79835Linearmapsandmodulehomomorphisms.html
 ---
 
-## [maths](index.html)
-### [Linear maps and module homomorphisms](79835Linearmapsandmodulehomomorphisms.html)
+## Stream: [maths](index.html)
+### Topic: [Linear maps and module homomorphisms](79835Linearmapsandmodulehomomorphisms.html)
+
+---
 
 #### [Johan Commelin (May 08 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20maps%20and%20module%20homomorphisms/near/126260883):
 In `algebra/module.lean` on line 78 there is `structure is_linear_map`. I have two questions:

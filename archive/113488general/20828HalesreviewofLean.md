@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20828HalesreviewofLean.html
 ---
 
-## [general](index.html)
-### [Hales' review of Lean](20828HalesreviewofLean.html)
+## Stream: [general](index.html)
+### Topic: [Hales' review of Lean](20828HalesreviewofLean.html)
+
+---
 
 #### [Kevin Buzzard (Sep 18 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hales%27%20review%20of%20Lean/near/134182451):
 Johan mentioned this but I thought it deserved its own stream. I would like to hear the community's response to the negative points.

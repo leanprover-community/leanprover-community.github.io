@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10421canIfixthisdeterministictimeout.html
 ---
 
-## [general](index.html)
-### [can I fix this deterministic timeout?](10421canIfixthisdeterministictimeout.html)
+## Stream: [general](index.html)
+### Topic: [can I fix this deterministic timeout?](10421canIfixthisdeterministictimeout.html)
+
+---
 
 #### [Kevin Buzzard (May 09 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20I%20fix%20this%20deterministic%20timeout%3F/near/126334659):
 I am in the middle of a long proof and finding it hard to shorten. I have a hypothesis H3 in my local context. I have a killer theorem which I want to apply, which takes 11 inputs (it's one of these obvious-to-a-mathematician statements of the form "if something happens, then when you replace everything by something equiv to it then it still happens). I want one of the inputs to be H3, but if I put H3 into it then I get a deterministic timeout. Instead I write (_ : [type of H3]) as an input and then I get an extra goal, which I can clear with `exact H3`.

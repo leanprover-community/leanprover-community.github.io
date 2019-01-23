@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67662notationgimmick.html
 ---
 
-## [general](index.html)
-### [notation gimmick](67662notationgimmick.html)
+## Stream: [general](index.html)
+### Topic: [notation gimmick](67662notationgimmick.html)
+
+---
 
 #### [Kevin Buzzard (Jun 02 2018 at 03:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20gimmick/near/127447537):
 If I have a family of rings `{gamma : Type} (R : gamma -> Type) [forall i, ring (R i)]`

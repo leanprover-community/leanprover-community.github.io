@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/11459conciseinequalityproofs.html
 ---
 
-## [new members](index.html)
-### [concise inequality proofs](11459conciseinequalityproofs.html)
+## Stream: [new members](index.html)
+### Topic: [concise inequality proofs](11459conciseinequalityproofs.html)
+
+---
 
 #### [Scott Olson (Sep 27 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/concise%20inequality%20proofs/near/134732046):
 How do you approach simple proofs with inequalities like this, concisely? I can always find a way, but it seems like there must be shorter ways.

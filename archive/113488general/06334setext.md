@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06334setext.html
 ---
 
-## [general](index.html)
-### [setext](06334setext.html)
+## Stream: [general](index.html)
+### Topic: [setext](06334setext.html)
+
+---
 
 #### [Patrick Massot (Apr 16 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155122):
 Core lib has a `funext` tactic which allows to replace `apply funext, intro x` by `funext x`. Would it be a good idea to copy the definition of this tactic to get a `setext` tactic?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/36244islinearmap.html
 ---
 
-## [maths](index.html)
-### [is_linear_map](36244islinearmap.html)
+## Stream: [maths](index.html)
+### Topic: [is_linear_map](36244islinearmap.html)
+
+---
 
 #### [Johan Commelin (Nov 22 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148162896):
 Is there a reason why `is_linear_map` does not extend `is_add_group_hom`?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43203mulvsmapmul.html
 ---
 
-## [general](index.html)
-### [mul vs map_mul](43203mulvsmapmul.html)
+## Stream: [general](index.html)
+### Topic: [mul vs map_mul](43203mulvsmapmul.html)
+
+---
 
 #### [Johan Commelin (Sep 05 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20vs%20map_mul/near/133366536):
 I noticed that `is_group_hom` has a field called `mul`, whereas I would expect it to be called `map_mul`. Similarly, in that namespace there is a lemma called `one`, and I would expect `map_one`. Etc...

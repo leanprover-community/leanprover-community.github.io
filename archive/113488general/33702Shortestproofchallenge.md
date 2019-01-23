@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/33702Shortestproofchallenge.html
 ---
 
-## [general](index.html)
-### [Shortest proof challenge](33702Shortestproofchallenge.html)
+## Stream: [general](index.html)
+### Topic: [Shortest proof challenge](33702Shortestproofchallenge.html)
+
+---
 
 #### [Chris Hughes (Apr 05 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Shortest%20proof%20challenge/near/124686991):
 `example (a b : ℕ) : a ≠ b →  0  < a + b `

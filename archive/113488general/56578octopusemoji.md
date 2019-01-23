@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56578octopusemoji.html
 ---
 
-## [general](index.html)
-### [octopus emoji](56578octopusemoji.html)
+## Stream: [general](index.html)
+### Topic: [octopus emoji](56578octopusemoji.html)
+
+---
 
 #### [Sean Leather (Apr 10 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/octopus%20emoji/near/124875291):
 What do you use :octopus: for? I'm struggling to understand it, and [searching](https://www.google.com/search?q=octopus+emoji) doesn't clarify much.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/22669smallscalereflection.html
 ---
 
-## [Lean Together 2019](index.html)
-### [small scale reflection](22669smallscalereflection.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [small scale reflection](22669smallscalereflection.html)
+
+---
 
 #### [Kevin Buzzard (Jan 10 2019 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/small%20scale%20reflection/near/154824750):
 Assia is talking about small scale reflection. 

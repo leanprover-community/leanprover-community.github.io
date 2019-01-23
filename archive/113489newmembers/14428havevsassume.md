@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/14428havevsassume.html
 ---
 
-## [new members](index.html)
-### [have vs assume](14428havevsassume.html)
+## Stream: [new members](index.html)
+### Topic: [have vs assume](14428havevsassume.html)
+
+---
 
 #### [Jeremiah (Oct 04 2018 at 05:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/have%20vs%20assume/near/135149874):
 What is the difference between have and assume?

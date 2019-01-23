@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/18763suprandrange.html
 ---
 
-## [maths](index.html)
-### [supr and range](18763suprandrange.html)
+## Stream: [maths](index.html)
+### Topic: [supr and range](18763suprandrange.html)
+
+---
 
 #### [Sebastien Gouezel (Nov 13 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147609120):
 There are the following definitions in mathlib:

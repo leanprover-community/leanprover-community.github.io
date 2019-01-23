@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/72652Isthereawaytocomplicatethingswithsimp.html
 ---
 
-## [new members](index.html)
-### [Is there a way to complicate things with simp?](72652Isthereawaytocomplicatethingswithsimp.html)
+## Stream: [new members](index.html)
+### Topic: [Is there a way to complicate things with simp?](72652Isthereawaytocomplicatethingswithsimp.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Nov 25 2018 at 12:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20complicate%20things%20with%20simp%3F/near/148315124):
 I.e. is there a way to write `simp [←lemma, lemma, lemma]`?

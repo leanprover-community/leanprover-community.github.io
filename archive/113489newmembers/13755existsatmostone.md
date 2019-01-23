@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/13755existsatmostone.html
 ---
 
-## [new members](index.html)
-### [exists at most one](13755existsatmostone.html)
+## Stream: [new members](index.html)
+### Topic: [exists at most one](13755existsatmostone.html)
+
+---
 
 #### [Ali Sever (Jul 25 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists%20at%20most%20one/near/130274521):
 I want to state `p a b → ∃ (at most one) c, q c`, and if such `c` exists, I want `f a b = c`.  Is there a smart/efficient way to do this?

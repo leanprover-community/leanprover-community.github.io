@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24101cardinalsoffinitesets.html
 ---
 
-## [general](index.html)
-### [cardinals of finite sets](24101cardinalsoffinitesets.html)
+## Stream: [general](index.html)
+### Topic: [cardinals of finite sets](24101cardinalsoffinitesets.html)
+
+---
 
 #### [Mario Carneiro (Aug 18 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cardinals%20of%20finite%20sets/near/132344762):
 People have mentioned that working with the size of finite sets is a bit complicated right now. We have two methods to talk about the cardinality of a type:

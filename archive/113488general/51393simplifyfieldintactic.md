@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51393simplifyfieldintactic.html
 ---
 
-## [general](index.html)
-### [simplify field in tactic](51393simplifyfieldintactic.html)
+## Stream: [general](index.html)
+### Topic: [simplify field in tactic](51393simplifyfieldintactic.html)
+
+---
 
 #### [Keeley Hoek (Sep 10 2018 at 07:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify%20field%20in%20tactic/near/133639356):
 Trivial question: I've got an instance `s` of some structure which has a `nat`-valued field `f`. In tactic mode I have as a hypothesis `v : nat := s.f`. What can I do to replace v with with its actual `nat` value? Sorry for the noise

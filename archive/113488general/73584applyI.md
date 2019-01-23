@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73584applyI.html
 ---
 
-## [general](index.html)
-### [applyI](73584applyI.html)
+## Stream: [general](index.html)
+### Topic: [applyI](73584applyI.html)
+
+---
 
 #### [Reid Barton (Sep 07 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/applyI/near/133495991):
 Is there a variant on apply or refine which turns `[...]` arguments which couldn't be solved into new goals?

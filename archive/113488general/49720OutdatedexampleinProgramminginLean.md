@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49720OutdatedexampleinProgramminginLean.html
 ---
 
-## [general](index.html)
-### [Outdated example in Programming in Lean](49720OutdatedexampleinProgramminginLean.html)
+## Stream: [general](index.html)
+### Topic: [Outdated example in Programming in Lean](49720OutdatedexampleinProgramminginLean.html)
+
+---
 
 #### [Miko de Amsterdamo (May 01 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Outdated%20example%20in%20Programming%20in%20Lean/near/125939264):
 The example didn't work with my lean 3.3.0. It seems that ``for`` has become ``map``

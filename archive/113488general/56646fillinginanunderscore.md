@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56646fillinginanunderscore.html
 ---
 
-## [general](index.html)
-### [filling in an underscore](56646fillinginanunderscore.html)
+## Stream: [general](index.html)
+### Topic: [filling in an underscore](56646fillinginanunderscore.html)
+
+---
 
 #### [Kevin Buzzard (Mar 29 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filling%20in%20an%20underscore/near/124374909):
 ```

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67120isatypewithparametersinjective.html
 ---
 
-## [general](index.html)
-### [is a type with parameters injective?](67120isatypewithparametersinjective.html)
+## Stream: [general](index.html)
+### Topic: [is a type with parameters injective?](67120isatypewithparametersinjective.html)
+
+---
 
 #### [Scott Buckley (May 02 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20a%20type%20with%20parameters%20injective%3F/near/125994740):
 forgive me for perhaps not using the correct terminology. what i want to know is similar to below:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72933hascoetosortonset.html
 ---
 
-## [general](index.html)
-### [`has_coe_to_sort` on set](72933hascoetosortonset.html)
+## Stream: [general](index.html)
+### Topic: [`has_coe_to_sort` on set](72933hascoetosortonset.html)
+
+---
 
 #### [Kevin Buzzard (Jul 16 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747338):
 What am I doing wrong:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/64576productsofCauchyfilters.html
 ---
 
-## [maths](index.html)
-### [products of Cauchy filters](64576productsofCauchyfilters.html)
+## Stream: [maths](index.html)
+### Topic: [products of Cauchy filters](64576productsofCauchyfilters.html)
+
+---
 
 #### [Patrick Massot (Jul 24 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130232215):
 I need that a product of Cauchy filters is Cauchy. I couldn't see it in mathlib, so I wrote a couple of lines on paper and decided I should be able to brute force Lean to swallow it. The result on https://gist.github.com/PatrickMassot/aca4545c10aa9d96bf37d9231fb3470c is not pretty (even if you cut in half the two redundant parts). Here brutality is to go all the way down to elements of our uniform spaces. I suspect I missed (or mathlib is missing) some support lemmas which would allow to operate at a higher level. @**Mario Carneiro** and @**Johannes Hölzl**, this is probably a good occasion to set a new golfing factor record.

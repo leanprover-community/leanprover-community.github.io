@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49532shouldfintypetakeasort.html
 ---
 
-## [general](index.html)
-### [should fintype take a sort?](49532shouldfintypetakeasort.html)
+## Stream: [general](index.html)
+### Topic: [should fintype take a sort?](49532shouldfintypetakeasort.html)
+
+---
 
 #### [Chris Hughes (Aug 06 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/should%20fintype%20take%20a%20sort%3F/near/130982613):
 This instance would be possible if `fintype` took a sort instead of a Type. Is it worth changing?

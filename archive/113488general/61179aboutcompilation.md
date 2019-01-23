@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61179aboutcompilation.html
 ---
 
-## [general](index.html)
-### [about compilation](61179aboutcompilation.html)
+## Stream: [general](index.html)
+### Topic: [about compilation](61179aboutcompilation.html)
+
+---
 
 #### [Kenny Lau (Nov 08 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/about%20compilation/near/147299477):
 why do we need to re-compile the file as well as all the files that depend on the file even if all we did is adding a space?

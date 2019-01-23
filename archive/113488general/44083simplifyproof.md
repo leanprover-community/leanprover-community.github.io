@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/44083simplifyproof.html
 ---
 
-## [general](index.html)
-### [simplify_proof](44083simplifyproof.html)
+## Stream: [general](index.html)
+### Topic: [simplify_proof](44083simplifyproof.html)
+
+---
 
 #### [Scott Morrison (Jun 06 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646386):
 At some point Mario told me how to write a "simplify_proof" tactic, but in my fiddling with it I seem to have lost the essential magic step where the new, simplified proof is actually installed in place of the original proof:

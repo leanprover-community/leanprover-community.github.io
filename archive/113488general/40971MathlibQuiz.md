@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40971MathlibQuiz.html
 ---
 
-## [general](index.html)
-### [Mathlib Quiz](40971MathlibQuiz.html)
+## Stream: [general](index.html)
+### Topic: [Mathlib Quiz](40971MathlibQuiz.html)
+
+---
 
 #### [Patrick Massot (Aug 25 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mathlib%20Quiz/near/132761188):
 On the occasion of the first Orsay Lean User Meeting, I've created a small Mathlib quizz at https://www.quiz-maker.com/QTNPVLT I'd be interested to see how well people here can estimate answers to these questions. It starts easy, but quickly becomes hard if you are not very familiar with either mathlib or Lean introspection capabilities.

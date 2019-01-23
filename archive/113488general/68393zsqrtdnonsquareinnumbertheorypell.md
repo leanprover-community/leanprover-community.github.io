@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68393zsqrtdnonsquareinnumbertheorypell.html
 ---
 
-## [general](index.html)
-### [zsqrtd.nonsquare in number_theory/pell](68393zsqrtdnonsquareinnumbertheorypell.html)
+## Stream: [general](index.html)
+### Topic: [zsqrtd.nonsquare in number_theory/pell](68393zsqrtdnonsquareinnumbertheorypell.html)
+
+---
 
 #### [Kenny Lau (May 27 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/zsqrtd.nonsquare%20in%20number_theory/pell/near/127162105):
 This should be a `Prop` @**Mario Carneiro**

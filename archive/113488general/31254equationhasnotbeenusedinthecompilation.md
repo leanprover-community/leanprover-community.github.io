@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31254equationhasnotbeenusedinthecompilation.html
 ---
 
-## [general](index.html)
-### [equation has not been used in the compilation](31254equationhasnotbeenusedinthecompilation.html)
+## Stream: [general](index.html)
+### Topic: [equation has not been used in the compilation](31254equationhasnotbeenusedinthecompilation.html)
+
+---
 
 #### [Sean Leather (Sep 15 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20has%20not%20been%20used%20in%20the%20compilation/near/134002534):
 This is the first time I've seen the error below. What does it mean? What might be causing it?

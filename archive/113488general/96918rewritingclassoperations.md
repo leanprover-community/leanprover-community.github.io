@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96918rewritingclassoperations.html
 ---
 
-## [general](index.html)
-### [rewriting class operations](96918rewritingclassoperations.html)
+## Stream: [general](index.html)
+### Topic: [rewriting class operations](96918rewritingclassoperations.html)
+
+---
 
 #### [Reid Barton (Jun 05 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127602788):
 I have this instance:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87312Edsquestionbarrage.html
 ---
 
-## [general](index.html)
-### [Ed's question barrage](87312Edsquestionbarrage.html)
+## Stream: [general](index.html)
+### Topic: [Ed's question barrage](87312Edsquestionbarrage.html)
+
+---
 
 #### [Edward Ayers (Aug 11 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ed%27s%20question%20barrage/near/131947644):
 Massive thanks to @**Mario Carneiro** for helping me. I'll buy you beers next time we are in the same physical location to within 100m.

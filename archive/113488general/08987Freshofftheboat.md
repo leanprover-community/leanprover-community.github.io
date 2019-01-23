@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08987Freshofftheboat.html
 ---
 
-## [general](index.html)
-### [Fresh off the boat](08987Freshofftheboat.html)
+## Stream: [general](index.html)
+### Topic: [Fresh off the boat](08987Freshofftheboat.html)
+
+---
 
 #### [Nima (Mar 29 2018 at 06:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Fresh%20off%20the%20boat/near/124351061):
 Anyone is willing to prove this example for me? It seems too obvious, but I have not luck doing it within the past hour.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/78098simplestructuralequality.html
 ---
 
-## [new members](index.html)
-### [simple structural equality](78098simplestructuralequality.html)
+## Stream: [new members](index.html)
+### Topic: [simple structural equality](78098simplestructuralequality.html)
+
+---
 
 #### [Edward Ayers (Aug 08 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20structural%20equality/near/131121507):
 How would I prove this?

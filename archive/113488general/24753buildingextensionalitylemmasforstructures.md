@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24753buildingextensionalitylemmasforstructures.html
 ---
 
-## [general](index.html)
-### [building @[extensionality] lemmas for structures](24753buildingextensionalitylemmasforstructures.html)
+## Stream: [general](index.html)
+### Topic: [building @[extensionality] lemmas for structures](24753buildingextensionalitylemmasforstructures.html)
+
+---
 
 #### [Scott Morrison (Aug 13 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/building%20%40%5Bextensionality%5D%20lemmas%20for%20structures/near/132045472):
 Hi @**Simon Hudon**, I'm wondering if you've thought recently about building `@[extensionality]` lemmas for structures automatically. I know we had some discussion about this a long time ago (gitter?), and some attempts at a `congr_struct` tactic.

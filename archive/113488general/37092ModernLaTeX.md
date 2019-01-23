@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37092ModernLaTeX.html
 ---
 
-## [general](index.html)
-### [Modern LaTeX](37092ModernLaTeX.html)
+## Stream: [general](index.html)
+### Topic: [Modern LaTeX](37092ModernLaTeX.html)
+
+---
 
 #### [Patrick Massot (Mar 17 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Modern%20LaTeX/near/123843670):
 I don't think it can be used as a preprocessor (that's an interesting question actually)

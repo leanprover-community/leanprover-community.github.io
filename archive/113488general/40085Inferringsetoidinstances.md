@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40085Inferringsetoidinstances.html
 ---
 
-## [general](index.html)
-### [Inferring setoid instances](40085Inferringsetoidinstances.html)
+## Stream: [general](index.html)
+### Topic: [Inferring setoid instances](40085Inferringsetoidinstances.html)
+
+---
 
 #### [Chris Hughes (Jul 17 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Inferring%20setoid%20instances/near/129811730):
 I've had a bit of trouble with setoid instances in quotient rings and groups. Changes the brackets around `setoid` in `quotient.induction_on` and similar lemmas form `[]` to `{}` improves matters a lot. Is there a downside to this approach? There should always only be one possibility for `setoid` from the type of `q` right?

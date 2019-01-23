@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64146howtocallthislemma.html
 ---
 
-## [general](index.html)
-### [how to call this lemma](64146howtocallthislemma.html)
+## Stream: [general](index.html)
+### Topic: [how to call this lemma](64146howtocallthislemma.html)
+
+---
 
 #### [Johan Commelin (Aug 07 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131039906):
 ```lean

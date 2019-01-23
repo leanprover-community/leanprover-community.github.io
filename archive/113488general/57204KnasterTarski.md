@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57204KnasterTarski.html
 ---
 
-## [general](index.html)
-### [Knaster-Tarski](57204KnasterTarski.html)
+## Stream: [general](index.html)
+### Topic: [Knaster-Tarski](57204KnasterTarski.html)
+
+---
 
 #### [Kenny Lau (Mar 29 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Knaster-Tarski/near/124351778):
 https://github.com/kckennylau/Lean/blob/master/Knaster-Tarski.lean

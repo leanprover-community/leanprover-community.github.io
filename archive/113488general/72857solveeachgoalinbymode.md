@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72857solveeachgoalinbymode.html
 ---
 
-## [general](index.html)
-### [solve each goal in "by" mode](72857solveeachgoalinbymode.html)
+## Stream: [general](index.html)
+### Topic: [solve each goal in "by" mode](72857solveeachgoalinbymode.html)
+
+---
 
 #### [Kenny Lau (Apr 19 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125302926):
 In `by` mode, i.e. `by xxx; yyy; zzz`, is there a way to not apply the tactics to every goal?

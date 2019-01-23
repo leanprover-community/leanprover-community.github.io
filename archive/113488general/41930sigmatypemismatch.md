@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/41930sigmatypemismatch.html
 ---
 
-## [general](index.html)
-### [sigma type mismatch](41930sigmatypemismatch.html)
+## Stream: [general](index.html)
+### Topic: [sigma type mismatch](41930sigmatypemismatch.html)
+
+---
 
 #### [Kevin Buzzard (Mar 26 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sigma%20type%20mismatch/near/124220067):
 `stalk2` below doesn't typecheck:

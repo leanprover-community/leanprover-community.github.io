@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/46077ordinals.html
 ---
 
-## [maths](index.html)
-### [ordinals](46077ordinals.html)
+## Stream: [maths](index.html)
+### Topic: [ordinals](46077ordinals.html)
+
+---
 
 #### [Reid Barton (Oct 04 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ordinals/near/135205944):
 If I am interested in sequences indexed by $$\{\,\alpha \mid \alpha \le \gamma\,\}$$ for varying ordinals $$\gamma$$, is it likely to be more convenient to just work with sequences indexed by arbitrary well-ordered sets?

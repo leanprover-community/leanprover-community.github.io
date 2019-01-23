@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/19171builtintactics.html
 ---
 
-## [new members](index.html)
-### [builtin tactics](19171builtintactics.html)
+## Stream: [new members](index.html)
+### Topic: [builtin tactics](19171builtintactics.html)
+
+---
 
 #### [Olli (Sep 15 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/builtin%20tactics/near/134011488):
 is there an even simpler way to write `{ left, assumption} <|> { right, assumption }` ?

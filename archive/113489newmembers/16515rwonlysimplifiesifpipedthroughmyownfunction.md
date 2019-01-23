@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/16515rwonlysimplifiesifpipedthroughmyownfunction.html
 ---
 
-## [new members](index.html)
-### [rw only simplifies if piped through my own function](16515rwonlysimplifiesifpipedthroughmyownfunction.html)
+## Stream: [new members](index.html)
+### Topic: [rw only simplifies if piped through my own function](16515rwonlysimplifiesifpipedthroughmyownfunction.html)
+
+---
 
 #### [Tobias Grosser (Sep 07 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20only%20simplifies%20if%20piped%20through%20my%20own%20function/near/133491472):
 My first beginners question. I tampered with this since a while, but maybe somebody has a quick explanation for this:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80114ringalgebras.html
 ---
 
-## [general](index.html)
-### [ring algebras](80114ringalgebras.html)
+## Stream: [general](index.html)
+### Topic: [ring algebras](80114ringalgebras.html)
+
+---
 
 #### [Kenny Lau (Sep 04 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring%20algebras/near/133299335):
 This problem has come up several times in this year, and I decided it's time to face it instead of to avoid it. This is the definition of an algebra over a commutative ring:

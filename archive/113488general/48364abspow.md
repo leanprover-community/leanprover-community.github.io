@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48364abspow.html
 ---
 
-## [general](index.html)
-### [abs_pow](48364abspow.html)
+## Stream: [general](index.html)
+### Topic: [abs_pow](48364abspow.html)
+
+---
 
 #### [Kenny Lau (May 03 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abs_pow/near/126016992):
 ```lean

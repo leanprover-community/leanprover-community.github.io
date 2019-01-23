@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/82737grouphom.html
 ---
 
-## [maths](index.html)
-### [group_hom](82737grouphom.html)
+## Stream: [maths](index.html)
+### Topic: [group_hom](82737grouphom.html)
+
+---
 
 #### [Chris Hughes (Dec 12 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group_hom/near/151505639):
 Can we define `is_group_hom` to be `is_monoid_hom` and make it reducible? It would avoid cycles.

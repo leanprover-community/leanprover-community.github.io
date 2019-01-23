@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/52031doublenegationimpliesexcludedmiddle.html
 ---
 
-## [new members](index.html)
-### [double negation implies excluded middle??](52031doublenegationimpliesexcludedmiddle.html)
+## Stream: [new members](index.html)
+### Topic: [double negation implies excluded middle??](52031doublenegationimpliesexcludedmiddle.html)
+
+---
 
 #### [Shaun Steenkamp (Nov 07 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/double%20negation%20implies%20excluded%20middle%3F%3F/near/146927399):
 In section "3.5 Classical Logic" it says that "As an exercise, you might try proving the converse, that is, showing that em can be proved from dne." Can someone give me a proof of this in Lean without using open classical?

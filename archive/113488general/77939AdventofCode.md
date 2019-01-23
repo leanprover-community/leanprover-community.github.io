@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77939AdventofCode.html
 ---
 
-## [general](index.html)
-### [Advent of Code](77939AdventofCode.html)
+## Stream: [general](index.html)
+### Topic: [Advent of Code](77939AdventofCode.html)
+
+---
 
 #### [Edward Ayers (Dec 01 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Advent%20of%20Code/near/150682850):
 adventofcode.com in Lean?

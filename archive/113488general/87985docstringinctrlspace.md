@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87985docstringinctrlspace.html
 ---
 
-## [general](index.html)
-### [docstring in ctrl+space](87985docstringinctrlspace.html)
+## Stream: [general](index.html)
+### Topic: [docstring in ctrl+space](87985docstringinctrlspace.html)
+
+---
 
 #### [Kenny Lau (Apr 22 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/docstring%20in%20ctrl%2Bspace/near/125507808):
 The docstring is quite well-formatted when I hover over it, but not when I press Ctrl+space:

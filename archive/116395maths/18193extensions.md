@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/18193extensions.html
 ---
 
-## [maths](index.html)
-### [extensions](18193extensions.html)
+## Stream: [maths](index.html)
+### Topic: [extensions](18193extensions.html)
+
+---
 
 #### [Patrick Massot (Jul 16 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772133):
 @**Johannes Hölzl**  At https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean#L841-L843 do we really need that `[inhabited γ]`? It forces lots of other inhabited assumptions that seem unnecessary from a mathematical point of view. If γ is not inhabited then there shouldn't be that many `f : α → γ` to care about

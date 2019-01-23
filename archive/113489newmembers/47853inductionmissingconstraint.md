@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/47853inductionmissingconstraint.html
 ---
 
-## [new members](index.html)
-### [induction missing constraint](47853inductionmissingconstraint.html)
+## Stream: [new members](index.html)
+### Topic: [induction missing constraint](47853inductionmissingconstraint.html)
+
+---
 
 #### [Etienne Laurin (Sep 01 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133180811):
 Given `(a b : ℕ) (h : a ≤ b)`, after doing `induction h`, the `case less_than_or_equal.refl` doesn't have any hypothesis allowing to conclude `a = b`. Why not? Is there another way to perform induction that does introduce `a = b` in that case?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40432easysubsetsubtypelemma.html
 ---
 
-## [general](index.html)
-### [easy subset/subtype lemma](40432easysubsetsubtypelemma.html)
+## Stream: [general](index.html)
+### Topic: [easy subset/subtype lemma](40432easysubsetsubtypelemma.html)
+
+---
 
 #### [Kevin Buzzard (Jul 16 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy%20subset/subtype%20lemma/near/129752088):
 I've reduced my goal to

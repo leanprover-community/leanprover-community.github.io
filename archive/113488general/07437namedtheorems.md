@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/07437namedtheorems.html
 ---
 
-## [general](index.html)
-### [named theorems](07437namedtheorems.html)
+## Stream: [general](index.html)
+### Topic: [named theorems](07437namedtheorems.html)
+
+---
 
 #### [Patrick Massot (Mar 12 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/named%20theorems/near/123598899):
 We had endless conversation about lemmas which don't have names in maths and need a name in a proof assistant. But what about theorems that do have a name? Now in mathlib we have the squeeze theorem, that some mathematicians call the sandwich theorem and French mathematicians call the "théorème des gendarmes" (gendarme is a military version of policeman) but [mathlib](https://github.com/leanprover/mathlib/blob/fe0f2a34b2bc71d480c5fc7766d889e0a4de3ccd/analysis/topology/topological_structures.lean#L346) calls it: `tendsto_of_tendsto_of_tendsto_of_le_of_le` and we have Lagrange's theorem on the order of subgroups called [in mathlib](https://github.com/leanprover/mathlib/blob/b97b7c38416d4f6f258882f807458d4f980976ef/group_theory/subgroup.lean#L88) `group_equiv_cosets_times_subgroup`. Isn't it slightly problematic?

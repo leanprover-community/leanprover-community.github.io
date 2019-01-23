@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02748Idontunderstandheq.html
 ---
 
-## [general](index.html)
-### [I don't understand heq](02748Idontunderstandheq.html)
+## Stream: [general](index.html)
+### Topic: [I don't understand heq](02748Idontunderstandheq.html)
+
+---
 
 #### [Kevin Buzzard (Apr 14 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20understand%20heq/near/125071940):
 Here's a self-contained extract from `analysis/topology/topological.space_lean`:

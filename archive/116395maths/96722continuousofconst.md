@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/96722continuousofconst.html
 ---
 
-## [maths](index.html)
-### [continuous_of_const](96722continuousofconst.html)
+## Stream: [maths](index.html)
+### Topic: [continuous_of_const](96722continuousofconst.html)
+
+---
 
 #### [Patrick Massot (Dec 17 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous_of_const/near/152017837):
 This is very much related to my question in the https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/Empty.20or.20not.20empty/near/152017713, but has some (tiny) math content. Can anyone golf the following ridiculous lemma?

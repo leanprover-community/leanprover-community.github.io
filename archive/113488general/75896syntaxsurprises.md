@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75896syntaxsurprises.html
 ---
 
-## [general](index.html)
-### [syntax surprises](75896syntaxsurprises.html)
+## Stream: [general](index.html)
+### Topic: [syntax surprises](75896syntaxsurprises.html)
+
+---
 
 #### [Sebastian Ullrich (Jun 19 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128299157):
 The Lean 4 parser only understands `prelude`, `import`, and `theory` so far, but I've already learned something surprising: `noncomputable theory` can be used anywhere in a file (also, multiple times)

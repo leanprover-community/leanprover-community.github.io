@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27916reflection.html
 ---
 
-## [general](index.html)
-### [reflection](27916reflection.html)
+## Stream: [general](index.html)
+### Topic: [reflection](27916reflection.html)
+
+---
 
 #### [Sarah Mameche (Sep 25 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134585528):
 Hi, 

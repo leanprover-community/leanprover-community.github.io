@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74703writingunicodetofile.html
 ---
 
-## [general](index.html)
-### [writing unicode to file](74703writingunicodetofile.html)
+## Stream: [general](index.html)
+### Topic: [writing unicode to file](74703writingunicodetofile.html)
+
+---
 
 #### [Rob Lewis (Jan 18 2019 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/writing%20unicode%20to%20file/near/156363926):
 Does anyone have experience using file i/o with unicode characters? Lean seems to be mangling them. But I'm pretty sure something like this has worked for me in the past.

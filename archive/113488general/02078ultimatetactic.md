@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02078ultimatetactic.html
 ---
 
-## [general](index.html)
-### [ultimate tactic](02078ultimatetactic.html)
+## Stream: [general](index.html)
+### Topic: [ultimate tactic](02078ultimatetactic.html)
+
+---
 
 #### [Patrick Massot (Feb 27 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ultimate%20tactic/near/123052910):
 I found the ultimate Lean tactic: https://stacks.math.columbia.edu/tag/05SG

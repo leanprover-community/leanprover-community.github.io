@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52419typemismatcherror.html
 ---
 
-## [general](index.html)
-### [type mismatch error](52419typemismatcherror.html)
+## Stream: [general](index.html)
+### Topic: [type mismatch error](52419typemismatcherror.html)
+
+---
 
 #### [Johan Commelin (Nov 09 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375133):
 I don't have a good strategy for debugging errors like this:

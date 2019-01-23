@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/84929reductions.html
 ---
 
-## [maths](index.html)
-### [reductions](84929reductions.html)
+## Stream: [maths](index.html)
+### Topic: [reductions](84929reductions.html)
+
+---
 
 #### [Kenny Lau (May 28 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/reductions/near/127179083):
 What are alpha, beta, delta, zeta, eta, iota reudctions?

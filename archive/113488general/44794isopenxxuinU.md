@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/44794isopenxxuinU.html
 ---
 
-## [general](index.html)
-### [is_open {x | x + u \in U}](44794isopenxxuinU.html)
+## Stream: [general](index.html)
+### Topic: [is_open {x | x + u \in U}](44794isopenxxuinU.html)
+
+---
 
 #### [Johan Commelin (Sep 10 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open%20%7Bx%20%7C%20x%20%2B%20u%20%5Cin%20U%7D/near/133679397):
 Given a topological additive monoid, I expected theorems that say that you can translate opens along addition by a given element. But I could not find those... is this in mathlib, or do I need to roll my own?

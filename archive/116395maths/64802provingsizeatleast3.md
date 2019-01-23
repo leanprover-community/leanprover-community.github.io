@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/64802provingsizeatleast3.html
 ---
 
-## [maths](index.html)
-### [proving size at least 3](64802provingsizeatleast3.html)
+## Stream: [maths](index.html)
+### Topic: [proving size at least 3](64802provingsizeatleast3.html)
+
+---
 
 #### [Kevin Buzzard (Aug 13 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132037729):
 I would be interested in a relatively slick proof of either of the below examples:

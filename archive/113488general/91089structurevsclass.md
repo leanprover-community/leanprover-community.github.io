@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91089structurevsclass.html
 ---
 
-## [general](index.html)
-### [structure vs class](91089structurevsclass.html)
+## Stream: [general](index.html)
+### Topic: [structure vs class](91089structurevsclass.html)
+
+---
 
 #### [Kenny Lau (Apr 02 2018 at 06:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20vs%20class/near/124512218):
 The age-old question: when to use `structure` and when to use `class`?

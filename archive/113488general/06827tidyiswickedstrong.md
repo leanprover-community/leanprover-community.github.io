@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06827tidyiswickedstrong.html
 ---
 
-## [general](index.html)
-### [tidy is wicked strong](06827tidyiswickedstrong.html)
+## Stream: [general](index.html)
+### Topic: [tidy is wicked strong](06827tidyiswickedstrong.html)
+
+---
 
 #### [Johan Commelin (Aug 03 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20is%20wicked%20strong/near/130822631):
 Kudos to Scott!

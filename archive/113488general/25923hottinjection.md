@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25923hottinjection.html
 ---
 
-## [general](index.html)
-### [hott injection](25923hottinjection.html)
+## Stream: [general](index.html)
+### Topic: [hott injection](25923hottinjection.html)
+
+---
 
 #### [Jakob von Raumer (Oct 22 2018 at 23:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hott%20injection/near/136298806):
 what is the hott-safe replacement for `injection`? Say I have `e : sum.inl a = sum.inr b` in the context and want to solve the goal by pointing out that contradiction...

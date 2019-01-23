@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03084localnotationinmessagewindow.html
 ---
 
-## [general](index.html)
-### [local notation in message window](03084localnotationinmessagewindow.html)
+## Stream: [general](index.html)
+### Topic: [local notation in message window](03084localnotationinmessagewindow.html)
+
+---
 
 #### [Patrick Massot (Apr 23 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20notation%20in%20message%20window/near/125571696):
 I have a local infix notation for an operation which is a local variable. Is there any hope to see Lean using this notation in the Lean messages window?

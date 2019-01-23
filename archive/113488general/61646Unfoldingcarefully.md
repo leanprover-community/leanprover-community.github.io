@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61646Unfoldingcarefully.html
 ---
 
-## [general](index.html)
-### [Unfolding carefully](61646Unfoldingcarefully.html)
+## Stream: [general](index.html)
+### Topic: [Unfolding carefully](61646Unfoldingcarefully.html)
+
+---
 
 #### [Moses Schönfinkel (Apr 11 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124924517):
 Suppose I have the following goal `f a = c (f (d a))`. What I am looking to do is to `unfold1 f` but only on the left hand side. Currently I do `generalize hack : f (d a) = x, unfold1 f, rw <- hack`. Apart from the fact that it's a hack, the `generalize` takes a couple of seconds to execute. I tried using `conv { to_lhs ... }` but `unfold1` is not an option in conv (and simp fails with deterministic timeout). a) Why on Earth is `generalize` so slow in this case - is it because `c` is some horrible dependently typed function with explicit well founded termination proofs? b) Is there a nicer trick to invoke `unfold1` on left hand side only?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/84699Heisenbug.html
 ---
 
-## [general](index.html)
-### [Heisenbug](84699Heisenbug.html)
+## Stream: [general](index.html)
+### Topic: [Heisenbug](84699Heisenbug.html)
+
+---
 
 #### [Scott Morrison (Aug 26 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Heisenbug/near/132789693):
 I just found a Heisenbug: a proof that doesn't typecheck correctly, but if you add `tactic.result >>= tactic.trace` at the end, it does!

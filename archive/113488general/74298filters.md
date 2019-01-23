@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74298filters.html
 ---
 
-## [general](index.html)
-### [filters](74298filters.html)
+## Stream: [general](index.html)
+### Topic: [filters](74298filters.html)
+
+---
 
 #### [Rohan Mitta (Sep 05 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133377621):
 Hi,

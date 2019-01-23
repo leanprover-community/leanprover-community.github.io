@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23326nohasinsertforfinset.html
 ---
 
-## [general](index.html)
-### [no `has_insert` for `finset`](23326nohasinsertforfinset.html)
+## Stream: [general](index.html)
+### Topic: [no `has_insert` for `finset`](23326nohasinsertforfinset.html)
+
+---
 
 #### [Chris Hughes (Jul 04 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20%60has_insert%60%20for%20%60finset%60/near/129094565):
 ```lean

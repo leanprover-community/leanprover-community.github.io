@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/78004Functionalextensionality.html
 ---
 
-## [new members](index.html)
-### [Functional extensionality](78004Functionalextensionality.html)
+## Stream: [new members](index.html)
+### Topic: [Functional extensionality](78004Functionalextensionality.html)
+
+---
 
 #### [Ken Roe (Jul 24 2018 at 23:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Functional%20extensionality/near/130240450):
 Is there a functionality extensionality theorem like the one shown below in one of the libraries:

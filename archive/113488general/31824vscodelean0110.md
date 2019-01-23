@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31824vscodelean0110.html
 ---
 
-## [general](index.html)
-### [vscode-lean 0.11.0](31824vscodelean0110.html)
+## Stream: [general](index.html)
+### Topic: [vscode-lean 0.11.0](31824vscodelean0110.html)
+
+---
 
 #### [Gabriel Ebner (Apr 21 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode-lean%200.11.0/near/125499751):
 {% raw %}

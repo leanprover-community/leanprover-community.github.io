@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98462pthroot.html
 ---
 
-## [general](index.html)
-### [p-th root](98462pthroot.html)
+## Stream: [general](index.html)
+### Topic: [p-th root](98462pthroot.html)
+
+---
 
 #### [Kenny Lau (Oct 17 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p-th%20root/near/135933565):
 How should we denote the p-th root of an element of a perfect field of char p?

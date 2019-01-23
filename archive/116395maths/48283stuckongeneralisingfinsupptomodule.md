@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/48283stuckongeneralisingfinsupptomodule.html
 ---
 
-## [maths](index.html)
-### [stuck on generalising finsupp.to_module](48283stuckongeneralisingfinsupptomodule.html)
+## Stream: [maths](index.html)
+### Topic: [stuck on generalising finsupp.to_module](48283stuckongeneralisingfinsupptomodule.html)
+
+---
 
 #### [Johan Commelin (May 28 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127201824):
 I really don't see why I'm getting stuck here. See the two comment lines just after the first `sorry`.

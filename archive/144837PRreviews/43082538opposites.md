@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/43082538opposites.html
 ---
 
-## [PR reviews](index.html)
-### [#538 opposites](43082538opposites.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#538 opposites](43082538opposites.html)
+
+---
 
 #### [Kenny Lau (Dec 20 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/152229118):
 maybe someone can write a tactic!
@@ -316,4 +318,202 @@ Should we make `order_dual` in `order/basic.lean` also a structure / inductive?
 
 #### [Kenny Lau (Jan 12 2019 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/154975174):
 or maybe we should merge these two
+
+#### [Kenny Lau (Jan 22 2019 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643371):
+@**Johannes Hölzl** what do you think about merging those two?
+
+#### [Reid Barton (Jan 22 2019 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643518):
+Which two?
+
+#### [Johannes Hölzl (Jan 22 2019 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643551):
+I guess Kenny meant "merge this too"
+
+#### [Johannes Hölzl (Jan 22 2019 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643596):
+I would prefer `opposite` to be like `order_dual`, just a definition
+
+#### [Patrick Massot (Jan 22 2019 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643616):
+I think he continues from the previous message in this thread
+
+#### [Patrick Massot (Jan 22 2019 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643678):
+From January 12th
+
+#### [Reid Barton (Jan 22 2019 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643731):
+Ah
+
+#### [Johannes Hölzl (Jan 22 2019 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643736):
+ah
+
+#### [Kenny Lau (Jan 22 2019 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643776):
+oh, sorry, I meant merging opposite and order_dual
+
+#### [Johannes Hölzl (Jan 22 2019 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643870):
+Hm, or we need `multiplicative_opp` and `additive_opp`...
+
+#### [Reid Barton (Jan 22 2019 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643898):
+I suppose you could have an ordered group and want to reverse the multiplication but not the order, or vice versa
+
+#### [Johannes Hölzl (Jan 22 2019 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643913):
+Yep
+
+#### [Kenny Lau (Jan 22 2019 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156643940):
+then what should I do?
+
+#### [Kenny Lau (Jan 22 2019 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644221):
+@**Johannes Hölzl** I don't see why we need multiplicative_opp and additive_opp; the only structure with both addition and multiplication are children of `semiring` in which addition is commutative anyway, right?
+
+#### [Johannes Hölzl (Jan 22 2019 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644378):
+I don't know. I don't do a lot of non-commutative algebra.
+
+#### [Johannes Hölzl (Jan 22 2019 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644453):
+I wouldn't merge it, for the problem Reid mentioned. I think we should restrict `opposite` to `*` currently, and see what the actual applications are.
+
+#### [Kenny Lau (Jan 22 2019 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644457):
+there's a heavy lack of consensus on this thread... everyone seems to want different things
+
+#### [Reid Barton (Jan 22 2019 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644497):
+I also have the sense which I can't explain clearly that `opposite` should be just for multiplication and not addition.
+
+#### [Mario Carneiro (Jan 22 2019 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644622):
+I agree that `opposite` should not flip both. If necessary we can have `add_opposite`
+
+#### [Kenny Lau (Jan 22 2019 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644718):
+ok, but what about merging opposite and order_dual?
+
+#### [Kenny Lau (Jan 22 2019 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644744):
+and what about irreducible def vs. just def vs. newtype?
+
+#### [Reid Barton (Jan 22 2019 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644854):
+I've just been trying out different options for opposite categories and my impression there is that an irreducible def is the best option, though you could probably make do with other options for algebra because there isn't as heavy use of dependent types there
+
+#### [Mario Carneiro (Jan 22 2019 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644857):
+these all seem like different things
+
+#### [Mario Carneiro (Jan 22 2019 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644876):
+you may want to invert the order without commuting the multiplication, or the addition
+
+#### [Mario Carneiro (Jan 22 2019 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644888):
+they are independent axes
+
+#### [Mario Carneiro (Jan 22 2019 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644900):
+so they should be different constructions
+
+#### [Mario Carneiro (Jan 22 2019 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156644989):
+I'm sure there will be various diamond issues like how `opposite (order_dual A) != order_dual (opposite A)`... I don't have a unified suggestion here
+
+#### [Mario Carneiro (Jan 22 2019 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645129):
+remind me why newtypes are bad @**Reid Barton** . refl is overrated
+
+#### [Mario Carneiro (Jan 22 2019 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645153):
+you should be using simp lemmas anyway in category theory
+
+#### [Reid Barton (Jan 22 2019 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645265):
+It's really hard to deal with nondefinitional equalities between objects in category theory though.
+
+#### [Reid Barton (Jan 22 2019 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645445):
+If you define the objects of C^op to be an inductive type/structure, then eventually you have to deal with the fact that a general object of C^op is not definitionally of the form `op` of something
+
+#### [Mario Carneiro (Jan 22 2019 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645580):
+isn't that by cases on the objects?
+
+#### [Mario Carneiro (Jan 22 2019 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645637):
+Or you can state your theorem to only apply to objects of the form `op X`
+
+#### [Reid Barton (Jan 22 2019 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645671):
+you can't really though, because you need to provide a natural transformation between two functors C^op -> Type or something
+
+#### [Reid Barton (Jan 22 2019 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645732):
+You could define it using cases on the object but putting that in a definition feels like a bad idea
+
+#### [Reid Barton (Jan 22 2019 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645771):
+I need to run but later I can prepare a version with irreducible and a version with an inductive type to compare
+
+#### [Mario Carneiro (Jan 22 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645789):
+In that case you can just use the `unop` function; the cases happens in the equality proof part
+
+#### [Reid Barton (Jan 22 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156645860):
+Well, this hasn't happened yet but potentially you could need to build something by composing a function ... -> X with a function op (unop X) -> ...
+
+#### [Mario Carneiro (Jan 22 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156646207):
+I guess the categorical formulation of what's going on is that `op : C => C^op` is a contravariant functor, and `unop` is its essential inverse
+
+#### [Mario Carneiro (Jan 22 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156646226):
+so the roundtrip is an iso
+
+#### [Kenny Lau (Jan 22 2019 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156646280):
+but in category theory (at least the way I learnt it), C^op is the category with the same objects as C but `Mor[C^op](X,Y) := Mor[C](Y,X)`
+
+#### [Mario Carneiro (Jan 22 2019 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156646408):
+I mean in category theoretic language, not using material properties of the category
+
+#### [Mario Carneiro (Jan 22 2019 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156646425):
+"the objects of C^op are the objects of C" does not typecheck in category language
+
+#### [Kenny Lau (Jan 22 2019 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156646501):
+I'm not sure how to define C^op using universal properties
+
+#### [Mario Carneiro (Jan 22 2019 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156646575):
+Just like any category language definition, it is defined up to a natural (2-)isomorphism
+
+#### [Kenny Lau (Jan 22 2019 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156646940):
+@**Johannes Hölzl** what do you think? irreducible def or newtype?
+
+#### [Johannes Hölzl (Jan 22 2019 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156647057):
+I prefer a (ir)reducible def. Or at least a `structure` with one field instead of a inductive
+
+#### [Mario Carneiro (Jan 22 2019 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156647129):
+I think the "newtype" option is a structure with one field
+
+#### [Kenny Lau (Jan 22 2019 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156647311):
+so... irreducible def it is?
+
+#### [Mario Carneiro (Jan 22 2019 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156647491):
+I think using a newtype is the "purist" approach, and it is workable if you are consistent about it. the (ir)reducible def approach has lower overhead, but lean will not check as much for you - the onus is on you to not misuse the defeqs
+
+#### [Kenny Lau (Jan 22 2019 at 23:54)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156647738):
+well but Reid has more experience on this?
+
+#### [Mario Carneiro (Jan 22 2019 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156647816):
+I'm just saying what the tradeoff is
+
+#### [Kenny Lau (Jan 23 2019 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156648359):
+@**Mario Carneiro** are you happy with making it an irreducible def and then afterwards see if it brings any problems?
+
+#### [Mario Carneiro (Jan 23 2019 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156648373):
+I would prefer to just make it a regular def for now
+
+#### [Mario Carneiro (Jan 23 2019 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156648425):
+which is I think the current state of the PR
+
+#### [Kenny Lau (Jan 23 2019 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156648458):
+well it's an inductive type currently
+
+#### [Kenny Lau (Jan 23 2019 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156648463):
+the first version was an irreducible def
+
+#### [Scott Morrison (Jan 23 2019 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156649703):
+Hmm... in the category theory opposites PR it is currently a (normal reducibility) definition. Perhaps Mario was talking about that one.
+
+#### [Kenny Lau (Jan 23 2019 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156649757):
+@**Scott Morrison|110087** what do you think then?
+
+#### [Scott Morrison (Jan 23 2019 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156649849):
+I think the semireducible def seems like a reasonable compromise. I wouldn't go all the way to the inductive type yet, unless we find that we're still finding confusing situations (because Lean is happily accepting things that "aren't quite right").
+
+#### [Scott Morrison (Jan 23 2019 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156649931):
+Certainly making the def irreducible (using a newtype would have had the same benefit) revealed lots of places in the category_theory files where things "weren't quite right". So I appreciate the argument for keeping this level of protection permanently, and this is the argument for using a newtype.
+
+#### [Kenny Lau (Jan 23 2019 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156650004):
+semireducible is the default right?
+
+#### [Scott Morrison (Jan 23 2019 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156650024):
+Yes
+
+#### [Kenny Lau (Jan 23 2019 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156650101):
+done
+
+#### [Kenny Lau (Jan 23 2019 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156650107):
+@**Johannes Hölzl** do you see any problem with this PR?
+
+#### [Kenny Lau (Jan 23 2019 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/156650116):
+Actually I'm not in a hurry; I would rather #614 to be merged first
 

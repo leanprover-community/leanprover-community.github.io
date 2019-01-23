@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64142aorborcord.html
 ---
 
-## [general](index.html)
-### [a or b or c or d](64142aorborcord.html)
+## Stream: [general](index.html)
+### Topic: [a or b or c or d](64142aorborcord.html)
+
+---
 
 #### [Chris Hughes (Aug 04 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20or%20b%20or%20c%20or%20d/near/130900638):
 If I have `a or b or c or d`, can I split into four goals in one go?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/38744twofunctionswiththesamename.html
 ---
 
-## [new members](index.html)
-### [two functions with the same name](38744twofunctionswiththesamename.html)
+## Stream: [new members](index.html)
+### Topic: [two functions with the same name](38744twofunctionswiththesamename.html)
+
+---
 
 #### [Ali Sever (Aug 10 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/two%20functions%20with%20the%20same%20name/near/131229114):
 Is there a reason why lean doesn't let me make two functions with the same name? Even if they take different arguments?

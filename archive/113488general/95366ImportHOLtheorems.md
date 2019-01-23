@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/95366ImportHOLtheorems.html
 ---
 
-## [general](index.html)
-### [Import HOL theorems](95366ImportHOLtheorems.html)
+## Stream: [general](index.html)
+### Topic: [Import HOL theorems](95366ImportHOLtheorems.html)
+
+---
 
 #### [Martin Kolář (Nov 02 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Import%20HOL%20theorems/near/137040429):
 Hi, I'm new here, and I have a question regarding LEAN's versatility.

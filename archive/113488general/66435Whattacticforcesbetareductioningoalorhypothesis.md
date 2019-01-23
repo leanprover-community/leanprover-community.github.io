@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66435Whattacticforcesbetareductioningoalorhypothesis.html
 ---
 
-## [general](index.html)
-### [What tactic forces beta reduction in goal or hypothesis](66435Whattacticforcesbetareductioningoalorhypothesis.html)
+## Stream: [general](index.html)
+### Topic: [What tactic forces beta reduction in goal or hypothesis](66435Whattacticforcesbetareductioningoalorhypothesis.html)
+
+---
 
 #### [Kevin Sullivan (Oct 10 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20tactic%20forces%20beta%20reduction%20in%20goal%20or%20hypothesis/near/135516798):
 Clearly a newbie question -- but I don't see the answer at hand. Sorry to have to ask. E.g., if my current goal is 3 * 3 -= 8, how, in a tactic script, do I force the * expression to be evaluated, yielding 9 = 8 as the new goal?

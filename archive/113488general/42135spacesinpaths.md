@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42135spacesinpaths.html
 ---
 
-## [general](index.html)
-### [spaces in paths](42135spacesinpaths.html)
+## Stream: [general](index.html)
+### Topic: [spaces in paths](42135spacesinpaths.html)
+
+---
 
 #### [Reid Barton (Oct 12 2018 at 17:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spaces%20in%20paths/near/135682751):
 @**Scott Olson** mind if I make a PR to your PR with the corresponding fixes for POSIX `leanpkg`?

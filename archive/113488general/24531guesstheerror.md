@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24531guesstheerror.html
 ---
 
-## [general](index.html)
-### [guess the error](24531guesstheerror.html)
+## Stream: [general](index.html)
+### Topic: [guess the error](24531guesstheerror.html)
+
+---
 
 #### [Kevin Buzzard (Mar 29 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/guess%20the%20error/near/124371146):
 ```

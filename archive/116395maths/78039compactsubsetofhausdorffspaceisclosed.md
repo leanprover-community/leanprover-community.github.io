@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html
 ---
 
-## [maths](index.html)
-### [compact subset of hausdorff space is closed](78039compactsubsetofhausdorffspaceisclosed.html)
+## Stream: [maths](index.html)
+### Topic: [compact subset of hausdorff space is closed](78039compactsubsetofhausdorffspaceisclosed.html)
+
+---
 
 #### [Edward Ayers (Aug 14 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132127153):
 Hi everyone. I would really appreciate any comments on how to improve this proof. Also, is this result in the library?

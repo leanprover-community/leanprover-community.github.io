@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/84538intmod.html
 ---
 
-## [new members](index.html)
-### [int.mod](84538intmod.html)
+## Stream: [new members](index.html)
+### Topic: [int.mod](84538intmod.html)
+
+---
 
 #### [petercommand (Nov 01 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906477):
 Trying to prove `int.mod (int.of_nat a_1) ↑p < ↑p` in lean, but I wasn't able to unfold int.mod.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/15072431recursivetoadditive.html
 ---
 
-## [PR reviews](index.html)
-### [#431 recursive to_additive](15072431recursivetoadditive.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#431 recursive to_additive](15072431recursivetoadditive.html)
+
+---
 
 #### [Johannes Hölzl (Nov 05 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23431%20recursive%20to_additive/near/146809006):
 @**Simon Hudon**  this currently fails. Do you know why? Maybe we need a way to have recursive optional?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/06213termhastypepybutisexpectedtohavetypepm1.html
 ---
 
-## [new members](index.html)
-### [term has type p y but is expected to have type p ?m_1[_]](06213termhastypepybutisexpectedtohavetypepm1.html)
+## Stream: [new members](index.html)
+### Topic: [term has type p y but is expected to have type p ?m_1[_]](06213termhastypepybutisexpectedtohavetypepm1.html)
+
+---
 
 #### [Alistair Tucker (Dec 02 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20has%20type%20p%20y%20but%20is%20expected%20to%20have%20type%20p%20%3Fm_1%5B_%5D/near/150728969):
 Am I trying to do something impossible?

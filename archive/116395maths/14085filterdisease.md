@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/14085filterdisease.html
 ---
 
-## [maths](index.html)
-### [filter disease](14085filterdisease.html)
+## Stream: [maths](index.html)
+### Topic: [filter disease](14085filterdisease.html)
+
+---
 
 #### [Patrick Massot (Aug 07 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20disease/near/131057798):
 This feels really strange: I just caught  myself writing a long string of manipulations involving filters pull-backed, push-forwarded, multiplied and compared, because it felt easier than thinking in terms of compositions of limits and such things

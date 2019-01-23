@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/83428Equationformatchcase.html
 ---
 
-## [new members](index.html)
-### [Equation for match-case](83428Equationformatchcase.html)
+## Stream: [new members](index.html)
+### Topic: [Equation for match-case](83428Equationformatchcase.html)
+
+---
 
 #### [Erika (Nov 09 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147352744):
 Is there way to fill this hole (similar to coq's match-return)

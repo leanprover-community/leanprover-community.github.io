@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39873copytargetdir.html
 ---
 
-## [general](index.html)
-### [copy _target dir](39873copytargetdir.html)
+## Stream: [general](index.html)
+### Topic: [copy _target dir](39873copytargetdir.html)
+
+---
 
 #### [Patrick Massot (May 28 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204618):
 I really don't understand how the `_target` directory works

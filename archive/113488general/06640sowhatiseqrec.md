@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06640sowhatiseqrec.html
 ---
 
-## [general](index.html)
-### [so what is eq.rec?](06640sowhatiseqrec.html)
+## Stream: [general](index.html)
+### Topic: [so what is eq.rec?](06640sowhatiseqrec.html)
+
+---
 
 #### [Kenny Lau (Apr 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134272):
 I'm stuck in this state:

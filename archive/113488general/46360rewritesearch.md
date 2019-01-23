@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/46360rewritesearch.html
 ---
 
-## [general](index.html)
-### [rewrite_search](46360rewritesearch.html)
+## Stream: [general](index.html)
+### Topic: [rewrite_search](46360rewritesearch.html)
+
+---
 
 #### [Scott Morrison (Nov 10 2018 at 07:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite_search/near/147422501):
 Hi @**Keeley Hoek**, I think I'm getting `"XXX" is not a valid rewrite lemma!` errors which I shouldn't be. I think in this case the problem is you need to unfold a step before the lemma looks right. Can we make `rewrite_search` more forgiving?

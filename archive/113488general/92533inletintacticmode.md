@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/92533inletintacticmode.html
 ---
 
-## [general](index.html)
-### [$ in let in tactic mode](92533inletintacticmode.html)
+## Stream: [general](index.html)
+### Topic: [$ in let in tactic mode](92533inletintacticmode.html)
+
+---
 
 #### [Kevin Buzzard (May 12 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20in%20let%20in%20tactic%20mode/near/126468511):
 ```lean

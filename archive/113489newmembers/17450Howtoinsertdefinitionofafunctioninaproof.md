@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/17450Howtoinsertdefinitionofafunctioninaproof.html
 ---
 
-## [new members](index.html)
-### [How to insert definition of a function in a proof](17450Howtoinsertdefinitionofafunctioninaproof.html)
+## Stream: [new members](index.html)
+### Topic: [How to insert definition of a function in a proof](17450Howtoinsertdefinitionofafunctioninaproof.html)
+
+---
 
 #### [Tobias Grosser (Oct 20 2018 at 02:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20definition%20of%20a%20function%20in%20a%20proof/near/136147887):
 Hi, I again have a simple beginners questions. The definition of

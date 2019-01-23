@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/82673dividebyzero.html
 ---
 
-## [maths](index.html)
-### [divide by zero](82673dividebyzero.html)
+## Stream: [maths](index.html)
+### Topic: [divide by zero](82673dividebyzero.html)
+
+---
 
 #### [Andrew Ashworth (Aug 11 2018 at 02:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/divide%20by%20zero/near/131929327):
 Lean was mentioned in a blog post about 1/0 = 0! https://www.hillelwayne.com/post/divide-by-zero/

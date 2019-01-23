@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06401DefininggraphsinLean.html
 ---
 
-## [general](index.html)
-### [Defining graphs in Lean](06401DefininggraphsinLean.html)
+## Stream: [general](index.html)
+### Topic: [Defining graphs in Lean](06401DefininggraphsinLean.html)
+
+---
 
 #### [Hoang Le Truong (Jul 10 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20graphs%20in%20Lean/near/129399957):
 I definite a function on the certain domain as follow

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61101simpausinghvssimpathsimph.html
 ---
 
-## [general](index.html)
-### [simpa using h vs simp at h, simp [h]](61101simpausinghvssimpathsimph.html)
+## Stream: [general](index.html)
+### Topic: [simpa using h vs simp at h, simp [h]](61101simpausinghvssimpathsimph.html)
+
+---
 
 #### [Sean Leather (Sep 17 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simpa%20using%20h%20vs%20simp%20at%20h%2C%20simp%20%5Bh%5D/near/134084181):
 On a few occasions, I've found that `simp at h, simp [h]` works when `simpa using h` does not. I thought the latter was intended to replace the former. Is this not the case?

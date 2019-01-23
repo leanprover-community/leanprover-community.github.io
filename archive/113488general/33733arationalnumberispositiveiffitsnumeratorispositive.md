@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/33733arationalnumberispositiveiffitsnumeratorispositive.html
 ---
 
-## [general](index.html)
-### [a rational number is positive iff its numerator is positive](33733arationalnumberispositiveiffitsnumeratorispositive.html)
+## Stream: [general](index.html)
+### Topic: [a rational number is positive iff its numerator is positive](33733arationalnumberispositiveiffitsnumeratorispositive.html)
+
+---
 
 #### [Kenny Lau (Apr 30 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20rational%20number%20is%20positive%20iff%20its%20numerator%20is%20positive/near/125905999):
 do we have that?

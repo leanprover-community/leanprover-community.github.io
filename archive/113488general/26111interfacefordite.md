@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26111interfacefordite.html
 ---
 
-## [general](index.html)
-### [interface for dite](26111interfacefordite.html)
+## Stream: [general](index.html)
+### Topic: [interface for dite](26111interfacefordite.html)
+
+---
 
 #### [Kenny Lau (Apr 28 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125812949):
 ```lean

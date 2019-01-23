@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83804simplemmaabab.html
 ---
 
-## [general](index.html)
-### [simp lemma `a + (b + -a) = b`?](83804simplemmaabab.html)
+## Stream: [general](index.html)
+### Topic: [simp lemma `a + (b + -a) = b`?](83804simplemmaabab.html)
+
+---
 
 #### [Kevin Buzzard (Aug 05 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945303):
 @**Guillermo Barajas Ayuso** wanted

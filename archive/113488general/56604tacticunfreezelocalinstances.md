@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56604tacticunfreezelocalinstances.html
 ---
 
-## [general](index.html)
-### [tactic.unfreeze_local_instances](56604tacticunfreezelocalinstances.html)
+## Stream: [general](index.html)
+### Topic: [tactic.unfreeze_local_instances](56604tacticunfreezelocalinstances.html)
+
+---
 
 #### [Kenny Lau (Oct 28 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.unfreeze_local_instances/near/136670895):
 ```lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85116weirdclasserror.html
 ---
 
-## [general](index.html)
-### [weird class error](85116weirdclasserror.html)
+## Stream: [general](index.html)
+### Topic: [weird class error](85116weirdclasserror.html)
+
+---
 
 #### [Reid Barton (Dec 07 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/weird%20class%20error/near/151060003):
 ```lean

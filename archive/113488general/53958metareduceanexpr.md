@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53958metareduceanexpr.html
 ---
 
-## [general](index.html)
-### [[meta] reduce an expr](53958metareduceanexpr.html)
+## Stream: [general](index.html)
+### Topic: [[meta] reduce an expr](53958metareduceanexpr.html)
+
+---
 
 #### [Zesen Qian (Aug 11 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bmeta%5D%20reduce%20an%20expr/near/131968299):
 So I have an `expr` of the form `not a`, can I evaluate this expr further? because `not` is defined as `\lam a, (a -> false)`.

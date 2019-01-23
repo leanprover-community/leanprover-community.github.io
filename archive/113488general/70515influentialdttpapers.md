@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/70515influentialdttpapers.html
 ---
 
-## [general](index.html)
-### [influential dtt papers](70515influentialdttpapers.html)
+## Stream: [general](index.html)
+### Topic: [influential dtt papers](70515influentialdttpapers.html)
+
+---
 
 #### [Andrew Ashworth (Mar 01 2018 at 04:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/influential%20dtt%20papers/near/123120262):
 is there a list out there of really important papers in dtt? i recently read "Elimination with a Motive" that was linked in this chat and finally understood how `cases` works

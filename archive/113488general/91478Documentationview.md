@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91478Documentationview.html
 ---
 
-## [general](index.html)
-### [Documentation view](91478Documentationview.html)
+## Stream: [general](index.html)
+### Topic: [Documentation view](91478Documentationview.html)
+
+---
 
 #### [Patrick Massot (Jan 15 2019 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Documentation%20view/near/155152756):
 @**Gabriel Ebner** What happened to the documentation view feature of vscode-lean?

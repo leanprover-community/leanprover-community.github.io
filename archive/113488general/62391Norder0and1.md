@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/62391Norder0and1.html
 ---
 
-## [general](index.html)
-### [N, order, 0 and 1](62391Norder0and1.html)
+## Stream: [general](index.html)
+### Topic: [N, order, 0 and 1](62391Norder0and1.html)
+
+---
 
 #### [Ned Summers (Aug 18 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369398):
 Hey, I'm trying to prove the seemingly very simple

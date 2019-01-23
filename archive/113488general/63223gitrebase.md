@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63223gitrebase.html
 ---
 
-## [general](index.html)
-### [git rebase](63223gitrebase.html)
+## Stream: [general](index.html)
+### Topic: [git rebase](63223gitrebase.html)
+
+---
 
 #### [Scott Morrison (Sep 10 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20rebase/near/133660217):
 @**Kevin Buzzard**, if you're interested in a quick tutorial on `git rebase`, let me know. I finally worked out how to do it (with some help from Johannes) at Orsay. You might in the end find it easier than what you just went through! [Screenshot-2018-09-10-23.30.11.png](/user_uploads/3121/N0ltaWQLM-4x4MmnvZVlAmvW/Screenshot-2018-09-10-23.30.11.png)

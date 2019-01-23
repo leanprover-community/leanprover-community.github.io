@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35885finsetsum.html
 ---
 
-## [general](index.html)
-### [finset.sum](35885finsetsum.html)
+## Stream: [general](index.html)
+### Topic: [finset.sum](35885finsetsum.html)
+
+---
 
 #### [Morenikeji Neri (Aug 06 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130977419):
 I'm having some trouble proving this. Help would be much appreciated.

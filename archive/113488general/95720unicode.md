@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/95720unicode.html
 ---
 
-## [general](index.html)
-### [unicode](95720unicode.html)
+## Stream: [general](index.html)
+### Topic: [unicode](95720unicode.html)
+
+---
 
 #### [Kenny Lau (Mar 31 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unicode/near/124443168):
 Does every symbol have a non-unicode equivalent?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/61943finitefields.html
 ---
 
-## [maths](index.html)
-### [finite fields](61943finitefields.html)
+## Stream: [maths](index.html)
+### Topic: [finite fields](61943finitefields.html)
+
+---
 
 #### [Joey van Langen (Jan 09 2019 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20fields/near/154730425):
 I'm going to do some works concerning finite fields. (number of elements, existence and uniqueness)

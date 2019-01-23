@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90559frames.html
 ---
 
-## [general](index.html)
-### [frames](90559frames.html)
+## Stream: [general](index.html)
+### Topic: [frames](90559frames.html)
+
+---
 
 #### [Johan Commelin (Oct 10 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/frames/near/135559182):
 Are frames in mathlib? https://ncatlab.org/nlab/show/frame

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64461unexpectedfunextreflbehaviour.html
 ---
 
-## [general](index.html)
-### [unexpected funext / refl behaviour](64461unexpectedfunextreflbehaviour.html)
+## Stream: [general](index.html)
+### Topic: [unexpected funext / refl behaviour](64461unexpectedfunextreflbehaviour.html)
+
+---
 
 #### [Kevin Buzzard (Apr 11 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946494):
 ```lean

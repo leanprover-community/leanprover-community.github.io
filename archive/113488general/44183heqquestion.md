@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/44183heqquestion.html
 ---
 
-## [general](index.html)
-### [heq question](44183heqquestion.html)
+## Stream: [general](index.html)
+### Topic: [heq question](44183heqquestion.html)
+
+---
 
 #### [Kevin Buzzard (May 20 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/heq%20question/near/126840954):
 I wanted to get affine scheme = scheme finished today, but I have run into a problem whereby restricting to an open subset is not quite the same as restricting to the same not-defeq version of trhe open subset

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/44625Guineapigswanted.html
 ---
 
-## [Lean Together 2019](index.html)
-### [Guinea pigs wanted!](44625Guineapigswanted.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [Guinea pigs wanted!](44625Guineapigswanted.html)
+
+---
 
 #### [Gabriel Ebner (Jan 11 2019 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Guinea%20pigs%20wanted%21/near/154915324):
 Due to popular demand, I hacked up something in the vscode extension.  Interested victims can now build the git version of the extension and try out ctrl+shift+p "open documentation view" and then try "try it!".

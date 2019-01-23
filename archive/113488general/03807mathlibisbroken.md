@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03807mathlibisbroken.html
 ---
 
-## [general](index.html)
-### [mathlib is broken](03807mathlibisbroken.html)
+## Stream: [general](index.html)
+### Topic: [mathlib is broken](03807mathlibisbroken.html)
+
+---
 
 #### [Kenny Lau (Jan 12 2019 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20is%20broken/near/154987864):
 The new Lean (merged just yesterday) breaks mathlib

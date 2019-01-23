@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/37885finntoTvsfinsuppfinnT.html
 ---
 
-## [maths](index.html)
-### [`fin n \to T` vs `finsupp (fin n) T`](37885finntoTvsfinsuppfinnT.html)
+## Stream: [maths](index.html)
+### Topic: [`fin n \to T` vs `finsupp (fin n) T`](37885finntoTvsfinsuppfinnT.html)
+
+---
 
 #### [Johan Commelin (May 28 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60fin%20n%20%5Cto%20T%60%20vs%20%60finsupp%20%28fin%20n%29%20T%60/near/127206339):
 General question: (`T` is a type) is it easy to move back and forth between `fin n \to T` and the finsupp variant?

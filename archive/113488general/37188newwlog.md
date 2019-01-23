@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37188newwlog.html
 ---
 
-## [general](index.html)
-### [new wlog](37188newwlog.html)
+## Stream: [general](index.html)
+### Topic: [new wlog](37188newwlog.html)
+
+---
 
 #### [Patrick Massot (May 28 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20wlog/near/127197261):
 Johannes, I'm sorry I didn't properly follow the new wlog discussion, I've been caught by real world. But I really think like it's less powerful than Simon's version. Today I noticed that it doesn't  even try `assumption` to discharge auxiliary goals.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10216recursingonmutualinductivetypes.html
 ---
 
-## [general](index.html)
-### [recursing on mutual inductive types](10216recursingonmutualinductivetypes.html)
+## Stream: [general](index.html)
+### Topic: [recursing on mutual inductive types](10216recursingonmutualinductivetypes.html)
+
+---
 
 #### [Jakob von Raumer (May 28 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127212172):
 What's the best way to prove a theorem about a mutual type where the induction should use both types?

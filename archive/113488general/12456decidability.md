@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/12456decidability.html
 ---
 
-## [general](index.html)
-### [decidability](12456decidability.html)
+## Stream: [general](index.html)
+### Topic: [decidability](12456decidability.html)
+
+---
 
 #### [Kenny Lau (Mar 30 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/124428848):
 Are there things that are decidable but not yet proven?

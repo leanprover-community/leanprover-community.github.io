@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/40384computersaresmart.html
 ---
 
-## [maths](index.html)
-### [computers are smart??](40384computersaresmart.html)
+## Stream: [maths](index.html)
+### Topic: [computers are smart??](40384computersaresmart.html)
+
+---
 
 #### [Reid Barton (Jun 04 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computers%20are%20smart%3F%3F/near/127549305):
 So I was going along constructing coequalizers in Top, like you do. A coequalizer is a kind of quotient, so I needed to prove that if $$Z$$ is the quotient of $$Y$$ by a relation, then the quotient map $$Y \to Z$$ is continuous, so that it's a morphism in Top.

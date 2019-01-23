@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45015calclhsrhs.html
 ---
 
-## [general](index.html)
-### [calc lhs/rhs](45015calclhsrhs.html)
+## Stream: [general](index.html)
+### Topic: [calc lhs/rhs](45015calclhsrhs.html)
+
+---
 
 #### [Johan Commelin (Nov 20 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20lhs/rhs/near/148043376):
 When writing `calc` blocks, it would be very convenient if we could have some special symbol that refers to the lhs/rhs of the original goal. Because currently I try to copy paste stuff from the goal, and then Lean starts moaning that it can't figure out the type etc...

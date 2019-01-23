@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01104proofusinginductivevsdef.html
 ---
 
-## [general](index.html)
-### [proof using inductive vs def](01104proofusinginductivevsdef.html)
+## Stream: [general](index.html)
+### Topic: [proof using inductive vs def](01104proofusinginductivevsdef.html)
+
+---
 
 #### [Sean Leather (Sep 14 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936109):
 This is quite an esoteric problem, so I'm not sure if anybody would be interested in looking into it. Nonetheless, I thought I'd try to see if anybody had any ideas.

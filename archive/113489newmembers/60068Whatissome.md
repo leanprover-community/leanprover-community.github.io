@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/60068Whatissome.html
 ---
 
-## [new members](index.html)
-### [What is `some`?](60068Whatissome.html)
+## Stream: [new members](index.html)
+### Topic: [What is `some`?](60068Whatissome.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Oct 14 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20%60some%60%3F/near/135790900):
 I'm learning non-constructive definitions from *[An Introduction to Lean](https://leanprover.github.io/introduction_to_lean/introduction_to_lean.pdf)* (p. 25) and the command `some h` is used -- what does it mean?

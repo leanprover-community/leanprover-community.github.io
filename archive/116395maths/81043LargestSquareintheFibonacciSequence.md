@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/81043LargestSquareintheFibonacciSequence.html
 ---
 
-## [maths](index.html)
-### [Largest Square in the Fibonacci Sequence](81043LargestSquareintheFibonacciSequence.html)
+## Stream: [maths](index.html)
+### Topic: [Largest Square in the Fibonacci Sequence](81043LargestSquareintheFibonacciSequence.html)
+
+---
 
 #### [Kevin Buzzard (May 23 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Largest%20Square%20in%20the%20Fibonacci%20Sequence/near/126977998):
 Did you know that 144 is the largest square in the Fibonacci sequence?

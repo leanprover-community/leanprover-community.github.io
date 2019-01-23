@@ -4,2783 +4,2799 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/index.html
 ---
 
-## [general](index.html)
+## Stream: [general](index.html)
 
-### [clean up old files](73211cleanupoldfiles.html)
+---
 
-### [notation in structures](99336notationinstructures.html)
+### Topics:
 
-### [Indexing Zulip](45931IndexingZulip.html)
+* [Lean + LaTeX?](57481LeanLaTeX.html) (4 messages, latest: Jan 23 2019 at 12:56)
 
-### [Lean 3.4.2](37206Lean342.html)
+* [cast woes](88074castwoes.html) (41 messages, latest: Jan 23 2019 at 11:34)
 
-### [parsing question](94829parsingquestion.html)
+* [Indexing Zulip](45931IndexingZulip.html) (45 messages, latest: Jan 23 2019 at 11:25)
 
-### [Teaching setup](27349Teachingsetup.html)
+* [constructive polynomial](16078constructivepolynomial.html) (2 messages, latest: Jan 23 2019 at 10:48)
 
-### [writing unicode to file](74703writingunicodetofile.html)
+* [Lean server mode in VS Code](41880LeanservermodeinVSCode.html) (3 messages, latest: Jan 23 2019 at 09:21)
 
-### [Nantes talk video](42445Nantestalkvideo.html)
+* [User definable options](25766Userdefinableoptions.html) (7 messages, latest: Jan 23 2019 at 06:42)
 
-### [leanpkg](35331leanpkg.html)
+* [simp canonize](76625simpcanonize.html) (7 messages, latest: Jan 23 2019 at 00:22)
 
-### [mathlib is broken](03807mathlibisbroken.html)
+* [Logic puzzles in Lean](32259LogicpuzzlesinLean.html) (11 messages, latest: Jan 22 2019 at 23:07)
 
-### [singleton / unique](36954singletonunique.html)
+* [mathlib olean files](80964mathliboleanfiles.html) (18 messages, latest: Jan 22 2019 at 21:57)
 
-### [system-wide elan](72220systemwideelan.html)
+* [Lean 3.4.2](37206Lean342.html) (89 messages, latest: Jan 22 2019 at 18:36)
 
-### [crec](54462crec.html)
+* [clean up old files](73211cleanupoldfiles.html) (1 message, latest: Jan 22 2019 at 15:21)
 
-### [Ofer Gabber on formal proof](00468OferGabberonformalproof.html)
+* [notation in structures](99336notationinstructures.html) (6 messages, latest: Jan 22 2019 at 13:16)
 
-### [Vscode Translations file](86695VscodeTranslationsfile.html)
+* [parsing question](94829parsingquestion.html) (7 messages, latest: Jan 19 2019 at 21:48)
 
-### [why is this happening](55527whyisthishappening.html)
+* [Teaching setup](27349Teachingsetup.html) (2 messages, latest: Jan 19 2019 at 17:51)
 
-### [Proving lemma without doing pattern matching](84032Provinglemmawithoutdoingpatternmatching.html)
+* [writing unicode to file](74703writingunicodetofile.html) (20 messages, latest: Jan 19 2019 at 01:43)
 
-### [error: expected type equals given type](57599errorexpectedtypeequalsgiventype.html)
+* [Nantes talk video](42445Nantestalkvideo.html) (11 messages, latest: Jan 18 2019 at 19:08)
 
-### [Abel tactic problem](37726Abeltacticproblem.html)
+* [leanpkg](35331leanpkg.html) (143 messages, latest: Jan 18 2019 at 16:54)
 
-### [mathlib files](31957mathlibfiles.html)
+* [mathlib is broken](03807mathlibisbroken.html) (29 messages, latest: Jan 18 2019 at 16:25)
 
-### [Documentation view](91478Documentationview.html)
+* [singleton / unique](36954singletonunique.html) (98 messages, latest: Jan 18 2019 at 11:26)
 
-### [pygments](17208pygments.html)
+* [system-wide elan](72220systemwideelan.html) (8 messages, latest: Jan 18 2019 at 10:45)
 
-### [Problem with looping over finset](46635Problemwithloopingoverfinset.html)
+* [crec](54462crec.html) (15 messages, latest: Jan 18 2019 at 01:00)
 
-### [What's good notation for convergence?](20537Whatsgoodnotationforconvergence.html)
+* [Ofer Gabber on formal proof](00468OferGabberonformalproof.html) (3 messages, latest: Jan 17 2019 at 23:43)
 
-### [equiv_subsingleton](09959equivsubsingleton.html)
+* [Vscode Translations file](86695VscodeTranslationsfile.html) (77 messages, latest: Jan 17 2019 at 19:49)
 
-### [has_mem notation](48775hasmemnotation.html)
+* [why is this happening](55527whyisthishappening.html) (14 messages, latest: Jan 16 2019 at 23:21)
 
-### [Windows installer](69594Windowsinstaller.html)
+* [Proving lemma without doing pattern matching](84032Provinglemmawithoutdoingpatternmatching.html) (6 messages, latest: Jan 16 2019 at 18:35)
 
-### [invalid occurrence of recursive arg](44024invalidoccurrenceofrecursivearg.html)
+* [error: expected type equals given type](57599errorexpectedtypeequalsgiventype.html) (33 messages, latest: Jan 16 2019 at 13:04)
 
-### [VS Code hover issue](00690VSCodehoverissue.html)
+* [Abel tactic problem](37726Abeltacticproblem.html) (4 messages, latest: Jan 16 2019 at 12:11)
 
-### [Program verification](01468Programverification.html)
+* [mathlib files](31957mathlibfiles.html) (107 messages, latest: Jan 16 2019 at 09:34)
 
-### [long multiplication in Lean](69430longmultiplicationinLean.html)
+* [Documentation view](91478Documentationview.html) (10 messages, latest: Jan 16 2019 at 03:51)
 
-### [User definable options](25766Userdefinableoptions.html)
+* [pygments](17208pygments.html) (47 messages, latest: Jan 15 2019 at 18:28)
 
-### [Lean trusted base](65095Leantrustedbase.html)
+* [Problem with looping over finset](46635Problemwithloopingoverfinset.html) (12 messages, latest: Jan 15 2019 at 16:46)
 
-### [Simplifying nested lambda expressions](70963Simplifyingnestedlambdaexpressions.html)
+* [What's good notation for convergence?](20537Whatsgoodnotationforconvergence.html) (8 messages, latest: Jan 15 2019 at 15:42)
 
-### [Computationally irrelevant proofs](39323Computationallyirrelevantproofs.html)
+* [equiv_subsingleton](09959equivsubsingleton.html) (5 messages, latest: Jan 15 2019 at 06:46)
 
-### [Removing transfer from core](57898Removingtransferfromcore.html)
+* [has_mem notation](48775hasmemnotation.html) (4 messages, latest: Jan 14 2019 at 12:28)
 
-### [custom lean in elan](99635customleaninelan.html)
+* [Windows installer](69594Windowsinstaller.html) (1 message, latest: Jan 14 2019 at 00:56)
 
-### [Proof term size * 2^200](32934Prooftermsize2200.html)
+* [invalid occurrence of recursive arg](44024invalidoccurrenceofrecursivearg.html) (8 messages, latest: Jan 13 2019 at 10:05)
 
-### [Learnability of an Oracle](98971LearnabilityofanOracle.html)
+* [VS Code hover issue](00690VSCodehoverissue.html) (8 messages, latest: Jan 12 2019 at 21:05)
 
-### [implicit arguments](46194implicitarguments.html)
+* [Program verification](01468Programverification.html) (7 messages, latest: Jan 12 2019 at 15:54)
 
-### [Assert Violation](27016AssertViolation.html)
+* [long multiplication in Lean](69430longmultiplicationinLean.html) (7 messages, latest: Jan 12 2019 at 15:49)
 
-### [find data necessary for instances](27128finddatanecessaryforinstances.html)
+* [Lean trusted base](65095Leantrustedbase.html) (4 messages, latest: Jan 12 2019 at 08:23)
 
-### [//](71743.html)
+* [Simplifying nested lambda expressions](70963Simplifyingnestedlambdaexpressions.html) (5 messages, latest: Jan 12 2019 at 01:34)
 
-### [tactic type class instance](21702tactictypeclassinstance.html)
+* [Computationally irrelevant proofs](39323Computationallyirrelevantproofs.html) (42 messages, latest: Jan 11 2019 at 22:22)
 
-### [eta for records](10228etaforrecords.html)
+* [Removing transfer from core](57898Removingtransferfromcore.html) (16 messages, latest: Jan 11 2019 at 18:25)
 
-### [Lean in Beamer](50628LeaninBeamer.html)
+* [custom lean in elan](99635customleaninelan.html) (3 messages, latest: Jan 11 2019 at 15:20)
 
-### [Module refactor](28061Modulerefactor.html)
+* [Proof term size * 2^200](32934Prooftermsize2200.html) (4 messages, latest: Jan 10 2019 at 23:18)
 
-### [List of lean repositories](47066Listofleanrepositories.html)
+* [Learnability of an Oracle](98971LearnabilityofanOracle.html) (1 message, latest: Jan 10 2019 at 19:55)
 
-### [Cubical HoTT Library](30056CubicalHoTTLibrary.html)
+* [implicit arguments](46194implicitarguments.html) (8 messages, latest: Jan 10 2019 at 09:44)
 
-### [(no topic)](79918notopic.html)
+* [Assert Violation](27016AssertViolation.html) (2 messages, latest: Jan 09 2019 at 11:11)
 
-### [New record](10826Newrecord.html)
+* [find data necessary for instances](27128finddatanecessaryforinstances.html) (12 messages, latest: Jan 09 2019 at 10:00)
 
-### [have in mathlib](58237haveinmathlib.html)
+* [//](71743.html) (5 messages, latest: Jan 09 2019 at 09:52)
 
-### [startswith](51454startswith.html)
+* [tactic type class instance](21702tactictypeclassinstance.html) (16 messages, latest: Jan 09 2019 at 09:39)
 
-### [subtype.decidable_eq](27549subtypedecidableeq.html)
+* [eta for records](10228etaforrecords.html) (4 messages, latest: Jan 09 2019 at 09:11)
 
-### [Lean Together 2019](63343LeanTogether2019.html)
+* [Lean in Beamer](50628LeaninBeamer.html) (60 messages, latest: Jan 08 2019 at 22:01)
 
-### [Lambda calculus](49854Lambdacalculus.html)
+* [Module refactor](28061Modulerefactor.html) (1 message, latest: Jan 08 2019 at 15:29)
 
-### [expr's with local constant](95179exprswithlocalconstant.html)
+* [List of lean repositories](47066Listofleanrepositories.html) (2 messages, latest: Jan 08 2019 at 15:12)
 
-### [Tactic help](56418Tactichelp.html)
+* [Cubical HoTT Library](30056CubicalHoTTLibrary.html) (4 messages, latest: Jan 08 2019 at 05:20)
 
-### [calc tactic](53580calctactic.html)
+* [(no topic)](79918notopic.html) (50 messages, latest: Jan 07 2019 at 18:24)
 
-### [naming part of the goal](02347namingpartofthegoal.html)
+* [New record](10826Newrecord.html) (15 messages, latest: Jan 05 2019 at 22:07)
 
-### [Beklemishev's worms](00258Beklemishevsworms.html)
+* [have in mathlib](58237haveinmathlib.html) (11 messages, latest: Jan 05 2019 at 13:31)
 
-### [tactic state filtering in VS code](11833tacticstatefilteringinVScode.html)
+* [startswith](51454startswith.html) (15 messages, latest: Jan 04 2019 at 20:43)
 
-### [hidden function](29043hiddenfunction.html)
+* [subtype.decidable_eq](27549subtypedecidableeq.html) (8 messages, latest: Jan 04 2019 at 18:30)
 
-### [type classes debugging](86749typeclassesdebugging.html)
+* [Lean Together 2019](63343LeanTogether2019.html) (113 messages, latest: Jan 04 2019 at 17:34)
 
-### [Parameters, sections and namespaces](53564Parameterssectionsandnamespaces.html)
+* [Lambda calculus](49854Lambdacalculus.html) (40 messages, latest: Jan 02 2019 at 22:48)
 
-### [of_as_true proofs](11809ofastrueproofs.html)
+* [expr's with local constant](95179exprswithlocalconstant.html) (61 messages, latest: Jan 02 2019 at 21:45)
 
-### [one-symbol "by assumption"](12632onesymbolbyassumption.html)
+* [Tactic help](56418Tactichelp.html) (7 messages, latest: Jan 02 2019 at 19:25)
 
-### [warnings](74858warnings.html)
+* [calc tactic](53580calctactic.html) (3 messages, latest: Jan 02 2019 at 15:42)
 
-### [underhanded lean](06147underhandedlean.html)
+* [naming part of the goal](02347namingpartofthegoal.html) (14 messages, latest: Jan 02 2019 at 09:09)
 
-### [orelse nontermination](39072orelsenontermination.html)
+* [Beklemishev's worms](00258Beklemishevsworms.html) (7 messages, latest: Jan 01 2019 at 00:33)
 
-### [Lean 4 at ETH Zurich Compiler Social - Wed 12. Dec](18848Lean4atETHZurichCompilerSocialWed12Dec.html)
+* [tactic state filtering in VS code](11833tacticstatefilteringinVScode.html) (2 messages, latest: Dec 31 2018 at 06:55)
 
-### [notations to introduce proofs](51017notationstointroduceproofs.html)
+* [hidden function](29043hiddenfunction.html) (37 messages, latest: Dec 30 2018 at 18:56)
 
-### [olean viewer](82562oleanviewer.html)
+* [type classes debugging](86749typeclassesdebugging.html) (16 messages, latest: Dec 29 2018 at 21:37)
 
-### [bug in lean imports](64324buginleanimports.html)
+* [Parameters, sections and namespaces](53564Parameterssectionsandnamespaces.html) (41 messages, latest: Dec 28 2018 at 18:18)
 
-### [why is quot an axiom?](48906whyisquotanaxiom.html)
+* [of_as_true proofs](11809ofastrueproofs.html) (43 messages, latest: Dec 28 2018 at 10:34)
 
-### [exists data](67899existsdata.html)
+* [one-symbol "by assumption"](12632onesymbolbyassumption.html) (15 messages, latest: Dec 28 2018 at 07:07)
 
-### [Let binding efficiency](15510Letbindingefficiency.html)
+* [warnings](74858warnings.html) (9 messages, latest: Dec 27 2018 at 19:03)
 
-### [linarith nat](80127linarithnat.html)
+* [underhanded lean](06147underhandedlean.html) (2 messages, latest: Dec 27 2018 at 12:18)
 
-### [equation compiler and dependent types](68737equationcompileranddependenttypes.html)
+* [orelse nontermination](39072orelsenontermination.html) (6 messages, latest: Dec 26 2018 at 21:07)
 
-### [What's new in mathlib](80721Whatsnewinmathlib.html)
+* [Lean 4 at ETH Zurich Compiler Social - Wed 12. Dec](18848Lean4atETHZurichCompilerSocialWed12Dec.html) (34 messages, latest: Dec 26 2018 at 07:56)
 
-### [expr.replace](72810exprreplace.html)
+* [notations to introduce proofs](51017notationstointroduceproofs.html) (59 messages, latest: Dec 24 2018 at 21:21)
 
-### [inter_eq_of_self_of_subset](25118intereqofselfofsubset.html)
+* [olean viewer](82562oleanviewer.html) (25 messages, latest: Dec 24 2018 at 21:12)
 
-### [automatic simp lemmas](67584automaticsimplemmas.html)
+* [bug in lean imports](64324buginleanimports.html) (1 message, latest: Dec 24 2018 at 15:22)
 
-### [VM floating point experiment in VM](35357VMfloatingpointexperimentinVM.html)
+* [why is quot an axiom?](48906whyisquotanaxiom.html) (13 messages, latest: Dec 24 2018 at 10:54)
 
-### [Not expected behavior using norm_num](17893Notexpectedbehaviorusingnormnum.html)
+* [exists data](67899existsdata.html) (4 messages, latest: Dec 24 2018 at 07:23)
 
-### [mathlib directories](52447mathlibdirectories.html)
+* [Let binding efficiency](15510Letbindingefficiency.html) (16 messages, latest: Dec 24 2018 at 01:51)
 
-### [eliminating impossible cases](15096eliminatingimpossiblecases.html)
+* [linarith nat](80127linarithnat.html) (3 messages, latest: Dec 23 2018 at 18:56)
 
-### [calc iff](22601calciff.html)
+* [equation compiler and dependent types](68737equationcompileranddependenttypes.html) (4 messages, latest: Dec 23 2018 at 18:07)
 
-### [isomorphisms](73070isomorphisms.html)
+* [What's new in mathlib](80721Whatsnewinmathlib.html) (42 messages, latest: Dec 22 2018 at 19:21)
 
-### [Proving field is gcd domain](89036Provingfieldisgcddomain.html)
+* [expr.replace](72810exprreplace.html) (71 messages, latest: Dec 22 2018 at 08:09)
 
-### [import graph](80686importgraph.html)
+* [inter_eq_of_self_of_subset](25118intereqofselfofsubset.html) (1 message, latest: Dec 22 2018 at 06:26)
 
-### [autoparam in instance](50743autoparamininstance.html)
+* [automatic simp lemmas](67584automaticsimplemmas.html) (39 messages, latest: Dec 21 2018 at 20:08)
 
-### [bug with refine + rw](59368bugwithrefinerw.html)
+* [VM floating point experiment in VM](35357VMfloatingpointexperimentinVM.html) (17 messages, latest: Dec 21 2018 at 12:05)
 
-### [quot.mk vs quotient.mk](90904quotmkvsquotientmk.html)
+* [Not expected behavior using norm_num](17893Notexpectedbehaviorusingnormnum.html) (10 messages, latest: Dec 21 2018 at 03:59)
 
-### [getting PRs merged](54140gettingPRsmerged.html)
+* [mathlib directories](52447mathlibdirectories.html) (10 messages, latest: Dec 21 2018 at 02:30)
 
-### [olean caching](68285oleancaching.html)
+* [eliminating impossible cases](15096eliminatingimpossiblecases.html) (3 messages, latest: Dec 20 2018 at 20:17)
 
-### [Empty or not empty](15473Emptyornotempty.html)
+* [calc iff](22601calciff.html) (24 messages, latest: Dec 20 2018 at 12:19)
 
-### [Triangular parent instances](36268Triangularparentinstances.html)
+* [isomorphisms](73070isomorphisms.html) (9 messages, latest: Dec 19 2018 at 19:28)
 
-### [well_founded recursion](03027wellfoundedrecursion.html)
+* [Proving field is gcd domain](89036Provingfieldisgcddomain.html) (10 messages, latest: Dec 19 2018 at 10:49)
 
-### [barber paradox](64542barberparadox.html)
+* [import graph](80686importgraph.html) (1 message, latest: Dec 19 2018 at 09:46)
 
-### [Auxiliary types](10222Auxiliarytypes.html)
+* [autoparam in instance](50743autoparamininstance.html) (14 messages, latest: Dec 18 2018 at 14:17)
 
-### [quotient.eq](73374quotienteq.html)
+* [bug with refine + rw](59368bugwithrefinerw.html) (2 messages, latest: Dec 18 2018 at 09:48)
 
-### [is_lawful_monad io](56077islawfulmonadio.html)
+* [quot.mk vs quotient.mk](90904quotmkvsquotientmk.html) (1 message, latest: Dec 17 2018 at 19:05)
 
-### [division and numerals](96064divisionandnumerals.html)
+* [getting PRs merged](54140gettingPRsmerged.html) (29 messages, latest: Dec 17 2018 at 18:27)
 
-### [Failedd to synthesize type class instance for set.decidab...](56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html)
+* [olean caching](68285oleancaching.html) (287 messages, latest: Dec 17 2018 at 18:18)
 
-### [De Morgan's Proof](53646DeMorgansProof.html)
+* [Empty or not empty](15473Emptyornotempty.html) (3 messages, latest: Dec 17 2018 at 11:41)
 
-### [(p ^ q) -> k](16423pqk.html)
+* [Triangular parent instances](36268Triangularparentinstances.html) (9 messages, latest: Dec 16 2018 at 20:26)
 
-### [Proof irrelevance](83927Proofirrelevance.html)
+* [well_founded recursion](03027wellfoundedrecursion.html) (11 messages, latest: Dec 16 2018 at 18:11)
 
-### [Accessing Nat type within inductive Typ](77009AccessingNattypewithininductiveTyp.html)
+* [barber paradox](64542barberparadox.html) (8 messages, latest: Dec 16 2018 at 17:48)
 
-### [new steam for PR discussions](93893newsteamforPRdiscussions.html)
+* [Auxiliary types](10222Auxiliarytypes.html) (22 messages, latest: Dec 16 2018 at 12:33)
 
-### [combining classes](48677combiningclasses.html)
+* [quotient.eq](73374quotienteq.html) (1 message, latest: Dec 15 2018 at 19:31)
 
-### [Automatically parsing string literals](40901Automaticallyparsingstringliterals.html)
+* [is_lawful_monad io](56077islawfulmonadio.html) (12 messages, latest: Dec 15 2018 at 09:19)
 
-### [adding a simp_lemmas method to Lean C++](77917addingasimplemmasmethodtoLeanC.html)
+* [division and numerals](96064divisionandnumerals.html) (6 messages, latest: Dec 14 2018 at 20:26)
 
-### [unreachable code](63254unreachablecode.html)
+* [Failedd to synthesize type class instance for set.decidab...](56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html) (5 messages, latest: Dec 14 2018 at 09:14)
 
-### [howto lean with elan](68366howtoleanwithelan.html)
+* [De Morgan's Proof](53646DeMorgansProof.html) (12 messages, latest: Dec 13 2018 at 22:53)
 
-### [evaluating proofs?](32457evaluatingproofs.html)
+* [(p ^ q) -> k](16423pqk.html) (4 messages, latest: Dec 13 2018 at 21:16)
 
-### [dictionary / map type: ordset](35057dictionarymaptypeordset.html)
+* [Proof irrelevance](83927Proofirrelevance.html) (9 messages, latest: Dec 13 2018 at 20:05)
 
-### [tactic.to_expr](06120tactictoexpr.html)
+* [Accessing Nat type within inductive Typ](77009AccessingNattypewithininductiveTyp.html) (11 messages, latest: Dec 13 2018 at 20:04)
 
-### [Lean library fixes](03125Leanlibraryfixes.html)
+* [new steam for PR discussions](93893newsteamforPRdiscussions.html) (14 messages, latest: Dec 13 2018 at 14:38)
 
-### [how does type class inference work?](27427howdoestypeclassinferencework.html)
+* [combining classes](48677combiningclasses.html) (26 messages, latest: Dec 13 2018 at 10:18)
 
-### [Character encoding of VM](93837CharacterencodingofVM.html)
+* [Automatically parsing string literals](40901Automaticallyparsingstringliterals.html) (8 messages, latest: Dec 12 2018 at 18:37)
 
-### [ring algebras](80114ringalgebras.html)
+* [adding a simp_lemmas method to Lean C++](77917addingasimplemmasmethodtoLeanC.html) (1 message, latest: Dec 12 2018 at 17:37)
 
-### [proof by induction on Z](95622proofbyinductiononZ.html)
+* [unreachable code](63254unreachablecode.html) (7 messages, latest: Dec 12 2018 at 16:25)
 
-### [(fin n) ≃ (fin m)](99238finnfinm.html)
+* [howto lean with elan](68366howtoleanwithelan.html) (74 messages, latest: Dec 12 2018 at 13:28)
 
-### [algebra over a ring](28764algebraoveraring.html)
+* [evaluating proofs?](32457evaluatingproofs.html) (17 messages, latest: Dec 12 2018 at 02:24)
 
-### [Dijkstra's algorithm in Lean](64309DijkstrasalgorithminLean.html)
+* [dictionary / map type: ordset](35057dictionarymaptypeordset.html) (10 messages, latest: Dec 11 2018 at 22:26)
 
-### [Lean in the wild](43625Leaninthewild.html)
+* [tactic.to_expr](06120tactictoexpr.html) (5 messages, latest: Dec 11 2018 at 19:42)
 
-### [extensionality](79105extensionality.html)
+* [Lean library fixes](03125Leanlibraryfixes.html) (19 messages, latest: Dec 11 2018 at 19:22)
 
-### [weird class error](85116weirdclasserror.html)
+* [how does type class inference work?](27427howdoestypeclassinferencework.html) (70 messages, latest: Dec 10 2018 at 20:20)
 
-### [Various VM questions](35960VariousVMquestions.html)
+* [Character encoding of VM](93837CharacterencodingofVM.html) (28 messages, latest: Dec 10 2018 at 13:29)
 
-### [Sup vs sup](17594Supvssup.html)
+* [ring algebras](80114ringalgebras.html) (104 messages, latest: Dec 10 2018 at 12:42)
 
-### [meet in opens X](82464meetinopensX.html)
+* [proof by induction on Z](95622proofbyinductiononZ.html) (22 messages, latest: Dec 09 2018 at 20:24)
 
-### [set.indefinite_description](08893setindefinitedescription.html)
+* [(fin n) ≃ (fin m)](99238finnfinm.html) (6 messages, latest: Dec 09 2018 at 18:35)
 
-### [simp rules](99781simprules.html)
+* [algebra over a ring](28764algebraoveraring.html) (9 messages, latest: Dec 08 2018 at 21:41)
 
-### [is_open_{univ,empty}](56034isopenunivempty.html)
+* [Dijkstra's algorithm in Lean](64309DijkstrasalgorithminLean.html) (10 messages, latest: Dec 08 2018 at 21:32)
 
-### [Advent of Code](77939AdventofCode.html)
+* [Lean in the wild](43625Leaninthewild.html) (7 messages, latest: Dec 08 2018 at 11:54)
 
-### [Rooms for Lean Together](79130RoomsforLeanTogether.html)
+* [extensionality](79105extensionality.html) (188 messages, latest: Dec 07 2018 at 19:02)
 
-### [conflict of Instances](06032conflictofInstances.html)
+* [weird class error](85116weirdclasserror.html) (4 messages, latest: Dec 07 2018 at 16:47)
 
-### [Tactic writing tutorial](13681Tacticwritingtutorial.html)
+* [Various VM questions](35960VariousVMquestions.html) (4 messages, latest: Dec 06 2018 at 21:31)
 
-### [Cannot find instance](90874Cannotfindinstance.html)
+* [Sup vs sup](17594Supvssup.html) (4 messages, latest: Dec 06 2018 at 06:51)
 
-### [norm_num](71468normnum.html)
+* [meet in opens X](82464meetinopensX.html) (17 messages, latest: Dec 05 2018 at 06:01)
 
-### [abbreviation](53591abbreviation.html)
+* [set.indefinite_description](08893setindefinitedescription.html) (10 messages, latest: Dec 05 2018 at 01:26)
 
-### [mem_eq_self](30622memeqself.html)
+* [simp rules](99781simprules.html) (13 messages, latest: Dec 04 2018 at 21:52)
 
-### [trouble with function as set](37088troublewithfunctionasset.html)
+* [is_open_{univ,empty}](56034isopenunivempty.html) (8 messages, latest: Dec 04 2018 at 19:22)
 
-### [inductive def](30619inductivedef.html)
+* [Advent of Code](77939AdventofCode.html) (36 messages, latest: Dec 04 2018 at 12:54)
 
-### ["modified" induction on nat](16371modifiedinductiononnat.html)
+* [Rooms for Lean Together](79130RoomsforLeanTogether.html) (9 messages, latest: Dec 04 2018 at 11:50)
 
-### [3.4.1 branch git hook](19000341branchgithook.html)
+* [conflict of Instances](06032conflictofInstances.html) (63 messages, latest: Dec 04 2018 at 11:10)
 
-### [normal form in tactics mode](73253normalformintacticsmode.html)
+* [Tactic writing tutorial](13681Tacticwritingtutorial.html) (51 messages, latest: Dec 04 2018 at 10:19)
 
-### [private](00220private.html)
+* [Cannot find instance](90874Cannotfindinstance.html) (1 message, latest: Dec 04 2018 at 07:16)
 
-### [updating the nth element of a list](85476updatingthenthelementofalist.html)
+* [norm_num](71468normnum.html) (34 messages, latest: Dec 04 2018 at 00:22)
 
-### [generalize_proofs](71999generalizeproofs.html)
+* [abbreviation](53591abbreviation.html) (5 messages, latest: Dec 03 2018 at 03:50)
 
-### [parameters and tactics](31795parametersandtactics.html)
+* [mem_eq_self](30622memeqself.html) (10 messages, latest: Dec 02 2018 at 19:06)
 
-### [deconstruct sigma types](72117deconstructsigmatypes.html)
+* [trouble with function as set](37088troublewithfunctionasset.html) (28 messages, latest: Dec 02 2018 at 00:47)
 
-### [[0,infty]](478070infty.html)
+* [inductive def](30619inductivedef.html) (5 messages, latest: Dec 01 2018 at 19:40)
 
-### [Ideal has_mem](99706Idealhasmem.html)
+* ["modified" induction on nat](16371modifiedinductiononnat.html) (27 messages, latest: Dec 01 2018 at 17:50)
 
-### [multiplayer lean](64025multiplayerlean.html)
+* [3.4.1 branch git hook](19000341branchgithook.html) (2 messages, latest: Dec 01 2018 at 16:32)
 
-### [notation and variables](73049notationandvariables.html)
+* [normal form in tactics mode](73253normalformintacticsmode.html) (5 messages, latest: Dec 01 2018 at 15:51)
 
-### [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html)
+* [private](00220private.html) (3 messages, latest: Dec 01 2018 at 15:16)
 
-### [tidy lost my metavars](40518tidylostmymetavars.html)
+* [updating the nth element of a list](85476updatingthenthelementofalist.html) (14 messages, latest: Dec 01 2018 at 06:29)
 
-### ["is_user_leanpkg_path": false](11441isuserleanpkgpathfalse.html)
+* [generalize_proofs](71999generalizeproofs.html) (13 messages, latest: Dec 01 2018 at 04:04)
 
-### [Problems with proving add_right_cancel](04817Problemswithprovingaddrightcancel.html)
+* [parameters and tactics](31795parametersandtactics.html) (2 messages, latest: Nov 30 2018 at 18:42)
 
-### [Should measurable_space be a class?](58233Shouldmeasurablespacebeaclass.html)
+* [deconstruct sigma types](72117deconstructsigmatypes.html) (27 messages, latest: Nov 30 2018 at 18:04)
 
-### [preorder.lift](11937preorderlift.html)
+* [[0,infty]](478070infty.html) (31 messages, latest: Nov 30 2018 at 15:46)
 
-### [internship at Oracle Labs](83026internshipatOracleLabs.html)
+* [Ideal has_mem](99706Idealhasmem.html) (53 messages, latest: Nov 30 2018 at 13:24)
 
-### [unfolding from cases](26122unfoldingfromcases.html)
+* [multiplayer lean](64025multiplayerlean.html) (6 messages, latest: Nov 30 2018 at 07:30)
 
-### [finset](94506finset.html)
+* [notation and variables](73049notationandvariables.html) (8 messages, latest: Nov 30 2018 at 01:25)
 
-### [finite intersection property](61020finiteintersectionproperty.html)
+* [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html) (4 messages, latest: Nov 29 2018 at 22:13)
 
-### [rcases with hypothesis](66318rcaseswithhypothesis.html)
+* [tidy lost my metavars](40518tidylostmymetavars.html) (16 messages, latest: Nov 29 2018 at 14:48)
 
-### [convert, refl](55671convertrefl.html)
+* ["is_user_leanpkg_path": false](11441isuserleanpkgpathfalse.html) (26 messages, latest: Nov 29 2018 at 11:43)
 
-### [fsplit with name](45872fsplitwithname.html)
+* [Problems with proving add_right_cancel](04817Problemswithprovingaddrightcancel.html) (59 messages, latest: Nov 29 2018 at 09:43)
 
-### [avoid writing (some?) simp-rfl lemmas](39173avoidwritingsomesimprfllemmas.html)
+* [Should measurable_space be a class?](58233Shouldmeasurablespacebeaclass.html) (2 messages, latest: Nov 29 2018 at 09:28)
 
-### [Lean puzzle #3](81153Leanpuzzle3.html)
+* [preorder.lift](11937preorderlift.html) (6 messages, latest: Nov 28 2018 at 22:07)
 
-### [pretty printing underscores](58529prettyprintingunderscores.html)
+* [internship at Oracle Labs](83026internshipatOracleLabs.html) (1 message, latest: Nov 28 2018 at 16:19)
 
-### [Insight](94743Insight.html)
+* [unfolding from cases](26122unfoldingfromcases.html) (2 messages, latest: Nov 28 2018 at 15:50)
 
-### [implicit parameters of structure/class fields](02642implicitparametersofstructureclassfields.html)
+* [finset](94506finset.html) (67 messages, latest: Nov 28 2018 at 06:16)
 
-### [refl v rfl](60452reflvrfl.html)
+* [finite intersection property](61020finiteintersectionproperty.html) (5 messages, latest: Nov 28 2018 at 02:39)
 
-### [Attribute caching implementation details](71470Attributecachingimplementationdetails.html)
+* [rcases with hypothesis](66318rcaseswithhypothesis.html) (3 messages, latest: Nov 28 2018 at 02:02)
 
-### [exact and new goals](69065exactandnewgoals.html)
+* [convert, refl](55671convertrefl.html) (4 messages, latest: Nov 27 2018 at 16:54)
 
-### [finset.sum](35885finsetsum.html)
+* [fsplit with name](45872fsplitwithname.html) (3 messages, latest: Nov 27 2018 at 16:46)
 
-### [order of simp lemmas](72682orderofsimplemmas.html)
+* [avoid writing (some?) simp-rfl lemmas](39173avoidwritingsomesimprfllemmas.html) (11 messages, latest: Nov 27 2018 at 13:54)
 
-### [6 cases](680066cases.html)
+* [Lean puzzle #3](81153Leanpuzzle3.html) (7 messages, latest: Nov 27 2018 at 10:25)
 
-### [rw fails](55897rwfails.html)
+* [pretty printing underscores](58529prettyprintingunderscores.html) (12 messages, latest: Nov 27 2018 at 01:07)
 
-### [linarith](04284linarith.html)
+* [Insight](94743Insight.html) (15 messages, latest: Nov 27 2018 at 01:05)
 
-### [Summer Internships ETH Zurich](74599SummerInternshipsETHZurich.html)
+* [implicit parameters of structure/class fields](02642implicitparametersofstructureclassfields.html) (2 messages, latest: Nov 27 2018 at 00:58)
 
-### [Definitions for binder notations](44791Definitionsforbindernotations.html)
+* [refl v rfl](60452reflvrfl.html) (2 messages, latest: Nov 26 2018 at 18:43)
 
-### [simp](79866simp.html)
+* [Attribute caching implementation details](71470Attributecachingimplementationdetails.html) (7 messages, latest: Nov 26 2018 at 16:10)
 
-### [termination](42891termination.html)
+* [exact and new goals](69065exactandnewgoals.html) (1 message, latest: Nov 26 2018 at 16:00)
 
-### [prime in `ring_theory/associated.lean`](91356primeinringtheoryassociatedlean.html)
+* [finset.sum](35885finsetsum.html) (144 messages, latest: Nov 26 2018 at 15:48)
 
-### [constructivising using `trunc (subtype (is_well_order _))`](82120constructivisingusingtruncsubtypeiswellorder.html)
+* [order of simp lemmas](72682orderofsimplemmas.html) (1 message, latest: Nov 25 2018 at 17:38)
 
-### [Shameless lean 4 request](09475Shamelesslean4request.html)
+* [6 cases](680066cases.html) (16 messages, latest: Nov 24 2018 at 23:27)
 
-### [log](29795log.html)
+* [rw fails](55897rwfails.html) (8 messages, latest: Nov 24 2018 at 19:37)
 
-### [itactic in lean.parser](62484itacticinleanparser.html)
+* [linarith](04284linarith.html) (90 messages, latest: Nov 24 2018 at 17:24)
 
-### [Guessing the type](53481Guessingthetype.html)
+* [Summer Internships ETH Zurich](74599SummerInternshipsETHZurich.html) (18 messages, latest: Nov 24 2018 at 16:27)
 
-### [reflected \alpha](54961reflectedalpha.html)
+* [Definitions for binder notations](44791Definitionsforbindernotations.html) (3 messages, latest: Nov 24 2018 at 14:55)
 
-### [build infrastructure](39122buildinfrastructure.html)
+* [simp](79866simp.html) (5 messages, latest: Nov 24 2018 at 12:07)
 
-### [notation that does nothing](22304notationthatdoesnothing.html)
+* [termination](42891termination.html) (25 messages, latest: Nov 23 2018 at 22:36)
 
-### [`existsi` is so dumb](35408existsiissodumb.html)
+* [prime in `ring_theory/associated.lean`](91356primeinringtheoryassociatedlean.html) (11 messages, latest: Nov 23 2018 at 06:19)
 
-### [can't manually `dunfold` reals](99796cantmanuallydunfoldreals.html)
+* [constructivising using `trunc (subtype (is_well_order _))`](82120constructivisingusingtruncsubtypeiswellorder.html) (7 messages, latest: Nov 23 2018 at 05:46)
 
-### [Leroy entering Collège de France](84929LeroyenteringCollgedeFrance.html)
+* [Shameless lean 4 request](09475Shamelesslean4request.html) (4 messages, latest: Nov 23 2018 at 02:22)
 
-### [@[derive has_reflect]](91640derivehasreflect.html)
+* [log](29795log.html) (3 messages, latest: Nov 23 2018 at 01:30)
 
-### [induction bug](96716inductionbug.html)
+* [itactic in lean.parser](62484itacticinleanparser.html) (6 messages, latest: Nov 22 2018 at 15:43)
 
-### [Abelian groups are Z-modules](14085AbeliangroupsareZmodules.html)
+* [Guessing the type](53481Guessingthetype.html) (7 messages, latest: Nov 22 2018 at 11:11)
 
-### [Substructural type systems](26974Substructuraltypesystems.html)
+* [reflected \alpha](54961reflectedalpha.html) (11 messages, latest: Nov 22 2018 at 10:00)
 
-### [calc lhs/rhs](45015calclhsrhs.html)
+* [build infrastructure](39122buildinfrastructure.html) (52 messages, latest: Nov 22 2018 at 02:37)
 
-### [equality of functions with bounded finite decideable domains](94038equalityoffunctionswithboundedfinitedecideabledomains.html)
+* [notation that does nothing](22304notationthatdoesnothing.html) (10 messages, latest: Nov 21 2018 at 21:50)
 
-### [tfae bug](14623tfaebug.html)
+* [`existsi` is so dumb](35408existsiissodumb.html) (40 messages, latest: Nov 21 2018 at 17:02)
 
-### [poor man's hint database](85855poormanshintdatabase.html)
+* [can't manually `dunfold` reals](99796cantmanuallydunfoldreals.html) (26 messages, latest: Nov 21 2018 at 13:58)
 
-### [cerw](13234cerw.html)
+* [Leroy entering Collège de France](84929LeroyenteringCollgedeFrance.html) (1 message, latest: Nov 21 2018 at 11:54)
 
-### [online leanprover](19268onlineleanprover.html)
+* [@[derive has_reflect]](91640derivehasreflect.html) (6 messages, latest: Nov 21 2018 at 07:12)
 
-### [(¬ Q → ¬ P) → (P → Q)](43567QPPQ.html)
+* [induction bug](96716inductionbug.html) (1 message, latest: Nov 20 2018 at 23:46)
 
-### [instance used](16519instanceused.html)
+* [Abelian groups are Z-modules](14085AbeliangroupsareZmodules.html) (1 message, latest: Nov 20 2018 at 17:51)
 
-### [set intersection](75812setintersection.html)
+* [Substructural type systems](26974Substructuraltypesystems.html) (9 messages, latest: Nov 20 2018 at 17:26)
 
-### [submodule.span](52145submodulespan.html)
+* [calc lhs/rhs](45015calclhsrhs.html) (7 messages, latest: Nov 20 2018 at 16:03)
 
-### [my_polynomial performance](91772mypolynomialperformance.html)
+* [equality of functions with bounded finite decideable domains](94038equalityoffunctionswithboundedfinitedecideabledomains.html) (13 messages, latest: Nov 20 2018 at 14:08)
 
-### [constructing a class for ih](86899constructingaclassforih.html)
+* [tfae bug](14623tfaebug.html) (56 messages, latest: Nov 19 2018 at 22:52)
 
-### [error after completing tactic proof](06317erroraftercompletingtacticproof.html)
+* [poor man's hint database](85855poormanshintdatabase.html) (14 messages, latest: Nov 19 2018 at 10:22)
 
-### [equiv between subsingletons](88037equivbetweensubsingletons.html)
+* [cerw](13234cerw.html) (19 messages, latest: Nov 19 2018 at 09:24)
 
-### [galois correspondences](88621galoiscorrespondences.html)
+* [online leanprover](19268onlineleanprover.html) (39 messages, latest: Nov 18 2018 at 20:48)
 
-### [induction with generalize](57712inductionwithgeneralize.html)
+* [(¬ Q → ¬ P) → (P → Q)](43567QPPQ.html) (8 messages, latest: Nov 18 2018 at 20:38)
 
-### [Try it online!](67651Tryitonline.html)
+* [instance used](16519instanceused.html) (8 messages, latest: Nov 18 2018 at 18:15)
 
-### [pnat and equation compiler?](64871pnatandequationcompiler.html)
+* [set intersection](75812setintersection.html) (8 messages, latest: Nov 18 2018 at 10:38)
 
-### [Typeclasses (again)?](80097Typeclassesagain.html)
+* [submodule.span](52145submodulespan.html) (11 messages, latest: Nov 18 2018 at 04:54)
 
-### [dsimp_config](42739dsimpconfig.html)
+* [my_polynomial performance](91772mypolynomialperformance.html) (11 messages, latest: Nov 18 2018 at 00:45)
 
-### [type class issues](43765typeclassissues.html)
+* [constructing a class for ih](86899constructingaclassforih.html) (5 messages, latest: Nov 17 2018 at 18:12)
 
-### [VScode extension](56578VScodeextension.html)
+* [error after completing tactic proof](06317erroraftercompletingtacticproof.html) (9 messages, latest: Nov 17 2018 at 12:02)
 
-### [zmod](77019zmod.html)
+* [equiv between subsingletons](88037equivbetweensubsingletons.html) (3 messages, latest: Nov 17 2018 at 10:04)
 
-### [how far to go with junk theorem](95945howfartogowithjunktheorem.html)
+* [galois correspondences](88621galoiscorrespondences.html) (4 messages, latest: Nov 17 2018 at 10:02)
 
-### [Lean at ICL](22286LeanatICL.html)
+* [induction with generalize](57712inductionwithgeneralize.html) (14 messages, latest: Nov 17 2018 at 08:59)
 
-### [efficiency](00342efficiency.html)
+* [Try it online!](67651Tryitonline.html) (44 messages, latest: Nov 16 2018 at 23:36)
 
-### [order of inputs to function](51326orderofinputstofunction.html)
+* [pnat and equation compiler?](64871pnatandequationcompiler.html) (4 messages, latest: Nov 16 2018 at 23:33)
 
-### [erw in conv](45148erwinconv.html)
+* [Typeclasses (again)?](80097Typeclassesagain.html) (4 messages, latest: Nov 16 2018 at 23:04)
 
-### [travis "failed to expand macro"](39096travisfailedtoexpandmacro.html)
+* [dsimp_config](42739dsimpconfig.html) (12 messages, latest: Nov 16 2018 at 12:07)
 
-### [When does dec_trivial fail for decidable and true props?](18586Whendoesdectrivialfailfordecidableandtrueprops.html)
+* [type class issues](43765typeclassissues.html) (133 messages, latest: Nov 16 2018 at 08:21)
 
-### [docstrings for lean](78184docstringsforlean.html)
+* [VScode extension](56578VScodeextension.html) (312 messages, latest: Nov 15 2018 at 11:07)
 
-### [mk_structure_instance](54109mkstructureinstance.html)
+* [zmod](77019zmod.html) (6 messages, latest: Nov 15 2018 at 08:30)
 
-### [parametricity](32223parametricity.html)
+* [how far to go with junk theorem](95945howfartogowithjunktheorem.html) (5 messages, latest: Nov 14 2018 at 21:14)
 
-### [Algebraic closure roadmap](27708Algebraicclosureroadmap.html)
+* [Lean at ICL](22286LeanatICL.html) (4 messages, latest: Nov 14 2018 at 21:13)
 
-### [norm_num bug](51786normnumbug.html)
+* [efficiency](00342efficiency.html) (35 messages, latest: Nov 14 2018 at 15:20)
 
-### [instance_max_depth](93871instancemaxdepth.html)
+* [order of inputs to function](51326orderofinputstofunction.html) (2 messages, latest: Nov 14 2018 at 14:53)
 
-### [about compilation](61179aboutcompilation.html)
+* [erw in conv](45148erwinconv.html) (3 messages, latest: Nov 13 2018 at 04:00)
 
-### [rewrite_search](46360rewritesearch.html)
+* [travis "failed to expand macro"](39096travisfailedtoexpandmacro.html) (6 messages, latest: Nov 13 2018 at 01:59)
 
-### ["unexpected token" in vs code](15990unexpectedtokeninvscode.html)
+* [When does dec_trivial fail for decidable and true props?](18586Whendoesdectrivialfailfordecidableandtrueprops.html) (10 messages, latest: Nov 13 2018 at 01:44)
 
-### [`parsing_only`](55574parsingonly.html)
+* [docstrings for lean](78184docstringsforlean.html) (30 messages, latest: Nov 12 2018 at 08:56)
 
-### [ring refactoring](40901ringrefactoring.html)
+* [mk_structure_instance](54109mkstructureinstance.html) (4 messages, latest: Nov 12 2018 at 08:10)
 
-### [another extensionality lemma?](93629anotherextensionalitylemma.html)
+* [parametricity](32223parametricity.html) (26 messages, latest: Nov 12 2018 at 00:40)
 
-### [Lean searching for subsingleton?](03288Leansearchingforsubsingleton.html)
+* [Algebraic closure roadmap](27708Algebraicclosureroadmap.html) (172 messages, latest: Nov 11 2018 at 15:31)
 
-### [caching](33134caching.html)
+* [norm_num bug](51786normnumbug.html) (7 messages, latest: Nov 11 2018 at 13:17)
 
-### [type mismatch error](52419typemismatcherror.html)
+* [instance_max_depth](93871instancemaxdepth.html) (6 messages, latest: Nov 11 2018 at 09:50)
 
-### [subtype_instance](12961subtypeinstance.html)
+* [about compilation](61179aboutcompilation.html) (19 messages, latest: Nov 11 2018 at 06:33)
 
-### [find supr](73964findsupr.html)
+* [rewrite_search](46360rewritesearch.html) (11 messages, latest: Nov 11 2018 at 05:26)
 
-### [timeout](17192timeout.html)
+* ["unexpected token" in vs code](15990unexpectedtokeninvscode.html) (1 message, latest: Nov 10 2018 at 19:14)
 
-### [obtain](04670obtain.html)
+* [`parsing_only`](55574parsingonly.html) (2 messages, latest: Nov 10 2018 at 17:11)
 
-### [Import HOL theorems](95366ImportHOLtheorems.html)
+* [ring refactoring](40901ringrefactoring.html) (7 messages, latest: Nov 10 2018 at 15:48)
 
-### [LUG Freiburg 2018](53290LUGFreiburg2018.html)
+* [another extensionality lemma?](93629anotherextensionalitylemma.html) (2 messages, latest: Nov 10 2018 at 07:25)
 
-### [rec_fn_macro](86943recfnmacro.html)
+* [Lean searching for subsingleton?](03288Leansearchingforsubsingleton.html) (14 messages, latest: Nov 09 2018 at 22:21)
 
-### [a tactic to forget the definition](62254atactictoforgetthedefinition.html)
+* [caching](33134caching.html) (2 messages, latest: Nov 09 2018 at 19:23)
 
-### [pending](25702pending.html)
+* [type mismatch error](52419typemismatcherror.html) (48 messages, latest: Nov 09 2018 at 16:05)
 
-### [type class inference with parameters](62456typeclassinferencewithparameters.html)
+* [subtype_instance](12961subtypeinstance.html) (6 messages, latest: Nov 09 2018 at 15:20)
 
-### [Structure fields](89769Structurefields.html)
+* [find supr](73964findsupr.html) (3 messages, latest: Nov 09 2018 at 14:46)
 
-### [Leanprover community](40324Leanprovercommunity.html)
+* [timeout](17192timeout.html) (12 messages, latest: Nov 09 2018 at 13:24)
 
-### [image binder notation](53124imagebindernotation.html)
+* [obtain](04670obtain.html) (7 messages, latest: Nov 09 2018 at 06:34)
 
-### [module and lattices and etc](86914moduleandlatticesandetc.html)
+* [Import HOL theorems](95366ImportHOLtheorems.html) (9 messages, latest: Nov 08 2018 at 14:13)
 
-### [Finite maps](05553Finitemaps.html)
+* [LUG Freiburg 2018](53290LUGFreiburg2018.html) (166 messages, latest: Nov 08 2018 at 09:30)
 
-### [VS Code in CoCalc!](67298VSCodeinCoCalc.html)
+* [rec_fn_macro](86943recfnmacro.html) (41 messages, latest: Nov 08 2018 at 03:15)
 
-### [old_structure_cmd in structure literals](33035oldstructurecmdinstructureliterals.html)
+* [a tactic to forget the definition](62254atactictoforgetthedefinition.html) (5 messages, latest: Nov 08 2018 at 01:15)
 
-### [apply in expression](52686applyinexpression.html)
+* [pending](25702pending.html) (1 message, latest: Nov 07 2018 at 23:21)
 
-### [tidy](52187tidy.html)
+* [type class inference with parameters](62456typeclassinferencewithparameters.html) (12 messages, latest: Nov 07 2018 at 18:10)
 
-### [module refactoring](97723modulerefactoring.html)
+* [Structure fields](89769Structurefields.html) (10 messages, latest: Nov 07 2018 at 17:45)
 
-### [expr](83264expr.html)
+* [Leanprover community](40324Leanprovercommunity.html) (2 messages, latest: Nov 07 2018 at 12:54)
 
-### [roption name](04301roptionname.html)
+* [image binder notation](53124imagebindernotation.html) (2 messages, latest: Nov 07 2018 at 07:26)
 
-### [mutual inductives](97591mutualinductives.html)
+* [module and lattices and etc](86914moduleandlatticesandetc.html) (3 messages, latest: Nov 06 2018 at 22:08)
 
-### [dsimp; simp](39890dsimpsimp.html)
+* [Finite maps](05553Finitemaps.html) (7 messages, latest: Nov 06 2018 at 21:37)
 
-### [1000th](300461000th.html)
+* [VS Code in CoCalc!](67298VSCodeinCoCalc.html) (6 messages, latest: Nov 06 2018 at 11:12)
 
-### [Defining inverse as a partial function.](01495Defininginverseasapartialfunction.html)
+* [old_structure_cmd in structure literals](33035oldstructurecmdinstructureliterals.html) (5 messages, latest: Nov 06 2018 at 09:11)
 
-### [Mutual induction problem](11191Mutualinductionproblem.html)
+* [apply in expression](52686applyinexpression.html) (1 message, latest: Nov 06 2018 at 09:08)
 
-### [uniform_add_group vs topological_add_group](20463uniformaddgroupvstopologicaladdgroup.html)
+* [tidy](52187tidy.html) (119 messages, latest: Nov 06 2018 at 05:32)
 
-### [lean --make](63481leanmake.html)
+* [module refactoring](97723modulerefactoring.html) (556 messages, latest: Nov 05 2018 at 16:59)
 
-### [performance of `assumption`](66011performanceofassumption.html)
+* [expr](83264expr.html) (52 messages, latest: Nov 05 2018 at 04:00)
 
-### [continuous tactic](13744continuoustactic.html)
+* [roption name](04301roptionname.html) (6 messages, latest: Nov 04 2018 at 19:31)
 
-### [testing](93439testing.html)
+* [mutual inductives](97591mutualinductives.html) (5 messages, latest: Nov 04 2018 at 00:37)
 
-### [Newly Downloaded](56977NewlyDownloaded.html)
+* [dsimp; simp](39890dsimpsimp.html) (6 messages, latest: Nov 03 2018 at 23:34)
 
-### [what is wrong with HoTT](79129whatiswrongwithHoTT.html)
+* [1000th](300461000th.html) (1 message, latest: Nov 03 2018 at 18:16)
 
-### [has_coe_to_fun questions](34376hascoetofunquestions.html)
+* [Defining inverse as a partial function.](01495Defininginverseasapartialfunction.html) (39 messages, latest: Nov 03 2018 at 16:04)
 
-### [Lean talk for mathematicians](50492Leantalkformathematicians.html)
+* [Mutual induction problem](11191Mutualinductionproblem.html) (15 messages, latest: Nov 02 2018 at 20:58)
 
-### [New versions of Presburger tactics](53317NewversionsofPresburgertactics.html)
+* [uniform_add_group vs topological_add_group](20463uniformaddgroupvstopologicaladdgroup.html) (43 messages, latest: Nov 01 2018 at 21:43)
 
-### [zorn](18826zorn.html)
+* [lean --make](63481leanmake.html) (29 messages, latest: Nov 01 2018 at 16:21)
 
-### [integers between 0 and 3](06946integersbetween0and3.html)
+* [performance of `assumption`](66011performanceofassumption.html) (34 messages, latest: Nov 01 2018 at 15:14)
 
-### [quot.ind in metatheory paper](89956quotindinmetatheorypaper.html)
+* [continuous tactic](13744continuoustactic.html) (5 messages, latest: Nov 01 2018 at 07:02)
 
-### [tactic.unfreeze_local_instances](56604tacticunfreezelocalinstances.html)
+* [testing](93439testing.html) (10 messages, latest: Oct 31 2018 at 23:52)
 
-### [T2 space](95251T2space.html)
+* [Newly Downloaded](56977NewlyDownloaded.html) (7 messages, latest: Oct 31 2018 at 23:40)
 
-### [tc](23704tc.html)
+* [what is wrong with HoTT](79129whatiswrongwithHoTT.html) (173 messages, latest: Oct 31 2018 at 19:12)
 
-### [Get olean files without elan on Win10](91011GetoleanfileswithoutelanonWin10.html)
+* [has_coe_to_fun questions](34376hascoetofunquestions.html) (7 messages, latest: Oct 31 2018 at 16:49)
 
-### [travis / good git practice](63137travisgoodgitpractice.html)
+* [Lean talk for mathematicians](50492Leantalkformathematicians.html) (242 messages, latest: Oct 31 2018 at 14:04)
 
-### [deeply unhappy with coercions](64106deeplyunhappywithcoercions.html)
+* [New versions of Presburger tactics](53317NewversionsofPresburgertactics.html) (18 messages, latest: Oct 30 2018 at 21:23)
 
-### [generalizing an unpacked structure](68171generalizinganunpackedstructure.html)
+* [zorn](18826zorn.html) (33 messages, latest: Oct 30 2018 at 21:04)
 
-### [(M1F/P65) syntactic entailment exercise](31387M1FP65syntacticentailmentexercise.html)
+* [integers between 0 and 3](06946integersbetween0and3.html) (24 messages, latest: Oct 30 2018 at 20:34)
 
-### [core](99658core.html)
+* [quot.ind in metatheory paper](89956quotindinmetatheorypaper.html) (17 messages, latest: Oct 29 2018 at 22:32)
 
-### [leanpkg refer to branches](71104leanpkgrefertobranches.html)
+* [tactic.unfreeze_local_instances](56604tacticunfreezelocalinstances.html) (40 messages, latest: Oct 29 2018 at 16:52)
 
-### [Simplifier](76053Simplifier.html)
+* [T2 space](95251T2space.html) (11 messages, latest: Oct 29 2018 at 15:04)
 
-### [head reduction](58432headreduction.html)
+* [tc](23704tc.html) (2 messages, latest: Oct 29 2018 at 03:10)
 
-### [implementation issues](15619implementationissues.html)
+* [Get olean files without elan on Win10](91011GetoleanfileswithoutelanonWin10.html) (9 messages, latest: Oct 27 2018 at 14:40)
 
-### [De Morgan's](81128DeMorgans.html)
+* [travis / good git practice](63137travisgoodgitpractice.html) (22 messages, latest: Oct 27 2018 at 05:30)
 
-### [hott injection](25923hottinjection.html)
+* [deeply unhappy with coercions](64106deeplyunhappywithcoercions.html) (28 messages, latest: Oct 26 2018 at 11:52)
 
-### [a](22626a.html)
+* [generalizing an unpacked structure](68171generalizinganunpackedstructure.html) (3 messages, latest: Oct 25 2018 at 21:49)
 
-### [instance loop?](28591instanceloop.html)
+* [(M1F/P65) syntactic entailment exercise](31387M1FP65syntacticentailmentexercise.html) (143 messages, latest: Oct 24 2018 at 21:04)
 
-### ["Type-Driven Program Synthesis"](70558TypeDrivenProgramSynthesis.html)
+* [core](99658core.html) (1 message, latest: Oct 24 2018 at 20:55)
 
-### [another CPP paper](65709anotherCPPpaper.html)
+* [leanpkg refer to branches](71104leanpkgrefertobranches.html) (2 messages, latest: Oct 24 2018 at 13:43)
 
-### [CPP paper](92540CPPpaper.html)
+* [Simplifier](76053Simplifier.html) (12 messages, latest: Oct 23 2018 at 20:38)
 
-### [matching on vectors](07471matchingonvectors.html)
+* [head reduction](58432headreduction.html) (6 messages, latest: Oct 23 2018 at 18:47)
 
-### [record stub](00190recordstub.html)
+* [implementation issues](15619implementationissues.html) (51 messages, latest: Oct 23 2018 at 18:13)
 
-### [instances](23433instances.html)
+* [De Morgan's](81128DeMorgans.html) (98 messages, latest: Oct 23 2018 at 08:55)
 
-### [on incomprehensibility](13055onincomprehensibility.html)
+* [hott injection](25923hottinjection.html) (7 messages, latest: Oct 23 2018 at 05:48)
 
-### [noncomputable theorem](08268noncomputabletheorem.html)
+* [a](22626a.html) (5 messages, latest: Oct 23 2018 at 01:38)
 
-### [backwards reasoning](49593backwardsreasoning.html)
+* [instance loop?](28591instanceloop.html) (9 messages, latest: Oct 22 2018 at 20:34)
 
-### [case bash tactic](02483casebashtactic.html)
+* ["Type-Driven Program Synthesis"](70558TypeDrivenProgramSynthesis.html) (11 messages, latest: Oct 22 2018 at 07:49)
 
-### [tauto?](46989tauto.html)
+* [another CPP paper](65709anotherCPPpaper.html) (14 messages, latest: Oct 22 2018 at 06:51)
 
-### [declaration linter](39509declarationlinter.html)
+* [CPP paper](92540CPPpaper.html) (124 messages, latest: Oct 21 2018 at 20:53)
 
-### [could meta be a monad](37846couldmetabeamonad.html)
+* [matching on vectors](07471matchingonvectors.html) (24 messages, latest: Oct 21 2018 at 02:02)
 
-### [or distrib over and golf](83722ordistriboverandgolf.html)
+* [record stub](00190recordstub.html) (12 messages, latest: Oct 20 2018 at 23:02)
 
-### [lean golf](48009leangolf.html)
+* [instances](23433instances.html) (8 messages, latest: Oct 20 2018 at 14:44)
 
-### [Dagstuhl tasks](50979Dagstuhltasks.html)
+* [on incomprehensibility](13055onincomprehensibility.html) (4 messages, latest: Oct 20 2018 at 05:20)
 
-### [Basic questions](14638Basicquestions.html)
+* [noncomputable theorem](08268noncomputabletheorem.html) (15 messages, latest: Oct 20 2018 at 00:45)
 
-### [bytecode?](28527bytecode.html)
+* [backwards reasoning](49593backwardsreasoning.html) (2 messages, latest: Oct 20 2018 at 00:05)
 
-### [newbie: proof from assumption of inductively defined prop](21143newbieprooffromassumptionofinductivelydefinedprop.html)
+* [case bash tactic](02483casebashtactic.html) (4 messages, latest: Oct 19 2018 at 23:21)
 
-### [beta meta](81924betameta.html)
+* [tauto?](46989tauto.html) (12 messages, latest: Oct 19 2018 at 22:36)
 
-### [attribute [class] nat.prime](35665attributeclassnatprime.html)
+* [declaration linter](39509declarationlinter.html) (5 messages, latest: Oct 19 2018 at 18:37)
 
-### [p-th root](98462pthroot.html)
+* [could meta be a monad](37846couldmetabeamonad.html) (19 messages, latest: Oct 19 2018 at 16:23)
 
-### [characteristic of fields](85526characteristicoffields.html)
+* [or distrib over and golf](83722ordistriboverandgolf.html) (10 messages, latest: Oct 19 2018 at 00:24)
 
-### [class on itp](42593classonitp.html)
+* [lean golf](48009leangolf.html) (77 messages, latest: Oct 18 2018 at 20:16)
 
-### [simple proof systems](31209simpleproofsystems.html)
+* [Dagstuhl tasks](50979Dagstuhltasks.html) (44 messages, latest: Oct 18 2018 at 18:34)
 
-### [help with travis](86303helpwithtravis.html)
+* [Basic questions](14638Basicquestions.html) (82 messages, latest: Oct 18 2018 at 09:04)
 
-### [p divides pCk for 0<k<p](96545pdividespCkfor0kp.html)
+* [bytecode?](28527bytecode.html) (6 messages, latest: Oct 18 2018 at 00:57)
 
-### [measure theory](76686measuretheory.html)
+* [newbie: proof from assumption of inductively defined prop](21143newbieprooffromassumptionofinductivelydefinedprop.html) (19 messages, latest: Oct 17 2018 at 22:20)
 
-### [visualisation of mathlib's git repo](09558visualisationofmathlibsgitrepo.html)
+* [beta meta](81924betameta.html) (3 messages, latest: Oct 17 2018 at 21:43)
 
-### [project or package](76997projectorpackage.html)
+* [attribute [class] nat.prime](35665attributeclassnatprime.html) (2 messages, latest: Oct 17 2018 at 09:54)
 
-### [propext, quot.sound and eq.rec](71472propextquotsoundandeqrec.html)
+* [p-th root](98462pthroot.html) (4 messages, latest: Oct 17 2018 at 00:40)
 
-### [idempotent constructions and universes](88527idempotentconstructionsanduniverses.html)
+* [characteristic of fields](85526characteristicoffields.html) (131 messages, latest: Oct 16 2018 at 22:53)
 
-### [updating Kevin's installation instructions](07323updatingKevinsinstallationinstructions.html)
+* [class on itp](42593classonitp.html) (22 messages, latest: Oct 15 2018 at 03:27)
 
-### [elan on windows](77961elanonwindows.html)
+* [simple proof systems](31209simpleproofsystems.html) (153 messages, latest: Oct 15 2018 at 01:35)
 
-### [spaces in paths](42135spacesinpaths.html)
+* [help with travis](86303helpwithtravis.html) (5 messages, latest: Oct 14 2018 at 21:53)
 
-### [compile time statistics](39364compiletimestatistics.html)
+* [p divides pCk for 0<k<p](96545pdividespCkfor0kp.html) (6 messages, latest: Oct 14 2018 at 20:25)
 
-### [cfarm.tetaneutral.net - Compile Farm](65330cfarmtetaneutralnetCompileFarm.html)
+* [measure theory](76686measuretheory.html) (87 messages, latest: Oct 14 2018 at 14:59)
 
-### [to_additive](21549toadditive.html)
+* [visualisation of mathlib's git repo](09558visualisationofmathlibsgitrepo.html) (2 messages, latest: Oct 13 2018 at 16:36)
 
-### [Löwenheim-Skolem](12683LwenheimSkolem.html)
+* [project or package](76997projectorpackage.html) (4 messages, latest: Oct 13 2018 at 13:27)
 
-### [simp lemma application order](06678simplemmaapplicationorder.html)
+* [propext, quot.sound and eq.rec](71472propextquotsoundandeqrec.html) (39 messages, latest: Oct 13 2018 at 11:33)
 
-### [checking imports](51083checkingimports.html)
+* [idempotent constructions and universes](88527idempotentconstructionsanduniverses.html) (100 messages, latest: Oct 12 2018 at 22:30)
 
-### [eta for structures](34982etaforstructures.html)
+* [updating Kevin's installation instructions](07323updatingKevinsinstallationinstructions.html) (126 messages, latest: Oct 12 2018 at 17:51)
 
-### [lean home page still pointing to gitter](26505leanhomepagestillpointingtogitter.html)
+* [elan on windows](77961elanonwindows.html) (76 messages, latest: Oct 12 2018 at 17:45)
 
-### [mu2](39381mu2.html)
+* [spaces in paths](42135spacesinpaths.html) (2 messages, latest: Oct 12 2018 at 17:23)
 
-### [quadratic reciprocity](25068quadraticreciprocity.html)
+* [compile time statistics](39364compiletimestatistics.html) (368 messages, latest: Oct 12 2018 at 02:51)
 
-### [What tactic forces beta reduction in goal or hypothesis](66435Whattacticforcesbetareductioningoalorhypothesis.html)
+* [cfarm.tetaneutral.net - Compile Farm](65330cfarmtetaneutralnetCompileFarm.html) (144 messages, latest: Oct 12 2018 at 00:38)
 
-### [frames](90559frames.html)
+* [to_additive](21549toadditive.html) (8 messages, latest: Oct 11 2018 at 18:03)
 
-### [lattice homomorphisms](55612latticehomomorphisms.html)
+* [Löwenheim-Skolem](12683LwenheimSkolem.html) (17 messages, latest: Oct 11 2018 at 17:50)
 
-### [with_infty](89414withinfty.html)
+* [simp lemma application order](06678simplemmaapplicationorder.html) (2 messages, latest: Oct 11 2018 at 03:49)
 
-### [simp_lemmas](48024simplemmas.html)
+* [checking imports](51083checkingimports.html) (35 messages, latest: Oct 11 2018 at 00:08)
 
-### [transparency](26779transparency.html)
+* [eta for structures](34982etaforstructures.html) (18 messages, latest: Oct 10 2018 at 23:15)
 
-### [Canonical structures](08397Canonicalstructures.html)
+* [lean home page still pointing to gitter](26505leanhomepagestillpointingtogitter.html) (19 messages, latest: Oct 10 2018 at 23:14)
 
-### [elan](95713elan.html)
+* [mu2](39381mu2.html) (18 messages, latest: Oct 10 2018 at 22:41)
 
-### [Coq's Abort in Lean](01261CoqsAbortinLean.html)
+* [quadratic reciprocity](25068quadraticreciprocity.html) (2 messages, latest: Oct 10 2018 at 22:33)
 
-### [Problems with the installation of mathlib (Linux)](20267ProblemswiththeinstallationofmathlibLinux.html)
+* [What tactic forces beta reduction in goal or hypothesis](66435Whattacticforcesbetareductioningoalorhypothesis.html) (12 messages, latest: Oct 10 2018 at 22:22)
 
-### [proposal for `backwards_reasoning`](96591proposalforbackwardsreasoning.html)
+* [frames](90559frames.html) (4 messages, latest: Oct 10 2018 at 21:04)
 
-### [nat = int](66348natint.html)
+* [lattice homomorphisms](55612latticehomomorphisms.html) (7 messages, latest: Oct 10 2018 at 19:39)
 
-### [expr.is_internal_cnstr](88943exprisinternalcnstr.html)
+* [with_infty](89414withinfty.html) (17 messages, latest: Oct 10 2018 at 19:25)
 
-### [heq hell again](32676heqhellagain.html)
+* [simp_lemmas](48024simplemmas.html) (14 messages, latest: Oct 10 2018 at 15:47)
 
-### [option troubles](48938optiontroubles.html)
+* [transparency](26779transparency.html) (3 messages, latest: Oct 10 2018 at 14:23)
 
-### [tutorial](22229tutorial.html)
+* [Canonical structures](08397Canonicalstructures.html) (7 messages, latest: Oct 10 2018 at 13:05)
 
-### [tokens](40789tokens.html)
+* [elan](95713elan.html) (5 messages, latest: Oct 10 2018 at 11:41)
 
-### [squeeze_simp](20539squeezesimp.html)
+* [Coq's Abort in Lean](01261CoqsAbortinLean.html) (29 messages, latest: Oct 10 2018 at 10:59)
 
-### [uses of choice](19425usesofchoice.html)
+* [Problems with the installation of mathlib (Linux)](20267ProblemswiththeinstallationofmathlibLinux.html) (10 messages, latest: Oct 10 2018 at 08:52)
 
-### [lean path in vscode](81001leanpathinvscode.html)
+* [proposal for `backwards_reasoning`](96591proposalforbackwardsreasoning.html) (59 messages, latest: Oct 10 2018 at 07:44)
 
-### [association lists, finmap](17620associationlistsfinmap.html)
+* [nat = int](66348natint.html) (68 messages, latest: Oct 09 2018 at 22:30)
 
-### [VScode extension on macOS](74802VScodeextensiononmacOS.html)
+* [expr.is_internal_cnstr](88943exprisinternalcnstr.html) (7 messages, latest: Oct 09 2018 at 21:45)
 
-### ["canonically" identifying two types](18651canonicallyidentifyingtwotypes.html)
+* [heq hell again](32676heqhellagain.html) (39 messages, latest: Oct 09 2018 at 21:21)
 
-### [implicit conv congr](78443implicitconvcongr.html)
+* [option troubles](48938optiontroubles.html) (9 messages, latest: Oct 09 2018 at 20:38)
 
-### [definition depending on theorem](68329definitiondependingontheorem.html)
+* [tutorial](22229tutorial.html) (407 messages, latest: Oct 09 2018 at 18:48)
 
-### [abc conjecture](13913abcconjecture.html)
+* [tokens](40789tokens.html) (38 messages, latest: Oct 08 2018 at 20:08)
 
-### [dependent finsupp](53181dependentfinsupp.html)
+* [squeeze_simp](20539squeezesimp.html) (61 messages, latest: Oct 08 2018 at 19:36)
 
-### [master branch is broken](90648masterbranchisbroken.html)
+* [uses of choice](19425usesofchoice.html) (52 messages, latest: Oct 08 2018 at 18:50)
 
-### [structure stubs](63907structurestubs.html)
+* [lean path in vscode](81001leanpathinvscode.html) (5 messages, latest: Oct 08 2018 at 18:39)
 
-### [extract `imp` from `iff`](02379extractimpfromiff.html)
+* [association lists, finmap](17620associationlistsfinmap.html) (100 messages, latest: Oct 08 2018 at 16:38)
 
-### [how to use transfer](52580howtousetransfer.html)
+* [VScode extension on macOS](74802VScodeextensiononmacOS.html) (19 messages, latest: Oct 08 2018 at 16:07)
 
-### [bundled in category_theory](34126bundledincategorytheory.html)
+* ["canonically" identifying two types](18651canonicallyidentifyingtwotypes.html) (1408 messages, latest: Oct 08 2018 at 11:20)
 
-### [how to use `solve_by_elim`](17064howtousesolvebyelim.html)
+* [implicit conv congr](78443implicitconvcongr.html) (4 messages, latest: Oct 08 2018 at 11:04)
 
-### [Spacemacs Lean Layer](06254SpacemacsLeanLayer.html)
+* [definition depending on theorem](68329definitiondependingontheorem.html) (8 messages, latest: Oct 08 2018 at 10:28)
 
-### [Coercion](98259Coercion.html)
+* [abc conjecture](13913abcconjecture.html) (2 messages, latest: Oct 07 2018 at 12:23)
 
-### [mono](52186mono.html)
+* [dependent finsupp](53181dependentfinsupp.html) (50 messages, latest: Oct 07 2018 at 09:57)
 
-### [From fields to sets](72590Fromfieldstosets.html)
+* [master branch is broken](90648masterbranchisbroken.html) (7 messages, latest: Oct 07 2018 at 08:22)
 
-### [funky notation](02618funkynotation.html)
+* [structure stubs](63907structurestubs.html) (2 messages, latest: Oct 07 2018 at 05:18)
 
-### [TFAE](86753TFAE.html)
+* [extract `imp` from `iff`](02379extractimpfromiff.html) (5 messages, latest: Oct 07 2018 at 02:51)
 
-### [mul and add type class hierarchies](98442mulandaddtypeclasshierarchies.html)
+* [how to use transfer](52580howtousetransfer.html) (115 messages, latest: Oct 06 2018 at 12:01)
 
-### [local attribute [instance] classical.prop_decidable](19351localattributeinstanceclassicalpropdecidable.html)
+* [bundled in category_theory](34126bundledincategorytheory.html) (15 messages, latest: Oct 06 2018 at 10:08)
 
-### [trace simp!](72554tracesimp.html)
+* [how to use `solve_by_elim`](17064howtousesolvebyelim.html) (21 messages, latest: Oct 06 2018 at 06:49)
 
-### [missing ext lemmas?](81802missingextlemmas.html)
+* [Spacemacs Lean Layer](06254SpacemacsLeanLayer.html) (5 messages, latest: Oct 06 2018 at 02:31)
 
-### [trash](83523trash.html)
+* [Coercion](98259Coercion.html) (17 messages, latest: Oct 05 2018 at 18:43)
 
-### [über-tactic](88094bertactic.html)
+* [mono](52186mono.html) (1 message, latest: Oct 05 2018 at 00:13)
 
-### [discard tactic_state after failure?](09676discardtacticstateafterfailure.html)
+* [From fields to sets](72590Fromfieldstosets.html) (9 messages, latest: Oct 04 2018 at 23:54)
 
-### [and_iff_and_of_iff_and_iff](58856andiffandofiffandiff.html)
+* [funky notation](02618funkynotation.html) (7 messages, latest: Oct 04 2018 at 17:01)
 
-### ["div_neg"](93377divneg.html)
+* [TFAE](86753TFAE.html) (242 messages, latest: Oct 04 2018 at 15:08)
 
-### [closure_compl_eq vs closure_compl](58029closurecompleqvsclosurecompl.html)
+* [mul and add type class hierarchies](98442mulandaddtypeclasshierarchies.html) (6 messages, latest: Oct 04 2018 at 10:08)
 
-### [pure](87197pure.html)
+* [local attribute [instance] classical.prop_decidable](19351localattributeinstanceclassicalpropdecidable.html) (2 messages, latest: Oct 04 2018 at 00:36)
 
-### [tidy bug](24153tidybug.html)
+* [trace simp!](72554tracesimp.html) (3 messages, latest: Oct 03 2018 at 23:03)
 
-### [proof help](24048proofhelp.html)
+* [missing ext lemmas?](81802missingextlemmas.html) (50 messages, latest: Oct 03 2018 at 22:54)
 
-### [AITP](07119AITP.html)
+* [trash](83523trash.html) (1 message, latest: Oct 03 2018 at 22:54)
 
-### [has_mem disjoint](60703hasmemdisjoint.html)
+* [über-tactic](88094bertactic.html) (101 messages, latest: Oct 03 2018 at 17:57)
 
-### [CoCalc](90182CoCalc.html)
+* [discard tactic_state after failure?](09676discardtacticstateafterfailure.html) (6 messages, latest: Oct 03 2018 at 11:31)
 
-### [assumptions in big_operators](79342assumptionsinbigoperators.html)
+* [and_iff_and_of_iff_and_iff](58856andiffandofiffandiff.html) (9 messages, latest: Oct 03 2018 at 10:17)
 
-### [data.fintype imports big_operators](82566datafintypeimportsbigoperators.html)
+* ["div_neg"](93377divneg.html) (202 messages, latest: Oct 03 2018 at 09:28)
 
-### [merge sprint](83665mergesprint.html)
+* [closure_compl_eq vs closure_compl](58029closurecompleqvsclosurecompl.html) (11 messages, latest: Oct 03 2018 at 09:20)
 
-### [readable subquotients](17447readablesubquotients.html)
+* [pure](87197pure.html) (20 messages, latest: Oct 03 2018 at 09:18)
 
-### [request](03626request.html)
+* [tidy bug](24153tidybug.html) (41 messages, latest: Oct 03 2018 at 09:14)
 
-### [subset of quotient](83717subsetofquotient.html)
+* [proof help](24048proofhelp.html) (14 messages, latest: Oct 03 2018 at 09:12)
 
-### [various to_strings](50998varioustostrings.html)
+* [AITP](07119AITP.html) (7 messages, latest: Oct 02 2018 at 23:54)
 
-### [simp_config placeholder](86354simpconfigplaceholder.html)
+* [has_mem disjoint](60703hasmemdisjoint.html) (48 messages, latest: Oct 02 2018 at 21:23)
 
-### [Pain](76553Pain.html)
+* [CoCalc](90182CoCalc.html) (264 messages, latest: Oct 02 2018 at 16:26)
 
-### [assumption vs decidable_eq Sort*](18193assumptionvsdecidableeqSort.html)
+* [assumptions in big_operators](79342assumptionsinbigoperators.html) (13 messages, latest: Oct 02 2018 at 15:46)
 
-### [nonempty quotient](83252nonemptyquotient.html)
+* [data.fintype imports big_operators](82566datafintypeimportsbigoperators.html) (2 messages, latest: Oct 02 2018 at 15:36)
 
-### [linarith & nat](36869linarithnat.html)
+* [merge sprint](83665mergesprint.html) (1 message, latest: Oct 01 2018 at 20:59)
 
-### [leftover trace?](48438leftovertrace.html)
+* [readable subquotients](17447readablesubquotients.html) (7 messages, latest: Oct 01 2018 at 16:45)
 
-### [Un-including an include](10945Unincludinganinclude.html)
+* [request](03626request.html) (2 messages, latest: Oct 01 2018 at 15:04)
 
-### [ordered_comm_monoid](43990orderedcommmonoid.html)
+* [subset of quotient](83717subsetofquotient.html) (149 messages, latest: Oct 01 2018 at 14:48)
 
-### [Mathematics and Philosophy](68243MathematicsandPhilosophy.html)
+* [various to_strings](50998varioustostrings.html) (4 messages, latest: Oct 01 2018 at 13:25)
 
-### [livestreaming](28699livestreaming.html)
+* [simp_config placeholder](86354simpconfigplaceholder.html) (2 messages, latest: Oct 01 2018 at 12:14)
 
-### [galois insertion](57755galoisinsertion.html)
+* [Pain](76553Pain.html) (8 messages, latest: Oct 01 2018 at 10:31)
 
-### [implicit arguments, and `ring`](00033implicitargumentsandring.html)
+* [assumption vs decidable_eq Sort*](18193assumptionvsdecidableeqSort.html) (2 messages, latest: Oct 01 2018 at 08:26)
 
-### [ext1 vs ext : 1](71528ext1vsext1.html)
+* [nonempty quotient](83252nonemptyquotient.html) (2 messages, latest: Sep 30 2018 at 22:56)
 
-### [unexpectedly long](52683unexpectedlylong.html)
+* [linarith & nat](36869linarithnat.html) (17 messages, latest: Sep 30 2018 at 17:20)
 
-### ["finset.singleton x" vs "{x}"](84452finsetsingletonxvsx.html)
+* [leftover trace?](48438leftovertrace.html) (4 messages, latest: Sep 30 2018 at 01:01)
 
-### [finset vs finite](40978finsetvsfinite.html)
+* [Un-including an include](10945Unincludinganinclude.html) (12 messages, latest: Sep 29 2018 at 22:48)
 
-### [monotonicity lemma](52473monotonicitylemma.html)
+* [ordered_comm_monoid](43990orderedcommmonoid.html) (9 messages, latest: Sep 29 2018 at 22:26)
 
-### [simp list.map id](82287simplistmapid.html)
+* [Mathematics and Philosophy](68243MathematicsandPhilosophy.html) (5 messages, latest: Sep 29 2018 at 20:23)
 
-### [sets not types? nat and int again](64678setsnottypesnatandintagain.html)
+* [livestreaming](28699livestreaming.html) (14 messages, latest: Sep 29 2018 at 17:05)
 
-### [Physics?](32035Physics.html)
+* [galois insertion](57755galoisinsertion.html) (26 messages, latest: Sep 29 2018 at 13:51)
 
-### [rewrite under a pi](11835rewriteunderapi.html)
+* [implicit arguments, and `ring`](00033implicitargumentsandring.html) (32 messages, latest: Sep 29 2018 at 13:26)
 
-### [Happy birthday, Kevin!](13508HappybirthdayKevin.html)
+* [ext1 vs ext : 1](71528ext1vsext1.html) (16 messages, latest: Sep 29 2018 at 01:45)
 
-### [dec_trivial performance](25977dectrivialperformance.html)
+* [unexpectedly long](52683unexpectedlylong.html) (30 messages, latest: Sep 28 2018 at 19:59)
 
-### [excessive memory](16265excessivememory.html)
+* ["finset.singleton x" vs "{x}"](84452finsetsingletonxvsx.html) (7 messages, latest: Sep 28 2018 at 19:27)
 
-### [import directories](30873importdirectories.html)
+* [finset vs finite](40978finsetvsfinite.html) (2 messages, latest: Sep 28 2018 at 15:43)
 
-### [libgmp dependency](88411libgmpdependency.html)
+* [monotonicity lemma](52473monotonicitylemma.html) (1 message, latest: Sep 28 2018 at 15:00)
 
-### [quotients](67981quotients.html)
+* [simp list.map id](82287simplistmapid.html) (3 messages, latest: Sep 28 2018 at 11:00)
 
-### [slogan](74693slogan.html)
+* [sets not types? nat and int again](64678setsnottypesnatandintagain.html) (28 messages, latest: Sep 28 2018 at 09:55)
 
-### [cheap Windows install](22596cheapWindowsinstall.html)
+* [Physics?](32035Physics.html) (8 messages, latest: Sep 28 2018 at 01:08)
 
-### [reflection](27916reflection.html)
+* [rewrite under a pi](11835rewriteunderapi.html) (26 messages, latest: Sep 27 2018 at 17:42)
 
-### [{1, 2, ..., n-1}](7573412n1.html)
+* [Happy birthday, Kevin!](13508HappybirthdayKevin.html) (69 messages, latest: Sep 27 2018 at 13:21)
 
-### [leanprover-community](03089leanprovercommunity.html)
+* [dec_trivial performance](25977dectrivialperformance.html) (3 messages, latest: Sep 27 2018 at 09:40)
 
-### [Orderable Topology on Naturals](35285OrderableTopologyonNaturals.html)
+* [excessive memory](16265excessivememory.html) (36 messages, latest: Sep 27 2018 at 00:25)
 
-### [Pipes in lean on windows](56929Pipesinleanonwindows.html)
+* [import directories](30873importdirectories.html) (5 messages, latest: Sep 26 2018 at 19:47)
 
-### [vscode extension installs Lean](70572vscodeextensioninstallsLean.html)
+* [libgmp dependency](88411libgmpdependency.html) (3 messages, latest: Sep 26 2018 at 17:58)
 
-### [Hopcroft is speaking!](21301Hopcroftisspeaking.html)
+* [quotients](67981quotients.html) (107 messages, latest: Sep 26 2018 at 13:20)
 
-### [can coercions be abused?](50034cancoercionsbeabused.html)
+* [slogan](74693slogan.html) (1 message, latest: Sep 25 2018 at 22:13)
 
-### [use/coerce one dependent type as an equal one?](98309usecoerceonedependenttypeasanequalone.html)
+* [cheap Windows install](22596cheapWindowsinstall.html) (8 messages, latest: Sep 25 2018 at 17:59)
 
-### [order on options](08294orderonoptions.html)
+* [reflection](27916reflection.html) (4 messages, latest: Sep 25 2018 at 14:16)
 
-### [overriding decidable instances](59343overridingdecidableinstances.html)
+* [{1, 2, ..., n-1}](7573412n1.html) (20 messages, latest: Sep 25 2018 at 13:27)
 
-### [confusion with sigma types](57079confusionwithsigmatypes.html)
+* [leanprover-community](03089leanprovercommunity.html) (5 messages, latest: Sep 25 2018 at 03:10)
 
-### [Stubborn unify](88059Stubbornunify.html)
+* [Orderable Topology on Naturals](35285OrderableTopologyonNaturals.html) (2 messages, latest: Sep 24 2018 at 21:14)
 
-### [rewrite_cfg](18578rewritecfg.html)
+* [Pipes in lean on windows](56929Pipesinleanonwindows.html) (3 messages, latest: Sep 24 2018 at 18:01)
 
-### [Proof examples?](05925Proofexamples.html)
+* [vscode extension installs Lean](70572vscodeextensioninstallsLean.html) (106 messages, latest: Sep 24 2018 at 11:57)
 
-### [vcode vim](27550vcodevim.html)
+* [Hopcroft is speaking!](21301Hopcroftisspeaking.html) (20 messages, latest: Sep 24 2018 at 11:45)
 
-### [a nat is just a non-negative int](96702anatisjustanonnegativeint.html)
+* [can coercions be abused?](50034cancoercionsbeabused.html) (14 messages, latest: Sep 24 2018 at 11:39)
 
-### [caching proofs](20999cachingproofs.html)
+* [use/coerce one dependent type as an equal one?](98309usecoerceonedependenttypeasanequalone.html) (8 messages, latest: Sep 23 2018 at 16:29)
 
-### [Hales' review of Lean](20828HalesreviewofLean.html)
+* [order on options](08294orderonoptions.html) (32 messages, latest: Sep 23 2018 at 06:46)
 
-### [look what I found on the internet](74262lookwhatIfoundontheinternet.html)
+* [overriding decidable instances](59343overridingdecidableinstances.html) (7 messages, latest: Sep 22 2018 at 08:29)
 
-### [quadratic reciprocity graph](67390quadraticreciprocitygraph.html)
+* [confusion with sigma types](57079confusionwithsigmatypes.html) (13 messages, latest: Sep 22 2018 at 06:32)
 
-### [Compilers meet Theorem Provers @ ETH Zurich](35253CompilersmeetTheoremProversETHZurich.html)
+* [Stubborn unify](88059Stubbornunify.html) (3 messages, latest: Sep 22 2018 at 02:33)
 
-### [Antiquoting inside a tactic quotation](33133Antiquotinginsideatacticquotation.html)
+* [rewrite_cfg](18578rewritecfg.html) (12 messages, latest: Sep 22 2018 at 02:15)
 
-### [simpa using h vs simp at h, simp [h]](61101simpausinghvssimpathsimph.html)
+* [Proof examples?](05925Proofexamples.html) (21 messages, latest: Sep 21 2018 at 07:39)
 
-### [vscode input completions for markdown](01772vscodeinputcompletionsformarkdown.html)
+* [vcode vim](27550vcodevim.html) (3 messages, latest: Sep 21 2018 at 01:59)
 
-### [resolving a name](72316resolvinganame.html)
+* [a nat is just a non-negative int](96702anatisjustanonnegativeint.html) (46 messages, latest: Sep 20 2018 at 20:20)
 
-### [This will brick your computer!](44283Thiswillbrickyourcomputer.html)
+* [caching proofs](20999cachingproofs.html) (74 messages, latest: Sep 19 2018 at 19:40)
 
-### [Projection after mk-structure](44550Projectionaftermkstructure.html)
+* [Hales' review of Lean](20828HalesreviewofLean.html) (103 messages, latest: Sep 19 2018 at 13:40)
 
-### [mathlib on windows](87882mathlibonwindows.html)
+* [look what I found on the internet](74262lookwhatIfoundontheinternet.html) (4 messages, latest: Sep 18 2018 at 20:53)
 
-### [why is this slow?](17585whyisthisslow.html)
+* [quadratic reciprocity graph](67390quadraticreciprocitygraph.html) (139 messages, latest: Sep 18 2018 at 01:23)
 
-### [scratch files](12700scratchfiles.html)
+* [Compilers meet Theorem Provers @ ETH Zurich](35253CompilersmeetTheoremProversETHZurich.html) (8 messages, latest: Sep 17 2018 at 18:50)
 
-### [noob "resuse variable name" question](52425noobresusevariablenamequestion.html)
+* [Antiquoting inside a tactic quotation](33133Antiquotinginsideatacticquotation.html) (16 messages, latest: Sep 17 2018 at 17:47)
 
-### [defining a dependent function out of `fin 2`](74975definingadependentfunctionoutoffin2.html)
+* [simpa using h vs simp at h, simp [h]](61101simpausinghvssimpathsimph.html) (10 messages, latest: Sep 17 2018 at 15:50)
 
-### [Discussions on github for PR, issues etc](85189DiscussionsongithubforPRissuesetc.html)
+* [vscode input completions for markdown](01772vscodeinputcompletionsformarkdown.html) (3 messages, latest: Sep 17 2018 at 11:55)
 
-### [inequality proof](26316inequalityproof.html)
+* [resolving a name](72316resolvinganame.html) (29 messages, latest: Sep 17 2018 at 11:20)
 
-### [failed to add declaration](73720failedtoadddeclaration.html)
+* [This will brick your computer!](44283Thiswillbrickyourcomputer.html) (17 messages, latest: Sep 17 2018 at 08:33)
 
-### [io](68345io.html)
+* [Projection after mk-structure](44550Projectionaftermkstructure.html) (7 messages, latest: Sep 17 2018 at 06:46)
 
-### [unchecked cast](36054uncheckedcast.html)
+* [mathlib on windows](87882mathlibonwindows.html) (20 messages, latest: Sep 17 2018 at 04:02)
 
-### [simp as rw](28727simpasrw.html)
+* [why is this slow?](17585whyisthisslow.html) (18 messages, latest: Sep 16 2018 at 13:48)
 
-### [meta + universes](53623metauniverses.html)
+* [scratch files](12700scratchfiles.html) (7 messages, latest: Sep 16 2018 at 12:48)
 
-### [equation has not been used in the compilation](31254equationhasnotbeenusedinthecompilation.html)
+* [noob "resuse variable name" question](52425noobresusevariablenamequestion.html) (3 messages, latest: Sep 16 2018 at 12:32)
 
-### [hlist](37797hlist.html)
+* [defining a dependent function out of `fin 2`](74975definingadependentfunctionoutoffin2.html) (38 messages, latest: Sep 16 2018 at 09:18)
 
-### ["funext, congr" fails in conv](17472funextcongrfailsinconv.html)
+* [Discussions on github for PR, issues etc](85189DiscussionsongithubforPRissuesetc.html) (4 messages, latest: Sep 16 2018 at 01:29)
 
-### ["refine" can't go with λ ⟨_, _⟩, _](07374refinecantgowith.html)
+* [inequality proof](26316inequalityproof.html) (22 messages, latest: Sep 15 2018 at 23:25)
 
-### [proof using inductive vs def](01104proofusinginductivevsdef.html)
+* [failed to add declaration](73720failedtoadddeclaration.html) (3 messages, latest: Sep 15 2018 at 21:43)
 
-### [SMTLIB generation and semantics](17970SMTLIBgenerationandsemantics.html)
+* [io](68345io.html) (7 messages, latest: Sep 15 2018 at 16:16)
 
-### [nat.strong_rec_on](21444natstrongrecon.html)
+* [unchecked cast](36054uncheckedcast.html) (15 messages, latest: Sep 15 2018 at 16:06)
 
-### [adding a definition](84434addingadefinition.html)
+* [simp as rw](28727simpasrw.html) (11 messages, latest: Sep 15 2018 at 11:25)
 
-### [naming conventions](31665namingconventions.html)
+* [meta + universes](53623metauniverses.html) (16 messages, latest: Sep 15 2018 at 10:53)
 
-### [local recursive function](60330localrecursivefunction.html)
+* [equation has not been used in the compilation](31254equationhasnotbeenusedinthecompilation.html) (5 messages, latest: Sep 15 2018 at 10:29)
 
-### [dependent argument hell](66336dependentargumenthell.html)
+* [hlist](37797hlist.html) (16 messages, latest: Sep 15 2018 at 10:14)
 
-### [tactic noobie](45525tacticnoobie.html)
+* ["funext, congr" fails in conv](17472funextcongrfailsinconv.html) (7 messages, latest: Sep 15 2018 at 10:01)
 
-### [match hypothesis](78110matchhypothesis.html)
+* ["refine" can't go with λ ⟨_, _⟩, _](07374refinecantgowith.html) (5 messages, latest: Sep 15 2018 at 09:56)
 
-### [vector spaces](12051vectorspaces.html)
+* [proof using inductive vs def](01104proofusinginductivevsdef.html) (30 messages, latest: Sep 15 2018 at 06:04)
 
-### [leanpkg upgrade](09099leanpkgupgrade.html)
+* [SMTLIB generation and semantics](17970SMTLIBgenerationandsemantics.html) (4 messages, latest: Sep 15 2018 at 00:40)
 
-### [int order](19144intorder.html)
+* [nat.strong_rec_on](21444natstrongrecon.html) (5 messages, latest: Sep 14 2018 at 20:22)
 
-### [Deligne on univalence](48864Deligneonunivalence.html)
+* [adding a definition](84434addingadefinition.html) (29 messages, latest: Sep 14 2018 at 19:07)
 
-### [slick minimum](98067slickminimum.html)
+* [naming conventions](31665namingconventions.html) (1 message, latest: Sep 14 2018 at 18:56)
 
-### [well-founded exists](70055wellfoundedexists.html)
+* [local recursive function](60330localrecursivefunction.html) (6 messages, latest: Sep 14 2018 at 18:42)
 
-### [Sequences in topological/metric spaces](83475Sequencesintopologicalmetricspaces.html)
+* [dependent argument hell](66336dependentargumenthell.html) (195 messages, latest: Sep 14 2018 at 14:11)
 
-### [coercing finset to set](38243coercingfinsettoset.html)
+* [tactic noobie](45525tacticnoobie.html) (8 messages, latest: Sep 14 2018 at 14:05)
 
-### [simp 0 < 1](83799simp01.html)
+* [match hypothesis](78110matchhypothesis.html) (44 messages, latest: Sep 14 2018 at 11:33)
 
-### [failed to start child process](28762failedtostartchildprocess.html)
+* [vector spaces](12051vectorspaces.html) (52 messages, latest: Sep 14 2018 at 10:04)
 
-### [haveI bug](98316haveIbug.html)
+* [leanpkg upgrade](09099leanpkgupgrade.html) (11 messages, latest: Sep 13 2018 at 21:07)
 
-### [new behaviour of ext?](37173newbehaviourofext.html)
+* [int order](19144intorder.html) (45 messages, latest: Sep 13 2018 at 19:43)
 
-### [naturals_in_reals](89367naturalsinreals.html)
+* [Deligne on univalence](48864Deligneonunivalence.html) (17 messages, latest: Sep 13 2018 at 18:23)
 
-### [custom induction](94825custominduction.html)
+* [slick minimum](98067slickminimum.html) (3 messages, latest: Sep 13 2018 at 16:22)
 
-### [is there a tactic?](03821isthereatactic.html)
+* [well-founded exists](70055wellfoundedexists.html) (29 messages, latest: Sep 13 2018 at 16:12)
 
-### [RSA in Lean](57694RSAinLean.html)
+* [Sequences in topological/metric spaces](83475Sequencesintopologicalmetricspaces.html) (71 messages, latest: Sep 13 2018 at 15:40)
 
-### [is github slow for everyone or just me?](32593isgithubslowforeveryoneorjustme.html)
+* [coercing finset to set](38243coercingfinsettoset.html) (5 messages, latest: Sep 13 2018 at 08:24)
 
-### [Noob meta question](39790Noobmetaquestion.html)
+* [simp 0 < 1](83799simp01.html) (12 messages, latest: Sep 12 2018 at 19:55)
 
-### [live streaming](77339livestreaming.html)
+* [failed to start child process](28762failedtostartchildprocess.html) (13 messages, latest: Sep 12 2018 at 18:57)
 
-### [Ubuntu package for Lean?](91542UbuntupackageforLean.html)
+* [haveI bug](98316haveIbug.html) (1 message, latest: Sep 12 2018 at 18:29)
 
-### [simp_attr](54516simpattr.html)
+* [new behaviour of ext?](37173newbehaviourofext.html) (7 messages, latest: Sep 12 2018 at 16:20)
 
-### [git rebase](63223gitrebase.html)
+* [naturals_in_reals](89367naturalsinreals.html) (16 messages, latest: Sep 12 2018 at 15:12)
 
-### [replacer](59087replacer.html)
+* [custom induction](94825custominduction.html) (6 messages, latest: Sep 12 2018 at 11:52)
 
-### [semimodules, more module headaches](35875semimodulesmoremoduleheadaches.html)
+* [is there a tactic?](03821isthereatactic.html) (24 messages, latest: Sep 12 2018 at 11:10)
 
-### [Eckmann–Hilton](72225EckmannHilton.html)
+* [RSA in Lean](57694RSAinLean.html) (29 messages, latest: Sep 12 2018 at 10:37)
 
-### [finding a failed](76294findingafailed.html)
+* [is github slow for everyone or just me?](32593isgithubslowforeveryoneorjustme.html) (9 messages, latest: Sep 11 2018 at 16:59)
 
-### [monotonity](53761monotonity.html)
+* [Noob meta question](39790Noobmetaquestion.html) (10 messages, latest: Sep 11 2018 at 16:49)
 
-### [is_open {x | x + u \in U}](44794isopenxxuinU.html)
+* [live streaming](77339livestreaming.html) (19 messages, latest: Sep 11 2018 at 15:17)
 
-### [heq again](35647heqagain.html)
+* [Ubuntu package for Lean?](91542UbuntupackageforLean.html) (45 messages, latest: Sep 11 2018 at 15:09)
 
-### [can you help me make it clear](49805canyouhelpmemakeitclear.html)
+* [simp_attr](54516simpattr.html) (22 messages, latest: Sep 11 2018 at 14:03)
 
-### [matching subsingletons](42236matchingsubsingletons.html)
+* [git rebase](63223gitrebase.html) (7 messages, latest: Sep 11 2018 at 07:39)
 
-### [rw inside lambda](82983rwinsidelambda.html)
+* [replacer](59087replacer.html) (19 messages, latest: Sep 11 2018 at 03:51)
 
-### [abel tactic](56973abeltactic.html)
+* [semimodules, more module headaches](35875semimodulesmoremoduleheadaches.html) (11 messages, latest: Sep 10 2018 at 22:15)
 
-### [simplify bricks with function.injective](08701simplifybrickswithfunctioninjective.html)
+* [Eckmann–Hilton](72225EckmannHilton.html) (20 messages, latest: Sep 10 2018 at 21:44)
 
-### [Groebner Basis Tactics](67858GroebnerBasisTactics.html)
+* [finding a failed](76294findingafailed.html) (8 messages, latest: Sep 10 2018 at 21:40)
 
-### [simplify field in tactic](51393simplifyfieldintactic.html)
+* [monotonity](53761monotonity.html) (2 messages, latest: Sep 10 2018 at 21:15)
 
-### [full names](41672fullnames.html)
+* [is_open {x | x + u \in U}](44794isopenxxuinU.html) (18 messages, latest: Sep 10 2018 at 20:59)
 
-### [naming](18235naming.html)
+* [heq again](35647heqagain.html) (90 messages, latest: Sep 10 2018 at 19:48)
 
-### [algorithms in the tactic monad](89018algorithmsinthetacticmonad.html)
+* [can you help me make it clear](49805canyouhelpmemakeitclear.html) (22 messages, latest: Sep 10 2018 at 17:32)
 
-### [rcases + quotients](77081rcasesquotients.html)
+* [matching subsingletons](42236matchingsubsingletons.html) (1 message, latest: Sep 10 2018 at 12:09)
 
-### [give #eval more time](01593giveevalmoretime.html)
+* [rw inside lambda](82983rwinsidelambda.html) (41 messages, latest: Sep 10 2018 at 10:22)
 
-### [rext](35236rext.html)
+* [abel tactic](56973abeltactic.html) (3 messages, latest: Sep 10 2018 at 09:34)
 
-### [more expr munging](65864moreexprmunging.html)
+* [simplify bricks with function.injective](08701simplifybrickswithfunctioninjective.html) (1 message, latest: Sep 10 2018 at 08:35)
 
-### [constructing expr.lam](98059constructingexprlam.html)
+* [Groebner Basis Tactics](67858GroebnerBasisTactics.html) (7 messages, latest: Sep 10 2018 at 08:34)
 
-### [finset implementation](75408finsetimplementation.html)
+* [simplify field in tactic](51393simplifyfieldintactic.html) (21 messages, latest: Sep 10 2018 at 08:26)
 
-### [card_nonempty](04116cardnonempty.html)
+* [full names](41672fullnames.html) (255 messages, latest: Sep 09 2018 at 20:30)
 
-### [false.elim](99873falseelim.html)
+* [naming](18235naming.html) (9 messages, latest: Sep 09 2018 at 20:27)
 
-### [monad in begin...end](14413monadinbeginend.html)
+* [algorithms in the tactic monad](89018algorithmsinthetacticmonad.html) (34 messages, latest: Sep 09 2018 at 19:37)
 
-### [functoriality tactic](54886functorialitytactic.html)
+* [rcases + quotients](77081rcasesquotients.html) (9 messages, latest: Sep 09 2018 at 18:56)
 
-### [pi_instance](02286piinstance.html)
+* [give #eval more time](01593giveevalmoretime.html) (11 messages, latest: Sep 09 2018 at 18:50)
 
-### [metavars](87332metavars.html)
+* [rext](35236rext.html) (44 messages, latest: Sep 09 2018 at 14:44)
 
-### [CPU overload+overheat](82734CPUoverloadoverheat.html)
+* [more expr munging](65864moreexprmunging.html) (28 messages, latest: Sep 09 2018 at 14:13)
 
-### [sum ite over fin](01137sumiteoverfin.html)
+* [constructing expr.lam](98059constructingexprlam.html) (8 messages, latest: Sep 09 2018 at 11:06)
 
-### [is this true without decidable](99190isthistruewithoutdecidable.html)
+* [finset implementation](75408finsetimplementation.html) (23 messages, latest: Sep 09 2018 at 01:43)
 
-### [rcases?](76545rcases.html)
+* [card_nonempty](04116cardnonempty.html) (8 messages, latest: Sep 08 2018 at 21:02)
 
-### [tidy & nonempty](27419tidynonempty.html)
+* [false.elim](99873falseelim.html) (2 messages, latest: Sep 08 2018 at 19:13)
 
-### [applyI](73584applyI.html)
+* [monad in begin...end](14413monadinbeginend.html) (2 messages, latest: Sep 08 2018 at 15:19)
 
-### [simp lemma](04902simplemma.html)
+* [functoriality tactic](54886functorialitytactic.html) (52 messages, latest: Sep 08 2018 at 14:05)
 
-### [subst at hyp](13048substathyp.html)
+* [pi_instance](02286piinstance.html) (3 messages, latest: Sep 08 2018 at 11:34)
 
-### [partial finset.filter?](08042partialfinsetfilter.html)
+* [metavars](87332metavars.html) (2 messages, latest: Sep 08 2018 at 02:26)
 
-### [segfault](65884segfault.html)
+* [CPU overload+overheat](82734CPUoverloadoverheat.html) (4 messages, latest: Sep 07 2018 at 18:44)
 
-### [olean files](51171oleanfiles.html)
+* [sum ite over fin](01137sumiteoverfin.html) (8 messages, latest: Sep 07 2018 at 16:07)
 
-### [I accidentally changed a core file](93323Iaccidentallychangedacorefile.html)
+* [is this true without decidable](99190isthistruewithoutdecidable.html) (6 messages, latest: Sep 07 2018 at 15:18)
 
-### [sigma, subtype, custom structure](64674sigmasubtypecustomstructure.html)
+* [rcases?](76545rcases.html) (5 messages, latest: Sep 07 2018 at 14:53)
 
-### [diamond problem](41934diamondproblem.html)
+* [tidy & nonempty](27419tidynonempty.html) (1 message, latest: Sep 07 2018 at 13:11)
 
-### [hacking `rintro`](25140hackingrintro.html)
+* [applyI](73584applyI.html) (17 messages, latest: Sep 07 2018 at 12:58)
 
-### [rfl lemmas](50212rfllemmas.html)
+* [simp lemma](04902simplemma.html) (1 message, latest: Sep 07 2018 at 11:40)
 
-### [changing `field`](88452changingfield.html)
+* [subst at hyp](13048substathyp.html) (24 messages, latest: Sep 07 2018 at 11:02)
 
-### [can meta `def`?](69128canmetadef.html)
+* [partial finset.filter?](08042partialfinsetfilter.html) (1 message, latest: Sep 07 2018 at 09:00)
 
-### [behaviour of simpa changed](21663behaviourofsimpachanged.html)
+* [segfault](65884segfault.html) (82 messages, latest: Sep 06 2018 at 23:46)
 
-### [filters](74298filters.html)
+* [olean files](51171oleanfiles.html) (3 messages, latest: Sep 06 2018 at 19:53)
 
-### [mul vs map_mul](43203mulvsmapmul.html)
+* [I accidentally changed a core file](93323Iaccidentallychangedacorefile.html) (17 messages, latest: Sep 06 2018 at 16:48)
 
-### [partial order noob questions](08643partialordernoobquestions.html)
+* [sigma, subtype, custom structure](64674sigmasubtypecustomstructure.html) (1 message, latest: Sep 06 2018 at 13:26)
 
-### [equational lemmas](90227equationallemmas.html)
+* [diamond problem](41934diamondproblem.html) (4 messages, latest: Sep 06 2018 at 11:20)
 
-### [brew install lean](75464brewinstalllean.html)
+* [hacking `rintro`](25140hackingrintro.html) (3 messages, latest: Sep 06 2018 at 06:40)
 
-### [is this choice computable?](48331isthischoicecomputable.html)
+* [rfl lemmas](50212rfllemmas.html) (4 messages, latest: Sep 06 2018 at 06:35)
 
-### [performance improvements to ring](28815performanceimprovementstoring.html)
+* [changing `field`](88452changingfield.html) (65 messages, latest: Sep 06 2018 at 02:25)
 
-### [error from last commit to data/polynomial](43052errorfromlastcommittodatapolynomial.html)
+* [can meta `def`?](69128canmetadef.html) (30 messages, latest: Sep 05 2018 at 21:28)
 
-### [Leo's slides on Lean 4](37712LeosslidesonLean4.html)
+* [behaviour of simpa changed](21663behaviourofsimpachanged.html) (2 messages, latest: Sep 05 2018 at 19:57)
 
-### [tidy hole command](71650tidyholecommand.html)
+* [filters](74298filters.html) (9 messages, latest: Sep 05 2018 at 16:39)
 
-### [transfer between mv_polynomial unit and polynomial](38861transferbetweenmvpolynomialunitandpolynomial.html)
+* [mul vs map_mul](43203mulvsmapmul.html) (3 messages, latest: Sep 05 2018 at 12:21)
 
-### [big proof](19801bigproof.html)
+* [partial order noob questions](08643partialordernoobquestions.html) (20 messages, latest: Sep 04 2018 at 21:40)
 
-### [source code browser](57681sourcecodebrowser.html)
+* [equational lemmas](90227equationallemmas.html) (54 messages, latest: Sep 04 2018 at 21:07)
 
-### [#reduce "X"++"Y" fails](49562reduceXYfails.html)
+* [brew install lean](75464brewinstalllean.html) (5 messages, latest: Sep 04 2018 at 20:17)
 
-### [preorder](85028preorder.html)
+* [is this choice computable?](48331isthischoicecomputable.html) (8 messages, latest: Sep 04 2018 at 16:02)
 
-### [Dagstuhl](81309Dagstuhl.html)
+* [performance improvements to ring](28815performanceimprovementstoring.html) (21 messages, latest: Sep 04 2018 at 09:14)
 
-### [Orsay meeting report](09684Orsaymeetingreport.html)
+* [error from last commit to data/polynomial](43052errorfromlastcommittodatapolynomial.html) (2 messages, latest: Sep 04 2018 at 08:22)
 
-### [How should I PR?](73800HowshouldIPR.html)
+* [Leo's slides on Lean 4](37712LeosslidesonLean4.html) (23 messages, latest: Sep 04 2018 at 06:19)
 
-### [group.one?](73693groupone.html)
+* [tidy hole command](71650tidyholecommand.html) (16 messages, latest: Sep 03 2018 at 22:29)
 
-### [CS stuff](60703CSstuff.html)
+* [transfer between mv_polynomial unit and polynomial](38861transferbetweenmvpolynomialunitandpolynomial.html) (3 messages, latest: Sep 03 2018 at 22:12)
 
-### [macs](20005macs.html)
+* [big proof](19801bigproof.html) (1 message, latest: Sep 03 2018 at 21:37)
 
-### [derive handlers](82097derivehandlers.html)
+* [source code browser](57681sourcecodebrowser.html) (54 messages, latest: Sep 03 2018 at 20:44)
 
-### [explode command](28785explodecommand.html)
+* [#reduce "X"++"Y" fails](49562reduceXYfails.html) (8 messages, latest: Sep 03 2018 at 17:22)
 
-### [subtype instance](53986subtypeinstance.html)
+* [preorder](85028preorder.html) (8 messages, latest: Sep 03 2018 at 13:22)
 
-### [cardinals of finite sets](24101cardinalsoffinitesets.html)
+* [Dagstuhl](81309Dagstuhl.html) (29 messages, latest: Sep 03 2018 at 12:19)
 
-### [parser.of_tactic is broken when the tactic fails](62623parseroftacticisbrokenwhenthetacticfails.html)
+* [Orsay meeting report](09684Orsaymeetingreport.html) (7 messages, latest: Sep 02 2018 at 21:52)
 
-### [hole commands](76731holecommands.html)
+* [How should I PR?](73800HowshouldIPR.html) (55 messages, latest: Sep 02 2018 at 18:12)
 
-### [Installing lean2 on Windows 10](34609Installinglean2onWindows10.html)
+* [group.one?](73693groupone.html) (3 messages, latest: Sep 02 2018 at 09:04)
 
-### [potential projects](80411potentialprojects.html)
+* [CS stuff](60703CSstuff.html) (86 messages, latest: Sep 01 2018 at 22:28)
 
-### [structural recursion](63764structuralrecursion.html)
+* [macs](20005macs.html) (12 messages, latest: Sep 01 2018 at 21:19)
 
-### [using_well_founded](47902usingwellfounded.html)
+* [derive handlers](82097derivehandlers.html) (3 messages, latest: Aug 31 2018 at 23:22)
 
-### [lifting the tactic monad](87862liftingthetacticmonad.html)
+* [explode command](28785explodecommand.html) (42 messages, latest: Aug 31 2018 at 14:37)
 
-### [Mathlib Quiz](40971MathlibQuiz.html)
+* [subtype instance](53986subtypeinstance.html) (1 message, latest: Aug 31 2018 at 12:59)
 
-### [Lean Crawler](80817LeanCrawler.html)
+* [cardinals of finite sets](24101cardinalsoffinitesets.html) (14 messages, latest: Aug 31 2018 at 09:20)
 
-### [Heisenbug](84699Heisenbug.html)
+* [parser.of_tactic is broken when the tactic fails](62623parseroftacticisbrokenwhenthetacticfails.html) (1 message, latest: Aug 31 2018 at 01:36)
 
-### [Updating Mathlib](68222UpdatingMathlib.html)
+* [hole commands](76731holecommands.html) (4 messages, latest: Aug 30 2018 at 20:19)
 
-### [cancel isos](53477cancelisos.html)
+* [Installing lean2 on Windows 10](34609Installinglean2onWindows10.html) (4 messages, latest: Aug 30 2018 at 10:28)
 
-### [obviously](00813obviously.html)
+* [potential projects](80411potentialprojects.html) (4 messages, latest: Aug 29 2018 at 09:34)
 
-### [category theory directories](55735categorytheorydirectories.html)
+* [structural recursion](63764structuralrecursion.html) (2 messages, latest: Aug 29 2018 at 05:35)
 
-### [best definition of "congruent mod 37"](43440bestdefinitionofcongruentmod37.html)
+* [using_well_founded](47902usingwellfounded.html) (17 messages, latest: Aug 28 2018 at 23:36)
 
-### [docs sprint](90698docssprint.html)
+* [lifting the tactic monad](87862liftingthetacticmonad.html) (32 messages, latest: Aug 28 2018 at 13:51)
 
-### [from tactics to terms](08878fromtacticstoterms.html)
+* [Mathlib Quiz](40971MathlibQuiz.html) (31 messages, latest: Aug 28 2018 at 07:41)
 
-### [meta mutual def errors](45420metamutualdeferrors.html)
+* [Lean Crawler](80817LeanCrawler.html) (3 messages, latest: Aug 27 2018 at 22:00)
 
-### [undead](84306undead.html)
+* [Heisenbug](84699Heisenbug.html) (4 messages, latest: Aug 26 2018 at 16:46)
 
-### [naming for subsingletons](10802namingforsubsingletons.html)
+* [Updating Mathlib](68222UpdatingMathlib.html) (57 messages, latest: Aug 25 2018 at 18:54)
 
-### [list notation](42057listnotation.html)
+* [cancel isos](53477cancelisos.html) (10 messages, latest: Aug 25 2018 at 17:47)
 
-### [rw feature](99350rwfeature.html)
+* [obviously](00813obviously.html) (3 messages, latest: Aug 25 2018 at 17:08)
 
-### [auxiliary lemma for induction](01273auxiliarylemmaforinduction.html)
+* [category theory directories](55735categorytheorydirectories.html) (8 messages, latest: Aug 25 2018 at 17:06)
 
-### [succ_pred_eq_of_pos](98259succpredeqofpos.html)
+* [best definition of "congruent mod 37"](43440bestdefinitionofcongruentmod37.html) (32 messages, latest: Aug 25 2018 at 14:05)
 
-### [doing casts with `simp`](85093doingcastswithsimp.html)
+* [docs sprint](90698docssprint.html) (48 messages, latest: Aug 24 2018 at 20:05)
 
-### [mono and ac_mono in the nursery](51801monoandacmonointhenursery.html)
+* [from tactics to terms](08878fromtacticstoterms.html) (8 messages, latest: Aug 24 2018 at 17:35)
 
-### [category theory design](49748categorytheorydesign.html)
+* [meta mutual def errors](45420metamutualdeferrors.html) (9 messages, latest: Aug 24 2018 at 16:00)
 
-### [unfolding definitions](31843unfoldingdefinitions.html)
+* [undead](84306undead.html) (82 messages, latest: Aug 24 2018 at 01:46)
 
-### [declaration inspection](60387declarationinspection.html)
+* [naming for subsingletons](10802namingforsubsingletons.html) (3 messages, latest: Aug 23 2018 at 20:23)
 
-### [N, order, 0 and 1](62391Norder0and1.html)
+* [list notation](42057listnotation.html) (6 messages, latest: Aug 23 2018 at 20:07)
 
-### [substs and reflexivity](74195substsandreflexivity.html)
+* [rw feature](99350rwfeature.html) (9 messages, latest: Aug 23 2018 at 16:24)
 
-### [public PRs](21269publicPRs.html)
+* [auxiliary lemma for induction](01273auxiliarylemmaforinduction.html) (5 messages, latest: Aug 23 2018 at 16:02)
 
-### [Default arguments with type parameter](35579Defaultargumentswithtypeparameter.html)
+* [succ_pred_eq_of_pos](98259succpredeqofpos.html) (1 message, latest: Aug 23 2018 at 15:46)
 
-### [[meta] reduce an expr](53958metareduceanexpr.html)
+* [doing casts with `simp`](85093doingcastswithsimp.html) (5 messages, latest: Aug 23 2018 at 13:25)
 
-### [create alias](56063createalias.html)
+* [mono and ac_mono in the nursery](51801monoandacmonointhenursery.html) (13 messages, latest: Aug 22 2018 at 22:00)
 
-### [lifting Prop to Type](12564liftingProptoType.html)
+* [category theory design](49748categorytheorydesign.html) (84 messages, latest: Aug 22 2018 at 17:22)
 
-### [cc is unexpectedly fast](01899ccisunexpectedlyfast.html)
+* [unfolding definitions](31843unfoldingdefinitions.html) (6 messages, latest: Aug 22 2018 at 17:10)
 
-### [Ed's question barrage](87312Edsquestionbarrage.html)
+* [declaration inspection](60387declarationinspection.html) (66 messages, latest: Aug 21 2018 at 23:18)
 
-### [metavariable details](16948metavariabledetails.html)
+* [N, order, 0 and 1](62391Norder0and1.html) (9 messages, latest: Aug 20 2018 at 12:05)
 
-### [vscode settings bug](92980vscodesettingsbug.html)
+* [substs and reflexivity](74195substsandreflexivity.html) (1 message, latest: Aug 20 2018 at 10:50)
 
-### [Teaching lean to high school students](59753Teachingleantohighschoolstudents.html)
+* [public PRs](21269publicPRs.html) (214 messages, latest: Aug 18 2018 at 14:18)
 
-### [building @[extensionality] lemmas for structures](24753buildingextensionalitylemmasforstructures.html)
+* [Default arguments with type parameter](35579Defaultargumentswithtypeparameter.html) (7 messages, latest: Aug 18 2018 at 13:58)
 
-### [LEAN_PATH](92013LEANPATH.html)
+* [[meta] reduce an expr](53958metareduceanexpr.html) (7 messages, latest: Aug 17 2018 at 22:08)
 
-### ["vscode freezes my machine"](49112vscodefreezesmymachine.html)
+* [create alias](56063createalias.html) (46 messages, latest: Aug 17 2018 at 17:53)
 
-### [(meta) get a list of all definition in a file](74341metagetalistofalldefinitioninafile.html)
+* [lifting Prop to Type](12564liftingProptoType.html) (4 messages, latest: Aug 17 2018 at 16:57)
 
-### [instance](18934instance.html)
+* [cc is unexpectedly fast](01899ccisunexpectedlyfast.html) (4 messages, latest: Aug 17 2018 at 08:12)
 
-### [array induction](78605arrayinduction.html)
+* [Ed's question barrage](87312Edsquestionbarrage.html) (185 messages, latest: Aug 16 2018 at 20:40)
 
-### [in the library already?](99791inthelibraryalready.html)
+* [metavariable details](16948metavariabledetails.html) (4 messages, latest: Aug 16 2018 at 20:04)
 
-### [how to prove a vector space](42366howtoproveavectorspace.html)
+* [vscode settings bug](92980vscodesettingsbug.html) (9 messages, latest: Aug 16 2018 at 19:07)
 
-### [cpu on mac](31671cpuonmac.html)
+* [Teaching lean to high school students](59753Teachingleantohighschoolstudents.html) (72 messages, latest: Aug 16 2018 at 11:57)
 
-### [bug](50143bug.html)
+* [building @[extensionality] lemmas for structures](24753buildingextensionalitylemmasforstructures.html) (25 messages, latest: Aug 15 2018 at 00:42)
 
-### [meta timeout](88815metatimeout.html)
+* [LEAN_PATH](92013LEANPATH.html) (1 message, latest: Aug 14 2018 at 23:55)
 
-### [print `expr` in plaintext](86653printexprinplaintext.html)
+* ["vscode freezes my machine"](49112vscodefreezesmymachine.html) (3 messages, latest: Aug 14 2018 at 23:39)
 
-### [Tail-call elimination?](22700Tailcallelimination.html)
+* [(meta) get a list of all definition in a file](74341metagetalistofalldefinitioninafile.html) (6 messages, latest: Aug 14 2018 at 21:28)
 
-### [[vscode] completions](38122vscodecompletions.html)
+* [instance](18934instance.html) (11 messages, latest: Aug 14 2018 at 18:55)
 
-### [`a = b := rfl`](96988abrfl.html)
+* [array induction](78605arrayinduction.html) (16 messages, latest: Aug 14 2018 at 17:57)
 
-### [singleton](65236singleton.html)
+* [in the library already?](99791inthelibraryalready.html) (1 message, latest: Aug 14 2018 at 01:31)
 
-### [Potential vm bug](51666Potentialvmbug.html)
+* [how to prove a vector space](42366howtoproveavectorspace.html) (5 messages, latest: Aug 13 2018 at 12:53)
 
-### [nursery](60089nursery.html)
+* [cpu on mac](31671cpuonmac.html) (21 messages, latest: Aug 13 2018 at 12:16)
 
-### [`mk_app`](84025mkapp.html)
+* [bug](50143bug.html) (4 messages, latest: Aug 13 2018 at 12:10)
 
-### ["Higher universe" io type](85543Higheruniverseiotype.html)
+* [meta timeout](88815metatimeout.html) (12 messages, latest: Aug 13 2018 at 02:07)
 
-### [Simplify dite statements](78620Simplifyditestatements.html)
+* [print `expr` in plaintext](86653printexprinplaintext.html) (22 messages, latest: Aug 13 2018 at 00:12)
 
-### [equivalence relation on wrong type](58237equivalencerelationonwrongtype.html)
+* [Tail-call elimination?](22700Tailcallelimination.html) (4 messages, latest: Aug 12 2018 at 19:18)
 
-### [Forward declarations](74575Forwarddeclarations.html)
+* [[vscode] completions](38122vscodecompletions.html) (32 messages, latest: Aug 12 2018 at 19:15)
 
-### [Does an applicative depend on pure?](54421Doesanapplicativedependonpure.html)
+* [`a = b := rfl`](96988abrfl.html) (73 messages, latest: Aug 12 2018 at 15:25)
 
-### [notation introduce variables](64659notationintroducevariables.html)
+* [singleton](65236singleton.html) (40 messages, latest: Aug 12 2018 at 04:23)
 
-### [Event announcement: CS meets math](73414EventannouncementCSmeetsmath.html)
+* [Potential vm bug](51666Potentialvmbug.html) (8 messages, latest: Aug 11 2018 at 18:10)
 
-### [import renaming?](75628importrenaming.html)
+* [nursery](60089nursery.html) (3 messages, latest: Aug 11 2018 at 11:36)
 
-### [idle software developer to help make lean more easily usable](69840idlesoftwaredevelopertohelpmakeleanmoreeasilyusable.html)
+* [`mk_app`](84025mkapp.html) (151 messages, latest: Aug 10 2018 at 22:15)
 
-### [print list name](59403printlistname.html)
+* ["Higher universe" io type](85543Higheruniverseiotype.html) (32 messages, latest: Aug 10 2018 at 21:33)
 
-### [Logic & Proof](02939LogicProof.html)
+* [Simplify dite statements](78620Simplifyditestatements.html) (14 messages, latest: Aug 10 2018 at 14:29)
 
-### [tactic for applying at appropriate assumptions](52230tacticforapplyingatappropriateassumptions.html)
+* [equivalence relation on wrong type](58237equivalencerelationonwrongtype.html) (7 messages, latest: Aug 10 2018 at 12:44)
 
-### [has_coe of function](84622hascoeoffunction.html)
+* [Forward declarations](74575Forwarddeclarations.html) (24 messages, latest: Aug 10 2018 at 12:27)
 
-### [rationals that are actually integers](27607rationalsthatareactuallyintegers.html)
+* [Does an applicative depend on pure?](54421Doesanapplicativedependonpure.html) (2 messages, latest: Aug 10 2018 at 09:46)
 
-### [rcases names](79702rcasesnames.html)
+* [notation introduce variables](64659notationintroducevariables.html) (6 messages, latest: Aug 10 2018 at 01:10)
 
-### [filter Lean messages](30239filterLeanmessages.html)
+* [Event announcement: CS meets math](73414EventannouncementCSmeetsmath.html) (2 messages, latest: Aug 09 2018 at 21:14)
 
-### [sneakiness with `auto_param`](23770sneakinesswithautoparam.html)
+* [import renaming?](75628importrenaming.html) (8 messages, latest: Aug 09 2018 at 19:02)
 
-### [#maths](76097maths.html)
+* [idle software developer to help make lean more easily usable](69840idlesoftwaredevelopertohelpmakeleanmoreeasilyusable.html) (25 messages, latest: Aug 09 2018 at 16:58)
 
-### [quotient.hrec_on₂](87308quotienthrecon.html)
+* [print list name](59403printlistname.html) (24 messages, latest: Aug 09 2018 at 10:53)
 
-### [stats](32112stats.html)
+* [Logic & Proof](02939LogicProof.html) (108 messages, latest: Aug 09 2018 at 10:03)
 
-### [design of products/equalizers/kernels/pullbacks](82635designofproductsequalizerskernelspullbacks.html)
+* [tactic for applying at appropriate assumptions](52230tacticforapplyingatappropriateassumptions.html) (50 messages, latest: Aug 09 2018 at 09:18)
 
-### [Category theory PR](85628CategorytheoryPR.html)
+* [has_coe of function](84622hascoeoffunction.html) (13 messages, latest: Aug 09 2018 at 07:47)
 
-### [Precedence of function application](21598Precedenceoffunctionapplication.html)
+* [rationals that are actually integers](27607rationalsthatareactuallyintegers.html) (23 messages, latest: Aug 09 2018 at 07:32)
 
-### [apply def or theorem](37131applydefortheorem.html)
+* [rcases names](79702rcasesnames.html) (30 messages, latest: Aug 08 2018 at 23:37)
 
-### [how to call this lemma](64146howtocallthislemma.html)
+* [filter Lean messages](30239filterLeanmessages.html) (3 messages, latest: Aug 08 2018 at 18:54)
 
-### [esimp?](56062esimp.html)
+* [sneakiness with `auto_param`](23770sneakinesswithautoparam.html) (54 messages, latest: Aug 08 2018 at 16:57)
 
-### [can we make a core lemma into a simp lemma](55555canwemakeacorelemmaintoasimplemma.html)
+* [#maths](76097maths.html) (12 messages, latest: Aug 08 2018 at 16:32)
 
-### [equality from scratch](20107equalityfromscratch.html)
+* [quotient.hrec_on₂](87308quotienthrecon.html) (93 messages, latest: Aug 08 2018 at 14:04)
 
-### [Tell leanpkg to use (n-1) cpu cores](42501Tellleanpkgtousen1cpucores.html)
+* [stats](32112stats.html) (1 message, latest: Aug 08 2018 at 13:32)
 
-### [basic struggles](23907basicstruggles.html)
+* [design of products/equalizers/kernels/pullbacks](82635designofproductsequalizerskernelspullbacks.html) (20 messages, latest: Aug 08 2018 at 13:01)
 
-### [type class trace dump](16734typeclasstracedump.html)
+* [Category theory PR](85628CategorytheoryPR.html) (72 messages, latest: Aug 08 2018 at 12:52)
 
-### [Documentation strings](33061Documentationstrings.html)
+* [Precedence of function application](21598Precedenceoffunctionapplication.html) (7 messages, latest: Aug 08 2018 at 02:28)
 
-### [should fintype take a sort?](49532shouldfintypetakeasort.html)
+* [apply def or theorem](37131applydefortheorem.html) (16 messages, latest: Aug 08 2018 at 00:14)
 
-### [more problems with coercions](32921moreproblemswithcoercions.html)
+* [how to call this lemma](64146howtocallthislemma.html) (19 messages, latest: Aug 07 2018 at 16:10)
 
-### [simp inside expressions with coe_to_fun sometimes fails](21691simpinsideexpressionswithcoetofunsometimesfails.html)
+* [esimp?](56062esimp.html) (21 messages, latest: Aug 07 2018 at 15:38)
 
-### [simp lemma `a + (b + -a) = b`?](83804simplemmaabab.html)
+* [can we make a core lemma into a simp lemma](55555canwemakeacorelemmaintoasimplemma.html) (11 messages, latest: Aug 07 2018 at 15:01)
 
-### [Theorems](28136Theorems.html)
+* [equality from scratch](20107equalityfromscratch.html) (28 messages, latest: Aug 07 2018 at 14:30)
 
-### [a or b or c or d](64142aorborcord.html)
+* [Tell leanpkg to use (n-1) cpu cores](42501Tellleanpkgtousen1cpucores.html) (38 messages, latest: Aug 07 2018 at 11:36)
 
-### [show is slow](14275showisslow.html)
+* [basic struggles](23907basicstruggles.html) (42 messages, latest: Aug 07 2018 at 09:24)
 
-### [trivially false](25708triviallyfalse.html)
+* [type class trace dump](16734typeclasstracedump.html) (1 message, latest: Aug 07 2018 at 08:25)
 
-### [structures](83621structures.html)
+* [Documentation strings](33061Documentationstrings.html) (7 messages, latest: Aug 06 2018 at 23:18)
 
-### [namespace design issues vs. pedagogy](91947namespacedesignissuesvspedagogy.html)
+* [should fintype take a sort?](49532shouldfintypetakeasort.html) (18 messages, latest: Aug 06 2018 at 21:11)
 
-### [reflect bool](07922reflectbool.html)
+* [more problems with coercions](32921moreproblemswithcoercions.html) (27 messages, latest: Aug 06 2018 at 08:31)
 
-### [tidy is wicked strong](06827tidyiswickedstrong.html)
+* [simp inside expressions with coe_to_fun sometimes fails](21691simpinsideexpressionswithcoetofunsometimesfails.html) (55 messages, latest: Aug 06 2018 at 04:41)
 
-### [congr_arg and superficially dependent functions](43922congrargandsuperficiallydependentfunctions.html)
+* [simp lemma `a + (b + -a) = b`?](83804simplemmaabab.html) (20 messages, latest: Aug 06 2018 at 00:18)
 
-### [`tactic expr` in interactive mode](34354tacticexprininteractivemode.html)
+* [Theorems](28136Theorems.html) (4 messages, latest: Aug 05 2018 at 18:30)
 
-### [increase memory consumption threshold](14768increasememoryconsumptionthreshold.html)
+* [a or b or c or d](64142aorborcord.html) (18 messages, latest: Aug 05 2018 at 01:13)
 
-### [Literate Lean](08411LiterateLean.html)
+* [show is slow](14275showisslow.html) (49 messages, latest: Aug 04 2018 at 19:33)
 
-### [pedagogy vs. "dumping internal representation"](95664pedagogyvsdumpinginternalrepresentation.html)
+* [trivially false](25708triviallyfalse.html) (9 messages, latest: Aug 04 2018 at 11:22)
 
-### [Figure out the rest by cc](25467Figureouttherestbycc.html)
+* [structures](83621structures.html) (42 messages, latest: Aug 04 2018 at 10:16)
 
-### [How does lean work?](90300Howdoesleanwork.html)
+* [namespace design issues vs. pedagogy](91947namespacedesignissuesvspedagogy.html) (8 messages, latest: Aug 03 2018 at 19:02)
 
-### [leanpkg artifact storage location](80479leanpkgartifactstoragelocation.html)
+* [reflect bool](07922reflectbool.html) (6 messages, latest: Aug 03 2018 at 15:41)
 
-### [Building lean2](91713Buildinglean2.html)
+* [tidy is wicked strong](06827tidyiswickedstrong.html) (25 messages, latest: Aug 03 2018 at 13:16)
 
-### [Fields medals](45326Fieldsmedals.html)
+* [congr_arg and superficially dependent functions](43922congrargandsuperficiallydependentfunctions.html) (10 messages, latest: Aug 03 2018 at 11:30)
 
-### [sqrt](70251sqrt.html)
+* [`tactic expr` in interactive mode](34354tacticexprininteractivemode.html) (17 messages, latest: Aug 03 2018 at 08:25)
 
-### [associativity](54221associativity.html)
+* [increase memory consumption threshold](14768increasememoryconsumptionthreshold.html) (12 messages, latest: Aug 02 2018 at 20:29)
 
-### [conv in sum](72163convinsum.html)
+* [Literate Lean](08411LiterateLean.html) (3 messages, latest: Aug 02 2018 at 20:05)
 
-### [DeepSpec Summer School Lectures](34418DeepSpecSummerSchoolLectures.html)
+* [pedagogy vs. "dumping internal representation"](95664pedagogyvsdumpinginternalrepresentation.html) (3 messages, latest: Aug 02 2018 at 19:07)
 
-### [quot.ind](75475quotind.html)
+* [Figure out the rest by cc](25467Figureouttherestbycc.html) (19 messages, latest: Aug 02 2018 at 16:13)
 
-### [Are all inductive types enumerable?](00401Areallinductivetypesenumerable.html)
+* [How does lean work?](90300Howdoesleanwork.html) (3 messages, latest: Aug 02 2018 at 05:43)
 
-### [ring bug again?](04462ringbugagain.html)
+* [leanpkg artifact storage location](80479leanpkgartifactstoragelocation.html) (11 messages, latest: Aug 02 2018 at 03:18)
 
-### [How did simp prove my lemma?](00534Howdidsimpprovemylemma.html)
+* [Building lean2](91713Buildinglean2.html) (12 messages, latest: Aug 02 2018 at 00:41)
 
-### [computable function Type 2 -> Type 1](93477computablefunctionType2Type1.html)
+* [Fields medals](45326Fieldsmedals.html) (64 messages, latest: Aug 01 2018 at 23:24)
 
-### [Casting from Prop to Type u](32793CastingfromProptoTypeu.html)
+* [sqrt](70251sqrt.html) (15 messages, latest: Aug 01 2018 at 22:45)
 
-### [Lean assignment from Kenny](08179LeanassignmentfromKenny.html)
+* [associativity](54221associativity.html) (83 messages, latest: Aug 01 2018 at 20:37)
 
-### [creating lambda without tactic](27899creatinglambdawithouttactic.html)
+* [conv in sum](72163convinsum.html) (3 messages, latest: Aug 01 2018 at 18:39)
 
-### [products](34165products.html)
+* [DeepSpec Summer School Lectures](34418DeepSpecSummerSchoolLectures.html) (1 message, latest: Aug 01 2018 at 18:37)
 
-### [make explicit argument implicit](52991makeexplicitargumentimplicit.html)
+* [quot.ind](75475quotind.html) (7 messages, latest: Aug 01 2018 at 12:40)
 
-### [min of non-empty set of nats](74264minofnonemptysetofnats.html)
+* [Are all inductive types enumerable?](00401Areallinductivetypesenumerable.html) (6 messages, latest: Aug 01 2018 at 08:56)
 
-### [isomorphism](72219isomorphism.html)
+* [ring bug again?](04462ringbugagain.html) (7 messages, latest: Jul 31 2018 at 16:19)
 
-### [keep a changelog](19023keepachangelog.html)
+* [How did simp prove my lemma?](00534Howdidsimpprovemylemma.html) (22 messages, latest: Jul 31 2018 at 15:06)
 
-### [le_min_of_mem](85479leminofmem.html)
+* [computable function Type 2 -> Type 1](93477computablefunctionType2Type1.html) (4 messages, latest: Jul 31 2018 at 11:54)
 
-### [well_founded.fix](86798wellfoundedfix.html)
+* [Casting from Prop to Type u](32793CastingfromProptoTypeu.html) (4 messages, latest: Jul 31 2018 at 11:48)
 
-### [computable_min](60592computablemin.html)
+* [Lean assignment from Kenny](08179LeanassignmentfromKenny.html) (25 messages, latest: Jul 31 2018 at 09:50)
 
-### [automatic cases](79543automaticcases.html)
+* [creating lambda without tactic](27899creatinglambdawithouttactic.html) (13 messages, latest: Jul 31 2018 at 00:52)
 
-### [timeout with split_ifs](72721timeoutwithsplitifs.html)
+* [products](34165products.html) (16 messages, latest: Jul 30 2018 at 18:19)
 
-### [Still don't understand simp](87350Stilldontunderstandsimp.html)
+* [make explicit argument implicit](52991makeexplicitargumentimplicit.html) (6 messages, latest: Jul 30 2018 at 17:12)
 
-### [Simon's "traversable" PR's.](52554SimonstraversablePRs.html)
+* [min of non-empty set of nats](74264minofnonemptysetofnats.html) (3 messages, latest: Jul 30 2018 at 12:55)
 
-### [ICMS 2018: What is in mathlib?](80057ICMS2018Whatisinmathlib.html)
+* [isomorphism](72219isomorphism.html) (5 messages, latest: Jul 30 2018 at 11:54)
 
-### [nth_le](74139nthle.html)
+* [keep a changelog](19023keepachangelog.html) (2 messages, latest: Jul 29 2018 at 18:09)
 
-### [inconsistency of theorem naming](03149inconsistencyoftheoremnaming.html)
+* [le_min_of_mem](85479leminofmem.html) (4 messages, latest: Jul 28 2018 at 22:10)
 
-### [Missing some set theorems?](50145Missingsomesettheorems.html)
+* [well_founded.fix](86798wellfoundedfix.html) (6 messages, latest: Jul 28 2018 at 21:12)
 
-### [finset.sum_single](31502finsetsumsingle.html)
+* [computable_min](60592computablemin.html) (3 messages, latest: Jul 28 2018 at 19:00)
 
-### [exact this](52942exactthis.html)
+* [automatic cases](79543automaticcases.html) (8 messages, latest: Jul 28 2018 at 11:46)
 
-### [prop_decidable breaks dec_trivial?](30795propdecidablebreaksdectrivial.html)
+* [timeout with split_ifs](72721timeoutwithsplitifs.html) (12 messages, latest: Jul 28 2018 at 10:17)
 
-### [adding an element to a set](51153addinganelementtoaset.html)
+* [Still don't understand simp](87350Stilldontunderstandsimp.html) (67 messages, latest: Jul 27 2018 at 23:57)
 
-### [scope vs accessibility](68428scopevsaccessibility.html)
+* [Simon's "traversable" PR's.](52554SimonstraversablePRs.html) (10 messages, latest: Jul 27 2018 at 14:27)
 
-### [statement linter](97540statementlinter.html)
+* [ICMS 2018: What is in mathlib?](80057ICMS2018Whatisinmathlib.html) (6 messages, latest: Jul 27 2018 at 13:54)
 
-### [Modules](77786Modules.html)
+* [nth_le](74139nthle.html) (1 message, latest: Jul 27 2018 at 09:32)
 
-### [iff.assoc](58749iffassoc.html)
+* [inconsistency of theorem naming](03149inconsistencyoftheoremnaming.html) (4 messages, latest: Jul 27 2018 at 09:06)
 
-### [emacs and contributions](11760emacsandcontributions.html)
+* [Missing some set theorems?](50145Missingsomesettheorems.html) (64 messages, latest: Jul 27 2018 at 05:18)
 
-### [rcases abuse](72370rcasesabuse.html)
+* [finset.sum_single](31502finsetsumsingle.html) (4 messages, latest: Jul 26 2018 at 20:30)
 
-### [lean lexer (pygments)](20585leanlexerpygments.html)
+* [exact this](52942exactthis.html) (21 messages, latest: Jul 26 2018 at 18:41)
 
-### [∃ notation](91514notation.html)
+* [prop_decidable breaks dec_trivial?](30795propdecidablebreaksdectrivial.html) (7 messages, latest: Jul 26 2018 at 17:43)
 
-### [Lean maths in Orsay](04547LeanmathsinOrsay.html)
+* [adding an element to a set](51153addinganelementtoaset.html) (13 messages, latest: Jul 26 2018 at 11:49)
 
-### [variable inside header or outside header](42323variableinsideheaderoroutsideheader.html)
+* [scope vs accessibility](68428scopevsaccessibility.html) (1 message, latest: Jul 26 2018 at 10:12)
 
-### [equation compiler](85762equationcompiler.html)
+* [statement linter](97540statementlinter.html) (4 messages, latest: Jul 26 2018 at 09:58)
 
-### [Why can't `rw` look inside lambda expressions?](25763Whycantrwlookinsidelambdaexpressions.html)
+* [Modules](77786Modules.html) (9 messages, latest: Jul 26 2018 at 09:57)
 
-### [naming help](97444naminghelp.html)
+* [iff.assoc](58749iffassoc.html) (27 messages, latest: Jul 26 2018 at 09:53)
 
-### [how to use linear combination](08557howtouselinearcombination.html)
+* [emacs and contributions](11760emacsandcontributions.html) (4 messages, latest: Jul 26 2018 at 00:24)
 
-### [induction](26286induction.html)
+* [rcases abuse](72370rcasesabuse.html) (4 messages, latest: Jul 25 2018 at 17:48)
 
-### [something is taking 1 second](37878somethingistaking1second.html)
+* [lean lexer (pygments)](20585leanlexerpygments.html) (5 messages, latest: Jul 25 2018 at 17:01)
 
-### [trolled by undergrad](97486trolledbyundergrad.html)
+* [∃ notation](91514notation.html) (2 messages, latest: Jul 25 2018 at 13:56)
 
-### [finsupp](54502finsupp.html)
+* [Lean maths in Orsay](04547LeanmathsinOrsay.html) (6 messages, latest: Jul 25 2018 at 11:08)
 
-### [auto derive has_to_string](71245autoderivehastostring.html)
+* [variable inside header or outside header](42323variableinsideheaderoroutsideheader.html) (2 messages, latest: Jul 25 2018 at 04:21)
 
-### [option.rec.elim](27671optionrecelim.html)
+* [equation compiler](85762equationcompiler.html) (42 messages, latest: Jul 25 2018 at 01:14)
 
-### [namespace](55694namespace.html)
+* [Why can't `rw` look inside lambda expressions?](25763Whycantrwlookinsidelambdaexpressions.html) (10 messages, latest: Jul 24 2018 at 18:40)
 
-### [Inferring setoid instances](40085Inferringsetoidinstances.html)
+* [naming help](97444naminghelp.html) (3 messages, latest: Jul 24 2018 at 08:39)
 
-### [Programming Language Foundations in Agda](39478ProgrammingLanguageFoundationsinAgda.html)
+* [how to use linear combination](08557howtouselinearcombination.html) (6 messages, latest: Jul 24 2018 at 00:13)
 
-### [unoption](87229unoption.html)
+* [induction](26286induction.html) (5 messages, latest: Jul 23 2018 at 18:06)
 
-### [descending universes](98393descendinguniverses.html)
+* [something is taking 1 second](37878somethingistaking1second.html) (5 messages, latest: Jul 23 2018 at 15:18)
 
-### [leanpkg takes forever on Windows](29660leanpkgtakesforeveronWindows.html)
+* [trolled by undergrad](97486trolledbyundergrad.html) (51 messages, latest: Jul 22 2018 at 17:32)
 
-### [multiset min on with_top](96935multisetminonwithtop.html)
+* [finsupp](54502finsupp.html) (4 messages, latest: Jul 22 2018 at 07:51)
 
-### [(fixed) comm_ring issues](57081fixedcommringissues.html)
+* [auto derive has_to_string](71245autoderivehastostring.html) (10 messages, latest: Jul 21 2018 at 23:10)
 
-### [inductive occurrence under a type constructor](90140inductiveoccurrenceunderatypeconstructor.html)
+* [option.rec.elim](27671optionrecelim.html) (41 messages, latest: Jul 21 2018 at 19:00)
 
-### [Rich Standard Library?](81772RichStandardLibrary.html)
+* [namespace](55694namespace.html) (23 messages, latest: Jul 21 2018 at 14:21)
 
-### [State monad invariant](58269Statemonadinvariant.html)
+* [Inferring setoid instances](40085Inferringsetoidinstances.html) (54 messages, latest: Jul 20 2018 at 20:19)
 
-### [#reduce is a bit slow?](54332reduceisabitslow.html)
+* [Programming Language Foundations in Agda](39478ProgrammingLanguageFoundationsinAgda.html) (5 messages, latest: Jul 20 2018 at 11:12)
 
-### [proof without rsimp](00230proofwithoutrsimp.html)
+* [unoption](87229unoption.html) (5 messages, latest: Jul 19 2018 at 21:48)
 
-### [must live in same universe](23272mustliveinsameuniverse.html)
+* [descending universes](98393descendinguniverses.html) (12 messages, latest: Jul 19 2018 at 20:33)
 
-### [Lean re-builds](65096Leanrebuilds.html)
+* [leanpkg takes forever on Windows](29660leanpkgtakesforeveronWindows.html) (4 messages, latest: Jul 19 2018 at 19:28)
 
-### [easy subset/subtype lemma](40432easysubsetsubtypelemma.html)
+* [multiset min on with_top](96935multisetminonwithtop.html) (6 messages, latest: Jul 19 2018 at 06:10)
 
-### [Leo's talk in Oxford](65968LeostalkinOxford.html)
+* [(fixed) comm_ring issues](57081fixedcommringissues.html) (13 messages, latest: Jul 18 2018 at 09:55)
 
-### [`has_coe_to_sort` on set](72933hascoetosortonset.html)
+* [inductive occurrence under a type constructor](90140inductiveoccurrenceunderatypeconstructor.html) (14 messages, latest: Jul 18 2018 at 00:35)
 
-### [level.imax](81718levelimax.html)
+* [Rich Standard Library?](81772RichStandardLibrary.html) (45 messages, latest: Jul 18 2018 at 00:11)
 
-### [future unbundled class hierarchy](51122futureunbundledclasshierarchy.html)
+* [State monad invariant](58269Statemonadinvariant.html) (2 messages, latest: Jul 17 2018 at 16:31)
 
-### [Programming in Lean](85947ProgramminginLean.html)
+* [#reduce is a bit slow?](54332reduceisabitslow.html) (26 messages, latest: Jul 17 2018 at 10:24)
 
-### [matrices](04281matrices.html)
+* [proof without rsimp](00230proofwithoutrsimp.html) (29 messages, latest: Jul 17 2018 at 09:11)
 
-### [multiset](00248multiset.html)
+* [must live in same universe](23272mustliveinsameuniverse.html) (6 messages, latest: Jul 17 2018 at 05:16)
 
-### [Unexpected equation compiler behaviour](49404Unexpectedequationcompilerbehaviour.html)
+* [Lean re-builds](65096Leanrebuilds.html) (22 messages, latest: Jul 17 2018 at 03:38)
 
-### [A technical question](11077Atechnicalquestion.html)
+* [easy subset/subtype lemma](40432easysubsetsubtypelemma.html) (11 messages, latest: Jul 16 2018 at 16:50)
 
-### [checking visible lines and above](05990checkingvisiblelinesandabove.html)
+* [Leo's talk in Oxford](65968LeostalkinOxford.html) (46 messages, latest: Jul 16 2018 at 15:35)
 
-### [easy decidability q](14347easydecidabilityq.html)
+* [`has_coe_to_sort` on set](72933hascoetosortonset.html) (17 messages, latest: Jul 16 2018 at 14:58)
 
-### [induction on two multisets](57903inductionontwomultisets.html)
+* [level.imax](81718levelimax.html) (2 messages, latest: Jul 16 2018 at 08:59)
 
-### [leanpkg does not work](39394leanpkgdoesnotwork.html)
+* [future unbundled class hierarchy](51122futureunbundledclasshierarchy.html) (33 messages, latest: Jul 15 2018 at 13:39)
 
-### [leanbot](59078leanbot.html)
+* [Programming in Lean](85947ProgramminginLean.html) (54 messages, latest: Jul 14 2018 at 14:26)
 
-### [Use list as an argument](16816Uselistasanargument.html)
+* [matrices](04281matrices.html) (15 messages, latest: Jul 13 2018 at 16:34)
 
-### [mk_local_const : name -> pexpr?](99293mklocalconstnamepexpr.html)
+* [multiset](00248multiset.html) (252 messages, latest: Jul 13 2018 at 11:12)
 
-### [Defining graphs in Lean](06401DefininggraphsinLean.html)
+* [Unexpected equation compiler behaviour](49404Unexpectedequationcompilerbehaviour.html) (11 messages, latest: Jul 12 2018 at 17:30)
 
-### [leanpkg breaks my mathlib](38818leanpkgbreaksmymathlib.html)
+* [A technical question](11077Atechnicalquestion.html) (2 messages, latest: Jul 12 2018 at 15:06)
 
-### [non-exhaustive for meta](93453nonexhaustiveformeta.html)
+* [checking visible lines and above](05990checkingvisiblelinesandabove.html) (5 messages, latest: Jul 12 2018 at 12:01)
 
-### [a PR for category theory](26436aPRforcategorytheory.html)
+* [easy decidability q](14347easydecidabilityq.html) (27 messages, latest: Jul 11 2018 at 23:35)
 
-### [structure vs. subtype](32885structurevssubtype.html)
+* [induction on two multisets](57903inductionontwomultisets.html) (29 messages, latest: Jul 11 2018 at 16:27)
 
-### [Beginner Questions](96566BeginnerQuestions.html)
+* [leanpkg does not work](39394leanpkgdoesnotwork.html) (26 messages, latest: Jul 11 2018 at 14:19)
 
-### [VM does not have code for 'multiset.strong_induction_on'](59614VMdoesnothavecodeformultisetstronginductionon.html)
+* [leanbot](59078leanbot.html) (1 message, latest: Jul 11 2018 at 13:21)
 
-### [Unexpected occurence of recursive funtion](70493Unexpectedoccurenceofrecursivefuntion.html)
+* [Use list as an argument](16816Uselistasanargument.html) (18 messages, latest: Jul 11 2018 at 12:26)
 
-### [partial functions](83047partialfunctions.html)
+* [mk_local_const : name -> pexpr?](99293mklocalconstnamepexpr.html) (31 messages, latest: Jul 10 2018 at 18:02)
 
-### [Representing Lean at DeepSpec Summer School](97238RepresentingLeanatDeepSpecSummerSchool.html)
+* [Defining graphs in Lean](06401DefininggraphsinLean.html) (137 messages, latest: Jul 10 2018 at 14:41)
 
-### [true_inhabited](47560trueinhabited.html)
+* [leanpkg breaks my mathlib](38818leanpkgbreaksmymathlib.html) (51 messages, latest: Jul 10 2018 at 12:08)
 
-### [structure equality](25920structureequality.html)
+* [non-exhaustive for meta](93453nonexhaustiveformeta.html) (13 messages, latest: Jul 09 2018 at 23:09)
 
-### [Finite dimensional linear algebra](55132Finitedimensionallinearalgebra.html)
+* [a PR for category theory](26436aPRforcategorytheory.html) (11 messages, latest: Jul 09 2018 at 16:05)
 
-### [slashes in leanpkg.path](52136slashesinleanpkgpath.html)
+* [structure vs. subtype](32885structurevssubtype.html) (38 messages, latest: Jul 09 2018 at 13:54)
 
-### [sup_eq_max](88851supeqmax.html)
+* [Beginner Questions](96566BeginnerQuestions.html) (126 messages, latest: Jul 09 2018 at 13:40)
 
-### [`@` changing type?](28385changingtype.html)
+* [VM does not have code for 'multiset.strong_induction_on'](59614VMdoesnothavecodeformultisetstronginductionon.html) (8 messages, latest: Jul 08 2018 at 20:45)
 
-### [Dependently Typed Folds for Nested Data Types](63156DependentlyTypedFoldsforNestedDataTypes.html)
+* [Unexpected occurence of recursive funtion](70493Unexpectedoccurenceofrecursivefuntion.html) (7 messages, latest: Jul 08 2018 at 19:27)
 
-### [intersections](42283intersections.html)
+* [partial functions](83047partialfunctions.html) (104 messages, latest: Jul 08 2018 at 19:15)
 
-### [Applied statistics](39883Appliedstatistics.html)
+* [Representing Lean at DeepSpec Summer School](97238RepresentingLeanatDeepSpecSummerSchool.html) (22 messages, latest: Jul 07 2018 at 22:02)
 
-### [universe polymorphic version of empty?](61969universepolymorphicversionofempty.html)
+* [true_inhabited](47560trueinhabited.html) (3 messages, latest: Jul 07 2018 at 17:39)
 
-### [Type](71427Type.html)
+* [structure equality](25920structureequality.html) (14 messages, latest: Jul 06 2018 at 22:23)
 
-### [unordered pairs](30312unorderedpairs.html)
+* [Finite dimensional linear algebra](55132Finitedimensionallinearalgebra.html) (8 messages, latest: Jul 06 2018 at 19:28)
 
-### [new writing technique](54293newwritingtechnique.html)
+* [slashes in leanpkg.path](52136slashesinleanpkgpath.html) (17 messages, latest: Jul 06 2018 at 19:05)
 
-### [no `has_insert` for `finset`](23326nohasinsertforfinset.html)
+* [sup_eq_max](88851supeqmax.html) (11 messages, latest: Jul 06 2018 at 15:15)
 
-### [sort vs type](90420sortvstype.html)
+* [`@` changing type?](28385changingtype.html) (24 messages, latest: Jul 06 2018 at 13:03)
 
-### [or.dcases_on](93951ordcaseson.html)
+* [Dependently Typed Folds for Nested Data Types](63156DependentlyTypedFoldsforNestedDataTypes.html) (19 messages, latest: Jul 06 2018 at 11:05)
 
-### [Software Foundations](44470SoftwareFoundations.html)
+* [intersections](42283intersections.html) (102 messages, latest: Jul 06 2018 at 09:43)
 
-### [lemma surprisingly not proved by rfl](63880lemmasurprisinglynotprovedbyrfl.html)
+* [Applied statistics](39883Appliedstatistics.html) (94 messages, latest: Jul 06 2018 at 09:23)
 
-### [Installing lean](72982Installinglean.html)
+* [universe polymorphic version of empty?](61969universepolymorphicversionofempty.html) (13 messages, latest: Jul 05 2018 at 21:37)
 
-### [recursive split](81093recursivesplit.html)
+* [Type](71427Type.html) (53 messages, latest: Jul 05 2018 at 21:33)
 
-### [Cheap installation idea for Windows](06553CheapinstallationideaforWindows.html)
+* [unordered pairs](30312unorderedpairs.html) (2 messages, latest: Jul 05 2018 at 16:47)
 
-### [reStructured Text and Lean](45957reStructuredTextandLean.html)
+* [new writing technique](54293newwritingtechnique.html) (17 messages, latest: Jul 04 2018 at 23:02)
 
-### [treacherous sorry](48901treacheroussorry.html)
+* [no `has_insert` for `finset`](23326nohasinsertforfinset.html) (2 messages, latest: Jul 04 2018 at 18:49)
 
-### [deterministic timeout](81276deterministictimeout.html)
+* [sort vs type](90420sortvstype.html) (5 messages, latest: Jul 04 2018 at 08:57)
 
-### [elab_as_eliminator](62075elabaseliminator.html)
+* [or.dcases_on](93951ordcaseson.html) (58 messages, latest: Jul 03 2018 at 17:21)
 
-### [hiding when import?](03072hidingwhenimport.html)
+* [Software Foundations](44470SoftwareFoundations.html) (57 messages, latest: Jul 03 2018 at 14:58)
 
-### [intros unfolding](45030introsunfolding.html)
+* [lemma surprisingly not proved by rfl](63880lemmasurprisinglynotprovedbyrfl.html) (19 messages, latest: Jul 03 2018 at 00:56)
 
-### [beginner equality question](52657beginnerequalityquestion.html)
+* [Installing lean](72982Installinglean.html) (12 messages, latest: Jul 02 2018 at 23:12)
 
-### [Lean loves tactics](99733Leanlovestactics.html)
+* [recursive split](81093recursivesplit.html) (13 messages, latest: Jul 02 2018 at 17:43)
 
-### [installing mathlib globally](46061installingmathlibglobally.html)
+* [Cheap installation idea for Windows](06553CheapinstallationideaforWindows.html) (5 messages, latest: Jul 02 2018 at 12:34)
 
-### [syntax highlighting](05694syntaxhighlighting.html)
+* [reStructured Text and Lean](45957reStructuredTextandLean.html) (199 messages, latest: Jul 02 2018 at 12:06)
 
-### [data/list/basic too big?](04154datalistbasictoobig.html)
+* [treacherous sorry](48901treacheroussorry.html) (28 messages, latest: Jun 28 2018 at 19:14)
 
-### [tactics for subsingletons](15107tacticsforsubsingletons.html)
+* [deterministic timeout](81276deterministictimeout.html) (3 messages, latest: Jun 28 2018 at 05:10)
 
-### [computational reflection in 3 lines](58833computationalreflectionin3lines.html)
+* [elab_as_eliminator](62075elabaseliminator.html) (20 messages, latest: Jun 28 2018 at 00:12)
 
-### [Hard but obvious lemma](07070Hardbutobviouslemma.html)
+* [hiding when import?](03072hidingwhenimport.html) (58 messages, latest: Jun 27 2018 at 23:10)
 
-### [solve_by_elim](75082solvebyelim.html)
+* [intros unfolding](45030introsunfolding.html) (4 messages, latest: Jun 27 2018 at 18:36)
 
-### [calculations with eq](13525calculationswitheq.html)
+* [beginner equality question](52657beginnerequalityquestion.html) (3 messages, latest: Jun 26 2018 at 22:06)
 
-### [Cardinality](58005Cardinality.html)
+* [Lean loves tactics](99733Leanlovestactics.html) (13 messages, latest: Jun 26 2018 at 21:07)
 
-### [type class instances of superclasses](64403typeclassinstancesofsuperclasses.html)
+* [installing mathlib globally](46061installingmathlibglobally.html) (21 messages, latest: Jun 25 2018 at 22:00)
 
-### [a strange type ascription error](89822astrangetypeascriptionerror.html)
+* [syntax highlighting](05694syntaxhighlighting.html) (3 messages, latest: Jun 25 2018 at 18:48)
 
-### [invalid occurence of recursive args](68025invalidoccurenceofrecursiveargs.html)
+* [data/list/basic too big?](04154datalistbasictoobig.html) (19 messages, latest: Jun 25 2018 at 17:19)
 
-### [string_lt doesn't match its spec](10515stringltdoesntmatchitsspec.html)
+* [tactics for subsingletons](15107tacticsforsubsingletons.html) (1 message, latest: Jun 25 2018 at 17:14)
 
-### [mathlib branches](02472mathlibbranches.html)
+* [computational reflection in 3 lines](58833computationalreflectionin3lines.html) (5 messages, latest: Jun 25 2018 at 12:57)
 
-### [repr for finsets](89149reprforfinsets.html)
+* [Hard but obvious lemma](07070Hardbutobviouslemma.html) (10 messages, latest: Jun 23 2018 at 04:51)
 
-### [auto deriving decidable](70079autoderivingdecidable.html)
+* [solve_by_elim](75082solvebyelim.html) (89 messages, latest: Jun 23 2018 at 04:46)
 
-### [list.prod](60832listprod.html)
+* [calculations with eq](13525calculationswitheq.html) (7 messages, latest: Jun 23 2018 at 04:46)
 
-### [mathlib pull requests](22683mathlibpullrequests.html)
+* [Cardinality](58005Cardinality.html) (8 messages, latest: Jun 22 2018 at 17:02)
 
-### [syntax surprises](75896syntaxsurprises.html)
+* [type class instances of superclasses](64403typeclassinstancesofsuperclasses.html) (22 messages, latest: Jun 22 2018 at 17:00)
 
-### [Hales60](30964Hales60.html)
+* [a strange type ascription error](89822astrangetypeascriptionerror.html) (8 messages, latest: Jun 22 2018 at 16:26)
 
-### [typeclass problems](99005typeclassproblems.html)
+* [invalid occurence of recursive args](68025invalidoccurenceofrecursiveargs.html) (7 messages, latest: Jun 21 2018 at 09:11)
 
-### [anonymous recursive functions](57659anonymousrecursivefunctions.html)
+* [string_lt doesn't match its spec](10515stringltdoesntmatchitsspec.html) (6 messages, latest: Jun 21 2018 at 03:16)
 
-### [unfolding notation in theorem vs def/instance](01274unfoldingnotationintheoremvsdefinstance.html)
+* [mathlib branches](02472mathlibbranches.html) (104 messages, latest: Jun 20 2018 at 23:16)
 
-### [getting confused by 'abstract'](77831gettingconfusedbyabstract.html)
+* [repr for finsets](89149reprforfinsets.html) (25 messages, latest: Jun 20 2018 at 22:51)
 
-### [mem in binder](27371meminbinder.html)
+* [auto deriving decidable](70079autoderivingdecidable.html) (4 messages, latest: Jun 20 2018 at 20:49)
 
-### [congr with subsingleton](46163congrwithsubsingleton.html)
+* [list.prod](60832listprod.html) (19 messages, latest: Jun 20 2018 at 17:34)
 
-### [Retrieving interactively constructed terms](49724Retrievinginteractivelyconstructedterms.html)
+* [mathlib pull requests](22683mathlibpullrequests.html) (19 messages, latest: Jun 20 2018 at 13:48)
 
-### [are proofs irrelevant?](98253areproofsirrelevant.html)
+* [syntax surprises](75896syntaxsurprises.html) (31 messages, latest: Jun 19 2018 at 17:43)
 
-### [Graphs, subtypes, sets, fintypes](29242Graphssubtypessetsfintypes.html)
+* [Hales60](30964Hales60.html) (3 messages, latest: Jun 19 2018 at 17:00)
 
-### [`leanpkg upgrade` no longer working?](74447leanpkgupgradenolongerworking.html)
+* [typeclass problems](99005typeclassproblems.html) (187 messages, latest: Jun 18 2018 at 09:52)
 
-### [more type class inference issues](00919moretypeclassinferenceissues.html)
+* [anonymous recursive functions](57659anonymousrecursivefunctions.html) (8 messages, latest: Jun 17 2018 at 19:53)
 
-### [ml methods in interactive theorem proving](90876mlmethodsininteractivetheoremproving.html)
+* [unfolding notation in theorem vs def/instance](01274unfoldingnotationintheoremvsdefinstance.html) (24 messages, latest: Jun 16 2018 at 21:32)
 
-### [pi_instance woes](56940piinstancewoes.html)
+* [getting confused by 'abstract'](77831gettingconfusedbyabstract.html) (2 messages, latest: Jun 16 2018 at 12:51)
 
-### [Proof of argument decrease for num.gcd](02862Proofofargumentdecreasefornumgcd.html)
+* [mem in binder](27371meminbinder.html) (9 messages, latest: Jun 16 2018 at 01:02)
 
-### [Why can rw rw different has_mul instances, but not fintype](89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html)
+* [congr with subsingleton](46163congrwithsubsingleton.html) (23 messages, latest: Jun 15 2018 at 23:48)
 
-### [how does tactic.ring work?](36914howdoestacticringwork.html)
+* [Retrieving interactively constructed terms](49724Retrievinginteractivelyconstructedterms.html) (4 messages, latest: Jun 15 2018 at 17:38)
 
-### [reflexive-transitive closure and recursion](11403reflexivetransitiveclosureandrecursion.html)
+* [are proofs irrelevant?](98253areproofsirrelevant.html) (8 messages, latest: Jun 15 2018 at 16:19)
 
-### [export?](23938export.html)
+* [Graphs, subtypes, sets, fintypes](29242Graphssubtypessetsfintypes.html) (7 messages, latest: Jun 15 2018 at 16:04)
 
-### [equation lemma ugliness](57821equationlemmaugliness.html)
+* [`leanpkg upgrade` no longer working?](74447leanpkgupgradenolongerworking.html) (14 messages, latest: Jun 15 2018 at 13:51)
 
-### [multifix bracket notation](71163multifixbracketnotation.html)
+* [more type class inference issues](00919moretypeclassinferenceissues.html) (465 messages, latest: Jun 15 2018 at 13:47)
 
-### [universe parameters of instances](58083universeparametersofinstances.html)
+* [ml methods in interactive theorem proving](90876mlmethodsininteractivetheoremproving.html) (4 messages, latest: Jun 15 2018 at 10:01)
 
-### [rfl and wildcard pattern](00992rflandwildcardpattern.html)
+* [pi_instance woes](56940piinstancewoes.html) (128 messages, latest: Jun 15 2018 at 08:52)
 
-### [teach VScode new unicode input](40427teachVScodenewunicodeinput.html)
+* [Proof of argument decrease for num.gcd](02862Proofofargumentdecreasefornumgcd.html) (7 messages, latest: Jun 15 2018 at 01:12)
 
-### [recursion on constructor with list argument](76761recursiononconstructorwithlistargument.html)
+* [Why can rw rw different has_mul instances, but not fintype](89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html) (8 messages, latest: Jun 14 2018 at 22:13)
 
-### [hanoi notes](17817hanoinotes.html)
+* [how does tactic.ring work?](36914howdoestacticringwork.html) (307 messages, latest: Jun 14 2018 at 19:03)
 
-### [CPDT Parser in Lean](61040CPDTParserinLean.html)
+* [reflexive-transitive closure and recursion](11403reflexivetransitiveclosureandrecursion.html) (40 messages, latest: Jun 13 2018 at 13:05)
 
-### [explicit/implicit switch](35423explicitimplicitswitch.html)
+* [export?](23938export.html) (19 messages, latest: Jun 13 2018 at 10:13)
 
-### [rewriting](29020rewriting.html)
+* [equation lemma ugliness](57821equationlemmaugliness.html) (2 messages, latest: Jun 13 2018 at 00:13)
 
-### [parsing technology](84049parsingtechnology.html)
+* [multifix bracket notation](71163multifixbracketnotation.html) (27 messages, latest: Jun 12 2018 at 09:32)
 
-### [unfold partial application](47722unfoldpartialapplication.html)
+* [universe parameters of instances](58083universeparametersofinstances.html) (84 messages, latest: Jun 11 2018 at 10:38)
 
-### [inspecting #reduce](26544inspectingreduce.html)
+* [rfl and wildcard pattern](00992rflandwildcardpattern.html) (55 messages, latest: Jun 11 2018 at 10:26)
 
-### [type class inference fail](30148typeclassinferencefail.html)
+* [teach VScode new unicode input](40427teachVScodenewunicodeinput.html) (3 messages, latest: Jun 11 2018 at 10:13)
 
-### [infix notation precedence](83865infixnotationprecedence.html)
+* [recursion on constructor with list argument](76761recursiononconstructorwithlistargument.html) (4 messages, latest: Jun 10 2018 at 21:46)
 
-### [coercion and too simp](46161coercionandtoosimp.html)
+* [hanoi notes](17817hanoinotes.html) (1 message, latest: Jun 10 2018 at 09:36)
 
-### [travis caching](16807traviscaching.html)
+* [CPDT Parser in Lean](61040CPDTParserinLean.html) (39 messages, latest: Jun 09 2018 at 17:37)
 
-### [auto deriving instances](24698autoderivinginstances.html)
+* [explicit/implicit switch](35423explicitimplicitswitch.html) (3 messages, latest: Jun 09 2018 at 14:51)
 
-### [calc with bij_on](04673calcwithbijon.html)
+* [rewriting](29020rewriting.html) (7 messages, latest: Jun 08 2018 at 23:11)
 
-### [expose class func to top-level](59410exposeclassfunctotoplevel.html)
+* [parsing technology](84049parsingtechnology.html) (3 messages, latest: Jun 08 2018 at 14:33)
 
-### [simp, cc](37772simpcc.html)
+* [unfold partial application](47722unfoldpartialapplication.html) (4 messages, latest: Jun 08 2018 at 13:23)
 
-### [simplify_proof](44083simplifyproof.html)
+* [inspecting #reduce](26544inspectingreduce.html) (11 messages, latest: Jun 08 2018 at 12:04)
 
-### [Definitional reduction](19492Definitionalreduction.html)
+* [type class inference fail](30148typeclassinferencefail.html) (43 messages, latest: Jun 08 2018 at 10:09)
 
-### [type class inference system](73933typeclassinferencesystem.html)
+* [infix notation precedence](83865infixnotationprecedence.html) (8 messages, latest: Jun 08 2018 at 08:07)
 
-### [rewriting class operations](96918rewritingclassoperations.html)
+* [coercion and too simp](46161coercionandtoosimp.html) (8 messages, latest: Jun 07 2018 at 10:46)
 
-### [automation](30658automation.html)
+* [travis caching](16807traviscaching.html) (57 messages, latest: Jun 07 2018 at 07:31)
 
-### [zulip internal server error](04275zulipinternalservererror.html)
+* [auto deriving instances](24698autoderivinginstances.html) (7 messages, latest: Jun 07 2018 at 03:27)
 
-### [experiment on students](53465experimentonstudents.html)
+* [calc with bij_on](04673calcwithbijon.html) (10 messages, latest: Jun 06 2018 at 22:41)
 
-### [Flip inductive parameters](92619Flipinductiveparameters.html)
+* [expose class func to top-level](59410exposeclassfunctotoplevel.html) (15 messages, latest: Jun 06 2018 at 22:08)
 
-### [Avoiding explicit setoid instances](65380Avoidingexplicitsetoidinstances.html)
+* [simp, cc](37772simpcc.html) (11 messages, latest: Jun 06 2018 at 16:17)
 
-### [syntax](83688syntax.html)
+* [simplify_proof](44083simplifyproof.html) (4 messages, latest: Jun 06 2018 at 11:19)
 
-### [mathlib file organization](67415mathlibfileorganization.html)
+* [Definitional reduction](19492Definitionalreduction.html) (8 messages, latest: Jun 05 2018 at 21:44)
 
-### [split_ifs](38094splitifs.html)
+* [type class inference system](73933typeclassinferencesystem.html) (9 messages, latest: Jun 05 2018 at 19:25)
 
-### [Newb question / not-true example in TPIL?](49101NewbquestionnottrueexampleinTPIL.html)
+* [rewriting class operations](96918rewritingclassoperations.html) (19 messages, latest: Jun 05 2018 at 17:27)
 
-### [customizing tidy](48727customizingtidy.html)
+* [automation](30658automation.html) (18 messages, latest: Jun 05 2018 at 09:27)
 
-### [emacs tools](48347emacstools.html)
+* [zulip internal server error](04275zulipinternalservererror.html) (1 message, latest: Jun 05 2018 at 09:01)
 
-### [error with let substitution](66953errorwithletsubstitution.html)
+* [experiment on students](53465experimentonstudents.html) (9 messages, latest: Jun 05 2018 at 08:56)
 
-### [exists (X) (Y)](23060existsXY.html)
+* [Flip inductive parameters](92619Flipinductiveparameters.html) (11 messages, latest: Jun 05 2018 at 05:36)
 
-### [error: interrupted](43035errorinterrupted.html)
+* [Avoiding explicit setoid instances](65380Avoidingexplicitsetoidinstances.html) (6 messages, latest: Jun 04 2018 at 20:35)
 
-### [cool paper on reification](22256coolpaperonreification.html)
+* [syntax](83688syntax.html) (17 messages, latest: Jun 04 2018 at 15:56)
 
-### [deleting variables](47494deletingvariables.html)
+* [mathlib file organization](67415mathlibfileorganization.html) (113 messages, latest: Jun 04 2018 at 14:50)
 
-### [Is mathlib too big?](04385Ismathlibtoobig.html)
+* [split_ifs](38094splitifs.html) (7 messages, latest: Jun 04 2018 at 11:44)
 
-### [composing tactics](00411composingtactics.html)
+* [Newb question / not-true example in TPIL?](49101NewbquestionnottrueexampleinTPIL.html) (11 messages, latest: Jun 04 2018 at 05:39)
 
-### [let in structure](86990letinstructure.html)
+* [customizing tidy](48727customizingtidy.html) (18 messages, latest: Jun 04 2018 at 02:59)
 
-### [notation gimmick](67662notationgimmick.html)
+* [emacs tools](48347emacstools.html) (28 messages, latest: Jun 04 2018 at 01:58)
 
-### [left shift on lists](30454leftshiftonlists.html)
+* [error with let substitution](66953errorwithletsubstitution.html) (8 messages, latest: Jun 04 2018 at 01:55)
 
-### [type resizing](68526typeresizing.html)
+* [exists (X) (Y)](23060existsXY.html) (69 messages, latest: Jun 03 2018 at 23:49)
 
-### [refine_struct](63294refinestruct.html)
+* [error: interrupted](43035errorinterrupted.html) (30 messages, latest: Jun 03 2018 at 23:00)
 
-### [Universe issues](03982Universeissues.html)
+* [cool paper on reification](22256coolpaperonreification.html) (31 messages, latest: Jun 03 2018 at 10:21)
 
-### [tactic debug](88224tacticdebug.html)
+* [deleting variables](47494deletingvariables.html) (21 messages, latest: Jun 03 2018 at 04:30)
 
-### [simp, tauto](37715simptauto.html)
+* [Is mathlib too big?](04385Ismathlibtoobig.html) (4 messages, latest: Jun 02 2018 at 12:14)
 
-### [newb,  "#check 5" 1 minute runtime?](03353newbcheck51minuteruntime.html)
+* [composing tactics](00411composingtactics.html) (5 messages, latest: Jun 02 2018 at 11:55)
 
-### [how expensive is rw?](07722howexpensiveisrw.html)
+* [let in structure](86990letinstructure.html) (165 messages, latest: Jun 02 2018 at 07:10)
 
-### [Mathematicians learning tactics](79076Mathematicianslearningtactics.html)
+* [notation gimmick](67662notationgimmick.html) (26 messages, latest: Jun 02 2018 at 03:57)
 
-### [tc loop again](43666tcloopagain.html)
+* [left shift on lists](30454leftshiftonlists.html) (4 messages, latest: Jun 01 2018 at 20:32)
 
-### [funny error](88283funnyerror.html)
+* [type resizing](68526typeresizing.html) (5 messages, latest: Jun 01 2018 at 18:46)
 
-### [convert](02530convert.html)
+* [refine_struct](63294refinestruct.html) (53 messages, latest: Jun 01 2018 at 18:43)
 
-### [diagnosing loops in `simp`](39361diagnosingloopsinsimp.html)
+* [Universe issues](03982Universeissues.html) (92 messages, latest: Jun 01 2018 at 11:03)
 
-### [Holes in Lean](55667HolesinLean.html)
+* [tactic debug](88224tacticdebug.html) (3 messages, latest: Jun 01 2018 at 08:54)
 
-### [targetted definitional reduction](89192targetteddefinitionalreduction.html)
+* [simp, tauto](37715simptauto.html) (6 messages, latest: Jun 01 2018 at 08:16)
 
-### [Automatic variable names](63906Automaticvariablenames.html)
+* [newb,  "#check 5" 1 minute runtime?](03353newbcheck51minuteruntime.html) (17 messages, latest: Jun 01 2018 at 01:07)
 
-### [squares](04165squares.html)
+* [how expensive is rw?](07722howexpensiveisrw.html) (14 messages, latest: May 31 2018 at 09:29)
 
-### [recursive ring](85513recursivering.html)
+* [Mathematicians learning tactics](79076Mathematicianslearningtactics.html) (123 messages, latest: May 31 2018 at 09:09)
 
-### [recursing on mutual inductive types](10216recursingonmutualinductivetypes.html)
+* [tc loop again](43666tcloopagain.html) (63 messages, latest: May 31 2018 at 09:08)
 
-### [Cooper's algorithm](10890Coopersalgorithm.html)
+* [funny error](88283funnyerror.html) (10 messages, latest: May 31 2018 at 06:16)
 
-### [Showing automatically obtained typeclass instances](16607Showingautomaticallyobtainedtypeclassinstances.html)
+* [convert](02530convert.html) (8 messages, latest: May 31 2018 at 04:26)
 
-### [greek letter tactic](74199greeklettertactic.html)
+* [diagnosing loops in `simp`](39361diagnosingloopsinsimp.html) (8 messages, latest: May 30 2018 at 16:06)
 
-### [And-elim phrasing](54756Andelimphrasing.html)
+* [Holes in Lean](55667HolesinLean.html) (12 messages, latest: May 30 2018 at 00:41)
 
-### [equality of pi types?](11441equalityofpitypes.html)
+* [targetted definitional reduction](89192targetteddefinitionalreduction.html) (71 messages, latest: May 30 2018 at 00:39)
 
-### [TPIL on frontpage of HackerNews](81405TPILonfrontpageofHackerNews.html)
+* [Automatic variable names](63906Automaticvariablenames.html) (16 messages, latest: May 30 2018 at 00:18)
 
-### [new wlog](37188newwlog.html)
+* [squares](04165squares.html) (4 messages, latest: May 29 2018 at 23:41)
 
-### [copy _target dir](39873copytargetdir.html)
+* [recursive ring](85513recursivering.html) (8 messages, latest: May 29 2018 at 23:09)
 
-### [notation scoping](34848notationscoping.html)
+* [recursing on mutual inductive types](10216recursingonmutualinductivetypes.html) (15 messages, latest: May 29 2018 at 21:12)
 
-### [variables](15002variables.html)
+* [Cooper's algorithm](10890Coopersalgorithm.html) (79 messages, latest: May 29 2018 at 13:35)
 
-### [inverse of $](97622inverseof.html)
+* [Showing automatically obtained typeclass instances](16607Showingautomaticallyobtainedtypeclassinstances.html) (11 messages, latest: May 29 2018 at 03:14)
 
-### [Importing euclidean_domain  breaks my code](16340Importingeuclideandomainbreaksmycode.html)
+* [greek letter tactic](74199greeklettertactic.html) (20 messages, latest: May 28 2018 at 23:45)
 
-### [Unexpected errors](24947Unexpectederrors.html)
+* [And-elim phrasing](54756Andelimphrasing.html) (11 messages, latest: May 28 2018 at 23:42)
 
-### [finite set lemmas very hard to use](29056finitesetlemmasveryhardtouse.html)
+* [equality of pi types?](11441equalityofpitypes.html) (26 messages, latest: May 28 2018 at 22:05)
 
-### [zsqrtd.nonsquare in number_theory/pell](68393zsqrtdnonsquareinnumbertheorypell.html)
+* [TPIL on frontpage of HackerNews](81405TPILonfrontpageofHackerNews.html) (1 message, latest: May 28 2018 at 20:53)
 
-### [ite term golf](99459itetermgolf.html)
+* [new wlog](37188newwlog.html) (35 messages, latest: May 28 2018 at 17:06)
 
-### [¬(A ∧ B) ↔ ¬ A ∨ ¬ B](42049ABAB.html)
+* [copy _target dir](39873copytargetdir.html) (10 messages, latest: May 28 2018 at 15:02)
 
-### [What's the fastest way to prove this?](40609Whatsthefastestwaytoprovethis.html)
+* [notation scoping](34848notationscoping.html) (37 messages, latest: May 28 2018 at 13:50)
 
-### [Conflicting transitive coercions?](75934Conflictingtransitivecoercions.html)
+* [variables](15002variables.html) (4 messages, latest: May 28 2018 at 12:50)
 
-### [cast woes](88074castwoes.html)
+* [inverse of $](97622inverseof.html) (91 messages, latest: May 28 2018 at 06:23)
 
-### [heq question](44183heqquestion.html)
+* [Importing euclidean_domain  breaks my code](16340Importingeuclideandomainbreaksmycode.html) (2 messages, latest: May 28 2018 at 01:13)
 
-### [thanks for `finset.sum_bij`](18673thanksforfinsetsumbij.html)
+* [Unexpected errors](24947Unexpectederrors.html) (21 messages, latest: May 27 2018 at 20:26)
 
-### [error: failed to unify](67736errorfailedtounify.html)
+* [finite set lemmas very hard to use](29056finitesetlemmasveryhardtouse.html) (6 messages, latest: May 27 2018 at 19:13)
 
-### [drop hypothesis from local context](78986drophypothesisfromlocalcontext.html)
+* [zsqrtd.nonsquare in number_theory/pell](68393zsqrtdnonsquareinnumbertheorypell.html) (6 messages, latest: May 27 2018 at 16:26)
 
-### [lean-3.4.1 branch](52080lean341branch.html)
+* [ite term golf](99459itetermgolf.html) (8 messages, latest: May 27 2018 at 16:19)
 
-### [vscode-lean 0.11.0](31824vscodelean0110.html)
+* [¬(A ∧ B) ↔ ¬ A ∨ ¬ B](42049ABAB.html) (6 messages, latest: May 27 2018 at 13:59)
 
-### [How many universes did I use?](88174HowmanyuniversesdidIuse.html)
+* [What's the fastest way to prove this?](40609Whatsthefastestwaytoprovethis.html) (9 messages, latest: May 27 2018 at 03:07)
 
-### [local notation for fin (n+1)](56247localnotationforfinn1.html)
+* [Conflicting transitive coercions?](75934Conflictingtransitivecoercions.html) (19 messages, latest: May 26 2018 at 18:35)
 
-### [assertion violation](70030assertionviolation.html)
+* [heq question](44183heqquestion.html) (245 messages, latest: May 25 2018 at 19:46)
 
-### [minimum of finite set](01949minimumoffiniteset.html)
+* [thanks for `finset.sum_bij`](18673thanksforfinsetsumbij.html) (1 message, latest: May 25 2018 at 18:56)
 
-### [congr'](79233congr.html)
+* [error: failed to unify](67736errorfailedtounify.html) (3 messages, latest: May 25 2018 at 16:56)
 
-### [function to pi type](71749functiontopitype.html)
+* [drop hypothesis from local context](78986drophypothesisfromlocalcontext.html) (9 messages, latest: May 25 2018 at 13:54)
 
-### [unfolding issue](68176unfoldingissue.html)
+* [lean-3.4.1 branch](52080lean341branch.html) (83 messages, latest: May 25 2018 at 12:59)
 
-### [Are elements of a subtype determined by their value?](60588Areelementsofasubtypedeterminedbytheirvalue.html)
+* [vscode-lean 0.11.0](31824vscodelean0110.html) (98 messages, latest: May 25 2018 at 12:50)
 
-### [Rookie question](40322Rookiequestion.html)
+* [How many universes did I use?](88174HowmanyuniversesdidIuse.html) (21 messages, latest: May 25 2018 at 12:04)
 
-### [Floating point](99007Floatingpoint.html)
+* [local notation for fin (n+1)](56247localnotationforfinn1.html) (37 messages, latest: May 24 2018 at 20:26)
 
-### [Kleene normal form theorem](26246Kleenenormalformtheorem.html)
+* [assertion violation](70030assertionviolation.html) (10 messages, latest: May 23 2018 at 22:12)
 
-### [tactic for set-theoretic trivialities](74681tacticforsettheoretictrivialities.html)
+* [minimum of finite set](01949minimumoffiniteset.html) (71 messages, latest: May 23 2018 at 18:38)
 
-### [Simple question about online tutorial example](37571Simplequestionaboutonlinetutorialexample.html)
+* [congr'](79233congr.html) (4 messages, latest: May 23 2018 at 12:52)
 
-### [crazy construction of a structure](21660crazyconstructionofastructure.html)
+* [function to pi type](71749functiontopitype.html) (248 messages, latest: May 23 2018 at 11:59)
 
-### [strange parsing](59209strangeparsing.html)
+* [unfolding issue](68176unfoldingissue.html) (25 messages, latest: May 23 2018 at 03:59)
 
-### [λ (⟨U,BU,Hx,s⟩](78536UBUHxs.html)
+* [Are elements of a subtype determined by their value?](60588Areelementsofasubtypedeterminedbytheirvalue.html) (35 messages, latest: May 22 2018 at 14:56)
 
-### [quotient type woes](79834quotienttypewoes.html)
+* [Rookie question](40322Rookiequestion.html) (4 messages, latest: May 22 2018 at 07:37)
 
-### [simp theorem iff true](63555simptheoremifftrue.html)
+* [Floating point](99007Floatingpoint.html) (13 messages, latest: May 22 2018 at 02:40)
 
-### [$ annoyance](39393annoyance.html)
+* [Kleene normal form theorem](26246Kleenenormalformtheorem.html) (17 messages, latest: May 21 2018 at 21:37)
 
-### [rw under a union](73586rwunderaunion.html)
+* [tactic for set-theoretic trivialities](74681tacticforsettheoretictrivialities.html) (56 messages, latest: May 21 2018 at 13:02)
 
-### [∈](69203.html)
+* [Simple question about online tutorial example](37571Simplequestionaboutonlinetutorialexample.html) (4 messages, latest: May 20 2018 at 18:22)
 
-### [universe shadows a local universe](70152universeshadowsalocaluniverse.html)
+* [crazy construction of a structure](21660crazyconstructionofastructure.html) (14 messages, latest: May 19 2018 at 22:40)
 
-### [metatheory libraries/frameworks](11952metatheorylibrariesframeworks.html)
+* [strange parsing](59209strangeparsing.html) (11 messages, latest: May 19 2018 at 16:23)
 
-### [proving equality of structures](74349provingequalityofstructures.html)
+* [λ (⟨U,BU,Hx,s⟩](78536UBUHxs.html) (29 messages, latest: May 19 2018 at 16:16)
 
-### [adding to someone else's PR](89510addingtosomeoneelsesPR.html)
+* [quotient type woes](79834quotienttypewoes.html) (47 messages, latest: May 19 2018 at 16:13)
 
-### [How to prove val_succ_eq_succ_val](56242Howtoprovevalsucceqsuccval.html)
+* [simp theorem iff true](63555simptheoremifftrue.html) (16 messages, latest: May 18 2018 at 13:57)
 
-### [cc failure](23855ccfailure.html)
+* [$ annoyance](39393annoyance.html) (37 messages, latest: May 18 2018 at 05:19)
 
-### [natural number hell](53478naturalnumberhell.html)
+* [rw under a union](73586rwunderaunion.html) (220 messages, latest: May 17 2018 at 22:56)
 
-### [golf time](36088golftime.html)
+* [∈](69203.html) (9 messages, latest: May 17 2018 at 15:40)
 
-### [cases](81328cases.html)
+* [universe shadows a local universe](70152universeshadowsalocaluniverse.html) (44 messages, latest: May 17 2018 at 13:01)
 
-### [$ in let in tactic mode](92533inletintacticmode.html)
+* [metatheory libraries/frameworks](11952metatheorylibrariesframeworks.html) (26 messages, latest: May 17 2018 at 08:35)
 
-### [leanpkg dependencies on branches](08397leanpkgdependenciesonbranches.html)
+* [proving equality of structures](74349provingequalityofstructures.html) (16 messages, latest: May 17 2018 at 05:51)
 
-### [nth_map](01960nthmap.html)
+* [adding to someone else's PR](89510addingtosomeoneelsesPR.html) (15 messages, latest: May 17 2018 at 01:35)
 
-### [good names](60926goodnames.html)
+* [How to prove val_succ_eq_succ_val](56242Howtoprovevalsucceqsuccval.html) (21 messages, latest: May 16 2018 at 21:31)
 
-### [understanding profiler output](23851understandingprofileroutput.html)
+* [cc failure](23855ccfailure.html) (17 messages, latest: May 16 2018 at 19:16)
 
-### [pointing the equation compiler right](69993pointingtheequationcompilerright.html)
+* [natural number hell](53478naturalnumberhell.html) (134 messages, latest: May 16 2018 at 14:59)
 
-### [copying structure fields from two places?](22471copyingstructurefieldsfromtwoplaces.html)
+* [golf time](36088golftime.html) (72 messages, latest: May 15 2018 at 22:06)
 
-### [`unfold` refuses to unfold](04369unfoldrefusestounfold.html)
+* [cases](81328cases.html) (76 messages, latest: May 14 2018 at 18:03)
 
-### [semiring with 0 ≠ 1](83527semiringwith01.html)
+* [$ in let in tactic mode](92533inletintacticmode.html) (6 messages, latest: May 14 2018 at 08:34)
 
-### [powers of a type](20697powersofatype.html)
+* [leanpkg dependencies on branches](08397leanpkgdependenciesonbranches.html) (3 messages, latest: May 14 2018 at 01:16)
 
-### [filter map](16165filtermap.html)
+* [nth_map](01960nthmap.html) (36 messages, latest: May 14 2018 at 00:56)
 
-### [unfold local definitions](29488unfoldlocaldefinitions.html)
+* [good names](60926goodnames.html) (1 message, latest: May 13 2018 at 22:26)
 
-### [can I fix this deterministic timeout?](10421canIfixthisdeterministictimeout.html)
+* [understanding profiler output](23851understandingprofileroutput.html) (61 messages, latest: May 13 2018 at 22:13)
 
-### [Still newbie](96227Stillnewbie.html)
+* [pointing the equation compiler right](69993pointingtheequationcompilerright.html) (29 messages, latest: May 13 2018 at 15:39)
 
-### [semiquot](95768semiquot.html)
+* [copying structure fields from two places?](22471copyingstructurefieldsfromtwoplaces.html) (2 messages, latest: May 13 2018 at 09:43)
 
-### [Newbie error](11013Newbieerror.html)
+* [`unfold` refuses to unfold](04369unfoldrefusestounfold.html) (40 messages, latest: May 12 2018 at 21:53)
 
-### [from finset to set](52941fromfinsettoset.html)
+* [semiring with 0 ≠ 1](83527semiringwith01.html) (28 messages, latest: May 12 2018 at 14:17)
 
-### [Lean’s unfolding mechanism](54986Leansunfoldingmechanism.html)
+* [powers of a type](20697powersofatype.html) (2 messages, latest: May 11 2018 at 16:27)
 
-### [3.4.1](62421341.html)
+* [filter map](16165filtermap.html) (53 messages, latest: May 11 2018 at 10:33)
 
-### [notation question](04805notationquestion.html)
+* [unfold local definitions](29488unfoldlocaldefinitions.html) (5 messages, latest: May 10 2018 at 19:36)
 
-### [subset refl weirdness](04500subsetreflweirdness.html)
+* [can I fix this deterministic timeout?](10421canIfixthisdeterministictimeout.html) (341 messages, latest: May 10 2018 at 15:39)
 
-### [rw under lambda](22985rwunderlambda.html)
+* [Still newbie](96227Stillnewbie.html) (2 messages, latest: May 09 2018 at 18:18)
 
-### [failing to use search in VS Code](36764failingtousesearchinVSCode.html)
+* [semiquot](95768semiquot.html) (7 messages, latest: May 09 2018 at 14:14)
 
-### [TPIL update](04349TPILupdate.html)
+* [Newbie error](11013Newbieerror.html) (63 messages, latest: May 08 2018 at 16:28)
 
-### [abs_pow](48364abspow.html)
+* [from finset to set](52941fromfinsettoset.html) (6 messages, latest: May 08 2018 at 12:10)
 
-### [is a type with parameters injective?](67120isatypewithparametersinjective.html)
+* [Lean’s unfolding mechanism](54986Leansunfoldingmechanism.html) (2 messages, latest: May 08 2018 at 07:43)
 
-### [categorical quotients](37547categoricalquotients.html)
+* [3.4.1](62421341.html) (38 messages, latest: May 07 2018 at 11:50)
 
-### [max/min of list](26603maxminoflist.html)
+* [notation question](04805notationquestion.html) (20 messages, latest: May 06 2018 at 16:45)
 
-### [naming issues](02007namingissues.html)
+* [subset refl weirdness](04500subsetreflweirdness.html) (9 messages, latest: May 05 2018 at 21:59)
 
-### [coe_coe](54574coecoe.html)
+* [rw under lambda](22985rwunderlambda.html) (10 messages, latest: May 04 2018 at 23:48)
 
-### [sum.rec](37598sumrec.html)
+* [failing to use search in VS Code](36764failingtousesearchinVSCode.html) (69 messages, latest: May 03 2018 at 16:45)
 
-### [lean website](93396leanwebsite.html)
+* [TPIL update](04349TPILupdate.html) (12 messages, latest: May 03 2018 at 15:39)
 
-### [Outdated example in Programming in Lean](49720OutdatedexampleinProgramminginLean.html)
+* [abs_pow](48364abspow.html) (10 messages, latest: May 03 2018 at 10:11)
 
-### [modeq.refl](19566modeqrefl.html)
+* [is a type with parameters injective?](67120isatypewithparametersinjective.html) (4 messages, latest: May 03 2018 at 03:38)
 
-### [#find goal](92424findgoal.html)
+* [categorical quotients](37547categoricalquotients.html) (49 messages, latest: May 02 2018 at 19:54)
 
-### [a rational number is positive iff its numerator is positive](33733arationalnumberispositiveiffitsnumeratorispositive.html)
+* [max/min of list](26603maxminoflist.html) (4 messages, latest: May 02 2018 at 19:08)
 
-### [induction in tactics](82160inductionintactics.html)
+* [naming issues](02007namingissues.html) (14 messages, latest: May 02 2018 at 14:43)
 
-### [emscripten build](68203emscriptenbuild.html)
+* [coe_coe](54574coecoe.html) (34 messages, latest: May 02 2018 at 12:28)
 
-### [bounded quantifiers](55725boundedquantifiers.html)
+* [sum.rec](37598sumrec.html) (42 messages, latest: May 01 2018 at 22:15)
 
-### [lean 4 branch](66627lean4branch.html)
+* [lean website](93396leanwebsite.html) (3 messages, latest: May 01 2018 at 18:40)
 
-### [0.5](3666005.html)
+* [Outdated example in Programming in Lean](49720OutdatedexampleinProgramminginLean.html) (1 message, latest: May 01 2018 at 12:51)
 
-### [Notes on well_founded recursion](20665Notesonwellfoundedrecursion.html)
+* [modeq.refl](19566modeqrefl.html) (16 messages, latest: May 01 2018 at 10:07)
 
-### [lt vs le](25435ltvsle.html)
+* [#find goal](92424findgoal.html) (5 messages, latest: May 01 2018 at 08:10)
 
-### [idle equiv question](24577idleequivquestion.html)
+* [a rational number is positive iff its numerator is positive](33733arationalnumberispositiveiffitsnumeratorispositive.html) (96 messages, latest: May 01 2018 at 07:04)
 
-### [no axioms](83055noaxioms.html)
+* [induction in tactics](82160inductionintactics.html) (1 message, latest: Apr 30 2018 at 15:19)
 
-### [f x = x](96788fxx.html)
+* [emscripten build](68203emscriptenbuild.html) (13 messages, latest: Apr 30 2018 at 14:31)
 
-### [induction recursion?](15623inductionrecursion.html)
+* [bounded quantifiers](55725boundedquantifiers.html) (36 messages, latest: Apr 30 2018 at 13:13)
 
-### [notes on parametricity](89093notesonparametricity.html)
+* [lean 4 branch](66627lean4branch.html) (16 messages, latest: Apr 30 2018 at 10:23)
 
-### [VScode in the browser](37089VScodeinthebrowser.html)
+* [0.5](3666005.html) (2 messages, latest: Apr 29 2018 at 21:49)
 
-### [interface for dite](26111interfacefordite.html)
+* [Notes on well_founded recursion](20665Notesonwellfoundedrecursion.html) (1 message, latest: Apr 29 2018 at 20:35)
 
-### [detecting terminal goals](30186detectingterminalgoals.html)
+* [lt vs le](25435ltvsle.html) (4 messages, latest: Apr 29 2018 at 19:22)
 
-### [transport through trivial bundles](27895transportthroughtrivialbundles.html)
+* [idle equiv question](24577idleequivquestion.html) (12 messages, latest: Apr 29 2018 at 13:21)
 
-### [equality of proofs](83037equalityofproofs.html)
+* [no axioms](83055noaxioms.html) (21 messages, latest: Apr 29 2018 at 09:26)
 
-### [proof of the five lemma](19443proofofthefivelemma.html)
+* [f x = x](96788fxx.html) (43 messages, latest: Apr 29 2018 at 07:22)
 
-### [Type* vs Type _](66487TypevsType.html)
+* [induction recursion?](15623inductionrecursion.html) (26 messages, latest: Apr 28 2018 at 20:03)
 
-### [Cauchy product theorem](41939Cauchyproducttheorem.html)
+* [notes on parametricity](89093notesonparametricity.html) (9 messages, latest: Apr 28 2018 at 19:58)
 
-### [#check giving an unexpected error](95636checkgivinganunexpectederror.html)
+* [VScode in the browser](37089VScodeinthebrowser.html) (17 messages, latest: Apr 28 2018 at 17:03)
 
-### [classes Type or Prop](97907classesTypeorProp.html)
+* [interface for dite](26111interfacefordite.html) (10 messages, latest: Apr 28 2018 at 16:08)
 
-### [cases eliminating into type](19645caseseliminatingintotype.html)
+* [detecting terminal goals](30186detectingterminalgoals.html) (48 messages, latest: Apr 28 2018 at 07:33)
 
-### [`d_array` type changing update](08327darraytypechangingupdate.html)
+* [transport through trivial bundles](27895transportthroughtrivialbundles.html) (6 messages, latest: Apr 28 2018 at 05:23)
 
-### [forcing structural recursion](22908forcingstructuralrecursion.html)
+* [equality of proofs](83037equalityofproofs.html) (3 messages, latest: Apr 28 2018 at 04:29)
 
-### [le_of_lt_of_le](26345leofltofle.html)
+* [proof of the five lemma](19443proofofthefivelemma.html) (120 messages, latest: Apr 27 2018 at 22:23)
 
-### [what is the fastest way to prove this](53220whatisthefastestwaytoprovethis.html)
+* [Type* vs Type _](66487TypevsType.html) (9 messages, latest: Apr 27 2018 at 17:46)
 
-### [rat.mk_eq](77891ratmkeq.html)
+* [Cauchy product theorem](41939Cauchyproducttheorem.html) (5 messages, latest: Apr 27 2018 at 17:37)
 
-### [generating all `app`s](16498generatingallapps.html)
+* [#check giving an unexpected error](95636checkgivinganunexpectederror.html) (18 messages, latest: Apr 27 2018 at 08:49)
 
-### [pattern matching 101](20508patternmatching101.html)
+* [classes Type or Prop](97907classesTypeorProp.html) (9 messages, latest: Apr 27 2018 at 03:05)
 
-### [trying to understand cc](88287tryingtounderstandcc.html)
+* [cases eliminating into type](19645caseseliminatingintotype.html) (53 messages, latest: Apr 26 2018 at 09:34)
 
-### [coq woes](63778coqwoes.html)
+* [`d_array` type changing update](08327darraytypechangingupdate.html) (52 messages, latest: Apr 26 2018 at 07:17)
 
-### [Documenting non-interactive tactics](72607Documentingnoninteractivetactics.html)
+* [forcing structural recursion](22908forcingstructuralrecursion.html) (27 messages, latest: Apr 26 2018 at 00:45)
 
-### [lambda temptation](98055lambdatemptation.html)
+* [le_of_lt_of_le](26345leofltofle.html) (7 messages, latest: Apr 25 2018 at 23:45)
 
-### [rw broken in 3.4](27799rwbrokenin34.html)
+* [what is the fastest way to prove this](53220whatisthefastestwaytoprovethis.html) (41 messages, latest: Apr 25 2018 at 21:00)
 
-### [maximum class-instance resolution depth has been reached](79810maximumclassinstanceresolutiondepthhasbeenreached.html)
+* [rat.mk_eq](77891ratmkeq.html) (12 messages, latest: Apr 25 2018 at 19:11)
 
-### [Strange error message](16100Strangeerrormessage.html)
+* [generating all `app`s](16498generatingallapps.html) (43 messages, latest: Apr 25 2018 at 16:41)
 
-### [Tactic as macro](99039Tacticasmacro.html)
+* [pattern matching 101](20508patternmatching101.html) (23 messages, latest: Apr 25 2018 at 15:58)
 
-### [apply with new equality goals](64017applywithnewequalitygoals.html)
+* [trying to understand cc](88287tryingtounderstandcc.html) (62 messages, latest: Apr 25 2018 at 15:52)
 
-### [negation of earlier cases of match](29056negationofearliercasesofmatch.html)
+* [coq woes](63778coqwoes.html) (153 messages, latest: Apr 25 2018 at 13:55)
 
-### [statement of the five lemma](74626statementofthefivelemma.html)
+* [Documenting non-interactive tactics](72607Documentingnoninteractivetactics.html) (11 messages, latest: Apr 25 2018 at 09:09)
 
-### [rewriting a hypothesis](35533rewritingahypothesis.html)
+* [lambda temptation](98055lambdatemptation.html) (10 messages, latest: Apr 25 2018 at 09:04)
 
-### [empty class](69126emptyclass.html)
+* [rw broken in 3.4](27799rwbrokenin34.html) (22 messages, latest: Apr 25 2018 at 05:26)
 
-### [kernels of homomorphisms](43391kernelsofhomomorphisms.html)
+* [maximum class-instance resolution depth has been reached](79810maximumclassinstanceresolutiondepthhasbeenreached.html) (111 messages, latest: Apr 25 2018 at 00:31)
 
-### [is_ring_hom instead of cast_mul](89764isringhominsteadofcastmul.html)
+* [Strange error message](16100Strangeerrormessage.html) (8 messages, latest: Apr 24 2018 at 23:52)
 
-### [dependent congr_arg?](21641dependentcongrarg.html)
+* [Tactic as macro](99039Tacticasmacro.html) (12 messages, latest: Apr 24 2018 at 20:10)
 
-### [find](16610find.html)
+* [apply with new equality goals](64017applywithnewequalitygoals.html) (130 messages, latest: Apr 24 2018 at 19:59)
 
-### [is_left_id rw mystery](38425isleftidrwmystery.html)
+* [negation of earlier cases of match](29056negationofearliercasesofmatch.html) (18 messages, latest: Apr 24 2018 at 15:04)
 
-### [local notation in message window](03084localnotationinmessagewindow.html)
+* [statement of the five lemma](74626statementofthefivelemma.html) (183 messages, latest: Apr 24 2018 at 11:49)
 
-### [bounded exists decidable](23087boundedexistsdecidable.html)
+* [rewriting a hypothesis](35533rewritingahypothesis.html) (139 messages, latest: Apr 24 2018 at 11:21)
 
-### [f circ g = h or forall x, f (g x) = h x?](22859fcircghorforallxfgxhx.html)
+* [empty class](69126emptyclass.html) (6 messages, latest: Apr 24 2018 at 03:24)
 
-### [punit_eq_punit](26581puniteqpunit.html)
+* [kernels of homomorphisms](43391kernelsofhomomorphisms.html) (18 messages, latest: Apr 24 2018 at 01:06)
 
-### [semilattices](13864semilattices.html)
+* [is_ring_hom instead of cast_mul](89764isringhominsteadofcastmul.html) (4 messages, latest: Apr 24 2018 at 01:01)
 
-### [unification magic](96443unificationmagic.html)
+* [dependent congr_arg?](21641dependentcongrarg.html) (99 messages, latest: Apr 23 2018 at 23:13)
 
-### [deciding if `refl` would work](78526decidingifreflwouldwork.html)
+* [find](16610find.html) (17 messages, latest: Apr 23 2018 at 19:12)
 
-### [A bunch of fin equiv results](14624Abunchoffinequivresults.html)
+* [is_left_id rw mystery](38425isleftidrwmystery.html) (14 messages, latest: Apr 23 2018 at 18:16)
 
-### [generalize in term mode](05051generalizeintermmode.html)
+* [local notation in message window](03084localnotationinmessagewindow.html) (26 messages, latest: Apr 23 2018 at 17:48)
 
-### [docstring in ctrl+space](87985docstringinctrlspace.html)
+* [bounded exists decidable](23087boundedexistsdecidable.html) (4 messages, latest: Apr 23 2018 at 15:35)
 
-### [libary/init/algebra/group](01184libaryinitalgebragroup.html)
+* [f circ g = h or forall x, f (g x) = h x?](22859fcircghorforallxfgxhx.html) (38 messages, latest: Apr 23 2018 at 09:57)
 
-### [without loss of advertisement](76230withoutlossofadvertisement.html)
+* [punit_eq_punit](26581puniteqpunit.html) (2 messages, latest: Apr 23 2018 at 09:54)
 
-### [notation with unknown symbols](60002notationwithunknownsymbols.html)
+* [semilattices](13864semilattices.html) (4 messages, latest: Apr 23 2018 at 09:36)
 
-### [priority of typeclass inferences](39506priorityoftypeclassinferences.html)
+* [unification magic](96443unificationmagic.html) (57 messages, latest: Apr 23 2018 at 01:01)
 
-### [3.4, elan, and mathlib](9593834elanandmathlib.html)
+* [deciding if `refl` would work](78526decidingifreflwouldwork.html) (7 messages, latest: Apr 22 2018 at 16:07)
 
-### [cc is so powerful](63417ccissopowerful.html)
+* [A bunch of fin equiv results](14624Abunchoffinequivresults.html) (21 messages, latest: Apr 22 2018 at 10:19)
 
-### [free group](47376freegroup.html)
+* [generalize in term mode](05051generalizeintermmode.html) (122 messages, latest: Apr 22 2018 at 10:04)
 
-### [cases fails on exists](53884casesfailsonexists.html)
+* [docstring in ctrl+space](87985docstringinctrlspace.html) (3 messages, latest: Apr 22 2018 at 08:49)
 
-### [dsimp](13502dsimp.html)
+* [libary/init/algebra/group](01184libaryinitalgebragroup.html) (24 messages, latest: Apr 22 2018 at 01:58)
 
-### [a whole new error](47957awholenewerror.html)
+* [without loss of advertisement](76230withoutlossofadvertisement.html) (58 messages, latest: Apr 22 2018 at 01:42)
 
-### [Expected Type in match](03929ExpectedTypeinmatch.html)
+* [notation with unknown symbols](60002notationwithunknownsymbols.html) (98 messages, latest: Apr 21 2018 at 23:26)
 
-### [Tactic to no tactic](96433Tactictonotactic.html)
+* [priority of typeclass inferences](39506priorityoftypeclassinferences.html) (19 messages, latest: Apr 21 2018 at 23:13)
 
-### [changing default coercion](20567changingdefaultcoercion.html)
+* [3.4, elan, and mathlib](9593834elanandmathlib.html) (204 messages, latest: Apr 21 2018 at 17:34)
 
-### [group.inhabited](92580groupinhabited.html)
+* [cc is so powerful](63417ccissopowerful.html) (50 messages, latest: Apr 21 2018 at 16:50)
 
-### [custom well-founded](20674customwellfounded.html)
+* [free group](47376freegroup.html) (831 messages, latest: Apr 21 2018 at 14:35)
 
-### [make onote.repr computable again](24087makeonotereprcomputableagain.html)
+* [cases fails on exists](53884casesfailsonexists.html) (34 messages, latest: Apr 21 2018 at 11:27)
 
-### [generalize](13255generalize.html)
+* [dsimp](13502dsimp.html) (4 messages, latest: Apr 21 2018 at 09:16)
 
-### [precompiled mathlib](89366precompiledmathlib.html)
+* [a whole new error](47957awholenewerror.html) (11 messages, latest: Apr 21 2018 at 09:11)
 
-### [environments and parameters](48560environmentsandparameters.html)
+* [Expected Type in match](03929ExpectedTypeinmatch.html) (6 messages, latest: Apr 21 2018 at 08:37)
 
-### [git branch](24819gitbranch.html)
+* [Tactic to no tactic](96433Tactictonotactic.html) (6 messages, latest: Apr 21 2018 at 07:45)
 
-### [tip for filling in holes](66476tipforfillinginholes.html)
+* [changing default coercion](20567changingdefaultcoercion.html) (12 messages, latest: Apr 21 2018 at 04:38)
 
-### [this and that, or structure?](13114thisandthatorstructure.html)
+* [group.inhabited](92580groupinhabited.html) (3 messages, latest: Apr 21 2018 at 04:04)
 
-### [setext](06334setext.html)
+* [custom well-founded](20674customwellfounded.html) (39 messages, latest: Apr 21 2018 at 01:52)
 
-### [wlog example](77414wlogexample.html)
+* [make onote.repr computable again](24087makeonotereprcomputableagain.html) (13 messages, latest: Apr 21 2018 at 00:50)
 
-### [catchy mottos](81123catchymottos.html)
+* [generalize](13255generalize.html) (37 messages, latest: Apr 20 2018 at 17:36)
 
-### [untyped expressions](63693untypedexpressions.html)
+* [precompiled mathlib](89366precompiledmathlib.html) (4 messages, latest: Apr 20 2018 at 17:01)
 
-### [is_group_hom.range_subgroup](83805isgrouphomrangesubgroup.html)
+* [environments and parameters](48560environmentsandparameters.html) (8 messages, latest: Apr 20 2018 at 16:23)
 
-### [solve each goal in "by" mode](72857solveeachgoalinbymode.html)
+* [git branch](24819gitbranch.html) (3 messages, latest: Apr 20 2018 at 13:29)
 
-### [int.induction_on](76899intinductionon.html)
+* [tip for filling in holes](66476tipforfillinginholes.html) (20 messages, latest: Apr 20 2018 at 12:16)
 
-### [Better Implication](24896BetterImplication.html)
+* [this and that, or structure?](13114thisandthatorstructure.html) (30 messages, latest: Apr 20 2018 at 10:39)
 
-### [How do we like Zulip](71543HowdowelikeZulip.html)
+* [setext](06334setext.html) (75 messages, latest: Apr 20 2018 at 07:29)
 
-### [alternative definition of list.is_prefix](49265alternativedefinitionoflistisprefix.html)
+* [wlog example](77414wlogexample.html) (42 messages, latest: Apr 20 2018 at 00:54)
 
-### [type class resolution or unification?](78790typeclassresolutionorunification.html)
+* [catchy mottos](81123catchymottos.html) (2 messages, latest: Apr 20 2018 at 00:50)
 
-### [cons overload](33072consoverload.html)
+* [untyped expressions](63693untypedexpressions.html) (6 messages, latest: Apr 19 2018 at 16:48)
 
-### [Lean 3.4](44246Lean34.html)
+* [is_group_hom.range_subgroup](83805isgrouphomrangesubgroup.html) (1 message, latest: Apr 19 2018 at 14:54)
 
-### [refinement of partitions](29680refinementofpartitions.html)
+* [solve each goal in "by" mode](72857solveeachgoalinbymode.html) (11 messages, latest: Apr 19 2018 at 14:29)
 
-### [type class inference notes](49265typeclassinferencenotes.html)
+* [int.induction_on](76899intinductionon.html) (3 messages, latest: Apr 19 2018 at 13:35)
 
-### [adding fact to type class inference system](09525addingfacttotypeclassinferencesystem.html)
+* [Better Implication](24896BetterImplication.html) (30 messages, latest: Apr 19 2018 at 08:26)
 
-### [easy-in-maths union question](40322easyinmathsunionquestion.html)
+* [How do we like Zulip](71543HowdowelikeZulip.html) (133 messages, latest: Apr 19 2018 at 08:19)
 
-### [expr.local_const](73503exprlocalconst.html)
+* [alternative definition of list.is_prefix](49265alternativedefinitionoflistisprefix.html) (8 messages, latest: Apr 19 2018 at 05:43)
 
-### [list from k to l](27115listfromktol.html)
+* [type class resolution or unification?](78790typeclassresolutionorunification.html) (66 messages, latest: Apr 18 2018 at 22:15)
 
-### [VScode folds](50717VScodefolds.html)
+* [cons overload](33072consoverload.html) (13 messages, latest: Apr 18 2018 at 11:58)
 
-### [Rust verification working group](00960Rustverificationworkinggroup.html)
+* [Lean 3.4](44246Lean34.html) (49 messages, latest: Apr 18 2018 at 11:29)
 
-### [quotient typeclass resolution](45190quotienttypeclassresolution.html)
+* [refinement of partitions](29680refinementofpartitions.html) (6 messages, latest: Apr 18 2018 at 02:19)
 
-### [substitutions in `expr`](32551substitutionsinexpr.html)
+* [type class inference notes](49265typeclassinferencenotes.html) (8 messages, latest: Apr 18 2018 at 01:08)
 
-### [code extraction](21725codeextraction.html)
+* [adding fact to type class inference system](09525addingfacttotypeclassinferencesystem.html) (7 messages, latest: Apr 17 2018 at 23:13)
 
-### [unexpected funext / refl behaviour](64461unexpectedfunextreflbehaviour.html)
+* [easy-in-maths union question](40322easyinmathsunionquestion.html) (49 messages, latest: Apr 17 2018 at 19:10)
 
-### [VScode extension hangs](42707VScodeextensionhangs.html)
+* [expr.local_const](73503exprlocalconst.html) (2 messages, latest: Apr 17 2018 at 16:32)
 
-### [elan on MacOSX](68393elanonMacOSX.html)
+* [list from k to l](27115listfromktol.html) (10 messages, latest: Apr 17 2018 at 14:48)
 
-### [idiom](85267idiom.html)
+* [VScode folds](50717VScodefolds.html) (1 message, latest: Apr 17 2018 at 09:38)
 
-### [group_equiv_left_cosets_times_subgroup](24264groupequivleftcosetstimessubgroup.html)
+* [Rust verification working group](00960Rustverificationworkinggroup.html) (32 messages, latest: Apr 17 2018 at 09:32)
 
-### [fibre of a map](08445fibreofamap.html)
+* [quotient typeclass resolution](45190quotienttypeclassresolution.html) (9 messages, latest: Apr 17 2018 at 07:51)
 
-### [invalid 'calc': transitivity rule](90773invalidcalctransitivityrule.html)
+* [substitutions in `expr`](32551substitutionsinexpr.html) (4 messages, latest: Apr 17 2018 at 04:36)
 
-### [Propositions as Types](64067PropositionsasTypes.html)
+* [code extraction](21725codeextraction.html) (16 messages, latest: Apr 17 2018 at 01:43)
 
-### [so what is eq.rec?](06640sowhatiseqrec.html)
+* [unexpected funext / refl behaviour](64461unexpectedfunextreflbehaviour.html) (48 messages, latest: Apr 16 2018 at 23:39)
 
-### [a = b ↔ b = a](33117abba.html)
+* [VScode extension hangs](42707VScodeextensionhangs.html) (10 messages, latest: Apr 16 2018 at 22:54)
 
-### [what does . mean?](52974whatdoesmean.html)
+* [elan on MacOSX](68393elanonMacOSX.html) (7 messages, latest: Apr 16 2018 at 13:40)
 
-### [Fresh off the boat](08987Freshofftheboat.html)
+* [idiom](85267idiom.html) (8 messages, latest: Apr 16 2018 at 11:09)
 
-### [`_` style and order of goals](38827styleandorderofgoals.html)
+* [group_equiv_left_cosets_times_subgroup](24264groupequivleftcosetstimessubgroup.html) (56 messages, latest: Apr 16 2018 at 11:03)
 
-### [nightly version stapling](30952nightlyversionstapling.html)
+* [fibre of a map](08445fibreofamap.html) (12 messages, latest: Apr 16 2018 at 10:02)
 
-### [easy finite set question](82902easyfinitesetquestion.html)
+* [invalid 'calc': transitivity rule](90773invalidcalctransitivityrule.html) (55 messages, latest: Apr 16 2018 at 09:53)
 
-### [I don't understand heq](02748Idontunderstandheq.html)
+* [Propositions as Types](64067PropositionsasTypes.html) (110 messages, latest: Apr 16 2018 at 09:07)
 
-### [set is a complete lattice](83465setisacompletelattice.html)
+* [so what is eq.rec?](06640sowhatiseqrec.html) (16 messages, latest: Apr 16 2018 at 06:44)
 
-### [Floating point arithmetic](90057Floatingpointarithmetic.html)
+* [a = b ↔ b = a](33117abba.html) (3 messages, latest: Apr 16 2018 at 03:53)
 
-### [Unfolding carefully](61646Unfoldingcarefully.html)
+* [what does . mean?](52974whatdoesmean.html) (10 messages, latest: Apr 16 2018 at 03:52)
 
-### [circumflex notation](89951circumflexnotation.html)
+* [Fresh off the boat](08987Freshofftheboat.html) (906 messages, latest: Apr 15 2018 at 23:39)
 
-### [mathlib nightly dependence](26924mathlibnightlydependence.html)
+* [`_` style and order of goals](38827styleandorderofgoals.html) (9 messages, latest: Apr 15 2018 at 21:17)
 
-### [X_of_Y_of_Z naming](81964XofYofZnaming.html)
+* [nightly version stapling](30952nightlyversionstapling.html) (157 messages, latest: Apr 15 2018 at 12:41)
 
-### [PR](90947PR.html)
+* [easy finite set question](82902easyfinitesetquestion.html) (7 messages, latest: Apr 15 2018 at 04:53)
 
-### [is_group_hom.mul](09896isgrouphommul.html)
+* [I don't understand heq](02748Idontunderstandheq.html) (15 messages, latest: Apr 14 2018 at 12:09)
 
-### [let x = LHS](95778letxLHS.html)
+* [set is a complete lattice](83465setisacompletelattice.html) (14 messages, latest: Apr 13 2018 at 17:44)
 
-### [Unicode in Zulip](39667UnicodeinZulip.html)
+* [Floating point arithmetic](90057Floatingpointarithmetic.html) (19 messages, latest: Apr 13 2018 at 14:42)
 
-### [git help](10702githelp.html)
+* [Unfolding carefully](61646Unfoldingcarefully.html) (161 messages, latest: Apr 12 2018 at 18:45)
 
-### [namespace field notation](78590namespacefieldnotation.html)
+* [circumflex notation](89951circumflexnotation.html) (5 messages, latest: Apr 12 2018 at 14:54)
 
-### [octopus emoji](56578octopusemoji.html)
+* [mathlib nightly dependence](26924mathlibnightlydependence.html) (31 messages, latest: Apr 12 2018 at 14:14)
 
-### [resetI](08589resetI.html)
+* [X_of_Y_of_Z naming](81964XofYofZnaming.html) (73 messages, latest: Apr 12 2018 at 10:15)
 
-### [mathlib](98018mathlib.html)
+* [PR](90947PR.html) (60 messages, latest: Apr 12 2018 at 08:56)
 
-### [constructing proofs by hand](85011constructingproofsbyhand.html)
+* [is_group_hom.mul](09896isgrouphommul.html) (21 messages, latest: Apr 12 2018 at 08:03)
 
-### [gsmul](69417gsmul.html)
+* [let x = LHS](95778letxLHS.html) (62 messages, latest: Apr 11 2018 at 22:01)
 
-### [nat to string?](55645nattostring.html)
+* [Unicode in Zulip](39667UnicodeinZulip.html) (32 messages, latest: Apr 11 2018 at 21:40)
 
-### [structure docs](49179structuredocs.html)
+* [git help](10702githelp.html) (12 messages, latest: Apr 11 2018 at 12:35)
 
-### [rw tactic failed](92071rwtacticfailed.html)
+* [namespace field notation](78590namespacefieldnotation.html) (53 messages, latest: Apr 11 2018 at 11:09)
 
-### [silent overflow](28164silentoverflow.html)
+* [octopus emoji](56578octopusemoji.html) (23 messages, latest: Apr 11 2018 at 09:11)
 
-### [windows nightly link broken](79962windowsnightlylinkbroken.html)
+* [resetI](08589resetI.html) (4 messages, latest: Apr 11 2018 at 03:03)
 
-### [spot the metavariable](91157spotthemetavariable.html)
+* [mathlib](98018mathlib.html) (10 messages, latest: Apr 10 2018 at 09:33)
 
-### [structure turned into class](71476structureturnedintoclass.html)
+* [constructing proofs by hand](85011constructingproofsbyhand.html) (19 messages, latest: Apr 10 2018 at 08:39)
 
-### [style](84626style.html)
+* [gsmul](69417gsmul.html) (15 messages, latest: Apr 10 2018 at 03:43)
 
-### [propaganda](84894propaganda.html)
+* [nat to string?](55645nattostring.html) (5 messages, latest: Apr 10 2018 at 01:55)
 
-### [ring fails but simp works](92378ringfailsbutsimpworks.html)
+* [structure docs](49179structuredocs.html) (1 message, latest: Apr 09 2018 at 22:52)
 
-### [fixes against the latest mathlib](33174fixesagainstthelatestmathlib.html)
+* [rw tactic failed](92071rwtacticfailed.html) (37 messages, latest: Apr 09 2018 at 20:43)
 
-### [how is OOP doing in the "real world"](42802howisOOPdoingintherealworld.html)
+* [silent overflow](28164silentoverflow.html) (50 messages, latest: Apr 09 2018 at 19:30)
 
-### [Naming our variables](10570Namingourvariables.html)
+* [windows nightly link broken](79962windowsnightlylinkbroken.html) (14 messages, latest: Apr 09 2018 at 15:29)
 
-### [change of ^](91354changeof.html)
+* [spot the metavariable](91157spotthemetavariable.html) (23 messages, latest: Apr 09 2018 at 13:26)
 
-### [limit of a series of sets](42165limitofaseriesofsets.html)
+* [structure turned into class](71476structureturnedintoclass.html) (18 messages, latest: Apr 09 2018 at 00:58)
 
-### [string -> tactic?](57914stringtactic.html)
+* [style](84626style.html) (5 messages, latest: Apr 09 2018 at 00:39)
 
-### [typeclass inferences](31387typeclassinferences.html)
+* [propaganda](84894propaganda.html) (4 messages, latest: Apr 08 2018 at 22:24)
 
-### [Shortest proof challenge](33702Shortestproofchallenge.html)
+* [ring fails but simp works](92378ringfailsbutsimpworks.html) (1 message, latest: Apr 08 2018 at 21:50)
 
-### [proving  lt from decidability](48449provingltfromdecidability.html)
+* [fixes against the latest mathlib](33174fixesagainstthelatestmathlib.html) (7 messages, latest: Apr 08 2018 at 19:23)
 
-### [teaching and proof assistant](44791teachingandproofassistant.html)
+* [how is OOP doing in the "real world"](42802howisOOPdoingintherealworld.html) (57 messages, latest: Apr 08 2018 at 14:40)
 
-### [erased](93941erased.html)
+* [Naming our variables](10570Namingourvariables.html) (32 messages, latest: Apr 07 2018 at 11:51)
 
-### [`example {x y : ℕ} : x + x = y + y → x = y := sorry`](43640examplexyxxyyxysorry.html)
+* [change of ^](91354changeof.html) (4 messages, latest: Apr 06 2018 at 15:37)
 
-### [def using dot](59421defusingdot.html)
+* [limit of a series of sets](42165limitofaseriesofsets.html) (7 messages, latest: Apr 06 2018 at 15:37)
 
-### [ℚ/ℤ](08602.html)
+* [string -> tactic?](57914stringtactic.html) (18 messages, latest: Apr 06 2018 at 08:49)
 
-### [ordering natural numbers](31182orderingnaturalnumbers.html)
+* [typeclass inferences](31387typeclassinferences.html) (21 messages, latest: Apr 06 2018 at 02:46)
 
-### [mathlib broken?](10818mathlibbroken.html)
+* [Shortest proof challenge](33702Shortestproofchallenge.html) (7 messages, latest: Apr 06 2018 at 01:11)
 
-### [euclidean domains PR](63608euclideandomainsPR.html)
+* [proving  lt from decidability](48449provingltfromdecidability.html) (160 messages, latest: Apr 05 2018 at 22:16)
 
-### [example (x : ℕ) : ¬ (2 + x = 0) := sorry](04700examplex2x0sorry.html)
+* [teaching and proof assistant](44791teachingandproofassistant.html) (3 messages, latest: Apr 05 2018 at 22:12)
 
-### [le for div?](09115lefordiv.html)
+* [erased](93941erased.html) (32 messages, latest: Apr 05 2018 at 21:38)
 
-### [palindromes](26591palindromes.html)
+* [`example {x y : ℕ} : x + x = y + y → x = y := sorry`](43640examplexyxxyyxysorry.html) (14 messages, latest: Apr 05 2018 at 21:22)
 
-### [structure vs class](91089structurevsclass.html)
+* [def using dot](59421defusingdot.html) (11 messages, latest: Apr 05 2018 at 19:55)
 
-### [What happened next?](35032Whathappenednext.html)
+* [ℚ/ℤ](08602.html) (47 messages, latest: Apr 05 2018 at 16:29)
 
-### [finiteness](87225finiteness.html)
+* [ordering natural numbers](31182orderingnaturalnumbers.html) (26 messages, latest: Apr 05 2018 at 14:19)
 
-### [more lean incompleteness](27997moreleanincompleteness.html)
+* [mathlib broken?](10818mathlibbroken.html) (46 messages, latest: Apr 05 2018 at 09:53)
 
-### [building lean](05903buildinglean.html)
+* [euclidean domains PR](63608euclideandomainsPR.html) (3 messages, latest: Apr 05 2018 at 06:24)
 
-### [category theory libraries](49847categorytheorylibraries.html)
+* [example (x : ℕ) : ¬ (2 + x = 0) := sorry](04700examplex2x0sorry.html) (43 messages, latest: Apr 05 2018 at 05:40)
 
-### [has_pow](66418haspow.html)
+* [le for div?](09115lefordiv.html) (20 messages, latest: Apr 05 2018 at 03:37)
 
-### [lean-web-editor not compiling?](47442leanwebeditornotcompiling.html)
+* [palindromes](26591palindromes.html) (60 messages, latest: Apr 05 2018 at 03:21)
 
-### [what is the purpose of is_subgroup](18151whatisthepurposeofissubgroup.html)
+* [structure vs class](91089structurevsclass.html) (100 messages, latest: Apr 04 2018 at 23:28)
 
-### [@[reducible]](98536reducible.html)
+* [What happened next?](35032Whathappenednext.html) (9 messages, latest: Apr 04 2018 at 22:31)
 
-### [Will simp go in a loop?](58617Willsimpgoinaloop.html)
+* [finiteness](87225finiteness.html) (14 messages, latest: Apr 04 2018 at 08:53)
 
-### [match in defs](11367matchindefs.html)
+* [more lean incompleteness](27997moreleanincompleteness.html) (1 message, latest: Apr 04 2018 at 07:17)
 
-### [working with finite sequences](73481workingwithfinitesequences.html)
+* [building lean](05903buildinglean.html) (2 messages, latest: Apr 04 2018 at 06:50)
 
-### [rw buglet (I think)](45701rwbugletIthink.html)
+* [category theory libraries](49847categorytheorylibraries.html) (1 message, latest: Apr 04 2018 at 06:44)
 
-### [are dsimp and simp idempontent?](73128aredsimpandsimpidempontent.html)
+* [has_pow](66418haspow.html) (11 messages, latest: Apr 03 2018 at 11:06)
 
-### [funext $ λ x, rfl](83984funextxrfl.html)
+* [lean-web-editor not compiling?](47442leanwebeditornotcompiling.html) (7 messages, latest: Apr 03 2018 at 11:01)
 
-### [equiv.image_compl](50870equivimagecompl.html)
+* [what is the purpose of is_subgroup](18151whatisthepurposeofissubgroup.html) (7 messages, latest: Apr 03 2018 at 06:08)
 
-### [Gabriel's challenge](43828Gabrielschallenge.html)
+* [@[reducible]](98536reducible.html) (21 messages, latest: Apr 03 2018 at 05:51)
 
-### [equation compiler fails for inductive predicate](20116equationcompilerfailsforinductivepredicate.html)
+* [Will simp go in a loop?](58617Willsimpgoinaloop.html) (5 messages, latest: Apr 03 2018 at 05:38)
 
-### [Are these tokens?](90821Arethesetokens.html)
+* [match in defs](11367matchindefs.html) (19 messages, latest: Apr 03 2018 at 02:27)
 
-### [elaborator](19500elaborator.html)
+* [working with finite sequences](73481workingwithfinitesequences.html) (212 messages, latest: Apr 03 2018 at 01:49)
 
-### [making isomorphism class a group](02870makingisomorphismclassagroup.html)
+* [rw buglet (I think)](45701rwbugletIthink.html) (15 messages, latest: Apr 02 2018 at 15:59)
 
-### [fix LEAN_PATH](09652fixLEANPATH.html)
+* [are dsimp and simp idempontent?](73128aredsimpandsimpidempontent.html) (4 messages, latest: Apr 02 2018 at 15:43)
 
-### [Zulip discipline](91225Zulipdiscipline.html)
+* [funext $ λ x, rfl](83984funextxrfl.html) (21 messages, latest: Apr 02 2018 at 13:43)
 
-### [Machine Learning](47686MachineLearning.html)
+* [equiv.image_compl](50870equivimagecompl.html) (68 messages, latest: Apr 02 2018 at 11:07)
 
-### [Naming question](01491Namingquestion.html)
+* [Gabriel's challenge](43828Gabrielschallenge.html) (86 messages, latest: Apr 02 2018 at 02:12)
 
-### [random math question](24772randommathquestion.html)
+* [equation compiler fails for inductive predicate](20116equationcompilerfailsforinductivepredicate.html) (1 message, latest: Apr 02 2018 at 00:07)
 
-### [Complete lattice redundant parameter](09702Completelatticeredundantparameter.html)
+* [Are these tokens?](90821Arethesetokens.html) (30 messages, latest: Apr 01 2018 at 22:11)
 
-### [mathlib nightly](57153mathlibnightly.html)
+* [elaborator](19500elaborator.html) (120 messages, latest: Apr 01 2018 at 21:31)
 
-### [unicode](95720unicode.html)
+* [making isomorphism class a group](02870makingisomorphismclassagroup.html) (191 messages, latest: Apr 01 2018 at 18:46)
 
-### [decidability](12456decidability.html)
+* [fix LEAN_PATH](09652fixLEANPATH.html) (18 messages, latest: Apr 01 2018 at 18:10)
 
-### [lean travis problems](39550leantravisproblems.html)
+* [Zulip discipline](91225Zulipdiscipline.html) (9 messages, latest: Apr 01 2018 at 10:47)
 
-### [filling in an underscore](56646fillinginanunderscore.html)
+* [Machine Learning](47686MachineLearning.html) (33 messages, latest: Mar 31 2018 at 21:46)
 
-### [formalizing exact sequence](29713formalizingexactsequence.html)
+* [Naming question](01491Namingquestion.html) (9 messages, latest: Mar 31 2018 at 21:27)
 
-### [sorting algorithms in lean](68184sortingalgorithmsinlean.html)
+* [random math question](24772randommathquestion.html) (27 messages, latest: Mar 31 2018 at 21:16)
 
-### [guess the error](24531guesstheerror.html)
+* [Complete lattice redundant parameter](09702Completelatticeredundantparameter.html) (2 messages, latest: Mar 31 2018 at 09:15)
 
-### [Concurrent lean](66756Concurrentlean.html)
+* [mathlib nightly](57153mathlibnightly.html) (8 messages, latest: Mar 31 2018 at 08:35)
 
-### [finite sum puzzle](79327finitesumpuzzle.html)
+* [unicode](95720unicode.html) (3 messages, latest: Mar 31 2018 at 07:11)
 
-### [fin has no recursor](03820finhasnorecursor.html)
+* [decidability](12456decidability.html) (33 messages, latest: Mar 31 2018 at 00:49)
 
-### [`[a,a+1,a+2,...,b-1]`?](65518aa1a2b1.html)
+* [lean travis problems](39550leantravisproblems.html) (40 messages, latest: Mar 31 2018 at 00:48)
 
-### [idly trying software foundations](84549idlytryingsoftwarefoundations.html)
+* [filling in an underscore](56646fillinginanunderscore.html) (20 messages, latest: Mar 31 2018 at 00:44)
 
-### [where did I go classical?](49946wheredidIgoclassical.html)
+* [formalizing exact sequence](29713formalizingexactsequence.html) (431 messages, latest: Mar 30 2018 at 22:16)
 
-### [tactic.ring feature requests](55167tacticringfeaturerequests.html)
+* [sorting algorithms in lean](68184sortingalgorithmsinlean.html) (12 messages, latest: Mar 30 2018 at 19:52)
 
-### [inductively-defined finsupp?](25137inductivelydefinedfinsupp.html)
+* [guess the error](24531guesstheerror.html) (7 messages, latest: Mar 30 2018 at 17:38)
 
-### [group ring](90686groupring.html)
+* [Concurrent lean](66756Concurrentlean.html) (84 messages, latest: Mar 30 2018 at 14:51)
 
-### [profiling](79339profiling.html)
+* [finite sum puzzle](79327finitesumpuzzle.html) (137 messages, latest: Mar 30 2018 at 12:08)
 
-### [Knaster-Tarski](57204KnasterTarski.html)
+* [fin has no recursor](03820finhasnorecursor.html) (4 messages, latest: Mar 30 2018 at 09:18)
 
-### [monotone](89520monotone.html)
+* [`[a,a+1,a+2,...,b-1]`?](65518aa1a2b1.html) (5 messages, latest: Mar 30 2018 at 04:23)
 
-### [What topological spaces do we have?](81795Whattopologicalspacesdowehave.html)
+* [idly trying software foundations](84549idlytryingsoftwarefoundations.html) (292 messages, latest: Mar 29 2018 at 22:38)
 
-### [FABSTRACTS funded](90660FABSTRACTSfunded.html)
+* [where did I go classical?](49946wheredidIgoclassical.html) (14 messages, latest: Mar 29 2018 at 21:23)
 
-### [seq and coinduction](28860seqandcoinduction.html)
+* [tactic.ring feature requests](55167tacticringfeaturerequests.html) (8 messages, latest: Mar 29 2018 at 16:39)
 
-### [constructive image](68877constructiveimage.html)
+* [inductively-defined finsupp?](25137inductivelydefinedfinsupp.html) (7 messages, latest: Mar 29 2018 at 14:52)
 
-### [Generalize being slow?](41328Generalizebeingslow.html)
+* [group ring](90686groupring.html) (18 messages, latest: Mar 29 2018 at 13:58)
 
-### [working lean and mathlib version](85692workingleanandmathlibversion.html)
+* [profiling](79339profiling.html) (22 messages, latest: Mar 29 2018 at 13:53)
 
-### [sigma type mismatch](41930sigmatypemismatch.html)
+* [Knaster-Tarski](57204KnasterTarski.html) (98 messages, latest: Mar 29 2018 at 10:52)
 
-### [a new world](43092anewworld.html)
+* [monotone](89520monotone.html) (6 messages, latest: Mar 29 2018 at 10:26)
 
-### [K-like inductives don't take arguments](97139Klikeinductivesdonttakearguments.html)
+* [What topological spaces do we have?](81795Whattopologicalspacesdowehave.html) (35 messages, latest: Mar 29 2018 at 08:49)
 
-### [euclidean division](61616euclideandivision.html)
+* [FABSTRACTS funded](90660FABSTRACTSfunded.html) (10 messages, latest: Mar 28 2018 at 19:14)
 
-### [What is the latest working (lean, mathlib) pair?](25609Whatisthelatestworkingleanmathlibpair.html)
+* [seq and coinduction](28860seqandcoinduction.html) (16 messages, latest: Mar 27 2018 at 22:25)
 
-### [nearly no_confusion](50044nearlynoconfusion.html)
+* [constructive image](68877constructiveimage.html) (17 messages, latest: Mar 27 2018 at 21:19)
 
-### [importing within lean package](99769importingwithinleanpackage.html)
+* [Generalize being slow?](41328Generalizebeingslow.html) (1 message, latest: Mar 27 2018 at 08:59)
 
-### [why does or only eliminate to Prop?](20962whydoesoronlyeliminatetoProp.html)
+* [working lean and mathlib version](85692workingleanandmathlibversion.html) (3 messages, latest: Mar 27 2018 at 05:16)
 
-### [add_theorem_by](28663addtheoremby.html)
+* [sigma type mismatch](41930sigmatypemismatch.html) (25 messages, latest: Mar 26 2018 at 17:26)
 
-### [algebraic/transcendent numbers](98991algebraictranscendentnumbers.html)
+* [a new world](43092anewworld.html) (9 messages, latest: Mar 26 2018 at 08:42)
 
-### [lawful classes](22522lawfulclasses.html)
+* [K-like inductives don't take arguments](97139Klikeinductivesdonttakearguments.html) (2 messages, latest: Mar 26 2018 at 08:36)
 
-### [my monads!](56938mymonads.html)
+* [euclidean division](61616euclideandivision.html) (4 messages, latest: Mar 26 2018 at 04:00)
 
-### [bastardization of latex](82931bastardizationoflatex.html)
+* [What is the latest working (lean, mathlib) pair?](25609Whatisthelatestworkingleanmathlibpair.html) (16 messages, latest: Mar 26 2018 at 02:10)
 
-### [Quantifying over an uninhabited type (false/ empty)](66754Quantifyingoveranuninhabitedtypefalseempty.html)
+* [nearly no_confusion](50044nearlynoconfusion.html) (113 messages, latest: Mar 25 2018 at 01:52)
 
-### [Proof of 0 ≠ 1](18312Proofof01.html)
+* [importing within lean package](99769importingwithinleanpackage.html) (75 messages, latest: Mar 24 2018 at 22:41)
 
-### [reduction to W types](27549reductiontoWtypes.html)
+* [why does or only eliminate to Prop?](20962whydoesoronlyeliminatetoProp.html) (22 messages, latest: Mar 24 2018 at 15:23)
 
-### [monadic merge](38732monadicmerge.html)
+* [add_theorem_by](28663addtheoremby.html) (7 messages, latest: Mar 24 2018 at 14:47)
 
-### [structure equality from parts](67902structureequalityfromparts.html)
+* [algebraic/transcendent numbers](98991algebraictranscendentnumbers.html) (1 message, latest: Mar 24 2018 at 13:45)
 
-### [add_inductive](49396addinductive.html)
+* [lawful classes](22522lawfulclasses.html) (3 messages, latest: Mar 23 2018 at 20:50)
 
-### [Sorry of wrong type!](76453Sorryofwrongtype.html)
+* [my monads!](56938mymonads.html) (3 messages, latest: Mar 23 2018 at 16:44)
 
-### [using infix in definition](05477usinginfixindefinition.html)
+* [bastardization of latex](82931bastardizationoflatex.html) (8 messages, latest: Mar 22 2018 at 19:39)
 
-### [Bots for zulip?](85907Botsforzulip.html)
+* [Quantifying over an uninhabited type (false/ empty)](66754Quantifyingoveranuninhabitedtypefalseempty.html) (11 messages, latest: Mar 22 2018 at 15:36)
 
-### [attributes and tactics](49062attributesandtactics.html)
+* [Proof of 0 ≠ 1](18312Proofof01.html) (19 messages, latest: Mar 22 2018 at 13:34)
 
-### [killing easy nat goal](77763killingeasynatgoal.html)
+* [reduction to W types](27549reductiontoWtypes.html) (53 messages, latest: Mar 22 2018 at 10:19)
 
-### [translating software foundations book into Lean](76034translatingsoftwarefoundationsbookintoLean.html)
+* [monadic merge](38732monadicmerge.html) (31 messages, latest: Mar 22 2018 at 01:50)
 
-### [list of tactics](08893listoftactics.html)
+* [structure equality from parts](67902structureequalityfromparts.html) (68 messages, latest: Mar 22 2018 at 00:53)
 
-### [acc.rec](25328accrec.html)
+* [add_inductive](49396addinductive.html) (14 messages, latest: Mar 21 2018 at 15:12)
 
-### [compute value of function](92086computevalueoffunction.html)
+* [Sorry of wrong type!](76453Sorryofwrongtype.html) (14 messages, latest: Mar 21 2018 at 12:23)
 
-### [rec_name](98683recname.html)
+* [using infix in definition](05477usinginfixindefinition.html) (7 messages, latest: Mar 21 2018 at 11:38)
 
-### [Frozen local instance](86357Frozenlocalinstance.html)
+* [Bots for zulip?](85907Botsforzulip.html) (10 messages, latest: Mar 20 2018 at 23:40)
 
-### [{|a|}](54674a.html)
+* [attributes and tactics](49062attributesandtactics.html) (1 message, latest: Mar 20 2018 at 20:27)
 
-### [lean's type theory](59576leanstypetheory.html)
+* [killing easy nat goal](77763killingeasynatgoal.html) (26 messages, latest: Mar 20 2018 at 19:52)
 
-### [Modern LaTeX](37092ModernLaTeX.html)
+* [translating software foundations book into Lean](76034translatingsoftwarefoundationsbookintoLean.html) (2 messages, latest: Mar 20 2018 at 18:18)
 
-### [creating a new inductive type](36390creatinganewinductivetype.html)
+* [list of tactics](08893listoftactics.html) (4 messages, latest: Mar 20 2018 at 16:39)
 
-### [About monotonicity](72616Aboutmonotonicity.html)
+* [acc.rec](25328accrec.html) (9 messages, latest: Mar 19 2018 at 23:11)
 
-### [generalisation of mk_eq_symm](01789generalisationofmkeqsymm.html)
+* [compute value of function](92086computevalueoffunction.html) (26 messages, latest: Mar 19 2018 at 21:22)
 
-### [testing tactics](63146testingtactics.html)
+* [rec_name](98683recname.html) (7 messages, latest: Mar 19 2018 at 14:58)
 
-### [unique typing](67859uniquetyping.html)
+* [Frozen local instance](86357Frozenlocalinstance.html) (15 messages, latest: Mar 19 2018 at 11:09)
 
-### [typeclass](77049typeclass.html)
+* [{|a|}](54674a.html) (2 messages, latest: Mar 18 2018 at 06:28)
 
-### [rw can't match this](54876rwcantmatchthis.html)
+* [lean's type theory](59576leanstypetheory.html) (102 messages, latest: Mar 17 2018 at 18:03)
 
-### [tactic for unfolding definition](05743tacticforunfoldingdefinition.html)
+* [Modern LaTeX](37092ModernLaTeX.html) (6 messages, latest: Mar 17 2018 at 15:49)
 
-### [the type of a pi type.](58179thetypeofapitype.html)
+* [creating a new inductive type](36390creatinganewinductivetype.html) (95 messages, latest: Mar 17 2018 at 04:07)
 
-### [Implicit constant-type scope](58831Implicitconstanttypescope.html)
+* [About monotonicity](72616Aboutmonotonicity.html) (29 messages, latest: Mar 16 2018 at 23:51)
 
-### [introductions to dependent type theory for mathematicians](62908introductionstodependenttypetheoryformathematicians.html)
+* [generalisation of mk_eq_symm](01789generalisationofmkeqsymm.html) (50 messages, latest: Mar 16 2018 at 12:09)
 
-### [simp documentation](29908simpdocumentation.html)
+* [testing tactics](63146testingtactics.html) (8 messages, latest: Mar 16 2018 at 11:10)
 
-### [conv example](03459convexample.html)
+* [unique typing](67859uniquetyping.html) (70 messages, latest: Mar 16 2018 at 00:46)
 
-### [computable min (real)](22086computableminreal.html)
+* [typeclass](77049typeclass.html) (39 messages, latest: Mar 16 2018 at 00:19)
 
-### [expr.pis](02074exprpis.html)
+* [rw can't match this](54876rwcantmatchthis.html) (19 messages, latest: Mar 15 2018 at 21:29)
 
-### [lean4](90901lean4.html)
+* [tactic for unfolding definition](05743tacticforunfoldingdefinition.html) (17 messages, latest: Mar 15 2018 at 21:06)
 
-### [context like expr lists?](85208contextlikeexprlists.html)
+* [the type of a pi type.](58179thetypeofapitype.html) (23 messages, latest: Mar 15 2018 at 20:49)
 
-### [rewrite entire](69770rewriteentire.html)
+* [Implicit constant-type scope](58831Implicitconstanttypescope.html) (42 messages, latest: Mar 15 2018 at 12:12)
 
-### [DeepSpec summer school](04971DeepSpecsummerschool.html)
+* [introductions to dependent type theory for mathematicians](62908introductionstodependenttypetheoryformathematicians.html) (8 messages, latest: Mar 15 2018 at 07:06)
 
-### [odd zeta values irrational](87089oddzetavaluesirrational.html)
+* [simp documentation](29908simpdocumentation.html) (20 messages, latest: Mar 15 2018 at 01:33)
 
-### [lean is pretty sweet](20749leanisprettysweet.html)
+* [conv example](03459convexample.html) (131 messages, latest: Mar 14 2018 at 23:50)
 
-### [extension and coercion](56515extensionandcoercion.html)
+* [computable min (real)](22086computableminreal.html) (24 messages, latest: Mar 14 2018 at 23:10)
 
-### [lean internals](00113leaninternals.html)
+* [expr.pis](02074exprpis.html) (8 messages, latest: Mar 14 2018 at 18:25)
 
-### [^ is left associative](03873isleftassociative.html)
+* [lean4](90901lean4.html) (185 messages, latest: Mar 14 2018 at 17:30)
 
-### [parser](22734parser.html)
+* [context like expr lists?](85208contextlikeexprlists.html) (35 messages, latest: Mar 14 2018 at 16:10)
 
-### [What's the binding power of →?](55846Whatsthebindingpowerof.html)
+* [rewrite entire](69770rewriteentire.html) (17 messages, latest: Mar 14 2018 at 12:58)
 
-### [image of complement](38477imageofcomplement.html)
+* [DeepSpec summer school](04971DeepSpecsummerschool.html) (93 messages, latest: Mar 14 2018 at 12:45)
 
-### [rewrite LHS is a mvar](44061rewriteLHSisamvar.html)
+* [odd zeta values irrational](87089oddzetavaluesirrational.html) (5 messages, latest: Mar 14 2018 at 11:50)
 
-### [org-mode](89147orgmode.html)
+* [lean is pretty sweet](20749leanisprettysweet.html) (30 messages, latest: Mar 14 2018 at 10:47)
 
-### [notation in topological space file](42157notationintopologicalspacefile.html)
+* [extension and coercion](56515extensionandcoercion.html) (9 messages, latest: Mar 14 2018 at 10:31)
 
-### [path issues?](37897pathissues.html)
+* [lean internals](00113leaninternals.html) (55 messages, latest: Mar 14 2018 at 10:26)
 
-### [pi instances](66274piinstances.html)
+* [^ is left associative](03873isleftassociative.html) (25 messages, latest: Mar 13 2018 at 23:26)
 
-### [named theorems](07437namedtheorems.html)
+* [parser](22734parser.html) (30 messages, latest: Mar 13 2018 at 22:09)
 
-### [rewrite occs](20171rewriteoccs.html)
+* [What's the binding power of →?](55846Whatsthebindingpowerof.html) (2 messages, latest: Mar 13 2018 at 18:35)
 
-### [metaprogramming and structure inheritance](42489metaprogrammingandstructureinheritance.html)
+* [image of complement](38477imageofcomplement.html) (10 messages, latest: Mar 13 2018 at 15:18)
 
-### [Relationship between repos lean and lean-nightly](21093Relationshipbetweenreposleanandleannightly.html)
+* [rewrite LHS is a mvar](44061rewriteLHSisamvar.html) (46 messages, latest: Mar 13 2018 at 14:26)
 
-### [group theory](90889grouptheory.html)
+* [org-mode](89147orgmode.html) (4 messages, latest: Mar 12 2018 at 22:05)
 
-### [type mismatch for fin n](31595typemismatchforfinn.html)
+* [notation in topological space file](42157notationintopologicalspacefile.html) (4 messages, latest: Mar 12 2018 at 19:54)
 
-### [type class inference after colon](51637typeclassinferenceaftercolon.html)
+* [path issues?](37897pathissues.html) (7 messages, latest: Mar 12 2018 at 14:56)
 
-### ["sorry" in mathlib build](29580sorryinmathlibbuild.html)
+* [pi instances](66274piinstances.html) (25 messages, latest: Mar 12 2018 at 11:14)
 
-### [declaring structures](88782declaringstructures.html)
+* [named theorems](07437namedtheorems.html) (11 messages, latest: Mar 12 2018 at 11:01)
 
-### [platformer on proof of square root of 3](23826platformeronproofofsquarerootof3.html)
+* [rewrite occs](20171rewriteoccs.html) (127 messages, latest: Mar 12 2018 at 08:57)
 
-### [outdated website link](09916outdatedwebsitelink.html)
+* [metaprogramming and structure inheritance](42489metaprogrammingandstructureinheritance.html) (11 messages, latest: Mar 11 2018 at 23:58)
 
-### [show in conv mode](59380showinconvmode.html)
+* [Relationship between repos lean and lean-nightly](21093Relationshipbetweenreposleanandleannightly.html) (5 messages, latest: Mar 11 2018 at 23:55)
 
-### [exists_of_not_forall_not](16468existsofnotforallnot.html)
+* [group theory](90889grouptheory.html) (1 message, latest: Mar 11 2018 at 21:11)
 
-### [wlog tests use sorry](80665wlogtestsusesorry.html)
+* [type mismatch for fin n](31595typemismatchforfinn.html) (19 messages, latest: Mar 11 2018 at 20:49)
 
-### [memory leak in server?](79716memoryleakinserver.html)
+* [type class inference after colon](51637typeclassinferenceaftercolon.html) (6 messages, latest: Mar 11 2018 at 20:39)
 
-### [type class traversable](13236typeclasstraversable.html)
+* ["sorry" in mathlib build](29580sorryinmathlibbuild.html) (3 messages, latest: Mar 11 2018 at 19:01)
 
-### [Awesome stuff](77274Awesomestuff.html)
+* [declaring structures](88782declaringstructures.html) (7 messages, latest: Mar 11 2018 at 13:22)
 
-### [variable a problem](87961variableaproblem.html)
+* [platformer on proof of square root of 3](23826platformeronproofofsquarerootof3.html) (9 messages, latest: Mar 11 2018 at 00:40)
 
-### [I can't build lean](87399Icantbuildlean.html)
+* [outdated website link](09916outdatedwebsitelink.html) (2 messages, latest: Mar 10 2018 at 23:24)
 
-### [bug with typeclasses](41867bugwithtypeclasses.html)
+* [show in conv mode](59380showinconvmode.html) (1 message, latest: Mar 10 2018 at 18:24)
 
-### [using wlog](91232usingwlog.html)
+* [exists_of_not_forall_not](16468existsofnotforallnot.html) (5 messages, latest: Mar 10 2018 at 18:12)
 
-### [axiom of unique choice](69142axiomofuniquechoice.html)
+* [wlog tests use sorry](80665wlogtestsusesorry.html) (20 messages, latest: Mar 09 2018 at 22:28)
 
-### [infinitely many odd zeta values irrational](03969infinitelymanyoddzetavaluesirrational.html)
+* [memory leak in server?](79716memoryleakinserver.html) (30 messages, latest: Mar 09 2018 at 11:20)
 
-### [stacks project / schemes](35992stacksprojectschemes.html)
+* [type class traversable](13236typeclasstraversable.html) (29 messages, latest: Mar 09 2018 at 00:53)
 
-### [too many axioms in comm_ring class](51105toomanyaxiomsincommringclass.html)
+* [Awesome stuff](77274Awesomestuff.html) (1 message, latest: Mar 08 2018 at 22:47)
 
-### [yay](30356yay.html)
+* [variable a problem](87961variableaproblem.html) (4 messages, latest: Mar 08 2018 at 22:37)
 
-### [tactic look around](00887tacticlookaround.html)
+* [I can't build lean](87399Icantbuildlean.html) (25 messages, latest: Mar 08 2018 at 20:22)
 
-### [lean failing quietly](59048leanfailingquietly.html)
+* [bug with typeclasses](41867bugwithtypeclasses.html) (13 messages, latest: Mar 08 2018 at 20:17)
 
-### [Can’t login to Zulip in an iOS browser](11399CantlogintoZulipinaniOSbrowser.html)
+* [using wlog](91232usingwlog.html) (1 message, latest: Mar 08 2018 at 19:18)
 
-### [hiding](21076hiding.html)
+* [axiom of unique choice](69142axiomofuniquechoice.html) (75 messages, latest: Mar 08 2018 at 11:47)
 
-### [releases](03733releases.html)
+* [infinitely many odd zeta values irrational](03969infinitelymanyoddzetavaluesirrational.html) (1 message, latest: Mar 08 2018 at 10:06)
 
-### [modes](79033modes.html)
+* [stacks project / schemes](35992stacksprojectschemes.html) (135 messages, latest: Mar 07 2018 at 22:15)
 
-### [bug with simp (editor's note: not a bug)](53094bugwithsimpeditorsnotenotabug.html)
+* [too many axioms in comm_ring class](51105toomanyaxiomsincommringclass.html) (196 messages, latest: Mar 07 2018 at 17:39)
 
-### [detecting sorry](09015detectingsorry.html)
+* [yay](30356yay.html) (5 messages, latest: Mar 07 2018 at 08:16)
 
-### [chain rule](05564chainrule.html)
+* [tactic look around](00887tacticlookaround.html) (11 messages, latest: Mar 07 2018 at 02:23)
 
-### [Is mathlib broken?](99262Ismathlibbroken.html)
+* [lean failing quietly](59048leanfailingquietly.html) (11 messages, latest: Mar 07 2018 at 00:14)
 
-### [Lean assertion violation](60942Leanassertionviolation.html)
+* [Can’t login to Zulip in an iOS browser](11399CantlogintoZulipinaniOSbrowser.html) (2 messages, latest: Mar 06 2018 at 18:56)
 
-### [simp is amazing](43357simpisamazing.html)
+* [hiding](21076hiding.html) (1 message, latest: Mar 06 2018 at 18:20)
 
-### [subtypes v sets](05461subtypesvsets.html)
+* [releases](03733releases.html) (14 messages, latest: Mar 06 2018 at 14:29)
 
-### [subsingleton instances](98726subsingletoninstances.html)
+* [modes](79033modes.html) (112 messages, latest: Mar 06 2018 at 11:29)
 
-### [Generating isomorphisms?](19505Generatingisomorphisms.html)
+* [bug with simp (editor's note: not a bug)](53094bugwithsimpeditorsnotenotabug.html) (12 messages, latest: Mar 06 2018 at 07:33)
 
-### [subset or subtype?](88707subsetorsubtype.html)
+* [detecting sorry](09015detectingsorry.html) (23 messages, latest: Mar 06 2018 at 03:53)
 
-### [transfinite induction](12885transfiniteinduction.html)
+* [chain rule](05564chainrule.html) (56 messages, latest: Mar 05 2018 at 22:12)
 
-### [Understanding notation declarations](23324Understandingnotationdeclarations.html)
+* [Is mathlib broken?](99262Ismathlibbroken.html) (14 messages, latest: Mar 05 2018 at 16:47)
 
-### [spawn new process](54483spawnnewprocess.html)
+* [Lean assertion violation](60942Leanassertionviolation.html) (68 messages, latest: Mar 05 2018 at 13:17)
 
-### [custom recursor](68209customrecursor.html)
+* [simp is amazing](43357simpisamazing.html) (33 messages, latest: Mar 04 2018 at 21:48)
 
-### [Another non-transitivity](88292Anothernontransitivity.html)
+* [subtypes v sets](05461subtypesvsets.html) (12 messages, latest: Mar 04 2018 at 21:45)
 
-### [monad refactoring](30756monadrefactoring.html)
+* [subsingleton instances](98726subsingletoninstances.html) (45 messages, latest: Mar 04 2018 at 20:08)
 
-### [congr tactic](61650congrtactic.html)
+* [Generating isomorphisms?](19505Generatingisomorphisms.html) (21 messages, latest: Mar 04 2018 at 19:20)
 
-### [mysterious decidable_of_decidable_of_iff](90138mysteriousdecidableofdecidableofiff.html)
+* [subset or subtype?](88707subsetorsubtype.html) (19 messages, latest: Mar 04 2018 at 18:40)
 
-### [magical restart fix](75835magicalrestartfix.html)
+* [transfinite induction](12885transfiniteinduction.html) (2 messages, latest: Mar 04 2018 at 18:35)
 
-### [commit went missing](22562commitwentmissing.html)
+* [Understanding notation declarations](23324Understandingnotationdeclarations.html) (2 messages, latest: Mar 04 2018 at 05:37)
 
-### [equation lemmas and simp](17362equationlemmasandsimp.html)
+* [spawn new process](54483spawnnewprocess.html) (7 messages, latest: Mar 03 2018 at 00:36)
 
-### [does lean know?](88618doesleanknow.html)
+* [custom recursor](68209customrecursor.html) (5 messages, latest: Mar 02 2018 at 21:28)
 
-### [new users / Cyril and Damien](63664newusersCyrilandDamien.html)
+* [Another non-transitivity](88292Anothernontransitivity.html) (55 messages, latest: Mar 02 2018 at 19:35)
 
-### [influential dtt papers](70515influentialdttpapers.html)
+* [monad refactoring](30756monadrefactoring.html) (63 messages, latest: Mar 02 2018 at 00:30)
 
-### [Writing a Theory](76321WritingaTheory.html)
+* [congr tactic](61650congrtactic.html) (5 messages, latest: Mar 01 2018 at 14:34)
 
-### [coinductive types](89043coinductivetypes.html)
+* [mysterious decidable_of_decidable_of_iff](90138mysteriousdecidableofdecidableofiff.html) (10 messages, latest: Mar 01 2018 at 14:28)
 
-### [notation](26829notation.html)
+* [magical restart fix](75835magicalrestartfix.html) (2 messages, latest: Mar 01 2018 at 14:09)
 
-### [github notifications](81438githubnotifications.html)
+* [commit went missing](22562commitwentmissing.html) (1 message, latest: Mar 01 2018 at 13:03)
 
-### [lists](93712lists.html)
+* [equation lemmas and simp](17362equationlemmasandsimp.html) (44 messages, latest: Mar 01 2018 at 12:28)
 
-### [refl](51626refl.html)
+* [does lean know?](88618doesleanknow.html) (3 messages, latest: Mar 01 2018 at 10:48)
 
-### [fintype](82176fintype.html)
+* [new users / Cyril and Damien](63664newusersCyrilandDamien.html) (5 messages, latest: Mar 01 2018 at 10:17)
 
-### [emacs lean-mode](27580emacsleanmode.html)
+* [influential dtt papers](70515influentialdttpapers.html) (15 messages, latest: Mar 01 2018 at 08:35)
 
-### [#reduce vs #eval](70736reducevseval.html)
+* [Writing a Theory](76321WritingaTheory.html) (6 messages, latest: Feb 28 2018 at 21:11)
 
-### [ultimate tactic](02078ultimatetactic.html)
+* [coinductive types](89043coinductivetypes.html) (12 messages, latest: Feb 28 2018 at 20:21)
 
-### [unfreeze_local_instances](54550unfreezelocalinstances.html)
+* [notation](26829notation.html) (5 messages, latest: Feb 28 2018 at 18:07)
 
-### [equality by components](80304equalitybycomponents.html)
+* [github notifications](81438githubnotifications.html) (35 messages, latest: Feb 28 2018 at 12:23)
 
-### [Dependently typed proof](68777Dependentlytypedproof.html)
+* [lists](93712lists.html) (14 messages, latest: Feb 28 2018 at 03:14)
 
-### [nested cases](55955nestedcases.html)
+* [refl](51626refl.html) (10 messages, latest: Feb 28 2018 at 03:00)
 
-### [mathlib broke](39285mathlibbroke.html)
+* [fintype](82176fintype.html) (16 messages, latest: Feb 28 2018 at 02:01)
 
-### [lean-nightly](32909leannightly.html)
+* [emacs lean-mode](27580emacsleanmode.html) (27 messages, latest: Feb 28 2018 at 01:14)
 
-### [subst and local constant expression](78762substandlocalconstantexpression.html)
+* [#reduce vs #eval](70736reducevseval.html) (10 messages, latest: Feb 27 2018 at 23:07)
 
-### [lean reference manual](06702leanreferencemanual.html)
+* [ultimate tactic](02078ultimatetactic.html) (4 messages, latest: Feb 27 2018 at 19:49)
 
-### [max of subsequence](08479maxofsubsequence.html)
+* [unfreeze_local_instances](54550unfreezelocalinstances.html) (4 messages, latest: Feb 27 2018 at 19:48)
 
-### [sets from quotients](98304setsfromquotients.html)
+* [equality by components](80304equalitybycomponents.html) (4 messages, latest: Feb 27 2018 at 18:54)
 
-### [off-topic](05576offtopic.html)
+* [Dependently typed proof](68777Dependentlytypedproof.html) (14 messages, latest: Feb 27 2018 at 18:50)
 
-### [different topics](96682differenttopics.html)
+* [nested cases](55955nestedcases.html) (4 messages, latest: Feb 27 2018 at 13:21)
 
-### [Polynomial Functors](81209PolynomialFunctors.html)
+* [mathlib broke](39285mathlibbroke.html) (1 message, latest: Feb 27 2018 at 10:53)
 
-### [archives](85686archives.html)
+* [lean-nightly](32909leannightly.html) (10 messages, latest: Feb 27 2018 at 10:51)
 
-### [logistics](75410logistics.html)
+* [subst and local constant expression](78762substandlocalconstantexpression.html) (5 messages, latest: Feb 27 2018 at 10:06)
 
-### [test](04161test.html)
+* [lean reference manual](06702leanreferencemanual.html) (2 messages, latest: Feb 27 2018 at 09:43)
 
-### [welcome](36973welcome.html)
+* [max of subsequence](08479maxofsubsequence.html) (5 messages, latest: Feb 27 2018 at 01:15)
+
+* [sets from quotients](98304setsfromquotients.html) (7 messages, latest: Feb 27 2018 at 01:05)
+
+* [off-topic](05576offtopic.html) (38 messages, latest: Feb 26 2018 at 22:20)
+
+* [different topics](96682differenttopics.html) (4 messages, latest: Feb 26 2018 at 21:54)
+
+* [Polynomial Functors](81209PolynomialFunctors.html) (15 messages, latest: Feb 26 2018 at 20:01)
+
+* [archives](85686archives.html) (3 messages, latest: Feb 26 2018 at 19:15)
+
+* [logistics](75410logistics.html) (19 messages, latest: Feb 26 2018 at 18:54)
+
+* [test](04161test.html) (4 messages, latest: Feb 26 2018 at 17:22)
+
+* [welcome](36973welcome.html) (1 message, latest: Feb 26 2018 at 17:02)
 

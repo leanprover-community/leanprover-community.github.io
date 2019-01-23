@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60588Areelementsofasubtypedeterminedbytheirvalue.html
 ---
 
-## [general](index.html)
-### [Are elements of a subtype determined by their value?](60588Areelementsofasubtypedeterminedbytheirvalue.html)
+## Stream: [general](index.html)
+### Topic: [Are elements of a subtype determined by their value?](60588Areelementsofasubtypedeterminedbytheirvalue.html)
+
+---
 
 #### [Johan Commelin (May 22 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915156):
 ```lean

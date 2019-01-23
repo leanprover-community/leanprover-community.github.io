@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90182CoCalc.html
 ---
 
-## [general](index.html)
-### [CoCalc](90182CoCalc.html)
+## Stream: [general](index.html)
+### Topic: [CoCalc](90182CoCalc.html)
+
+---
 
 #### [Patrick Massot (May 03 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc/near/126061868):
 Someone sent me this link: https://twitter.com/cocalc_com/status/990971941308727296

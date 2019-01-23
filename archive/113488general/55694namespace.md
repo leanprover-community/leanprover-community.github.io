@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55694namespace.html
 ---
 
-## [general](index.html)
-### [namespace](55694namespace.html)
+## Stream: [general](index.html)
+### Topic: [namespace](55694namespace.html)
+
+---
 
 #### [Kevin Buzzard (Jul 21 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/namespace/near/130048945):
 I thought it was about time I read through theorem proving in Lean again, to make sure I understand it 100% now. I don't. 

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30952nightlyversionstapling.html
 ---
 
-## [general](index.html)
-### [nightly version stapling](30952nightlyversionstapling.html)
+## Stream: [general](index.html)
+### Topic: [nightly version stapling](30952nightlyversionstapling.html)
+
+---
 
 #### [Sebastian Ullrich (Mar 04 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nightly%20version%20stapling/near/123270930):
 sneak peek: https://github.com/leanprover/lean-nightly/releases

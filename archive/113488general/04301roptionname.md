@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04301roptionname.html
 ---
 
-## [general](index.html)
-### [roption name](04301roptionname.html)
+## Stream: [general](index.html)
+### Topic: [roption name](04301roptionname.html)
+
+---
 
 #### [Scott Olson (Nov 04 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/roption%20name/near/137151183):
 @**Mario Carneiro** What's the meaning behind the name of the type `roption`? Sorry if I'm missing something obvious :p

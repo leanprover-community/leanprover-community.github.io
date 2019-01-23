@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/61085Whyisntmathlibinsrc.html
 ---
 
-## [maths](index.html)
-### [Why isn't mathlib in `src`?](61085Whyisntmathlibinsrc.html)
+## Stream: [maths](index.html)
+### Topic: [Why isn't mathlib in `src`?](61085Whyisntmathlibinsrc.html)
+
+---
 
 #### [Kevin Buzzard (Nov 04 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Why%20isn%27t%20mathlib%20in%20%60src%60%3F/near/137161687):
 I thought I'd try proving Hilbert Basis theorem again with the new module stuff (although it's been impossible because my nephews have been here all weekend) and I realised that building my version of community mathlib is really annoying because my scratch files don't compile (as they were all doing things with old versions of module). This  could all be fixed if mathlib lived in src like everything else does. Can we make this change at some point?

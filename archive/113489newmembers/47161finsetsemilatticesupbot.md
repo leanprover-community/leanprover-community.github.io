@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/47161finsetsemilatticesupbot.html
 ---
 
-## [new members](index.html)
-### [finset semilattice_sup_bot](47161finsetsemilatticesupbot.html)
+## Stream: [new members](index.html)
+### Topic: [finset semilattice_sup_bot](47161finsetsemilatticesupbot.html)
+
+---
 
 #### [Alistair Tucker (Nov 20 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20semilattice_sup_bot/near/148054444):
 Hi! In finset.lean there is

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86695VscodeTranslationsfile.html
 ---
 
-## [general](index.html)
-### [Vscode Translations file](86695VscodeTranslationsfile.html)
+## Stream: [general](index.html)
+### Topic: [Vscode Translations file](86695VscodeTranslationsfile.html)
+
+---
 
 #### [Edward Ayers (Jan 10 2019 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Vscode%20Translations%20file/near/154843392):
 Dear all I am cleaning up the vscode translations file. I've removed all of the accents which are rejected by Lean. Are there any shortcuts that people find they mistype frequently or which stop a useful character from being corrected?

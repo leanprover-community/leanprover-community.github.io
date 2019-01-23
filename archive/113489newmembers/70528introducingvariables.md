@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/70528introducingvariables.html
 ---
 
-## [new members](index.html)
-### [introducing variables](70528introducingvariables.html)
+## Stream: [new members](index.html)
+### Topic: [introducing variables](70528introducingvariables.html)
+
+---
 
 #### [Ali Sever (Jul 19 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/introducing%20variables/near/129956826):
 If I have a Prop that says `∃ a b c, p`, whats the quickest way of introducing a b c and p? In tactic mode, I have to use `cases` three times to obtain all of them.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25467Figureouttherestbycc.html
 ---
 
-## [general](index.html)
-### [Figure out the rest by cc](25467Figureouttherestbycc.html)
+## Stream: [general](index.html)
+### Topic: [Figure out the rest by cc](25467Figureouttherestbycc.html)
+
+---
 
 #### [Johan Commelin (Aug 02 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779658):
 Can I tell Lean to work out the rest `by cc`:

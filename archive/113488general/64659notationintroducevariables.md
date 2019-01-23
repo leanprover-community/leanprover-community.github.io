@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64659notationintroducevariables.html
 ---
 
-## [general](index.html)
-### [notation introduce variables](64659notationintroducevariables.html)
+## Stream: [general](index.html)
+### Topic: [notation introduce variables](64659notationintroducevariables.html)
+
+---
 
 #### [Joe Hendrix (Aug 10 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20introduce%20variables/near/131200648):
 Is it possible to write notation that will allow introducing variables?  e.g. have something like the following work:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72316resolvinganame.html
 ---
 
-## [general](index.html)
-### [resolving a name](72316resolvinganame.html)
+## Stream: [general](index.html)
+### Topic: [resolving a name](72316resolvinganame.html)
+
+---
 
 #### [Keeley Hoek (Sep 11 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133714444):
 Say I've got `n : name`, which I get passed, but would like to be of type `my_type`.  I know I can use `t <- infer_type n` to get the type of the identifier pointed to by `n`, and then can use an if to guard against the type being wrong. But I'd really like to do more and "cast" `n` to type `my_type`, getting some `inst : my_type` from `n`.  Would anyone be able to point me to a nice/any facility for doing this? (I've grepped for `cast` without success, is `mk_app` what I'm looking for?)

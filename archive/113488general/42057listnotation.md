@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42057listnotation.html
 ---
 
-## [general](index.html)
-### [list notation](42057listnotation.html)
+## Stream: [general](index.html)
+### Topic: [list notation](42057listnotation.html)
+
+---
 
 #### [Jason Dagit (Aug 23 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20notation/near/132651314):
 I saw this snippet in the tutorial in the "inductive types" section:

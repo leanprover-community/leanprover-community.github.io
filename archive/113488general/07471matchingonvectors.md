@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/07471matchingonvectors.html
 ---
 
-## [general](index.html)
-### [matching on vectors](07471matchingonvectors.html)
+## Stream: [general](index.html)
+### Topic: [matching on vectors](07471matchingonvectors.html)
+
+---
 
 #### [Floris van Doorn (Oct 19 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/matching%20on%20vectors/near/136140175):
 Is there a library of vectors, defined inductively?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32551substitutionsinexpr.html
 ---
 
-## [general](index.html)
-### [substitutions in `expr`](32551substitutionsinexpr.html)
+## Stream: [general](index.html)
+### Topic: [substitutions in `expr`](32551substitutionsinexpr.html)
+
+---
 
 #### [Simon Hudon (Apr 17 2018 at 03:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/substitutions%20in%20%60expr%60/near/125176108):
 If I have `e : expr` and I have a pattern `p : expr` which I would like to substitute for a variable (a bit like `generalize` does for a proof goal) what is the best way to do it?

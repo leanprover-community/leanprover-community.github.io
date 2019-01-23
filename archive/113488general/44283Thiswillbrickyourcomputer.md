@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/44283Thiswillbrickyourcomputer.html
 ---
 
-## [general](index.html)
-### [This will brick your computer!](44283Thiswillbrickyourcomputer.html)
+## Stream: [general](index.html)
+### Topic: [This will brick your computer!](44283Thiswillbrickyourcomputer.html)
+
+---
 
 #### [Kenny Lau (Sep 14 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133943778):
 ```lean

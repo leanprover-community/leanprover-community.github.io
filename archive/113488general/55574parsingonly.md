@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55574parsingonly.html
 ---
 
-## [general](index.html)
-### [`parsing_only`](55574parsingonly.html)
+## Stream: [general](index.html)
+### Topic: [`parsing_only`](55574parsingonly.html)
+
+---
 
 #### [Keeley Hoek (Nov 10 2018 at 17:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60parsing_only%60/near/147438292):
 What does the `parsing_only` attribute, as in

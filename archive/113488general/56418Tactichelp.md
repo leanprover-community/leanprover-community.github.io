@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56418Tactichelp.html
 ---
 
-## [general](index.html)
-### [Tactic help](56418Tactichelp.html)
+## Stream: [general](index.html)
+### Topic: [Tactic help](56418Tactichelp.html)
+
+---
 
 #### [Koundinya Vajjha (Jan 02 2019 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154186308):
 Hi, in order to get familiar with writing tactics, I am trying to write a simple tactic to count the number of occurrences of `∅` in a goal. Here is what I have so far:

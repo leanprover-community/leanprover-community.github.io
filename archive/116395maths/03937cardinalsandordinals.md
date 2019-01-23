@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/03937cardinalsandordinals.html
 ---
 
-## [maths](index.html)
-### [cardinals and ordinals](03937cardinalsandordinals.html)
+## Stream: [maths](index.html)
+### Topic: [cardinals and ordinals](03937cardinalsandordinals.html)
+
+---
 
 #### [Kenny Lau (Aug 22 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132580778):
 In lean they are not sets? i.e. `set_theory/zfc.lean` and `set_theory/cardinal.lean` are independent?

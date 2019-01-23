@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72590Fromfieldstosets.html
 ---
 
-## [general](index.html)
-### [From fields to sets](72590Fromfieldstosets.html)
+## Stream: [general](index.html)
+### Topic: [From fields to sets](72590Fromfieldstosets.html)
+
+---
 
 #### [Anthony Bordg (Oct 04 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135217336):
 Hello,

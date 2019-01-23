@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78526decidingifreflwouldwork.html
 ---
 
-## [general](index.html)
-### [deciding if `refl` would work](78526decidingifreflwouldwork.html)
+## Stream: [general](index.html)
+### Topic: [deciding if `refl` would work](78526decidingifreflwouldwork.html)
+
+---
 
 #### [Scott Morrison (Apr 22 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deciding%20if%20%60refl%60%20would%20work/near/125526321):
 I have `lhs rhs : expr`, and I would like to know, if the goal were to be `lhs = rhs`,  whether or not `refl` would succeed. I could temporarily make the goal actually `lhs = rhs`, and try `refl`, but I'm wondering if it can be done directly.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/01999dononcyclicgroupsexist.html
 ---
 
-## [maths](index.html)
-### [do non-cyclic groups exist?](01999dononcyclicgroupsexist.html)
+## Stream: [maths](index.html)
+### Topic: [do non-cyclic groups exist?](01999dononcyclicgroupsexist.html)
+
+---
 
 #### [Kevin Buzzard (Nov 05 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811479):
 ```lean

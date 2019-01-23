@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81093recursivesplit.html
 ---
 
-## [general](index.html)
-### [recursive split](81093recursivesplit.html)
+## Stream: [general](index.html)
+### Topic: [recursive split](81093recursivesplit.html)
+
+---
 
 #### [Patrick Massot (Jul 02 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursive%20split/near/128962808):
 Do we have a recursive split tactic? My goal looks likes `a ∧ b ∧ c ∧ d` and I would like to write one word and get four non-nested goals.

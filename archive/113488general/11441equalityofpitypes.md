@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11441equalityofpitypes.html
 ---
 
-## [general](index.html)
-### [equality of pi types?](11441equalityofpitypes.html)
+## Stream: [general](index.html)
+### Topic: [equality of pi types?](11441equalityofpitypes.html)
+
+---
 
 #### [Scott Buckley (Apr 26 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125702762):
 Hi guys, I'm stuck trying to prove the following, which seems intuitively true to me:

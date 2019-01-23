@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21660crazyconstructionofastructure.html
 ---
 
-## [general](index.html)
-### [crazy construction of a structure](21660crazyconstructionofastructure.html)
+## Stream: [general](index.html)
+### Topic: [crazy construction of a structure](21660crazyconstructionofastructure.html)
+
+---
 
 #### [Kevin Buzzard (May 19 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crazy%20construction%20of%20a%20structure/near/126805454):
 I never knew one could do this: https://github.com/leanprover/mathlib/blob/38d553694351f4c23a8a8216038c7c8abcb7cd32/ring_theory/localization.lean#L80 (definition of ring structure on a localization).

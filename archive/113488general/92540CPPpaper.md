@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/92540CPPpaper.html
 ---
 
-## [general](index.html)
-### [CPP paper](92540CPPpaper.html)
+## Stream: [general](index.html)
+### Topic: [CPP paper](92540CPPpaper.html)
+
+---
 
 #### [Rob Lewis (Oct 16 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPP%20paper/near/135887180):
 I'm submitting a paper about the p-adics and Hensel's lemma to CPP. If anyone is interested in taking a look, the paper is here: http://robertylewis.com/padics/padics.pdf I'm happy to hear any comments before or after the submission deadline on Thursday!

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83055noaxioms.html
 ---
 
-## [general](index.html)
-### [no axioms](83055noaxioms.html)
+## Stream: [general](index.html)
+### Topic: [no axioms](83055noaxioms.html)
+
+---
 
 #### [Kenny Lau (Apr 28 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20axioms/near/125814400):
 ```lean

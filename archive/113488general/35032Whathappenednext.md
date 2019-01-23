@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35032Whathappenednext.html
 ---
 
-## [general](index.html)
-### [What happened next?](35032Whathappenednext.html)
+## Stream: [general](index.html)
+### Topic: [What happened next?](35032Whathappenednext.html)
+
+---
 
 #### [Kevin Buzzard (Apr 04 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124638598):
 ```

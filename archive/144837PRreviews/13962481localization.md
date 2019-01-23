@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/13962481localization.html
 ---
 
-## [PR reviews](index.html)
-### [#481 localization](13962481localization.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#481 localization](13962481localization.html)
+
+---
 
 #### [Kenny Lau (Dec 20 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23481%20localization/near/152240956):
 I need a better interface

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/78740topicnames.html
 ---
 
-## [PR reviews](index.html)
-### [topic names](78740topicnames.html)
+## Stream: [PR reviews](index.html)
+### Topic: [topic names](78740topicnames.html)
+
+---
 
 #### [Johan Commelin (Oct 07 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/topic%20names/near/135349506):
 Can we have slightly more descriptive topic names please? Currently they are just hash-number, and they actually link to issues of the `lean` repo instead of `mathlib`...

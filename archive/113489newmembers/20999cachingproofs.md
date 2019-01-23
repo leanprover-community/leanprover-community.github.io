@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/20999cachingproofs.html
 ---
 
-## [new members](index.html)
-### [caching proofs](20999cachingproofs.html)
+## Stream: [new members](index.html)
+### Topic: [caching proofs](20999cachingproofs.html)
+
+---
 
 #### [Johan Commelin (Sep 18 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/caching%20proofs/near/134149890):
 Re @**Keeley Hoek**'s dream. ( :warning: everything that follows should be taken with a fair amount of :four_leaf_clover:)

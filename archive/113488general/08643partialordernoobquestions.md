@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08643partialordernoobquestions.html
 ---
 
-## [general](index.html)
-### [partial order noob questions](08643partialordernoobquestions.html)
+## Stream: [general](index.html)
+### Topic: [partial order noob questions](08643partialordernoobquestions.html)
+
+---
 
 #### [Kevin Buzzard (Sep 04 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20order%20noob%20questions/near/133302203):
 OK so I appear to be engaging with orders for the first time in my Lean career.

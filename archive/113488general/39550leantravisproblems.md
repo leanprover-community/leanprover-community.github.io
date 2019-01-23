@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39550leantravisproblems.html
 ---
 
-## [general](index.html)
-### [lean travis problems](39550leantravisproblems.html)
+## Stream: [general](index.html)
+### Topic: [lean travis problems](39550leantravisproblems.html)
+
+---
 
 #### [Kevin Buzzard (Mar 29 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20travis%20problems/near/124357753):
 https://travis-ci.org/leanprover/lean/jobs/359716662#L1465

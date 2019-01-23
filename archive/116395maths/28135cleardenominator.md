@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/28135cleardenominator.html
 ---
 
-## [maths](index.html)
-### [clear_denominator](28135cleardenominator.html)
+## Stream: [maths](index.html)
+### Topic: [clear_denominator](28135cleardenominator.html)
+
+---
 
 #### [Patrick Massot (May 30 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/clear_denominator/near/127303903):
 Let's start a new thread about this

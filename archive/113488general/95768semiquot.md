@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/95768semiquot.html
 ---
 
-## [general](index.html)
-### [semiquot](95768semiquot.html)
+## Stream: [general](index.html)
+### Topic: [semiquot](95768semiquot.html)
+
+---
 
 #### [Mario Carneiro (May 09 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semiquot/near/126308546):
 A minor advertisement for `data/semiquot` because I think it's a cool idea. I've mentioned this approach before, but this data type makes it easy to work with nondeterministic functions using quotient types.

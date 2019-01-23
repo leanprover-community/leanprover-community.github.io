@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37598sumrec.html
 ---
 
-## [general](index.html)
-### [sum.rec](37598sumrec.html)
+## Stream: [general](index.html)
+### Topic: [sum.rec](37598sumrec.html)
+
+---
 
 #### [Reid Barton (May 01 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum.rec/near/125949453):
 I'm having a surprisingly hard time working with `sum.rec`. Specifically, I'm having trouble convincing Lean to give me an ordinary, non-dependent function as the result. I pasted a transcript here: https://gist.github.com/rwbarton/b6cbf07bd07afd89f8c2b4feef8cec5f

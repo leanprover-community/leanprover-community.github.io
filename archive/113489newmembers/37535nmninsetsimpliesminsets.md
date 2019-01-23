@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/37535nmninsetsimpliesminsets.html
 ---
 
-## [new members](index.html)
-### [n = m, n in set s implies m in set s](37535nmninsetsimpliesminsets.html)
+## Stream: [new members](index.html)
+### Topic: [n = m, n in set s implies m in set s](37535nmninsetsimpliesminsets.html)
+
+---
 
 #### [Alexandru-Andrei Bosinta (Nov 25 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n%20%3D%20m%2C%20n%20in%20set%20s%20implies%20m%20in%20set%20s/near/148328566):
 How do you prove this in tactic mode? Or if you know how to get to term mode while in tactic mode in the middle of the proof, a term proof would also work.

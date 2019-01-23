@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81153Leanpuzzle3.html
 ---
 
-## [general](index.html)
-### [Lean puzzle #3](81153Leanpuzzle3.html)
+## Stream: [general](index.html)
+### Topic: [Lean puzzle #3](81153Leanpuzzle3.html)
+
+---
 
 #### [Keeley Hoek (Nov 27 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20puzzle%20%233/near/148625272):
 Next up in my series of lean puzzles, consider the following code snippet:

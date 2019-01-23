@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05694syntaxhighlighting.html
 ---
 
-## [general](index.html)
-### [syntax highlighting](05694syntaxhighlighting.html)
+## Stream: [general](index.html)
+### Topic: [syntax highlighting](05694syntaxhighlighting.html)
+
+---
 
 #### [Kevin Buzzard (Jun 25 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20highlighting/near/128609810):
 William Stein says:

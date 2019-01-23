@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71543HowdowelikeZulip.html
 ---
 
-## [general](index.html)
-### [How do we like Zulip](71543HowdowelikeZulip.html)
+## Stream: [general](index.html)
+### Topic: [How do we like Zulip](71543HowdowelikeZulip.html)
+
+---
 
 #### [Sean Leather (Feb 27 2018 at 07:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20we%20like%20Zulip/near/123030078):
 I must say that the linear conversation of Gitter is easier to follow. This interleaving of streams and topics: having to figure out where the conversation flows and which topic to post to is a bit of a cognitive load for casual chat.

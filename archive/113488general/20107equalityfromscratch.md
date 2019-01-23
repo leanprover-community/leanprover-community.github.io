@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20107equalityfromscratch.html
 ---
 
-## [general](index.html)
-### [equality from scratch](20107equalityfromscratch.html)
+## Stream: [general](index.html)
+### Topic: [equality from scratch](20107equalityfromscratch.html)
+
+---
 
 #### [Adam Kurkiewicz (Aug 07 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035424):
 While looking at Kevin's [great blog post](https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/) about unsigned integers from scratch I thought to push myself a little bit and I've tried to do them *even more* from scratch, by giving up the existing `eq` or `=`.

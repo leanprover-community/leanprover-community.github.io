@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04462ringbugagain.html
 ---
 
-## [general](index.html)
-### [ring bug again?](04462ringbugagain.html)
+## Stream: [general](index.html)
+### Topic: [ring bug again?](04462ringbugagain.html)
+
+---
 
 #### [Patrick Massot (Jul 31 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring%20bug%20again%3F/near/130644147):
 ```lean

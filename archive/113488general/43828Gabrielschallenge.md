@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43828Gabrielschallenge.html
 ---
 
-## [general](index.html)
-### [Gabriel's challenge](43828Gabrielschallenge.html)
+## Stream: [general](index.html)
+### Topic: [Gabriel's challenge](43828Gabrielschallenge.html)
+
+---
 
 #### [Kevin Buzzard (Apr 02 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Gabriel%27s%20challenge/near/124504672):
 Can you do Gabriel's exercise?

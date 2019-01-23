@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/42069inductionoverconstrainedstructure.html
 ---
 
-## [new members](index.html)
-### [induction over constrained structure](42069inductionoverconstrainedstructure.html)
+## Stream: [new members](index.html)
+### Topic: [induction over constrained structure](42069inductionoverconstrainedstructure.html)
+
+---
 
 #### [Gavid Liebnich (Nov 13 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20over%20constrained%20structure/near/147588184):
 I am slightly stuck on a proof, could anyone point me in the right direction? The tl;dr is that I have a structure `X` holding `n` and a proof that `h : 0 < n`. However, `h` makes it impossible to do induction on `n`, because my inductive hypotheses requires me to construct a new `X` such that `h` holds, which is untrue for an arbitrary `n`.

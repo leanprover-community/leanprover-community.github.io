@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/45468letwithpropositionintacticmode.html
 ---
 
-## [new members](index.html)
-### [let with proposition in tactic mode](45468letwithpropositionintacticmode.html)
+## Stream: [new members](index.html)
+### Topic: [let with proposition in tactic mode](45468letwithpropositionintacticmode.html)
+
+---
 
 #### [Kenny Lau (Dec 13 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/let%20with%20proposition%20in%20tactic%20mode/near/151616438):
 ```lean

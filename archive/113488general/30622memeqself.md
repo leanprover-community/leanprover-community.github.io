@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30622memeqself.html
 ---
 
-## [general](index.html)
-### [mem_eq_self](30622memeqself.html)
+## Stream: [general](index.html)
+### Topic: [mem_eq_self](30622memeqself.html)
+
+---
 
 #### [Kevin Buzzard (Dec 02 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_eq_self/near/150731070):
 Harder than I expected!

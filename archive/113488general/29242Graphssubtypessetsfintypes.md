@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29242Graphssubtypessetsfintypes.html
 ---
 
-## [general](index.html)
-### [Graphs, subtypes, sets, fintypes](29242Graphssubtypessetsfintypes.html)
+## Stream: [general](index.html)
+### Topic: [Graphs, subtypes, sets, fintypes](29242Graphssubtypessetsfintypes.html)
+
+---
 
 #### [Pablo Le Hénaff (Jun 15 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121007):
 Hello hello

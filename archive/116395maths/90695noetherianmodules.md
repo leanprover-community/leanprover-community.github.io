@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/90695noetherianmodules.html
 ---
 
-## [maths](index.html)
-### [noetherian modules](90695noetherianmodules.html)
+## Stream: [maths](index.html)
+### Topic: [noetherian modules](90695noetherianmodules.html)
+
+---
 
 #### [Johan Commelin (Aug 31 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/noetherian%20modules/near/133118514):
 What are the next steps for noetherian modules?

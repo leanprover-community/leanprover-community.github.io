@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/11537Accessingconstructortypeintacticdefinition.html
 ---
 
-## [new members](index.html)
-### [Accessing constructor type in tactic definition](11537Accessingconstructortypeintacticdefinition.html)
+## Stream: [new members](index.html)
+### Topic: [Accessing constructor type in tactic definition](11537Accessingconstructortypeintacticdefinition.html)
+
+---
 
 #### [Jesse Michael Han (Oct 18 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Accessing%20constructor%20type%20in%20tactic%20definition/near/136019547):
 Hello everyone,

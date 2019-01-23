@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/43871unfoldingrepeatingPi.html
 ---
 
-## [new members](index.html)
-### [unfolding repeating Pi](43871unfoldingrepeatingPi.html)
+## Stream: [new members](index.html)
+### Topic: [unfolding repeating Pi](43871unfoldingrepeatingPi.html)
+
+---
 
 #### [Jesse Michael Han (Sep 21 2018 at 17:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unfolding%20repeating%20Pi/near/134384020):
 hello everyone! i'm trying to define the following inductive datatype: 

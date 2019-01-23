@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/62825cardinalityofintegersmodulon.html
 ---
 
-## [maths](index.html)
-### [cardinality of integers modulo n](62825cardinalityofintegersmodulon.html)
+## Stream: [maths](index.html)
+### Topic: [cardinality of integers modulo n](62825cardinalityofintegersmodulon.html)
+
+---
 
 #### [Joey van Langen (Jan 14 2019 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinality%20of%20integers%20modulo%20n/near/155093729):
 I am trying to prove the following result

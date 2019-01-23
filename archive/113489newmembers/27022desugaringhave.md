@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/27022desugaringhave.html
 ---
 
-## [new members](index.html)
-### [desugaring have](27022desugaringhave.html)
+## Stream: [new members](index.html)
+### Topic: [desugaring have](27022desugaringhave.html)
+
+---
 
 #### [Olli (Sep 02 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/desugaring%20have/near/133226383):
 https://gist.github.com/luxbock/f0c19afd8d88fef9c13814ba072b9eb5

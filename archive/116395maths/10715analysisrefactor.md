@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/10715analysisrefactor.html
 ---
 
-## [maths](index.html)
-### [analysis refactor](10715analysisrefactor.html)
+## Stream: [maths](index.html)
+### Topic: [analysis refactor](10715analysisrefactor.html)
+
+---
 
 #### [Patrick Massot (Aug 21 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis%20refactor/near/132541838):
 @**Johannes Hölzl** If you have some time, I'd be interested to know what is the big plan underlying your recent mathilb commits

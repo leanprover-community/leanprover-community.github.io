@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/42505Metafunctionswithhigherordervariables.html
 ---
 
-## [new members](index.html)
-### [Meta functions with higher order variables](42505Metafunctionswithhigherordervariables.html)
+## Stream: [new members](index.html)
+### Topic: [Meta functions with higher order variables](42505Metafunctionswithhigherordervariables.html)
+
+---
 
 #### [Ken Roe (Jul 29 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Meta%20functions%20with%20higher%20order%20variables/near/130493380):
 How can I get the following to parse:

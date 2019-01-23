@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/80075choosingfromdifferenceoffinsets.html
 ---
 
-## [new members](index.html)
-### [choosing from difference of finsets](80075choosingfromdifferenceoffinsets.html)
+## Stream: [new members](index.html)
+### Topic: [choosing from difference of finsets](80075choosingfromdifferenceoffinsets.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Sep 09 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133619465):
 Here's my "Tactic State":

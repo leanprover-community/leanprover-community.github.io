@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71999generalizeproofs.html
 ---
 
-## [general](index.html)
-### [generalize_proofs](71999generalizeproofs.html)
+## Stream: [general](index.html)
+### Topic: [generalize_proofs](71999generalizeproofs.html)
+
+---
 
 #### [Reid Barton (Dec 01 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148900772):
 Does `generalize_proofs` ever work?

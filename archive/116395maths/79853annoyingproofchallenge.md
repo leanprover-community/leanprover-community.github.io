@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/79853annoyingproofchallenge.html
 ---
 
-## [maths](index.html)
-### [annoying proof challenge](79853annoyingproofchallenge.html)
+## Stream: [maths](index.html)
+### Topic: [annoying proof challenge](79853annoyingproofchallenge.html)
+
+---
 
 #### [Chris Hughes (Dec 01 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698181):
 Is there a nice way to prove this?

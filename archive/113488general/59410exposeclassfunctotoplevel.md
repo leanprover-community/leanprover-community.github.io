@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59410exposeclassfunctotoplevel.html
 ---
 
-## [general](index.html)
-### [expose class func to top-level](59410exposeclassfunctotoplevel.html)
+## Stream: [general](index.html)
+### Topic: [expose class func to top-level](59410exposeclassfunctotoplevel.html)
+
+---
 
 #### [Zesen Qian (Jun 06 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expose%20class%20func%20to%20top-level/near/127674397):
 Hi, how can I expose a function defined in type class to the top-level? i.e., the way to_string is exposed.

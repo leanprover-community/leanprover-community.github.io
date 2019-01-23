@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/44024invalidoccurrenceofrecursivearg.html
 ---
 
-## [general](index.html)
-### [invalid occurrence of recursive arg](44024invalidoccurrenceofrecursivearg.html)
+## Stream: [general](index.html)
+### Topic: [invalid occurrence of recursive arg](44024invalidoccurrenceofrecursivearg.html)
+
+---
 
 #### [Reid Barton (Jan 13 2019 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg/near/155020104):
 What does this error message mean and is there a workaround?

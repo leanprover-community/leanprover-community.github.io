@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17585whyisthisslow.html
 ---
 
-## [general](index.html)
-### [why is this slow?](17585whyisthisslow.html)
+## Stream: [general](index.html)
+### Topic: [why is this slow?](17585whyisthisslow.html)
+
+---
 
 #### [Kenny Lau (Sep 16 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20slow%3F/near/134047650):
 ```lean

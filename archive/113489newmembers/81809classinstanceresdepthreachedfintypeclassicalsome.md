@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/81809classinstanceresdepthreachedfintypeclassicalsome.html
 ---
 
-## [new members](index.html)
-### ["class-instance res. depth reached" fintype + classical.some](81809classinstanceresdepthreachedfintypeclassicalsome.html)
+## Stream: [new members](index.html)
+### Topic: ["class-instance res. depth reached" fintype + classical.some](81809classinstanceresdepthreachedfintypeclassicalsome.html)
+
+---
 
 #### [Tobias Grosser (Sep 29 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22class-instance%20res.%20depth%20reached%22%20fintype%20%2B%20classical.some/near/134871036):
 Hi guys, I am trying to model ssreflects 'pick' method using classical.some. The code I came up with reads:

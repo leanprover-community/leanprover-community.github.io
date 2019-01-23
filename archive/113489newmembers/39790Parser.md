@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/39790Parser.html
 ---
 
-## [new members](index.html)
-### [Parser](39790Parser.html)
+## Stream: [new members](index.html)
+### Topic: [Parser](39790Parser.html)
+
+---
 
 #### [Pablo Le Hénaff (Aug 08 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Parser/near/131100158):
 Hello !

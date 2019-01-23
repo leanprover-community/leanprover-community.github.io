@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90138mysteriousdecidableofdecidableofiff.html
 ---
 
-## [general](index.html)
-### [mysterious decidable_of_decidable_of_iff](90138mysteriousdecidableofdecidableofiff.html)
+## Stream: [general](index.html)
+### Topic: [mysterious decidable_of_decidable_of_iff](90138mysteriousdecidableofdecidableofiff.html)
+
+---
 
 #### [Sean Leather (Mar 01 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mysterious%20decidable_of_decidable_of_iff/near/123137155):
 This is also peculiar. I came upon the following which didn't resolve with `refl` or `simp`:

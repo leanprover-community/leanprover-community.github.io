@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25920structureequality.html
 ---
 
-## [general](index.html)
-### [structure equality](25920structureequality.html)
+## Stream: [general](index.html)
+### Topic: [structure equality](25920structureequality.html)
+
+---
 
 #### [Patrick Massot (Jul 06 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129218426):
 How do we prove equality of two terms whose type is a structure mixing data and Prop? I would like to prove each data holding field matches. I thought this has something to do with `no_confusion` but I can't get it to work.

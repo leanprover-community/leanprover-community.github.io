@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/75913Weirdbehaviorofrw.html
 ---
 
-## [new members](index.html)
-### [Weird behavior of rw?](75913Weirdbehaviorofrw.html)
+## Stream: [new members](index.html)
+### Topic: [Weird behavior of rw?](75913Weirdbehaviorofrw.html)
+
+---
 
 #### [Sebastian Zimmer (Sep 29 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20behavior%20of%20rw%3F/near/134890495):
 I'm trying to shorten the following proof:

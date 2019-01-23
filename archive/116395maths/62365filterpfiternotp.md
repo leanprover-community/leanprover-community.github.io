@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/62365filterpfiternotp.html
 ---
 
-## [maths](index.html)
-### [filter p + fiter not p](62365filterpfiternotp.html)
+## Stream: [maths](index.html)
+### Topic: [filter p + fiter not p](62365filterpfiternotp.html)
+
+---
 
 #### [Kevin Buzzard (Aug 15 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20p%20%2B%20fiter%20not%20p/near/132190025):
 ```lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/61359Missingmathstactic.html
 ---
 
-## [maths](index.html)
-### [Missing maths tactic?](61359Missingmathstactic.html)
+## Stream: [maths](index.html)
+### Topic: [Missing maths tactic?](61359Missingmathstactic.html)
+
+---
 
 #### [Kevin Buzzard (Nov 23 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Missing%20maths%20tactic%3F/near/148250605):
 `example (a b c d : ℤ) (H : a - b = c * d) : b - a = c * (-d) := by simp [H] -- fails`.

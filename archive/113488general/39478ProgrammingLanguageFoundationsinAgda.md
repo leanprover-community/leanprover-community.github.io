@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39478ProgrammingLanguageFoundationsinAgda.html
 ---
 
-## [general](index.html)
-### [Programming Language Foundations in Agda](39478ProgrammingLanguageFoundationsinAgda.html)
+## Stream: [general](index.html)
+### Topic: [Programming Language Foundations in Agda](39478ProgrammingLanguageFoundationsinAgda.html)
+
+---
 
 #### [Sean Leather (Jul 20 2018 at 08:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129979672):
 I got an email that [Phil Wadler](http://homepages.inf.ed.ac.uk/wadler/) is giving a talk at Utrecht University. Here's the introduction:

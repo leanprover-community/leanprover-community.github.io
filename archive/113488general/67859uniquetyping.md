@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67859uniquetyping.html
 ---
 
-## [general](index.html)
-### [unique typing](67859uniquetyping.html)
+## Stream: [general](index.html)
+### Topic: [unique typing](67859uniquetyping.html)
+
+---
 
 #### [Mario Carneiro (Mar 15 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unique%20typing/near/123746502):
 Success! I managed to finally show that Lean's full type system has unique typing (which implies stuff like it is impossible to prove `Type 0 : Type 0`), even if you use "full" definitional equality, i.e. the transitive and undecidable ideal version of what lean checks. Since it uses a reduction that is guaranteed to run forever on subsingleton eliminators like `acc`, it yields an alternative semi-decision procedure for testing definitional equality.

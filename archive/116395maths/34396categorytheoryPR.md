@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/34396categorytheoryPR.html
 ---
 
-## [maths](index.html)
-### [category theory PR](34396categorytheoryPR.html)
+## Stream: [maths](index.html)
+### Topic: [category theory PR](34396categorytheoryPR.html)
+
+---
 
 #### [Scott Morrison (Jun 04 2018 at 05:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20PR/near/127526777):
 @**Kevin Buzzard**, @**Reid Barton**, @**Johan Commelin**, the first cut of my category theory PR has just landed as https://github.com/leanprover/mathlib/pull/152. Criticisms welcome!

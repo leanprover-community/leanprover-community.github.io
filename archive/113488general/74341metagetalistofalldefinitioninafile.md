@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74341metagetalistofalldefinitioninafile.html
 ---
 
-## [general](index.html)
-### [(meta) get a list of all definition in a file](74341metagetalistofalldefinitioninafile.html)
+## Stream: [general](index.html)
+### Topic: [(meta) get a list of all definition in a file](74341metagetalistofalldefinitioninafile.html)
+
+---
 
 #### [Zesen Qian (Aug 14 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28meta%29%20get%20a%20list%20of%20all%20definition%20in%20a%20file/near/132130403):
 Hi, is it possible in meta-programming to get a list of all (non-meta) definitions in a file?

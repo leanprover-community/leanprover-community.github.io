@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00033implicitargumentsandring.html
 ---
 
-## [general](index.html)
-### [implicit arguments, and `ring`](00033implicitargumentsandring.html)
+## Stream: [general](index.html)
+### Topic: [implicit arguments, and `ring`](00033implicitargumentsandring.html)
+
+---
 
 #### [Scott Morrison (Sep 29 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878744):
 Hi @**Mario Carneiro**, I noticed an unfortunate feature of `ring`.

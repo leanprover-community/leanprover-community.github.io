@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63555simptheoremifftrue.html
 ---
 
-## [general](index.html)
-### [simp theorem iff true](63555simptheoremifftrue.html)
+## Stream: [general](index.html)
+### Topic: [simp theorem iff true](63555simptheoremifftrue.html)
+
+---
 
 #### [Sean Leather (May 18 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20theorem%20iff%20true/near/126744334):
 What's the difference in `simp` behavior (if any) between these two theorems for `p : Prop`? Is one or the other preferable?

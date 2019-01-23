@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00220private.html
 ---
 
-## [general](index.html)
-### [private](00220private.html)
+## Stream: [general](index.html)
+### Topic: [private](00220private.html)
+
+---
 
 #### [Reid Barton (Dec 01 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/private/near/150684856):
 What's the scope of something defined as `private`? It seems to be larger than just the surrounding section

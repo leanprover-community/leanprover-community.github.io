@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/58376549overcategories.html
 ---
 
-## [PR reviews](index.html)
-### [#549 over categories](58376549overcategories.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#549 over categories](58376549overcategories.html)
+
+---
 
 #### [Scott Morrison (Dec 21 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23549%20over%20categories/near/152321838):
 Hi @**Johan Commelin**, is it a good idea to define over and under categories in terms of comma categories?

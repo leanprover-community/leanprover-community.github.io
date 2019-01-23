@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/40911classvsdefagain.html
 ---
 
-## [maths](index.html)
-### [class vs def again](40911classvsdefagain.html)
+## Stream: [maths](index.html)
+### Topic: [class vs def again](40911classvsdefagain.html)
+
+---
 
 #### [Patrick Massot (Jul 16 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129776099):
 Variation on a well-known theme: should uniform continuity of a map `f` between uniform spaces `a` and `b` be a `def` or a `class`? Or should we bundle `f` and its uniform continuity?  Currently we have a `def` and no bundling. As usual, this is all convenient to prove properties of individual maps, or compositions of two such maps. Now let's get functorial. I want to promote each such `f` to a map between the respective Hausdorff completions of `a` and `b`.  Of course in math this would be called `completion_lift f`. This currently doesn't make sense in mathlib, we need a term `h : uniform_continuous f`. So we could write `completion_lift f h`. But `f` can be inferred from `h`, so common sense dictates it should be an implicit argument, and we end up with `completion_lift h`. And it looks *weird*. And it gets worse when stating and proving properties of `completion_lift`, especially functoriality that should read `completion_lift f' ∘ f = (completion_lift f') ∘ completion_lift f ` but actually reads `completion_lift (uniform_continuous.comp h h') = (completion_lift h') ∘ completion_lift h`.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99873falseelim.html
 ---
 
-## [general](index.html)
-### [false.elim](99873falseelim.html)
+## Stream: [general](index.html)
+### Topic: [false.elim](99873falseelim.html)
+
+---
 
 #### [Kenny Lau (Sep 08 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/false.elim/near/133574791):
 Why can `false` elim to anything even though it is only a `Prop`?

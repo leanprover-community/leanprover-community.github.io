@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/47376freegroup.html
 ---
 
-## [maths](index.html)
-### [free group](47376freegroup.html)
+## Stream: [maths](index.html)
+### Topic: [free group](47376freegroup.html)
+
+---
 
 #### [Kenny Lau (Apr 01 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20group/near/124494694):
 @**Kevin Buzzard**  here's my old version of free group https://github.com/kckennylau/Lean/blob/c6eac863b23d58d40deaab62489f6069f860407e/free_group.lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23938export.html
 ---
 
-## [general](index.html)
-### [export?](23938export.html)
+## Stream: [general](index.html)
+### Topic: [export?](23938export.html)
+
+---
 
 #### [Kevin Buzzard (Jun 13 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/export%3F/near/127995777):
 From lean core:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85513recursivering.html
 ---
 
-## [general](index.html)
-### [recursive ring](85513recursivering.html)
+## Stream: [general](index.html)
+### Topic: [recursive ring](85513recursivering.html)
+
+---
 
 #### [Patrick Massot (May 29 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursive%20ring/near/127272896):
 Is that a bug?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/07556onboarding.html
 ---
 
-## [new members](index.html)
-### [onboarding](07556onboarding.html)
+## Stream: [new members](index.html)
+### Topic: [onboarding](07556onboarding.html)
+
+---
 
 #### [Welcome Bot (Feb 26 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/onboarding/near/123002022):
 A #**new members** stream is great for onboarding new members.

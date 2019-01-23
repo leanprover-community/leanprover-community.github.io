@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89414withinfty.html
 ---
 
-## [general](index.html)
-### [with_infty](89414withinfty.html)
+## Stream: [general](index.html)
+### Topic: [with_infty](89414withinfty.html)
+
+---
 
 #### [Johan Commelin (Oct 08 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/with_infty/near/135383943):
 I am looking at Sebastien's PR for emetric spaces. And I'm wondering, we have `with_top`, `with_bot` and `with_zero`. Would it make sense to have `with_infty`, or is it not worth it?

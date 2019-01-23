@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/97918tacticcasescore.html
 ---
 
-## [new members](index.html)
-### [tactic.cases_core](97918tacticcasescore.html)
+## Stream: [new members](index.html)
+### Topic: [tactic.cases_core](97918tacticcasescore.html)
+
+---
 
 #### [Kenny Lau (Nov 24 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tactic.cases_core/near/148270993):
 What is the output of `tactic.cases_core`?

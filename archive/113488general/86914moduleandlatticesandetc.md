@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86914moduleandlatticesandetc.html
 ---
 
-## [general](index.html)
-### [module and lattices and etc](86914moduleandlatticesandetc.html)
+## Stream: [general](index.html)
+### Topic: [module and lattices and etc](86914moduleandlatticesandetc.html)
+
+---
 
 #### [Kenny Lau (Nov 06 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20and%20lattices%20and%20etc/near/146859692):
 ```lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/50998varioustostrings.html
 ---
 
-## [general](index.html)
-### [various to_strings](50998varioustostrings.html)
+## Stream: [general](index.html)
+### Topic: [various to_strings](50998varioustostrings.html)
+
+---
 
 #### [Edward Ayers (Oct 01 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/various%20to_strings/near/134964035):
 Hi all, when should I use the following typeclasses to display information?

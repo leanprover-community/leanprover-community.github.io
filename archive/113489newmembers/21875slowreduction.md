@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/21875slowreduction.html
 ---
 
-## [new members](index.html)
-### [slow reduction](21875slowreduction.html)
+## Stream: [new members](index.html)
+### Topic: [slow reduction](21875slowreduction.html)
+
+---
 
 #### [Scott Olson (Sep 28 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/slow%20reduction/near/134782780):
 I have a `#reduce` that's leading to "(deterministic) timeout" and I'm wondering what I can do to find out what's taking so long. Can I `#reduce` step-by-step?

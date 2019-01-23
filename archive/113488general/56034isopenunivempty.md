@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56034isopenunivempty.html
 ---
 
-## [general](index.html)
-### [is_open_{univ,empty}](56034isopenunivempty.html)
+## Stream: [general](index.html)
+### Topic: [is_open_{univ,empty}](56034isopenunivempty.html)
+
+---
 
 #### [Johan Commelin (Dec 04 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_open_%7Buniv%2Cempty%7D/near/150866118):
 Is there a reason for the following discrepancy?

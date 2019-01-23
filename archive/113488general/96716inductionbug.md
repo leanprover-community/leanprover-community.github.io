@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96716inductionbug.html
 ---
 
-## [general](index.html)
-### [induction bug](96716inductionbug.html)
+## Stream: [general](index.html)
+### Topic: [induction bug](96716inductionbug.html)
+
+---
 
 #### [Kenny Lau (Nov 20 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20bug/near/148074216):
 ```lean

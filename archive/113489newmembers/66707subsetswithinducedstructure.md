@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/66707subsetswithinducedstructure.html
 ---
 
-## [new members](index.html)
-### [subsets with induced structure](66707subsetswithinducedstructure.html)
+## Stream: [new members](index.html)
+### Topic: [subsets with induced structure](66707subsetswithinducedstructure.html)
+
+---
 
 #### [Jean Lo (Nov 19 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subsets%20with%20induced%20structure/near/147981000):
 Given a set with some structure, I often would like to think about its subsets that also have a similar structure on it. This seems like a pretty common construction — what would be the idiomatic way to formulate such things in Lean?

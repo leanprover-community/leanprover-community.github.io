@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85628CategorytheoryPR.html
 ---
 
-## [general](index.html)
-### [Category theory PR](85628CategorytheoryPR.html)
+## Stream: [general](index.html)
+### Topic: [Category theory PR](85628CategorytheoryPR.html)
+
+---
 
 #### [Scott Morrison (Aug 07 2018 at 07:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Category%20theory%20PR/near/131024775):
 Hi @**Mario Carneiro**, I didn’t understand your suggestion to use “`functor.id` (protected)”. What is “protected”?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/70030assertionviolation.html
 ---
 
-## [general](index.html)
-### [assertion violation](70030assertionviolation.html)
+## Stream: [general](index.html)
+### Topic: [assertion violation](70030assertionviolation.html)
+
+---
 
 #### [Kevin Buzzard (Mar 26 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assertion%20violation/near/124242811):
 Kenny found an assertion violation back in Feb or so: `instance foo (α : Type) : group α := { mul_assoc := λ x y z, rfl }`. I just mention it here because it still seems to be there.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/90889analysissession.html
 ---
 
-## [Lean Together 2019](index.html)
-### [analysis session](90889analysissession.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [analysis session](90889analysissession.html)
+
+---
 
 #### [Jeremy Avigad (Jan 09 2019 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/analysis%20session/near/154724961):
 Friends, 

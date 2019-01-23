@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/70126CoqsProgramtactic.html
 ---
 
-## [new members](index.html)
-### [Coq's Program tactic](70126CoqsProgramtactic.html)
+## Stream: [new members](index.html)
+### Topic: [Coq's Program tactic](70126CoqsProgramtactic.html)
+
+---
 
 #### [Wojciech Nawrocki (Dec 16 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151888312):
 Is there something akin to Coq's [Program](https://coq.inria.fr/refman/addendum/program.html) tactic in Lean? I thought that the equation compiler is basically that, but it seems to fail in the case when it should generate an equality at the type level. In my example:

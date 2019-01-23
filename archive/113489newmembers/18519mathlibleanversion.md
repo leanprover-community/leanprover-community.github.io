@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/18519mathlibleanversion.html
 ---
 
-## [new members](index.html)
-### [mathlib/lean version](18519mathlibleanversion.html)
+## Stream: [new members](index.html)
+### Topic: [mathlib/lean version](18519mathlibleanversion.html)
+
+---
 
 #### [Scott Olson (Sep 25 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib/lean%20version/near/134602285):
 The mathlib instructions at https://github.com/leanprover/mathlib/blob/master/docs/elan.md#scenario-1-start-a-new-package suggest using the version in the mathlib leanpkg.toml, expecting it to be a nightly, but it's actually the stable 3.4.1 now, which means leanpkg downloads the lean-3.4.1 branch instead of master.

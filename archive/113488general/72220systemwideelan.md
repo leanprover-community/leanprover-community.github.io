@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72220systemwideelan.html
 ---
 
-## [general](index.html)
-### [system-wide elan](72220systemwideelan.html)
+## Stream: [general](index.html)
+### Topic: [system-wide elan](72220systemwideelan.html)
+
+---
 
 #### [Patrick Massot (Jan 18 2019 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/system-wide%20elan/near/156355328):
 @**Sebastian Ullrich** I'd like to try to build a debian package for local deployment for my course. Is it possible to have a system-wide `elan` It seems elan always tries to install in the user directory

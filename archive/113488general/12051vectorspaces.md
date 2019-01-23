@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/12051vectorspaces.html
 ---
 
-## [general](index.html)
-### [vector spaces](12051vectorspaces.html)
+## Stream: [general](index.html)
+### Topic: [vector spaces](12051vectorspaces.html)
+
+---
 
 #### [Johan Commelin (Sep 14 2018 at 02:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vector%20spaces/near/133922950):
 Before we go on a rampage proving things about vector spaces: there was some suggestion that we should just turn `vector_space` into notation/abbreviation for `module`. Maybe now is a good point to decide on this, since Kenny is already PR'ing stuff where he needs new instances of `vector_space`.

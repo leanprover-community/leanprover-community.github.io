@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/42731algebraonsubtypes.html
 ---
 
-## [maths](index.html)
-### [algebra on subtypes](42731algebraonsubtypes.html)
+## Stream: [maths](index.html)
+### Topic: [algebra on subtypes](42731algebraonsubtypes.html)
+
+---
 
 #### [Patrick Massot (Jul 19 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algebra%20on%20subtypes/near/129923410):
 @**Johan Commelin** Simon has been working for us, and Mario promptly merged. You can update mathlib to at least c2f54ad03 and try to understand how to use the magic in https://gist.github.com/PatrickMassot/8afef3917a917300cf31c1396a895705

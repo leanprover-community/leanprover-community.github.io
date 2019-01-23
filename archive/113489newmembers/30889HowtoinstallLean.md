@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/30889HowtoinstallLean.html
 ---
 
-## [new members](index.html)
-### [How to install Lean](30889HowtoinstallLean.html)
+## Stream: [new members](index.html)
+### Topic: [How to install Lean](30889HowtoinstallLean.html)
+
+---
 
 #### [Daryl Zuniga (Nov 20 2018 at 04:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20install%20Lean/near/148014581):
 I downloaded the darwin zip for my Mac. Inside are bin/, include/, and lib/ folders. No readme, no install script. I can't find any installation instructions on the website. Where should I put these?

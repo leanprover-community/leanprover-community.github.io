@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26122unfoldingfromcases.html
 ---
 
-## [general](index.html)
-### [unfolding from cases](26122unfoldingfromcases.html)
+## Stream: [general](index.html)
+### Topic: [unfolding from cases](26122unfoldingfromcases.html)
+
+---
 
 #### [Reid Barton (Nov 28 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20from%20cases/near/148714917):
 ```lean

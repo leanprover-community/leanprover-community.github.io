@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/11204tacticsinsidedefinitions.html
 ---
 
-## [new members](index.html)
-### [tactics inside definitions](11204tacticsinsidedefinitions.html)
+## Stream: [new members](index.html)
+### Topic: [tactics inside definitions](11204tacticsinsidedefinitions.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Oct 15 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tactics%20inside%20definitions/near/135796356):
 @**Kenny Lau** [said](https://github.com/leanprover/mathlib/pull/421#discussion_r225011707):

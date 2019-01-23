@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08294orderonoptions.html
 ---
 
-## [general](index.html)
-### [order on options](08294orderonoptions.html)
+## Stream: [general](index.html)
+### Topic: [order on options](08294orderonoptions.html)
+
+---
 
 #### [Simon Hudon (Sep 23 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/order%20on%20options/near/134463860):
 Is there an instance of `decidable_linear_order` on `option` in Mathlib or core? I can't find one

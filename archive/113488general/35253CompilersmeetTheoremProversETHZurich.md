@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35253CompilersmeetTheoremProversETHZurich.html
 ---
 
-## [general](index.html)
-### [Compilers meet Theorem Provers @ ETH Zurich](35253CompilersmeetTheoremProversETHZurich.html)
+## Stream: [general](index.html)
+### Topic: [Compilers meet Theorem Provers @ ETH Zurich](35253CompilersmeetTheoremProversETHZurich.html)
+
+---
 
 #### [Tobias Grosser (Sep 05 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Compilers%20meet%20Theorem%20Provers%20%40%20ETH%20Zurich/near/133360691):
 Dear Lean Community, we will be having a "Compiler meets Theorem Proving" social @ ETH Zurich next week Thursday.

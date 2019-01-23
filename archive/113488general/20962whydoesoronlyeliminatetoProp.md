@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20962whydoesoronlyeliminatetoProp.html
 ---
 
-## [general](index.html)
-### [why does or only eliminate to Prop?](20962whydoesoronlyeliminatetoProp.html)
+## Stream: [general](index.html)
+### Topic: [why does or only eliminate to Prop?](20962whydoesoronlyeliminatetoProp.html)
+
+---
 
 #### [Kevin Buzzard (Mar 22 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124063589):
 I just noticed this. Chris Hughes wrote a proof for me, but in my application of his proof I have a function from `fin n` to `nat`, and he has implemented his proof using a function from `nat` to `nat` which he only ever evaluates at numbers less than `n`. Given my function from `fin n` to `nat` I hence need to come up with a function from `nat` to `nat` which extends it and I thought I'd just define it using `or.elim (decidable.em (i<n))` but this won't work because the target can't be `nat`.

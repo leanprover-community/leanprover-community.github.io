@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/84184568metricnamespace.html
 ---
 
-## [PR reviews](index.html)
-### [#568 metric namespace](84184568metricnamespace.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#568 metric namespace](84184568metricnamespace.html)
+
+---
 
 #### [Sebastien Gouezel (Jan 13 2019 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155045224):
 After Mario's alternative proposition for the metric namespace, I fixed the build. The following line in `normed_space.lean`

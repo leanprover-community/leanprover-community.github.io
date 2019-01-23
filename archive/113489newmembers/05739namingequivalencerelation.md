@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/05739namingequivalencerelation.html
 ---
 
-## [new members](index.html)
-### [naming equivalence relation](05739namingequivalencerelation.html)
+## Stream: [new members](index.html)
+### Topic: [naming equivalence relation](05739namingequivalencerelation.html)
+
+---
 
 #### [Ali Sever (Jul 18 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/naming%20equivalence%20relation/near/129879693):
 I have a function `eqd : point → point → point → point → Prop`, and I have made an equivalence relation on `point × point`. Instead of using `setoid.r (a,b) (c,d)`, is it possible to change the notation to be `(a,b) ≡ (c,d)`?

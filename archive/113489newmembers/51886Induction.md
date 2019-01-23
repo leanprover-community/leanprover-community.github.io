@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/51886Induction.html
 ---
 
-## [new members](index.html)
-### [Induction](51886Induction.html)
+## Stream: [new members](index.html)
+### Topic: [Induction](51886Induction.html)
+
+---
 
 #### [Alistair Tucker (Sep 25 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/134579977):
 Hello again! I'm still having a little trouble with my induction. In the example below the second dite gives me

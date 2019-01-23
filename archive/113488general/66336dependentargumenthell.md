@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66336dependentargumenthell.html
 ---
 
-## [general](index.html)
-### [dependent argument hell](66336dependentargumenthell.html)
+## Stream: [general](index.html)
+### Topic: [dependent argument hell](66336dependentargumenthell.html)
+
+---
 
 #### [Scott Morrison (Sep 12 2018 at 03:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dependent%20argument%20hell/near/133771753):
 I seem to have backed myself into a corner, and I don't understand how to escape. I would really appreciate some help, as it feels like this problem is an instance of one that will become more and more severe as we do more advanced maths.

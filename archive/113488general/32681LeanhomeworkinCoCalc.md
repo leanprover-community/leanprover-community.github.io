@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32681LeanhomeworkinCoCalc.html
 ---
 
-## [general](index.html)
-### [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html)
+## Stream: [general](index.html)
+### Topic: [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html)
+
+---
 
 #### [Kevin Buzzard (Nov 29 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20homework%20in%20CoCalc/near/148778475):
 Here are my notes on setting Lean homework in CoCalc:

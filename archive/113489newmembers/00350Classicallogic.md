@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/00350Classicallogic.html
 ---
 
-## [new members](index.html)
-### [Classical logic](00350Classicallogic.html)
+## Stream: [new members](index.html)
+### Topic: [Classical logic](00350Classicallogic.html)
+
+---
 
 #### [Alexandru-Andrei Bosinta (Nov 21 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Classical%20logic/near/148124896):
 What is the problem with classical logic in Lean? Why does one have to use `open classical` in order to use the law of the excluded middle? Also what is up with all the `decidable` that I see in some theorems? Does classical logic (somehow) create any problems to computation (aka it slows down the computation)?

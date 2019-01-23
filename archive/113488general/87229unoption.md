@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87229unoption.html
 ---
 
-## [general](index.html)
-### [unoption](87229unoption.html)
+## Stream: [general](index.html)
+### Topic: [unoption](87229unoption.html)
+
+---
 
 #### [Kevin Buzzard (Jul 19 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unoption/near/129948591):
 What is the function which takes `a : option X` and a proof that `a` isn't `none` and returns the x such that `a = some x` called? I can write it -- but I suspect someone else already thought of it...

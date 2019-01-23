@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01273auxiliarylemmaforinduction.html
 ---
 
-## [general](index.html)
-### [auxiliary lemma for induction](01273auxiliarylemmaforinduction.html)
+## Stream: [general](index.html)
+### Topic: [auxiliary lemma for induction](01273auxiliarylemmaforinduction.html)
+
+---
 
 #### [Kevin Buzzard (Aug 23 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auxiliary%20lemma%20for%20induction/near/132633649):
 ```lean

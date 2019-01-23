@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/92619Flipinductiveparameters.html
 ---
 
-## [general](index.html)
-### [Flip inductive parameters](92619Flipinductiveparameters.html)
+## Stream: [general](index.html)
+### Topic: [Flip inductive parameters](92619Flipinductiveparameters.html)
+
+---
 
 #### [Nicholas Scheel (Jun 05 2018 at 04:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Flip%20inductive%20parameters/near/127578848):
 Is there a way to flip the `Type` and `ℕ` parameters around so I can make this a functor?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/18383overridingcoersions.html
 ---
 
-## [new members](index.html)
-### [overriding coersions](18383overridingcoersions.html)
+## Stream: [new members](index.html)
+### Topic: [overriding coersions](18383overridingcoersions.html)
+
+---
 
 #### [Keeley Hoek (Nov 10 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overriding%20coersions/near/147433140):
 Is there a way to define a coercion which takes priority over another one? I tried `@[priority 10]` but it doesn't seem like it does anything to a `has_coe` instance (and I don't know what it should do in any case)

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/48256normnumweirdness.html
 ---
 
-## [maths](index.html)
-### [norm_num weirdness](48256normnumweirdness.html)
+## Stream: [maths](index.html)
+### Topic: [norm_num weirdness](48256normnumweirdness.html)
+
+---
 
 #### [Kevin Buzzard (Jan 18 2019 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_num%20weirdness/near/156327693):
 What's going on here?

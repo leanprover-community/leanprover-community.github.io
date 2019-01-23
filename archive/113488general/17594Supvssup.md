@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17594Supvssup.html
 ---
 
-## [general](index.html)
-### [Sup vs sup](17594Supvssup.html)
+## Stream: [general](index.html)
+### Topic: [Sup vs sup](17594Supvssup.html)
+
+---
 
 #### [Johan Commelin (Dec 06 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sup%20vs%20sup/near/150984986):
 Is there something in mathlib expressing compatibility between `Sup` and `sup` for complete lattices?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16468existsofnotforallnot.html
 ---
 
-## [general](index.html)
-### [exists_of_not_forall_not](16468existsofnotforallnot.html)
+## Stream: [general](index.html)
+### Topic: [exists_of_not_forall_not](16468existsofnotforallnot.html)
+
+---
 
 #### [Kevin Buzzard (Mar 10 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exists_of_not_forall_not/near/123536960):
 I am a classical guy. Is `example (α : Type) (P : α → Prop) : (¬ (∀ a : α, ¬ P a)) → (∃ a : α, P a) := sorry` already in Lean or mathlib?

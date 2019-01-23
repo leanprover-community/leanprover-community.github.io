@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77081rcasesquotients.html
 ---
 
-## [general](index.html)
-### [rcases + quotients](77081rcasesquotients.html)
+## Stream: [general](index.html)
+### Topic: [rcases + quotients](77081rcasesquotients.html)
+
+---
 
 #### [Reid Barton (Sep 09 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rcases%20%2B%20quotients/near/133602376):
 I just saw this a moment ago but I think this commit by Johannes needs to be advertised: https://github.com/leanprover/mathlib/commit/5613d2ecc92ce8fae9555745bd94756dec61a323

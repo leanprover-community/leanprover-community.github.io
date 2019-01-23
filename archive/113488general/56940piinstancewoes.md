@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56940piinstancewoes.html
 ---
 
-## [general](index.html)
-### [pi_instance woes](56940piinstancewoes.html)
+## Stream: [general](index.html)
+### Topic: [pi_instance woes](56940piinstancewoes.html)
+
+---
 
 #### [Kevin Buzzard (Jun 14 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pi_instance%20woes/near/128076746):
 A product of topological groups is a topological group.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24153tidybug.html
 ---
 
-## [general](index.html)
-### [tidy bug](24153tidybug.html)
+## Stream: [general](index.html)
+### Topic: [tidy bug](24153tidybug.html)
+
+---
 
 #### [Patrick Massot (Oct 02 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060203):
 Can someone try

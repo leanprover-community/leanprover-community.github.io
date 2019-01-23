@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/29167ContinuousFunctionsPreserveLimits.html
 ---
 
-## [maths](index.html)
-### [Continuous Functions Preserve Limits](29167ContinuousFunctionsPreserveLimits.html)
+## Stream: [maths](index.html)
+### Topic: [Continuous Functions Preserve Limits](29167ContinuousFunctionsPreserveLimits.html)
+
+---
 
 #### [Rohan Mitta (Sep 26 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Continuous%20Functions%20Preserve%20Limits/near/134671259):
 Is this in mathlib (or anything like this)? 

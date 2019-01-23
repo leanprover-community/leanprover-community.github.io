@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00960Rustverificationworkinggroup.html
 ---
 
-## [general](index.html)
-### [Rust verification working group](00960Rustverificationworkinggroup.html)
+## Stream: [general](index.html)
+### Topic: [Rust verification working group](00960Rustverificationworkinggroup.html)
+
+---
 
 #### [Simon Hudon (Apr 15 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rust%20verification%20working%20group/near/125118534):
 Did anybody else see this:

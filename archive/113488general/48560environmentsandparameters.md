@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48560environmentsandparameters.html
 ---
 
-## [general](index.html)
-### [environments and parameters](48560environmentsandparameters.html)
+## Stream: [general](index.html)
+### Topic: [environments and parameters](48560environmentsandparameters.html)
+
+---
 
 #### [Jakob von Raumer (Apr 20 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/environments%20and%20parameters/near/125449732):
 So I want to emulate inductive types defined in some section with parameters (or variables, I don't care). Can I do that by adding the paramters as local consts to some evironment `e` and then use `e.add_inductive`?

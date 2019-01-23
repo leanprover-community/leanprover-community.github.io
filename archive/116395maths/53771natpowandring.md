@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/53771natpowandring.html
 ---
 
-## [maths](index.html)
-### [nat.pow and ring](53771natpowandring.html)
+## Stream: [maths](index.html)
+### Topic: [nat.pow and ring](53771natpowandring.html)
+
+---
 
 #### [Kevin Buzzard (Jun 09 2018 at 03:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802027):
 ```lean

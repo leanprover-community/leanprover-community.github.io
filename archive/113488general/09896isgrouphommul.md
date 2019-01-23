@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09896isgrouphommul.html
 ---
 
-## [general](index.html)
-### [is_group_hom.mul](09896isgrouphommul.html)
+## Stream: [general](index.html)
+### Topic: [is_group_hom.mul](09896isgrouphommul.html)
+
+---
 
 #### [Kenny Lau (Apr 12 2018 at 07:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_group_hom.mul/near/124970058):
 This is what `is_group_hom.mul` looked like on [Apr 5](https://github.com/leanprover/mathlib/blob/22e671c5ed5fd1b891fb73aa10c9425d1c6cfd3d/algebra/group.lean#L493):

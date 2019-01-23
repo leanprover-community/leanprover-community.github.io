@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37547categoricalquotients.html
 ---
 
-## [general](index.html)
-### [categorical quotients](37547categoricalquotients.html)
+## Stream: [general](index.html)
+### Topic: [categorical quotients](37547categoricalquotients.html)
+
+---
 
 #### [Scott Morrison (Apr 30 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/categorical%20quotients/near/125870843):
 Is everyone ready for a new puzzle about how to formalise things mathematicians use without thinking about? :-)

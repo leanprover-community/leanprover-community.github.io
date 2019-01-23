@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/86181Nonetheorem.html
 ---
 
-## [new members](index.html)
-### [None theorem](86181Nonetheorem.html)
+## Stream: [new members](index.html)
+### Topic: [None theorem](86181Nonetheorem.html)
+
+---
 
 #### [Ken Roe (Sep 01 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/None%20theorem/near/133185891):
 Does someone know what tactic to use to prove the following:

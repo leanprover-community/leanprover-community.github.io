@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86303helpwithtravis.html
 ---
 
-## [general](index.html)
-### [help with travis](86303helpwithtravis.html)
+## Stream: [general](index.html)
+### Topic: [help with travis](86303helpwithtravis.html)
+
+---
 
 #### [Scott Morrison (Oct 14 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790347):
 Hmm, a strange error:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13508HappybirthdayKevin.html
 ---
 
-## [general](index.html)
-### [Happy birthday, Kevin!](13508HappybirthdayKevin.html)
+## Stream: [general](index.html)
+### Topic: [Happy birthday, Kevin!](13508HappybirthdayKevin.html)
+
+---
 
 #### [Scott Morrison (Sep 21 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Happy%20birthday%2C%20Kevin%21/near/134343927):
 https://github.com/semorrison/kbb

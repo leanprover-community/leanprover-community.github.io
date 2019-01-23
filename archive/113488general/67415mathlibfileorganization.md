@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67415mathlibfileorganization.html
 ---
 
-## [general](index.html)
-### [mathlib file organization](67415mathlibfileorganization.html)
+## Stream: [general](index.html)
+### Topic: [mathlib file organization](67415mathlibfileorganization.html)
+
+---
 
 #### [Sean Leather (Jun 01 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406142):
 For those interested in the file organization of mathlib, I've written up a [proposal](https://github.com/leanprover/mathlib/issues/148) for a small change that, I think, will improve things a bit. Feedback welcome!

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04154datalistbasictoobig.html
 ---
 
-## [general](index.html)
-### [data/list/basic too big?](04154datalistbasictoobig.html)
+## Stream: [general](index.html)
+### Topic: [data/list/basic too big?](04154datalistbasictoobig.html)
+
+---
 
 #### [Scott Morrison (Jun 22 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/data/list/basic%20too%20big%3F/near/128444963):
 Is this output from travis:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/88047TeachingLeantomathematicians.html
 ---
 
-## [Lean Together 2019](index.html)
-### [Teaching Lean to mathematicians](88047TeachingLeantomathematicians.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [Teaching Lean to mathematicians](88047TeachingLeantomathematicians.html)
+
+---
 
 #### [Kevin Buzzard (Jan 06 2019 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Teaching%20Lean%20to%20mathematicians/near/154532336):
 I have been thinking for a while now about how to teach Lean to absolute beginners, because that is currently the bottleneck we have at Imperial -- not enough people able to get started. Gabriel and I are running a teaching session tomorrow 0900-1030 and 1100-1200 and some people have confessed to knowing no Lean at all, which is of course absolutely fine, but how to get them started?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02286piinstance.html
 ---
 
-## [general](index.html)
-### [pi_instance](02286piinstance.html)
+## Stream: [general](index.html)
+### Topic: [pi_instance](02286piinstance.html)
+
+---
 
 #### [Kenny Lau (Sep 08 2018 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pi_instance/near/133560439):
 Maybe we can also extend this tactic to quotients of pi_instances?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/70542intcoenatmulisntnatcastmul.html
 ---
 
-## [maths](index.html)
-### [int.coe_nat_mul isn't nat.cast_mul](70542intcoenatmulisntnatcastmul.html)
+## Stream: [maths](index.html)
+### Topic: [int.coe_nat_mul isn't nat.cast_mul](70542intcoenatmulisntnatcastmul.html)
+
+---
 
 #### [Kevin Buzzard (Aug 01 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130677240):
 ```lean

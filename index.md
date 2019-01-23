@@ -13,6 +13,6 @@ programming.
 
 Much of the discussion surrounding Lean occurs in a [Zulip chat room](https://leanprover.zulipchat.com).
 Since this chatroom is only visible to registered users, we provide an 
-[openly accessible archive](archive.html) of the public discussions. This is useful for quick
+[openly accessible archive](archive/) of the public discussions. This is useful for quick
 reference; for a better browsing interface, and to participate in the discussions, we strongly
 suggest joining the chat. Questions from users at all levels of expertise are welcomed.

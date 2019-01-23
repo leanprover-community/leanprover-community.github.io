@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/56118newisgrouphom.html
 ---
 
-## [maths](index.html)
-### [new is_group_hom](56118newisgrouphom.html)
+## Stream: [maths](index.html)
+### Topic: [new is_group_hom](56118newisgrouphom.html)
+
+---
 
 #### [Patrick Massot (Apr 16 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152694):
 Recently `is_group_hom` became a class. Previously we had 

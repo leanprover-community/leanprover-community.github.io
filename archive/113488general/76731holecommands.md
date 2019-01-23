@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76731holecommands.html
 ---
 
-## [general](index.html)
-### [hole commands](76731holecommands.html)
+## Stream: [general](index.html)
+### Topic: [hole commands](76731holecommands.html)
+
+---
 
 #### [Johan Commelin (Aug 30 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hole%20commands/near/133076337):
 One thing that might be of general interest that got some attention in Orsay: Lean has support for holes, but it isn't up to par to some other theorem provers. Nevertheless, try typing

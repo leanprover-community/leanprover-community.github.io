@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/82169inductionargument2notavariable.html
 ---
 
-## [new members](index.html)
-### [induction: "argument 2 not a variable"](82169inductionargument2notavariable.html)
+## Stream: [new members](index.html)
+### Topic: [induction: "argument 2 not a variable"](82169inductionargument2notavariable.html)
+
+---
 
 #### [Sarah Mameche (Jan 03 2019 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154266676):
 Hi, I have an inductive predicate SN that takes a relation as argument (here eval), see the code snippet below. An induction over the statement ```SN eval st```gives me the error: induction tactic failed, argument #2 of major premise type SN eval st is not a variable. 

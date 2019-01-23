@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43357simpisamazing.html
 ---
 
-## [general](index.html)
-### [simp is amazing](43357simpisamazing.html)
+## Stream: [general](index.html)
+### Topic: [simp is amazing](43357simpisamazing.html)
+
+---
 
 #### [Chris Hughes (Mar 04 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20is%20amazing/near/123265688):
 I was proving some lemmas about disjoint finsets, and I was amazed to find that this goal was solved by `simp {contextual := tt}`, when I previously had a 10 line proof.

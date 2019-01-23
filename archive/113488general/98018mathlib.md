@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98018mathlib.html
 ---
 
-## [general](index.html)
-### [mathlib](98018mathlib.html)
+## Stream: [general](index.html)
+### Topic: [mathlib](98018mathlib.html)
+
+---
 
 #### [Scott Morrison (Apr 10 2018 at 07:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib/near/124871039):
 Is it strange that we have `monoid.pow` and `gpow` (for groups)? Can we make these more uniform?

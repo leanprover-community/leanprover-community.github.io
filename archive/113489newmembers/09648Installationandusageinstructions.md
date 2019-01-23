@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/09648Installationandusageinstructions.html
 ---
 
-## [new members](index.html)
-### [Installation and usage instructions](09648Installationandusageinstructions.html)
+## Stream: [new members](index.html)
+### Topic: [Installation and usage instructions](09648Installationandusageinstructions.html)
+
+---
 
 #### [Kevin Buzzard (Oct 10 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Installation%20and%20usage%20instructions/near/135528888):
 On [my blog home page](https://xenaproject.wordpress.com) there is an "installing Lean and mathlib" link right at the top now. It takes you [here](https://xenaproject.wordpress.com/installing-lean-and-mathlib/) which is a page (not a post, for those of you that understand blogs) which lists everything I could think of which could help a new user getting started. Comments and criticisms very welcome.

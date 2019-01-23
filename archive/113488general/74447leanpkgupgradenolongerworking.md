@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74447leanpkgupgradenolongerworking.html
 ---
 
-## [general](index.html)
-### [`leanpkg upgrade` no longer working?](74447leanpkgupgradenolongerworking.html)
+## Stream: [general](index.html)
+### Topic: [`leanpkg upgrade` no longer working?](74447leanpkgupgradenolongerworking.html)
+
+---
 
 #### [Scott Morrison (Jun 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%20upgrade%60%20no%20longer%20working%3F/near/127502598):
 Since I've switched all my repositories to have `lean_version = "3.4.1"` in the `leanpkg.toml` file, it seems that `leanpkg upgrade` no longer has any effect: that is, commits to downstream repositories aren't pulled.

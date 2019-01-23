@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/65884segfault.html
 ---
 
-## [general](index.html)
-### [segfault](65884segfault.html)
+## Stream: [general](index.html)
+### Topic: [segfault](65884segfault.html)
+
+---
 
 #### [Rob Lewis (Aug 10 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/segfault/near/131243767):
 I just managed to crash Lean, and realized it's been quite a while since the last time!

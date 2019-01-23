@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/10725startupspeed.html
 ---
 
-## [new members](index.html)
-### [startup speed](10725startupspeed.html)
+## Stream: [new members](index.html)
+### Topic: [startup speed](10725startupspeed.html)
+
+---
 
 #### [Scott Olson (Sep 29 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/startup%20speed/near/134895169):
 Is it normal for Lean to take several minutes to catch up when I freshly open my project in VSCode, even if I've completely precompiled the mathlib dependency to .olean files?

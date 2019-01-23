@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/90797Regivan.html
 ---
 
-## [new members](index.html)
-### [Regivan](90797Regivan.html)
+## Stream: [new members](index.html)
+### Topic: [Regivan](90797Regivan.html)
+
+---
 
 #### [Regivan Santiago (Feb 28 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Regivan/near/123086826):
 Hello

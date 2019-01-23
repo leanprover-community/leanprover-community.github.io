@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40901ringrefactoring.html
 ---
 
-## [general](index.html)
-### [ring refactoring](40901ringrefactoring.html)
+## Stream: [general](index.html)
+### Topic: [ring refactoring](40901ringrefactoring.html)
+
+---
 
 #### [Kenny Lau (Nov 10 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring%20refactoring/near/147427723):
 In the module refactoring, we turned `(N : set M) [is_submodule N]` into `(N: submodule R M)`, and we turned `(f : M -> N) (hf : is_linear_map f)` into `(f : linear_map M N)`. And I found this very helpful.

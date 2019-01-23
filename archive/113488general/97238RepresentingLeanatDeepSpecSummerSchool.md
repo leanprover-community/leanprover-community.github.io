@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/97238RepresentingLeanatDeepSpecSummerSchool.html
 ---
 
-## [general](index.html)
-### [Representing Lean at DeepSpec Summer School](97238RepresentingLeanatDeepSpecSummerSchool.html)
+## Stream: [general](index.html)
+### Topic: [Representing Lean at DeepSpec Summer School](97238RepresentingLeanatDeepSpecSummerSchool.html)
+
+---
 
 #### [Simon Hudon (Jul 07 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Representing%20Lean%20at%20DeepSpec%20Summer%20School/near/129267892):
 I've been invited to give a talk about Lean tactics at the upcoming DeepSpec summer school. It's a 5-10 minute talk that other participants do as well. I'd like to walk the audience through the writing of a tactic that I can contrast with Coq tactics. I thought of presenting tactics like `refine_struct` but it plays a lot with the internals and I'm not sure that a non-Lean-user would see the point. 

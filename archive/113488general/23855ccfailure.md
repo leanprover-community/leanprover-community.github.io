@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23855ccfailure.html
 ---
 
-## [general](index.html)
-### [cc failure](23855ccfailure.html)
+## Stream: [general](index.html)
+### Topic: [cc failure](23855ccfailure.html)
+
+---
 
 #### [Reid Barton (May 16 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654388):
 Is this a bug?

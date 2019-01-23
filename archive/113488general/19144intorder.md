@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19144intorder.html
 ---
 
-## [general](index.html)
-### [int order](19144intorder.html)
+## Stream: [general](index.html)
+### Topic: [int order](19144intorder.html)
+
+---
 
 #### [Patrick Massot (Sep 13 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int%20order/near/133888086):
 Why is most of https://github.com/leanprover/mathlib/blob/master/data/int/order.lean commented out? Do we have these theorems elsewhere?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39506priorityoftypeclassinferences.html
 ---
 
-## [general](index.html)
-### [priority of typeclass inferences](39506priorityoftypeclassinferences.html)
+## Stream: [general](index.html)
+### Topic: [priority of typeclass inferences](39506priorityoftypeclassinferences.html)
+
+---
 
 #### [Kenny Lau (Apr 21 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/priority%20of%20typeclass%20inferences/near/125473385):
 If I proved `A.to_B` and `A.to_C` and `B.to_D` and `C.to_D`, when I want to coerce `A` to `D`, how does Lean judge which path to use?

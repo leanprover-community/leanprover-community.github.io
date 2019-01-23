@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87399Icantbuildlean.html
 ---
 
-## [general](index.html)
-### [I can't build lean](87399Icantbuildlean.html)
+## Stream: [general](index.html)
+### Topic: [I can't build lean](87399Icantbuildlean.html)
+
+---
 
 #### [Kenny Lau (Mar 08 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20can%27t%20build%20lean/near/123457140):
 `ninja` gives me error. here's an excerpt:

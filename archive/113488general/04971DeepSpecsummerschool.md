@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04971DeepSpecsummerschool.html
 ---
 
-## [general](index.html)
-### [DeepSpec summer school](04971DeepSpecsummerschool.html)
+## Stream: [general](index.html)
+### Topic: [DeepSpec summer school](04971DeepSpecsummerschool.html)
+
+---
 
 #### [Simon Hudon (Mar 11 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/DeepSpec%20summer%20school/near/123577208):
 The registrations are open for the DeepSpec summer school 2018: https://deepspec.org/event/dsss18/

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54516simpattr.html
 ---
 
-## [general](index.html)
-### [simp_attr](54516simpattr.html)
+## Stream: [general](index.html)
+### Topic: [simp_attr](54516simpattr.html)
+
+---
 
 #### [Kenny Lau (Sep 11 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp_attr/near/133724617):
 I think `simp_attr` is a great idea that will help us speed up many proofs and that we should use this extensively. What do you think?

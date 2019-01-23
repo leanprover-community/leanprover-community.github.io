@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91640derivehasreflect.html
 ---
 
-## [general](index.html)
-### [@[derive has_reflect]](91640derivehasreflect.html)
+## Stream: [general](index.html)
+### Topic: [@[derive has_reflect]](91640derivehasreflect.html)
+
+---
 
 #### [Keeley Hoek (Nov 21 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Bderive%20has_reflect%5D/near/148090195):
 For long-enough structure definitions, e.g.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/57602withtopdiamonds.html
 ---
 
-## [maths](index.html)
-### [with_top "diamonds"](57602withtopdiamonds.html)
+## Stream: [maths](index.html)
+### Topic: [with_top "diamonds"](57602withtopdiamonds.html)
+
+---
 
 #### [Chris Hughes (Oct 25 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/with_top%20%22diamonds%22/near/136461132):
 The following equality isn't `rfl`. I think it should be. I tried redefining the instances, because I thought it might have something to do with the issue that stopped `(0 : with_bot nat) = some 0` being definitional, but I couldn't get it to work 

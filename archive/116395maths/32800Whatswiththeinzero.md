@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/32800Whatswiththeinzero.html
 ---
 
-## [maths](index.html)
-### [What's with the `_` in `zero_`?](32800Whatswiththeinzero.html)
+## Stream: [maths](index.html)
+### Topic: [What's with the `_` in `zero_`?](32800Whatswiththeinzero.html)
+
+---
 
 #### [Kevin Buzzard (Oct 07 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%27s%20with%20the%20%60_%60%20in%20%60zero_%60%3F/near/135330352):
 I've seen this in a few places now:

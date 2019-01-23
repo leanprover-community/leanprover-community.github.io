@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51105toomanyaxiomsincommringclass.html
 ---
 
-## [general](index.html)
-### [too many axioms in comm_ring class](51105toomanyaxiomsincommringclass.html)
+## Stream: [general](index.html)
+### Topic: [too many axioms in comm_ring class](51105toomanyaxiomsincommringclass.html)
+
+---
 
 #### [Kevin Buzzard (Mar 07 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389686):
 I have to put a ring structure on a slightly complicated type (a subtype, consisting of functions with some properties). Every verification is going to be quite messy -- even defining zero and one will take some effort. So I really want to minimise the amount of stuff I want to prove. I am sure that Lean is asking me to do too much by default -- for example it wants a proof of add_comm, add_zero and zero_add, and the same story with multiplication and one. Of course I can deduce zero_add from add_zero once I've proved add_comm but in some sense I'm wondering why I am even being asked to do this, because this is true for every commutative ring. Is there a way of "fixing" this?

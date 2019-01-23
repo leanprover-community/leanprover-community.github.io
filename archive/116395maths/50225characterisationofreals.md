@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/50225characterisationofreals.html
 ---
 
-## [maths](index.html)
-### [characterisation of reals](50225characterisationofreals.html)
+## Stream: [maths](index.html)
+### Topic: [characterisation of reals](50225characterisationofreals.html)
+
+---
 
 #### [Kevin Buzzard (Nov 17 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/characterisation%20of%20reals/near/147869830):
 ```lean

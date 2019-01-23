@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63254unreachablecode.html
 ---
 
-## [general](index.html)
-### [unreachable code](63254unreachablecode.html)
+## Stream: [general](index.html)
+### Topic: [unreachable code](63254unreachablecode.html)
+
+---
 
 #### [Kenny Lau (Dec 12 2018 at 01:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unreachable%20code/near/151491054):
 sometimes `_` causes "unreachable code" error. it is quite clear that they won't fix it, so I'm not here to "feed the fed horse". Rather, I think I've found a temporary fix by just replacing `_` with `by skip` or any tactic mode thing at all

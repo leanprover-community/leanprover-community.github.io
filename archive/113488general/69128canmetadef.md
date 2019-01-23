@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/69128canmetadef.html
 ---
 
-## [general](index.html)
-### [can meta `def`?](69128canmetadef.html)
+## Stream: [general](index.html)
+### Topic: [can meta `def`?](69128canmetadef.html)
+
+---
 
 #### [Johan Commelin (Sep 05 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20meta%20%60def%60%3F/near/133394258):
 Can you have meta code that writes definitions and lemmas for you? Probably yes, and this is how things like `to_additive` work. Is that right?

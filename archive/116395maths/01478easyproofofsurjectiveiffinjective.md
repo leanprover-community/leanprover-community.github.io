@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/01478easyproofofsurjectiveiffinjective.html
 ---
 
-## [maths](index.html)
-### [easy proof of surjective_iff_injective](01478easyproofofsurjectiveiffinjective.html)
+## Stream: [maths](index.html)
+### Topic: [easy proof of surjective_iff_injective](01478easyproofofsurjectiveiffinjective.html)
+
+---
 
 #### [Chris Hughes (Apr 06 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/easy%20proof%20of%20surjective_iff_injective/near/124726537):
 Is there an easy proof of 

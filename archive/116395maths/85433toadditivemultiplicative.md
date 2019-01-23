@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/85433toadditivemultiplicative.html
 ---
 
-## [maths](index.html)
-### [to_additive multiplicative](85433toadditivemultiplicative.html)
+## Stream: [maths](index.html)
+### Topic: [to_additive multiplicative](85433toadditivemultiplicative.html)
+
+---
 
 #### [Patrick Massot (Oct 09 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/to_additive%20multiplicative/near/135470227):
 This is again a question about the machinery allowing to transfer stuff from multiplicative monoids/groups to additive. I'm trying to get a version of https://github.com/leanprover/mathlib/blob/master/group_theory/submonoid.lean#L112-L142 for groups. I tried:

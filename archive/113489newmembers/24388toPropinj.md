@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/24388toPropinj.html
 ---
 
-## [new members](index.html)
-### [to_Prop_inj](24388toPropinj.html)
+## Stream: [new members](index.html)
+### Topic: [to_Prop_inj](24388toPropinj.html)
+
+---
 
 #### [Kenny Lau (Jan 11 2019 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/to_Prop_inj/near/154908038):
 ```lean

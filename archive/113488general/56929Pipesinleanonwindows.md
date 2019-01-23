@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56929Pipesinleanonwindows.html
 ---
 
-## [general](index.html)
-### [Pipes in lean on windows](56929Pipesinleanonwindows.html)
+## Stream: [general](index.html)
+### Topic: [Pipes in lean on windows](56929Pipesinleanonwindows.html)
+
+---
 
 #### [Keeley Hoek (Sep 24 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pipes%20in%20lean%20on%20windows/near/134519900):
 Just a quick question for someone in-the-know: does `lean` lack an implementation of pipes on windows? I'm looking in `src/library/pipe.(h/cpp)` and it looks empty for windows---am I missing something?

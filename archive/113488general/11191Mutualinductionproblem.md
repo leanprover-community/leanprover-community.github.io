@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11191Mutualinductionproblem.html
 ---
 
-## [general](index.html)
-### [Mutual induction problem](11191Mutualinductionproblem.html)
+## Stream: [general](index.html)
+### Topic: [Mutual induction problem](11191Mutualinductionproblem.html)
+
+---
 
 #### [Neil Strickland (Nov 02 2018 at 18:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137068101):
 Here is an attempt at a mutually inductive definition, which is a bit more intricate than the ones in the book.  

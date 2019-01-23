@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98059constructingexprlam.html
 ---
 
-## [general](index.html)
-### [constructing expr.lam](98059constructingexprlam.html)
+## Stream: [general](index.html)
+### Topic: [constructing expr.lam](98059constructingexprlam.html)
+
+---
 
 #### [Scott Morrison (Sep 09 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600290):
 How do I construct `expr.lam` terms? In particular, I have  an expression `e_1` that already has a `var n` inside it, and another `e_2`, and I want to construct the `expr` representing `lam x, e_1 = e_2`.

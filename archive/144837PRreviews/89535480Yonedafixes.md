@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/89535480Yonedafixes.html
 ---
 
-## [PR reviews](index.html)
-### [#480 Yoneda fixes](89535480Yonedafixes.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#480 Yoneda fixes](89535480Yonedafixes.html)
+
+---
 
 #### [Scott Morrison (Nov 28 2018 at 04:29)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23480%20Yoneda%20fixes/near/148686856):
 Travis seems to be screwing something up with https://github.com/leanprover/mathlib/pull/480. It’s complaining about invalid imports in files that aren’t even in this PR anymore. @**Mario Carneiro**, are you able to reset it somehow?

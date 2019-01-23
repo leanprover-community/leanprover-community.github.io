@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82983rwinsidelambda.html
 ---
 
-## [general](index.html)
-### [rw inside lambda](82983rwinsidelambda.html)
+## Stream: [general](index.html)
+### Topic: [rw inside lambda](82983rwinsidelambda.html)
+
+---
 
 #### [Kenny Lau (Sep 09 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133624964):
 from my experience, `simp` can change things inside lambda, but `rw` cannot. Is there a way to bypass this and let `rw` change inside lambda?

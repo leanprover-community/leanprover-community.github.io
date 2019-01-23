@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/45845weirdLeanproofs.html
 ---
 
-## [maths](index.html)
-### [weird Lean proofs](45845weirdLeanproofs.html)
+## Stream: [maths](index.html)
+### Topic: [weird Lean proofs](45845weirdLeanproofs.html)
+
+---
 
 #### [Reid Barton (Nov 29 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148758351):
 Lemma. If $$t : (X_j)_{j \in J} \to X$$ is a colimit cocone in Set, then every element of $$X$$ is in the image of $$X_j \to X$$ for some $$j \in J$$.

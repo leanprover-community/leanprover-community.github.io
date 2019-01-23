@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/09895noobquestion.html
 ---
 
-## [new members](index.html)
-### [noob question](09895noobquestion.html)
+## Stream: [new members](index.html)
+### Topic: [noob question](09895noobquestion.html)
+
+---
 
 #### [Wojciech Nawrocki (Sep 04 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question/near/133315850):
 Hello! Very new to Lean and logic in general;  i'm interested in how i can find the function names that i might need for various deduction steps (e.g. `and.intro`), since the std/maths library sections of "theorem proving in lean" are empty :anguished: in particular, i want to go from `¬p → false` to `p`

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48864Deligneonunivalence.html
 ---
 
-## [general](index.html)
-### [Deligne on univalence](48864Deligneonunivalence.html)
+## Stream: [general](index.html)
+### Topic: [Deligne on univalence](48864Deligneonunivalence.html)
+
+---
 
 #### [Johan Commelin (Sep 09 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Deligne%20on%20univalence/near/133618998):
 http://www.math.ias.edu/calendar/event/138368/1536679800/1536683400

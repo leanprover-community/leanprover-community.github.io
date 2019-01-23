@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32676heqhellagain.html
 ---
 
-## [general](index.html)
-### [heq hell again](32676heqhellagain.html)
+## Stream: [general](index.html)
+### Topic: [heq hell again](32676heqhellagain.html)
+
+---
 
 #### [Patrick Massot (Oct 09 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/heq%20hell%20again/near/135479776):
 My current goal looks like `eq.mpr comm_ring._proof_2 (quotient_ring.comm_ring (closure (is_ideal.trivial α))) == quotient_ring.comm_ring (closure (is_ideal.trivial α))` I'm ready to believe this is a rightful punishment for an earlier sin, but I'd like to know whether there is any hope to escape, or I should go back and think about what I'm doing

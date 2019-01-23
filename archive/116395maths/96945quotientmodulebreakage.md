@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/96945quotientmodulebreakage.html
 ---
 
-## [maths](index.html)
-### [quotient_module breakage](96945quotientmodulebreakage.html)
+## Stream: [maths](index.html)
+### Topic: [quotient_module breakage](96945quotientmodulebreakage.html)
+
+---
 
 #### [Kevin Buzzard (Sep 20 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotient_module%20breakage/near/134325716):
 ```lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/18749finsetwithtwoelements.html
 ---
 
-## [maths](index.html)
-### [finset with two elements](18749finsetwithtwoelements.html)
+## Stream: [maths](index.html)
+### Topic: [finset with two elements](18749finsetwithtwoelements.html)
+
+---
 
 #### [Kevin Buzzard (Aug 08 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20with%20two%20elements/near/131097823):
 @**Morenikeji Neri** has proved `det(AB)=det(A)det(B)` modulo some lemma about switching two rows of a matrix making the sign change, which became a lemma about summing over a set of size 2, which has now been reduced to this:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88059Stubbornunify.html
 ---
 
-## [general](index.html)
-### [Stubborn unify](88059Stubbornunify.html)
+## Stream: [general](index.html)
+### Topic: [Stubborn unify](88059Stubbornunify.html)
+
+---
 
 #### [Keeley Hoek (Sep 21 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Stubborn%20unify/near/134372143):
 I've been experimenting with some of the `tactic.*` namespace, which I'm admittedly pretty scared of since some of it seems like magic. In trying to accomplish my nefarious goals, I'm running into quite a wall with `unify` and friends. It's seeming more and more like `unify` is more stubborn (an idiot?) than I first thought; for example, the following happens when I try to `unify` two metavar-containing types (which I think is sensible?)

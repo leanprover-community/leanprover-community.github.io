@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/89474ultrafilters.html
 ---
 
-## [maths](index.html)
-### [ultrafilters](89474ultrafilters.html)
+## Stream: [maths](index.html)
+### Topic: [ultrafilters](89474ultrafilters.html)
+
+---
 
 #### [Reid Barton (Oct 19 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ultrafilters/near/136077666):
 I want to define the ultrafilter monad. I suppose this means I need a bundled type: filter plus the ultrafilter property. (Currently, we have `ultrafilter : Π {α : Type u}, filter α → Prop`.) Thoughts on naming?

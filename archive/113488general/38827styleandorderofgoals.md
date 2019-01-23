@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38827styleandorderofgoals.html
 ---
 
-## [general](index.html)
-### [`_` style and order of goals](38827styleandorderofgoals.html)
+## Stream: [general](index.html)
+### Topic: [`_` style and order of goals](38827styleandorderofgoals.html)
+
+---
 
 #### [Kevin Buzzard (Apr 15 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60_%60%20style%20and%20order%20of%20goals/near/125107491):
 I was proving a goal yesterday which was a rather complex maze of essentially trivial things -- everything was either a relatively easy argument or a relatively easy consequence of an already-proved result, and it was very much a case of following my nose. I was in tactic mode. Occasionally there were branches, where I would write something like `refine _ H _` because H was to hand but the two other goals needed a three-line argument, or I had a goal of the form `exists x, exists H, ...` and I would write `existsi _` and move on.

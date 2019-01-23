@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73586rwunderaunion.html
 ---
 
-## [general](index.html)
-### [rw under a union](73586rwunderaunion.html)
+## Stream: [general](index.html)
+### Topic: [rw under a union](73586rwunderaunion.html)
+
+---
 
 #### [Kevin Buzzard (May 14 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126553772):
 ```lean

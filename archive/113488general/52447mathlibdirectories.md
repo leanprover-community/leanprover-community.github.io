@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52447mathlibdirectories.html
 ---
 
-## [general](index.html)
-### [mathlib directories](52447mathlibdirectories.html)
+## Stream: [general](index.html)
+### Topic: [mathlib directories](52447mathlibdirectories.html)
+
+---
 
 #### [Reid Barton (Dec 20 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20directories/near/152288114):
 Not sure whether joke suggestion: one top-level directory per arXiv primary category.

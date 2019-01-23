@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/34609Installinglean2onWindows10.html
 ---
 
-## [general](index.html)
-### [Installing lean2 on Windows 10](34609Installinglean2onWindows10.html)
+## Stream: [general](index.html)
+### Topic: [Installing lean2 on Windows 10](34609Installinglean2onWindows10.html)
+
+---
 
 #### [Thomas Eckl (Aug 23 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean2%20on%20Windows%2010/near/132650105):
 I would like to work with the HoTT library of Lean2, so I tried to install lean2 on Windows 10 machines (a laptop and a Surface Pro3) following the instructions at [https://github.com/leanprover/lean2/blob/master/doc/make/msys2.md](https://github.com/leanprover/lean2/blob/master/doc/make/msys2.md), and I failed several times at the same stage when running the ninja command. Below I copied just the last log-message of several very similar ones.  Any idea what to do?

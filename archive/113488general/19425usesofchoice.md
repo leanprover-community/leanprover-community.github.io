@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19425usesofchoice.html
 ---
 
-## [general](index.html)
-### [uses of choice](19425usesofchoice.html)
+## Stream: [general](index.html)
+### Topic: [uses of choice](19425usesofchoice.html)
+
+---
 
 #### [Floris van Doorn (Oct 07 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/uses%20of%20choice/near/135362955):
 Inspired by my post in the thread "what is wrong with HoTT" I had two questions:

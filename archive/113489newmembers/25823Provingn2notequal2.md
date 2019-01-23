@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/25823Provingn2notequal2.html
 ---
 
-## [new members](index.html)
-### [Proving n^2 not equal 2](25823Provingn2notequal2.html)
+## Stream: [new members](index.html)
+### Topic: [Proving n^2 not equal 2](25823Provingn2notequal2.html)
+
+---
 
 #### [Yuhan Du (Aug 31 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132228):
 I am trying to prove the statement that $$n^2 \neq 2$$

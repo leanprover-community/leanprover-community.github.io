@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/75284subringvssubmodule.html
 ---
 
-## [maths](index.html)
-### [subring vs submodule](75284subringvssubmodule.html)
+## Stream: [maths](index.html)
+### Topic: [subring vs submodule](75284subringvssubmodule.html)
+
+---
 
 #### [Patrick Massot (Oct 09 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subring%20vs%20submodule/near/135464064):
 Let me bring up old news since it looks like the module refactor is almost done. The following works nicely:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/97139Klikeinductivesdonttakearguments.html
 ---
 
-## [general](index.html)
-### [K-like inductives don't take arguments](97139Klikeinductivesdonttakearguments.html)
+## Stream: [general](index.html)
+### Topic: [K-like inductives don't take arguments](97139Klikeinductivesdonttakearguments.html)
+
+---
 
 #### [Mario Carneiro (Mar 26 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/K-like%20inductives%20don%27t%20take%20arguments/near/124204821):
 @**Gabriel Ebner** I just discovered by reading the source code that lean doesn't consider an inductive suitable for K-like reduction unless it has 0 arguments in the constructor, rather than having all arguments in the output type like I thought (and wrote in my paper). Do you know why this is?

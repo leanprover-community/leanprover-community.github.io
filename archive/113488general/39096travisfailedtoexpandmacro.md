@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39096travisfailedtoexpandmacro.html
 ---
 
-## [general](index.html)
-### [travis "failed to expand macro"](39096travisfailedtoexpandmacro.html)
+## Stream: [general](index.html)
+### Topic: [travis "failed to expand macro"](39096travisfailedtoexpandmacro.html)
+
+---
 
 #### [Scott Morrison (Nov 13 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20%22failed%20to%20expand%20macro%22/near/147562010):
 I just got another of these:

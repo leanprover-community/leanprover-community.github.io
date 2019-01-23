@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99190isthistruewithoutdecidable.html
 ---
 
-## [general](index.html)
-### [is this true without decidable](99190isthistruewithoutdecidable.html)
+## Stream: [general](index.html)
+### Topic: [is this true without decidable](99190isthistruewithoutdecidable.html)
+
+---
 
 #### [Johan Commelin (Sep 07 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20true%20without%20decidable/near/133509753):
 ```lean

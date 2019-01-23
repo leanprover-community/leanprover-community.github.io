@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37712LeosslidesonLean4.html
 ---
 
-## [general](index.html)
-### [Leo's slides on Lean 4](37712LeosslidesonLean4.html)
+## Stream: [general](index.html)
+### Topic: [Leo's slides on Lean 4](37712LeosslidesonLean4.html)
+
+---
 
 #### [Johan Commelin (Sep 03 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Leo%27s%20slides%20on%20Lean%204/near/133248994):
 ```quote

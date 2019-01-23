@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/01196Backtickanguish.html
 ---
 
-## [new members](index.html)
-### [Backtick anguish](01196Backtickanguish.html)
+## Stream: [new members](index.html)
+### Topic: [Backtick anguish](01196Backtickanguish.html)
+
+---
 
 #### [Edward Ayers (Aug 17 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Backtick%20anguish/near/132269318):
 What am I doing wrong here?

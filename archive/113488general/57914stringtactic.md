@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57914stringtactic.html
 ---
 
-## [general](index.html)
-### [string -> tactic?](57914stringtactic.html)
+## Stream: [general](index.html)
+### Topic: [string -> tactic?](57914stringtactic.html)
+
+---
 
 #### [Scott Morrison (Apr 06 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string%20-%3E%20tactic%3F/near/124695173):
 Is there a good way to take a string (e.g. "simp, exact p") and return the tactic that executes it in interactive mode?

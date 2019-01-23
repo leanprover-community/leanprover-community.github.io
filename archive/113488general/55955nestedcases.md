@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55955nestedcases.html
 ---
 
-## [general](index.html)
-### [nested cases](55955nestedcases.html)
+## Stream: [general](index.html)
+### Topic: [nested cases](55955nestedcases.html)
+
+---
 
 #### [Reid Barton (Feb 26 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20cases/near/123003168):
 Is there a more convenient way to unpack the components of a conclusion of the form `∃ x y, p x ∧ q y ∧ r x y` in a tactics block than using multiple `cases` tactics?

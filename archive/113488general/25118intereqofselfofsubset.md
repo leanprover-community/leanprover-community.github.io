@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25118intereqofselfofsubset.html
 ---
 
-## [general](index.html)
-### [inter_eq_of_self_of_subset](25118intereqofselfofsubset.html)
+## Stream: [general](index.html)
+### Topic: [inter_eq_of_self_of_subset](25118intereqofselfofsubset.html)
+
+---
 
 #### [Reid Barton (Dec 22 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inter_eq_of_self_of_subset/near/152376322):
 Should these lemmas from `data.set.basic` be simp lemmas? I was surprised when `simp` didn't solve these statements automatically.

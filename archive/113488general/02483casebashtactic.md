@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02483casebashtactic.html
 ---
 
-## [general](index.html)
-### [case bash tactic](02483casebashtactic.html)
+## Stream: [general](index.html)
+### Topic: [case bash tactic](02483casebashtactic.html)
+
+---
 
 #### [Johan Commelin (Oct 19 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/case%20bash%20tactic/near/136128666):
 @**Scott Morrison|110087** I incorrectly assumed that your `case_bash` tactic was related to the `fin`-bashing tactic. Nevertheless I wonder if there is place for a mechanism as follows:

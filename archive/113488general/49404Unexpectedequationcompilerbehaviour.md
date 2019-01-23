@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49404Unexpectedequationcompilerbehaviour.html
 ---
 
-## [general](index.html)
-### [Unexpected equation compiler behaviour](49404Unexpectedequationcompilerbehaviour.html)
+## Stream: [general](index.html)
+### Topic: [Unexpected equation compiler behaviour](49404Unexpectedequationcompilerbehaviour.html)
+
+---
 
 #### [Chris Hughes (Jul 12 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20equation%20compiler%20behaviour/near/129536505):
 Is this a bug?

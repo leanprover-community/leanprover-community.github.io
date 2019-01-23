@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48938optiontroubles.html
 ---
 
-## [general](index.html)
-### [option troubles](48938optiontroubles.html)
+## Stream: [general](index.html)
+### Topic: [option troubles](48938optiontroubles.html)
+
+---
 
 #### [Johan Commelin (Oct 09 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135487811):
 I have `x : option X`, and `h : x ≠ none`. How do I turn this into a `y : X` such that `x = some y`? I want to use `option.get` and `option.is_some`. But I can't figure out how to use `h`.

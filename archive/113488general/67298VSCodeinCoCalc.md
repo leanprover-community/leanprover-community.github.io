@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67298VSCodeinCoCalc.html
 ---
 
-## [general](index.html)
-### [VS Code in CoCalc!](67298VSCodeinCoCalc.html)
+## Stream: [general](index.html)
+### Topic: [VS Code in CoCalc!](67298VSCodeinCoCalc.html)
+
+---
 
 #### [Kevin Buzzard (Nov 06 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20in%20CoCalc%21/near/146831167):
 http://blog.sagemath.com/cocalc/2018/11/05/x11.html

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83688syntax.html
 ---
 
-## [general](index.html)
-### [syntax](83688syntax.html)
+## Stream: [general](index.html)
+### Topic: [syntax](83688syntax.html)
+
+---
 
 #### [Reid Barton (Jun 04 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/127544480):
 Fun fact: `notation` applies even in `namespace` commands, so if you write ``notation `foo` := bar`` and then `namespace foo` it means `namespace bar`

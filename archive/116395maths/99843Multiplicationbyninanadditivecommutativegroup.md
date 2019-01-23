@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/99843Multiplicationbyninanadditivecommutativegroup.html
 ---
 
-## [maths](index.html)
-### [Multiplication by n in an additive commutative group](99843Multiplicationbyninanadditivecommutativegroup.html)
+## Stream: [maths](index.html)
+### Topic: [Multiplication by n in an additive commutative group](99843Multiplicationbyninanadditivecommutativegroup.html)
+
+---
 
 #### [Johan Commelin (May 14 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiplication%20by%20n%20in%20an%20additive%20commutative%20group/near/126531796):
 Is this somewhere in mathlib?

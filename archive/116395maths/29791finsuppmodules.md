@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/29791finsuppmodules.html
 ---
 
-## [maths](index.html)
-### [finsupp modules](29791finsuppmodules.html)
+## Stream: [maths](index.html)
+### Topic: [finsupp modules](29791finsuppmodules.html)
+
+---
 
 #### [Johan Commelin (Nov 22 2018 at 03:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finsupp%20modules/near/148149210):
 I think the module part of finsupp is broken. For example in

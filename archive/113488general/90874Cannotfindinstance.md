@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90874Cannotfindinstance.html
 ---
 
-## [general](index.html)
-### [Cannot find instance](90874Cannotfindinstance.html)
+## Stream: [general](index.html)
+### Topic: [Cannot find instance](90874Cannotfindinstance.html)
+
+---
 
 #### [AHan (Dec 04 2018 at 07:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cannot%20find%20instance/near/150826554):
 In `mathlib/data/finsupp.lean` the instance `has_add` of `finsupp` structure was already proved,

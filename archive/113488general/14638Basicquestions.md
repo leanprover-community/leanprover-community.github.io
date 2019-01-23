@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/14638Basicquestions.html
 ---
 
-## [general](index.html)
-### [Basic questions](14638Basicquestions.html)
+## Stream: [general](index.html)
+### Topic: [Basic questions](14638Basicquestions.html)
+
+---
 
 #### [Charles Rezk (Oct 18 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Basic%20questions/near/136010459):
 How would I go about proving things about functions between sets, especially finite sets?  I see some machinery for sets (really, "subsets" of a given type), but nothing about functions between them.  On the other hand, I can certainly have functions between types, but I don't see a convenient way to produce a particular "finite type".

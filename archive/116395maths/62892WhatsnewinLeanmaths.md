@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/62892WhatsnewinLeanmaths.html
 ---
 
-## [maths](index.html)
-### [What's new in Lean maths?](62892WhatsnewinLeanmaths.html)
+## Stream: [maths](index.html)
+### Topic: [What's new in Lean maths?](62892WhatsnewinLeanmaths.html)
+
+---
 
 #### [Kevin Buzzard (Sep 09 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%27s%20new%20in%20Lean%20maths%3F/near/133605485):
 This thread is for people to occasionally announce or flag code which they or others have written, which is publically available, finished / usable, and which might be of general use or interest to the lean community. I'm starting it because I find looking through mathlib commits confusing and time-consuming, and because there are things which are happening other than mathlib commits.
@@ -272,4 +274,13 @@ I don't see how monads will help with your problem...
 
 #### [Chris Hughes (Jan 21 2019 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%27s%20new%20in%20Lean%20maths%3F/near/156542773):
 (deleted)
+
+#### [Patrick Massot (Jan 22 2019 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%27s%20new%20in%20Lean%20maths%3F/near/156618466):
+Johannes and Sander defined the [rank of a linear map](https://github.com/leanprover/mathlib/commit/edfa2061547510a41db4d0d471130badcb92ef20)!
+
+#### [Johannes Hölzl (Jan 23 2019 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%27s%20new%20in%20Lean%20maths%3F/near/156682401):
+PR #553 was merged, we have now Lipschitz continuous functions, the Banach fixed-point theorem
+
+#### [Johannes Hölzl (Jan 23 2019 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%27s%20new%20in%20Lean%20maths%3F/near/156682413):
+We also have the point wise order on products as the canonical order structure
 

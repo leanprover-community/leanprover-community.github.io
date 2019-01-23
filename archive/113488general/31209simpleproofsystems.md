@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31209simpleproofsystems.html
 ---
 
-## [general](index.html)
-### [simple proof systems](31209simpleproofsystems.html)
+## Stream: [general](index.html)
+### Topic: [simple proof systems](31209simpleproofsystems.html)
+
+---
 
 #### [Reid Barton (Oct 14 2018 at 04:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simple%20proof%20systems/near/135758238):
 Sorry in advance for a rather vague question, hopefully I can make it clear what I'm looking for.

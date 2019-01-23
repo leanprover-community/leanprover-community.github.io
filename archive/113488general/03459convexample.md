@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03459convexample.html
 ---
 
-## [general](index.html)
-### [conv example](03459convexample.html)
+## Stream: [general](index.html)
+### Topic: [conv example](03459convexample.html)
+
+---
 
 #### [Kevin Buzzard (Mar 13 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651407):
 I was trying to write an example to illustrate the power of `conv`, by finding an example where the entire goal was difficult to work with because it contained implicit proofs. I realised that there were two things I didn't understand properly. Here's some code.

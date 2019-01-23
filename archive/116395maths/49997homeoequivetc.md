@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/49997homeoequivetc.html
 ---
 
-## [maths](index.html)
-### [homeo equiv etc.](49997homeoequivetc.html)
+## Stream: [maths](index.html)
+### Topic: [homeo equiv etc.](49997homeoequivetc.html)
+
+---
 
 #### [Patrick Massot (Apr 03 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homeo%20equiv%20etc./near/124593811):
 A more specific version of https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/structure.20vs.20class/near/124574243 (it may be easier to understand my problem by looking at code) is https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/support.lean#L188 where I'm clearly very stupidly trying to Lean some trivial lemma. I'm completely tangled in coercions and type classes

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68366howtoleanwithelan.html
 ---
 
-## [general](index.html)
-### [howto lean with elan](68366howtoleanwithelan.html)
+## Stream: [general](index.html)
+### Topic: [howto lean with elan](68366howtoleanwithelan.html)
+
+---
 
 #### [Johan Commelin (Apr 20 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/howto%20lean%20with%20elan/near/125446301):
 https://gist.github.com/jcommelin/1d45a0ea7a84a87db8a28a12e93cac32

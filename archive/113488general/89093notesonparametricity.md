@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89093notesonparametricity.html
 ---
 
-## [general](index.html)
-### [notes on parametricity](89093notesonparametricity.html)
+## Stream: [general](index.html)
+### Topic: [notes on parametricity](89093notesonparametricity.html)
+
+---
 
 #### [Reid Barton (Apr 28 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notes%20on%20parametricity/near/125810022):
 Since the subject of parametricity came up, here are some papers which may be of interest and should be relatively readable for mathematicians (especially those who are also Lean users). These papers pertain to non-dependently typed languages; I don't know what differences there might be in the dependently typed setting.

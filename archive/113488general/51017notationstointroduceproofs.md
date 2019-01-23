@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51017notationstointroduceproofs.html
 ---
 
-## [general](index.html)
-### [notations to introduce proofs](51017notationstointroduceproofs.html)
+## Stream: [general](index.html)
+### Topic: [notations to introduce proofs](51017notationstointroduceproofs.html)
+
+---
 
 #### [Sebastien Gouezel (Oct 15 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815299):
 In the following snippet,

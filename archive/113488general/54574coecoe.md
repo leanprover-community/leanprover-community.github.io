@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54574coecoe.html
 ---
 
-## [general](index.html)
-### [coe_coe](54574coecoe.html)
+## Stream: [general](index.html)
+### Topic: [coe_coe](54574coecoe.html)
+
+---
 
 #### [Chris Hughes (May 01 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_coe/near/125958400):
 Just noticed the lemma `coe_coe`, which is tagged as `simp`, does this mean I need to be careful about tagging lemmas that make a double coercion into a single coercion with simp?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26829notation.html
 ---
 
-## [general](index.html)
-### [notation](26829notation.html)
+## Stream: [general](index.html)
+### Topic: [notation](26829notation.html)
+
+---
 
 #### [Reid Barton (Feb 28 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation/near/123093960):
 Does anyone have a suggestion for Lean-friendly notation corresponding to TeX $$f_*$$ and $$f^*$$?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54502finsupp.html
 ---
 
-## [general](index.html)
-### [finsupp](54502finsupp.html)
+## Stream: [general](index.html)
+### Topic: [finsupp](54502finsupp.html)
+
+---
 
 #### [Kenny Lau (Apr 18 2018 at 08:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finsupp/near/125235580):
 I have a new idea: let's build finsupp using multiset

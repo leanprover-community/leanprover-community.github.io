@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13525calculationswitheq.html
 ---
 
-## [general](index.html)
-### [calculations with eq](13525calculationswitheq.html)
+## Stream: [general](index.html)
+### Topic: [calculations with eq](13525calculationswitheq.html)
+
+---
 
 #### [Reid Barton (Jun 22 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calculations%20with%20eq/near/128483780):
 Is this provable?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/21353strangetheorem.html
 ---
 
-## [maths](index.html)
-### [strange theorem](21353strangetheorem.html)
+## Stream: [maths](index.html)
+### Topic: [strange theorem](21353strangetheorem.html)
+
+---
 
 #### [Kenny Lau (Apr 28 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20theorem/near/125808366):
 ```lean

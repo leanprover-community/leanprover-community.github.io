@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88621galoiscorrespondences.html
 ---
 
-## [general](index.html)
-### [galois correspondences](88621galoiscorrespondences.html)
+## Stream: [general](index.html)
+### Topic: [galois correspondences](88621galoiscorrespondences.html)
+
+---
 
 #### [Johan Commelin (Nov 17 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/galois%20correspondences/near/147866625):
 Do we already have the Galois correspondence for `set.map` and `set.comap` (aka, `range` and `preimage`)?

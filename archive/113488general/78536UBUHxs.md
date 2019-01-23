@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78536UBUHxs.html
 ---
 
-## [general](index.html)
-### [λ (⟨U,BU,Hx,s⟩](78536UBUHxs.html)
+## Stream: [general](index.html)
+### Topic: [λ (⟨U,BU,Hx,s⟩](78536UBUHxs.html)
+
+---
 
 #### [Kevin Buzzard (May 18 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126741686):
 In the middle of defining a big structure, I have `(λ (a : X), sorry)`, where X is some explicit structure which takes four...erm...inputs or whatever they're called. Everything typechecks fine. The moment I replace `(λ (a : X), sorry)` with `(λ (⟨U,BU,Hx,s⟩ : X),sorry)` I get three errors on the `⟨` (and plenty more errors too) -- `invalid binder, identifier expected`, `invalid match/convoy expression, expected type is not known` and `invalid type ascription, term has type

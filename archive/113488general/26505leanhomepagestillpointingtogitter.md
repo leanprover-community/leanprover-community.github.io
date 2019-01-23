@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26505leanhomepagestillpointingtogitter.html
 ---
 
-## [general](index.html)
-### [lean home page still pointing to gitter](26505leanhomepagestillpointingtogitter.html)
+## Stream: [general](index.html)
+### Topic: [lean home page still pointing to gitter](26505leanhomepagestillpointingtogitter.html)
+
+---
 
 #### [Kevin Buzzard (Oct 10 2018 at 08:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20home%20page%20still%20pointing%20to%20gitter/near/135521404):
 I occasionally notice that [Lean's web pages](https://leanprover.github.io/documentation/) still point to gitter, and we occasionally get questions there; perhaps the signage isn't good enough for everyone. How could we go about changing this? I could make a PR but someone will have to point me to the location of the git source for those pages (not least so I can check the PR is not already made).

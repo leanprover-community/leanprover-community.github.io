@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43990orderedcommmonoid.html
 ---
 
-## [general](index.html)
-### [ordered_comm_monoid](43990orderedcommmonoid.html)
+## Stream: [general](index.html)
+### Topic: [ordered_comm_monoid](43990orderedcommmonoid.html)
+
+---
 
 #### [Johan Commelin (Sep 29 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered_comm_monoid/near/134890643):
 Why is `ordered_comm_monoid` additive? I thought `{x : real | x ≥ 1}` is a really nice ordered commutative monoid...

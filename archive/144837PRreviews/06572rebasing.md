@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/06572rebasing.html
 ---
 
-## [PR reviews](index.html)
-### [rebasing](06572rebasing.html)
+## Stream: [PR reviews](index.html)
+### Topic: [rebasing](06572rebasing.html)
+
+---
 
 #### [Scott Morrison (Nov 13 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/rebasing/near/147631335):
 Hi @**Reid Barton**, @**Johan Commelin**. I'm about to rebase `limits-others-new`. This is going to leave `adjunctions` and `sheaf` in a strange position.

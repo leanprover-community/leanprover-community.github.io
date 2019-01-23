@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57821equationlemmaugliness.html
 ---
 
-## [general](index.html)
-### [equation lemma ugliness](57821equationlemmaugliness.html)
+## Stream: [general](index.html)
+### Topic: [equation lemma ugliness](57821equationlemmaugliness.html)
+
+---
 
 #### [Kevin Buzzard (Jun 13 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemma%20ugliness/near/127977206):
 ```lean

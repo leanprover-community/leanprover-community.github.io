@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61650congrtactic.html
 ---
 
-## [general](index.html)
-### [congr tactic](61650congrtactic.html)
+## Stream: [general](index.html)
+### Topic: [congr tactic](61650congrtactic.html)
+
+---
 
 #### [Sean Leather (Mar 01 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr%20tactic/near/123137699):
 How do I know when to use the `congr` tactic? It's not in the Lean reference. Are there any good examples? I should've [learned](https://gitter.im/leanprover_public/Lobby?at=5a8d2134c3c5f8b90de5020b) already, but I'm slow. :simple_smile:

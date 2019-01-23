@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/55857Typeequality.html
 ---
 
-## [new members](index.html)
-### [Type equality](55857Typeequality.html)
+## Stream: [new members](index.html)
+### Topic: [Type equality](55857Typeequality.html)
+
+---
 
 #### [Keeley Hoek (Nov 11 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478097):
 Is it possible to decide whether two types are equal?

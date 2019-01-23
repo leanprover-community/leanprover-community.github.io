@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/18151whatisthepurposeofissubgroup.html
 ---
 
-## [general](index.html)
-### [what is the purpose of is_subgroup](18151whatisthepurposeofissubgroup.html)
+## Stream: [general](index.html)
+### Topic: [what is the purpose of is_subgroup](18151whatisthepurposeofissubgroup.html)
+
+---
 
 #### [Kenny Lau (Mar 31 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20purpose%20of%20is_subgroup/near/124464518):
 what is the purpose of is_subgroup if you don't prove that they are groups?

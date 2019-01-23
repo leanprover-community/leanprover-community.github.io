@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/30861bundledbases.html
 ---
 
-## [maths](index.html)
-### [bundled bases](30861bundledbases.html)
+## Stream: [maths](index.html)
+### Topic: [bundled bases](30861bundledbases.html)
+
+---
 
 #### [Johan Commelin (Oct 17 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135955551):
 I pushed the results of yesterdays painful efforts to https://github.com/leanprover-community/mathlib/blob/open_set/category_theory/examples/topological_spaces.lean. This wouldn't have been possible without the great help of @**Johannes Hölzl** 

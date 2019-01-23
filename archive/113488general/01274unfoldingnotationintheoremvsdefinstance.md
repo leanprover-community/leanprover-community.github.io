@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01274unfoldingnotationintheoremvsdefinstance.html
 ---
 
-## [general](index.html)
-### [unfolding notation in theorem vs def/instance](01274unfoldingnotationintheoremvsdefinstance.html)
+## Stream: [general](index.html)
+### Topic: [unfolding notation in theorem vs def/instance](01274unfoldingnotationintheoremvsdefinstance.html)
+
+---
 
 #### [Kenny Lau (May 31 2018 at 04:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20notation%20in%20theorem%20vs%20def/instance/near/127341302):
 ```lean

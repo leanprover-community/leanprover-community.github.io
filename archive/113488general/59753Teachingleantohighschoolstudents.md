@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59753Teachingleantohighschoolstudents.html
 ---
 
-## [general](index.html)
-### [Teaching lean to high school students](59753Teachingleantohighschoolstudents.html)
+## Stream: [general](index.html)
+### Topic: [Teaching lean to high school students](59753Teachingleantohighschoolstudents.html)
+
+---
 
 #### [Adam Kurkiewicz (Jul 12 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Teaching%20lean%20to%20high%20school%20students/near/129529806):
 Hey guys, I'll be talking about lean to a bunch of smart high school kids (BMO/ BIO type of crowd, they can program in python and write down "normal" maths proofs at a high school level).

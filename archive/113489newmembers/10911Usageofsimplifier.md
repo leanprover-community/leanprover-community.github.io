@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/10911Usageofsimplifier.html
 ---
 
-## [new members](index.html)
-### [Usage of simplifier](10911Usageofsimplifier.html)
+## Stream: [new members](index.html)
+### Topic: [Usage of simplifier](10911Usageofsimplifier.html)
+
+---
 
 #### [AHan (Nov 02 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20simplifier/near/136979706):
 Although having read the simplifier in the tutorial: Theorem Proving in Lean and the The Lean Reference Manual

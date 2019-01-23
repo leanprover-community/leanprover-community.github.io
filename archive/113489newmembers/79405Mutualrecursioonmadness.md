@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/79405Mutualrecursioonmadness.html
 ---
 
-## [new members](index.html)
-### [Mutual recursioon madness](79405Mutualrecursioonmadness.html)
+## Stream: [new members](index.html)
+### Topic: [Mutual recursioon madness](79405Mutualrecursioonmadness.html)
+
+---
 
 #### [Ken Roe (Jul 25 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutual%20recursioon%20madness/near/130250392):
 How do I complete the following theorem:

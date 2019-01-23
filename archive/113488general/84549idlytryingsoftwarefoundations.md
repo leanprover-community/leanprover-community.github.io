@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/84549idlytryingsoftwarefoundations.html
 ---
 
-## [general](index.html)
-### [idly trying software foundations](84549idlytryingsoftwarefoundations.html)
+## Stream: [general](index.html)
+### Topic: [idly trying software foundations](84549idlytryingsoftwarefoundations.html)
+
+---
 
 #### [Kevin Buzzard (Mar 27 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idly%20trying%20software%20foundations/near/124286568):
 I am working through software foundations. I'm finding the first book relatively straightforward, which is a relief. I was trying to do the exercises in a golf-like way. Why doesn't this work:

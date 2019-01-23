@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88943exprisinternalcnstr.html
 ---
 
-## [general](index.html)
-### [expr.is_internal_cnstr](88943exprisinternalcnstr.html)
+## Stream: [general](index.html)
+### Topic: [expr.is_internal_cnstr](88943exprisinternalcnstr.html)
+
+---
 
 #### [Edward Ayers (Oct 09 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr.is_internal_cnstr/near/135479383):
 What does `expr.is_internal_cnstr` do?

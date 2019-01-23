@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61020finiteintersectionproperty.html
 ---
 
-## [general](index.html)
-### [finite intersection property](61020finiteintersectionproperty.html)
+## Stream: [general](index.html)
+### Topic: [finite intersection property](61020finiteintersectionproperty.html)
+
+---
 
 #### [Kenny Lau (Nov 27 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148672762):
 Does Lean know that a space is compact iff it has the finite intersection property?

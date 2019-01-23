@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59368bugwithrefinerw.html
 ---
 
-## [general](index.html)
-### [bug with refine + rw](59368bugwithrefinerw.html)
+## Stream: [general](index.html)
+### Topic: [bug with refine + rw](59368bugwithrefinerw.html)
+
+---
 
 #### [Kenny Lau (Dec 18 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20refine%20%2B%20rw/near/152093977):
 ```lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06317erroraftercompletingtacticproof.html
 ---
 
-## [general](index.html)
-### [error after completing tactic proof](06317erroraftercompletingtacticproof.html)
+## Stream: [general](index.html)
+### Topic: [error after completing tactic proof](06317erroraftercompletingtacticproof.html)
+
+---
 
 #### [Johan Commelin (Nov 17 2018 at 07:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147866833):
 ```lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47376freegroup.html
 ---
 
-## [general](index.html)
-### [free group](47376freegroup.html)
+## Stream: [general](index.html)
+### Topic: [free group](47376freegroup.html)
+
+---
 
 #### [Kenny Lau (Apr 01 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free%20group/near/124469539):
 I have constructed the free group of a set here: https://github.com/kckennylau/Lean/blob/master/free_group.lean

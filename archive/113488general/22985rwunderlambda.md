@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22985rwunderlambda.html
 ---
 
-## [general](index.html)
-### [rw under lambda](22985rwunderlambda.html)
+## Stream: [general](index.html)
+### Topic: [rw under lambda](22985rwunderlambda.html)
+
+---
 
 #### [Reid Barton (May 04 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126107890):
 `rw` refuses to perform rewrites inside a lambda, as far as I can tell. Is there a convenient way to do so?

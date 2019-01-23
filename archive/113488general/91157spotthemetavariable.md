@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91157spotthemetavariable.html
 ---
 
-## [general](index.html)
-### [spot the metavariable](91157spotthemetavariable.html)
+## Stream: [general](index.html)
+### Topic: [spot the metavariable](91157spotthemetavariable.html)
+
+---
 
 #### [Kevin Buzzard (Apr 09 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124814424):
 ```lean

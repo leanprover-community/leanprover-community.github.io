@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/96225422limitsinCommRing.html
 ---
 
-## [PR reviews](index.html)
-### [#422 limits in CommRing](96225422limitsinCommRing.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#422 limits in CommRing](96225422limitsinCommRing.html)
+
+---
 
 #### [Scott Morrison (Oct 15 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23422%20limits%20in%20CommRing/near/135796679):
 @**Patrick Massot**, I've started a WIP branch to construct products and equalizers in CommRing.

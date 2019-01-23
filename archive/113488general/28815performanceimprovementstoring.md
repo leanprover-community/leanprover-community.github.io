@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28815performanceimprovementstoring.html
 ---
 
-## [general](index.html)
-### [performance improvements to ring](28815performanceimprovementstoring.html)
+## Stream: [general](index.html)
+### Topic: [performance improvements to ring](28815performanceimprovementstoring.html)
+
+---
 
 #### [Mario Carneiro (Sep 02 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20improvements%20to%20ring/near/133227901):
 @**Rob Lewis** The latest commit replaces some of the `mk_app` applications used in `ring`, and there was a *huge* performance gain. Now `ring` will solve `(x + y)^n = (x+y)^n` up to `n = 60` before hitting the timeout, compared to `n = 11` before

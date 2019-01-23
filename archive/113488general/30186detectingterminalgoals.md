@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30186detectingterminalgoals.html
 ---
 
-## [general](index.html)
-### [detecting terminal goals](30186detectingterminalgoals.html)
+## Stream: [general](index.html)
+### Topic: [detecting terminal goals](30186detectingterminalgoals.html)
+
+---
 
 #### [Scott Morrison (Apr 26 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/detecting%20terminal%20goals/near/125718057):
 I have a little tactic that is meant to determine with the current goal is "terminal", that is, no other goals depend on it.

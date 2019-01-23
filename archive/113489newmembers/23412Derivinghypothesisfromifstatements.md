@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/23412Derivinghypothesisfromifstatements.html
 ---
 
-## [new members](index.html)
-### [Deriving hypothesis from if statements](23412Derivinghypothesisfromifstatements.html)
+## Stream: [new members](index.html)
+### Topic: [Deriving hypothesis from if statements](23412Derivinghypothesisfromifstatements.html)
+
+---
 
 #### [Tobias Grosser (Oct 02 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056007):
 Hi, I am currently cleaning up my gaussian elimination proof. At one point I defined the following functions:

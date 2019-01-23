@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/77718splittingfields.html
 ---
 
-## [kbb](index.html)
-### [splitting fields](77718splittingfields.html)
+## Stream: [kbb](index.html)
+### Topic: [splitting fields](77718splittingfields.html)
+
+---
 
 #### [Johan Commelin (Sep 14 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/splitting%20fields/near/133967305):
 It would be great if we could push the splitting fields branch to the point where we can define the Galois group of a splitting field.

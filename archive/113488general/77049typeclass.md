@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77049typeclass.html
 ---
 
-## [general](index.html)
-### [typeclass](77049typeclass.html)
+## Stream: [general](index.html)
+### Topic: [typeclass](77049typeclass.html)
+
+---
 
 #### [Kenny Lau (Mar 15 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761005):
 why does this have no problem:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26924mathlibnightlydependence.html
 ---
 
-## [general](index.html)
-### [mathlib nightly dependence](26924mathlibnightlydependence.html)
+## Stream: [general](index.html)
+### Topic: [mathlib nightly dependence](26924mathlibnightlydependence.html)
+
+---
 
 #### [Kenny Lau (Apr 12 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly%20dependence/near/124969893):
 could mathlib stop depending on nightlies?

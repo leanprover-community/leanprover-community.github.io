@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/70572vscodeextensioninstallsLean.html
 ---
 
-## [general](index.html)
-### [vscode extension installs Lean](70572vscodeextensioninstallsLean.html)
+## Stream: [general](index.html)
+### Topic: [vscode extension installs Lean](70572vscodeextensioninstallsLean.html)
+
+---
 
 #### [Scott Morrison (Sep 17 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode%20extension%20installs%20Lean/near/134097115):
 I just sent a PR for the VS Code extension, that will offer to install Lean for you if it can't find a working copy. It uses elan, and just runs in the VS Code terminal.

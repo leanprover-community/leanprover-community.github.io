@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96935multisetminonwithtop.html
 ---
 
-## [general](index.html)
-### [multiset min on with_top](96935multisetminonwithtop.html)
+## Stream: [general](index.html)
+### Topic: [multiset min on with_top](96935multisetminonwithtop.html)
+
+---
 
 #### [Kevin Buzzard (Jul 12 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiset%20min%20on%20with_top/near/129562759):
 Back in the days before `with_top` I rolled my own instance of `decidable_linear_order (option nat)` (with `none` = +infinity), and defined `min` on `multiset (option nat)` as `lam s, multiset.fold (min) none s`. It compiled and worked fine and I thought no more about it. 

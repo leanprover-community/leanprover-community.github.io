@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/94368FeedbackHeineBorelinprogress.html
 ---
 
-## [new members](index.html)
-### [Feedback (Heine Borel in progress)](94368FeedbackHeineBorelinprogress.html)
+## Stream: [new members](index.html)
+### Topic: [Feedback (Heine Borel in progress)](94368FeedbackHeineBorelinprogress.html)
+
+---
 
 #### [Guillermo Barajas Ayuso (Sep 16 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134030478):
 Hi, I have uploaded some code in the link  https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/Topology/Heine-Borel%20(incomplete) , I'll leave it here in case you want to give me some feedback. Thank you for your time! :-)

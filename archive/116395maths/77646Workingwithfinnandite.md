@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/77646Workingwithfinnandite.html
 ---
 
-## [maths](index.html)
-### [Working with `fin n` (and `ite`?)](77646Workingwithfinnandite.html)
+## Stream: [maths](index.html)
+### Topic: [Working with `fin n` (and `ite`?)](77646Workingwithfinnandite.html)
+
+---
 
 #### [Johan Commelin (May 14 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Working%20with%20%60fin%20n%60%20%28and%20%60ite%60%3F%29/near/126534552):
 How should I do this:

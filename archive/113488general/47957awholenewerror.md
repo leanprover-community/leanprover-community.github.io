@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47957awholenewerror.html
 ---
 
-## [general](index.html)
-### [a whole new error](47957awholenewerror.html)
+## Stream: [general](index.html)
+### Topic: [a whole new error](47957awholenewerror.html)
+
+---
 
 #### [Kenny Lau (Apr 21 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483415):
 ```lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/64685Normalsubmonoids.html
 ---
 
-## [maths](index.html)
-### [Normal submonoids](64685Normalsubmonoids.html)
+## Stream: [maths](index.html)
+### Topic: [Normal submonoids](64685Normalsubmonoids.html)
+
+---
 
 #### [Mario Carneiro (Aug 10 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Normal%20submonoids/near/131229964):
 Are these a thing? The natural definition of normal subgroup extends to the monoid case as `a + b \in S -> b + a \in S`

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/85969beginnerproofbyinductionquestion.html
 ---
 
-## [new members](index.html)
-### [beginner proof by induction question](85969beginnerproofbyinductionquestion.html)
+## Stream: [new members](index.html)
+### Topic: [beginner proof by induction question](85969beginnerproofbyinductionquestion.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Aug 30 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133037403):
 I'm trying to prove that $$ \sum_{k=0}^{n-1}F_k = F_{2k-1} $$, where $$F_{k}$$ is the kth Fibonacci number. Here's my attempt so far:

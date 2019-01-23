@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/14624Abunchoffinequivresults.html
 ---
 
-## [general](index.html)
-### [A bunch of fin equiv results](14624Abunchoffinequivresults.html)
+## Stream: [general](index.html)
+### Topic: [A bunch of fin equiv results](14624Abunchoffinequivresults.html)
+
+---
 
 #### [Kenny Lau (Apr 22 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521488):
 ```lean

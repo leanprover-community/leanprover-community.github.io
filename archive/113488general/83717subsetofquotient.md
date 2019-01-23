@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83717subsetofquotient.html
 ---
 
-## [general](index.html)
-### [subset of quotient](83717subsetofquotient.html)
+## Stream: [general](index.html)
+### Topic: [subset of quotient](83717subsetofquotient.html)
+
+---
 
 #### [Johan Commelin (Oct 01 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956599):
 For the perfectoid project we often need to work with subsets of quotient types. A mathematician would write

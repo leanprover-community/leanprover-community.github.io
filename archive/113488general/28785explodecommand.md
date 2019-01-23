@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28785explodecommand.html
 ---
 
-## [general](index.html)
-### [explode command](28785explodecommand.html)
+## Stream: [general](index.html)
+### Topic: [explode command](28785explodecommand.html)
+
+---
 
 #### [Mario Carneiro (Aug 31 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explode%20command/near/133093714):
 While on the flight home, I decided to actually write the wishlist tactic I've mentioned to a few people, which displays lean proofs in a line by line style heavily annotated with type ascriptions so it looks more like a Fitch style proof. I'm still tweaking the display options, but here's what it looks like right now:

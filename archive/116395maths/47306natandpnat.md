@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/47306natandpnat.html
 ---
 
-## [maths](index.html)
-### [nat and pnat](47306natandpnat.html)
+## Stream: [maths](index.html)
+### Topic: [nat and pnat](47306natandpnat.html)
+
+---
 
 #### [Kevin Buzzard (May 27 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat%20and%20pnat/near/127168435):
 Should I not be using these functions:

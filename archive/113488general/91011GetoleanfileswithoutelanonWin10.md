@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91011GetoleanfileswithoutelanonWin10.html
 ---
 
-## [general](index.html)
-### [Get olean files without elan on Win10](91011GetoleanfileswithoutelanonWin10.html)
+## Stream: [general](index.html)
+### Topic: [Get olean files without elan on Win10](91011GetoleanfileswithoutelanonWin10.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Oct 27 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Get%20olean%20files%20without%20elan%20on%20Win10/near/136602966):
 I'd like to download updates to mathlib manually from github, then produce the olean files. How can I do this? I saw [these](https://github.com/leanprover/lean/blob/master/doc/make/msvc.md) instructions, but apparently they aren't compatible with VS2018.

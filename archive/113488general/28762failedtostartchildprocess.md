@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28762failedtostartchildprocess.html
 ---
 
-## [general](index.html)
-### [failed to start child process](28762failedtostartchildprocess.html)
+## Stream: [general](index.html)
+### Topic: [failed to start child process](28762failedtostartchildprocess.html)
+
+---
 
 #### [Scott Morrison (Jul 25 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failed%20to%20start%20child%20process/near/130257139):
 I have a student who can't run leanpkg on Windows: `leanpkg.bat new test` says: "failed to start child process", and doesn't create a new directory.

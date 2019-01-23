@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/36054uncheckedcast.html
 ---
 
-## [general](index.html)
-### [unchecked cast](36054uncheckedcast.html)
+## Stream: [general](index.html)
+### Topic: [unchecked cast](36054uncheckedcast.html)
+
+---
 
 #### [Kenny Lau (Sep 15 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unchecked%20cast/near/134005017):
 ```lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/06660metatacticwithunfold.html
 ---
 
-## [new members](index.html)
-### [meta tactic with unfold](06660metatacticwithunfold.html)
+## Stream: [new members](index.html)
+### Topic: [meta tactic with unfold](06660metatacticwithunfold.html)
+
+---
 
 #### [Sarah Mameche (Nov 19 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20tactic%20with%20unfold/near/147963936):
 Is there an equivalent to 'tactic.apply' with unfold? I have a ```meta```tactic that rewrites with specific lemmas which are given as a ```pexpr``` : 

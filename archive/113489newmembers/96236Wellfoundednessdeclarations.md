@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/96236Wellfoundednessdeclarations.html
 ---
 
-## [new members](index.html)
-### [Well foundedness declarations](96236Wellfoundednessdeclarations.html)
+## Stream: [new members](index.html)
+### Topic: [Well foundedness declarations](96236Wellfoundednessdeclarations.html)
+
+---
 
 #### [Ken Roe (Jul 11 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Well%20foundedness%20declarations/near/129479543):
 It seems for the mutually recursive function below, Lean cannot find the well founded relation.  How can I specify the relation?

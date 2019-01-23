@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37088troublewithfunctionasset.html
 ---
 
-## [general](index.html)
-### [trouble with function as set](37088troublewithfunctionasset.html)
+## Stream: [general](index.html)
+### Topic: [trouble with function as set](37088troublewithfunctionasset.html)
+
+---
 
 #### [Marcus Klaas (Dec 02 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trouble%20with%20function%20as%20set/near/150700590):
 Hi! Is this a proper channel for asking (elementary) questions?

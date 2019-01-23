@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/92424findgoal.html
 ---
 
-## [general](index.html)
-### [#find goal](92424findgoal.html)
+## Stream: [general](index.html)
+### Topic: [#find goal](92424findgoal.html)
+
+---
 
 #### [Johan Commelin (May 01 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125929630):
 I occasionally find myself in the situation where I would like to know if there is a theorem that I can apply to the current goal (in tactic mode). It would be nice if I could run a tactic `find_goal` that does not change the proof state, but just prints messages of the theorems that I could apply. Is this reasonable?

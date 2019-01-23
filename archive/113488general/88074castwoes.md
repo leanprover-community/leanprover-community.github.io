@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88074castwoes.html
 ---
 
-## [general](index.html)
-### [cast woes](88074castwoes.html)
+## Stream: [general](index.html)
+### Topic: [cast woes](88074castwoes.html)
+
+---
 
 #### [Kevin Buzzard (May 25 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127073963):
 ```lean
@@ -168,4 +170,25 @@ Maybe it's about time I learnt how it worked.
 
 #### [Chris Hughes (May 26 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122380):
 What funny MOD stuff?
+
+#### [Kevin Buzzard (Jan 23 2019 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/156678741):
+I have generally got the hang of how to handle casts now. The point of view which I want to push amongst the UGs is that even though yes it's annoying that natural numbers aren't actually real numbers, `simp` should do all the translating for you. But here's an example where I couldn't make it work:
+
+```lean
+import data.real.basic
+
+example (M : ℕ) (H : 0 < M + 1) : (0 : ℝ) < M + 1 :=
+begin
+  simp [H],
+  -- ⊢ 0 < 1 + ↑M
+  -- gaargh
+  -- simp at H, -- won't change it to 0 < 1 + M
+  sorry
+end
+```
+
+Applying `simp` to nat `M + 1` doesn't change it, but applying `simp` to real `M + 1` changes it to `1 + M` and this somehow means Lean loses track.
+
+#### [Kevin Buzzard (Jan 23 2019 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/156678755):
+I know I can use some cast_lt or whatever, but this is exactly what I am trying to avoid. `simp` is usually good at these.
 

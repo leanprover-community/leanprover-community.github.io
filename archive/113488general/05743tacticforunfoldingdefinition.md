@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05743tacticforunfoldingdefinition.html
 ---
 
-## [general](index.html)
-### [tactic for unfolding definition](05743tacticforunfoldingdefinition.html)
+## Stream: [general](index.html)
+### Topic: [tactic for unfolding definition](05743tacticforunfoldingdefinition.html)
+
+---
 
 #### [Kenny Lau (Mar 15 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20unfolding%20definition/near/123764614):
 If I've defined `def A := B` and my goal / hypothesis contains A, how do I replace A with B?

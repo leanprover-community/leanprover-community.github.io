@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63693untypedexpressions.html
 ---
 
-## [general](index.html)
-### [untyped expressions](63693untypedexpressions.html)
+## Stream: [general](index.html)
+### Topic: [untyped expressions](63693untypedexpressions.html)
+
+---
 
 #### [Jakob von Raumer (Apr 19 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/untyped%20expressions/near/125308427):
 When referring to local constants it's pretty annoying that I have to give the type every time. Can't I used leave the type unelaborated until the local constant is abstracted away anyway?

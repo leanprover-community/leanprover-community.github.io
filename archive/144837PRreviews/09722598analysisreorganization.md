@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/09722598analysisreorganization.html
 ---
 
-## [PR reviews](index.html)
-### [#598 analysis reorganization](09722598analysisreorganization.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#598 analysis reorganization](09722598analysisreorganization.html)
+
+---
 
 #### [Sebastien Gouezel (Jan 17 2019 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23598%20analysis%20reorganization/near/155347359):
 I am confused: is it normal that there are still several references to `general_topology`?

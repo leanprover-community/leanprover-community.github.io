@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/98412Unfoldingdefinitionswithmatch.html
 ---
 
-## [new members](index.html)
-### [Unfolding definitions with match](98412Unfoldingdefinitionswithmatch.html)
+## Stream: [new members](index.html)
+### Topic: [Unfolding definitions with match](98412Unfoldingdefinitionswithmatch.html)
+
+---
 
 #### [Ken Roe (Jul 25 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unfolding%20definitions%20with%20match/near/130244220):
 I'm trying to prove the following:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51666Potentialvmbug.html
 ---
 
-## [general](index.html)
-### [Potential vm bug](51666Potentialvmbug.html)
+## Stream: [general](index.html)
+### Topic: [Potential vm bug](51666Potentialvmbug.html)
+
+---
 
 #### [Keeley Hoek (Aug 11 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950146):
 The following code typechecks:

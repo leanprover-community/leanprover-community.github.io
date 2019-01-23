@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/70527prime617challenge.html
 ---
 
-## [maths](index.html)
-### [prime 617 challenge](70527prime617challenge.html)
+## Stream: [maths](index.html)
+### Topic: [prime 617 challenge](70527prime617challenge.html)
+
+---
 
 #### [Kevin Buzzard (Jul 26 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130359176):
 ```lean

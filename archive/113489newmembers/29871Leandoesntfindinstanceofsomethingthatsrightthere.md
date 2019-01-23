@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/29871Leandoesntfindinstanceofsomethingthatsrightthere.html
 ---
 
-## [new members](index.html)
-### [Lean doesn't find instance of something that's right there](29871Leandoesntfindinstanceofsomethingthatsrightthere.html)
+## Stream: [new members](index.html)
+### Topic: [Lean doesn't find instance of something that's right there](29871Leandoesntfindinstanceofsomethingthatsrightthere.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Oct 16 2018 at 00:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20doesn%27t%20find%20instance%20of%20something%20that%27s%20right%20there/near/135863594):
 Weird problem -- I have my goal, which is `(x ⋆ y) → (y ⋆ z) → (x ⋆ z)` (for some operation `⋆`) and I have a hypothesis `Hxy : x = y`. But when I try `rw Hxy,` Lean tells me:

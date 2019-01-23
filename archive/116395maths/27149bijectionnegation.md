@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/27149bijectionnegation.html
 ---
 
-## [maths](index.html)
-### [bijection negation](27149bijectionnegation.html)
+## Stream: [maths](index.html)
+### Topic: [bijection negation](27149bijectionnegation.html)
+
+---
 
 #### [Sean Leather (May 17 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bijection%20negation/near/126694854):
 Is there a property like `∀ ⦃a₁ a₂⦄, f a₁ ≠ f a₂ → a₁ ≠ a₂` for a `bijective f`?

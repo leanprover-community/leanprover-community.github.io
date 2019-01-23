@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72225EckmannHilton.html
 ---
 
-## [general](index.html)
-### [Eckmann–Hilton](72225EckmannHilton.html)
+## Stream: [general](index.html)
+### Topic: [Eckmann–Hilton](72225EckmannHilton.html)
+
+---
 
 #### [Johan Commelin (Sep 07 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Eckmann%E2%80%93Hilton/near/133496192):
 Today I thought it was a good idea to stretch the type class system a bit. In fact, I ended up not using it at all :rolling_on_the_floor_laughing:

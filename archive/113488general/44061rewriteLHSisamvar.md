@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/44061rewriteLHSisamvar.html
 ---
 
-## [general](index.html)
-### [rewrite LHS is a mvar](44061rewriteLHSisamvar.html)
+## Stream: [general](index.html)
+### Topic: [rewrite LHS is a mvar](44061rewriteLHSisamvar.html)
+
+---
 
 #### [Mario Carneiro (Mar 13 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20LHS%20is%20a%20mvar/near/123653459):
 ```

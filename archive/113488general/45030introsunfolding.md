@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45030introsunfolding.html
 ---
 
-## [general](index.html)
-### [intros unfolding](45030introsunfolding.html)
+## Stream: [general](index.html)
+### Topic: [intros unfolding](45030introsunfolding.html)
+
+---
 
 #### [Patrick Massot (Jun 27 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intros%20unfolding/near/128723966):
 Is this normal?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/39239ringtacticwithhomomorphism.html
 ---
 
-## [maths](index.html)
-### [ring tactic with homomorphism](39239ringtacticwithhomomorphism.html)
+## Stream: [maths](index.html)
+### Topic: [ring tactic with homomorphism](39239ringtacticwithhomomorphism.html)
+
+---
 
 #### [Johan Commelin (Apr 30 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20tactic%20with%20homomorphism/near/125892370):
 Consider the following MWE

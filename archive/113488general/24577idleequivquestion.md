@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24577idleequivquestion.html
 ---
 
-## [general](index.html)
-### [idle equiv question](24577idleequivquestion.html)
+## Stream: [general](index.html)
+### Topic: [idle equiv question](24577idleequivquestion.html)
+
+---
 
 #### [Kevin Buzzard (Apr 28 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idle%20equiv%20question/near/125831713):
 ```lean

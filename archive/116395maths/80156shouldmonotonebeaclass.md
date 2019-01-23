@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/80156shouldmonotonebeaclass.html
 ---
 
-## [maths](index.html)
-### [should monotone be a class?](80156shouldmonotonebeaclass.html)
+## Stream: [maths](index.html)
+### Topic: [should monotone be a class?](80156shouldmonotonebeaclass.html)
+
+---
 
 #### [Johan Commelin (May 28 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/should%20monotone%20be%20a%20class%3F/near/127196629):
 Should

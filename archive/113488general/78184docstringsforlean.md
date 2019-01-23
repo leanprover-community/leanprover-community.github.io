@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78184docstringsforlean.html
 ---
 
-## [general](index.html)
-### [docstrings for lean](78184docstringsforlean.html)
+## Stream: [general](index.html)
+### Topic: [docstrings for lean](78184docstringsforlean.html)
+
+---
 
 #### [Edward Ayers (Oct 27 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/docstrings%20for%20lean/near/136609124):
 It's not completed yet, but I am incrementally adding documentation to undocumented parts of the lean source code. Would there be any interest in PRing this into the Lean 3 source eventually? Obviously someone would have to go over my changes and make sure that the comments are not wrong/ misleading etc. https://github.com/EdAyers/lean/tree/docstrings

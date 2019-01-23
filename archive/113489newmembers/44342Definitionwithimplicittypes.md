@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/44342Definitionwithimplicittypes.html
 ---
 
-## [new members](index.html)
-### [Definition with implicit types](44342Definitionwithimplicittypes.html)
+## Stream: [new members](index.html)
+### Topic: [Definition with implicit types](44342Definitionwithimplicittypes.html)
+
+---
 
 #### [Ken Roe (Jul 11 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Definition%20with%20implicit%20types/near/129437343):
 Can someone correct the syntax for this definition:

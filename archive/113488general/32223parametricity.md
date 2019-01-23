@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32223parametricity.html
 ---
 
-## [general](index.html)
-### [parametricity](32223parametricity.html)
+## Stream: [general](index.html)
+### Topic: [parametricity](32223parametricity.html)
+
+---
 
 #### [Cyril Cohen (Nov 11 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147487744):
 Hi, @**Johannes Hölzl** @**Mario Carneiro** @**Rob Lewis**,

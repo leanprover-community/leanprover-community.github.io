@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/68806Replacingrwwithterms.html
 ---
 
-## [new members](index.html)
-### [Replacing rw with terms](68806Replacingrwwithterms.html)
+## Stream: [new members](index.html)
+### Topic: [Replacing rw with terms](68806Replacingrwwithterms.html)
+
+---
 
 #### [Andreas Swerdlow (Sep 15 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Replacing%20rw%20with%20terms/near/134012592):
 I have some proofs written in tactic mode that contain a lot of rewrites, including rewrites of hypotheses. Is there a way to easily convert such proofs into term mode. I know about eq.subst but can’t see a way to do this that won’t take aeons. 

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/16724pairsequaliffprojectionsare.html
 ---
 
-## [new members](index.html)
-### [pairs equal iff projections are?](16724pairsequaliffprojectionsare.html)
+## Stream: [new members](index.html)
+### Topic: [pairs equal iff projections are?](16724pairsequaliffprojectionsare.html)
+
+---
 
 #### [Marcus Klaas (Dec 02 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/pairs%20equal%20iff%20projections%20are%3F/near/150722245):
 Can anyone give me a pointer on how prove this?

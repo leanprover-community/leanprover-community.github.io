@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/24215inequalitygolfrequest.html
 ---
 
-## [new members](index.html)
-### [inequality golf request](24215inequalitygolfrequest.html)
+## Stream: [new members](index.html)
+### Topic: [inequality golf request](24215inequalitygolfrequest.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Nov 21 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inequality%20golf%20request/near/148130620):
 I'm curious to see how simple a lean proof of this can be:

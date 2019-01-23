@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/53986subtypeinstance.html
 ---
 
-## [maths](index.html)
-### [subtype instance](53986subtypeinstance.html)
+## Stream: [maths](index.html)
+### Topic: [subtype instance](53986subtypeinstance.html)
+
+---
 
 #### [Patrick Massot (Aug 19 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subtype%20instance/near/132419278):
 In PR [#261](https://github.com/leanprover/mathlib/pull/261) coming from the perfectoid project, Johan defined subrings and subfields and proved they are rings and fields respectively. The proofs were of course extremely similar to the case of monoids and groups. So I exploited^Wencouraged Simon to write a new tactic built on top of `refine_struct` in the spirit of `pi_instance`. The result is  [#267](https://github.com/leanprover/mathlib/pull/267). Of course any comment is welcome, but I'd be particularly interested in trying to answer question about how [this tactic](https://github.com/leanprover/mathlib/pull/267/files#diff-040c2692bc712ca8fface6e4aa45ce62R31) works, since I managed to fool myself into believing I mostly understand it and should write a tutorial about it.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/08348parallelcombinator.html
 ---
 
-## [new members](index.html)
-### [parallel combinator](08348parallelcombinator.html)
+## Stream: [new members](index.html)
+### Topic: [parallel combinator](08348parallelcombinator.html)
+
+---
 
 #### [Olli (Sep 13 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133876440):
 is there a way to use the `exact` tactic with the parallel tactic combinator:

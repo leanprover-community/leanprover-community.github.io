@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27899creatinglambdawithouttactic.html
 ---
 
-## [general](index.html)
-### [creating lambda without tactic](27899creatinglambdawithouttactic.html)
+## Stream: [general](index.html)
+### Topic: [creating lambda without tactic](27899creatinglambdawithouttactic.html)
+
+---
 
 #### [Zesen Qian (Jul 30 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130588564):
 meta programming problem: So I have a function body represented as `expr -> expr`, which receives a reference to the argument, and return the body. Is it possible to abstract the argument away(that is, wrap it with a lambda) and get the anonymous function back as `expr`?

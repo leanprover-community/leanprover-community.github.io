@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04116cardnonempty.html
 ---
 
-## [general](index.html)
-### [card_nonempty](04116cardnonempty.html)
+## Stream: [general](index.html)
+### Topic: [card_nonempty](04116cardnonempty.html)
+
+---
 
 #### [Johan Commelin (Sep 08 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577651):
 Is there some easy way to tackle this goal:

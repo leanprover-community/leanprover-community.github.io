@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98309usecoerceonedependenttypeasanequalone.html
 ---
 
-## [general](index.html)
-### [use/coerce one dependent type as an equal one?](98309usecoerceonedependenttypeasanequalone.html)
+## Stream: [general](index.html)
+### Topic: [use/coerce one dependent type as an equal one?](98309usecoerceonedependenttypeasanequalone.html)
+
+---
 
 #### [Andrew Tindall (Sep 23 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use/coerce%20one%20dependent%20type%20as%20an%20equal%20one%3F/near/134479228):
 I am trying to apply a function to a vector, and get the error message 

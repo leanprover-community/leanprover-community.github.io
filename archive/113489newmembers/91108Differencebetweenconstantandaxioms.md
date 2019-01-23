@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/91108Differencebetweenconstantandaxioms.html
 ---
 
-## [new members](index.html)
-### [Difference between constant and axioms](91108Differencebetweenconstantandaxioms.html)
+## Stream: [new members](index.html)
+### Topic: [Difference between constant and axioms](91108Differencebetweenconstantandaxioms.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Dec 31 2018 at 07:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154074362):
 I just noticed that `propext` is defined as a constant:

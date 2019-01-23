@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/93037unicodefontsforVScodeonmacOS.html
 ---
 
-## [new members](index.html)
-### [unicode fonts for VS code on macOS](93037unicodefontsforVScodeonmacOS.html)
+## Stream: [new members](index.html)
+### Topic: [unicode fonts for VS code on macOS](93037unicodefontsforVScodeonmacOS.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Aug 15 2018 at 01:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unicode%20fonts%20for%20VS%20code%20on%20macOS/near/132142135):
 Does anyone have any recommendations for macOS fonts that include all the unicode symbols in mathlib? On Windows the default fonts seem good so far but there are some missing symbols on macOS like `ₘ`.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68184sortingalgorithmsinlean.html
 ---
 
-## [general](index.html)
-### [sorting algorithms in lean](68184sortingalgorithmsinlean.html)
+## Stream: [general](index.html)
+### Topic: [sorting algorithms in lean](68184sortingalgorithmsinlean.html)
+
+---
 
 #### [Adam Kurkiewicz (Mar 30 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sorting%20algorithms%20in%20lean/near/124411849):
 Hi guys,

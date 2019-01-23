@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29056negationofearliercasesofmatch.html
 ---
 
-## [general](index.html)
-### [negation of earlier cases of match](29056negationofearliercasesofmatch.html)
+## Stream: [general](index.html)
+### Topic: [negation of earlier cases of match](29056negationofearliercasesofmatch.html)
+
+---
 
 #### [Nima (Apr 24 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/negation%20of%20earlier%20cases%20of%20match/near/125618723):
 (deleted)

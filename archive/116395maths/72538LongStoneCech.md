@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/72538LongStoneCech.html
 ---
 
-## [maths](index.html)
-### [Long Stone-Cech](72538LongStoneCech.html)
+## Stream: [maths](index.html)
+### Topic: [Long Stone-Cech](72538LongStoneCech.html)
+
+---
 
 #### [Patrick Massot (Jan 22 2019 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598228):
 @**Reid Barton** https://github.com/leanprover/mathlib/blob/master/src/topology/stone_cech.lean#L253 takes forever to elaborate. Do you care if I change it to:

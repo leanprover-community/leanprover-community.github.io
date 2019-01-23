@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80057ICMS2018Whatisinmathlib.html
 ---
 
-## [general](index.html)
-### [ICMS 2018: What is in mathlib?](80057ICMS2018Whatisinmathlib.html)
+## Stream: [general](index.html)
+### Topic: [ICMS 2018: What is in mathlib?](80057ICMS2018Whatisinmathlib.html)
+
+---
 
 #### [Mario Carneiro (Jul 27 2018 at 06:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ICMS%202018%3A%20What%20is%20in%20mathlib%3F/near/130389009):
 Hi all, you can check out yesterday's ICMS talk on YouTube: https://youtu.be/5tS4j_A1ZvU

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88287tryingtounderstandcc.html
 ---
 
-## [general](index.html)
-### [trying to understand cc](88287tryingtounderstandcc.html)
+## Stream: [general](index.html)
+### Topic: [trying to understand cc](88287tryingtounderstandcc.html)
+
+---
 
 #### [Johan Commelin (Apr 24 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125602905):
 I had hoped this would work:

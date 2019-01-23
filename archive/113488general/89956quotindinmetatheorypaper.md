@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89956quotindinmetatheorypaper.html
 ---
 
-## [general](index.html)
-### [quot.ind in metatheory paper](89956quotindinmetatheorypaper.html)
+## Stream: [general](index.html)
+### Topic: [quot.ind in metatheory paper](89956quotindinmetatheorypaper.html)
+
+---
 
 #### [Floris van Doorn (Oct 29 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quot.ind%20in%20metatheory%20paper/near/136716513):
 In Section 2.7 of Mario's metatheory of Lean paper, I'm missing the fact that `quot.ind` is a axiom in Lean. Is this an omission, or is there an implicit claim here that `quot.ind` is derivable from the other constants/axioms?

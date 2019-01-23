@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93377divneg.html
 ---
 
-## [general](index.html)
-### ["div_neg"](93377divneg.html)
+## Stream: [general](index.html)
+### Topic: ["div_neg"](93377divneg.html)
+
+---
 
 #### [Kenny Lau (Sep 25 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22div_neg%22/near/134617532):
 algebra/field.lean L95:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/90259mathlibintegerdocsgcdexample.html
 ---
 
-## [new members](index.html)
-### [mathlib integer docs gcd example](90259mathlibintegerdocsgcdexample.html)
+## Stream: [new members](index.html)
+### Topic: [mathlib integer docs gcd example](90259mathlibintegerdocsgcdexample.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Aug 09 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20integer%20docs%20gcd%20example/near/131176076):
 The final `example` in [this file from the mathlib docs](https://github.com/leanprover/mathlib/blob/master/docs/theories/integers.md) (I guess it originally comes from [this page on the xena blog](https://xenaproject.wordpress.com/maths-in-lean-integers/)) doesn't seem to typecheck for me:

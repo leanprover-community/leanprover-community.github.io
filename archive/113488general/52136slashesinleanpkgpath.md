@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52136slashesinleanpkgpath.html
 ---
 
-## [general](index.html)
-### [slashes in leanpkg.path](52136slashesinleanpkgpath.html)
+## Stream: [general](index.html)
+### Topic: [slashes in leanpkg.path](52136slashesinleanpkgpath.html)
+
+---
 
 #### [Kevin Buzzard (Jul 06 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212544):
 What does leanpkg.path look like on windows? I have about 20 minutes to get mathlib up and running on a win7 machine with no admin access and hence no git (apparently!). Are they `/` or `\`, and one or two?

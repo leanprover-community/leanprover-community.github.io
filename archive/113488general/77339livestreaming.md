@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77339livestreaming.html
 ---
 
-## [general](index.html)
-### [live streaming](77339livestreaming.html)
+## Stream: [general](index.html)
+### Topic: [live streaming](77339livestreaming.html)
+
+---
 
 #### [Reid Barton (Sep 08 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/live%20streaming/near/133567651):
 I'm going to try out this streaming thing: https://www.twitch.tv/colimit/

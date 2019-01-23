@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23433instances.html
 ---
 
-## [general](index.html)
-### [instances](23433instances.html)
+## Stream: [general](index.html)
+### Topic: [instances](23433instances.html)
+
+---
 
 #### [Jakob von Raumer (Oct 20 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances/near/136163177):
 Can someone explain this?

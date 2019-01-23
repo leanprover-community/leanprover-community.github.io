@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29488unfoldlocaldefinitions.html
 ---
 
-## [general](index.html)
-### [unfold local definitions](29488unfoldlocaldefinitions.html)
+## Stream: [general](index.html)
+### Topic: [unfold local definitions](29488unfoldlocaldefinitions.html)
+
+---
 
 #### [Reid Barton (May 10 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfold%20local%20definitions/near/126372867):
 Is there a way in tactic mode to unfold something bound by a surrounding `let`?

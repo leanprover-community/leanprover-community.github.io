@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/18975notationforgroupaction.html
 ---
 
-## [kbb](index.html)
-### [notation for group action](18975notationforgroupaction.html)
+## Stream: [kbb](index.html)
+### Topic: [notation for group action](18975notationforgroupaction.html)
+
+---
 
 #### [Johan Commelin (Sep 14 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/notation%20for%20group%20action/near/133932189):
 I think we should just group actions an instance of `has_smul`. What do others think?

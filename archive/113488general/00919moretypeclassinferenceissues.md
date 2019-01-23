@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00919moretypeclassinferenceissues.html
 ---
 
-## [general](index.html)
-### [more type class inference issues](00919moretypeclassinferenceissues.html)
+## Stream: [general](index.html)
+### Topic: [more type class inference issues](00919moretypeclassinferenceissues.html)
+
+---
 
 #### [Kevin Buzzard (Apr 19 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/125320059):
 It seems to me that for classes like `ring`defined in core lean or mathlib, you are kind of supposed to use type class inference to make them work.

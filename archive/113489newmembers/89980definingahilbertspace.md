@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/89980definingahilbertspace.html
 ---
 
-## [new members](index.html)
-### [defining a hilbert space](89980definingahilbertspace.html)
+## Stream: [new members](index.html)
+### Topic: [defining a hilbert space](89980definingahilbertspace.html)
+
+---
 
 #### [Joseph Corneli (Jul 31 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130645249):
 Hi, this looks like something that might be near the edge of what's possible to define right now; would a more experienced person be able to give me some guidance?

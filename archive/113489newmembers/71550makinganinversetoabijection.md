@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/71550makinganinversetoabijection.html
 ---
 
-## [new members](index.html)
-### [making an inverse to a bijection](71550makinganinversetoabijection.html)
+## Stream: [new members](index.html)
+### Topic: [making an inverse to a bijection](71550makinganinversetoabijection.html)
+
+---
 
 #### [Sebastian Zimmer (Oct 14 2018 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/making%20an%20inverse%20to%20a%20bijection/near/135775250):
 Is there something in mathlib that lets you (constructively) make an inverse to a bijection between two fintypes with decidably equality?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00342efficiency.html
 ---
 
-## [general](index.html)
-### [efficiency](00342efficiency.html)
+## Stream: [general](index.html)
+### Topic: [efficiency](00342efficiency.html)
+
+---
 
 #### [Scott Morrison (Nov 13 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570420):
 Hi @**Mario Carneiro**, @**Keeley Hoek**  and I are having some "fun" profiling `rewrite_search`, and discovered that all the arithmetic is slow.

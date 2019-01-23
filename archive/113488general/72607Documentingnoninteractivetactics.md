@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72607Documentingnoninteractivetactics.html
 ---
 
-## [general](index.html)
-### [Documenting non-interactive tactics](72607Documentingnoninteractivetactics.html)
+## Stream: [general](index.html)
+### Topic: [Documenting non-interactive tactics](72607Documentingnoninteractivetactics.html)
+
+---
 
 #### [Patrick Massot (Apr 24 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Documenting%20non-interactive%20tactics/near/125638696):
 @**Mario Carneiro** what's the problem with documenting non-interactive tactics?

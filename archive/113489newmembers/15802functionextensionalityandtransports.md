@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/15802functionextensionalityandtransports.html
 ---
 
-## [new members](index.html)
-### [function extensionality and transports](15802functionextensionalityandtransports.html)
+## Stream: [new members](index.html)
+### Topic: [function extensionality and transports](15802functionextensionalityandtransports.html)
+
+---
 
 #### [Edward Ayers (Aug 08 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/function%20extensionality%20and%20transports/near/131125621):
 ```lean

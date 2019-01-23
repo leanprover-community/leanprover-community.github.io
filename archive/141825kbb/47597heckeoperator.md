@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/47597heckeoperator.html
 ---
 
-## [kbb](index.html)
-### [hecke operator](47597heckeoperator.html)
+## Stream: [kbb](index.html)
+### Topic: [hecke operator](47597heckeoperator.html)
+
+---
 
 #### [Johan Commelin (Sep 14 2018 at 18:32)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/hecke%20operator/near/133964447):
 The next step would be to define https://en.wikipedia.org/wiki/Hecke_operator#Explicit_formula on the subspace of `Petersson_weight k` functions on the upper half plane.

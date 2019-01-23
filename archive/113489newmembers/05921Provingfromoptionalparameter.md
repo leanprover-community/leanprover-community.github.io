@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/05921Provingfromoptionalparameter.html
 ---
 
-## [new members](index.html)
-### [Proving from optional parameter](05921Provingfromoptionalparameter.html)
+## Stream: [new members](index.html)
+### Topic: [Proving from optional parameter](05921Provingfromoptionalparameter.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Nov 13 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20from%20optional%20parameter/near/147601867):
 How do I fill in the sorry?

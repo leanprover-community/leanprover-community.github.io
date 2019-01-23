@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98683recname.html
 ---
 
-## [general](index.html)
-### [rec_name](98683recname.html)
+## Stream: [general](index.html)
+### Topic: [rec_name](98683recname.html)
+
+---
 
 #### [Jakob von Raumer (Mar 19 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_name/near/123916531):
 After adding an inductive type to the environment using `add_inductive`, I can use the `induction` tactic, but it doesn't return any useful case names... Can I solve this by defining `rec_name`?

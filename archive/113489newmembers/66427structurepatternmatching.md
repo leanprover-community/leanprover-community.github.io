@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/66427structurepatternmatching.html
 ---
 
-## [new members](index.html)
-### [structure pattern matching](66427structurepatternmatching.html)
+## Stream: [new members](index.html)
+### Topic: [structure pattern matching](66427structurepatternmatching.html)
+
+---
 
 #### [Olli (Aug 27 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/structure%20pattern%20matching/near/132868918):
 is it possible to pattern match structures? I saw on the PDF version of Theorem Proving in Lean (which I am guessing is now outdated based on other syntax differences) it is used, but the HTML version makes no mention of it, and none of my obvious guesses are working

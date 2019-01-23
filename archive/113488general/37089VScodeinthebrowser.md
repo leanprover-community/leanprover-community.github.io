@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37089VScodeinthebrowser.html
 ---
 
-## [general](index.html)
-### [VScode in the browser](37089VScodeinthebrowser.html)
+## Stream: [general](index.html)
+### Topic: [VScode in the browser](37089VScodeinthebrowser.html)
+
+---
 
 #### [Johan Commelin (Apr 27 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20in%20the%20browser/near/125773025):
 Has anyone seen https://spiffcode.github.io/ghedit/ before?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/69126emptyclass.html
 ---
 
-## [general](index.html)
-### [empty class](69126emptyclass.html)
+## Stream: [general](index.html)
+### Topic: [empty class](69126emptyclass.html)
+
+---
 
 #### [Reid Barton (Apr 24 2018 at 03:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/empty%20class/near/125597374):
 What's the right way to declare an empty class (i.e., one with no fields) and an instance of it? I found that this works:

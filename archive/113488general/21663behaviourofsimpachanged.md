@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21663behaviourofsimpachanged.html
 ---
 
-## [general](index.html)
-### [behaviour of simpa changed](21663behaviourofsimpachanged.html)
+## Stream: [general](index.html)
+### Topic: [behaviour of simpa changed](21663behaviourofsimpachanged.html)
+
+---
 
 #### [Chris Hughes (Sep 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/behaviour%20of%20simpa%20changed/near/133365192):
 A few of my proofs have broken since the recent changes to `simpa`. For example this one.

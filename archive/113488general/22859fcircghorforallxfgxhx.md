@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22859fcircghorforallxfgxhx.html
 ---
 
-## [general](index.html)
-### [f circ g = h or forall x, f (g x) = h x?](22859fcircghorforallxfgxhx.html)
+## Stream: [general](index.html)
+### Topic: [f circ g = h or forall x, f (g x) = h x?](22859fcircghorforallxfgxhx.html)
+
+---
 
 #### [Kevin Buzzard (Apr 23 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/f%20circ%20g%20%3D%20h%20or%20forall%20x%2C%20f%20%28g%20x%29%20%3D%20h%20x%3F/near/125544509):
 I am constantly proving that various functions are equal because they are both the unique function with some property. A lot of my proofs naturally prove `f circ g = h`. However Kenny often writes such goals as `forall x, f (g x) = h x`. Normally in Lean I would prove `f circ g = h`  by applying funext and then `intro x`. However in the kind of mathematics I'm currently doing this is not the way to prove things -- in fact I hardly ever get my hands dirty with explicit terms, I'm just chasing around universal properties.

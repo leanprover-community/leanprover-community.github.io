@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/47427M1M1MathematicalMethodsinLean.html
 ---
 
-## [maths](index.html)
-### [(M1M1) Mathematical Methods in Lean](47427M1M1MathematicalMethodsinLean.html)
+## Stream: [maths](index.html)
+### Topic: [(M1M1) Mathematical Methods in Lean](47427M1M1MathematicalMethodsinLean.html)
+
+---
 
 #### [Kevin Buzzard (Oct 13 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%28M1M1%29%20Mathematical%20Methods%20in%20Lean/near/135729301):
 The joint maths and computer science students at Imperial College London are doing four courses this term. One on Haskell, one on logic, my course M1F, and a course called M1M1, which is a mathematical methods course, where the derivative of sin is cos just like it was at school and nobody really bothers with why that's true.

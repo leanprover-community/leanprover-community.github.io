@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42323variableinsideheaderoroutsideheader.html
 ---
 
-## [general](index.html)
-### [variable inside header or outside header](42323variableinsideheaderoroutsideheader.html)
+## Stream: [general](index.html)
+### Topic: [variable inside header or outside header](42323variableinsideheaderoroutsideheader.html)
+
+---
 
 #### [Kenny Lau (Jul 25 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20inside%20header%20or%20outside%20header/near/130250391):
 ```lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/49506xorisnotassociative.html
 ---
 
-## [maths](index.html)
-### [xor is not associative](49506xorisnotassociative.html)
+## Stream: [maths](index.html)
+### Topic: [xor is not associative](49506xorisnotassociative.html)
+
+---
 
 #### [Kenny Lau (Apr 18 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/xor%20is%20not%20associative/near/125256439):
 Could someone prove that xor is not associative constructively, perhaps by constructing a Kripke model where this fails?

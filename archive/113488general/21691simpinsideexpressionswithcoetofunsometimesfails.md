@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21691simpinsideexpressionswithcoetofunsometimesfails.html
 ---
 
-## [general](index.html)
-### [simp inside expressions with coe_to_fun sometimes fails](21691simpinsideexpressionswithcoetofunsometimesfails.html)
+## Stream: [general](index.html)
+### Topic: [simp inside expressions with coe_to_fun sometimes fails](21691simpinsideexpressionswithcoetofunsometimesfails.html)
+
+---
 
 #### [Scott Morrison (Aug 06 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20inside%20expressions%20with%20coe_to_fun%20sometimes%20fails/near/130948850):
 I've been trying to implement @**Johannes Hölzl** request that in my baby PR for category theory I use coercions to allow applying a functor to an object, as `F X`, rather than having to either write explicitly `F.onObjects X`, or introduce some awkward notation, such as `F +> X`.

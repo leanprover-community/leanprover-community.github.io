@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55132Finitedimensionallinearalgebra.html
 ---
 
-## [general](index.html)
-### [Finite dimensional linear algebra](55132Finitedimensionallinearalgebra.html)
+## Stream: [general](index.html)
+### Topic: [Finite dimensional linear algebra](55132Finitedimensionallinearalgebra.html)
+
+---
 
 #### [Blair Shi (Jul 05 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129146008):
 @**Kenny Lau**  I am currently doing linear algebra on lean. I heard that you already did something on it. Could you plz tell me how far are you?

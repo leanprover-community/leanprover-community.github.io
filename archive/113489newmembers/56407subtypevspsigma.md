@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/56407subtypevspsigma.html
 ---
 
-## [new members](index.html)
-### [subtype vs psigma](56407subtypevspsigma.html)
+## Stream: [new members](index.html)
+### Topic: [subtype vs psigma](56407subtypevspsigma.html)
+
+---
 
 #### [Sebastian Zimmer (Oct 14 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20vs%20psigma/near/135787450):
 What is the difference between `{a:α // p a}` and `Σ' a, P a`?

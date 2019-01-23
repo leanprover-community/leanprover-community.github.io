@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/34800remember.html
 ---
 
-## [new members](index.html)
-### [remember](34800remember.html)
+## Stream: [new members](index.html)
+### Topic: [remember](34800remember.html)
+
+---
 
 #### [petercommand (Nov 01 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/remember/near/136927744):
 Is there something similar to coq's remember tactic in lean?

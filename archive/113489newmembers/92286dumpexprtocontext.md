@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/92286dumpexprtocontext.html
 ---
 
-## [new members](index.html)
-### [dump expr to context](92286dumpexprtocontext.html)
+## Stream: [new members](index.html)
+### Topic: [dump expr to context](92286dumpexprtocontext.html)
+
+---
 
 #### [Kenny Lau (Nov 24 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dump%20expr%20to%20context/near/148282282):
 Is there a way to dump an expr to the context?

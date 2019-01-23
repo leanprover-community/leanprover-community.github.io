@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40609Whatsthefastestwaytoprovethis.html
 ---
 
-## [general](index.html)
-### [What's the fastest way to prove this?](40609Whatsthefastestwaytoprovethis.html)
+## Stream: [general](index.html)
+### Topic: [What's the fastest way to prove this?](40609Whatsthefastestwaytoprovethis.html)
+
+---
 
 #### [Kenny Lau (May 27 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20the%20fastest%20way%20to%20prove%20this%3F/near/127145665):
 ```lean

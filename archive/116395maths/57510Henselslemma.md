@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/57510Henselslemma.html
 ---
 
-## [maths](index.html)
-### [Hensel's lemma](57510Henselslemma.html)
+## Stream: [maths](index.html)
+### Topic: [Hensel's lemma](57510Henselslemma.html)
+
+---
 
 #### [Johan Commelin (Sep 11 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133747941):
 @**Rob Lewis** has PR'd Hensel's lemma for the p-adics! :tada: :octopus: :muscle:

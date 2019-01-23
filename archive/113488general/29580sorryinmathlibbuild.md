@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29580sorryinmathlibbuild.html
 ---
 
-## [general](index.html)
-### ["sorry" in mathlib build](29580sorryinmathlibbuild.html)
+## Stream: [general](index.html)
+### Topic: ["sorry" in mathlib build](29580sorryinmathlibbuild.html)
+
+---
 
 #### [Ching-Tsun Chou (Mar 11 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22sorry%22%20in%20mathlib%20build/near/123576774):
 I just tried to build the latest mathlib (b15409291946) using the latest nightly Lean build (d6d44a19947e) and saw the following:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48449provingltfromdecidability.html
 ---
 
-## [general](index.html)
-### [proving  lt from decidability](48449provingltfromdecidability.html)
+## Stream: [general](index.html)
+### Topic: [proving  lt from decidability](48449provingltfromdecidability.html)
+
+---
 
 #### [Adam Kurkiewicz (Apr 05 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661129):
 I'd like to show the following lemma:

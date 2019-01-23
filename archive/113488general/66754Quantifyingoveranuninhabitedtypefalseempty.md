@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66754Quantifyingoveranuninhabitedtypefalseempty.html
 ---
 
-## [general](index.html)
-### [Quantifying over an uninhabited type (false/ empty)](66754Quantifyingoveranuninhabitedtypefalseempty.html)
+## Stream: [general](index.html)
+### Topic: [Quantifying over an uninhabited type (false/ empty)](66754Quantifyingoveranuninhabitedtypefalseempty.html)
+
+---
 
 #### [Adam Kurkiewicz (Mar 22 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Quantifying%20over%20an%20uninhabited%20type%20%28false/%20empty%29/near/124058931):
 I'm wondering whether this is something I should be able to prove (I think I should). It came up when I was trying to show that two definitions of primality are equivalent.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00992rflandwildcardpattern.html
 ---
 
-## [general](index.html)
-### [rfl and wildcard pattern](00992rflandwildcardpattern.html)
+## Stream: [general](index.html)
+### Topic: [rfl and wildcard pattern](00992rflandwildcardpattern.html)
+
+---
 
 #### [Patrick Massot (Jun 08 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127771996):
 Have a look at https://github.com/kbuzzard/lean-perfectoid-spaces/blob/b1e6489145be504e64a009226c6811bfd84a5070/src/valuations.lean#L143-L151:

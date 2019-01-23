@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/46395homeomorphisms.html
 ---
 
-## [maths](index.html)
-### [homeomorphisms](46395homeomorphisms.html)
+## Stream: [maths](index.html)
+### Topic: [homeomorphisms](46395homeomorphisms.html)
+
+---
 
 #### [Reid Barton (Jun 01 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homeomorphisms/near/127431536):
 @**Patrick Massot**, did you have a definition of homeomorphisms somewhere?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55671convertrefl.html
 ---
 
-## [general](index.html)
-### [convert, refl](55671convertrefl.html)
+## Stream: [general](index.html)
+### Topic: [convert, refl](55671convertrefl.html)
+
+---
 
 #### [Reid Barton (Nov 27 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/convert%2C%20refl/near/148646168):
 This is a new one for me--`convert` left a goal which I could close with `refl`

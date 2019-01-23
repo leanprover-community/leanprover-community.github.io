@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37846couldmetabeamonad.html
 ---
 
-## [general](index.html)
-### [could meta be a monad](37846couldmetabeamonad.html)
+## Stream: [general](index.html)
+### Topic: [could meta be a monad](37846couldmetabeamonad.html)
+
+---
 
 #### [Johan Commelin (Oct 15 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/could%20meta%20be%20a%20monad/near/135797914):
 Something that popped into my head recently, and my curiosity makes me ask this question:

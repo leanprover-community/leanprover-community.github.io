@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67736errorfailedtounify.html
 ---
 
-## [general](index.html)
-### [error: failed to unify](67736errorfailedtounify.html)
+## Stream: [general](index.html)
+### Topic: [error: failed to unify](67736errorfailedtounify.html)
+
+---
 
 #### [Johan Commelin (May 25 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20failed%20to%20unify/near/127084634):
 I am at a stage where I am currently hitting errors of the following type

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/47790deltarings.html
 ---
 
-## [maths](index.html)
-### [delta rings](47790deltarings.html)
+## Stream: [maths](index.html)
+### Topic: [delta rings](47790deltarings.html)
+
+---
 
 #### [Johan Commelin (Jul 20 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/delta%20rings/near/129993188):
 Fix a prime `p`.

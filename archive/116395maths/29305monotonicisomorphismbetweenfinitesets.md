@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/29305monotonicisomorphismbetweenfinitesets.html
 ---
 
-## [maths](index.html)
-### [monotonic isomorphism between finite sets](29305monotonicisomorphismbetweenfinitesets.html)
+## Stream: [maths](index.html)
+### Topic: [monotonic isomorphism between finite sets](29305monotonicisomorphismbetweenfinitesets.html)
+
+---
 
 #### [Chris Hughes (Aug 18 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/monotonic%20isomorphism%20between%20finite%20sets/near/132370926):
 I'm looking for a lexicographic total order on `fin a × fin b` and a proof that's it's isomorphic to the lexicographic total order on `fin b × fin a`. Is this easy in lean?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/02588uniformcontinuouscontinuous.html
 ---
 
-## [maths](index.html)
-### [uniform_continuous.continuous](02588uniformcontinuouscontinuous.html)
+## Stream: [maths](index.html)
+### Topic: [uniform_continuous.continuous](02588uniformcontinuouscontinuous.html)
+
+---
 
 #### [Patrick Massot (Dec 20 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform_continuous.continuous/near/152242464):
 Still trying to clean up topology stuff, I realized the proof that [uniform continuous functions are continuous](https://github.com/leanprover/mathlib/blob/caa2076038e2d5a84fd05e9988fbe31d01a7f6ba/analysis/topology/uniform_space.lean#L487-L500) is pretty hard to read. @**Johannes Hölzl** how do you like the following proof:

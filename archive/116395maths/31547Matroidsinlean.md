@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/31547Matroidsinlean.html
 ---
 
-## [maths](index.html)
-### [Matroids in lean](31547Matroidsinlean.html)
+## Stream: [maths](index.html)
+### Topic: [Matroids in lean](31547Matroidsinlean.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Sep 21 2018 at 08:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Matroids%20in%20lean/near/134359386):
 As my next learning project, I've moved on from Fibonacci numbers and have been working on a formalization of [matroids](https://en.wikipedia.org/wiki/Matroid) based on the book "Matroid theory" by Oxley. Roughly speaking, a matroid on a set is a family of subsets that encodes an abstract version of linear dependence between the elements, and they appear in many different guises in combinatorics and related fields. My work-in-progress is in my [lean-matroids](https://github.com/bryangingechen/lean-matroids) repository. In "lean" terms, I've defined there 3 complicated `structure`s which build off of `data.finset` and proven that they are equivalent to each other.

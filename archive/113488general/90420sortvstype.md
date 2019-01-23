@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90420sortvstype.html
 ---
 
-## [general](index.html)
-### [sort vs type](90420sortvstype.html)
+## Stream: [general](index.html)
+### Topic: [sort vs type](90420sortvstype.html)
+
+---
 
 #### [Johan Commelin (Jul 03 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sort%20vs%20type/near/129031745):
 I realise that I don't actually quite understand what the distinction is between sort and type. Somehow I treat them as interchangeable, but of course that is not a very solid strategy. So, what exactly is a sort, and when should I use it?

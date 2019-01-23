@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27016AssertViolation.html
 ---
 
-## [general](index.html)
-### [Assert Violation](27016AssertViolation.html)
+## Stream: [general](index.html)
+### Topic: [Assert Violation](27016AssertViolation.html)
+
+---
 
 #### [Namdak Tonpa (Jan 09 2019 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Assert%20Violation/near/154711246):
 ```

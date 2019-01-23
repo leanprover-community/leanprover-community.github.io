@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76230withoutlossofadvertisement.html
 ---
 
-## [general](index.html)
-### [without loss of advertisement](76230withoutlossofadvertisement.html)
+## Stream: [general](index.html)
+### Topic: [without loss of advertisement](76230withoutlossofadvertisement.html)
+
+---
 
 #### [Patrick Massot (Apr 21 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/without%20loss%20of%20advertisement/near/125491146):
 Let me share my joy of using @**Simon Hudon** recent contributions (not yet merged, see https://github.com/PatrickMassot/mathlib/tree/wlog_ext for a version including both relevant PR if you want to play with it).

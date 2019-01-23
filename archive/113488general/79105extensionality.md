@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79105extensionality.html
 ---
 
-## [general](index.html)
-### [extensionality](79105extensionality.html)
+## Stream: [general](index.html)
+### Topic: [extensionality](79105extensionality.html)
+
+---
 
 #### [Kenny Lau (May 27 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extensionality/near/127167357):
 Now that we have the `ext` tactic, let's get started tagging every theorem with `@[extensionality]` :D

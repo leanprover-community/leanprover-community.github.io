@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86653printexprinplaintext.html
 ---
 
-## [general](index.html)
-### [print `expr` in plaintext](86653printexprinplaintext.html)
+## Stream: [general](index.html)
+### Topic: [print `expr` in plaintext](86653printexprinplaintext.html)
+
+---
 
 #### [Zesen Qian (Aug 12 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/print%20%60expr%60%20in%20plaintext/near/132012147):
 How to print an `expr` in a plaintext way? That is, represented as all constructors `app` `lam` `var`, etc..

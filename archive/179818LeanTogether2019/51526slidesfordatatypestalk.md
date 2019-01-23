@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/51526slidesfordatatypestalk.html
 ---
 
-## [Lean Together 2019](index.html)
-### [slides for datatypes talk?](51526slidesfordatatypestalk.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [slides for datatypes talk?](51526slidesfordatatypestalk.html)
+
+---
 
 #### [Zans Mihejevs (Jan 07 2019 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/slides%20for%20datatypes%20talk%3F/near/154576794):
 does anyone know where I can find them?

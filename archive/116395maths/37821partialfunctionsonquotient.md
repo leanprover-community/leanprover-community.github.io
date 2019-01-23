@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/37821partialfunctionsonquotient.html
 ---
 
-## [maths](index.html)
-### [partial functions on quotient](37821partialfunctionsonquotient.html)
+## Stream: [maths](index.html)
+### Topic: [partial functions on quotient](37821partialfunctionsonquotient.html)
+
+---
 
 #### [Chris Hughes (Aug 05 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/partial%20functions%20on%20quotient/near/130929260):
 What's the easiest way to define a partial function on a quotient type, where the proof that it is well defined depends on the predicate? I tried `quotient.hrec_on` but whilst I can define the function, it's hard to prove things about it due to `motive is not type correct` errors. For context, I'm experimenting with defining the signature of a permutation as being derived from this.

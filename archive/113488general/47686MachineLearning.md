@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47686MachineLearning.html
 ---
 
-## [general](index.html)
-### [Machine Learning](47686MachineLearning.html)
+## Stream: [general](index.html)
+### Topic: [Machine Learning](47686MachineLearning.html)
+
+---
 
 #### [Simon Hudon (Mar 31 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Machine%20Learning/near/124463630):
 @**Andrew Ashworth** Let's switch threads

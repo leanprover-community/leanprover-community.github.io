@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/94506finset.html
 ---
 
-## [general](index.html)
-### [finset](94506finset.html)
+## Stream: [general](index.html)
+### Topic: [finset](94506finset.html)
+
+---
 
 #### [Floris van Doorn (Nov 20 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset/near/148072219):
 Is the following result somewhere in mathlib? If not, are there results which make it less painful than proving it from scratch using lists?

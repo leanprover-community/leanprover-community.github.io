@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96433Tactictonotactic.html
 ---
 
-## [general](index.html)
-### [Tactic to no tactic](96433Tactictonotactic.html)
+## Stream: [general](index.html)
+### Topic: [Tactic to no tactic](96433Tactictonotactic.html)
+
+---
 
 #### [Nima (Apr 21 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125479107):
 Is there an easy way to re-write the last function without using tactic?

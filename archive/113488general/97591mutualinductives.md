@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/97591mutualinductives.html
 ---
 
-## [general](index.html)
-### [mutual inductives](97591mutualinductives.html)
+## Stream: [general](index.html)
+### Topic: [mutual inductives](97591mutualinductives.html)
+
+---
 
 #### [Chris Hughes (Nov 04 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132804):
 What's the "canonical" proof that the Types A and B are empty. I proved it by reference to the auxiliary `A._mut_`. Is there a nicer way?

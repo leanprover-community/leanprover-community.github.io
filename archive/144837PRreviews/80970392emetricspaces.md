@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/80970392emetricspaces.html
 ---
 
-## [PR reviews](index.html)
-### [#392 emetric spaces](80970392emetricspaces.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#392 emetric spaces](80970392emetricspaces.html)
+
+---
 
 #### [Johan Commelin (Oct 08 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23392%20emetric%20spaces/near/135384309):
 I am wondering: `dist` of a metric space takes values in `ℝ`, while the `edist` of an emetric space takes values in `ennreal`. Should the latter maybe take values in `with_top ℝ`?

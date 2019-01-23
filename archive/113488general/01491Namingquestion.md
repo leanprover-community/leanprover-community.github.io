@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01491Namingquestion.html
 ---
 
-## [general](index.html)
-### [Naming question](01491Namingquestion.html)
+## Stream: [general](index.html)
+### Topic: [Naming question](01491Namingquestion.html)
+
+---
 
 #### [Simon Hudon (Mar 31 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Naming%20question/near/124463575):
 ```quote

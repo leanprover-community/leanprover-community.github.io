@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49265typeclassinferencenotes.html
 ---
 
-## [general](index.html)
-### [type class inference notes](49265typeclassinferencenotes.html)
+## Stream: [general](index.html)
+### Topic: [type class inference notes](49265typeclassinferencenotes.html)
+
+---
 
 #### [Kevin Buzzard (Apr 17 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20notes/near/125217163):
 I'm writing some currently sketchy docs on type class inference (because if I don't then in 1 month's time I'll be back here asking to be reminded of `letI` again). Would I be right in thinking that one could think about the type class inference system as (amongst other things) a big directed graph, with classes as vertices, and with a directed edge from `C1` to `C2` iff type class inference gives you a way of getting a structure of type `C2` from one of type `C1`? I'm aware that it's more complex than this, basically because the system works for families so you could in theory envisage type class inference showing that if `X` has structure  `C1` then `X × X × bool` has structure `C2`, but amongst other things is it reasonable to think about this graph? And then the condition I want to put on this graph is that any two routes from `C` to `D` have to be definitionally equal as functions; in particular I could have a directed edge from `C` to `D` and one from `D` to `C` but the composite both ways had better be the identity function, and basically I am suggesting that somewhere there is a category with at most one morphism between any two objects. Is this an oversimplification?

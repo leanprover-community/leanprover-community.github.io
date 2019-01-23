@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/9593834elanandmathlib.html
 ---
 
-## [general](index.html)
-### [3.4, elan, and mathlib](9593834elanandmathlib.html)
+## Stream: [general](index.html)
+### Topic: [3.4, elan, and mathlib](9593834elanandmathlib.html)
+
+---
 
 #### [Johan Commelin (Apr 19 2018 at 10:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/3.4%2C%20elan%2C%20and%20mathlib/near/125295801):
 I just installed `elan`. Succesfully it seems. I then ran `mkdir ~/mess/leantest` and inside that directory, I ran `elan toolchain install nightly`. This provided me with a `leanpkg` command, and I ran `leanpkg add https://github.com/leanprover/mathlib`. After cloning from github, it complained `cannot find revision lean-3.4.0 in repository _target/deps/mathlib`. I guess this is somehow expected, because mathlib is not 3.4.0 ready. Right?

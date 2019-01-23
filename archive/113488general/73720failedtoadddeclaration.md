@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73720failedtoadddeclaration.html
 ---
 
-## [general](index.html)
-### [failed to add declaration](73720failedtoadddeclaration.html)
+## Stream: [general](index.html)
+### Topic: [failed to add declaration](73720failedtoadddeclaration.html)
+
+---
 
 #### [Keeley Hoek (Sep 15 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failed%20to%20add%20declaration/near/134011400):
 Has anyone ever seen the error `failed to add declaration 'xxxx.my_defn' to environment, type has metavariables` while writing a tactic?

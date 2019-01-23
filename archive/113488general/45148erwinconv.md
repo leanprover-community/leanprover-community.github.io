@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45148erwinconv.html
 ---
 
-## [general](index.html)
-### [erw in conv](45148erwinconv.html)
+## Stream: [general](index.html)
+### Topic: [erw in conv](45148erwinconv.html)
+
+---
 
 #### [Reid Barton (Nov 13 2018 at 03:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erw%20in%20conv/near/147565415):
 Is it intentional that you have to import `tactic.converter.interactive` to get the new `conv` goodies?

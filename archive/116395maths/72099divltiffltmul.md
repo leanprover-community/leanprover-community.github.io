@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/72099divltiffltmul.html
 ---
 
-## [maths](index.html)
-### [div_lt_iff_lt_mul](72099divltiffltmul.html)
+## Stream: [maths](index.html)
+### Topic: [div_lt_iff_lt_mul](72099divltiffltmul.html)
+
+---
 
 #### [Kevin Buzzard (Jan 15 2019 at 12:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_lt_iff_lt_mul/near/155161891):
 I just wanted to get from `a<b*c` to `a/c<b` (on the real  numbers) with a hypothesis that `c>0`. I was surprised to find that although all three of `div_lt_iff_lt_mul`, `lt_mul_of_div_lt` and `div_lt_of_lt_mul` were in Lean, they were in `data.int.basic` :-) and only applied to ints. This should be some general lemma about ordered monoids or some such thing, right? I might start doing what Chris always encourages me to do, which is to make a super-short PR, assuming that this is actually something missing from mathlib. But is it there and I missed it?

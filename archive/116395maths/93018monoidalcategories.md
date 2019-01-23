@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/93018monoidalcategories.html
 ---
 
-## [maths](index.html)
-### [monoidal categories](93018monoidalcategories.html)
+## Stream: [maths](index.html)
+### Topic: [monoidal categories](93018monoidalcategories.html)
+
+---
 
 #### [Scott Morrison (Nov 07 2018 at 04:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/monoidal%20categories/near/146915123):
 @**Michael Jendrusch** has recently started work on monoidal categories again. (Yay!)

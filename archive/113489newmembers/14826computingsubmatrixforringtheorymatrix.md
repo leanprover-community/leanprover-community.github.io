@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/14826computingsubmatrixforringtheorymatrix.html
 ---
 
-## [new members](index.html)
-### [computing submatrix for ring_theory.matrix](14826computingsubmatrixforringtheorymatrix.html)
+## Stream: [new members](index.html)
+### Topic: [computing submatrix for ring_theory.matrix](14826computingsubmatrixforringtheorymatrix.html)
+
+---
 
 #### [Tobias Grosser (Sep 29 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/computing%20submatrix%20for%20ring_theory.matrix/near/134897036):
 On another lean saturday afternoon, I continued looked forther into formalizing another basic lean maths. This time I want to compute sub-matrixes for ring_theory.matrix.

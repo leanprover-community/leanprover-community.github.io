@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79834quotienttypewoes.html
 ---
 
-## [general](index.html)
-### [quotient type woes](79834quotienttypewoes.html)
+## Stream: [general](index.html)
+### Topic: [quotient type woes](79834quotienttypewoes.html)
+
+---
 
 #### [Kevin Buzzard (May 19 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20type%20woes/near/126772251):
 I find myself finally having to engage with the quotient type.

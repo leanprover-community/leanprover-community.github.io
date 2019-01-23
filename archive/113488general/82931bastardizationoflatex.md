@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82931bastardizationoflatex.html
 ---
 
-## [general](index.html)
-### [bastardization of latex](82931bastardizationoflatex.html)
+## Stream: [general](index.html)
+### Topic: [bastardization of latex](82931bastardizationoflatex.html)
+
+---
 
 #### [Kenny Lau (Mar 22 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bastardization%20of%20latex/near/124064895):
 the usage of a different font (times new roman I guess?) bastardizes the entirety of latex...

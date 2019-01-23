@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/34376hascoetofunquestions.html
 ---
 
-## [general](index.html)
-### [has_coe_to_fun questions](34376hascoetofunquestions.html)
+## Stream: [general](index.html)
+### Topic: [has_coe_to_fun questions](34376hascoetofunquestions.html)
+
+---
 
 #### [Kevin Buzzard (Oct 31 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136859792):
 1) What's going on here?

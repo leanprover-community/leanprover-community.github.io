@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/12504intcastisunique.html
 ---
 
-## [maths](index.html)
-### [int.cast is unique](12504intcastisunique.html)
+## Stream: [maths](index.html)
+### Topic: [int.cast is unique](12504intcastisunique.html)
+
+---
 
 #### [Johan Commelin (Jan 21 2019 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.cast%20is%20unique/near/156541423):
 Do we already know that `int.cast` is the unique ring hom `ℤ → R`?

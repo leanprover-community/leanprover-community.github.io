@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/46163congrwithsubsingleton.html
 ---
 
-## [general](index.html)
-### [congr with subsingleton](46163congrwithsubsingleton.html)
+## Stream: [general](index.html)
+### Topic: [congr with subsingleton](46163congrwithsubsingleton.html)
+
+---
 
 #### [Reid Barton (Jun 15 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr%20with%20subsingleton/near/128141922):
 Is this a bug in `congr`?

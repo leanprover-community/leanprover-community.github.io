@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11760emacsandcontributions.html
 ---
 
-## [general](index.html)
-### [emacs and contributions](11760emacsandcontributions.html)
+## Stream: [general](index.html)
+### Topic: [emacs and contributions](11760emacsandcontributions.html)
+
+---
 
 #### [Simon Hudon (Jul 25 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emacs%20and%20contributions/near/130300559):
 I have created a `leanprover-community` account on github and a `lean-mode-contrib` repository. I think it will be easier to accumulate tools there and simply have members of the community maintain it than to pester the Lean developers. Other community managed repos might be useful. Feel free to make suggestions (including suggesting / volunteering maintainers)

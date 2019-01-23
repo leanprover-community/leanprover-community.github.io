@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/86268helpmefindlemmas.html
 ---
 
-## [new members](index.html)
-### [help me find lemmas](86268helpmefindlemmas.html)
+## Stream: [new members](index.html)
+### Topic: [help me find lemmas](86268helpmefindlemmas.html)
+
+---
 
 #### [Scott Morrison (Nov 24 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20me%20find%20lemmas/near/148255862):
 Surely these are somewhere?

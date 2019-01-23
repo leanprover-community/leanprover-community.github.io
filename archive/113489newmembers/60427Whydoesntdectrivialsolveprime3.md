@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/60427Whydoesntdectrivialsolveprime3.html
 ---
 
-## [new members](index.html)
-### [Why doesn't dec_trivial solve `prime 3`?](60427Whydoesntdectrivialsolveprime3.html)
+## Stream: [new members](index.html)
+### Topic: [Why doesn't dec_trivial solve `prime 3`?](60427Whydoesntdectrivialsolveprime3.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Oct 24 2018 at 17:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20doesn%27t%20dec_trivial%20solve%20%60prime%203%60%3F/near/136416609):
 In `prime.lean`, the following statements are made:

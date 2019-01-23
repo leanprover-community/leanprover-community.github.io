@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88815metatimeout.html
 ---
 
-## [general](index.html)
-### [meta timeout](88815metatimeout.html)
+## Stream: [general](index.html)
+### Topic: [meta timeout](88815metatimeout.html)
+
+---
 
 #### [Patrick Massot (Aug 13 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015530):
 I'm still playing with Lean introspection, but I can't sort declarations in order to print first axioms, then constants, then definition, and then theorems. I try

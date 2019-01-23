@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/41672fullnames.html
 ---
 
-## [general](index.html)
-### [full names](41672fullnames.html)
+## Stream: [general](index.html)
+### Topic: [full names](41672fullnames.html)
+
+---
 
 #### [Patrick Massot (Jul 17 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/full%20names/near/129832050):
 Is there a way to ask Lean to list all fully qualified names (I mean including namespaces) defined by a particular file? I'd like to check I didn't messed up with name spaces

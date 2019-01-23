@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/60837mergingintomathlib.html
 ---
 
-## [kbb](index.html)
-### [merging into mathlib](60837mergingintomathlib.html)
+## Stream: [kbb](index.html)
+### Topic: [merging into mathlib](60837mergingintomathlib.html)
+
+---
 
 #### [Johan Commelin (Sep 24 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/merging%20into%20mathlib/near/134535620):
 Clearly some parts of `kbb` are not mathlib-ready, but other parts are.

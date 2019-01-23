@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49724Retrievinginteractivelyconstructedterms.html
 ---
 
-## [general](index.html)
-### [Retrieving interactively constructed terms](49724Retrievinginteractivelyconstructedterms.html)
+## Stream: [general](index.html)
+### Topic: [Retrieving interactively constructed terms](49724Retrievinginteractivelyconstructedterms.html)
+
+---
 
 #### [Seul Baek (Jun 15 2018 at 02:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Retrieving%20interactively%20constructed%20terms/near/128095723):
 Suppose I'd like to construct a term of type `τ` interactively, so I use `e ← assert n '(τ)` and apply some further tactics to close off the goal. Now `e` is bound to a local constant, which is the expr of a term that has type `τ`.

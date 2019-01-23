@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00534Howdidsimpprovemylemma.html
 ---
 
-## [general](index.html)
-### [How did simp prove my lemma?](00534Howdidsimpprovemylemma.html)
+## Stream: [general](index.html)
+### Topic: [How did simp prove my lemma?](00534Howdidsimpprovemylemma.html)
+
+---
 
 #### [Johan Commelin (Jul 31 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20did%20simp%20prove%20my%20lemma%3F/near/130640952):
 ```lean

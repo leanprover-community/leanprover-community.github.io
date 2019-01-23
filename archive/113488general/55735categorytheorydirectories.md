@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55735categorytheorydirectories.html
 ---
 
-## [general](index.html)
-### [category theory directories](55735categorytheorydirectories.html)
+## Stream: [general](index.html)
+### Topic: [category theory directories](55735categorytheorydirectories.html)
+
+---
 
 #### [Reid Barton (Aug 23 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20directories/near/132605394):
 @**Scott Morrison**, would you accept PRs to `lean-category-theory` and `lean-category-theory-pr` which move everything from `categories/` to `category_theory/`?

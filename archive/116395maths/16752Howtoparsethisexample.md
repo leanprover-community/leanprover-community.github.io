@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/16752Howtoparsethisexample.html
 ---
 
-## [maths](index.html)
-### [How to parse this example?](16752Howtoparsethisexample.html)
+## Stream: [maths](index.html)
+### Topic: [How to parse this example?](16752Howtoparsethisexample.html)
+
+---
 
 #### [None proffered (Aug 07 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20parse%20this%20example%3F/near/131060242):
 How to parse this example?

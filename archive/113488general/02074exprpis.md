@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02074exprpis.html
 ---
 
-## [general](index.html)
-### [expr.pis](02074exprpis.html)
+## Stream: [general](index.html)
+### Topic: [expr.pis](02074exprpis.html)
+
+---
 
 #### [Jakob von Raumer (Mar 14 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr.pis/near/123711391):
 Why doesn't ``#reduce expr.pis [expr.local_const  ` A `A binder_info.default `(Sort 1)] `(Sort 1)``terminate?

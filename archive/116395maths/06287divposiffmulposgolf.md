@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/06287divposiffmulposgolf.html
 ---
 
-## [maths](index.html)
-### [div_pos_iff_mul_pos golf](06287divposiffmulposgolf.html)
+## Stream: [maths](index.html)
+### Topic: [div_pos_iff_mul_pos golf](06287divposiffmulposgolf.html)
+
+---
 
 #### [Kevin Buzzard (Nov 14 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_pos_iff_mul_pos%20golf/near/147700596):
 ```lean

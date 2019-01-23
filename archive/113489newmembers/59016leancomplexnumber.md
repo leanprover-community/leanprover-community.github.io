@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/59016leancomplexnumber.html
 ---
 
-## [new members](index.html)
-### [#lean #complex number](59016leancomplexnumber.html)
+## Stream: [new members](index.html)
+### Topic: [#lean #complex number](59016leancomplexnumber.html)
+
+---
 
 #### [VeraZZ (Jul 10 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%23lean%20%23complex%20number/near/129414919):
 hey I intend to write a proof of an equation where the RHS is real and LHS is a sum of a pair of  complex conjugates but it keeps telling the error that the terms on RHS should have type \real . how am I supposed to fix it ? thanks

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/68895Provingsomethingisasubfield.html
 ---
 
-## [new members](index.html)
-### [Proving something is a subfield](68895Provingsomethingisasubfield.html)
+## Stream: [new members](index.html)
+### Topic: [Proving something is a subfield](68895Provingsomethingisasubfield.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872747):
 I'm trying to prove that the intersection of two subfields is a subfield -- the problem with using `subfield.mk`, or just using `{...}` directly, is that `subfield` is defined using `extends`, so I need to prove that it's a subring -- and by extension that it is an additive subgroup and a submonoid. What's the notation for this?

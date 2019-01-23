@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/17253orderisowoes.html
 ---
 
-## [new members](index.html)
-### [order_iso woes](17253orderisowoes.html)
+## Stream: [new members](index.html)
+### Topic: [order_iso woes](17253orderisowoes.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Oct 10 2018 at 03:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135512696):
 I'm trying to generalize [this function](https://github.com/leanprover-community/mathlib/blob/tutorials/order/partitions.lean#L366) (there's a typo, that should be a def not a lemma; nonetheless it works...). I want to prove that an `order_iso`gives rise to a `galois_insertion` but I'm stuck on what seems to me to be simple:

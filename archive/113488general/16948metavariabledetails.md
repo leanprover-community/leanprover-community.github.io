@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16948metavariabledetails.html
 ---
 
-## [general](index.html)
-### [metavariable details](16948metavariabledetails.html)
+## Stream: [general](index.html)
+### Topic: [metavariable details](16948metavariabledetails.html)
+
+---
 
 #### [Edward Ayers (Aug 16 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metavariable%20details/near/132255464):
 In `metavar_context.h`, the class`metavar_decl` keeps a `local_context` field called `m_context`, which is the local context in which the mvar was created. In the system description it says "since only closed terms can be assigned to metavariables, a metavariable that occurs in a context records the parameters that it depends on". Is this what `m_context` is doing? Does closed here mean no unbound de-bruijn variables? The system description seems to imply that the context is stored as a telescope of `pi`s on the type of the mvar rather than in a special field in the declaration which is confusing me. Thanks

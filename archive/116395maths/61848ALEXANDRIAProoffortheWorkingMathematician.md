@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/61848ALEXANDRIAProoffortheWorkingMathematician.html
 ---
 
-## [maths](index.html)
-### [ALEXANDRIA: Proof for the Working Mathematician](61848ALEXANDRIAProoffortheWorkingMathematician.html)
+## Stream: [maths](index.html)
+### Topic: [ALEXANDRIA: Proof for the Working Mathematician](61848ALEXANDRIAProoffortheWorkingMathematician.html)
+
+---
 
 #### [Sean Leather (May 15 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ALEXANDRIA%3A%20Proof%20for%20the%20Working%20Mathematician/near/126588456):
 **[ALEXANDRIA: Large-Scale Formal Proof for the Working Mathematician](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/)**

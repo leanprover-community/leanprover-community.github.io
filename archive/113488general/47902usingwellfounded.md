@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47902usingwellfounded.html
 ---
 
-## [general](index.html)
-### [using_well_founded](47902usingwellfounded.html)
+## Stream: [general](index.html)
+### Topic: [using_well_founded](47902usingwellfounded.html)
+
+---
 
 #### [Edward Ayers (Aug 28 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/132934326):
 I'm looking at RB trees again. I found a really good implementation in Coq that I am copying over to Lean: https://github.com/coq/coq/blob/a1fc621b943dbf904705dc88ed27c26daf4c5e72/theories/MSets/MSetRBT.v

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/62254atactictoforgetthedefinition.html
 ---
 
-## [general](index.html)
-### [a tactic to forget the definition](62254atactictoforgetthedefinition.html)
+## Stream: [general](index.html)
+### Topic: [a tactic to forget the definition](62254atactictoforgetthedefinition.html)
+
+---
 
 #### [Kenny Lau (Nov 07 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20forget%20the%20definition/near/147254137):
 Can we make a tactic to forget the definition of something in the local context while keeping everything else unchanged?

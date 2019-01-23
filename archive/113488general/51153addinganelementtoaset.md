@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51153addinganelementtoaset.html
 ---
 
-## [general](index.html)
-### [adding an element to a set](51153addinganelementtoaset.html)
+## Stream: [general](index.html)
+### Topic: [adding an element to a set](51153addinganelementtoaset.html)
+
+---
 
 #### [Kevin Buzzard (Jul 26 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130330334):
 The notation `+` is attached to `has_add.add : X -> X -> X`. Mathematicians use `+` in more general ways though. I find myself wanting to write `r + J` for `r` an element of, and `J` a subset of, an additive abelian group (`J` is a subgroup in fact). This is standard notation in mathematics and I suspect I can't have it given the set-up we have. Does anyone have any thoughts as to how I might try and represent such an idea in Lean? I can make the object I want no problem, the issue is simply that I want the notation to be as close to what a mathematician would write as possible.

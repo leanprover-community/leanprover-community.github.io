@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/14789Decomposinghypotheses.html
 ---
 
-## [new members](index.html)
-### [Decomposing hypotheses](14789Decomposinghypotheses.html)
+## Stream: [new members](index.html)
+### Topic: [Decomposing hypotheses](14789Decomposinghypotheses.html)
+
+---
 
 #### [Ken Roe (Jul 25 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130287397):
 ```lean

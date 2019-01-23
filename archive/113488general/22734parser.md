@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22734parser.html
 ---
 
-## [general](index.html)
-### [parser](22734parser.html)
+## Stream: [general](index.html)
+### Topic: [parser](22734parser.html)
+
+---
 
 #### [Kevin Buzzard (Mar 13 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parser/near/123663841):
 Mario once told me that Lean's parser was an Operator-precedence parser. The manual tells me it's a Pratt-style parser. Is it a top down parser? Furthermore, will the Lean 4 Parser be all of these things, or is this not yet known? I have some very primitive notes on parsers but they are so full of questions that I thought I'd better answer some of them before I started making it public.

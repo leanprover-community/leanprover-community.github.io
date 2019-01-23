@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64871pnatandequationcompiler.html
 ---
 
-## [general](index.html)
-### [pnat and equation compiler?](64871pnatandequationcompiler.html)
+## Stream: [general](index.html)
+### Topic: [pnat and equation compiler?](64871pnatandequationcompiler.html)
+
+---
 
 #### [Kevin Buzzard (Nov 16 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pnat%20and%20equation%20compiler%3F/near/147850385):
 Can I somehow make the equation compiler work on pnat as well as it works on nat? Something like

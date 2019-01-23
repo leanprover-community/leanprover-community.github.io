@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45326Fieldsmedals.html
 ---
 
-## [general](index.html)
-### [Fields medals](45326Fieldsmedals.html)
+## Stream: [general](index.html)
+### Topic: [Fields medals](45326Fieldsmedals.html)
+
+---
 
 #### [Patrick Massot (Jul 31 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Fields%20medals/near/130662923):
 Who wants to bet on Fields medals that will be awarded tomorrow? I mean the other Fields medals, not Scholze's.

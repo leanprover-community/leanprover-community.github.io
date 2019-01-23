@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38243coercingfinsettoset.html
 ---
 
-## [general](index.html)
-### [coercing finset to set](38243coercingfinsettoset.html)
+## Stream: [general](index.html)
+### Topic: [coercing finset to set](38243coercingfinsettoset.html)
+
+---
 
 #### [Kenny Lau (Sep 13 2018 at 08:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercing%20finset%20to%20set/near/133865074):
 What is the idiomatic way to coerce a finset to a set?

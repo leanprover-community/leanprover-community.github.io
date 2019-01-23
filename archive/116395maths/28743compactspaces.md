@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/28743compactspaces.html
 ---
 
-## [maths](index.html)
-### [compact spaces](28743compactspaces.html)
+## Stream: [maths](index.html)
+### Topic: [compact spaces](28743compactspaces.html)
+
+---
 
 #### [Reid Barton (Sep 22 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20spaces/near/134451428):
 I'm inclined to add the following class, following the naming scheme of `t2_space`, `separable_space`, etc.

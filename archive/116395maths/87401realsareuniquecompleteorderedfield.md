@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/87401realsareuniquecompleteorderedfield.html
 ---
 
-## [maths](index.html)
-### [reals are unique complete ordered field](87401realsareuniquecompleteorderedfield.html)
+## Stream: [maths](index.html)
+### Topic: [reals are unique complete ordered field](87401realsareuniquecompleteorderedfield.html)
+
+---
 
 #### [Kevin Buzzard (Aug 09 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/reals%20are%20unique%20complete%20ordered%20field/near/131159069):
 The reals are the unique complete ordered field up to unique isomorphism. Is this in Lean already? I thought it might be a good exercise for a student.  @**Patrick Massot** does "complete" here mean "an ordered field inherits a topology from the order, and the associated uniform space is complete"? Last week I didn't know what that even meant. Is that the same as asking that any non-empty bounded set has a least upper bound? 

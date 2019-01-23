@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79810maximumclassinstanceresolutiondepthhasbeenreached.html
 ---
 
-## [general](index.html)
-### [maximum class-instance resolution depth has been reached](79810maximumclassinstanceresolutiondepthhasbeenreached.html)
+## Stream: [general](index.html)
+### Topic: [maximum class-instance resolution depth has been reached](79810maximumclassinstanceresolutiondepthhasbeenreached.html)
+
+---
 
 #### [Kevin Buzzard (Apr 24 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/maximum%20class-instance%20resolution%20depth%20has%20been%20reached/near/125627176):
 I was writing some random universal property code

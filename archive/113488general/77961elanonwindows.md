@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77961elanonwindows.html
 ---
 
-## [general](index.html)
-### [elan on windows](77961elanonwindows.html)
+## Stream: [general](index.html)
+### Topic: [elan on windows](77961elanonwindows.html)
+
+---
 
 #### [Scott Morrison (Sep 26 2018 at 07:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elan%20on%20windows/near/134647268):
 @**Sebastian Ullrich**,

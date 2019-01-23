@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/86709haspowforfpow.html
 ---
 
-## [maths](index.html)
-### [has_pow for fpow](86709haspowforfpow.html)
+## Stream: [maths](index.html)
+### Topic: [has_pow for fpow](86709haspowforfpow.html)
+
+---
 
 #### [Chris Hughes (Nov 03 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_pow%20for%20fpow/near/137112179):
 There's no `has_pow` instance for integer powers in a field, there's just `fpow`. Is there a reason why the notation isn't used for `fpow`?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28527bytecode.html
 ---
 
-## [general](index.html)
-### [bytecode?](28527bytecode.html)
+## Stream: [general](index.html)
+### Topic: [bytecode?](28527bytecode.html)
+
+---
 
 #### [Sebastien Gouezel (Oct 17 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bytecode%3F/near/135998701):
 In a file with `noncomputable theory`, I get the trace message

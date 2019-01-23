@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85526characteristicoffields.html
 ---
 
-## [general](index.html)
-### [characteristic of fields](85526characteristicoffields.html)
+## Stream: [general](index.html)
+### Topic: [characteristic of fields](85526characteristicoffields.html)
+
+---
 
 #### [Kenny Lau (Oct 16 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921382):
 @**Mario Carneiro** @**Johan Commelin** @**Kevin Buzzard** how should we define the `char` of a field?

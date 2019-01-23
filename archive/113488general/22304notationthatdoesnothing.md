@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22304notationthatdoesnothing.html
 ---
 
-## [general](index.html)
-### [notation that does nothing](22304notationthatdoesnothing.html)
+## Stream: [general](index.html)
+### Topic: [notation that does nothing](22304notationthatdoesnothing.html)
+
+---
 
 #### [Johan Commelin (Nov 21 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148107367):
 I want something like this:

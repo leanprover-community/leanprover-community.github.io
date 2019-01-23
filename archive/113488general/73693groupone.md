@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73693groupone.html
 ---
 
-## [general](index.html)
-### [group.one?](73693groupone.html)
+## Stream: [general](index.html)
+### Topic: [group.one?](73693groupone.html)
+
+---
 
 #### [Kenny Lau (Sep 02 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group.one%3F/near/133204605):
 This is the definition of `group`:

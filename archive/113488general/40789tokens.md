@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40789tokens.html
 ---
 
-## [general](index.html)
-### [tokens](40789tokens.html)
+## Stream: [general](index.html)
+### Topic: [tokens](40789tokens.html)
+
+---
 
 #### [Scott Morrison (Oct 08 2018 at 08:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tokens/near/135382507):
 Does anyone know where the list of "registered tokens" is?

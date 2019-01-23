@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22683mathlibpullrequests.html
 ---
 
-## [general](index.html)
-### [mathlib pull requests](22683mathlibpullrequests.html)
+## Stream: [general](index.html)
+### Topic: [mathlib pull requests](22683mathlibpullrequests.html)
+
+---
 
 #### [Sean Leather (Jun 19 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20pull%20requests/near/128290679):
 @**Mario Carneiro** and @**Johannes Hölzl**: There are a lot of pending [PRs](https://github.com/leanprover/mathlib/pulls). What would you like to do with them?

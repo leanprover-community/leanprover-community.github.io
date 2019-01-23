@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/43359imagevsmapandinjective.html
 ---
 
-## [maths](index.html)
-### [image vs map and injective](43359imagevsmapandinjective.html)
+## Stream: [maths](index.html)
+### Topic: [image vs map and injective](43359imagevsmapandinjective.html)
+
+---
 
 #### [Sean Leather (Jun 22 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/image%20vs%20map%20and%20injective/near/128459841):
 In `data.finset`, `finset.map` is defined as mapping an `embedding` or an injective function over a `finset`, and `finset.image` is mapping a function over a `finset`. Other mathlib components (e.g `set`, `multiset`, `list`, `array`, etc.) do not make this distinction using this naming scheme.

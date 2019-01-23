@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/54459exponentials.html
 ---
 
-## [maths](index.html)
-### [exponentials](54459exponentials.html)
+## Stream: [maths](index.html)
+### Topic: [exponentials](54459exponentials.html)
+
+---
 
 #### [Kenny Lau (Apr 27 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125775813):
 @**Chris Hughes** what happened to your PR's about exp?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52942exactthis.html
 ---
 
-## [general](index.html)
-### [exact this](52942exactthis.html)
+## Stream: [general](index.html)
+### Topic: [exact this](52942exactthis.html)
+
+---
 
 #### [Patrick Massot (Jul 26 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exact%20this/near/130305391):
 Today I came across several instance of `have := stuff, exact this` closing a goal where `exact stuff` doesn't. I guess this is yet another elaboration subtlety, but I'd like to know if there is a nicer way to do this in one tactic.

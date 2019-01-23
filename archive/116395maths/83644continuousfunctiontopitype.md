@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/83644continuousfunctiontopitype.html
 ---
 
-## [maths](index.html)
-### [continuous function to pi type](83644continuousfunctiontopitype.html)
+## Stream: [maths](index.html)
+### Topic: [continuous function to pi type](83644continuousfunctiontopitype.html)
+
+---
 
 #### [Johan Commelin (May 23 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20function%20to%20pi%20type/near/126969544):
 I have no clue how to prove this:

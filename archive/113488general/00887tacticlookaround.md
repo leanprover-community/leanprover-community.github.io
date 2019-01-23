@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00887tacticlookaround.html
 ---
 
-## [general](index.html)
-### [tactic look around](00887tacticlookaround.html)
+## Stream: [general](index.html)
+### Topic: [tactic look around](00887tacticlookaround.html)
+
+---
 
 #### [Patrick Massot (Mar 06 2018 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20look%20around/near/123344266):
 Assume I write

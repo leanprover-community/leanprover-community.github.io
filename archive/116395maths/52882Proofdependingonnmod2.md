@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/52882Proofdependingonnmod2.html
 ---
 
-## [maths](index.html)
-### [Proof depending on n mod 2](52882Proofdependingonnmod2.html)
+## Stream: [maths](index.html)
+### Topic: [Proof depending on n mod 2](52882Proofdependingonnmod2.html)
+
+---
 
 #### [Johan Commelin (Jul 16 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20depending%20on%20n%20mod%202/near/129743513):
 I need to prove a fact about `(-a)^n`, with `n : nat`. I would like to split into two cases, depending on whether `n` is odd or even. What is the best way to do this in mathlib?

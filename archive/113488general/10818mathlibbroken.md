@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10818mathlibbroken.html
 ---
 
-## [general](index.html)
-### [mathlib broken?](10818mathlibbroken.html)
+## Stream: [general](index.html)
+### Topic: [mathlib broken?](10818mathlibbroken.html)
+
+---
 
 #### [Scott Morrison (Apr 04 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20broken%3F/near/124599682):
 Actually, it seems like the problem is just in mathlib.

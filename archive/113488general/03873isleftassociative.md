@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03873isleftassociative.html
 ---
 
-## [general](index.html)
-### [^ is left associative](03873isleftassociative.html)
+## Stream: [general](index.html)
+### Topic: [^ is left associative](03873isleftassociative.html)
+
+---
 
 #### [Kevin Buzzard (Mar 13 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5E%20is%20left%20associative/near/123659529):
 Is that normal? `#eval 2^3^2` gives 64. I don't know any other language where this is the case. I just tried python, pari, sage and they all give me 2^(3^2)=512.

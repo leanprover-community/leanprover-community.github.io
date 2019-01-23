@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52941fromfinsettoset.html
 ---
 
-## [general](index.html)
-### [from finset to set](52941fromfinsettoset.html)
+## Stream: [general](index.html)
+### Topic: [from finset to set](52941fromfinsettoset.html)
+
+---
 
 #### [Johan Commelin (May 08 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/from%20finset%20to%20set/near/126256617):
 I can't find a way to go from `finset` to `set` in the `finset.lean` file. How do I do this?

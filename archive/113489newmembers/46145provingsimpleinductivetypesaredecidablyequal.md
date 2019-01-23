@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/46145provingsimpleinductivetypesaredecidablyequal.html
 ---
 
-## [new members](index.html)
-### [proving simple inductive types are decidably equal](46145provingsimpleinductivetypesaredecidablyequal.html)
+## Stream: [new members](index.html)
+### Topic: [proving simple inductive types are decidably equal](46145provingsimpleinductivetypesaredecidablyequal.html)
+
+---
 
 #### [Edward Ayers (Nov 06 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20simple%20inductive%20types%20are%20decidably%20equal/near/146870382):
 Suppose I make

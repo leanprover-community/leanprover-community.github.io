@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31502finsetsumsingle.html
 ---
 
-## [general](index.html)
-### [finset.sum_single](31502finsetsumsingle.html)
+## Stream: [general](index.html)
+### Topic: [finset.sum_single](31502finsetsumsingle.html)
+
+---
 
 #### [Morenikeji Neri (Jul 26 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum_single/near/130363587):
 I'm wondering if there is a proof for

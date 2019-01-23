@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/65833rcaseswithfalse.html
 ---
 
-## [new members](index.html)
-### [rcases with false](65833rcaseswithfalse.html)
+## Stream: [new members](index.html)
+### Topic: [rcases with false](65833rcaseswithfalse.html)
+
+---
 
 #### [Kenny Lau (Oct 02 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rcases%20with%20false/near/135056202):
 Can I do `rcases` on `p \or false` and end up with one state where we know `p`?

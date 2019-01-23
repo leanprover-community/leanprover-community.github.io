@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22229tutorial.html
 ---
 
-## [general](index.html)
-### [tutorial](22229tutorial.html)
+## Stream: [general](index.html)
+### Topic: [tutorial](22229tutorial.html)
+
+---
 
 #### [Johan Commelin (Oct 04 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tutorial/near/135155789):
 @**Patrick Massot** Would you mind pushing your demo to a new `tutorial` branch on community fork? Maybe as `docs/tutorial/demo.lean`.

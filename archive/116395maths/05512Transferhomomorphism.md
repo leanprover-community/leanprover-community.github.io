@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/05512Transferhomomorphism.html
 ---
 
-## [maths](index.html)
-### [Transfer homomorphism](05512Transferhomomorphism.html)
+## Stream: [maths](index.html)
+### Topic: [Transfer homomorphism](05512Transferhomomorphism.html)
+
+---
 
 #### [Kenny Lau (Jun 15 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127678):
 Let G be a group and H a subgroup of finite index. Then, pick a set-theoretic section s:G/H->G where G/H is the right cosets. Then, the transfer homomorphism G^ab -> H^ab is defined by sending [[g]] to prod[x in G/H] s(x) g s(xg)^-1.

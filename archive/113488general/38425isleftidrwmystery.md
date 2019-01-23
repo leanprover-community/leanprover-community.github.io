@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38425isleftidrwmystery.html
 ---
 
-## [general](index.html)
-### [is_left_id rw mystery](38425isleftidrwmystery.html)
+## Stream: [general](index.html)
+### Topic: [is_left_id rw mystery](38425isleftidrwmystery.html)
+
+---
 
 #### [Patrick Massot (Apr 23 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570810):
 ```lean

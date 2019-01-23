@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/97874affineschemesareschemes.html
 ---
 
-## [maths](index.html)
-### [affine schemes are schemes](97874affineschemesareschemes.html)
+## Stream: [maths](index.html)
+### Topic: [affine schemes are schemes](97874affineschemesareschemes.html)
+
+---
 
 #### [Kevin Buzzard (May 23 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/affine%20schemes%20are%20schemes/near/126963591):
 I just reached a milestone:

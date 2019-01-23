@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63146testingtactics.html
 ---
 
-## [general](index.html)
-### [testing tactics](63146testingtactics.html)
+## Stream: [general](index.html)
+### Topic: [testing tactics](63146testingtactics.html)
+
+---
 
 #### [Scott Morrison (Mar 16 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790056):
 I have a `meta def T : expr → tactic expr := ...` that I've written that isn't behaving properly, and I want to do some debugging. Inside the definition there are some `trace` statements that explain to me what's going on --- I just need a convenient way to invoke my tactic. Suppose I have some other `def f := ...`, and I want to invoke `T` on `f`. What do I do?

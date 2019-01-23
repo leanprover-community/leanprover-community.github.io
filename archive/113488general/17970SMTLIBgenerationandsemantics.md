@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17970SMTLIBgenerationandsemantics.html
 ---
 
-## [general](index.html)
-### [SMTLIB generation and semantics](17970SMTLIBgenerationandsemantics.html)
+## Stream: [general](index.html)
+### Topic: [SMTLIB generation and semantics](17970SMTLIBgenerationandsemantics.html)
+
+---
 
 #### [Joe Hendrix (Sep 14 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/SMTLIB%20generation%20and%20semantics/near/133980967):
 Is there a library for representing and rendering SMTLIB 2 expressions that is compatible with Lean 3?  I'd like to have a library where I can generate SMTLIB (specifically the uninterpreted functions/sorts, bitvectors, and arrays), and express semantically what it means for a set of SMTLIB assertions to be satisfiable from a model-theoretic definition.  I can start one, but don't want to duplicate existing work.

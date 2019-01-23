@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/94306Isabelle.html
 ---
 
-## [maths](index.html)
-### [Isabelle](94306Isabelle.html)
+## Stream: [maths](index.html)
+### Topic: [Isabelle](94306Isabelle.html)
+
+---
 
 #### [Sebastien Gouezel (Aug 27 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Isabelle/near/132841692):
 I just wanted to thank @**Johannes Hölzl**  for this in Isabelle:

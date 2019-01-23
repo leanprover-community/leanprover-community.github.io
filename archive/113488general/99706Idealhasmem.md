@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99706Idealhasmem.html
 ---
 
-## [general](index.html)
-### [Ideal has_mem](99706Idealhasmem.html)
+## Stream: [general](index.html)
+### Topic: [Ideal has_mem](99706Idealhasmem.html)
+
+---
 
 #### [AHan (Nov 30 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ideal%20has_mem/near/148853358):
 I don't get why `test₁` type checked but `test₂` will result in deterministic timeout...?

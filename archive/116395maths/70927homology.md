@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/70927homology.html
 ---
 
-## [maths](index.html)
-### [homology](70927homology.html)
+## Stream: [maths](index.html)
+### Topic: [homology](70927homology.html)
+
+---
 
 #### [Kenny Lau (Aug 21 2018 at 17:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homology/near/132522372):
 what is the progress of simplicial/singular homology?

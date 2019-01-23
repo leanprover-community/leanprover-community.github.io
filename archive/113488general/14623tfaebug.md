@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/14623tfaebug.html
 ---
 
-## [general](index.html)
-### [tfae bug](14623tfaebug.html)
+## Stream: [general](index.html)
+### Topic: [tfae bug](14623tfaebug.html)
+
+---
 
 #### [Patrick Massot (Oct 05 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tfae%20bug/near/135238104):
 Minimized from the open maps thread:

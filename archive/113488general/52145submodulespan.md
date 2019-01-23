@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52145submodulespan.html
 ---
 
-## [general](index.html)
-### [submodule.span](52145submodulespan.html)
+## Stream: [general](index.html)
+### Topic: [submodule.span](52145submodulespan.html)
+
+---
 
 #### [petercommand (Nov 18 2018 at 04:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/submodule.span/near/147901978):
 I am trying to understand submodule.span, why can the type of ```Inf { p | s \sub p } ``` (set beta) be converted to ```submodule \alpha \beta```? Thanks!

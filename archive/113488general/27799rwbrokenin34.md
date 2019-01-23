@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27799rwbrokenin34.html
 ---
 
-## [general](index.html)
-### [rw broken in 3.4](27799rwbrokenin34.html)
+## Stream: [general](index.html)
+### Topic: [rw broken in 3.4](27799rwbrokenin34.html)
+
+---
 
 #### [Mario Carneiro (Apr 20 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20broken%20in%203.4/near/125331297):
 @**Sebastian Ullrich** Help! I'm looking at upgrading to 3.4.0, but one of the recent commits introduced a bug that breaks a lot of mathlib stuff. I'm a bit worried I will have to abandon 3.4 and stick to nightlies unless it is fixed.

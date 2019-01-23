@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/90767Provingdegreelemmasforpolynomials.html
 ---
 
-## [maths](index.html)
-### [Proving degree lemmas for polynomials](90767Provingdegreelemmasforpolynomials.html)
+## Stream: [maths](index.html)
+### Topic: [Proving degree lemmas for polynomials](90767Provingdegreelemmasforpolynomials.html)
+
+---
 
 #### [Chris Hughes (Aug 07 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20degree%20lemmas%20for%20polynomials/near/131063700):
 I wrote some stuff on polynomials recently, which has been merged, but I was never that happy with it, because I knew that proving basic lemmas about degree was going to be quite hard. For example

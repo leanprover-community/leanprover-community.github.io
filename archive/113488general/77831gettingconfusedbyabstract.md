@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77831gettingconfusedbyabstract.html
 ---
 
-## [general](index.html)
-### [getting confused by 'abstract'](77831gettingconfusedbyabstract.html)
+## Stream: [general](index.html)
+### Topic: [getting confused by 'abstract'](77831gettingconfusedbyabstract.html)
+
+---
 
 #### [Scott Morrison (Jun 16 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/getting%20confused%20by%20%27abstract%27/near/128164505):
 I'm really confused by `abstract`. I've used it successfully in the past, but tonight it just won't do anything for me.  Can anyone see what's wrong with this:

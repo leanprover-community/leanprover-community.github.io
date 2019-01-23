@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05925Proofexamples.html
 ---
 
-## [general](index.html)
-### [Proof examples?](05925Proofexamples.html)
+## Stream: [general](index.html)
+### Topic: [Proof examples?](05925Proofexamples.html)
+
+---
 
 #### [Ryan Smith (Sep 21 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20examples%3F/near/134356151):
 Hi, I'm entirely new to lean. I've read the docs, but I'm struggling to see what it would look like to prove anything in practice. The homepage didn't have much of a gallery, do we have examples of what a simple proof of the infinitude of primes or Lagrange's theorem for finite groups would look like?

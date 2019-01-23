@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55725boundedquantifiers.html
 ---
 
-## [general](index.html)
-### [bounded quantifiers](55725boundedquantifiers.html)
+## Stream: [general](index.html)
+### Topic: [bounded quantifiers](55725boundedquantifiers.html)
+
+---
 
 #### [Sean Leather (Apr 26 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20quantifiers/near/125723227):
 I've seen these referred to in different places. I've inferred that a bounded forall is `{α : Sort*} {p : α → Prop} : ∀ x, p x` and a bounded exists is `{α : Sort*} {p : α → Prop} : ∃ x, p x`. In some places, they're called `ball` and `bex`. In `mathlib/docs/naming.md` (only, it appears), they are called `bforall` and `bexists`.

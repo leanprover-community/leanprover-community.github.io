@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89036Provingfieldisgcddomain.html
 ---
 
-## [general](index.html)
-### [Proving field is gcd domain](89036Provingfieldisgcddomain.html)
+## Stream: [general](index.html)
+### Topic: [Proving field is gcd domain](89036Provingfieldisgcddomain.html)
+
+---
 
 #### [AHan (Dec 19 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20field%20is%20gcd%20domain/near/152170274):
 While trying to prove a field is gcd domain, I found out that there seems like a conflict between two fields of class `gcd_domain` to me ...

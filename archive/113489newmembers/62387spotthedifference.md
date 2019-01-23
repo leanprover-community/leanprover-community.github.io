@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/62387spotthedifference.html
 ---
 
-## [new members](index.html)
-### [spot the difference](62387spotthedifference.html)
+## Stream: [new members](index.html)
+### Topic: [spot the difference](62387spotthedifference.html)
+
+---
 
 #### [Kenny Lau (Jan 11 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spot%20the%20difference/near/154913709):
 ```lean

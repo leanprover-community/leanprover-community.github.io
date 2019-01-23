@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/58005semimodulesneindanke.html
 ---
 
-## [maths](index.html)
-### [semimodules nein danke](58005semimodulesneindanke.html)
+## Stream: [maths](index.html)
+### Topic: [semimodules nein danke](58005semimodulesneindanke.html)
+
+---
 
 #### [Kevin Buzzard (Sep 13 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133914925):
 ```

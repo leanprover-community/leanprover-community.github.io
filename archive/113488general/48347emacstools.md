@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48347emacstools.html
 ---
 
-## [general](index.html)
-### [emacs tools](48347emacstools.html)
+## Stream: [general](index.html)
+### Topic: [emacs tools](48347emacstools.html)
+
+---
 
 #### [Simon Hudon (Jun 03 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emacs%20tools/near/127482729):
 Is it possible in emacs lisp to use `lean-server-session-send-command` to get the text of a definition? Failing that, is it possible to use it with the command `'info` to get the line info of the next command in the file that contains it? I'm trying to create a command to display the definition of the symbol the cursor is currently on.

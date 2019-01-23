@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93893newsteamforPRdiscussions.html
 ---
 
-## [general](index.html)
-### [new steam for PR discussions](93893newsteamforPRdiscussions.html)
+## Stream: [general](index.html)
+### Topic: [new steam for PR discussions](93893newsteamforPRdiscussions.html)
+
+---
 
 #### [Scott Morrison (Oct 07 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20steam%20for%20PR%20discussions/near/135347475):
 I've just created a new stream, after a brief discussion with Mario, for discussion of current PRs.

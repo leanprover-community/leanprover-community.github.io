@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53591abbreviation.html
 ---
 
-## [general](index.html)
-### [abbreviation](53591abbreviation.html)
+## Stream: [general](index.html)
+### Topic: [abbreviation](53591abbreviation.html)
+
+---
 
 #### [Reid Barton (Dec 03 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/150746902):
 I don't suppose `abbreviation` is documented anywhere?

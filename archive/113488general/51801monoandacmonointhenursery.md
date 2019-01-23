@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51801monoandacmonointhenursery.html
 ---
 
-## [general](index.html)
-### [mono and ac_mono in the nursery](51801monoandacmonointhenursery.html)
+## Stream: [general](index.html)
+### Topic: [mono and ac_mono in the nursery](51801monoandacmonointhenursery.html)
+
+---
 
 #### [Simon Hudon (Aug 22 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mono%20and%20ac_mono%20in%20the%20nursery/near/132589831):
 My `mono` and `ac_mono` are, I believe, ready for use. I have put them in the nursery https://github.com/leanprover-community/mathlib-nursery so that people can try them out as I get them merged into mathlib.

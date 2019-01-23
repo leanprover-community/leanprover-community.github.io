@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43922congrargandsuperficiallydependentfunctions.html
 ---
 
-## [general](index.html)
-### [congr_arg and superficially dependent functions](43922congrargandsuperficiallydependentfunctions.html)
+## Stream: [general](index.html)
+### Topic: [congr_arg and superficially dependent functions](43922congrargandsuperficiallydependentfunctions.html)
+
+---
 
 #### [Scott Morrison (Aug 02 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781762):
 I'm having trouble constructing `congr_arg` expressions, where the function superficially looks like a dependent function, but after some definitionally unfolding you can see that it isn't really.

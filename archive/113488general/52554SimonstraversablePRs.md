@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52554SimonstraversablePRs.html
 ---
 
-## [general](index.html)
-### [Simon's "traversable" PR's.](52554SimonstraversablePRs.html)
+## Stream: [general](index.html)
+### Topic: [Simon's "traversable" PR's.](52554SimonstraversablePRs.html)
+
+---
 
 #### [Kevin Buzzard (Jul 27 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simon%27s%20%22traversable%22%20PR%27s./near/130402086):
 What do these do? I can't understand anything :-(

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67899existsdata.html
 ---
 
-## [general](index.html)
-### [exists data](67899existsdata.html)
+## Stream: [general](index.html)
+### Topic: [exists data](67899existsdata.html)
+
+---
 
 #### [Johan Commelin (Dec 24 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exists%20data/near/152455922):
 Is there a clean way to avoid the `, true` in this condition?

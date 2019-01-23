@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/89394Writingrationals.html
 ---
 
-## [new members](index.html)
-### [Writing rationals](89394Writingrationals.html)
+## Stream: [new members](index.html)
+### Topic: [Writing rationals](89394Writingrationals.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Oct 17 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135984699):
 How can I rewrite a known rational `r : \Q` in the form `rat.mk (...) (...)`?

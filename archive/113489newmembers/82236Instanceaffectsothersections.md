@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/82236Instanceaffectsothersections.html
 ---
 
-## [new members](index.html)
-### [Instance affects other sections](82236Instanceaffectsothersections.html)
+## Stream: [new members](index.html)
+### Topic: [Instance affects other sections](82236Instanceaffectsothersections.html)
+
+---
 
 #### [AHan (Jan 01 2019 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154128043):
 ```lean

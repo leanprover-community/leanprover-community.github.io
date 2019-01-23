@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49805canyouhelpmemakeitclear.html
 ---
 
-## [general](index.html)
-### [can you help me make it clear](49805canyouhelpmemakeitclear.html)
+## Stream: [general](index.html)
+### Topic: [can you help me make it clear](49805canyouhelpmemakeitclear.html)
+
+---
 
 #### [Truong Nguyen (Sep 10 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133665638):
 I read the book about lean prover. There is some code like this:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59576leanstypetheory.html
 ---
 
-## [general](index.html)
-### [lean's type theory](59576leanstypetheory.html)
+## Stream: [general](index.html)
+### Topic: [lean's type theory](59576leanstypetheory.html)
+
+---
 
 #### [Mario Carneiro (Mar 17 2018 at 04:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%27s%20type%20theory/near/123826805):
 Okay, I'm a bit embarrassed to release this in this very early form, but there's enough meat in it that it can be useful to others even before it's done. This will probably become a major part of my master's thesis. What you will find:

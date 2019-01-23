@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99769importingwithinleanpackage.html
 ---
 
-## [general](index.html)
-### [importing within lean package](99769importingwithinleanpackage.html)
+## Stream: [general](index.html)
+### Topic: [importing within lean package](99769importingwithinleanpackage.html)
+
+---
 
 #### [Chris Hughes (Mar 24 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/importing%20within%20lean%20package/near/124161392):
 So I've tried to download @**Kenny Lau** and @**Kevin Buzzard**'s stacks project library, but none of the imports are currently working, I get the following message

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04673calcwithbijon.html
 ---
 
-## [general](index.html)
-### [calc with bij_on](04673calcwithbijon.html)
+## Stream: [general](index.html)
+### Topic: [calc with bij_on](04673calcwithbijon.html)
+
+---
 
 #### [Reid Barton (Jun 06 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20with%20bij_on/near/127674091):
 Is there a way I could use `calc` to chain together `bij_on_comp`?

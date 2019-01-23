@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56077islawfulmonadio.html
 ---
 
-## [general](index.html)
-### [is_lawful_monad io](56077islawfulmonadio.html)
+## Stream: [general](index.html)
+### Topic: [is_lawful_monad io](56077islawfulmonadio.html)
+
+---
 
 #### [Joe Hendrix (Dec 14 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_lawful_monad%20io/near/151810212):
 I can't seem to find an instance of `is_lawful_monad io` in Lean 3.  Is that a deliberate omission in that `io` is not intended to satisfy the monad laws, or just something that wasn't implemented?  Is there a good way to manually introduce this?

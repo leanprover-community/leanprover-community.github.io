@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/14347easydecidabilityq.html
 ---
 
-## [general](index.html)
-### [easy decidability q](14347easydecidabilityq.html)
+## Stream: [general](index.html)
+### Topic: [easy decidability q](14347easydecidabilityq.html)
+
+---
 
 #### [Kevin Buzzard (Jul 11 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy%20decidability%20q/near/129492071):
 Is this provable:

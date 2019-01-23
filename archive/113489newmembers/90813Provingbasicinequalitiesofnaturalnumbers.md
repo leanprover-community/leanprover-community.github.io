@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/90813Provingbasicinequalitiesofnaturalnumbers.html
 ---
 
-## [new members](index.html)
-### [Proving basic inequalities of natural numbers](90813Provingbasicinequalitiesofnaturalnumbers.html)
+## Stream: [new members](index.html)
+### Topic: [Proving basic inequalities of natural numbers](90813Provingbasicinequalitiesofnaturalnumbers.html)
+
+---
 
 #### [Sebastian Zimmer (Oct 13 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20basic%20inequalities%20of%20natural%20numbers/near/135737118):
 linarith doesn't seem to be good enough to prove this basic inequality

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html
 ---
 
-## [new members](index.html)
-### [Variable with braces, parentheses and  square brackets](53044Variablewithbracesparenthesesandsquarebrackets.html)
+## Stream: [new members](index.html)
+### Topic: [Variable with braces, parentheses and  square brackets](53044Variablewithbracesparenthesesandsquarebrackets.html)
+
+---
 
 #### [AHan (Nov 08 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147280537):
 The below code works.

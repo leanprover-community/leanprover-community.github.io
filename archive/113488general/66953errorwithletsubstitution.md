@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66953errorwithletsubstitution.html
 ---
 
-## [general](index.html)
-### [error with let substitution](66953errorwithletsubstitution.html)
+## Stream: [general](index.html)
+### Topic: [error with let substitution](66953errorwithletsubstitution.html)
+
+---
 
 #### [Mohammed Eyad Kurd-Misto (Jun 04 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20with%20let%20substitution/near/127518930):
 Hello, I'm not sure if this is the correct place to post this. I am Mohammed Eyad Kurd-Misto, a PhD student at Chapman university. I am having an issue with a proof where the let construct does not seem to be working the way I would think. For two steps of the proof, I am simply substituting portions of the current statement from the let, and in one instance there is no issue but in another I am getting an error. The main relevant code is:

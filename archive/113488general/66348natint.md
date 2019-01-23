@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66348natint.html
 ---
 
-## [general](index.html)
-### [nat = int](66348natint.html)
+## Stream: [general](index.html)
+### Topic: [nat = int](66348natint.html)
+
+---
 
 #### [Kenny Lau (Oct 09 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20%3D%20int/near/135492419):
 Is `nat = int` consistent with Lean?

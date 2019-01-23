@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23770sneakinesswithautoparam.html
 ---
 
-## [general](index.html)
-### [sneakiness with `auto_param`](23770sneakinesswithautoparam.html)
+## Stream: [general](index.html)
+### Topic: [sneakiness with `auto_param`](23770sneakinesswithautoparam.html)
+
+---
 
 #### [Scott Morrison (Aug 08 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sneakiness%20with%20%60auto_param%60/near/131101629):
 I would like to be able to change the tactic specified via `auto_param` to fill in a structure field automatically.

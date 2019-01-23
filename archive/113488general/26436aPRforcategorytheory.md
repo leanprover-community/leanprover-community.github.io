@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26436aPRforcategorytheory.html
 ---
 
-## [general](index.html)
-### [a PR for category theory](26436aPRforcategorytheory.html)
+## Stream: [general](index.html)
+### Topic: [a PR for category theory](26436aPRforcategorytheory.html)
+
+---
 
 #### [Scott Morrison (Jun 04 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20PR%20for%20category%20theory/near/127523861):
 Dear all, (@**Mario Carneiro** and @**Johannes Hölzl** in particular!)

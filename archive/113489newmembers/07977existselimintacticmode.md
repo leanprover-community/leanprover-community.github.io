@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/07977existselimintacticmode.html
 ---
 
-## [new members](index.html)
-### [exists.elim in tactic mode?](07977existselimintacticmode.html)
+## Stream: [new members](index.html)
+### Topic: [exists.elim in tactic mode?](07977existselimintacticmode.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Oct 11 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135602582):
 Hi -- I've been trying to prove a certain relation is symmetric -- is there a way to use "exists.elim" in tactic mode? It always gives me errors.

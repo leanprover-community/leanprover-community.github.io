@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88452changingfield.html
 ---
 
-## [general](index.html)
-### [changing `field`](88452changingfield.html)
+## Stream: [general](index.html)
+### Topic: [changing `field`](88452changingfield.html)
+
+---
 
 #### [Mario Carneiro (Sep 03 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/changing%20%60field%60/near/133230210):
 Before we get too involved in field theory, I would like to propose a change to `division_ring` and `field`. The problem is that these are defined in core, meaning that we would have to more or less completely ignore all the core definitions based on fields (which isn't much) and add primes or something to avoid name collision.

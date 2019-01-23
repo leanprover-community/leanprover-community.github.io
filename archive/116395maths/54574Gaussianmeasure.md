@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/54574Gaussianmeasure.html
 ---
 
-## [maths](index.html)
-### [Gaussian measure](54574Gaussianmeasure.html)
+## Stream: [maths](index.html)
+### Topic: [Gaussian measure](54574Gaussianmeasure.html)
+
+---
 
 #### [Kevin Buzzard (Oct 02 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Gaussian%20measure/near/135049503):
 Today the subject of formalising Gaussian measure in Lean came up at work. I asked Johannes about it privately and he seemed optimistic that it was within reach. But then he mentioned some work done at Dagstuhl on the Lebesgue integral which is...possibly not accessible at this point? @**Mario Carneiro** do you have access to this stuff and is it in any state to be made public? As Patrick has pointed out in the past, our analysis is weak in places, and this probably simply because us number theorists / geometers are working on our pet projects where a bunch of foundational stuff has been done already, whereas any potential analysts will soon discover that there are still gaps in the coverage of 1st year undergraduate analysis (did anyone do the product rule yet??).

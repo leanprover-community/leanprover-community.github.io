@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/59921410backwardsreasoning.html
 ---
 
-## [PR reviews](index.html)
-### [#410 backwards reasoning](59921410backwardsreasoning.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#410 backwards reasoning](59921410backwardsreasoning.html)
+
+---
 
 #### [Scott Morrison (Oct 10 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23410%20backwards%20reasoning/near/135520408):
 I've just made a `[WIP]` pull request for the backwards reasoning tactic which has been discussed in <https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proposal.20for.20.60backwards_reasoning.60>.

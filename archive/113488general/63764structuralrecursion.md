@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63764structuralrecursion.html
 ---
 
-## [general](index.html)
-### [structural recursion](63764structuralrecursion.html)
+## Stream: [general](index.html)
+### Topic: [structural recursion](63764structuralrecursion.html)
+
+---
 
 #### [Simon Hudon (Aug 29 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structural%20recursion/near/132971116):
 I have the following code for which Lean cannot prove termination because it's trying to use well-founded recursion:

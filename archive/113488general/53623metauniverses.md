@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53623metauniverses.html
 ---
 
-## [general](index.html)
-### [meta + universes](53623metauniverses.html)
+## Stream: [general](index.html)
+### Topic: [meta + universes](53623metauniverses.html)
+
+---
 
 #### [Reid Barton (Sep 14 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20%2B%20universes/near/133974969):
 Could/should :four_leaf_clover: allow `meta` to break "universe safety", e.g., stick a field of type `Type` inside a structure declared to have type `Type`?

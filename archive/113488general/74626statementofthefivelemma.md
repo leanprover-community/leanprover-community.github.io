@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74626statementofthefivelemma.html
 ---
 
-## [general](index.html)
-### [statement of the five lemma](74626statementofthefivelemma.html)
+## Stream: [general](index.html)
+### Topic: [statement of the five lemma](74626statementofthefivelemma.html)
+
+---
 
 #### [Johan Commelin (Apr 24 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20of%20the%20five%20lemma/near/125606612):
 I just wrote a statement of the five lemma: https://gist.github.com/jcommelin/d097eb8f2587d34e5c337450bca543db

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/65860quantifierexercises.html
 ---
 
-## [new members](index.html)
-### [quantifier exercises](65860quantifierexercises.html)
+## Stream: [new members](index.html)
+### Topic: [quantifier exercises](65860quantifierexercises.html)
+
+---
 
 #### [Olli (Sep 08 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/quantifier%20exercises/near/133561165):
 could I get a hint how to make progress here:

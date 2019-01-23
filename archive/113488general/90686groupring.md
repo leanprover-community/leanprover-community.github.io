@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90686groupring.html
 ---
 
-## [general](index.html)
-### [group ring](90686groupring.html)
+## Stream: [general](index.html)
+### Topic: [group ring](90686groupring.html)
+
+---
 
 #### [Kenny Lau (Mar 29 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20ring/near/124361143):
 Do we have group rings? It's an instance of finsupp

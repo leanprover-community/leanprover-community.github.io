@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48024simplemmas.html
 ---
 
-## [general](index.html)
-### [simp_lemmas](48024simplemmas.html)
+## Stream: [general](index.html)
+### Topic: [simp_lemmas](48024simplemmas.html)
+
+---
 
 #### [Edward Ayers (Oct 10 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp_lemmas/near/135532880):
 What is the difference between a 'simp' and a 'congr' below?

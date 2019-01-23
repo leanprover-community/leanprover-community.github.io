@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/20471Topicsessions.html
 ---
 
-## [Lean Together 2019](index.html)
-### [Topic sessions](20471Topicsessions.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [Topic sessions](20471Topicsessions.html)
+
+---
 
 #### [Patrick Massot (Jan 04 2019 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Topic%20sessions/near/154426066):
 Maybe we could already gather extra suggestions for the topic sessions on Thursday and Friday. I have one: the end of Patrick's talk :stuck_out_tongue_wink:

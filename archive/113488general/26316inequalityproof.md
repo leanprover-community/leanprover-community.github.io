@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26316inequalityproof.html
 ---
 
-## [general](index.html)
-### [inequality proof](26316inequalityproof.html)
+## Stream: [general](index.html)
+### Topic: [inequality proof](26316inequalityproof.html)
+
+---
 
 #### [Kevin Sullivan (Sep 14 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inequality%20proof/near/133955902):
 What is the simplest exact proof term that proves ~0=1 (not zero equals one)?

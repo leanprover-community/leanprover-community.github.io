@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13236typeclasstraversable.html
 ---
 
-## [general](index.html)
-### [type class traversable](13236typeclasstraversable.html)
+## Stream: [general](index.html)
+### Topic: [type class traversable](13236typeclasstraversable.html)
+
+---
 
 #### [Simon Hudon (Mar 08 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20traversable/near/123421044):
 I have written a type class `traversable` similar to that of Haskell. Universe polymorphism has made the task challenging but I think I have reached a reasonable compromise. I'd love to hear what the community thinks of it: 

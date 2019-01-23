@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/48996imagebypermutationpower.html
 ---
 
-## [maths](index.html)
-### [image by permutation power](48996imagebypermutationpower.html)
+## Stream: [maths](index.html)
+### Topic: [image by permutation power](48996imagebypermutationpower.html)
+
+---
 
 #### [Patrick Massot (Apr 17 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/image%20by%20permutation%20power/near/125188730):
 ```lean

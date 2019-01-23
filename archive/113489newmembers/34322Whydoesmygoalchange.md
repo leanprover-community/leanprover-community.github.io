@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/34322Whydoesmygoalchange.html
 ---
 
-## [new members](index.html)
-### [Why does my goal change?](34322Whydoesmygoalchange.html)
+## Stream: [new members](index.html)
+### Topic: [Why does my goal change?](34322Whydoesmygoalchange.html)
+
+---
 
 #### [Ali Sever (Aug 04 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20does%20my%20goal%20change%3F/near/130885232):
 After using `constructor` my goal was `?m_1 ∉ A`. Then I used `cases h with p hp`, and my goal became `?m_1[_] ∉ A`. What does that mean, and why does it even happen?

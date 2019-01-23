@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/24816Isthereavariantofsimpthathandlesreversesimps.html
 ---
 
-## [new members](index.html)
-### [Is there a variant of `simp` that handles reverse simps?](24816Isthereavariantofsimpthathandlesreversesimps.html)
+## Stream: [new members](index.html)
+### Topic: [Is there a variant of `simp` that handles reverse simps?](24816Isthereavariantofsimpthathandlesreversesimps.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Nov 18 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20variant%20of%20%60simp%60%20that%20handles%20reverse%20simps%3F/near/147897139):
 Is there a variant of `simp` so I can write things like `simp [←P, Q]` or `simp only [←P, Q]` where `P` and `Q` may or may not be `simp` lemmas?

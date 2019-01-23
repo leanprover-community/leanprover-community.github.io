@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/33133Antiquotinginsideatacticquotation.html
 ---
 
-## [general](index.html)
-### [Antiquoting inside a tactic quotation](33133Antiquotinginsideatacticquotation.html)
+## Stream: [general](index.html)
+### Topic: [Antiquoting inside a tactic quotation](33133Antiquotinginsideatacticquotation.html)
+
+---
 
 #### [Nicholas Scheel (Sep 17 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Antiquoting%20inside%20a%20tactic%20quotation/near/134069500):
 Hi!! So I'm trying to write my first tactic and I have something that looks like this:

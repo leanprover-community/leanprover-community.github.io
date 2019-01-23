@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23087boundedexistsdecidable.html
 ---
 
-## [general](index.html)
-### [bounded exists decidable](23087boundedexistsdecidable.html)
+## Stream: [general](index.html)
+### Topic: [bounded exists decidable](23087boundedexistsdecidable.html)
+
+---
 
 #### [Kenny Lau (Apr 23 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125567139):
 ```lean

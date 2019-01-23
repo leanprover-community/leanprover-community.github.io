@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/34848notationscoping.html
 ---
 
-## [general](index.html)
-### [notation scoping](34848notationscoping.html)
+## Stream: [general](index.html)
+### Topic: [notation scoping](34848notationscoping.html)
+
+---
 
 #### [Sebastian Ullrich (May 28 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20scoping/near/127193572):
 https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/local.20notation.20for.20fin.20(n.2B1)/near/127041848

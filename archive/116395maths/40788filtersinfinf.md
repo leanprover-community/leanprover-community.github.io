@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/40788filtersinfinf.html
 ---
 
-## [maths](index.html)
-### [filters inf inf](40788filtersinfinf.html)
+## Stream: [maths](index.html)
+### Topic: [filters inf inf](40788filtersinfinf.html)
+
+---
 
 #### [Patrick Massot (Jun 16 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filters%20inf%20inf/near/128166284):
 @**Johannes Hölzl** I have difficulties setting up my uniform space structure on topological groups. Basically the trouble is the definition involves dependent nested infimum. I tried to mimick the metric space case where you wrote:

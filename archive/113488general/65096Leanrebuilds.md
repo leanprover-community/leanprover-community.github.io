@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/65096Leanrebuilds.html
 ---
 
-## [general](index.html)
-### [Lean re-builds](65096Leanrebuilds.html)
+## Stream: [general](index.html)
+### Topic: [Lean re-builds](65096Leanrebuilds.html)
+
+---
 
 #### [Simon Hudon (Jul 12 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129503329):
 @**Sebastian Ullrich** What criterion does `leanpkg` use to decide whether a certain file has to be rebuilt or not? I'm caching `.olean` files on travis and the whole thing gets rebuilt anyway. If I also cache `.lean` files, then the rebuild is more conservative.

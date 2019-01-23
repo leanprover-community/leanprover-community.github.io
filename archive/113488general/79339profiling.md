@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79339profiling.html
 ---
 
-## [general](index.html)
-### [profiling](79339profiling.html)
+## Stream: [general](index.html)
+### Topic: [profiling](79339profiling.html)
+
+---
 
 #### [Simon Hudon (Mar 25 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124196289):
 Am I correct to believe that `lean --make` and `lean --profile` are not meant to be used together? 

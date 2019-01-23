@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/28918vectorspacesvsmodulesoverafield.html
 ---
 
-## [maths](index.html)
-### [vector spaces vs modules over a field](28918vectorspacesvsmodulesoverafield.html)
+## Stream: [maths](index.html)
+### Topic: [vector spaces vs modules over a field](28918vectorspacesvsmodulesoverafield.html)
+
+---
 
 #### [Johan Commelin (Jun 18 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/vector%20spaces%20vs%20modules%20over%20a%20field/near/128233939):
 I have a module over a field. How do I upgrade it to a vector_space? We can't have a generic instance, because we would immediately get loops (every vector_space is already a module).

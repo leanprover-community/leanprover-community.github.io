@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87862liftingthetacticmonad.html
 ---
 
-## [general](index.html)
-### [lifting the tactic monad](87862liftingthetacticmonad.html)
+## Stream: [general](index.html)
+### Topic: [lifting the tactic monad](87862liftingthetacticmonad.html)
+
+---
 
 #### [Scott Morrison (Aug 24 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682369):
 Several times I have wanted to use a lift of the tactic monad, in order to carry along some additional state. (As a simple example, I would like to carry along a ℕ that limits how much more computation is allowed, that several different subtactics need to respect.)

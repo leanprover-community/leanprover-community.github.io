@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/62075elabaseliminator.html
 ---
 
-## [general](index.html)
-### [elab_as_eliminator](62075elabaseliminator.html)
+## Stream: [general](index.html)
+### Topic: [elab_as_eliminator](62075elabaseliminator.html)
+
+---
 
 #### [Reid Barton (Jun 27 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740170):
 Is there an explanation of what `elab_as_eliminator` actually does somewhere? I once tried reading the source, but wasn't enlightened.

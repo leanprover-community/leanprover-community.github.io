@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/97741troublerunningleanonmac.html
 ---
 
-## [new members](index.html)
-### [trouble running lean on mac](97741troublerunningleanonmac.html)
+## Stream: [new members](index.html)
+### Topic: [trouble running lean on mac](97741troublerunningleanonmac.html)
+
+---
 
 #### [Yuhan Du (Aug 13 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038880):
 ```

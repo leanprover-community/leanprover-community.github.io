@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48727customizingtidy.html
 ---
 
-## [general](index.html)
-### [customizing tidy](48727customizingtidy.html)
+## Stream: [general](index.html)
+### Topic: [customizing tidy](48727customizingtidy.html)
+
+---
 
 #### [Reid Barton (Jun 03 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127504066):
 @**Scott Morrison** I used your `tidy` tactic to automatically generate a bunch of continuity proofs that I was formerly writing out manually like

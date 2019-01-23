@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/61216396squeezesimp.html
 ---
 
-## [PR reviews](index.html)
-### [#396 squeeze_simp](61216396squeezesimp.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#396 squeeze_simp](61216396squeezesimp.html)
+
+---
 
 #### [Kenny Lau (Oct 07 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23396%20squeeze_simp/near/135353930):
 #396

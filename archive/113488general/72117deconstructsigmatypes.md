@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72117deconstructsigmatypes.html
 ---
 
-## [general](index.html)
-### [deconstruct sigma types](72117deconstructsigmatypes.html)
+## Stream: [general](index.html)
+### Topic: [deconstruct sigma types](72117deconstructsigmatypes.html)
+
+---
 
 #### [Kevin Buzzard (Nov 30 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deconstruct%20sigma%20types/near/148871250):
 ```lean

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25708triviallyfalse.html
 ---
 
-## [general](index.html)
-### [trivially false](25708triviallyfalse.html)
+## Stream: [general](index.html)
+### Topic: [trivially false](25708triviallyfalse.html)
+
+---
 
 #### [Kevin Buzzard (Aug 04 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trivially%20false/near/130883663):
 Am I supposed to resolve situations like

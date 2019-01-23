@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21725codeextraction.html
 ---
 
-## [general](index.html)
-### [code extraction](21725codeextraction.html)
+## Stream: [general](index.html)
+### Topic: [code extraction](21725codeextraction.html)
+
+---
 
 #### [jacke (Apr 17 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/code%20extraction/near/125171529):
 I would like to extract c++ programs from my lean code, but the question is how to do it! Page 6 of Programming in Lean says that " Programs

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/22790powltpowofltgolf.html
 ---
 
-## [maths](index.html)
-### [pow_lt_pow_of_lt golf](22790powltpowofltgolf.html)
+## Stream: [maths](index.html)
+### Topic: [pow_lt_pow_of_lt golf](22790powltpowofltgolf.html)
+
+---
 
 #### [Kevin Buzzard (Nov 14 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/pow_lt_pow_of_lt%20golf/near/147671439):
 ```lean

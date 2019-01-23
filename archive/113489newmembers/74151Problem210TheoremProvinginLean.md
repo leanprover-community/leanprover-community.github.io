@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/74151Problem210TheoremProvinginLean.html
 ---
 
-## [new members](index.html)
-### [Problem 2.10 "Theorem Proving in Lean"](74151Problem210TheoremProvinginLean.html)
+## Stream: [new members](index.html)
+### Topic: [Problem 2.10 "Theorem Proving in Lean"](74151Problem210TheoremProvinginLean.html)
+
+---
 
 #### [Christopher Sumnicht (Jan 19 2019 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Problem%202.10%20%22Theorem%20Proving%20in%20Lean%22/near/156414053):
 Hello, I hope this is the correct place to ask this. I was looking at the [Theorem Proving in Lean book exercises in Chap 2](https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#exercises) which asks to both add two vectors together and reverse a vector. I have the following questions: 

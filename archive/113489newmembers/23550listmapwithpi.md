@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/23550listmapwithpi.html
 ---
 
-## [new members](index.html)
-### [list.map with pi](23550listmapwithpi.html)
+## Stream: [new members](index.html)
+### Topic: [list.map with pi](23550listmapwithpi.html)
+
+---
 
 #### [Gavid Liebnich (Nov 09 2018 at 08:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.map%20with%20pi/near/147355746):
 Hello. I have an issue using dependent function space in conjunction with `list.map`. Could anyone take a peek?

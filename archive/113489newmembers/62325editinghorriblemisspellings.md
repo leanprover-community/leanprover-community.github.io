@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/62325editinghorriblemisspellings.html
 ---
 
-## [new members](index.html)
-### [editing horrible misspellings?](62325editinghorriblemisspellings.html)
+## Stream: [new members](index.html)
+### Topic: [editing horrible misspellings?](62325editinghorriblemisspellings.html)
+
+---
 
 #### [Cyril Cohen (Mar 01 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/editing%20horrible%20misspellings%3F/near/123140234):
 How do I edit my horrible english faults in the messages I already posted?

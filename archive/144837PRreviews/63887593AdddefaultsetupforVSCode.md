@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/63887593AdddefaultsetupforVSCode.html
 ---
 
-## [PR reviews](index.html)
-### [#593 Add default setup for VS Code](63887593AdddefaultsetupforVSCode.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#593 Add default setup for VS Code](63887593AdddefaultsetupforVSCode.html)
+
+---
 
 #### [Johannes Hölzl (Jan 14 2019 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23593%20Add%20default%20setup%20for%20VS%20Code/near/155096087):
 I would like to propose to add a `.vscode/settings.json` file. @**Gabriel Ebner** mentioned that this may be a problem if somebody uses this file for their own personal `mathlib` settings. Is anybody using it?
@@ -38,4 +40,7 @@ I was wondering about what `tabSize` does too
 
 #### [Patrick Massot (Jan 15 2019 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23593%20Add%20default%20setup%20for%20VS%20Code/near/155159566):
 Ok, then this should be in the enforced things. But I think rulers shouldn't
+
+#### [Johannes Hölzl (Jan 23 2019 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23593%20Add%20default%20setup%20for%20VS%20Code/near/156682868):
+Okay, I just needed to merge another PR which had the wrong file endings. I will merge the current setup, and adopt it when people start complaining about it
 

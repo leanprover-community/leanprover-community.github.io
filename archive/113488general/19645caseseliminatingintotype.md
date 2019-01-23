@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19645caseseliminatingintotype.html
 ---
 
-## [general](index.html)
-### [cases eliminating into type](19645caseseliminatingintotype.html)
+## Stream: [general](index.html)
+### Topic: [cases eliminating into type](19645caseseliminatingintotype.html)
+
+---
 
 #### [Kevin Buzzard (Apr 25 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691805):
 I've just managed to internalise something Mario told me a couple of weeks ago.

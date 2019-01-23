@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/65678Saturdaydinner.html
 ---
 
-## [Lean Together 2019](index.html)
-### [Saturday dinner](65678Saturdaydinner.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [Saturday dinner](65678Saturdaydinner.html)
+
+---
 
 #### [Rob Lewis (Jan 05 2019 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Saturday%20dinner/near/154470066):
 If anyone is in town tonight, a few of us are planning to meet up for dinner. Let me know if you'd like to join.

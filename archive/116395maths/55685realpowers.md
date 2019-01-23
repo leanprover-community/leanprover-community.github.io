@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/55685realpowers.html
 ---
 
-## [maths](index.html)
-### [real powers](55685realpowers.html)
+## Stream: [maths](index.html)
+### Topic: [real powers](55685realpowers.html)
+
+---
 
 #### [Chris Hughes (Nov 04 2018 at 16:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20powers/near/137159650):
 If we did `has_pow real real`, what would `(-1)^(1/3)` be?

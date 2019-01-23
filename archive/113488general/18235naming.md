@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/18235naming.html
 ---
 
-## [general](index.html)
-### [naming](18235naming.html)
+## Stream: [general](index.html)
+### Topic: [naming](18235naming.html)
+
+---
 
 #### [Reid Barton (Sep 09 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming/near/133613270):
 So I have a bunch of standard math terminology which contains a variable (a regular cardinal $$\kappa$$) in the middle of the term. For example:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00813obviously.html
 ---
 
-## [general](index.html)
-### [obviously](00813obviously.html)
+## Stream: [general](index.html)
+### Topic: [obviously](00813obviously.html)
+
+---
 
 #### [Reid Barton (Aug 23 2018 at 05:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obviously/near/132615425):
 @**Scott Morrison** How can I recover the old behavior of `obviously` which did not trace the steps it took?

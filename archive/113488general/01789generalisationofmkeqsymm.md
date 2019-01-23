@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01789generalisationofmkeqsymm.html
 ---
 
-## [general](index.html)
-### [generalisation of mk_eq_symm](01789generalisationofmkeqsymm.html)
+## Stream: [general](index.html)
+### Topic: [generalisation of mk_eq_symm](01789generalisationofmkeqsymm.html)
+
+---
 
 #### [Scott Morrison (Mar 16 2018 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123790494):
 I am really struggling to write a tactic that "does mk_eq_symm, but even inside binders". I would like to have something that given `h : \forall x : X, f x = g x`, spits back `\forall x : X, g x = f x`. Can anyone point me in the right direction?

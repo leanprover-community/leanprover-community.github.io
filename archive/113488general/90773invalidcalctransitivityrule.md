@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90773invalidcalctransitivityrule.html
 ---
 
-## [general](index.html)
-### [invalid 'calc': transitivity rule](90773invalidcalctransitivityrule.html)
+## Stream: [general](index.html)
+### Topic: [invalid 'calc': transitivity rule](90773invalidcalctransitivityrule.html)
+
+---
 
 #### [Kenny Lau (Apr 16 2018 at 03:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20%27calc%27%3A%20transitivity%20rule/near/125130147):
 > invalid 'calc' expression, transitivity rule is not defined for current step

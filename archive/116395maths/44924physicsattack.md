@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/44924physicsattack.html
 ---
 
-## [maths](index.html)
-### [physics attack](44924physicsattack.html)
+## Stream: [maths](index.html)
+### Topic: [physics attack](44924physicsattack.html)
+
+---
 
 #### [Patrick Massot (Sep 19 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/physics%20attack/near/134230265):
 Argg, mathlib is under attack from the physics department!

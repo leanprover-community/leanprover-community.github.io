@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/38132shouldthisbedectrivial.html
 ---
 
-## [maths](index.html)
-### [should this be dec_trivial?](38132shouldthisbedectrivial.html)
+## Stream: [maths](index.html)
+### Topic: [should this be dec_trivial?](38132shouldthisbedectrivial.html)
+
+---
 
 #### [Kevin Buzzard (Nov 18 2018 at 16:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/should%20this%20be%20dec_trivial%3F/near/147920509):
 `example (n : ℕ) : n > 0 → n ≤ 6 → fact n < 3 ^ n := dec_trivial -- fails`

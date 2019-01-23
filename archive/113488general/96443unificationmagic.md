@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96443unificationmagic.html
 ---
 
-## [general](index.html)
-### [unification magic](96443unificationmagic.html)
+## Stream: [general](index.html)
+### Topic: [unification magic](96443unificationmagic.html)
+
+---
 
 #### [Kevin Buzzard (Apr 23 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20magic/near/125543006):
 I wrote a `noncomputable definition` which was an instance of a structure. The structure had 6 fields, and I was filling in the last one, which was a proof. The other 5 fields had already used a bunch of constructions. I was filling in this 6th field and I started by getting the syntax right and writing `_` for several things, including a function `_ : R -> S` between two rings. Once I'd got the syntax correct and complete, Lean evaluated the term and to my surprise found no problems with it.  In particular I think it must have figured out which function I meant.

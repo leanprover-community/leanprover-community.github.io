@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24048proofhelp.html
 ---
 
-## [general](index.html)
-### [proof help](24048proofhelp.html)
+## Stream: [general](index.html)
+### Topic: [proof help](24048proofhelp.html)
+
+---
 
 #### [Scott Morrison (Oct 03 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20help/near/135084627):
 How does one prove `1 = n + 1 - n`, without getting your hands dirty? Do we have anything that can help with `nat.sub`?

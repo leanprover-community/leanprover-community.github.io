@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24896BetterImplication.html
 ---
 
-## [general](index.html)
-### [Better Implication](24896BetterImplication.html)
+## Stream: [general](index.html)
+### Topic: [Better Implication](24896BetterImplication.html)
+
+---
 
 #### [Nima (Apr 19 2018 at 06:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20Implication/near/125287484):
 I can write `if h:cnd then aa else bb`.

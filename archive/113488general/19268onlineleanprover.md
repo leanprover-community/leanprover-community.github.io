@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19268onlineleanprover.html
 ---
 
-## [general](index.html)
-### [online leanprover](19268onlineleanprover.html)
+## Stream: [general](index.html)
+### Topic: [online leanprover](19268onlineleanprover.html)
+
+---
 
 #### [Kenny Lau (Nov 14 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/147701238):
 just how outdated is this thing? I posted some code somewhere public and then one guy complained they can't run it in the online lean prover

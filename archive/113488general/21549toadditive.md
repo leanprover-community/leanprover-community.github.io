@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21549toadditive.html
 ---
 
-## [general](index.html)
-### [to_additive](21549toadditive.html)
+## Stream: [general](index.html)
+### Topic: [to_additive](21549toadditive.html)
+
+---
 
 #### [Patrick Massot (Oct 10 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/135545903):
 Is there any hope `to_additive` could be improved to avoid things like https://github.com/leanprover/mathlib/blob/2594f48f20392f84b0743eb0867c030913eca627/group_theory/quotient_group.lean#L40-L47?

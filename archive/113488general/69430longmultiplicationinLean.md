@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/69430longmultiplicationinLean.html
 ---
 
-## [general](index.html)
-### [long multiplication in Lean](69430longmultiplicationinLean.html)
+## Stream: [general](index.html)
+### Topic: [long multiplication in Lean](69430longmultiplicationinLean.html)
+
+---
 
 #### [Kevin Buzzard (Jan 12 2019 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154983199):
 `nat` is great for proving things, but is computationally inefficient because it uses O(n) memory to store the natural number n:

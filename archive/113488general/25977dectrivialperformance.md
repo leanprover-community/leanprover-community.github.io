@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25977dectrivialperformance.html
 ---
 
-## [general](index.html)
-### [dec_trivial performance](25977dectrivialperformance.html)
+## Stream: [general](index.html)
+### Topic: [dec_trivial performance](25977dectrivialperformance.html)
+
+---
 
 #### [Moses Schönfinkel (Sep 25 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20performance/near/134590634):
 I have a computation resolved by `dec_trivial` that takes about 5 minutes with extreme deterministic timeout lean server setting. How does one diagnose this kind of performance problem - is there a way to inspect what's happening or is the situation similar to `#reduce` where you're somewhat out of luck in this regard and the best bet is to step through C++ with a debugger? (As a side note, what is being computed is handled by `#eval` in a few milliseconds.)

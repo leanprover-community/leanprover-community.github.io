@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71468normnum.html
 ---
 
-## [general](index.html)
-### [norm_num](71468normnum.html)
+## Stream: [general](index.html)
+### Topic: [norm_num](71468normnum.html)
+
+---
 
 #### [Sebastien Gouezel (Dec 03 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num/near/150797276):
 I was under the impression that `norm_num` was always successful in its range of expertise. Here is a real-life counterexample:

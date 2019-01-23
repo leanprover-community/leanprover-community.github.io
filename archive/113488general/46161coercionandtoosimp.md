@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/46161coercionandtoosimp.html
 ---
 
-## [general](index.html)
-### [coercion and too simp](46161coercionandtoosimp.html)
+## Stream: [general](index.html)
+### Topic: [coercion and too simp](46161coercionandtoosimp.html)
+
+---
 
 #### [Sean Leather (Jun 07 2018 at 10:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercion%20and%20too%20simp/near/127703649):
 I keep running into the problem of `simp` reducing something to `p = ff` when I really want `¬↥p`. I then end up doing a `rw` explicitly, which is a pain. Is there any way to work around this issue with `simp`?

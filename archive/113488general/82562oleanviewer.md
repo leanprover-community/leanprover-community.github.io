@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82562oleanviewer.html
 ---
 
-## [general](index.html)
-### [olean viewer](82562oleanviewer.html)
+## Stream: [general](index.html)
+### Topic: [olean viewer](82562oleanviewer.html)
+
+---
 
 #### [Mario Carneiro (Dec 19 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean%20viewer/near/152149295):
 Hi all, I'm ready to present a first cut at an [olean file parser](https://github.com/digama0/olean-rs), written in Lean and Rust. I'm hoping it can be useful for people that want to do analysis on lean files without having to grep the files or something. Plus this makes lots of other goodies accessible like notations and VM code for definitions.

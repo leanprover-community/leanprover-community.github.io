@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03027wellfoundedrecursion.html
 ---
 
-## [general](index.html)
-### [well_founded recursion](03027wellfoundedrecursion.html)
+## Stream: [general](index.html)
+### Topic: [well_founded recursion](03027wellfoundedrecursion.html)
+
+---
 
 #### [petercommand (Dec 16 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20recursion/near/151874709):
 Given that a relation ```R : a -> a -> Prop``` satisfies ```{ f : stream a // forall n, R (f (n + 1)) (f n)} -> false```, is it possible to get ```well_founded R```?

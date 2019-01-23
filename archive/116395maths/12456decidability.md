@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/12456decidability.html
 ---
 
-## [maths](index.html)
-### [decidability](12456decidability.html)
+## Stream: [maths](index.html)
+### Topic: [decidability](12456decidability.html)
+
+---
 
 #### [Sebastien Gouezel (Nov 17 2018 at 17:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decidability/near/147882267):
 tldr; why do we have `linear_order` and `decidable_linear_order`?

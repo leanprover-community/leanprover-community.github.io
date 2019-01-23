@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/54951valuations.html
 ---
 
-## [maths](index.html)
-### [valuations](54951valuations.html)
+## Stream: [maths](index.html)
+### Topic: [valuations](54951valuations.html)
+
+---
 
 #### [Kevin Buzzard (May 26 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/valuations/near/127105553):
 Both the Fibonacci Squares project and the Adic Space project need valuations on rings -- one in rather more generality than the other. But let's start at the beginning. Does Lean have p-adic valuations on Z? In other words, is the function $$v_p(\cdot)$$ on the non-zero integers (or even rationals) sending $$p^nN$$ (with $$N$$ coprime to the prime $$p$$) to $$n$$? The key theorems are $$v_p(ab)=v_p(a)+v_p(b)$$ and $$v_p(a+b)\geq\min\{v_p(a),v_p(b)\}$$ (where $$v_p(0)$$ is usually taken to be $$+\infty$$).

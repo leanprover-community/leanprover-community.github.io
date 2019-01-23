@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38861transferbetweenmvpolynomialunitandpolynomial.html
 ---
 
-## [general](index.html)
-### [transfer between mv_polynomial unit and polynomial](38861transferbetweenmvpolynomialunitandpolynomial.html)
+## Stream: [general](index.html)
+### Topic: [transfer between mv_polynomial unit and polynomial](38861transferbetweenmvpolynomialunitandpolynomial.html)
+
+---
 
 #### [Johan Commelin (Sep 03 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transfer%20between%20mv_polynomial%20unit%20and%20polynomial/near/133275790):
 Suppose I want to build a slick machine to move back and forth between `mv_polynomial unit` and `polynomial`. Does it make sense to start with

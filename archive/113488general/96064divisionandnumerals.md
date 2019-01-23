@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96064divisionandnumerals.html
 ---
 
-## [general](index.html)
-### [division and numerals](96064divisionandnumerals.html)
+## Stream: [general](index.html)
+### Topic: [division and numerals](96064divisionandnumerals.html)
+
+---
 
 #### [Kevin Buzzard (Dec 14 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20and%20numerals/near/151792143):
 ```lean

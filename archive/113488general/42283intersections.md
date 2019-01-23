@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42283intersections.html
 ---
 
-## [general](index.html)
-### [intersections](42283intersections.html)
+## Stream: [general](index.html)
+### Topic: [intersections](42283intersections.html)
+
+---
 
 #### [Patrick Massot (Jul 03 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intersections/near/129031496):
 Do we have a better way to do

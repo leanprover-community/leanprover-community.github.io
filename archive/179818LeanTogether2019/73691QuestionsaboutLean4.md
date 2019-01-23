@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/73691QuestionsaboutLean4.html
 ---
 
-## [Lean Together 2019](index.html)
-### [Questions about Lean 4](73691QuestionsaboutLean4.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [Questions about Lean 4](73691QuestionsaboutLean4.html)
+
+---
 
 #### [Joseph Corneli (Jan 07 2019 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Questions%20about%20Lean%204/near/154572312):
 "any chance of the tool you're presenting will allow us to reimplement parameters?"

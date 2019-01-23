@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39890dsimpsimp.html
 ---
 
-## [general](index.html)
-### [dsimp; simp](39890dsimpsimp.html)
+## Stream: [general](index.html)
+### Topic: [dsimp; simp](39890dsimpsimp.html)
+
+---
 
 #### [Reid Barton (Nov 03 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%3B%20simp/near/137130133):
 I think I set a new personal record:

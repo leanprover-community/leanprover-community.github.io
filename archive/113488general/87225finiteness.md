@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87225finiteness.html
 ---
 
-## [general](index.html)
-### [finiteness](87225finiteness.html)
+## Stream: [general](index.html)
+### Topic: [finiteness](87225finiteness.html)
+
+---
 
 #### [Scott Morrison (Apr 04 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finiteness/near/124610398):
 Do mathlib have something that behaves like:

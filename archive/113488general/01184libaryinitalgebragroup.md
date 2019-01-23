@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01184libaryinitalgebragroup.html
 ---
 
-## [general](index.html)
-### [libary/init/algebra/group](01184libaryinitalgebragroup.html)
+## Stream: [general](index.html)
+### Topic: [libary/init/algebra/group](01184libaryinitalgebragroup.html)
+
+---
 
 #### [Kenny Lau (Apr 22 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509188):
 L165:

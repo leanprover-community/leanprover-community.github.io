@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/94461SmallandstraightforwardPRs.html
 ---
 
-## [PR reviews](index.html)
-### [Small and straightforward PRs](94461SmallandstraightforwardPRs.html)
+## Stream: [PR reviews](index.html)
+### Topic: [Small and straightforward PRs](94461SmallandstraightforwardPRs.html)
+
+---
 
 #### [Johan Commelin (Dec 20 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Small%20and%20straightforward%20PRs/near/152240964):
 #531 — *feat(data/int/basic) int.cast is ring hom* [changes 1 file, +4 lines]

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29056finitesetlemmasveryhardtouse.html
 ---
 
-## [general](index.html)
-### [finite set lemmas very hard to use](29056finitesetlemmasveryhardtouse.html)
+## Stream: [general](index.html)
+### Topic: [finite set lemmas very hard to use](29056finitesetlemmasveryhardtouse.html)
+
+---
 
 #### [Chris Hughes (May 27 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20set%20lemmas%20very%20hard%20to%20use/near/127169799):
 A lot of the finite set lemmas are extremely difficult to use. For example `set.empty_card` can only be used in a rewrite, if I've used `fintype_empty` as my `fintype` instance in my goal. Would it be a good idea to make fintype instances an argument to the lemma whenever they're used in the statement of a theorem?

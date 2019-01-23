@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/44470SoftwareFoundations.html
 ---
 
-## [general](index.html)
-### [Software Foundations](44470SoftwareFoundations.html)
+## Stream: [general](index.html)
+### Topic: [Software Foundations](44470SoftwareFoundations.html)
+
+---
 
 #### [Simon Hudon (May 01 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Software%20Foundations/near/125958987):
 @**Kevin Buzzard** I think a while back you were looking at Software Foundations using Lean. Did you write anything up?

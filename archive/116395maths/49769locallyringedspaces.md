@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/49769locallyringedspaces.html
 ---
 
-## [maths](index.html)
-### [locally ringed spaces](49769locallyringedspaces.html)
+## Stream: [maths](index.html)
+### Topic: [locally ringed spaces](49769locallyringedspaces.html)
+
+---
 
 #### [Scott Morrison (Sep 01 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/locally%20ringed%20spaces/near/133171105):
 In [`lean-category-theory`](https://github.com/semorrison/lean-category-theory/blob/master/src/category_theory/locally_ringed.lean) I've added a definition of `locally_ringed_space`.

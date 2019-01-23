@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/65124Macinstallation.html
 ---
 
-## [new members](index.html)
-### [Mac installation](65124Macinstallation.html)
+## Stream: [new members](index.html)
+### Topic: [Mac installation](65124Macinstallation.html)
+
+---
 
 #### [David Michael Roberts (Oct 08 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mac%20installation/near/135389084):
 I notice @**Scott Morrison|110087** put up a nice short video on getting required dependencies, VS Code and Lean installed on Mac, here: https://www.youtube.com/watch?v=k8U6YOK7c0M

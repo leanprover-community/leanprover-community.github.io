@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35357VMfloatingpointexperimentinVM.html
 ---
 
-## [general](index.html)
-### [VM floating point experiment in VM](35357VMfloatingpointexperimentinVM.html)
+## Stream: [general](index.html)
+### Topic: [VM floating point experiment in VM](35357VMfloatingpointexperimentinVM.html)
+
+---
 
 #### [Edward Ayers (Dec 07 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20floating%20point%20experiment%20in%20VM/near/151113509):
 Hi all, as an experiment I made some changes to the Lean VM sourcecode so that it can do basic floating point arithmetic in the VM. It was just an experiment so I do not have the intention of working on it for PR. Overall I found working with the C++ codebase easy to figure out so I would like to thank the Lean team for that.

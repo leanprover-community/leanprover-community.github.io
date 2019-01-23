@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06946integersbetween0and3.html
 ---
 
-## [general](index.html)
-### [integers between 0 and 3](06946integersbetween0and3.html)
+## Stream: [general](index.html)
+### Topic: [integers between 0 and 3](06946integersbetween0and3.html)
+
+---
 
 #### [Kevin Buzzard (Oct 20 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162002):
 `example : ∀ (r : ℤ), r ≥ 0 → r < 3 → r = 0 ∨ r = 1 ∨ r = 2 := dec_trivial` doesn't work for me. Is there any easy way of getting from $$0\leq r<3$$ (with `r : int`) to the three cases?

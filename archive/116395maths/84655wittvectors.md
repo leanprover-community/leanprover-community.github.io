@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/84655wittvectors.html
 ---
 
-## [maths](index.html)
-### [witt vectors](84655wittvectors.html)
+## Stream: [maths](index.html)
+### Topic: [witt vectors](84655wittvectors.html)
+
+---
 
 #### [Johan Commelin (Jul 24 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/130216141):
 Anyone interested in sharpening his teeth on polynomials is encouraged to look here: https://gist.github.com/jcommelin/77240367c2815ca0c45da188ba78be19

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/98386generatefilter.html
 ---
 
-## [maths](index.html)
-### [generate filter](98386generatefilter.html)
+## Stream: [maths](index.html)
+### Topic: [generate filter](98386generatefilter.html)
+
+---
 
 #### [Kenny Lau (Apr 28 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125807430):
 ```lean

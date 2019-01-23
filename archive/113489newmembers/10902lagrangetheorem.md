@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/10902lagrangetheorem.html
 ---
 
-## [new members](index.html)
-### [lagrange theorem](10902lagrangetheorem.html)
+## Stream: [new members](index.html)
+### Topic: [lagrange theorem](10902lagrangetheorem.html)
+
+---
 
 #### [Leonid Kimelfeld (Jan 22 2019 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lagrange%20theorem/near/156586958):
 Dear all, could you help me. Where is formalization of Lagrange theorem (group theory) in mathlib?

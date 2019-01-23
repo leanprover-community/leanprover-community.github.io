@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20508patternmatching101.html
 ---
 
-## [general](index.html)
-### [pattern matching 101](20508patternmatching101.html)
+## Stream: [general](index.html)
+### Topic: [pattern matching 101](20508patternmatching101.html)
+
+---
 
 #### [Scott Morrison (Apr 25 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662292):
 Easy question: how do I do pattern matching against values? Given `k : nat`, naively I could try writing

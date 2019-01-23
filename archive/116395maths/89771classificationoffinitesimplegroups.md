@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/89771classificationoffinitesimplegroups.html
 ---
 
-## [maths](index.html)
-### [classification of finite simple groups](89771classificationoffinitesimplegroups.html)
+## Stream: [maths](index.html)
+### Topic: [classification of finite simple groups](89771classificationoffinitesimplegroups.html)
+
+---
 
 #### [Scott Morrison (Sep 22 2018 at 08:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/classification%20of%20finite%20simple%20groups/near/134424165):
 I made a very preliminary start on the statement of the classification of finite simple groups.

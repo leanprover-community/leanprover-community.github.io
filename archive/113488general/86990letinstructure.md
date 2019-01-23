@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86990letinstructure.html
 ---
 
-## [general](index.html)
-### [let in structure](86990letinstructure.html)
+## Stream: [general](index.html)
+### Topic: [let in structure](86990letinstructure.html)
+
+---
 
 #### [Kevin Buzzard (Jun 02 2018 at 05:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20in%20structure/near/127451506):
 ```lean

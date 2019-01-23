@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/03321Inverseimageoftheindicatorfunction.html
 ---
 
-## [maths](index.html)
-### [Inverse image of the indicator function](03321Inverseimageoftheindicatorfunction.html)
+## Stream: [maths](index.html)
+### Topic: [Inverse image of the indicator function](03321Inverseimageoftheindicatorfunction.html)
+
+---
 
 #### [Koundinya Vajjha (Jan 10 2019 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20of%20the%20indicator%20function/near/154825505):
 I'm struggling to get a hold of the inverse image of the indicator function:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37131applydefortheorem.html
 ---
 
-## [general](index.html)
-### [apply def or theorem](37131applydefortheorem.html)
+## Stream: [general](index.html)
+### Topic: [apply def or theorem](37131applydefortheorem.html)
+
+---
 
 #### [Hoang Le Truong (Aug 07 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131070910):
 I have the following definitions 

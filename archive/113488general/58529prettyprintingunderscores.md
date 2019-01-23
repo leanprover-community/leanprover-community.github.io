@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58529prettyprintingunderscores.html
 ---
 
-## [general](index.html)
-### [pretty printing underscores](58529prettyprintingunderscores.html)
+## Stream: [general](index.html)
+### Topic: [pretty printing underscores](58529prettyprintingunderscores.html)
+
+---
 
 #### [Scott Morrison (Nov 27 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148406464):
 Is there a good way to pretty print expressions, so metavariables get replaced by `_` characters?

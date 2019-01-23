@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31387typeclassinferences.html
 ---
 
-## [general](index.html)
-### [typeclass inferences](31387typeclassinferences.html)
+## Stream: [general](index.html)
+### Topic: [typeclass inferences](31387typeclassinferences.html)
+
+---
 
 #### [Kenny Lau (Apr 06 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695237):
 https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72

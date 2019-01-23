@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/2111785monotonicity.html
 ---
 
-## [PR reviews](index.html)
-### [#85 monotonicity](2111785monotonicity.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#85 monotonicity](2111785monotonicity.html)
+
+---
 
 #### [Simon Hudon (Oct 07 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%2385%20monotonicity/near/135362082):
 @**Mario Carneiro** @**Johannes Hölzl**: what is missing on this PR?

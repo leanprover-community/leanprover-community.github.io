@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/92086computevalueoffunction.html
 ---
 
-## [general](index.html)
-### [compute value of function](92086computevalueoffunction.html)
+## Stream: [general](index.html)
+### Topic: [compute value of function](92086computevalueoffunction.html)
+
+---
 
 #### [jmc (Mar 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932056):
 Hi. Lean-newbie here. I've got a function f : \N \to \Z with a pretty involved definition. I would like to see what Lean thinks that the value of f is on 0,1,2,3 for example.

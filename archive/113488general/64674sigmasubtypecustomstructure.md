@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64674sigmasubtypecustomstructure.html
 ---
 
-## [general](index.html)
-### [sigma, subtype, custom structure](64674sigmasubtypecustomstructure.html)
+## Stream: [general](index.html)
+### Topic: [sigma, subtype, custom structure](64674sigmasubtypecustomstructure.html)
+
+---
 
 #### [Sean Leather (Sep 06 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sigma%2C%20subtype%2C%20custom%20structure/near/133436036):
 On [#316](https://github.com/leanprover/mathlib/pull/316), there are the following comments:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79716memoryleakinserver.html
 ---
 
-## [general](index.html)
-### [memory leak in server?](79716memoryleakinserver.html)
+## Stream: [general](index.html)
+### Topic: [memory leak in server?](79716memoryleakinserver.html)
+
+---
 
 #### [Kevin Buzzard (Feb 27 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/memory%20leak%20in%20server%3F/near/123017339):
 ```

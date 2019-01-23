@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52974whatdoesmean.html
 ---
 
-## [general](index.html)
-### [what does . mean?](52974whatdoesmean.html)
+## Stream: [general](index.html)
+### Topic: [what does . mean?](52974whatdoesmean.html)
+
+---
 
 #### [Kenny Lau (Apr 16 2018 at 03:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20does%20.%20mean%3F/near/125129469):
 ```

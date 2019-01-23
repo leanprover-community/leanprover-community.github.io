@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04284linarith.html
 ---
 
-## [general](index.html)
-### [linarith](04284linarith.html)
+## Stream: [general](index.html)
+### Topic: [linarith](04284linarith.html)
+
+---
 
 #### [Johan Commelin (Nov 21 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith/near/148096612):
 Shouldn't `linarith` be able to take care of this?

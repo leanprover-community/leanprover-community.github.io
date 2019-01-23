@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80304equalitybycomponents.html
 ---
 
-## [general](index.html)
-### [equality by components](80304equalitybycomponents.html)
+## Stream: [general](index.html)
+### Topic: [equality by components](80304equalitybycomponents.html)
+
+---
 
 #### [Reid Barton (Feb 27 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20by%20components/near/123047697):
 If my goal is of the form `⟨x, y⟩ = ⟨x', y'⟩`, is there a tactic that will replace it with two new goals `x = x'` and `y = y'`?

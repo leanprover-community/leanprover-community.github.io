@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29043hiddenfunction.html
 ---
 
-## [general](index.html)
-### [hidden function](29043hiddenfunction.html)
+## Stream: [general](index.html)
+### Topic: [hidden function](29043hiddenfunction.html)
+
+---
 
 #### [Mario Carneiro (Dec 15 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151838238):
 I just noticed a very clever trick that was used in a Coq development. We can define the following function:

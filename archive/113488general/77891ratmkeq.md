@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77891ratmkeq.html
 ---
 
-## [general](index.html)
-### [rat.mk_eq](77891ratmkeq.html)
+## Stream: [general](index.html)
+### Topic: [rat.mk_eq](77891ratmkeq.html)
+
+---
 
 #### [Kenny Lau (Apr 25 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rat.mk_eq/near/125675114):
 ```lean

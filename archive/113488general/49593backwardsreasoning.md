@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49593backwardsreasoning.html
 ---
 
-## [general](index.html)
-### [backwards reasoning](49593backwardsreasoning.html)
+## Stream: [general](index.html)
+### Topic: [backwards reasoning](49593backwardsreasoning.html)
+
+---
 
 #### [Reid Barton (Oct 19 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/backwards%20reasoning/near/136141676):
 Can someone remind me of the status of `backwards_reasoning` in mathlib? Is it still in PR limbo, or did it get merged into `solve_by_elim`, or what?

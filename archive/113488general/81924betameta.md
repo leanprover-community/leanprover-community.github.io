@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81924betameta.html
 ---
 
-## [general](index.html)
-### [beta meta](81924betameta.html)
+## Stream: [general](index.html)
+### Topic: [beta meta](81924betameta.html)
+
+---
 
 #### [Patrick Massot (Oct 17 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/beta%20meta/near/135995670):
 Inside the tactic monad, can I ask Lean to beta-reduce an `expr`?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25328accrec.html
 ---
 
-## [general](index.html)
-### [acc.rec](25328accrec.html)
+## Stream: [general](index.html)
+### Topic: [acc.rec](25328accrec.html)
+
+---
 
 #### [Chris Hughes (Mar 19 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/acc.rec/near/123928942):
 I've been trying to prove things using acc.rec, and I'm finding it difficult to deal with. Of these three lemmas, only the first compiled. Definitional equality doesn't always seem to work. I'm particularly surprised that the third lemma doesn't reduce, given that the two terms differ only by a proof with the same type.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83984funextxrfl.html
 ---
 
-## [general](index.html)
-### [funext $ λ x, rfl](83984funextxrfl.html)
+## Stream: [general](index.html)
+### Topic: [funext $ λ x, rfl](83984funextxrfl.html)
+
+---
 
 #### [Kenny Lau (Apr 02 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funext%20%24%20%CE%BB%20x%2C%20rfl/near/124521378):
 conjecture: everything that can be proven using `funext $ λ x, rfl` can be proven using `rfl`

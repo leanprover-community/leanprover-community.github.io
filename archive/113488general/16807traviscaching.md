@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16807traviscaching.html
 ---
 
-## [general](index.html)
-### [travis caching](16807traviscaching.html)
+## Stream: [general](index.html)
+### Topic: [travis caching](16807traviscaching.html)
+
+---
 
 #### [Mario Carneiro (May 31 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127367872):
 @**Gabriel Ebner** Could you help me try to set up build caching on travis? The from-scratch build times are nearing the time limit for public jobs. I tried following https://docs.travis-ci.com/user/caching/ but I can't find the *Build branch updates* option.

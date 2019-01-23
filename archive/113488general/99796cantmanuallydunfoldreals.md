@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99796cantmanuallydunfoldreals.html
 ---
 
-## [general](index.html)
-### [can't manually `dunfold` reals](99796cantmanuallydunfoldreals.html)
+## Stream: [general](index.html)
+### Topic: [can't manually `dunfold` reals](99796cantmanuallydunfoldreals.html)
+
+---
 
 #### [Kevin Buzzard (Nov 21 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20manually%20%60dunfold%60%20reals/near/148102409):
 ```lean

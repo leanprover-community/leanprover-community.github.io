@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78762substandlocalconstantexpression.html
 ---
 
-## [general](index.html)
-### [subst and local constant expression](78762substandlocalconstantexpression.html)
+## Stream: [general](index.html)
+### Topic: [subst and local constant expression](78762substandlocalconstantexpression.html)
+
+---
 
 #### [Sean Leather (Feb 27 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20and%20local%20constant%20expression/near/123034490):
 Why does `subst` need its expression argument to be a local constant? I would like to be able to do something like `subst <expr>` with an arbitrary `<expr>`, but this results in:

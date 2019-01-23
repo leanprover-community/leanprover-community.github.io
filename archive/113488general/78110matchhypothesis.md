@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78110matchhypothesis.html
 ---
 
-## [general](index.html)
-### [match hypothesis](78110matchhypothesis.html)
+## Stream: [general](index.html)
+### Topic: [match hypothesis](78110matchhypothesis.html)
+
+---
 
 #### [Alexander Bentkamp (Sep 12 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133796312):
 Hi, 

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76294findingafailed.html
 ---
 
-## [general](index.html)
-### [finding a failed](76294findingafailed.html)
+## Stream: [general](index.html)
+### Topic: [finding a failed](76294findingafailed.html)
+
+---
 
 #### [Keeley Hoek (Sep 10 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133643406):
 What's the easiest way to find where a "failed" was generated? I've been resorting to inserting trace statements in multiple files and now its just getting out of hand

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16816Uselistasanargument.html
 ---
 
-## [general](index.html)
-### [Use list as an argument](16816Uselistasanargument.html)
+## Stream: [general](index.html)
+### Topic: [Use list as an argument](16816Uselistasanargument.html)
+
+---
 
 #### [Blair Shi (Jul 11 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Use%20list%20as%20an%20argument/near/129458509):
 I define a function which takes a list as a argument but I do not know why it always break when I use it in my other theorem or function.

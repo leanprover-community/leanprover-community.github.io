@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/07070Hardbutobviouslemma.html
 ---
 
-## [general](index.html)
-### [Hard but obvious lemma](07070Hardbutobviouslemma.html)
+## Stream: [general](index.html)
+### Topic: [Hard but obvious lemma](07070Hardbutobviouslemma.html)
+
+---
 
 #### [Chris Hughes (Jun 23 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hard%20but%20obvious%20lemma/near/128498549):
 How to prove this? I don't need it, I'm just curious.

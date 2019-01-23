@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85947ProgramminginLean.html
 ---
 
-## [general](index.html)
-### [Programming in Lean](85947ProgramminginLean.html)
+## Stream: [general](index.html)
+### Topic: [Programming in Lean](85947ProgramminginLean.html)
+
+---
 
 #### [Chris Hughes (Jul 11 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20in%20Lean/near/129464604):
 The following code from Chapter 9 of Programming in Lean doesn't work in `lean-nightly-2018-04-20`

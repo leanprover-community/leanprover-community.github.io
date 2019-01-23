@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/39810avoidingsubtypeeq.html
 ---
 
-## [maths](index.html)
-### [avoiding subtype.eq](39810avoidingsubtypeeq.html)
+## Stream: [maths](index.html)
+### Topic: [avoiding subtype.eq](39810avoidingsubtypeeq.html)
+
+---
 
 #### [Kevin Buzzard (Aug 21 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/avoiding%20subtype.eq/near/132541236):
 ```lean

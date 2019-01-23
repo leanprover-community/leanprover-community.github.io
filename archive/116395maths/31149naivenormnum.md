@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/31149naivenormnum.html
 ---
 
-## [maths](index.html)
-### [naive norm-num](31149naivenormnum.html)
+## Stream: [maths](index.html)
+### Topic: [naive norm-num](31149naivenormnum.html)
+
+---
 
 #### [Kevin Buzzard (Sep 11 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naive%20norm-num/near/133735274):
 Chris Hughes sent me a message in June containing a very cool naive `norm_num`. I found learning about a naive `ring` very interesting, and `ring` and `norm_num` are two tactics which mathematicians can't live without, so without his permission, here is the message he sent me in full:

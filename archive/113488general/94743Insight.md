@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/94743Insight.html
 ---
 
-## [general](index.html)
-### [Insight](94743Insight.html)
+## Stream: [general](index.html)
+### Topic: [Insight](94743Insight.html)
+
+---
 
 #### [Patrick Massot (Nov 26 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Insight/near/148393158):
 Do we know how much of https://www.youtube.com/watch?v=bGD_YF64Nwk has been formally certified?

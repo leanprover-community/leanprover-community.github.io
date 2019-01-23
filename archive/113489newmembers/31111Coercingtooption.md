@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/31111Coercingtooption.html
 ---
 
-## [new members](index.html)
-### [Coercing to option](31111Coercingtooption.html)
+## Stream: [new members](index.html)
+### Topic: [Coercing to option](31111Coercingtooption.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204948):
 Where can I find lemmas about coercing to option (e.g. `ℕ` to `option ℕ`)? I want basic things like `↑(n - m) = ↑n - ↑m`.

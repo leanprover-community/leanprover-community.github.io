@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/69812Ismathlibbrokencurrentlyno.html
 ---
 
-## [maths](index.html)
-### [Is mathlib broken currently? (no)](69812Ismathlibbrokencurrentlyno.html)
+## Stream: [maths](index.html)
+### Topic: [Is mathlib broken currently? (no)](69812Ismathlibbrokencurrentlyno.html)
+
+---
 
 #### [Kevin Buzzard (Sep 06 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133406331):
 ```lean

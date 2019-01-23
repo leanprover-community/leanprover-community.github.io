@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/07374refinecantgowith.html
 ---
 
-## [general](index.html)
-### ["refine" can't go with λ ⟨_, _⟩, _](07374refinecantgowith.html)
+## Stream: [general](index.html)
+### Topic: ["refine" can't go with λ ⟨_, _⟩, _](07374refinecantgowith.html)
+
+---
 
 #### [Kenny Lau (Sep 15 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22refine%22%20can%27t%20go%20with%20%CE%BB%20%E2%9F%A8_%2C%20_%E2%9F%A9%2C%20_/near/134001592):
 ```lean

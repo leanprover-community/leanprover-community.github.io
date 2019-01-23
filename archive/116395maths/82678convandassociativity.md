@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/82678convandassociativity.html
 ---
 
-## [maths](index.html)
-### [conv and associativity](82678convandassociativity.html)
+## Stream: [maths](index.html)
+### Topic: [conv and associativity](82678convandassociativity.html)
+
+---
 
 #### [Scott Morrison (Nov 13 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/conv%20and%20associativity/near/147579358):
 If any category theorists have recently been fighting with associativity, they might like the new `conv` tactic I just wrote:

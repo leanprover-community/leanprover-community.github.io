@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74575Forwarddeclarations.html
 ---
 
-## [general](index.html)
-### [Forward declarations](74575Forwarddeclarations.html)
+## Stream: [general](index.html)
+### Topic: [Forward declarations](74575Forwarddeclarations.html)
+
+---
 
 #### [Keeley Hoek (Aug 10 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227150):
 Is it possible to forward declare definitions in lean? I'd like to write something like

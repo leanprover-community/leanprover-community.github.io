@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/68210makingawelldefineddefinition.html
 ---
 
-## [new members](index.html)
-### [making a well-defined definition](68210makingawelldefineddefinition.html)
+## Stream: [new members](index.html)
+### Topic: [making a well-defined definition](68210makingawelldefineddefinition.html)
+
+---
 
 #### [Ali Sever (Aug 05 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/making%20a%20well-defined%20definition/near/130922260):
 I have two sets `A B` and I want to define `f A B = g A b`(another set) for some `b ∈ B`.  I have the fact that `∃ b, b ∈ B`, but I'm not allowed to use Exists.dcases_on. Also, how/when do I prove this is well-defined and doesn't depend on the choice of `b`?

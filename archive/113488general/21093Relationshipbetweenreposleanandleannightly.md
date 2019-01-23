@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21093Relationshipbetweenreposleanandleannightly.html
 ---
 
-## [general](index.html)
-### [Relationship between repos lean and lean-nightly](21093Relationshipbetweenreposleanandleannightly.html)
+## Stream: [general](index.html)
+### Topic: [Relationship between repos lean and lean-nightly](21093Relationshipbetweenreposleanandleannightly.html)
+
+---
 
 #### [Ching-Tsun Chou (Mar 11 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Relationship%20between%20repos%20lean%20and%20lean-nightly/near/123582525):
 I am confused about the relationship between the following two repos:

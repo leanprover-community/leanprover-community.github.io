@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/69770rewriteentire.html
 ---
 
-## [general](index.html)
-### [rewrite entire](69770rewriteentire.html)
+## Stream: [general](index.html)
+### Topic: [rewrite entire](69770rewriteentire.html)
+
+---
 
 #### [Scott Morrison (Mar 14 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679200):
 Hi all, this is a follow-up to my difficulties with the `occs` configuration for `rw`. I'm still not there writing a "please find _all_ the possible rewrites" function.

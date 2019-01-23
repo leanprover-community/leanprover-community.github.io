@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/49995quiversanddiagrams.html
 ---
 
-## [maths](index.html)
-### [quivers and diagrams](49995quiversanddiagrams.html)
+## Stream: [maths](index.html)
+### Topic: [quivers and diagrams](49995quiversanddiagrams.html)
+
+---
 
 #### [Johan Commelin (May 01 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937757):
 I've got the following snippet

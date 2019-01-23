@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/34616118directlimit.html
 ---
 
-## [PR reviews](index.html)
-### [#118 direct limit](34616118directlimit.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#118 direct limit](34616118directlimit.html)
+
+---
 
 #### [Kenny Lau (Oct 14 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23118%20direct%20limit/near/135791634):
 This is a can of worms. If we define a directed order to be one such that for every x and y there is z with x<=z and y<=z, then you can't define (x,a) + (y,b) computably, because you only have the fact that such `z` exists. So originally I defined a directed order to be one with a supremum function where `le_sup_left` and `le_sup_right` hold, but I don't require `sup_le`. But this generated much backlash, because people don't want it to be a function, but just an existential.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52580howtousetransfer.html
 ---
 
-## [general](index.html)
-### [how to use transfer](52580howtousetransfer.html)
+## Stream: [general](index.html)
+### Topic: [how to use transfer](52580howtousetransfer.html)
+
+---
 
 #### [Mario Carneiro (Oct 06 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299504):
 Okay, here is a mockup use of `transfer`:

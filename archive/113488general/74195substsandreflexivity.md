@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74195substsandreflexivity.html
 ---
 
-## [general](index.html)
-### [substs and reflexivity](74195substsandreflexivity.html)
+## Stream: [general](index.html)
+### Topic: [substs and reflexivity](74195substsandreflexivity.html)
+
+---
 
 #### [Sean Leather (Aug 20 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/substs%20and%20reflexivity/near/132442829):
 It seems like `subst` solves a reflexive goal but `substs` does not. If I replace `subst p, subst q`with `substs p q`, I have to add `refl` to solve the goal.

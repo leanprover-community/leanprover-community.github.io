@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/62584polynomials.html
 ---
 
-## [maths](index.html)
-### [polynomials](62584polynomials.html)
+## Stream: [maths](index.html)
+### Topic: [polynomials](62584polynomials.html)
+
+---
 
 #### [Scott Morrison (Apr 04 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/124608289):
 Where can I find the following facts: `Z[x] is a commutative ring`, and `evaluation at x = i is a ring homomorphism`?

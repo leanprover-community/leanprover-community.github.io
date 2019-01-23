@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59403printlistname.html
 ---
 
-## [general](index.html)
-### [print list name](59403printlistname.html)
+## Stream: [general](index.html)
+### Topic: [print list name](59403printlistname.html)
+
+---
 
 #### [Johan Commelin (Aug 09 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/print%20list%20name/near/131155695):
 My first attempt at writing a tactic. I want a tactic that will `fail` by printing a list of tactics. I've copy-pasted code by Scott:

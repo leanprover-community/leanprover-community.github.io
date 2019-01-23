@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25609Whatisthelatestworkingleanmathlibpair.html
 ---
 
-## [general](index.html)
-### [What is the latest working (lean, mathlib) pair?](25609Whatisthelatestworkingleanmathlibpair.html)
+## Stream: [general](index.html)
+### Topic: [What is the latest working (lean, mathlib) pair?](25609Whatisthelatestworkingleanmathlibpair.html)
+
+---
 
 #### [Ching-Tsun Chou (Mar 26 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20latest%20working%20%28lean%2C%20mathlib%29%20pair%3F/near/124203602):
 A pair of git commit ids would suffice.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/94829parsingquestion.html
 ---
 
-## [general](index.html)
-### [parsing question](94829parsingquestion.html)
+## Stream: [general](index.html)
+### Topic: [parsing question](94829parsingquestion.html)
+
+---
 
 #### [Kevin Buzzard (Jan 19 2019 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20question/near/156445528):
 tl;dr: what are the binding powers of `Π  _ , _` and `→` in Lean's dependent type theory? Does this even make sense?

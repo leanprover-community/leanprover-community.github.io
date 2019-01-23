@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/00370multiplicativefinsupp.html
 ---
 
-## [maths](index.html)
-### [multiplicative finsupp](00370multiplicativefinsupp.html)
+## Stream: [maths](index.html)
+### Topic: [multiplicative finsupp](00370multiplicativefinsupp.html)
+
+---
 
 #### [Johan Commelin (Jan 22 2019 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/multiplicative%20finsupp/near/156594377):
 I'm trying to stress test my adjunctions code. A natural example is `mv_polynomial` being left adjoint to `forget`. This adjunction is actually a composite of two adjunctions: the free monoid construction, and monoid rings. While trying to write these things down, I got stuck in the whole additive-multiplicative business again. So, let's forget about this motivation for now.

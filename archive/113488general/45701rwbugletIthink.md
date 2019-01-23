@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45701rwbugletIthink.html
 ---
 
-## [general](index.html)
-### [rw buglet (I think)](45701rwbugletIthink.html)
+## Stream: [general](index.html)
+### Topic: [rw buglet (I think)](45701rwbugletIthink.html)
+
+---
 
 #### [Kevin Buzzard (Apr 02 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20buglet%20%28I%20think%29/near/124528036):
 before : 38 hypotheses including ` HyT2 : y ∈ T ` and ` HTUih : T = Ui h `

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93941erased.html
 ---
 
-## [general](index.html)
-### [erased](93941erased.html)
+## Stream: [general](index.html)
+### Topic: [erased](93941erased.html)
+
+---
 
 #### [Mario Carneiro (Apr 05 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124681873):
 @**Gabriel Ebner** What would be the best way to define the following type:

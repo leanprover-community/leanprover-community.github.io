@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23851understandingprofileroutput.html
 ---
 
-## [general](index.html)
-### [understanding profiler output](23851understandingprofileroutput.html)
+## Stream: [general](index.html)
+### Topic: [understanding profiler output](23851understandingprofileroutput.html)
+
+---
 
 #### [Kevin Buzzard (May 11 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20profiler%20output/near/126403538):
 So I am 2/3 of the way through a pretty big proof which I am currently reluctant to break up into smaller pieces.

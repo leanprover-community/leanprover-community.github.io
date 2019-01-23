@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20537Whatsgoodnotationforconvergence.html
 ---
 
-## [general](index.html)
-### [What's good notation for convergence?](20537Whatsgoodnotationforconvergence.html)
+## Stream: [general](index.html)
+### Topic: [What's good notation for convergence?](20537Whatsgoodnotationforconvergence.html)
+
+---
 
 #### [Jan-David Salchow (Jan 15 2019 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20good%20notation%20for%20convergence%3F/near/155162064):
 To avoid introducing constants, @**Johannes Hölzl** asked me to change

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08179LeanassignmentfromKenny.html
 ---
 
-## [general](index.html)
-### [Lean assignment from Kenny](08179LeanassignmentfromKenny.html)
+## Stream: [general](index.html)
+### Topic: [Lean assignment from Kenny](08179LeanassignmentfromKenny.html)
+
+---
 
 #### [Kenny Lau (Jul 30 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20assignment%20from%20Kenny/near/130567187):
 (optional) assignment for the people here who are too bored:

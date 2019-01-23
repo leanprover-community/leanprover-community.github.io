@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04700examplex2x0sorry.html
 ---
 
-## [general](index.html)
-### [example (x : ℕ) : ¬ (2 + x = 0) := sorry](04700examplex2x0sorry.html)
+## Stream: [general](index.html)
+### Topic: [example (x : ℕ) : ¬ (2 + x = 0) := sorry](04700examplex2x0sorry.html)
+
+---
 
 #### [Kevin Buzzard (Apr 04 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/example%20%28x%20%3A%20%E2%84%95%29%20%3A%20%C2%AC%20%282%20%2B%20x%20%3D%200%29%20%3A%3D%20sorry/near/124642055):
 It is forever taking me 3 lines to prove stuff like this. What's a slick way of doing this quickly?

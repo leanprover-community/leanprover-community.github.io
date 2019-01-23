@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30619inductivedef.html
 ---
 
-## [general](index.html)
-### [inductive def](30619inductivedef.html)
+## Stream: [general](index.html)
+### Topic: [inductive def](30619inductivedef.html)
+
+---
 
 #### [Patrick Massot (Dec 01 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20def/near/150691842):
 I very rarely use inductive def so I'm a bit confused by:

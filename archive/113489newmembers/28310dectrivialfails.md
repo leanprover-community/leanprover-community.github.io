@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/28310dectrivialfails.html
 ---
 
-## [new members](index.html)
-### [dec_trivial fails](28310dectrivialfails.html)
+## Stream: [new members](index.html)
+### Topic: [dec_trivial fails](28310dectrivialfails.html)
+
+---
 
 #### [Kenny Lau (Oct 30 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dec_trivial%20fails/near/136806175):
 ```lean

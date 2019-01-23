@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/07323updatingKevinsinstallationinstructions.html
 ---
 
-## [general](index.html)
-### [updating Kevin's installation instructions](07323updatingKevinsinstallationinstructions.html)
+## Stream: [general](index.html)
+### Topic: [updating Kevin's installation instructions](07323updatingKevinsinstallationinstructions.html)
+
+---
 
 #### [Scott Morrison (Oct 06 2018 at 03:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20Kevin%27s%20installation%20instructions/near/135291857):
 Hi @**Kevin Buzzard**, I'm thinking that since `elan` has now arrived and is pretty good, we should update your blog post.

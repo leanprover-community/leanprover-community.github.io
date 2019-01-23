@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55527whyisthishappening.html
 ---
 
-## [general](index.html)
-### [why is this happening](55527whyisthishappening.html)
+## Stream: [general](index.html)
+### Topic: [why is this happening](55527whyisthishappening.html)
+
+---
 
 #### [Koundinya Vajjha (Jan 16 2019 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155291582):
 ```lean 

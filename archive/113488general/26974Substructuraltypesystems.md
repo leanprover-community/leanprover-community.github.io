@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26974Substructuraltypesystems.html
 ---
 
-## [general](index.html)
-### [Substructural type systems](26974Substructuraltypesystems.html)
+## Stream: [general](index.html)
+### Topic: [Substructural type systems](26974Substructuraltypesystems.html)
+
+---
 
 #### [Wojciech Nawrocki (Oct 31 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Substructural%20type%20systems/near/136882886):
 Has anyone looked at or is familiar with Lean formalisations of substructural type systems (like linear types whose instances have to be used exactly once)?

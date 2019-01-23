@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/29865typeofnot.html
 ---
 
-## [new members](index.html)
-### [type of `not`](29865typeofnot.html)
+## Stream: [new members](index.html)
+### Topic: [type of `not`](29865typeofnot.html)
+
+---
 
 #### [Scott Olson (Oct 09 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20of%20%60not%60/near/135432721):
 Is there a reason we have `def not : Prop → Prop` rather than `def not : Sort u → Prop`?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/30267morelimitstuff.html
 ---
 
-## [maths](index.html)
-### [more limit stuff](30267morelimitstuff.html)
+## Stream: [maths](index.html)
+### Topic: [more limit stuff](30267morelimitstuff.html)
+
+---
 
 #### [Johan Commelin (Dec 17 2018 at 05:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151910753):
 I've got the following lemmas

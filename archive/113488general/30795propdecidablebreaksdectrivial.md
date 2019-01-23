@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30795propdecidablebreaksdectrivial.html
 ---
 
-## [general](index.html)
-### [prop_decidable breaks dec_trivial?](30795propdecidablebreaksdectrivial.html)
+## Stream: [general](index.html)
+### Topic: [prop_decidable breaks dec_trivial?](30795propdecidablebreaksdectrivial.html)
+
+---
 
 #### [Kevin Buzzard (Jul 26 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prop_decidable%20breaks%20dec_trivial%3F/near/130351758):
 ```lean

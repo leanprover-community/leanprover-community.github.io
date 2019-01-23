@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02870makingisomorphismclassagroup.html
 ---
 
-## [general](index.html)
-### [making isomorphism class a group](02870makingisomorphismclassagroup.html)
+## Stream: [general](index.html)
+### Topic: [making isomorphism class a group](02870makingisomorphismclassagroup.html)
+
+---
 
 #### [Kenny Lau (Mar 31 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464358):
 Let's say I have a bunch of groups, and I use `quotient` to make isomorphism classes. Is there a constructive way to make the isomorphism classes inherit the structure of a group?

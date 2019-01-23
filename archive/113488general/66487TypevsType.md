@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66487TypevsType.html
 ---
 
-## [general](index.html)
-### [Type* vs Type _](66487TypevsType.html)
+## Stream: [general](index.html)
+### Topic: [Type* vs Type _](66487TypevsType.html)
+
+---
 
 #### [Patrick Massot (Apr 26 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%2A%20vs%20Type%20_/near/125719177):
 What's the difference between `(a: Type*)` and `(a: Type _)`?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/50984trailingwhitespace.html
 ---
 
-## [PR reviews](index.html)
-### [trailing whitespace](50984trailingwhitespace.html)
+## Stream: [PR reviews](index.html)
+### Topic: [trailing whitespace](50984trailingwhitespace.html)
+
+---
 
 #### [Reid Barton (Oct 08 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/trailing%20whitespace/near/135371097):
 https://stackoverflow.com/questions/30884131/remove-trailing-spaces-automatically-or-with-a-shortcut for Scott, and other VS Code users

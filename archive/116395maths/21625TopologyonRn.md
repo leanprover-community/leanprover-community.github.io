@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/21625TopologyonRn.html
 ---
 
-## [maths](index.html)
-### [Topology on R^n](21625TopologyonRn.html)
+## Stream: [maths](index.html)
+### Topic: [Topology on R^n](21625TopologyonRn.html)
+
+---
 
 #### [Johan Commelin (May 14 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528202):
 I have the following code

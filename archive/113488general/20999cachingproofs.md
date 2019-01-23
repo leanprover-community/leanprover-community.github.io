@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20999cachingproofs.html
 ---
 
-## [general](index.html)
-### [caching proofs](20999cachingproofs.html)
+## Stream: [general](index.html)
+### Topic: [caching proofs](20999cachingproofs.html)
+
+---
 
 #### [Scott Morrison (Sep 18 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/caching%20proofs/near/134150227):
 So I'm moving it here.

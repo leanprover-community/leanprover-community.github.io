@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02379extractimpfromiff.html
 ---
 
-## [general](index.html)
-### [extract `imp` from `iff`](02379extractimpfromiff.html)
+## Stream: [general](index.html)
+### Topic: [extract `imp` from `iff`](02379extractimpfromiff.html)
+
+---
 
 #### [Scott Morrison (Oct 07 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extract%20%60imp%60%20from%20%60iff%60/near/135330842):
 I'd like a function `meta imp_of_iff : expr -> tactic expr`, that takes a lemma that says, `\Pi (...), P \iff Q`, and gives me instead the lemma `\Pi (...), P \to Q`. Has anyone seen this lying around somewhere in mathlib? It's probably not too hard, I'm just hoping it's already done!

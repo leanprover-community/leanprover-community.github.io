@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/13546SL2Zaction.html
 ---
 
-## [kbb](index.html)
-### [SL2Z action](13546SL2Zaction.html)
+## Stream: [kbb](index.html)
+### Topic: [SL2Z action](13546SL2Zaction.html)
+
+---
 
 #### [Johan Commelin (Sep 14 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/SL2Z%20action/near/133942386):
 I'm trying to continue Patrick's work on finiteness of the quotient `SL2Z \ (Mat m)`.

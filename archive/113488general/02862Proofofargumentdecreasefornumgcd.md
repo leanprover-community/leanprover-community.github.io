@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02862Proofofargumentdecreasefornumgcd.html
 ---
 
-## [general](index.html)
-### [Proof of argument decrease for num.gcd](02862Proofofargumentdecreasefornumgcd.html)
+## Stream: [general](index.html)
+### Topic: [Proof of argument decrease for num.gcd](02862Proofofargumentdecreasefornumgcd.html)
+
+---
 
 #### [Seul Baek (Jun 07 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20of%20argument%20decrease%20for%20num.gcd/near/127717897):
 I'm trying to define `gcd` for `num`. I've already defined `num.mod` and proved related lemmas (which you can check at https://github.com/skbaek/qelim/blob/master/src/common/num.lean), and here's my first attempt using those preliminary definitions :

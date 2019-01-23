@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77763killingeasynatgoal.html
 ---
 
-## [general](index.html)
-### [killing easy nat goal](77763killingeasynatgoal.html)
+## Stream: [general](index.html)
+### Topic: [killing easy nat goal](77763killingeasynatgoal.html)
+
+---
 
 #### [Kevin Buzzard (Mar 20 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/killing%20easy%20nat%20goal/near/123969731):
 Faced with `∀ n, 2 * nat.succ (n) = nat.succ (2 * n + 1)` I find that simp or ring don't seem to be able to do it. Even `intro n, simp [nat.succ_eq_add_one,mul_add,one_add_one_eq_two]` doesn't work. I can use simp and then ring!

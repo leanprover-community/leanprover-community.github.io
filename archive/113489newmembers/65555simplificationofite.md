@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/65555simplificationofite.html
 ---
 
-## [new members](index.html)
-### [simplification of ite](65555simplificationofite.html)
+## Stream: [new members](index.html)
+### Topic: [simplification of ite](65555simplificationofite.html)
+
+---
 
 #### [Ken Roe (Aug 11 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simplification%20of%20ite/near/131967259):
 How do I complete the following theorem:

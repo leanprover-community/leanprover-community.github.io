@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05576offtopic.html
 ---
 
-## [general](index.html)
-### [off-topic](05576offtopic.html)
+## Stream: [general](index.html)
+### Topic: [off-topic](05576offtopic.html)
+
+---
 
 #### [Andrew Ashworth (Feb 26 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/off-topic/near/123008244):
 or you could have an off-topic topic, very meta

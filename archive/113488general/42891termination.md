@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42891termination.html
 ---
 
-## [general](index.html)
-### [termination](42891termination.html)
+## Stream: [general](index.html)
+### Topic: [termination](42891termination.html)
+
+---
 
 #### [petercommand (Nov 23 2018 at 03:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148203856):
 https://gist.github.com/petercommand/91e72613af95bde16baadf484abd1368

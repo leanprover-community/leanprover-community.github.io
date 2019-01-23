@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/04805Perfectoidspaces.html
 ---
 
-## [maths](index.html)
-### [Perfectoid spaces](04805Perfectoidspaces.html)
+## Stream: [maths](index.html)
+### Topic: [Perfectoid spaces](04805Perfectoidspaces.html)
+
+---
 
 #### [Kevin Buzzard (May 30 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/127307288):
 Ok so here is the perfectoid spaces thread. As many people here know, I've long been mulling over the idea of formalising the notion of a perfectoid space in Lean. To the CS people -- it's just some structure, like a group, just a few more axioms and things.

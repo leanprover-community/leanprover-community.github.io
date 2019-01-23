@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/73541iscontinuumhypothesistrueinLean.html
 ---
 
-## [maths](index.html)
-### [is continuum hypothesis true in Lean?](73541iscontinuumhypothesistrueinLean.html)
+## Stream: [maths](index.html)
+### Topic: [is continuum hypothesis true in Lean?](73541iscontinuumhypothesistrueinLean.html)
+
+---
 
 #### [Kenny Lau (May 11 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is%20continuum%20hypothesis%20true%20in%20Lean%3F/near/126419454):
 Is the continuum hypothesis true in Lean’s model of ZFC?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56973abeltactic.html
 ---
 
-## [general](index.html)
-### [abel tactic](56973abeltactic.html)
+## Stream: [general](index.html)
+### Topic: [abel tactic](56973abeltactic.html)
+
+---
 
 #### [Mario Carneiro (Sep 10 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abel%20tactic/near/133643278):
 Say hello to the `abel` tactic, which does the same thing as `ring` but for commutative additive monoids and commutative groups. It doesn't currently support `*` on rings, since it would require a bit more support for `nat.cast` and `int.cast` in `norm_num`, but otherwise it is full featured using `+`, `-`, and `add_monoid.smul`, `gsmul`.

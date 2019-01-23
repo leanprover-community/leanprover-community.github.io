@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/67846SoLongandThanksforAlltheFish.html
 ---
 
-## [Lean Together 2019](index.html)
-### [So Long, and Thanks for All the Fish](67846SoLongandThanksforAlltheFish.html)
+## Stream: [Lean Together 2019](index.html)
+### Topic: [So Long, and Thanks for All the Fish](67846SoLongandThanksforAlltheFish.html)
+
+---
 
 #### [Johan Commelin (Jan 11 2019 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/So%20Long%2C%20and%20Thanks%20for%20All%20the%20Fish/near/154916334):
 Eventually my neighbourhood filter tends to that of Freiburg.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/70558TypeDrivenProgramSynthesis.html
 ---
 
-## [general](index.html)
-### ["Type-Driven Program Synthesis"](70558TypeDrivenProgramSynthesis.html)
+## Stream: [general](index.html)
+### Topic: ["Type-Driven Program Synthesis"](70558TypeDrivenProgramSynthesis.html)
+
+---
 
 #### [Bryan Gin-ge Chen (Oct 22 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22Type-Driven%20Program%20Synthesis%22/near/136245038):
 I just watched and enjoyed this talk: ["Type-Driven Program Synthesis" by Nadia Polikarpova](https://www.youtube.com/watch?v=HnOix9TFy1A). To a newbie like me, this kind of automation seems quite cool and mindblowing. Also, the way she described synthesizing programs as a search problem made me think of @**Scott Morrison|110087** 's `rewrite_search` demo.

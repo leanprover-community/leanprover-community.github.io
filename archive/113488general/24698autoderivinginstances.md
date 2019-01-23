@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24698autoderivinginstances.html
 ---
 
-## [general](index.html)
-### [auto deriving instances](24698autoderivinginstances.html)
+## Stream: [general](index.html)
+### Topic: [auto deriving instances](24698autoderivinginstances.html)
+
+---
 
 #### [Zesen Qian (Jun 07 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20deriving%20instances/near/127688095):
 Is there a quick way to derive instances for type definitions like `def boolean : Type := bool`?

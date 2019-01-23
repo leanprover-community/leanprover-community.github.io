@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82176fintype.html
 ---
 
-## [general](index.html)
-### [fintype](82176fintype.html)
+## Stream: [general](index.html)
+### Topic: [fintype](82176fintype.html)
+
+---
 
 #### [Chris Hughes (Feb 27 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123059884):
 What's the reason fintype isn't marked as Prop?

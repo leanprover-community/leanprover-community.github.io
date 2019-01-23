@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/92876Rewritingonobjectsthathaventbeenintroduced.html
 ---
 
-## [new members](index.html)
-### [Rewriting on objects that haven't been introduced](92876Rewritingonobjectsthathaventbeenintroduced.html)
+## Stream: [new members](index.html)
+### Topic: [Rewriting on objects that haven't been introduced](92876Rewritingonobjectsthathaventbeenintroduced.html)
+
+---
 
 #### [Abhimanyu Pallavi Sudhir (Nov 19 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rewriting%20on%20objects%20that%20haven%27t%20been%20introduced/near/147983997):
 I have the following term in my goal:

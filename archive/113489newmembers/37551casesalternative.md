@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/37551casesalternative.html
 ---
 
-## [new members](index.html)
-### [cases alternative](37551casesalternative.html)
+## Stream: [new members](index.html)
+### Topic: [cases alternative](37551casesalternative.html)
+
+---
 
 #### [Sarah Mameche (Dec 18 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cases%20alternative/near/152139969):
 Hi, using ``cases`` on an hypothesis sometimes gives me really huge terms in the resulting hypotheses. It's happened if the hypothesis contains recursive definitions, and I fixed it in one case by marking the definition as ``irreducible``.

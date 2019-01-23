@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40518tidylostmymetavars.html
 ---
 
-## [general](index.html)
-### [tidy lost my metavars](40518tidylostmymetavars.html)
+## Stream: [general](index.html)
+### Topic: [tidy lost my metavars](40518tidylostmymetavars.html)
+
+---
 
 #### [Johan Commelin (Nov 29 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148774987):
 Somehow `tidy` claims it closed all goals, but the kernel says there are still metavariables left. Is there a good approach to debugging this? Somewhere a metavariable got removed from the goal-list without being fully instantiated. I guess it should be possible to track this, right?

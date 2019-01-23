@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/58787428BanachContraction.html
 ---
 
-## [PR reviews](index.html)
-### [#428 Banach Contraction](58787428BanachContraction.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#428 Banach Contraction](58787428BanachContraction.html)
+
+---
 
 #### [Johan Commelin (Dec 11 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151452941):
 PR by @**Rohan Mitta**.

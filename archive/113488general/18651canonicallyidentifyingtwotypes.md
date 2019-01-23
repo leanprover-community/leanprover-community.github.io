@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/18651canonicallyidentifyingtwotypes.html
 ---
 
-## [general](index.html)
-### ["canonically" identifying two types](18651canonicallyidentifyingtwotypes.html)
+## Stream: [general](index.html)
+### Topic: ["canonically" identifying two types](18651canonicallyidentifyingtwotypes.html)
+
+---
 
 #### [Kevin Buzzard (Apr 27 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125765228):
 How can I beef up "equiv" into "canonical isomorphism"?

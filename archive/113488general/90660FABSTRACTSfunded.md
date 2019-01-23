@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90660FABSTRACTSfunded.html
 ---
 
-## [general](index.html)
-### [FABSTRACTS funded](90660FABSTRACTSfunded.html)
+## Stream: [general](index.html)
+### Topic: [FABSTRACTS funded](90660FABSTRACTSfunded.html)
+
+---
 
 #### [Kevin Buzzard (Mar 28 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/FABSTRACTS%20funded/near/124325364):
 https://jiggerwit.wordpress.com/2018/03/28/formal-abstracts-in-mathematics/

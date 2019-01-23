@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45957reStructuredTextandLean.html
 ---
 
-## [general](index.html)
-### [reStructured Text and Lean](45957reStructuredTextandLean.html)
+## Stream: [general](index.html)
+### Topic: [reStructured Text and Lean](45957reStructuredTextandLean.html)
+
+---
 
 #### [Simon Hudon (Jun 18 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reStructured%20Text%20and%20Lean/near/128224433):
 I'm looking at the build system of https://github.com/leanprover/theorem_proving_in_lean to adapt Software Foundations and I can't find where the html and latex lean syntax highlighting is defined. Can someone give me a hint?

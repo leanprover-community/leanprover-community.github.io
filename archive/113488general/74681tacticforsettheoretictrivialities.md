@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74681tacticforsettheoretictrivialities.html
 ---
 
-## [general](index.html)
-### [tactic for set-theoretic trivialities](74681tacticforsettheoretictrivialities.html)
+## Stream: [general](index.html)
+### Topic: [tactic for set-theoretic trivialities](74681tacticforsettheoretictrivialities.html)
+
+---
 
 #### [Kevin Buzzard (May 21 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866089):
 I am beginning to tire of goals of the form `Ua ∩ Ub ∩ Uc ⊆ Ua ∩ Ub ∩ (Ua ∩ Uc)`

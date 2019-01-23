@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/20349UniformlyContinuousonMetricSpaces.html
 ---
 
-## [maths](index.html)
-### [Uniformly Continuous on Metric Spaces](20349UniformlyContinuousonMetricSpaces.html)
+## Stream: [maths](index.html)
+### Topic: [Uniformly Continuous on Metric Spaces](20349UniformlyContinuousonMetricSpaces.html)
+
+---
 
 #### [Rohan Mitta (Sep 26 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Uniformly%20Continuous%20on%20Metric%20Spaces/near/134666418):
 Have I formalised this right and is it in mathlib?

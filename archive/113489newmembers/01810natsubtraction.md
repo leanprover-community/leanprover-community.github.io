@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/01810natsubtraction.html
 ---
 
-## [new members](index.html)
-### [nat subtraction](01810natsubtraction.html)
+## Stream: [new members](index.html)
+### Topic: [nat subtraction](01810natsubtraction.html)
+
+---
 
 #### [Patrick Thomas (Dec 22 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152392979):
 I am a bit confused by the results of the following:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90876mlmethodsininteractivetheoremproving.html
 ---
 
-## [general](index.html)
-### [ml methods in interactive theorem proving](90876mlmethodsininteractivetheoremproving.html)
+## Stream: [general](index.html)
+### Topic: [ml methods in interactive theorem proving](90876mlmethodsininteractivetheoremproving.html)
+
+---
 
 #### [Andrew Ashworth (Jun 14 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ml%20methods%20in%20interactive%20theorem%20proving/near/128046890):
 interesting paper here: "GamePad: A Learning Environment for Theorem Proving" https://arxiv.org/abs/1806.00608

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26544inspectingreduce.html
 ---
 
-## [general](index.html)
-### [inspecting #reduce](26544inspectingreduce.html)
+## Stream: [general](index.html)
+### Topic: [inspecting #reduce](26544inspectingreduce.html)
+
+---
 
 #### [Moses Schönfinkel (Jun 07 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inspecting%20%23reduce/near/127709156):
 Is there a `set_option` of sorts to see what steps `#reduce` is going through to debug a *(deterministic) timeout*?

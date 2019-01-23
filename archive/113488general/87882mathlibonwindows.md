@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87882mathlibonwindows.html
 ---
 
-## [general](index.html)
-### [mathlib on windows](87882mathlibonwindows.html)
+## Stream: [general](index.html)
+### Topic: [mathlib on windows](87882mathlibonwindows.html)
+
+---
 
 #### [Jeremy Avigad (Sep 16 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20on%20windows/near/134031931):
 I am trying to install mathlib on a windows laptop. In mingw I set all the paths, but I get this:

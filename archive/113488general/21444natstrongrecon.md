@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21444natstrongrecon.html
 ---
 
-## [general](index.html)
-### [nat.strong_rec_on](21444natstrongrecon.html)
+## Stream: [general](index.html)
+### Topic: [nat.strong_rec_on](21444natstrongrecon.html)
+
+---
 
 #### [Kenny Lau (Sep 14 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133965949):
 Can we make this `@[elab_as_eliminator]`?

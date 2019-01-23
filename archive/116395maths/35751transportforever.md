@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/35751transportforever.html
 ---
 
-## [maths](index.html)
-### [transport forever](35751transportforever.html)
+## Stream: [maths](index.html)
+### Topic: [transport forever](35751transportforever.html)
+
+---
 
 #### [Patrick Massot (Oct 10 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transport%20forever/near/135547994):
 Today I tried to setup transport of structure along equiv, since @**Mario Carneiro** wanted to see (part of) what we would like to be automated. It can be seen at https://gist.github.com/PatrickMassot/9c5246efe8d1fd4f26c21cbf2ac99ff8 First I'd like to know if the beginning looks reasonnable. The answer is almost certainly not since I'm stuck when I try to go to rings at the bottom. This file is autonomous, it should fail reliably with any recentish version of mathlib.

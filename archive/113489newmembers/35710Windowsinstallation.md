@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/35710Windowsinstallation.html
 ---
 
-## [new members](index.html)
-### [Windows installation](35710Windowsinstallation.html)
+## Stream: [new members](index.html)
+### Topic: [Windows installation](35710Windowsinstallation.html)
+
+---
 
 #### [JDM (Sep 22 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Windows%20installation/near/134429178):
 Hi everyone! I'm trying to get Lean to work with Visual Studio, but I'm having trouble setting the installation path. Can anyone help? Much appreciated!

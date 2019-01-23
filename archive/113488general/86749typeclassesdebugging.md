@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86749typeclassesdebugging.html
 ---
 
-## [general](index.html)
-### [type classes debugging](86749typeclassesdebugging.html)
+## Stream: [general](index.html)
+### Topic: [type classes debugging](86749typeclassesdebugging.html)
+
+---
 
 #### [Sebastien Gouezel (Dec 29 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20classes%20debugging/near/152707443):
 A t2 space is a topological space with some separation property. Every metric space is a t2 space. If you try

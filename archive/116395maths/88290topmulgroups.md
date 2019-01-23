@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/88290topmulgroups.html
 ---
 
-## [maths](index.html)
-### [top mul groups](88290topmulgroups.html)
+## Stream: [maths](index.html)
+### Topic: [top mul groups](88290topmulgroups.html)
+
+---
 
 #### [Patrick Massot (Oct 06 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/top%20mul%20groups/near/135306917):
 Am I blind or is the definition of multiplicative topological groups is missing in mathlib?

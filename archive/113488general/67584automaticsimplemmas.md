@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67584automaticsimplemmas.html
 ---
 
-## [general](index.html)
-### [automatic simp lemmas](67584automaticsimplemmas.html)
+## Stream: [general](index.html)
+### Topic: [automatic simp lemmas](67584automaticsimplemmas.html)
+
+---
 
 #### [Reid Barton (Dec 15 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151823722):
 We have a lot of simp lemmas in category theory that describe the action of functors, natural isomorphisms, etc. on various things. Johan has a few open PRs adding more of these lemmas (eg #503, #505) and they prompted me to try to understand how to describe these lemmas systematically.

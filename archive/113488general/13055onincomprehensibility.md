@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13055onincomprehensibility.html
 ---
 
-## [general](index.html)
-### [on incomprehensibility](13055onincomprehensibility.html)
+## Stream: [general](index.html)
+### Topic: [on incomprehensibility](13055onincomprehensibility.html)
+
+---
 
 #### [Reid Barton (Oct 20 2018 at 04:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20incomprehensibility/near/136149992):
 I managed to turn a screen-long argument (Theorem 4.3 [here](https://ncatlab.org/nlab/show/relational+beta-module#conc)) which I don't really understand into 4 lines of lean which I also don't really understand--the last four lines below. (What I'm formalizing is not exactly the same thing as that page is talking about, but I think it's closely related.)

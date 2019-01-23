@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/78187473limitsandcolimits.html
 ---
 
-## [PR reviews](index.html)
-### [#473 limits and colimits](78187473limitsandcolimits.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#473 limits and colimits](78187473limitsandcolimits.html)
+
+---
 
 #### [Johan Commelin (Nov 19 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23473%20limits%20and%20colimits/near/147952349):
 @**Scott Morrison|110087** has taken this PR through a couple of revisions, but I think it is quite solid and stable now. I've been stress testing it quite a bit on my `sheaf` branch, and I think it works well. Do others have any comments?

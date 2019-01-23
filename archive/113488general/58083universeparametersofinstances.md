@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58083universeparametersofinstances.html
 ---
 
-## [general](index.html)
-### [universe parameters of instances](58083universeparametersofinstances.html)
+## Stream: [general](index.html)
+### Topic: [universe parameters of instances](58083universeparametersofinstances.html)
+
+---
 
 #### [Reid Barton (Jun 03 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20parameters%20of%20instances/near/127507965):
 Is this a known issue?

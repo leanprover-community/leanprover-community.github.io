@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/84894propaganda.html
 ---
 
-## [general](index.html)
-### [propaganda](84894propaganda.html)
+## Stream: [general](index.html)
+### Topic: [propaganda](84894propaganda.html)
+
+---
 
 #### [Patrick Massot (Apr 05 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propaganda/near/124688670):
 Today I attended a talk by Warwick Tucker, the Lorenz attractor guy. I told him about Lean and he seemed to be very interested (he does computer assisted proofs and would like to use proof assistants)

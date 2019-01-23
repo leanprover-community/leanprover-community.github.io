@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00690VSCodehoverissue.html
 ---
 
-## [general](index.html)
-### [VS Code hover issue](00690VSCodehoverissue.html)
+## Stream: [general](index.html)
+### Topic: [VS Code hover issue](00690VSCodehoverissue.html)
+
+---
 
 #### [Kevin Buzzard (Jan 12 2019 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20issue/near/154997129):
 ```lean

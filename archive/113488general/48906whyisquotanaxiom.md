@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48906whyisquotanaxiom.html
 ---
 
-## [general](index.html)
-### [why is quot an axiom?](48906whyisquotanaxiom.html)
+## Stream: [general](index.html)
+### Topic: [why is quot an axiom?](48906whyisquotanaxiom.html)
+
+---
 
 #### [Kevin Buzzard (Dec 21 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152363029):
 Can't we just do it like this?

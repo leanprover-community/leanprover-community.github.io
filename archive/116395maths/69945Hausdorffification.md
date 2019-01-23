@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/69945Hausdorffification.html
 ---
 
-## [maths](index.html)
-### [Hausdorffification](69945Hausdorffification.html)
+## Stream: [maths](index.html)
+### Topic: [Hausdorffification](69945Hausdorffification.html)
+
+---
 
 #### [Kenny Lau (Oct 18 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026443):
 ```lean

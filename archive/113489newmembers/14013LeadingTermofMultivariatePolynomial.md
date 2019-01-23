@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/14013LeadingTermofMultivariatePolynomial.html
 ---
 
-## [new members](index.html)
-### [Leading Term of Multivariate Polynomial](14013LeadingTermofMultivariatePolynomial.html)
+## Stream: [new members](index.html)
+### Topic: [Leading Term of Multivariate Polynomial](14013LeadingTermofMultivariatePolynomial.html)
+
+---
 
 #### [AHan (Nov 18 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leading%20Term%20of%20Multivariate%20Polynomial/near/147908130):
 I wanted to write a function which return the leading term of a multivariate polynomial

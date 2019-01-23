@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71472propextquotsoundandeqrec.html
 ---
 
-## [general](index.html)
-### [propext, quot.sound and eq.rec](71472propextquotsoundandeqrec.html)
+## Stream: [general](index.html)
+### Topic: [propext, quot.sound and eq.rec](71472propextquotsoundandeqrec.html)
+
+---
 
 #### [Chris Hughes (Oct 09 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135462261):
 Is every `nat` defined using `propext`, `quot.sound` and `eq.rec` but without choice guaranteed to reduce to `succ $ succ $ succ ... zero`?

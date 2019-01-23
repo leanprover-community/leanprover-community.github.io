@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31843unfoldingdefinitions.html
 ---
 
-## [general](index.html)
-### [unfolding definitions](31843unfoldingdefinitions.html)
+## Stream: [general](index.html)
+### Topic: [unfolding definitions](31843unfoldingdefinitions.html)
+
+---
 
 #### [Guy Leroy (Aug 22 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573040):
 I have the following def:

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22700Tailcallelimination.html
 ---
 
-## [general](index.html)
-### [Tail-call elimination?](22700Tailcallelimination.html)
+## Stream: [general](index.html)
+### Topic: [Tail-call elimination?](22700Tailcallelimination.html)
+
+---
 
 #### [Keeley Hoek (Aug 12 2018 at 13:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tail-call%20elimination%3F/near/131992962):
 Because I have no idea how the VM actually works I tempt asking a meaningless question here, but here we go regardless: does the VM do tail-call elimination? Will my IO reading loops eventually explode if left to their own devices for long enough?

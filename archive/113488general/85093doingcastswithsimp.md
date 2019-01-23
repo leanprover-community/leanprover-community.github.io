@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85093doingcastswithsimp.html
 ---
 
-## [general](index.html)
-### [doing casts with `simp`](85093doingcastswithsimp.html)
+## Stream: [general](index.html)
+### Topic: [doing casts with `simp`](85093doingcastswithsimp.html)
+
+---
 
 #### [Kevin Buzzard (Aug 23 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/doing%20casts%20with%20%60simp%60/near/132631368):
 ```lean

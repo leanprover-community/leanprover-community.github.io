@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02530convert.html
 ---
 
-## [general](index.html)
-### [convert](02530convert.html)
+## Stream: [general](index.html)
+### Topic: [convert](02530convert.html)
+
+---
 
 #### [Kenny Lau (May 31 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/convert/near/127339342):
 maybe `convert` can automatically `apply_instance`?

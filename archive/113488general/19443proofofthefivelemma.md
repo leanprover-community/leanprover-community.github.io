@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19443proofofthefivelemma.html
 ---
 
-## [general](index.html)
-### [proof of the five lemma](19443proofofthefivelemma.html)
+## Stream: [general](index.html)
+### Topic: [proof of the five lemma](19443proofofthefivelemma.html)
+
+---
 
 #### [Johan Commelin (Apr 24 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20of%20the%20five%20lemma/near/125618074):
 Yoohoo, I'm done.

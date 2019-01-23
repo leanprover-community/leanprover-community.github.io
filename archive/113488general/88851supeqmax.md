@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88851supeqmax.html
 ---
 
-## [general](index.html)
-### [sup_eq_max](88851supeqmax.html)
+## Stream: [general](index.html)
+### Topic: [sup_eq_max](88851supeqmax.html)
+
+---
 
 #### [Chris Hughes (Jul 06 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sup_eq_max/near/129199027):
 Is there a nice way to state the lemma `a ⊔ b = max a b`, in general, for when `sup` is not derived from `max` such as on `with_bot`, or do I just have to prove it for `with_bot`

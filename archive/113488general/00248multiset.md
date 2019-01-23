@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00248multiset.html
 ---
 
-## [general](index.html)
-### [multiset](00248multiset.html)
+## Stream: [general](index.html)
+### Topic: [multiset](00248multiset.html)
+
+---
 
 #### [Kevin Buzzard (Jul 12 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiset/near/129522842):
 @**Ellen Arlt** and I are putting `multiset.lean` through its paces.

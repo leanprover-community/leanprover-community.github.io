@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/97622inverseof.html
 ---
 
-## [general](index.html)
-### [inverse of $](97622inverseof.html)
+## Stream: [general](index.html)
+### Topic: [inverse of $](97622inverseof.html)
+
+---
 
 #### [Andrew Ashworth (May 28 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186287):
 is there an inverse of `$`? (the backwards pipe operator`<|`)  i.e. instead of `g (f x)` being written as `g $ f x` I'd like to write `f x <| g`

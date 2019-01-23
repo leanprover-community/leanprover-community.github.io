@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/09235510oppositecategories.html
 ---
 
-## [PR reviews](index.html)
-### [#510 opposite categories](09235510oppositecategories.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#510 opposite categories](09235510oppositecategories.html)
+
+---
 
 #### [Johan Commelin (Dec 20 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23510%20opposite%20categories/near/152239436):
 @**Scott Morrison|110087** I saw you fixed some stuff, but Travis is still complaining... If you don't have time for this, just let me know, and I'll try to take a look.

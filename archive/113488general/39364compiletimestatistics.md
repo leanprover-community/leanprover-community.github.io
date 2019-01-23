@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39364compiletimestatistics.html
 ---
 
-## [general](index.html)
-### [compile time statistics](39364compiletimestatistics.html)
+## Stream: [general](index.html)
+### Topic: [compile time statistics](39364compiletimestatistics.html)
+
+---
 
 #### [Kenny Lau (Sep 24 2018 at 07:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compile%20time%20statistics/near/134506913):
 Can we get some data on how long it takes for *each* file to compile?

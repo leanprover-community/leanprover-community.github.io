@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/30944Binomialtheorem.html
 ---
 
-## [maths](index.html)
-### [Binomial theorem](30944Binomialtheorem.html)
+## Stream: [maths](index.html)
+### Topic: [Binomial theorem](30944Binomialtheorem.html)
+
+---
 
 #### [Nicholas Scheel (Jun 08 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Binomial%20theorem/near/127788179):
 Hey! I proved the binomial theorem, if anyone finds it interesting its in a gist here: https://gist.github.com/MonoidMusician/ad43301ee3b4e71c0e1c3d440c6898c5

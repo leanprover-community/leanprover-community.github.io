@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/18848Lean4atETHZurichCompilerSocialWed12Dec.html
 ---
 
-## [general](index.html)
-### [Lean 4 at ETH Zurich Compiler Social - Wed 12. Dec](18848Lean4atETHZurichCompilerSocialWed12Dec.html)
+## Stream: [general](index.html)
+### Topic: [Lean 4 at ETH Zurich Compiler Social - Wed 12. Dec](18848Lean4atETHZurichCompilerSocialWed12Dec.html)
+
+---
 
 #### [Tobias Grosser (Nov 28 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20at%20ETH%20Zurich%20Compiler%20Social%20-%20Wed%2012.%20Dec/near/148708913):
 Dear all,

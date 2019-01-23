@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32921moreproblemswithcoercions.html
 ---
 
-## [general](index.html)
-### [more problems with coercions](32921moreproblemswithcoercions.html)
+## Stream: [general](index.html)
+### Topic: [more problems with coercions](32921moreproblemswithcoercions.html)
+
+---
 
 #### [Scott Morrison (Aug 06 2018 at 07:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958740):
 So... I've been trying to implement @**Mario Carneiro**'s suggestion that I define the coercion allowing `F X` for a functor `F` on an object `X`, and define a @[simp] lemma unfolding the coercion.

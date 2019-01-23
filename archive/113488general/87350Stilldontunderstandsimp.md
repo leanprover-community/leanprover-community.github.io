@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87350Stilldontunderstandsimp.html
 ---
 
-## [general](index.html)
-### [Still don't understand simp](87350Stilldontunderstandsimp.html)
+## Stream: [general](index.html)
+### Topic: [Still don't understand simp](87350Stilldontunderstandsimp.html)
+
+---
 
 #### [Kevin Buzzard (Jul 27 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Still%20don%27t%20understand%20simp/near/130435282):
 I still don't understand simp. I tried

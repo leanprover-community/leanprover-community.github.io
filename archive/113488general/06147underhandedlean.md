@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06147underhandedlean.html
 ---
 
-## [general](index.html)
-### [underhanded lean](06147underhandedlean.html)
+## Stream: [general](index.html)
+### Topic: [underhanded lean](06147underhandedlean.html)
+
+---
 
 #### [Mario Carneiro (Dec 27 2018 at 02:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/underhanded%20lean/near/152579911):
 wow, I didn't expect this to work:

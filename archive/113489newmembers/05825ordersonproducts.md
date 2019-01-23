@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/05825ordersonproducts.html
 ---
 
-## [new members](index.html)
-### [orders on products](05825ordersonproducts.html)
+## Stream: [new members](index.html)
+### Topic: [orders on products](05825ordersonproducts.html)
+
+---
 
 #### [Alistair Tucker (Dec 08 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/orders%20on%20products/near/151190056):
 I want definitions like

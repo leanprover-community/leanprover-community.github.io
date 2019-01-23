@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/36869linarithnat.html
 ---
 
-## [general](index.html)
-### [linarith & nat](36869linarithnat.html)
+## Stream: [general](index.html)
+### Topic: [linarith & nat](36869linarithnat.html)
+
+---
 
 #### [Reid Barton (Sep 30 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134918920):
 @**Rob Lewis** I started remembering to use `linarith` to solve some easy goals like `f < g -> -f - -g <= 0 -> false`.

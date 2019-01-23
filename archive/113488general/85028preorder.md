@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85028preorder.html
 ---
 
-## [general](index.html)
-### [preorder](85028preorder.html)
+## Stream: [general](index.html)
+### Topic: [preorder](85028preorder.html)
+
+---
 
 #### [Kevin Buzzard (Sep 03 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder/near/133250860):
 ```lean

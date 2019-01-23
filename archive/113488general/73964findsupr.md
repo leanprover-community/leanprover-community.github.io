@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73964findsupr.html
 ---
 
-## [general](index.html)
-### [find supr](73964findsupr.html)
+## Stream: [general](index.html)
+### Topic: [find supr](73964findsupr.html)
+
+---
 
 #### [Johan Commelin (Nov 09 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/find%20supr/near/147368449):
 I have found

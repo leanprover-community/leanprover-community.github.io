@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28663addtheoremby.html
 ---
 
-## [general](index.html)
-### [add_theorem_by](28663addtheoremby.html)
+## Stream: [general](index.html)
+### Topic: [add_theorem_by](28663addtheoremby.html)
+
+---
 
 #### [Jakob von Raumer (Mar 24 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_theorem_by/near/124151486):
 Why does this fail?

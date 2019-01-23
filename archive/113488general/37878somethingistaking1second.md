@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37878somethingistaking1second.html
 ---
 
-## [general](index.html)
-### [something is taking 1 second](37878somethingistaking1second.html)
+## Stream: [general](index.html)
+### Topic: [something is taking 1 second](37878somethingistaking1second.html)
+
+---
 
 #### [Kenny Lau (Jul 23 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147638):
 ```lean

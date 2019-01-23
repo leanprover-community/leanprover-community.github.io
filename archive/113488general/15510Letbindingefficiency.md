@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/15510Letbindingefficiency.html
 ---
 
-## [general](index.html)
-### [Let binding efficiency](15510Letbindingefficiency.html)
+## Stream: [general](index.html)
+### Topic: [Let binding efficiency](15510Letbindingefficiency.html)
+
+---
 
 #### [Seul Baek (Dec 24 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Let%20binding%20efficiency/near/152446520):
 If a term `foo` appears multiple times in a definition in such a way that each occurrence of it will have to be normalized,  does the definition become more efficiently computable by using `let x := foo in` in the beginning? The assumption is that `x` will be structured in a way that forces (some) normalization with the let binding (e.g., if `foo : A × B`, then `let (a,b) := foo`).

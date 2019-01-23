@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53884casesfailsonexists.html
 ---
 
-## [general](index.html)
-### [cases fails on exists](53884casesfailsonexists.html)
+## Stream: [general](index.html)
+### Topic: [cases fails on exists](53884casesfailsonexists.html)
+
+---
 
 #### [Nima (Apr 21 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485520):
 Can you explain this error message (it happens when I say `cases hm with aa bb`, but `by_cases number.has_min α with hm` works perfectly fine):

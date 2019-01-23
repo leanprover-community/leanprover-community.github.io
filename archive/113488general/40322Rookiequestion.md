@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40322Rookiequestion.html
 ---
 
-## [general](index.html)
-### [Rookie question](40322Rookiequestion.html)
+## Stream: [general](index.html)
+### Topic: [Rookie question](40322Rookiequestion.html)
+
+---
 
 #### [Frank Mobler (May 22 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rookie%20question/near/126907865):
 I'm stumped proving `example {V : Type}{n : V} : n ∈ ({n} : set V)`. Please without tactics first. I want to see how to construct proof terms explicitly for types like this.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63608euclideandomainsPR.html
 ---
 
-## [general](index.html)
-### [euclidean domains PR](63608euclideandomainsPR.html)
+## Stream: [general](index.html)
+### Topic: [euclidean domains PR](63608euclideandomainsPR.html)
+
+---
 
 #### [Scott Morrison (Apr 05 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/euclidean%20domains%20PR/near/124646289):
 I think https://github.com/leanprover/mathlib/pull/78 is at this point waiting either to be merged or for further comments.

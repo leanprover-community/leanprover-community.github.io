@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/43083indirectrecursioncheck.html
 ---
 
-## [new members](index.html)
-### [indirect recursion check](43083indirectrecursioncheck.html)
+## Stream: [new members](index.html)
+### Topic: [indirect recursion check](43083indirectrecursioncheck.html)
+
+---
 
 #### [Scott Olson (Sep 27 2018 at 03:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134713724):
 A while ago I was porting some code from Coq to Lean and it was going very well, but there was one definition that reduces to something like this:

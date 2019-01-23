@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89043coinductivetypes.html
 ---
 
-## [general](index.html)
-### [coinductive types](89043coinductivetypes.html)
+## Stream: [general](index.html)
+### Topic: [coinductive types](89043coinductivetypes.html)
+
+---
 
 #### [Kevin Buzzard (Feb 28 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coinductive%20types/near/123081684):
 Can someone (@**Simon Hudon** ?) explain what a coinductive type is and, more specifically, whether a mathematician would ever need them?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53181dependentfinsupp.html
 ---
 
-## [general](index.html)
-### [dependent finsupp](53181dependentfinsupp.html)
+## Stream: [general](index.html)
+### Topic: [dependent finsupp](53181dependentfinsupp.html)
+
+---
 
 #### [Kenny Lau (Sep 04 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dependent%20finsupp/near/133297941):
 I want to make finsupp dependent, and then build the current finsupp as a special case. Is this a good idea?

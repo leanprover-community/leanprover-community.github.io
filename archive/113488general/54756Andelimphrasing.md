@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54756Andelimphrasing.html
 ---
 
-## [general](index.html)
-### [And-elim phrasing](54756Andelimphrasing.html)
+## Stream: [general](index.html)
+### Topic: [And-elim phrasing](54756Andelimphrasing.html)
+
+---
 
 #### [Patrick Stevens (May 28 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/And-elim%20phrasing/near/127218529):
 Noob question here, trying to improve my mental model of Lean.

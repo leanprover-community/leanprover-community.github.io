@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85011constructingproofsbyhand.html
 ---
 
-## [general](index.html)
-### [constructing proofs by hand](85011constructingproofsbyhand.html)
+## Stream: [general](index.html)
+### Topic: [constructing proofs by hand](85011constructingproofsbyhand.html)
+
+---
 
 #### [Scott Morrison (Apr 10 2018 at 05:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20proofs%20by%20hand/near/124867540):
 If I have `X Y Z : expr`, and a `P : expr` representing a proof that `X = Y`, how do I make the expression that says `(X = Z) = (Y = Z)`?

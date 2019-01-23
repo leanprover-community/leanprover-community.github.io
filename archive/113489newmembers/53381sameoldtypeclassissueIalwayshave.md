@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/53381sameoldtypeclassissueIalwayshave.html
 ---
 
-## [new members](index.html)
-### [same old typeclass issue I always have](53381sameoldtypeclassissueIalwayshave.html)
+## Stream: [new members](index.html)
+### Topic: [same old typeclass issue I always have](53381sameoldtypeclassissueIalwayshave.html)
+
+---
 
 #### [Kevin Buzzard (Oct 08 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401453):
 I really should write these down at some point; I'm always having to ask. I still can't quite control `haveI` `exactI` etc.

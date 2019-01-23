@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/95179exprswithlocalconstant.html
 ---
 
-## [general](index.html)
-### [expr's with local constant](95179exprswithlocalconstant.html)
+## Stream: [general](index.html)
+### Topic: [expr's with local constant](95179exprswithlocalconstant.html)
+
+---
 
 #### [Chris Hughes (Jan 02 2019 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr%27s%20with%20local%20constant/near/154192394):
 What's the best way of getting something a bit like this to work?

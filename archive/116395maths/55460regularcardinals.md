@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/55460regularcardinals.html
 ---
 
-## [maths](index.html)
-### [regular cardinals](55460regularcardinals.html)
+## Stream: [maths](index.html)
+### Topic: [regular cardinals](55460regularcardinals.html)
+
+---
 
 #### [Reid Barton (Sep 08 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/regular%20cardinals/near/133571077):
 @**Mario Carneiro** I want to show that if $$\kappa$$ is a regular cardinal, then the sum of fewer than $$\kappa$$ cardinals smaller than $$\kappa$$ is less than $$\kappa$$. Is there an easy way to do this from what's already there about regular cardinals?

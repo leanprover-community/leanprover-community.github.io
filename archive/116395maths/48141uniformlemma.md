@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/48141uniformlemma.html
 ---
 
-## [maths](index.html)
-### [uniform lemma](48141uniformlemma.html)
+## Stream: [maths](index.html)
+### Topic: [uniform lemma](48141uniformlemma.html)
+
+---
 
 #### [Patrick Massot (Jul 14 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20lemma/near/129677243):
 Is the following lemma already hidden somewhere in mathlib? Or is it too trivial to be stated? What would be his canonical name?

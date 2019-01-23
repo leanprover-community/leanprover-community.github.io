@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/30462Timeoutwiththemathematicalbrackets.html
 ---
 
-## [new members](index.html)
-### [Time out with the mathematical brackets](30462Timeoutwiththemathematicalbrackets.html)
+## Stream: [new members](index.html)
+### Topic: [Time out with the mathematical brackets](30462Timeoutwiththemathematicalbrackets.html)
+
+---
 
 #### [AHan (Nov 04 2018 at 05:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Time%20out%20with%20the%20mathematical%20brackets/near/137141051):
 I've defined a prime field, and tried to define a function that maps `int` to`pf`, but somehow timeout at the function...

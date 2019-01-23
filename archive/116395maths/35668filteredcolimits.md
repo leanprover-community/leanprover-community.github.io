@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/35668filteredcolimits.html
 ---
 
-## [maths](index.html)
-### [filtered colimits](35668filteredcolimits.html)
+## Stream: [maths](index.html)
+### Topic: [filtered colimits](35668filteredcolimits.html)
+
+---
 
 #### [Reid Barton (Dec 21 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filtered%20colimits/near/152355333):
 Has anyone been working with filtered colimits? Perhaps @**Ramon Fernandez Mir** @**Kevin Buzzard**?

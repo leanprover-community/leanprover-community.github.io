@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77786Modules.html
 ---
 
-## [general](index.html)
-### [Modules](77786Modules.html)
+## Stream: [general](index.html)
+### Topic: [Modules](77786Modules.html)
+
+---
 
 #### [Morenikeji Neri (Jul 26 2018 at 00:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Modules/near/130306693):
 Why is is_linear_map not a class?

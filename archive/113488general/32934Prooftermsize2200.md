@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32934Prooftermsize2200.html
 ---
 
-## [general](index.html)
-### [Proof term size * 2^200](32934Prooftermsize2200.html)
+## Stream: [general](index.html)
+### Topic: [Proof term size * 2^200](32934Prooftermsize2200.html)
+
+---
 
 #### [Seul Baek (Jan 10 2019 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20term%20size%20%2A%202%5E200/near/154864164):
 I became curious how sizes of proof terms affect speed, so I ran a quick experiment: 

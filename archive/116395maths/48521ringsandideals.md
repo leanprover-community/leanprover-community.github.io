@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/48521ringsandideals.html
 ---
 
-## [maths](index.html)
-### [rings and ideals](48521ringsandideals.html)
+## Stream: [maths](index.html)
+### Topic: [rings and ideals](48521ringsandideals.html)
+
+---
 
 #### [Patrick Massot (Jul 21 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/rings%20and%20ideals/near/130050846):
 @**Kenny Lau** and @**Chris Hughes** with the recent merge of [PR196](https://github.com/leanprover/mathlib/pull/196) how does current mathlib compare to [Lean 2 lib](https://github.com/leanprover/lean2/blob/master/library/theories/commutative_algebra/ideal.lean)?

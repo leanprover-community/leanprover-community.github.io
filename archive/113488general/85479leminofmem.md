@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85479leminofmem.html
 ---
 
-## [general](index.html)
-### [le_min_of_mem](85479leminofmem.html)
+## Stream: [general](index.html)
+### Topic: [le_min_of_mem](85479leminofmem.html)
+
+---
 
 #### [Kenny Lau (Jul 28 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_min_of_mem/near/130485616):
 ```lean

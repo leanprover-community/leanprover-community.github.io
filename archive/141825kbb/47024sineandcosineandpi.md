@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/47024sineandcosineandpi.html
 ---
 
-## [kbb](index.html)
-### [sine and cosine and pi](47024sineandcosineandpi.html)
+## Stream: [kbb](index.html)
+### Topic: [sine and cosine and pi](47024sineandcosineandpi.html)
+
+---
 
 #### [Chris Hughes (Sep 15 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/sine%20and%20cosine%20and%20pi/near/134008790):
 I've started working on sine and cosine. I have cleaned the proofs up until `exp (x + y)` and I'm currently working on things like `sin (x + y)`. I have no idea how to define pi however. @**Mario Carneiro** what's the best way to do this?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73414EventannouncementCSmeetsmath.html
 ---
 
-## [general](index.html)
-### [Event announcement: CS meets math](73414EventannouncementCSmeetsmath.html)
+## Stream: [general](index.html)
+### Topic: [Event announcement: CS meets math](73414EventannouncementCSmeetsmath.html)
+
+---
 
 #### [Johan Commelin (Aug 09 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Event%20announcement%3A%20CS%20meets%20math/near/131191986):
 Forwarding an announcement that might be interesting for some: http://people.mpi-inf.mpg.de/~cikenmey/tcsag/

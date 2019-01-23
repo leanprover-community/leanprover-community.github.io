@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/71101extendpresheaffrombasis.html
 ---
 
-## [maths](index.html)
-### [extend presheaf from basis](71101extendpresheaffrombasis.html)
+## Stream: [maths](index.html)
+### Topic: [extend presheaf from basis](71101extendpresheaffrombasis.html)
+
+---
 
 #### [Johan Commelin (Oct 10 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extend%20presheaf%20from%20basis/near/135529957):
 @**Scott Morrison|110087** Somehow this is not doing what I hoped:

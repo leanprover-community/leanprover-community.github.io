@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/74274Basicfinitegroups.html
 ---
 
-## [maths](index.html)
-### [Basic finite groups](74274Basicfinitegroups.html)
+## Stream: [maths](index.html)
+### Topic: [Basic finite groups](74274Basicfinitegroups.html)
+
+---
 
 #### [Kenny Lau (Jul 27 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130387854):
 Do we have the symmetry group of order n!?

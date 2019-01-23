@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30658automation.html
 ---
 
-## [general](index.html)
-### [automation](30658automation.html)
+## Stream: [general](index.html)
+### Topic: [automation](30658automation.html)
+
+---
 
 #### [Scott Morrison (Jun 05 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574167):
 I was just having a look at @**Chris Hughes**'s nice PR for quotient groups.

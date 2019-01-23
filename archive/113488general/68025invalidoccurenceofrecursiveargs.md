@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68025invalidoccurenceofrecursiveargs.html
 ---
 
-## [general](index.html)
-### [invalid occurence of recursive args](68025invalidoccurenceofrecursiveargs.html)
+## Stream: [general](index.html)
+### Topic: [invalid occurence of recursive args](68025invalidoccurenceofrecursiveargs.html)
+
+---
 
 #### [Zesen Qian (Jun 20 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurence%20of%20recursive%20args/near/128381305):
 Not sure if it's a place for routine trouble shooting, but I'm trying to do some theory inside lean, I defined a inductive family but lean is not happy with it. https://ptpb.pw/3O0a

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32457evaluatingproofs.html
 ---
 
-## [general](index.html)
-### [evaluating proofs?](32457evaluatingproofs.html)
+## Stream: [general](index.html)
+### Topic: [evaluating proofs?](32457evaluatingproofs.html)
+
+---
 
 #### [Kenny Lau (Dec 12 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495074):
 @**Mario Carneiro** I think you said that it is possible to evaluate proofs... do you have an example? can we also break proof irrelevance? maybe have an unsound but computable `non-classical.some`?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51454startswith.html
 ---
 
-## [general](index.html)
-### [startswith](51454startswith.html)
+## Stream: [general](index.html)
+### Topic: [startswith](51454startswith.html)
+
+---
 
 #### [Patrick Massot (Jan 04 2019 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/startswith/near/154412396):
 Do we have something like `string.startswith : string -> string -> bool` somewhere?

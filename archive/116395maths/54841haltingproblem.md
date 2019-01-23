@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/54841haltingproblem.html
 ---
 
-## [maths](index.html)
-### [halting problem](54841haltingproblem.html)
+## Stream: [maths](index.html)
+### Topic: [halting problem](54841haltingproblem.html)
+
+---
 
 #### [Kenny Lau (May 23 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964377):
 https://github.com/leanprover/mathlib/commit/d62bf5605ec8971d446a01af40abf9183447cb42#diff-6650f7dae83be3a52c8eb036a23d7b26R175

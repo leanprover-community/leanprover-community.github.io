@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/42611574quotientkerequivrange.html
 ---
 
-## [PR reviews](index.html)
-### [#574 quotient_ker_equiv_range](42611574quotientkerequivrange.html)
+## Stream: [PR reviews](index.html)
+### Topic: [#574 quotient_ker_equiv_range](42611574quotientkerequivrange.html)
+
+---
 
 #### [Johan Commelin (Jan 05 2019 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23574%20quotient_ker_equiv_range/near/154473405):
 @**Chris Hughes** Nice job. Should you also prove that the equiv is an iso?

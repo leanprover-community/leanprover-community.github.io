@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/71280buildingmathlib.html
 ---
 
-## [maths](index.html)
-### [building mathlib](71280buildingmathlib.html)
+## Stream: [maths](index.html)
+### Topic: [building mathlib](71280buildingmathlib.html)
+
+---
 
 #### [Sean Leather (Apr 19 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/building%20mathlib/near/125292006):
 I'm trying to build the mathlib master with the Lean master. Should this work? I currently get this as the first error (followed by others):

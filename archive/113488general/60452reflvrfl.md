@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60452reflvrfl.html
 ---
 
-## [general](index.html)
-### [refl v rfl](60452reflvrfl.html)
+## Stream: [general](index.html)
+### Topic: [refl v rfl](60452reflvrfl.html)
+
+---
 
 #### [Kevin Buzzard (Nov 26 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20v%20rfl/near/148383637):
 I've always had it in the back of my mind that `refl` was slightly more general than `rfl`, because the tactic works with anything tagged `@[refl]`. But I've been trying to write a blog post about equality and I ran into this -- `rfl` working but `refl` not working.

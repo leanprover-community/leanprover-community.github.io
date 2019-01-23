@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77009AccessingNattypewithininductiveTyp.html
 ---
 
-## [general](index.html)
-### [Accessing Nat type within inductive Typ](77009AccessingNattypewithininductiveTyp.html)
+## Stream: [general](index.html)
+### Topic: [Accessing Nat type within inductive Typ](77009AccessingNattypewithininductiveTyp.html)
+
+---
 
 #### [Cameron Crossman (Dec 13 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151722800):
 I have the following inductive definition

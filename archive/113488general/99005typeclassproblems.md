@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99005typeclassproblems.html
 ---
 
-## [general](index.html)
-### [typeclass problems](99005typeclassproblems.html)
+## Stream: [general](index.html)
+### Topic: [typeclass problems](99005typeclassproblems.html)
+
+---
 
 #### [Kenny Lau (Jun 16 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143681):
 This loop is breaking everything

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75812setintersection.html
 ---
 
-## [general](index.html)
-### [set intersection](75812setintersection.html)
+## Stream: [general](index.html)
+### Topic: [set intersection](75812setintersection.html)
+
+---
 
 #### [petercommand (Nov 18 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20intersection/near/147908613):
 I am trying to understand the has_Inf instance of submodule defined at https://github.com/leanprover/mathlib/blob/master/linear_algebra/basic.lean#L240

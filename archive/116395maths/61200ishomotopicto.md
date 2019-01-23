@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/61200ishomotopicto.html
 ---
 
-## [maths](index.html)
-### [is_homotopic_to](61200ishomotopicto.html)
+## Stream: [maths](index.html)
+### Topic: [is_homotopic_to](61200ishomotopicto.html)
+
+---
 
 #### [Kevin Buzzard (Aug 09 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_homotopic_to/near/131163659):
 I just saw this in @**Luca Gerolla** 's code.

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43625Leaninthewild.html
 ---
 
-## [general](index.html)
-### [Lean in the wild](43625Leaninthewild.html)
+## Stream: [general](index.html)
+### Topic: [Lean in the wild](43625Leaninthewild.html)
+
+---
 
 #### [Johannes Hölzl (Nov 29 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/148772776):
 Its always interesting to find unexpected Lean theories: https://github.com/levjj/esverify-theory/

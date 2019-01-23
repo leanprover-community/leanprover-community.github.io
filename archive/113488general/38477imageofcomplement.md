@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38477imageofcomplement.html
 ---
 
-## [general](index.html)
-### [image of complement](38477imageofcomplement.html)
+## Stream: [general](index.html)
+### Topic: [image of complement](38477imageofcomplement.html)
+
+---
 
 #### [Patrick Massot (Mar 13 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/image%20of%20complement/near/123655801):
 Do we have `{α : Type*} {β : Type*} (f : α ≃ β) (s : set α) : f '' -s = -(f '' s)` in mathlib?

@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/65578basiccomplexnumbercomputations.html
 ---
 
-## [maths](index.html)
-### [basic complex number computations](65578basiccomplexnumbercomputations.html)
+## Stream: [maths](index.html)
+### Topic: [basic complex number computations](65578basiccomplexnumbercomputations.html)
+
+---
 
 #### [Kevin Buzzard (Jul 11 2018 at 17:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/basic%20complex%20number%20computations/near/129477726):
 @**VeraZZ** is doing basic computations with complex numbers and I'm still not 100% sure that we're doing it right.

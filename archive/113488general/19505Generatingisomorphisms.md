@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19505Generatingisomorphisms.html
 ---
 
-## [general](index.html)
-### [Generating isomorphisms?](19505Generatingisomorphisms.html)
+## Stream: [general](index.html)
+### Topic: [Generating isomorphisms?](19505Generatingisomorphisms.html)
+
+---
 
 #### [Kevin Buzzard (Mar 04 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generating%20isomorphisms%3F/near/123269348):
 I have some definition `definition foo (X : Type) : Type := blah`

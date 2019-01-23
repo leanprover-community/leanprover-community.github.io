@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03929ExpectedTypeinmatch.html
 ---
 
-## [general](index.html)
-### [Expected Type in match](03929ExpectedTypeinmatch.html)
+## Stream: [general](index.html)
+### Topic: [Expected Type in match](03929ExpectedTypeinmatch.html)
+
+---
 
 #### [Nima (Apr 21 2018 at 08:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Expected%20Type%20in%20match/near/125483132):
 Is there anyway to **explicitly** tell lean the expected type of `match`, so I would not receive the following error:

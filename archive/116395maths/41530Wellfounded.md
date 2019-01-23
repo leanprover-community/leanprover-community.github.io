@@ -4,8 +4,10 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/41530Wellfounded.html
 ---
 
-## [maths](index.html)
-### [Well founded](41530Wellfounded.html)
+## Stream: [maths](index.html)
+### Topic: [Well founded](41530Wellfounded.html)
+
+---
 
 #### [Morenikeji Neri (Aug 22 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Well%20founded/near/132583592):
 Is there a proof that if a set is well founded it contains a minimal element?
