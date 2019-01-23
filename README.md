@@ -1,3 +1,9 @@
+Temporary instructions to build locally:
+- run `import.py` with both `populate_all()` and `write_markdown()` uncommented
+- `jekyll serve --incremental`
+
+Todo: build Zulip archive incrementally, nicer style
+
 [![](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/wild-flame)
 
 # jekyll-simple
