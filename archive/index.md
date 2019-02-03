@@ -10,13 +10,13 @@ permalink: archive/index.html
 
 * [general](113488general/index.html) (1426 topics)
 
-* [new members](113489newmembers/index.html) (288 topics)
-
 * [maths](116395maths/index.html) (361 topics)
 
-* [kbb](141825kbb/index.html) (13 topics)
+* [new members](113489newmembers/index.html) (288 topics)
 
 * [PR reviews](144837PRreviews/index.html) (79 topics)
 
 * [Lean Together 2019](179818LeanTogether2019/index.html) (31 topics)
+
+* [kbb](141825kbb/index.html) (13 topics)
 

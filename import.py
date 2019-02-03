@@ -125,7 +125,7 @@ def write_topic_index(s): #(stream_name, topics):
 def write_stream_index(streams):
     outfile = open(md_root / md_index, 'w+', encoding='utf-8')
     outfile.write("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive\npermalink: {}/index.html\n---\n\n---\n\n## Streams:\n\n".format(html_root))
-    for s in sorted(streams, key=lambda s: s['id']):
+    for s in sorted(streams, key=lambda s: len(s['topics']), reverse=True):
         outfile.write("* [{0}]({1}/index.html) ({2} topic{3})\n\n".format(
             s['name'], 
             sanitize_stream(s['name'], s['id']), 
@@ -160,5 +160,5 @@ def write_markdown():
         for t in s['topics']:
             get_topic_and_write(s, t)
 
-populate_all()
+#populate_all()
 write_markdown()
